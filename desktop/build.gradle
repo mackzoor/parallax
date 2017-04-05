@@ -30,7 +30,7 @@ task dist(type: Jar) {
     from files(project.assetsDir);
  
     manifest {
-        attributes 'Main-Class': project.mainClassName
+        attributes 'Parallax-Class': project.mainClassName
     }
 }
 
