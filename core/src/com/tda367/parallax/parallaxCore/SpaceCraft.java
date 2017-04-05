@@ -1,4 +1,4 @@
-package ParallaxCore;
+package com.tda367.parallax.parallaxCore;
 
 /**
  * Interface for all spaceCraft in the game.

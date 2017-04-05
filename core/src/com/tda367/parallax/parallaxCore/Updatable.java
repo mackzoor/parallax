@@ -1,4 +1,4 @@
-package ParallaxCore;
+package com.tda367.parallax.parallaxCore;
 
 /**
  * Interface for objects that need to be updated every game tick/loop.

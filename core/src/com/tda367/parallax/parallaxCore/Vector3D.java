@@ -1,4 +1,4 @@
-package ParallaxCore;
+package com.tda367.parallax.parallaxCore;
 
 /**
  * A 3d vector class that handles vectors in a three dimensional space.

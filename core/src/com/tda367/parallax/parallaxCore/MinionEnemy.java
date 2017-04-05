@@ -1,22 +1,22 @@
-package ParallaxCore;
+package com.tda367.parallax.parallaxCore;
 
 /**
  * An enemy minion. Will try to destroy its target.
  */
 public class MinionEnemy implements EnemyAI {
 
-    private SpaceCraft spaceCraft;
-    private Collidable target;
+    private com.tda367.parallax.parallaxCore.SpaceCraft spaceCraft;
+    private com.tda367.parallax.parallaxCore.Collidable target;
 
 
     //TODO Update?
 
-    MinionEnemy(SpaceCraft spaceCraft){
+    MinionEnemy(com.tda367.parallax.parallaxCore.SpaceCraft spaceCraft){
 
     }
 
     @Override
-    public void setTarget(Collidable collidableObject) {
+    public void setTarget(com.tda367.parallax.parallaxCore.Collidable collidableObject) {
         target = collidableObject;
     }
 

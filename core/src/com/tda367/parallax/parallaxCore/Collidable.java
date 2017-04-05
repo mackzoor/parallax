@@ -1,4 +1,4 @@
-package ParallaxCore;
+package com.tda367.parallax.parallaxCore;
 
 /**
  * Created by Anthony on 03/04/2017.

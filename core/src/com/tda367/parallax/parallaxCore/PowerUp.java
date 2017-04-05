@@ -1,4 +1,4 @@
-package ParallaxCore;
+package com.tda367.parallax.parallaxCore;
 
 /**
  * Interface for powerups in the game.

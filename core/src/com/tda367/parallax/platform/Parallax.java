@@ -1,4 +1,4 @@
-package com.tda367.parallax;
+package com.tda367.parallax.platform;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;

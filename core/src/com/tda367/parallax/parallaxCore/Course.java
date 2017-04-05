@@ -1,4 +1,4 @@
-package ParallaxCore;
+package com.tda367.parallax.parallaxCore;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import java.util.List;
 public class Course implements Updatable {
 
     List<CourseModule> modules;
-    List<SpaceCraft> spaceCrafts;
+    List<com.tda367.parallax.parallaxCore.SpaceCraft> spaceCrafts;
 
     @Override
     public void update(int milliSinceLastUpdate) {
