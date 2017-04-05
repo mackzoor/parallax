@@ -16,6 +16,7 @@ import com.badlogic.gdx.utils.UBJsonReader;
 import com.tda367.parallax.parallaxCore.Agelion;
 import com.tda367.parallax.parallaxCore.Player;
 import com.tda367.parallax.parallaxCore.Parallax;
+import javafx.scene.input.KeyCode;
 
 public class ParallaxLibGdxLayer implements ApplicationListener, InputProcessor {
 	SpriteBatch batch;
@@ -164,12 +165,32 @@ public class ParallaxLibGdxLayer implements ApplicationListener, InputProcessor 
 
 	@Override
 	public boolean keyDown(int keycode) {
+		float panSpeed = 1;
+
+		spaceShipTurn(keycode, panSpeed);
+
 		return false;
 	}
 
 	@Override
 	public boolean keyUp(int keycode) {
+		float panSpeed = 0;
+
+		spaceShipTurn(keycode, panSpeed);
+
 		return false;
+	}
+
+	private void spaceShipTurn(int keycode, float panSpeed){
+		if (keycode == KeyCode.W.impl_getCode()){
+			player.getSpaceCraft().setPanYVelocity(panSpeed);
+		} else if (keycode == KeyCode.A.impl_getCode()){
+			player.getSpaceCraft().setPanXVelocity(panSpeed);
+		} else if (keycode == KeyCode.S.impl_getCode()){
+			player.getSpaceCraft().setPanYVelocity(panSpeed);
+		} else if (keycode == KeyCode.D.impl_getCode()){
+			player.getSpaceCraft().setPanXVelocity(panSpeed);
+		}
 	}
 
 	@Override
