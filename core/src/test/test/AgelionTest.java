@@ -1,4 +1,4 @@
-package com.tda367.parallax.test;
+package test.test;
 
 import org.junit.After;
 import org.junit.Before;
@@ -17,12 +17,10 @@ public class AgelionTest {
 
     @After
     public void tearDown() throws Exception {
-
     }
 
     @Test
     public void setSpeedTarget() throws Exception {
-
     }
 
     @Test

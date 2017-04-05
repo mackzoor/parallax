@@ -1,4 +1,4 @@
-package com.tda367.parallax.test;
+package test.test;
 
 import static org.junit.Assert.*;
 
