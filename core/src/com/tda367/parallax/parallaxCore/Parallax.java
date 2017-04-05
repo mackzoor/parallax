@@ -8,7 +8,7 @@ public class Parallax implements Updatable{
     private Course course;
     private Camera camera;
 
-    Parallax(Player player){
+    public Parallax(Player player){
         course = new Course();
         course.addSpaceCraft(player.getSpaceCraft());
 
@@ -21,7 +21,7 @@ public class Parallax implements Updatable{
     @Override
     public void update(int milliSinceLastUpdate) {
         course.update(milliSinceLastUpdate);
-        //TODO Camera update pos
+        camera.update(milliSinceLastUpdate);
     }
 
     public Camera getCamera(){

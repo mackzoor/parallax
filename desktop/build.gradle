@@ -30,7 +30,7 @@ task dist(type: Jar) {
     from files(project.assetsDir);
  
     manifest {
-        attributes 'Parallax-Class': project.mainClassName
+        attributes 'ParallaxLibGdxLayer-Class': project.mainClassName
     }
 }
 

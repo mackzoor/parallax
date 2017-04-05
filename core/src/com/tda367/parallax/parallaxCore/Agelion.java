@@ -32,7 +32,7 @@ public class Agelion implements SpaceCraft {
         this.pointMode = false;
     }
     public Agelion(){
-        new Agelion(new Vector3D(), new Matrix3D(), 1);
+        this(new Vector3D(), new Matrix3D(), 1);
     }
 
 
