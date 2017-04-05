@@ -92,7 +92,8 @@ public class ParallaxLibGdxLayer implements ApplicationListener, InputProcessor 
 
 	@Override
 	public void resize(int width, int height) {
-
+		camera.viewportWidth = width;
+		camera.viewportHeight = height;
 	}
 
 	@Override
