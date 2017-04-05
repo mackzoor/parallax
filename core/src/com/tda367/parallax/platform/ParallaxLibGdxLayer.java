@@ -11,12 +11,10 @@ import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.loader.G3dModelLoader;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
-import com.badlogic.gdx.math.Matrix3;
 import com.badlogic.gdx.utils.UBJsonReader;
 import com.tda367.parallax.parallaxCore.Agelion;
 import com.tda367.parallax.parallaxCore.Player;
 import com.tda367.parallax.parallaxCore.Parallax;
-import javafx.scene.input.KeyCode;
 
 public class ParallaxLibGdxLayer implements ApplicationListener, InputProcessor {
 	SpriteBatch batch;
@@ -76,9 +74,6 @@ public class ParallaxLibGdxLayer implements ApplicationListener, InputProcessor 
 		// Now create an instance.  Instance holds the positioning data, etc of an instance of your model
 		modelInstance = new ModelInstance(model);
 
-		//DEBUG ONLY
-		modelInstance.transform.translate(0, 0, 0);
-
 		// Finally we want some light, or we wont see our color.  The environment gets passed in during
 		// the rendering process.  Create one, then create an Ambient ( non-positioned, non-directional ) light.
 		environment = new Environment();
@@ -102,22 +97,26 @@ public class ParallaxLibGdxLayer implements ApplicationListener, InputProcessor 
 
 	@Override
 	public void render () {
+
+		//Updates Parallax game logic
 		parallaxGame.update((int)(Gdx.graphics.getDeltaTime() * 1000));
 
-		camera.update();
 
+		//Updates camera
 		camera.position.set(
 				parallaxGame.getCamera().getPos().getX(),
 				parallaxGame.getCamera().getPos().getZ(),
 				parallaxGame.getCamera().getPos().getY()*-1
 		);
 
-
 		modelInstance.transform.setToTranslation(
 				player.getSpaceCraft().getPos().getX(),
 				player.getSpaceCraft().getPos().getZ(),
 				player.getSpaceCraft().getPos().getY()*-1
 		);
+
+		camera.update();
+
 
 
 		// You've seen all this before, just be sure to clear the GL_DEPTH_BUFFER_BIT when working in 3D
@@ -191,13 +190,13 @@ public class ParallaxLibGdxLayer implements ApplicationListener, InputProcessor 
 	}
 
 	private void spaceShipTurn(int keycode, float panSpeed){
-		if (keycode == Input.Keys.W){
+		if (keycode == Input.Keys.W || keycode == Input.Keys.UP){
 			player.getSpaceCraft().setPanYVelocity(panSpeed);
-		} else if (keycode == Input.Keys.A){
+		} else if (keycode == Input.Keys.A || keycode == Input.Keys.LEFT){
 			player.getSpaceCraft().setPanXVelocity(-panSpeed);
-		} else if (keycode == Input.Keys.S){
+		} else if (keycode == Input.Keys.S || keycode == Input.Keys.DOWN){
 			player.getSpaceCraft().setPanYVelocity(-panSpeed);
-		} else if (keycode == Input.Keys.D){
+		} else if (keycode == Input.Keys.D || keycode == Input.Keys.RIGHT){
 			player.getSpaceCraft().setPanXVelocity(panSpeed);
 		}
 	}
