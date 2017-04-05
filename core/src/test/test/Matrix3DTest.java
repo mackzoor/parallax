@@ -63,6 +63,8 @@ public class Matrix3DTest {
 
         Matrix3D matrix3 = new Matrix3D(v6, v7, v8);
 
+        //Test
+
 
         assertTrue(matrix1.multi(matrix1, matrix2).equals(matrix3));
 
