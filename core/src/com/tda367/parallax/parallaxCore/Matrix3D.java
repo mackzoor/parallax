@@ -71,6 +71,11 @@ public class Matrix3D {
     }
 
 
-    //TODO Rotate Global & Local
-    //TODO Other features
+    public boolean equals(Matrix3D matrix) {
+        return this.v0.equals(matrix.v0) && this.v1.equals(matrix.v1) && this.v2.equals(matrix.v2);
+
+
+        //TODO Rotate Global & Local
+        //TODO Other features
+    }
 }

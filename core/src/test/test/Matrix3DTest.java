@@ -63,8 +63,6 @@ public class Matrix3DTest {
 
         Matrix3D matrix3 = new Matrix3D(v6, v7, v8);
 
-        //Test
-
 
         assertTrue(matrix1.multi(matrix1, matrix2).equals(matrix3));
 
@@ -72,8 +70,22 @@ public class Matrix3DTest {
     }
 
     @Test
-    public boolean equals(Matrix3D matrix,Matrix3D matrix2){
-        return true;
+    public void equals() {
+
+        Vector3D v0 = new Vector3D(1, 2, 3);
+        Vector3D v1 = new Vector3D(1, 2, 3);
+        Vector3D v2 = new Vector3D(1, 2, 3);
+        Matrix3D matrix = new Matrix3D(v0,v1,v2);
+
+        Vector3D v3 = new Vector3D(1, 0, 3);
+        Vector3D v4 = new Vector3D(1, 2, 3);
+        Vector3D v5 = new Vector3D(1, 2, 3);
+        Matrix3D matrix2 = new Matrix3D(v3,v4,v5);
+
+
+        assertTrue(matrix.equals(matrix));
+        assertTrue((!matrix.equals(matrix2)));
+
     }
 
 
