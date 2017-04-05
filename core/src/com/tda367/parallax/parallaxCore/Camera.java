@@ -50,7 +50,6 @@ public class Camera implements Updatable{
     @Override
     public void update(int milliSinceLastUpdate) {
         float targetYPos = trackingTarget.getPos().getY();
-        System.out.println(pos.getZ());
         pos = new Vector3D(pos.getX(),targetYPos-4, pos.getZ());
     }
 }
