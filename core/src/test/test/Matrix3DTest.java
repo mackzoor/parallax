@@ -31,6 +31,13 @@ public class Matrix3DTest {
 
     @Test
     public void subtract() throws Exception {
+        Matrix3D matrix = new Matrix3D(1,2,3,1,2,3,1,2,3);
+
+        Matrix3D onesMatrix = new Matrix3D(1,1,1,1,1,1,1,1,1);
+
+        Matrix3D resultMatrix = new Matrix3D(2,3,4,2,3,4,2,3,4);
+
+        assertTrue(matrix.add(onesMatrix), resultMatrix);
     }
 
     @Test

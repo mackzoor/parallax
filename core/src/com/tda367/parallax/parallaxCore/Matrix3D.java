@@ -30,7 +30,7 @@ public class Matrix3D {
         this.v2 = v2;
     }
 
-    public Matrix3D(float a11,float a12, float a13, float a21, float a22, float a23, float a31,float a32, float a33){
+    public Matrix3D(float a11,float a21, float a31, float a12, float a22, float a32, float a13,float a23, float a33){
         this.v0 = new Vector3D(a11,a21,a31);
         this.v1 = new Vector3D(a12,a22,a32);
         this.v2 = new Vector3D(a13,a23,a33);
