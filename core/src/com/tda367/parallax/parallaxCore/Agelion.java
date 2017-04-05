@@ -6,7 +6,7 @@ package com.tda367.parallax.parallaxCore;
 public class Agelion implements SpaceCraft {
 
     private int health; //Current health
-    private com.tda367.parallax.parallaxCore.PowerUp pu; //Current stored power up
+    private PowerUp pu; //Current stored power up
 
     private float velocity;
     private float panSpeed; // m/s
@@ -14,11 +14,11 @@ public class Agelion implements SpaceCraft {
     private float panXTarget;
     private float panZTarget;
 
-    private com.tda367.parallax.parallaxCore.Vector3D pos; //Position of the craft
-    private com.tda367.parallax.parallaxCore.Matrix3D rot; //Rotation of the craft
+    private Vector3D pos; //Position of the craft
+    private Matrix3D rot; //Rotation of the craft
 
 
-    Agelion(com.tda367.parallax.parallaxCore.Vector3D position, com.tda367.parallax.parallaxCore.Matrix3D rotation, float startVelocity){
+    Agelion(Vector3D position, Matrix3D rotation, float startVelocity){
         this.pos = position;
         this.rot = rotation;
         this.velocity = startVelocity;
@@ -26,8 +26,8 @@ public class Agelion implements SpaceCraft {
         this.pu = null;
         this.panSpeed = 2;
     }
-    Agelion(){
-        new Agelion(new com.tda367.parallax.parallaxCore.Vector3D(), new com.tda367.parallax.parallaxCore.Matrix3D(), 1);
+    public Agelion(){
+        new Agelion(new Vector3D(), new Matrix3D(), 1);
     }
 
 
@@ -86,7 +86,7 @@ public class Agelion implements SpaceCraft {
 
 
         /* Sets new position */
-        pos = new com.tda367.parallax.parallaxCore.Vector3D(posXNew, pos.getY(), posZNew);
+        pos = new Vector3D(posXNew, pos.getY(), posZNew);
     }
     private void advanceCraft(int timeMilli){
         float posYAdded = velocity * ((float)timeMilli/1000);
@@ -104,11 +104,11 @@ public class Agelion implements SpaceCraft {
 
 
     @Override
-    public com.tda367.parallax.parallaxCore.Vector3D getPos() {
+    public Vector3D getPos() {
         return pos;
     }
     @Override
-    public com.tda367.parallax.parallaxCore.Matrix3D getRot() {
+    public Matrix3D getRot() {
         return rot;
     }
 
