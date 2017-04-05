@@ -21,6 +21,13 @@ public class Agelion implements SpaceCraft {
     private Vector3D pos; //Position of the craft
     private Matrix3D rot; //Rotation of the craft
 
+    public Agelion(int health, float velocity, float panSpeed, Vector3D pos, Matrix3D rot) {
+        this.health = health;
+        this.velocity = velocity;
+        this.panSpeed = panSpeed;
+        this.pos = pos;
+        this.rot = rot;
+    }
 
     public Agelion(Vector3D position, Matrix3D rotation, float startVelocity){
         this.pos = position;
