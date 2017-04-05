@@ -83,6 +83,13 @@ public class Vector3D {
 
     }
 
+    public Vector3D multi(Vector3D column){
+        return null;
+    }
+
+
+
+
     public float getX() {
         return x;
     }
