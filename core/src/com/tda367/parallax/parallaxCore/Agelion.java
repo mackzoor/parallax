@@ -11,20 +11,25 @@ public class Agelion implements SpaceCraft {
     private float velocity;
     private float panSpeed; // m/s
 
+    private boolean pointMode;
     private float panXTarget;
     private float panZTarget;
+
+    private float velXTarget;
+    private float velZTarget;
 
     private Vector3D pos; //Position of the craft
     private Matrix3D rot; //Rotation of the craft
 
 
-    Agelion(Vector3D position, Matrix3D rotation, float startVelocity){
+    public Agelion(Vector3D position, Matrix3D rotation, float startVelocity){
         this.pos = position;
         this.rot = rotation;
         this.velocity = startVelocity;
         this.health = 5;
         this.pu = null;
         this.panSpeed = 2;
+        this.pointMode = false;
     }
     public Agelion(){
         new Agelion(new Vector3D(), new Matrix3D(), 1);
@@ -39,19 +44,23 @@ public class Agelion implements SpaceCraft {
         //TODO implement setAccelerateTarget
     }
 
-    // Pan Y&X  //
-    public void setPanXTarget(float xTarget){
+    // Pan X&Y  //
+    public synchronized void setPanXPoint(float xTarget){
         panXTarget = xTarget;
+        pointMode = true;
     }
-    public void setPanZTarget(float zTarget){
+    public synchronized void setPanZPoint(float zTarget){
         panZTarget = zTarget;
+        pointMode = true;
     }
 
-    public void setPanXAcceleration(float xAcceleration){
-        //TODO implement setPanXAcceleration
+    public void setPanXVelocity(float xVelocity){
+        velXTarget = xVelocity;
+        pointMode = false;
     }
-    public void setPanYAcceleration(float yAcceleration){
-        //TODO setPanYAcceleration
+    public void setPanYVelocity(float yVelocity){
+        velZTarget = yVelocity;
+        pointMode = false;
     }
 
     // Action   //
@@ -60,7 +69,14 @@ public class Agelion implements SpaceCraft {
     }
 
     private void panCraft(int timeMilli){
+        if (pointMode) {
+            panPointMode(timeMilli);
+        } else {
+            panVelocityMode(timeMilli);
+        }
+    }
 
+    private void panPointMode(int timeMilli){
         /*X AXIS */
         float xDiff = panXTarget - pos.getX();
         float xMovement = panSpeed * ((float)timeMilli/1000);
@@ -88,6 +104,17 @@ public class Agelion implements SpaceCraft {
         /* Sets new position */
         pos = new Vector3D(posXNew, pos.getY(), posZNew);
     }
+    private void panVelocityMode(int timeMilli){
+        float addedXPos = distanceCalc(velXTarget,timeMilli);
+        float addedZPos = distanceCalc(velZTarget,timeMilli);
+
+        pos = pos.add(addedXPos,0, addedZPos);
+    }
+
+    private float distanceCalc(float speed, float timeMilli){
+        return speed * ((float)timeMilli/1000);
+    }
+
     private void advanceCraft(int timeMilli){
         float posYAdded = velocity * ((float)timeMilli/1000);
         pos = pos.add(0, posYAdded, 0);
