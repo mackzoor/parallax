@@ -16,6 +16,8 @@ public class Agelion implements SpaceCraft{
         this.pos = position;
         this.rot = rotation;
         this.velocity = startVelocity;
+        this.health = 5;
+        this.pu = null;
     }
     Agelion(){
         new Agelion(new Vector3D(), new Matrix3D(), 1);
@@ -23,26 +25,26 @@ public class Agelion implements SpaceCraft{
 
 
     //  Speed   //
-    public void speedTarget(float speed){
-        //TODO implement speedTarget
+    public void setSpeedTarget(float speed){
+        //TODO implement setSpeedTarget
     }
-    public void accelerateTarget(float accelerate){
-        //TODO implement accelerateTarget
+    public void setAccelerateTarget(float accelerate){
+        //TODO implement setAccelerateTarget
     }
 
     // Pan Y&X  //
-    public void panXTarget(){
-        //TODO implement panXTarget
+    public void setPanXTarget(float xTarget){
+        //TODO implement setPanXTarget
     }
-    public void panYTarget(){
-        //TODO panYTarget
+    public void setPanYTarget(float yTarget){
+        //TODO setPanYTarget
     }
 
-    public void panXAcceleration(){
-        //TODO implement panXAcceleration
+    public void setPanXAcceleration(float xAcceleration){
+        //TODO implement setPanXAcceleration
     }
-    public void panYAcceleration(){
-        //TODO panYAcceleration
+    public void setPanYAcceleration(float yAcceleration){
+        //TODO setPanYAcceleration
     }
 
     // Action   //
