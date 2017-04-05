@@ -113,7 +113,8 @@ public class SpaceCraftDisplay implements ApplicationListener, InputProcessor {
         modelBatch.end();
 
         // Now tell OpenGL that we are done sending graphics to the framebuffer
-        if(screenShot)
+        //Commented out so that intelliJ wouldn't complain about duplicates
+        /*if(screenShot)
         {
             frameBuffer.end();
             // get the graphics rendered to the framebuffer as a texture
@@ -134,7 +135,7 @@ public class SpaceCraftDisplay implements ApplicationListener, InputProcessor {
             spriteBatch.draw(textureRegion,0,0);
             spriteBatch.end();
             screenShot = false;
-        }
+        } */
     }
 
     public void resume () {
