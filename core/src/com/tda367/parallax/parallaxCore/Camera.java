@@ -3,7 +3,7 @@ package com.tda367.parallax.parallaxCore;
 /**
  * Created by Anthony on 05/04/2017.
  */
-public class Camera {
+public class Camera implements Updatable{
 
     private Vector3D pos;
     private Matrix3D rot;
@@ -45,5 +45,12 @@ public class Camera {
     }
     public float getFov() {
         return fov;
+    }
+
+    @Override
+    public void update(int milliSinceLastUpdate) {
+        float targetYPos = trackingTarget.getPos().getY();
+
+        pos = new Vector3D(pos.getX(), (float)(targetYPos-1.5), pos.getZ());
     }
 }
