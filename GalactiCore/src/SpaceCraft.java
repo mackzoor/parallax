@@ -9,7 +9,7 @@ public interface SpaceCraft extends Collidable, Updatable {
 
     // Pan Y&X //
     void setPanXTarget(float xTarget);
-    void setPanYTarget(float yTarget);
+    void setPanZTarget(float yTarget);
 
     void setPanXAcceleration(float xAcceleration);
     void setPanYAcceleration(float yAcceleration);

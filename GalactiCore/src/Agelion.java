@@ -7,6 +7,10 @@ public class Agelion implements SpaceCraft{
     private PowerUp pu; //Current stored power up
 
     private float velocity;
+    private float panSpeed; // m/s
+
+    private float panXTarget;
+    private float panZTarget;
 
     private Vector3D pos; //Position of the craft
     private Matrix3D rot; //Rotation of the craft
@@ -18,6 +22,7 @@ public class Agelion implements SpaceCraft{
         this.velocity = startVelocity;
         this.health = 5;
         this.pu = null;
+        this.panSpeed = 2;
     }
     Agelion(){
         new Agelion(new Vector3D(), new Matrix3D(), 1);
@@ -34,10 +39,10 @@ public class Agelion implements SpaceCraft{
 
     // Pan Y&X  //
     public void setPanXTarget(float xTarget){
-        //TODO implement setPanXTarget
+        panXTarget = xTarget;
     }
-    public void setPanYTarget(float yTarget){
-        //TODO setPanYTarget
+    public void setPanZTarget(float zTarget){
+        panZTarget = zTarget;
     }
 
     public void setPanXAcceleration(float xAcceleration){
@@ -52,6 +57,39 @@ public class Agelion implements SpaceCraft{
         pu.usePU(pos, rot);
     }
 
+    private void panCraft(int timeMilli){
+
+        /*X AXIS */
+        float xDiff = panXTarget - pos.getX();
+        float xMovement = panSpeed * ((float)timeMilli/1000);
+        float posXNew;
+
+        if (xDiff < xMovement){
+            posXNew = pos.getX()+xDiff;
+        } else {
+            posXNew = pos.getX()+xMovement;
+        }
+
+
+        /* Z AXIS */
+        float ZDiff = panZTarget - pos.getZ();
+        float ZMovement = panSpeed * ((float)timeMilli/1000);
+        float posZNew;
+
+        if (ZDiff < ZMovement){
+            posZNew = pos.getZ()+ZDiff;
+        } else {
+            posZNew = pos.getZ()+ZMovement;
+        }
+
+
+        /* Sets new position */
+        pos = new Vector3D(posXNew, pos.getY(), posZNew);
+    }
+    private void advanceCraft(int timeMilli){
+        float posYAdded = velocity * ((float)timeMilli/1000);
+        pos = pos.add(0, posYAdded, 0);
+    }
 
     //TODO some sort of rotation engine?
     //TODO Spacecraft flight system. (Acc pan etc)
@@ -74,7 +112,8 @@ public class Agelion implements SpaceCraft{
 
     @Override
     public void update(int milliSinceLastUpdate) {
-        //TODO Update ship position. Depends on orientation and speed.
+        panCraft(milliSinceLastUpdate);
+        advanceCraft(milliSinceLastUpdate);
     }
 }
 
