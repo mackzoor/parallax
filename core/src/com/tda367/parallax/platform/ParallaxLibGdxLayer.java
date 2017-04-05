@@ -10,8 +10,8 @@ import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.loader.G3dModelLoader;
-import com.badlogic.gdx.graphics.g3d.utils.CameraInputController;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
+import com.badlogic.gdx.math.Matrix3;
 import com.badlogic.gdx.utils.UBJsonReader;
 import com.tda367.parallax.parallaxCore.Agelion;
 import com.tda367.parallax.parallaxCore.Player;
@@ -45,7 +45,7 @@ public class ParallaxLibGdxLayer implements ApplicationListener, InputProcessor 
 
 		// Create camera sized to screens width/height with Field of View of 75 degrees
 		camera = new PerspectiveCamera(
-				90,
+				parallaxGame.getCamera().getFov(),
 				Gdx.graphics.getWidth(),
 				Gdx.graphics.getHeight());
 
@@ -80,7 +80,11 @@ public class ParallaxLibGdxLayer implements ApplicationListener, InputProcessor 
 		modelInstance = new ModelInstance(model);
 
 		//move the model down a bit on the screen ( in a z-up world, down is -z ).
-		modelInstance.transform.translate(0, 0, 0);
+		modelInstance.transform.translate(
+				player.getSpaceCraft().getPos().getX(),
+				player.getSpaceCraft().getPos().getY(),
+				player.getSpaceCraft().getPos().getZ()
+		);
 
 		// Finally we want some light, or we wont see our color.  The environment gets passed in during
 		// the rendering process.  Create one, then create an Ambient ( non-positioned, non-directional ) light.
@@ -106,6 +110,21 @@ public class ParallaxLibGdxLayer implements ApplicationListener, InputProcessor 
 	@Override
 	public void render () {
 		parallaxGame.update((int)(Gdx.graphics.getDeltaTime() * 1000));
+		camera.position.set(
+				parallaxGame.getCamera().getPos().getX(),
+				parallaxGame.getCamera().getPos().getY(),
+				parallaxGame.getCamera().getPos().getZ()
+		);
+		camera.lookAt(
+				player.getSpaceCraft().getPos().getX(),
+				player.getSpaceCraft().getPos().getY(),
+				player.getSpaceCraft().getPos().getZ()
+		);
+		modelInstance.transform.set( new Matrix3(new float[]{
+				player.getSpaceCraft().getPos().getX(),
+				player.getSpaceCraft().getPos().getY(),
+				player.getSpaceCraft().getPos().getZ()
+		}));
 
 		// You've seen all this before, just be sure to clear the GL_DEPTH_BUFFER_BIT when working in 3D
 		Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
