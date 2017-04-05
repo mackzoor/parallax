@@ -38,6 +38,7 @@ public class ParallaxLibGdxLayer implements ApplicationListener, InputProcessor 
 	
 	@Override
 	public void create () {
+		Gdx.input.setInputProcessor(this);
 
 		// Initiate game with space craft "Agelion"
 		this.player = new Player(new Agelion());
@@ -50,18 +51,14 @@ public class ParallaxLibGdxLayer implements ApplicationListener, InputProcessor 
 				Gdx.graphics.getHeight());
 
 		// Move the camera 5 units behind the ship along the z-axis and look at the origin
-		camera.position.set(
-				parallaxGame.getCamera().getPos().getX(),
-				parallaxGame.getCamera().getPos().getY(),
-				parallaxGame.getCamera().getPos().getZ()
-		);
-		camera.lookAt(
-				player.getSpaceCraft().getPos().getX(),
-				player.getSpaceCraft().getPos().getY(),
-				player.getSpaceCraft().getPos().getZ()
-		);
 
 		// Near and Far (plane) represent the minimum and maximum ranges of the camera in, um, units
+		camera.position.set(
+				parallaxGame.getCamera().getPos().getX(),
+				parallaxGame.getCamera().getPos().getZ(),
+				parallaxGame.getCamera().getPos().getY()
+		);
+
 		camera.near = 0.1f;
 		camera.far = 300.0f;
 
@@ -79,12 +76,8 @@ public class ParallaxLibGdxLayer implements ApplicationListener, InputProcessor 
 		// Now create an instance.  Instance holds the positioning data, etc of an instance of your model
 		modelInstance = new ModelInstance(model);
 
-		//move the model down a bit on the screen ( in a z-up world, down is -z ).
-		modelInstance.transform.translate(
-				player.getSpaceCraft().getPos().getX(),
-				player.getSpaceCraft().getPos().getY(),
-				player.getSpaceCraft().getPos().getZ()
-		);
+		//DEBUG ONLY
+		modelInstance.transform.translate(0, 0, 0);
 
 		// Finally we want some light, or we wont see our color.  The environment gets passed in during
 		// the rendering process.  Create one, then create an Ambient ( non-positioned, non-directional ) light.
@@ -110,21 +103,22 @@ public class ParallaxLibGdxLayer implements ApplicationListener, InputProcessor 
 	@Override
 	public void render () {
 		parallaxGame.update((int)(Gdx.graphics.getDeltaTime() * 1000));
+
+		camera.update();
+
 		camera.position.set(
 				parallaxGame.getCamera().getPos().getX(),
-				parallaxGame.getCamera().getPos().getY(),
-				parallaxGame.getCamera().getPos().getZ()
+				parallaxGame.getCamera().getPos().getZ(),
+				parallaxGame.getCamera().getPos().getY()*-1
 		);
-		camera.lookAt(
+
+
+		modelInstance.transform.setToTranslation(
 				player.getSpaceCraft().getPos().getX(),
-				player.getSpaceCraft().getPos().getY(),
-				player.getSpaceCraft().getPos().getZ()
+				player.getSpaceCraft().getPos().getZ(),
+				player.getSpaceCraft().getPos().getY()*-1
 		);
-		modelInstance.transform.set( new Matrix3(new float[]{
-				player.getSpaceCraft().getPos().getX(),
-				player.getSpaceCraft().getPos().getY(),
-				player.getSpaceCraft().getPos().getZ()
-		}));
+
 
 		// You've seen all this before, just be sure to clear the GL_DEPTH_BUFFER_BIT when working in 3D
 		Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -184,30 +178,26 @@ public class ParallaxLibGdxLayer implements ApplicationListener, InputProcessor 
 
 	@Override
 	public boolean keyDown(int keycode) {
-		float panSpeed = 1;
-
+		float panSpeed = 5;
 		spaceShipTurn(keycode, panSpeed);
-
 		return false;
 	}
 
 	@Override
 	public boolean keyUp(int keycode) {
 		float panSpeed = 0;
-
 		spaceShipTurn(keycode, panSpeed);
-
 		return false;
 	}
 
 	private void spaceShipTurn(int keycode, float panSpeed){
-		if (keycode == KeyCode.W.impl_getCode()){
+		if (keycode == Input.Keys.W){
 			player.getSpaceCraft().setPanYVelocity(panSpeed);
-		} else if (keycode == KeyCode.A.impl_getCode()){
-			player.getSpaceCraft().setPanXVelocity(panSpeed);
-		} else if (keycode == KeyCode.S.impl_getCode()){
-			player.getSpaceCraft().setPanYVelocity(panSpeed);
-		} else if (keycode == KeyCode.D.impl_getCode()){
+		} else if (keycode == Input.Keys.A){
+			player.getSpaceCraft().setPanXVelocity(-panSpeed);
+		} else if (keycode == Input.Keys.S){
+			player.getSpaceCraft().setPanYVelocity(-panSpeed);
+		} else if (keycode == Input.Keys.D){
 			player.getSpaceCraft().setPanXVelocity(panSpeed);
 		}
 	}

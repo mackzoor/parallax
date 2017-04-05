@@ -21,7 +21,7 @@ public class Parallax implements Updatable{
     @Override
     public void update(int milliSinceLastUpdate) {
         course.update(milliSinceLastUpdate);
-        //TODO Camera update pos
+        camera.update(milliSinceLastUpdate);
     }
 
     public Camera getCamera(){
