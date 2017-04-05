@@ -40,8 +40,8 @@ public class Matrix3DTest {
         Matrix3D onesMatrix = new Matrix3D(1,1,1,1,1,1,1,1,1);
 
         Matrix3D resultMatrix = new Matrix3D(2,3,4,2,3,4,2,3,4);
-
-        assertTrue(matrix.add(onesMatrix), resultMatrix);
+        Matrix3D test = matrix.add(onesMatrix);
+        assertTrue(test.equals(resultMatrix));
     }
 
     @Test

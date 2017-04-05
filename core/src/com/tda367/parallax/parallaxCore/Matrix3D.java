@@ -62,9 +62,11 @@ public class Matrix3D {
 
     }
 
-    public void add(Matrix3D matrix, Matrix3D otherMatrix) {
-
-
+    public Matrix3D add(Matrix3D matrix) {
+        Vector3D v0 = new Vector3D(matrix.v0.getX() + this.v0.getX(), matrix.v0.getY() + this.v0.getY(),matrix.v0.getZ() + this.v0.getZ());
+        Vector3D v1 = new Vector3D(matrix.v1.getX() + this.v1.getX(), matrix.v1.getY() + this.v1.getY(),matrix.v1.getZ() + this.v1.getZ());
+        Vector3D v2 = new Vector3D(matrix.v2.getX() + this.v2.getX(), matrix.v2.getY() + this.v2.getY(),matrix.v2.getZ() + this.v2.getZ());
+        return new Matrix3D(v0,v1,v2);
 
     }
 
