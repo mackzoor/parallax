@@ -1,3 +1,5 @@
+package ParallaxCore;
+
 /**
  * Represents the spacecraft in our game.
  */

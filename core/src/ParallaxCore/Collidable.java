@@ -1,3 +1,5 @@
+package ParallaxCore;
+
 /**
  * Created by Anthony on 03/04/2017.
  */

@@ -1,3 +1,5 @@
+package ParallaxCore;
+
 /**
  * Interface for all spaceCraft in the game.
  */

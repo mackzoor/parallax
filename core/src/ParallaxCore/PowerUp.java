@@ -1,3 +1,5 @@
+package ParallaxCore;
+
 /**
  * Interface for powerups in the game.
  */

@@ -1,3 +1,5 @@
+package ParallaxCore;
+
 /**
  * Self made matrix class. Mostly used to save the rotation of objects.
  */

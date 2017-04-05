@@ -1,3 +1,5 @@
+package ParallaxCore;
+
 /**
  * Interface for ai that will try to destroy its target.
  */

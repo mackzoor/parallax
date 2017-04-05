@@ -1,3 +1,5 @@
+package ParallaxCore;
+
 /**
  * An enemy minion. Will try to destroy its target.
  */

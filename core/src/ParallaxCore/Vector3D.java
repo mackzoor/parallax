@@ -1,3 +1,5 @@
+package ParallaxCore;
+
 /**
  * A 3d vector class that handles vectors in a three dimensional space.
  */

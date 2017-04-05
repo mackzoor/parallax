@@ -1,3 +1,5 @@
+package ParallaxCore;
+
 /**
  * Interface for objects that need to be updated every game tick/loop.
  */
