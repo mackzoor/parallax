@@ -143,6 +143,7 @@ public class Agelion implements SpaceCraft {
     public void update(int milliSinceLastUpdate) {
         panCraft(milliSinceLastUpdate);
         advanceCraft(milliSinceLastUpdate);
+//        System.out.println("Ship update");
     }
 }
 
