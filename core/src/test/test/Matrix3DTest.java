@@ -8,9 +8,6 @@ import static java.lang.Math.cos;
 import static java.lang.Math.sin;
 import static org.junit.Assert.*;
 
-/**
- * Created by Markus on 2017-04-05.
- */
 public class Matrix3DTest {
 
     @Test
@@ -25,12 +22,17 @@ public class Matrix3DTest {
         Matrix3D rotatedMatrix = matrix2.rotateX(30);
         Matrix3D resultMatrix = new Matrix3D(v0, v1, v2);
         assertTrue(rotatedMatrix == resultMatrix);
-
-
     }
 
     @Test
     public void subtract() throws Exception {
+        Matrix3D matrix = new Matrix3D(1,2,3,1,2,3,1,5,4);
+
+        Matrix3D onesMatrix = new Matrix3D(1,1,1,1,1,1,1,1,1);
+
+        Matrix3D resultMatrix = new Matrix3D(0,1,2,0,1,2,0,4,3);
+
+        assertTrue(matrix.subtract(onesMatrix).equals(resultMatrix));
     }
 
     @Test
@@ -40,8 +42,8 @@ public class Matrix3DTest {
         Matrix3D onesMatrix = new Matrix3D(1,1,1,1,1,1,1,1,1);
 
         Matrix3D resultMatrix = new Matrix3D(2,3,4,2,3,4,2,3,4);
-        Matrix3D test = matrix.add(onesMatrix);
-        assertTrue(test.equals(resultMatrix));
+
+        assertTrue(matrix.add(onesMatrix).equals(resultMatrix));
     }
 
     @Test
@@ -78,7 +80,6 @@ public class Matrix3DTest {
 
     @Test
     public void equals() {
-
         Vector3D v0 = new Vector3D(1, 2, 3);
         Vector3D v1 = new Vector3D(1, 2, 3);
         Vector3D v2 = new Vector3D(1, 2, 3);
@@ -89,11 +90,8 @@ public class Matrix3DTest {
         Vector3D v5 = new Vector3D(1, 2, 3);
         Matrix3D matrix2 = new Matrix3D(v3,v4,v5);
 
-
         assertTrue(matrix.equals(matrix));
         assertTrue((!matrix.equals(matrix2)));
 
     }
-
-
 }
