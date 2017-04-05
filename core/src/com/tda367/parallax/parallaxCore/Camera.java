@@ -27,7 +27,7 @@ public class Camera implements Updatable{
         this.fov = fov;
     }
     public Camera(){
-        new Camera(new Vector3D(), new Matrix3D(), 90);
+        this(new Vector3D(0,0,1), new Matrix3D(), 90);
     }
 
     public void trackTo(Collidable collidable){
@@ -50,7 +50,7 @@ public class Camera implements Updatable{
     @Override
     public void update(int milliSinceLastUpdate) {
         float targetYPos = trackingTarget.getPos().getY();
-
-        pos = new Vector3D(pos.getX(),pos.getY(),targetYPos);
+        System.out.println(pos.getZ());
+        pos = new Vector3D(pos.getX(),targetYPos-4, pos.getZ());
     }
 }

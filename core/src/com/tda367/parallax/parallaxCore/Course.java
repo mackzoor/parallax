@@ -26,8 +26,12 @@ public class Course implements Updatable {
     @Override
     public void update(int milliSinceLastUpdate) {
 
-        for (CourseModule module : modules){
+//        for (CourseModule module : modules){
+//
+//        }
 
+        for (SpaceCraft spaceCraft : spaceCrafts){
+            spaceCraft.update(milliSinceLastUpdate);
         }
 
     }
