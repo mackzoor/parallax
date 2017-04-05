@@ -18,9 +18,7 @@ public class Agelion implements SpaceCraft{
         this.velocity = startVelocity;
     }
     Agelion(){
-        this.pos = new Vector3D();
-        this.rot = new Matrix3D();
-        this.velocity = 1;
+        new Agelion(new Vector3D(), new Matrix3D(), 1);
     }
 
 
@@ -73,7 +71,7 @@ public class Agelion implements SpaceCraft{
     }
 
     @Override
-    public void update() {
+    public void update(int milliSinceLastUpdate) {
         //TODO Update ship position. Depends on orientation and speed.
     }
 }

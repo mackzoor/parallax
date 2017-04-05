@@ -29,7 +29,7 @@ public class MinionEnemy implements EnemyAI {
     }
 
     @Override
-    public void update() {
+    public void update(int milliSinceLastUpdate) {
         //TODO Update ai to target enemy and fire if targeted
     }
 }
