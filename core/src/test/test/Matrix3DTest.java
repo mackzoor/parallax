@@ -1,10 +1,78 @@
 package test.test;
 
+import com.tda367.parallax.parallaxCore.Matrix3D;
+import com.tda367.parallax.parallaxCore.Vector3D;
+import org.junit.Test;
+
+import static java.lang.Math.cos;
+import static java.lang.Math.sin;
 import static org.junit.Assert.*;
 
 /**
  * Created by Markus on 2017-04-05.
  */
 public class Matrix3DTest {
+
+    @Test
+    public void rotateX() throws Exception {
+
+        Vector3D v0 = new Vector3D(1, 0, 0);
+        Vector3D v1 = new Vector3D(0, (float) cos(20), 0);
+        Vector3D v2 = new Vector3D(0, 0, (float) cos(20));
+
+        Matrix3D matrix2 = new Matrix3D();
+
+        Matrix3D rotatedMatrix = matrix2.rotateX(30);
+        Matrix3D resultMatrix = new Matrix3D(v0, v1, v2);
+        assertTrue(rotatedMatrix == resultMatrix);
+
+
+    }
+
+    @Test
+    public void subtract() throws Exception {
+    }
+
+    @Test
+    public void add() throws Exception {
+    }
+
+    @Test
+    public void projection() throws Exception {
+    }
+
+    @Test
+    public void multi() throws Exception {
+
+        Vector3D v0 = new Vector3D(1, 1, 1);
+        Vector3D v1 = new Vector3D(2, 2, 2);
+        Vector3D v2 = new Vector3D(3, 3, 3);
+
+        Matrix3D matrix1 = new Matrix3D(v0, v1, v2);
+
+        Vector3D v3 = new Vector3D(1, 0, 0);
+        Vector3D v4 = new Vector3D(0, 1, 0);
+        Vector3D v5 = new Vector3D(1, 1, 1);
+
+        Matrix3D matrix2 = new Matrix3D(v3, v4, v5);
+
+        Vector3D v6 = new Vector3D(2, 2, 1);
+        Vector3D v7 = new Vector3D(4, 4, 2);
+        Vector3D v8 = new Vector3D(6, 6, 3);
+
+
+        Matrix3D matrix3 = new Matrix3D(v6, v7, v8);
+
+
+        assertTrue(matrix1.multi(matrix1, matrix2).equals(matrix3));
+
+
+    }
+
+    @Test
+    public boolean equals(Matrix3D matrix,Matrix3D matrix2){
+        return true;
+    }
+
 
 }
