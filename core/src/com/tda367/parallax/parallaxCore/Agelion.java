@@ -1,5 +1,9 @@
 package com.tda367.parallax.parallaxCore;
 
+import javax.vecmath.Matrix3f;
+import javax.vecmath.Tuple3f;
+import javax.vecmath.Vector3f;
+
 /**
  * Represents the spacecraft in our game.
  */
@@ -18,10 +22,12 @@ public class Agelion implements ISpaceCraft {
     private float velXTarget;
     private float velZTarget;
 
-    private Vector3D pos; //Position of the craft
-    private Matrix3D rot; //Rotation of the craft
+    private Vector3f pos;
+    private Matrix3f rot;
+//    private Vector3D pos; //Position of the craft
+//    private Matrix3D rot; //Rotation of the craft
 
-    public Agelion(int health, float velocity, float panSpeed, Vector3D pos, Matrix3D rot) {
+    public Agelion(int health, float velocity, float panSpeed, Vector3f pos, Matrix3f rot) {
         this.health = health;
         this.velocity = velocity;
         this.panSpeed = panSpeed;
@@ -29,7 +35,7 @@ public class Agelion implements ISpaceCraft {
         this.rot = rot;
     }
 
-    public Agelion(Vector3D position, Matrix3D rotation, float startVelocity){
+    public Agelion(Vector3f position, Matrix3f rotation, float startVelocity){
         this.pos = position;
         this.rot = rotation;
         this.velocity = startVelocity;
@@ -39,11 +45,10 @@ public class Agelion implements ISpaceCraft {
         this.pointMode = false;
     }
     public Agelion(){
-        this(new Vector3D(), new Matrix3D(), 1);
+        this(new Vector3f(), new Matrix3f(), 1);
     }
 
 
-    //  Speed   //
     public void setSpeedTarget(float speed){
         //TODO implement setSpeedTarget
     }
@@ -51,7 +56,6 @@ public class Agelion implements ISpaceCraft {
         //TODO implement setAccelerateTarget
     }
 
-    // Pan X&Y  //
     public synchronized void setPanXPoint(float xTarget){
         panXTarget = xTarget;
         pointMode = true;
@@ -70,17 +74,16 @@ public class Agelion implements ISpaceCraft {
         pointMode = false;
     }
 
-    // Action   //
-    public void action(){
-        pu.usePU(pos, rot);
-    }
-
     private void panCraft(int timeMilli){
         if (pointMode) {
             panPointMode(timeMilli);
         } else {
             panVelocityMode(timeMilli);
         }
+    }
+    private void advanceCraft(int timeMilli){
+        float posYAdded = velocity * ((float)timeMilli/1000);
+        pos.add((Tuple3f)new Vector3f(0, posYAdded, 0));
     }
 
     private void panPointMode(int timeMilli){
@@ -109,23 +112,23 @@ public class Agelion implements ISpaceCraft {
 
 
         /* Sets new position */
-        pos = new Vector3D(posXNew, pos.getY(), posZNew);
+        pos = new Vector3f(posXNew,pos.getY(),posZNew);
     }
     private void panVelocityMode(int timeMilli){
         float addedXPos = distanceCalc(velXTarget,timeMilli);
         float addedZPos = distanceCalc(velZTarget,timeMilli);
 
-        pos = pos.add(addedXPos,0, addedZPos);
+        pos.add((Tuple3f) new Vector3f(addedXPos,0,addedZPos));
     }
 
     private float distanceCalc(float speed, float timeMilli){
         return speed * ((float)timeMilli/1000);
     }
 
-    private void advanceCraft(int timeMilli){
-        float posYAdded = velocity * ((float)timeMilli/1000);
-        pos = pos.add(0, posYAdded, 0);
+    public void action(){
+        pu.usePU(pos, rot);
     }
+
 
     //TODO some sort of rotation engine?
     //TODO Spacecraft flight system. (Acc pan etc)
@@ -138,17 +141,18 @@ public class Agelion implements ISpaceCraft {
 
 
     @Override
-    public Vector3D getPos() {
+    public Vector3f getPos() {
         return pos;
     }
     @Override
-    public Matrix3D getRot() {
+    public Matrix3f getRot() {
         return rot;
     }
 
     @Override
     public void update(int milliSinceLastUpdate) {
         panCraft(milliSinceLastUpdate);
+        System.out.println(pos.getX());
         advanceCraft(milliSinceLastUpdate);
     }
 }

@@ -1,4 +1,4 @@
-package com.tda367.parallax.parallaxCore;
+package com.tda367.parallax.oldMathClasses;
 
 /**
  * Self made matrix class. Mostly used to save the rotation of objects.

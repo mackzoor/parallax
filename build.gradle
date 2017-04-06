@@ -77,6 +77,8 @@ project(":core") {
 
 
     dependencies {
+        // https://mvnrepository.com/artifact/javax.vecmath/vecmath
+        compile group: 'javax.vecmath', name: 'vecmath', version: '1.5.2'
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-bullet:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-controllers:$gdxVersion"
