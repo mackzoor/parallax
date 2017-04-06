@@ -13,10 +13,12 @@ import com.badlogic.gdx.graphics.g3d.loader.G3dModelLoader;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.utils.UBJsonReader;
 import com.tda367.parallax.parallaxCore.Agelion;
+import com.tda367.parallax.parallaxCore.ISpaceCraft;
 import com.tda367.parallax.parallaxCore.Player;
 import com.tda367.parallax.parallaxCore.Parallax;
 
 import javax.vecmath.Vector2f;
+import java.util.List;
 
 public class ParallaxLibGdxLayer implements ApplicationListener, InputProcessor {
 	SpriteBatch batch;
@@ -67,11 +69,13 @@ public class ParallaxLibGdxLayer implements ApplicationListener, InputProcessor 
 
 		// Model loader needs a binary json reader to decode
 		UBJsonReader jsonReader = new UBJsonReader();
+
 		// Create a model loader passing in our json reader
 		G3dModelLoader modelLoader = new G3dModelLoader(jsonReader);
+
 		// Now load the model by name
 		// Note, the model (g3db file ) and textures need to be added to the assets folder of the Android proj
-		model = modelLoader.loadModel(Gdx.files.getFileHandle("ship.g3db", Files.FileType.Internal));
+		model = modelLoader.loadModel(Gdx.files.getFileHandle("agelion.g3db", Files.FileType.Internal));
 
 		// Now create an instance.  Instance holds the positioning data, etc of an instance of your model
 		modelInstance = new ModelInstance(model);
@@ -79,13 +83,10 @@ public class ParallaxLibGdxLayer implements ApplicationListener, InputProcessor 
 		// Finally we want some light, or we wont see our color.  The environment gets passed in during
 		// the rendering process.  Create one, then create an Ambient ( non-positioned, non-directional ) light.
 		environment = new Environment();
-//        Texture texture1 = new Texture("bg.jpg");
-//        environment.set(new TextureAttribute(TextureAttribute.createAmbient(texture1)));
 		environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.8f, 0.8f, 0.8f, 1.0f));
 
 
 		frameBuffer = new FrameBuffer(Pixmap.Format.RGB888,Gdx.graphics.getWidth(),Gdx.graphics.getHeight(),false);
-//        Gdx.input.setInputProcessor(this);
 
 		spriteBatch = new SpriteBatch();
 
@@ -103,7 +104,6 @@ public class ParallaxLibGdxLayer implements ApplicationListener, InputProcessor 
 
 		//Updates Parallax game logic
 		parallaxGame.update((int)(Gdx.graphics.getDeltaTime() * 1000));
-
 
 		//Updates camera
 		camera.position.set(
@@ -134,8 +134,18 @@ public class ParallaxLibGdxLayer implements ApplicationListener, InputProcessor 
 
 		// Like spriteBatch, just with models!  pass in the box Instance and the environment
 		modelBatch.begin(camera);
-		modelBatch.render(modelInstance, environment);
+		List<ISpaceCraft> spaceCrafts = parallaxGame.getSpaceCraft();
+		for (ISpaceCraft spaceCraft : spaceCrafts){
+			ModelInstance tempModel = new ModelInstance(model);
+			tempModel.transform.setToTranslation(
+					spaceCraft.getPos().getX(),
+					spaceCraft.getPos().getZ(),
+					spaceCraft.getPos().getY()*-1
+			);
+			modelBatch.render(tempModel, environment);
+		}
 		modelBatch.end();
+
 
 		// Now tell OpenGL that we are done sending graphics to the framebuffer
 		if(screenShot)
