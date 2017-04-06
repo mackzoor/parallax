@@ -16,6 +16,8 @@ import com.tda367.parallax.parallaxCore.Agelion;
 import com.tda367.parallax.parallaxCore.Player;
 import com.tda367.parallax.parallaxCore.Parallax;
 
+import javax.vecmath.Vector2f;
+
 public class ParallaxLibGdxLayer implements ApplicationListener, InputProcessor {
 	SpriteBatch batch;
 
@@ -185,20 +187,20 @@ public class ParallaxLibGdxLayer implements ApplicationListener, InputProcessor 
 
 	@Override
 	public boolean keyUp(int keycode) {
-		float panSpeed = 0;
+		float panSpeed = -5;
 		spaceShipTurn(keycode, panSpeed);
 		return false;
 	}
 
 	private void spaceShipTurn(int keycode, float panSpeed){
 		if (keycode == Input.Keys.W || keycode == Input.Keys.UP){
-			player.getSpaceCraft().setPanYVelocity(panSpeed);
+			player.getSpaceCraft().addPanVelocity(new Vector2f(0,panSpeed));
 		} else if (keycode == Input.Keys.A || keycode == Input.Keys.LEFT){
-			player.getSpaceCraft().setPanXVelocity(-panSpeed);
+			player.getSpaceCraft().addPanVelocity(new Vector2f(-panSpeed,0));
 		} else if (keycode == Input.Keys.S || keycode == Input.Keys.DOWN){
-			player.getSpaceCraft().setPanYVelocity(-panSpeed);
+			player.getSpaceCraft().addPanVelocity(new Vector2f(0,-panSpeed));
 		} else if (keycode == Input.Keys.D || keycode == Input.Keys.RIGHT){
-			player.getSpaceCraft().setPanXVelocity(panSpeed);
+			player.getSpaceCraft().addPanVelocity(new Vector2f(panSpeed,0));
 		}
 	}
 
