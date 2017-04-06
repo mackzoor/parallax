@@ -7,9 +7,9 @@ public class Player {
 
     private int score;
     private String userName;
-    private SpaceCraft spaceCraft;
+    private ISpaceCraft spaceCraft;
 
-    public Player(SpaceCraft spaceCraft) {
+    public Player(ISpaceCraft spaceCraft) {
         this.spaceCraft = spaceCraft;
         this.score = 0;
     }
@@ -22,7 +22,7 @@ public class Player {
         return userName;
     }
 
-    public SpaceCraft getSpaceCraft() {
+    public ISpaceCraft getSpaceCraft() {
         return spaceCraft;
     }
 }

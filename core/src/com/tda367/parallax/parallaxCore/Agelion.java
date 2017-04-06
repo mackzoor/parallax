@@ -3,7 +3,7 @@ package com.tda367.parallax.parallaxCore;
 /**
  * Represents the spacecraft in our game.
  */
-public class Agelion implements SpaceCraft {
+public class Agelion implements ISpaceCraft {
 
     private int health; //Current health
     private PowerUp pu; //Current stored power up

@@ -9,17 +9,17 @@ import java.util.List;
 public class Course implements Updatable {
 
     List<CourseModule> modules;
-    List<SpaceCraft> spaceCrafts;
+    List<ISpaceCraft> spaceCrafts;
 
     public Course(){
-        spaceCrafts = new ArrayList<SpaceCraft>();
+        spaceCrafts = new ArrayList<ISpaceCraft>();
 
     }
 
-    public void addSpaceCraft(SpaceCraft spaceCraft){
+    public void addSpaceCraft(ISpaceCraft spaceCraft){
         spaceCrafts.add(spaceCraft);
     }
-    public void removeSpaceCraft(SpaceCraft spaceCraft){
+    public void removeSpaceCraft(ISpaceCraft spaceCraft){
         spaceCrafts.remove(spaceCraft);
     }
 
@@ -30,7 +30,7 @@ public class Course implements Updatable {
 //
 //        }
 
-        for (SpaceCraft spaceCraft : spaceCrafts){
+        for (ISpaceCraft spaceCraft : spaceCrafts){
             spaceCraft.update(milliSinceLastUpdate);
         }
 
