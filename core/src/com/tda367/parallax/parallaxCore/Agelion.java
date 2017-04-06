@@ -11,6 +11,11 @@ public class Agelion implements ISpaceCraft {
     private PowerUp pu; //Current stored power up
 
     private float velocity;
+    private float targetSpeed;
+    private float targetAcceleration;
+    private boolean speedTargetMode;
+
+
     private float panSpeed; // m/s
 
     private boolean pointMode;
@@ -32,21 +37,27 @@ public class Agelion implements ISpaceCraft {
         velTarget = new Vector2f();
 
         this.pointMode = false;
+        this.speedTargetMode = true;
 
     }
     public Agelion(Vector3f position, Matrix3f rotation, float startVelocity){
         this(5,startVelocity,2,position,rotation);
     }
+    public Agelion(float velocity){
+        this(new Vector3f(), new Matrix3f(), velocity);
+    }
     public Agelion(){
-        this(new Vector3f(), new Matrix3f(), 1);
+        this(1);
     }
 
 
-    public void setSpeedTarget(float speed){
-        //TODO implement setSpeedTarget
+    public synchronized void setSpeedTarget(float speed){
+        targetSpeed = speed;
+        speedTargetMode = true;
     }
-    public void setAccelerateTarget(float accelerate){
-        //TODO implement setAccelerateTarget
+    public synchronized void setAccelerateTarget(float accelerate){
+        targetAcceleration = accelerate;
+        speedTargetMode = false;
     }
 
     @Override
@@ -75,6 +86,22 @@ public class Agelion implements ISpaceCraft {
             panPointMode(timeMilli);
         } else {
             panVelocityMode(timeMilli);
+        }
+    }
+    private void accelerateCraft(int timeMilli){
+        if (speedTargetMode){
+            if (velocity < targetSpeed){
+                float speedIncrease = velocity + targetAcceleration * ((float)timeMilli/1000);
+
+                if (targetSpeed < speedIncrease+velocity){
+                    velocity = targetSpeed;
+                } else {
+                    velocity += speedIncrease;
+                }
+
+            }
+        } else {
+            velocity = velocity + targetAcceleration * ((float)timeMilli/1000);
         }
     }
     private void advanceCraft(int timeMilli){
@@ -137,10 +164,7 @@ public class Agelion implements ISpaceCraft {
     //TODO some sort of rotation engine?
     //TODO Spacecraft flight system. (Acc pan etc)
 
-
     //TODO Geometry?
-    //TODO Turn left right up down? Set speed of movement or set target placement target?
-    //TODO Accelerate decelerate? Set thrust target or set speed target?
     //TODO More?
 
 
@@ -155,6 +179,7 @@ public class Agelion implements ISpaceCraft {
 
     @Override
     public void update(int milliSinceLastUpdate) {
+        accelerateCraft(milliSinceLastUpdate);
         panCraft(milliSinceLastUpdate);
         advanceCraft(milliSinceLastUpdate);
     }
