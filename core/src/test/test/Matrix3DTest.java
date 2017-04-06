@@ -19,7 +19,7 @@ public class Matrix3DTest {
 
         Matrix3D matrix2 = new Matrix3D();
 
-        Matrix3D rotatedMatrix = matrix2.rotateX(30);
+        Matrix3D rotatedMatrix = matrix2.rotateX(20);
         Matrix3D resultMatrix = new Matrix3D(v0, v1, v2);
         assertTrue(rotatedMatrix.equals(resultMatrix));
     }
