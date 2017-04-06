@@ -11,6 +11,9 @@ public class MinionEnemy extends HunterAI {
     }
 
     private void operate(){
+
+//        spaceCraft.setAccelerateTarget(1);
+
         //TODO implement minion operate method.
         //Track to target
 
@@ -23,5 +26,9 @@ public class MinionEnemy extends HunterAI {
     @Override
     public void update(int milliSinceLastUpdate) {
         operate();
+    }
+
+    public ISpaceCraft getSpaceCraft() {
+        return spaceCraft;
     }
 }
