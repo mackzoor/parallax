@@ -1,5 +1,7 @@
 package com.tda367.parallax.parallaxCore;
 
+import java.util.List;
+
 /**
  * Created by Anthony on 05/04/2017.
  */
@@ -22,6 +24,10 @@ public class Parallax implements Updatable{
     public void update(int milliSinceLastUpdate) {
         course.update(milliSinceLastUpdate);
         camera.update(milliSinceLastUpdate);
+    }
+
+    public List<ISpaceCraft> getSpaceCraft(){
+        return course.getSpaceCrafts();
     }
 
     public Camera getCamera(){
