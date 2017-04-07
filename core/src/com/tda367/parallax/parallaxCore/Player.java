@@ -1,5 +1,7 @@
 package com.tda367.parallax.parallaxCore;
 
+import com.tda367.parallax.parallaxCore.SpaceCraft.ISpaceCraft;
+
 /**
  * Created by Markus on 2017-04-05.
  */

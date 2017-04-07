@@ -1,5 +1,8 @@
 package com.tda367.parallax.parallaxCore;
 
+import com.tda367.parallax.parallaxCore.SpaceCraft.Agelion;
+import com.tda367.parallax.parallaxCore.SpaceCraft.ISpaceCraft;
+
 import javax.vecmath.Matrix3f;
 import javax.vecmath.Vector3f;
 import java.util.ArrayList;

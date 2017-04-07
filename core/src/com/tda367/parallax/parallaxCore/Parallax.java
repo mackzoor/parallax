@@ -1,5 +1,7 @@
 package com.tda367.parallax.parallaxCore;
 
+import com.tda367.parallax.parallaxCore.SpaceCraft.ISpaceCraft;
+
 import java.util.List;
 
 /**

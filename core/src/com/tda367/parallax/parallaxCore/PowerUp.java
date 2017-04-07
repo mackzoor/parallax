@@ -7,5 +7,5 @@ import javax.vecmath.Vector3f;
  * Abstract class for powerups in the game.
  */
 public abstract class PowerUp implements Usable{
-    abstract void usePU(Vector3f pos, Matrix3f rot);
+    public abstract void usePU(Vector3f pos, Matrix3f rot);
 }

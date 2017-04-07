@@ -1,4 +1,6 @@
-package com.tda367.parallax.parallaxCore;
+package com.tda367.parallax.parallaxCore.SpaceCraft;
+
+import com.tda367.parallax.parallaxCore.PowerUp;
 
 import javax.vecmath.*;
 

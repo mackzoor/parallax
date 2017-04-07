@@ -1,5 +1,7 @@
 package com.tda367.parallax.parallaxCore;
 
+import com.tda367.parallax.parallaxCore.SpaceCraft.ISpaceCraft;
+
 /**
  * An enemy minion. Will try to destroy its target.
  */

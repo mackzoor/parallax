@@ -12,8 +12,8 @@ import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.loader.G3dModelLoader;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.utils.UBJsonReader;
-import com.tda367.parallax.parallaxCore.Agelion;
-import com.tda367.parallax.parallaxCore.ISpaceCraft;
+import com.tda367.parallax.parallaxCore.SpaceCraft.Agelion;
+import com.tda367.parallax.parallaxCore.SpaceCraft.ISpaceCraft;
 import com.tda367.parallax.parallaxCore.Player;
 import com.tda367.parallax.parallaxCore.Parallax;
 
@@ -75,7 +75,7 @@ public class ParallaxLibGdxLayer implements ApplicationListener, InputProcessor 
 
 		// Now load the model by name
 		// Note, the model (g3db file ) and textures need to be added to the assets folder of the Android proj
-		model = modelLoader.loadModel(Gdx.files.getFileHandle("agelion.g3db", Files.FileType.Internal));
+		model = modelLoader.loadModel(Gdx.files.getFileHandle("ship.g3db", Files.FileType.Internal));
 
 		// Now create an instance.  Instance holds the positioning data, etc of an instance of your model
 		modelInstance = new ModelInstance(model);
