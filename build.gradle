@@ -3,7 +3,7 @@ buildscript {
         mavenLocal()
         mavenCentral()
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-        jcenter()
+        jcenter() //Vital for cardboard extension
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.2.2'
@@ -29,6 +29,7 @@ allprojects {
         mavenCentral()
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
         maven { url "https://oss.sonatype.org/content/repositories/releases/" }
+        jcenter() //Vital for cardboard extension
     }
 }
 
@@ -69,6 +70,8 @@ project(":android") {
         compile "com.badlogicgames.gdx:gdx-controllers:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-controllers-android:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-ai:$aiVersion"
+        compile fileTree(dir: 'libs', include: ['*.jar']) //Cardboard extension
+        compile "com.github.yangweigbh:libgdx-cardboard-core:0.3" //Cardboard extension
     }
 }
 
