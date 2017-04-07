@@ -1,12 +1,15 @@
 package com.tda367.parallax.parallaxCore;
 
+import javax.vecmath.Matrix3f;
+import javax.vecmath.Vector3f;
+
 /**
  * Created by Anthony on 05/04/2017.
  */
 public class Camera implements Updatable{
 
-    private Vector3D pos;
-    private Matrix3D rot;
+    private Vector3f pos;
+    private Matrix3f rot;
 
     private float fov;
 
@@ -21,13 +24,13 @@ public class Camera implements Updatable{
     }*/
 
 
-    public Camera(Vector3D pos, Matrix3D rot, float fov){
+    public Camera(Vector3f pos, Matrix3f rot, float fov){
         this.pos = pos;
         this.rot = rot;
         this.fov = fov;
     }
     public Camera(){
-        this(new Vector3D(0,0,1), new Matrix3D(), 90);
+        this(new Vector3f(0,0,1), new Matrix3f(), 90);
     }
 
     public void trackTo(Collidable collidable){
@@ -37,10 +40,10 @@ public class Camera implements Updatable{
 
     }
 
-    public Vector3D getPos() {
+    public Vector3f getPos() {
         return pos;
     }
-    public Matrix3D getRot() {
+    public Matrix3f getRot() {
         return rot;
     }
     public float getFov() {
@@ -50,6 +53,6 @@ public class Camera implements Updatable{
     @Override
     public void update(int milliSinceLastUpdate) {
         float targetYPos = trackingTarget.getPos().getY();
-        pos = new Vector3D(pos.getX(),targetYPos-4, pos.getZ());
+        pos = new Vector3f(pos.getX(),targetYPos-4, pos.getZ());
     }
 }

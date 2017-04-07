@@ -3,35 +3,32 @@ package com.tda367.parallax.parallaxCore;
 /**
  * An enemy minion. Will try to destroy its target.
  */
-public class MinionEnemy implements EnemyAI {
+public class MinionEnemy extends HunterAI {
+    private ISpaceCraft spaceCraft;
 
-    private com.tda367.parallax.parallaxCore.SpaceCraft spaceCraft;
-    private com.tda367.parallax.parallaxCore.Collidable target;
-
-
-    //TODO Update?
-
-    MinionEnemy(com.tda367.parallax.parallaxCore.SpaceCraft spaceCraft){
-
+    MinionEnemy(ISpaceCraft spaceCraft){
+        this.spaceCraft = spaceCraft;
     }
 
-    @Override
-    public void setTarget(com.tda367.parallax.parallaxCore.Collidable collidableObject) {
-        target = collidableObject;
-    }
+    private void operate(){
 
-    @Override
-    public void start() {
+//        spaceCraft.setAccelerateTarget(1);
 
-    }
+        //TODO implement minion operate method.
+        //Track to target
 
-    @Override
-    public void stop() {
-
+        //If pointing at target
+            //Shoot
+        //else
+            //Do nothing
     }
 
     @Override
     public void update(int milliSinceLastUpdate) {
-        //TODO Update ai to target enemy and fire if targeted
+        operate();
+    }
+
+    public ISpaceCraft getSpaceCraft() {
+        return spaceCraft;
     }
 }

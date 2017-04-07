@@ -1,8 +1,11 @@
 package com.tda367.parallax.parallaxCore;
 
+import javax.vecmath.Matrix3f;
+import javax.vecmath.Vector3f;
+
 /**
- * Interface for powerups in the game.
+ * Abstract class for powerups in the game.
  */
-public interface PowerUp extends Usable{
-    void usePU(Vector3D pos, Matrix3D rot);
+public abstract class PowerUp implements Usable{
+    abstract void usePU(Vector3f pos, Matrix3f rot);
 }

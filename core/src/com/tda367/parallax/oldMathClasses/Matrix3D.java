@@ -1,4 +1,4 @@
-package com.tda367.parallax.parallaxCore;
+package com.tda367.parallax.oldMathClasses;
 
 import com.sun.javafx.geom.transform.BaseTransform;
 
