@@ -1,7 +1,7 @@
 package test.test;
 
-import com.tda367.parallax.parallaxCore.Matrix3D;
-import com.tda367.parallax.parallaxCore.Vector3D;
+import com.tda367.parallax.oldMathClasses.Matrix3D;
+import com.tda367.parallax.oldMathClasses.Vector3D;
 import org.junit.Test;
 
 import static java.lang.Math.cos;
