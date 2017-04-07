@@ -1,4 +1,4 @@
-package com.tda367.parallax.parallaxCore.SpaceCraft;
+package com.tda367.parallax.parallaxCore.spaceCraft;
 
 import com.tda367.parallax.parallaxCore.Collidable;
 import com.tda367.parallax.parallaxCore.PowerUp;

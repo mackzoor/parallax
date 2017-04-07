@@ -12,8 +12,8 @@ import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.loader.G3dModelLoader;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.utils.UBJsonReader;
-import com.tda367.parallax.parallaxCore.SpaceCraft.Agelion;
-import com.tda367.parallax.parallaxCore.SpaceCraft.ISpaceCraft;
+import com.tda367.parallax.parallaxCore.spaceCraft.Agelion;
+import com.tda367.parallax.parallaxCore.spaceCraft.ISpaceCraft;
 import com.tda367.parallax.parallaxCore.Player;
 import com.tda367.parallax.parallaxCore.Parallax;
 
