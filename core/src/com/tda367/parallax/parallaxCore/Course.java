@@ -4,6 +4,7 @@ import com.tda367.parallax.parallaxCore.spaceCraft.Agelion;
 import com.tda367.parallax.parallaxCore.spaceCraft.ISpaceCraft;
 
 import javax.vecmath.Matrix3f;
+import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +54,7 @@ public class Course implements Updatable {
 
         MinionEnemy minionEnemy = new MinionEnemy(new Agelion(
                 new Vector3f(1.5f,-2, 1),
-                new Matrix3f(),
+                new Quat4f(),
                 3
         ));
         minionEnemy.getSpaceCraft().setAccelerateTarget(-0.5f);

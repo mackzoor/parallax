@@ -25,10 +25,10 @@ public class Agelion implements ISpaceCraft {
     private Vector2f velTarget;
 
     private Vector3f pos;
-    private Matrix3f rot;
+    private Quat4f rot;
 
 
-    public Agelion(int health, float velocity, float panSpeed, Vector3f pos, Matrix3f rot) {
+    public Agelion(int health, float velocity, float panSpeed, Vector3f pos, Quat4f rot) {
         this.health = health;
         this.velocity = velocity;
         this.panSpeed = panSpeed;
@@ -42,11 +42,11 @@ public class Agelion implements ISpaceCraft {
         this.speedTargetMode = true;
 
     }
-    public Agelion(Vector3f position, Matrix3f rotation, float startVelocity){
+    public Agelion(Vector3f position, Quat4f rotation, float startVelocity){
         this(5,startVelocity,2,position,rotation);
     }
     public Agelion(float velocity){
-        this(new Vector3f(), new Matrix3f(), velocity);
+        this(new Vector3f(), new Quat4f(), velocity);
     }
     public Agelion(){
         this(1);
@@ -175,7 +175,7 @@ public class Agelion implements ISpaceCraft {
         return pos;
     }
     @Override
-    public Matrix3f getRot() {
+    public Quat4f getRot() {
         return rot;
     }
 

@@ -1,6 +1,6 @@
 package com.tda367.parallax.parallaxCore;
 
-import javax.vecmath.Matrix3f;
+import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
 
 /**
@@ -8,7 +8,7 @@ import javax.vecmath.Vector3f;
  */
 public interface Collidable {
     Vector3f getPos();
-    Matrix3f getRot();
+    Quat4f getRot();
 
     //Get geo?
 }

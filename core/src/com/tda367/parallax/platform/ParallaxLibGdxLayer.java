@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.loader.G3dModelLoader;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
+import com.badlogic.gdx.math.Quaternion;
 import com.badlogic.gdx.utils.UBJsonReader;
 import com.tda367.parallax.parallaxCore.spaceCraft.Agelion;
 import com.tda367.parallax.parallaxCore.spaceCraft.ISpaceCraft;
@@ -141,6 +142,14 @@ public class ParallaxLibGdxLayer implements ApplicationListener, InputProcessor 
 					spaceCraft.getPos().getX(),
 					spaceCraft.getPos().getZ(),
 					spaceCraft.getPos().getY()*-1
+			);
+			tempModel.transform.rotate(
+					new Quaternion(
+							spaceCraft.getRot().getX(),
+							spaceCraft.getRot().getY(),
+							spaceCraft.getRot().getZ(),
+							spaceCraft.getRot().getW()
+					)
 			);
 			modelBatch.render(tempModel, environment);
 		}
