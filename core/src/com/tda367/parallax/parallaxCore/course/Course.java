@@ -16,13 +16,15 @@ import java.util.Random;
  */
 public class Course implements Updatable {
 
-    List<CourseModule> modules;
-    List<ISpaceCraft> spaceCrafts;
+    private List<ICourseModule> modules;
+    private List<ISpaceCraft> spaceCrafts;
+
 
     public Course(){
         spaceCrafts = new ArrayList<ISpaceCraft>();
 
 
+        //Debug purpose only
         createTestEnemy();
     }
 
@@ -36,7 +38,7 @@ public class Course implements Updatable {
     @Override
     public void update(int milliSinceLastUpdate) {
 
-//        for (CourseModule module : modules){
+//        for (ICourseModule module : modules){
 //
 //        }
 
