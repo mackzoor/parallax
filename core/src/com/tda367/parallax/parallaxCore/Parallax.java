@@ -9,11 +9,11 @@ import java.util.List;
  */
 public class Parallax implements Updatable{
 
-    private Course course;
+    private com.tda367.parallax.parallaxCore.course.Course course;
     private Camera camera;
 
     public Parallax(Player player){
-        course = new Course();
+        course = new com.tda367.parallax.parallaxCore.course.Course();
         course.addSpaceCraft(player.getSpaceCraft());
 
         camera = new Camera();

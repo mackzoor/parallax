@@ -1,7 +1,7 @@
 package com.tda367.parallax.parallaxCore.spaceCraft;
 
 import com.tda367.parallax.parallaxCore.Collidable;
-import com.tda367.parallax.parallaxCore.IPowerUp;
+import com.tda367.parallax.parallaxCore.powerUps.IPowerUp;
 import com.tda367.parallax.parallaxCore.Updatable;
 
 import javax.vecmath.Vector2f;

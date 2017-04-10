@@ -1,4 +1,4 @@
-package com.tda367.parallax.parallaxCore;
+package com.tda367.parallax.parallaxCore.enemies;
 
 import com.tda367.parallax.parallaxCore.spaceCraft.ISpaceCraft;
 
@@ -8,7 +8,7 @@ import com.tda367.parallax.parallaxCore.spaceCraft.ISpaceCraft;
 public class MinionEnemy extends HunterAI {
     private ISpaceCraft spaceCraft;
 
-    MinionEnemy(ISpaceCraft spaceCraft){
+    public MinionEnemy(ISpaceCraft spaceCraft){
         this.spaceCraft = spaceCraft;
     }
 

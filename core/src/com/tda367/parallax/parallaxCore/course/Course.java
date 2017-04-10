@@ -1,9 +1,10 @@
-package com.tda367.parallax.parallaxCore;
+package com.tda367.parallax.parallaxCore.course;
 
+import com.tda367.parallax.parallaxCore.enemies.MinionEnemy;
+import com.tda367.parallax.parallaxCore.Updatable;
 import com.tda367.parallax.parallaxCore.spaceCraft.Agelion;
 import com.tda367.parallax.parallaxCore.spaceCraft.ISpaceCraft;
 
-import javax.vecmath.Matrix3f;
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
 import java.util.ArrayList;

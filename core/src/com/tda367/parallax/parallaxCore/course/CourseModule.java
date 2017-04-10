@@ -1,4 +1,6 @@
-package com.tda367.parallax.parallaxCore;
+package com.tda367.parallax.parallaxCore.course;
+
+import com.tda367.parallax.parallaxCore.Collidable;
 
 import java.util.List;
 
