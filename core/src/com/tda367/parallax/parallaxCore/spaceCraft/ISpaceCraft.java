@@ -1,7 +1,7 @@
 package com.tda367.parallax.parallaxCore.spaceCraft;
 
 import com.tda367.parallax.parallaxCore.Collidable;
-import com.tda367.parallax.parallaxCore.PowerUp;
+import com.tda367.parallax.parallaxCore.IPowerUp;
 import com.tda367.parallax.parallaxCore.Updatable;
 
 import javax.vecmath.Vector2f;
@@ -20,7 +20,7 @@ public interface ISpaceCraft extends Collidable, Updatable {
     void addPanVelocity(Vector2f velocity);
 
     public void action();
-    public void setPU(PowerUp pu);
+    public void setPU(IPowerUp pu);
 }
 
 

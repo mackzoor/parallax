@@ -1,6 +1,6 @@
 package com.tda367.parallax.parallaxCore.spaceCraft;
 
-import com.tda367.parallax.parallaxCore.PowerUp;
+import com.tda367.parallax.parallaxCore.IPowerUp;
 
 import javax.vecmath.*;
 
@@ -10,7 +10,7 @@ import javax.vecmath.*;
 public class Agelion implements ISpaceCraft {
 
     private int health; //Current health
-    private PowerUp pu; //Current stored power up
+    private IPowerUp pu; //Current stored power up
 
     private float velocity;
     private float targetSpeed;
@@ -158,7 +158,7 @@ public class Agelion implements ISpaceCraft {
         }
     }
     @Override
-    public void setPU(PowerUp pu) {
+    public void setPU(IPowerUp pu) {
         this.pu = pu;
     }
 
