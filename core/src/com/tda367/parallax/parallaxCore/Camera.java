@@ -7,7 +7,7 @@ import javax.vecmath.Vector3f;
 /**
  * Created by Anthony on 05/04/2017.
  */
-public class Camera implements Updatable{
+public class Camera implements Updatable, Transformable{
 
     private Vector3f pos;
     private Quat4f rot;
