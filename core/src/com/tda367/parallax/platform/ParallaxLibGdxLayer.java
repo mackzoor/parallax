@@ -2,21 +2,13 @@ package com.tda367.parallax.platform;
 
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.*;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g3d.ModelBatch;
-import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.tda367.parallax.parallaxCore.spaceCraft.Agelion;
 import com.tda367.parallax.parallaxCore.Player;
 import com.tda367.parallax.parallaxCore.Parallax;
-import javax.vecmath.Vector2f;
 
 public class ParallaxLibGdxLayer implements ApplicationListener {
 
 	private PerspectiveCamera camera;
-	private ModelBatch modelBatch;
-	private boolean screenShot = false;
-	private FrameBuffer frameBuffer;
-	private Texture texture = null;
 	private Player player;
 	private Parallax parallaxGame;
 	private Renderer renderer;
@@ -50,9 +42,6 @@ public class ParallaxLibGdxLayer implements ApplicationListener {
 		camera.near = 0.1f;
 		camera.far = 300.0f;
 
-
-		frameBuffer = new FrameBuffer(Pixmap.Format.RGB888,Gdx.graphics.getWidth(),Gdx.graphics.getHeight(),false);
-
 		renderer = new Renderer(camera);
 	}
 
@@ -77,7 +66,7 @@ public class ParallaxLibGdxLayer implements ApplicationListener {
 
 		camera.update();
 
-		renderer.renderAll(frameBuffer);
+		renderer.renderAll();
 
 
 	}

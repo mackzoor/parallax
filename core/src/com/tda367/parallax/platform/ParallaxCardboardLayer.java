@@ -3,52 +3,49 @@ package com.tda367.parallax.platform;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.android.CardBoardApplicationListener;
 import com.badlogic.gdx.backends.android.CardboardCamera;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.VertexAttributes;
-import com.badlogic.gdx.graphics.g3d.*;
-import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
-import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
-import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.badlogic.gdx.math.Matrix4;
 import com.google.vrtoolkit.cardboard.Eye;
 import com.google.vrtoolkit.cardboard.HeadTransform;
 import com.google.vrtoolkit.cardboard.Viewport;
+import com.tda367.parallax.parallaxCore.Parallax;
+import com.tda367.parallax.parallaxCore.Player;
+import com.tda367.parallax.parallaxCore.spaceCraft.Agelion;
 
 /**
  * Created by Markus on 2017-04-11.
  */
 public class ParallaxCardboardLayer implements CardBoardApplicationListener {
 
-    private CardboardCamera cam;
-    private Model model;
-    private ModelInstance instance;
-    private ModelBatch batch;
-    private Environment environment;
+    private CardboardCamera camera;
+    private Player player;
+    private Parallax parallaxGame;
+    private Renderer renderer;
+    private ParallaxLibGDXController controller;
     private static final float Z_NEAR = 0.1f;
-    private static final float Z_FAR = 1000.0f;
-    private static final float CAMERA_Z = 0.01f;
+    private static final float Z_FAR = 300.0f;
 
     @Override
     public void create() {
-        cam = new CardboardCamera();
-        cam.position.set(0f, 0f, CAMERA_Z);
-        cam.lookAt(0,0,0);
-        cam.near = Z_NEAR;
-        cam.far = Z_FAR;
 
-        environment = new Environment();
-        environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.4f, 0.4f, 0.4f, 1f));
-        environment.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -1f, -0.8f, -0.2f));
+        Gdx.graphics.setTitle("Galactica space wars of justice, ultimate edition");
 
-        ModelBuilder modelBuilder = new ModelBuilder();
-        model = modelBuilder.createBox(10f, 20f, 30f,
-                new Material(ColorAttribute.createDiffuse(Color.RED)),
-                VertexAttributes.Usage.Position | VertexAttributes.Usage.Normal);
-        instance = new ModelInstance(model);
-        instance.transform.translate(0, 0, -50);
+        // Initiate game with space craft "Agelion"
+        this.player = new Player(new Agelion(10));
+        this.parallaxGame = new Parallax(player);
+        controller = new ParallaxLibGDXController(player);
 
-        batch = new ModelBatch();
+        // Setup of special camera for VR
+        camera = new CardboardCamera();
+        camera.position.set(
+                parallaxGame.getCamera().getPos().getX(),
+                parallaxGame.getCamera().getPos().getY(),
+                parallaxGame.getCamera().getPos().getZ()
+        );
+        camera.lookAt(0, 0, -1);
+        camera.near = Z_NEAR;
+        camera.far = Z_FAR;
+
+        renderer = new Renderer(camera);
     }
 
     @Override
@@ -71,30 +68,36 @@ public class ParallaxCardboardLayer implements CardBoardApplicationListener {
 
     @Override
     public void dispose() {
-        batch.dispose();
-        model.dispose();
+
     }
 
     @Override
     public void onNewFrame(HeadTransform paramHeadTransform) {
-        instance.transform.rotate(0, 1, 0, Gdx.graphics.getDeltaTime() * 30);
+        //Updates Parallax game logic
+        parallaxGame.update((int)(Gdx.graphics.getDeltaTime() * 1000));
+
+        //Updates camera
+        camera.position.set(
+                parallaxGame.getCamera().getPos().getX(),
+                parallaxGame.getCamera().getPos().getZ(),
+                parallaxGame.getCamera().getPos().getY()*-1
+        );
+        camera.update();
+
     }
 
     @Override
     public void onDrawEye(Eye eye) {
-        Gdx.gl.glEnable(GL20.GL_DEPTH_TEST);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 
         // Apply the eye transformation to the camera.
-        cam.setEyeViewAdjustMatrix(new Matrix4(eye.getEyeView()));
+        camera.setEyeViewAdjustMatrix(new Matrix4(eye.getEyeView()));
 
         float[] perspective = eye.getPerspective(Z_NEAR, Z_FAR);
-        cam.setEyeProjection(new Matrix4(perspective));
-        cam.update();
+        camera.setEyeProjection(new Matrix4(perspective));
+        camera.update();
 
-        batch.begin(cam);
-        batch.render(instance, environment);
-        batch.end();
+        //Renders scene for current eye
+        renderer.renderAll();
     }
 
     @Override
