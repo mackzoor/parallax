@@ -10,8 +10,7 @@ import com.tda367.parallax.parallaxCore.Player;
 import com.tda367.parallax.parallaxCore.Parallax;
 import javax.vecmath.Vector2f;
 
-public class ParallaxLibGdxLayer implements ApplicationListener, InputProcessor {
-	SpriteBatch batch;
+public class ParallaxLibGdxLayer implements ApplicationListener {
 
 	private PerspectiveCamera camera;
 	private ModelBatch modelBatch;
@@ -21,16 +20,17 @@ public class ParallaxLibGdxLayer implements ApplicationListener, InputProcessor 
 	private Player player;
 	private Parallax parallaxGame;
 	private Renderer renderer;
+	private ParallaxLibGDXController controller;
 
 	@Override
 	public void create () {
-		Gdx.input.setInputProcessor(this);
 
 		Gdx.graphics.setTitle("Galactica space wars of justice, ultimate edition");
 
 		// Initiate game with space craft "Agelion"
 		this.player = new Player(new Agelion(10));
 		this.parallaxGame = new Parallax(player);
+		controller = new ParallaxLibGDXController(player);
 
 		// Create camera sized to screens width/height with Field of View of 75 degrees
 		camera = new PerspectiveCamera(
@@ -54,8 +54,6 @@ public class ParallaxLibGdxLayer implements ApplicationListener, InputProcessor 
 		frameBuffer = new FrameBuffer(Pixmap.Format.RGB888,Gdx.graphics.getWidth(),Gdx.graphics.getHeight(),false);
 
 		renderer = new Renderer(camera);
-
-		batch = new SpriteBatch();
 	}
 
 	@Override
@@ -98,61 +96,5 @@ public class ParallaxLibGdxLayer implements ApplicationListener, InputProcessor 
 	public void dispose() {
 //		modelBatch.dispose();
 //		model.dispose();
-	}
-
-	@Override
-	public boolean keyDown(int keycode) {
-		float panSpeed = 5;
-		spaceShipTurn(keycode, panSpeed);
-		return false;
-	}
-
-	@Override
-	public boolean keyUp(int keycode) {
-		float panSpeed = -5;
-		spaceShipTurn(keycode, panSpeed);
-		return false;
-	}
-
-	private void spaceShipTurn(int keycode, float panSpeed){
-		if (keycode == Input.Keys.W || keycode == Input.Keys.UP){
-			player.getSpaceCraft().addPanVelocity(new Vector2f(0,panSpeed));
-		} else if (keycode == Input.Keys.A || keycode == Input.Keys.LEFT){
-			player.getSpaceCraft().addPanVelocity(new Vector2f(-panSpeed,0));
-		} else if (keycode == Input.Keys.S || keycode == Input.Keys.DOWN){
-			player.getSpaceCraft().addPanVelocity(new Vector2f(0,-panSpeed));
-		} else if (keycode == Input.Keys.D || keycode == Input.Keys.RIGHT){
-			player.getSpaceCraft().addPanVelocity(new Vector2f(panSpeed,0));
-		}
-	}
-
-	@Override
-	public boolean keyTyped(char character) {
-		return false;
-	}
-
-	@Override
-	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		return false;
-	}
-
-	@Override
-	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-		return false;
-	}
-
-	@Override
-	public boolean touchDragged(int screenX, int screenY, int pointer) {
-		return false;
-	}
-
-	@Override
-	public boolean mouseMoved(int screenX, int screenY) {
-		return false;
-	}
-
-	@Override
-	public boolean scrolled(int amount) {
-		return false;
 	}
 }
