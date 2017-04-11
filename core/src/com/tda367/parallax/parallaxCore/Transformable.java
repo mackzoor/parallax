@@ -4,9 +4,9 @@ import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
 
 /**
- * Created by Anthony on 03/04/2017.
+ * Created by Anthony on 11/04/2017.
  */
-public interface Collidable extends Transformable {
-
-    //Get geo?
+public interface Transformable {
+    Vector3f getPos();
+    Quat4f getRot();
 }

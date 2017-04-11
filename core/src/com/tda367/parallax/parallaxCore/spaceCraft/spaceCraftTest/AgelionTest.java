@@ -1,3 +1,5 @@
+package com.tda367.parallax.parallaxCore.spaceCraft.spaceCraftTest;
+
 import com.tda367.parallax.parallaxCore.spaceCraft.Agelion;
 import org.junit.Before;
 import org.junit.Test;
