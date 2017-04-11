@@ -163,11 +163,24 @@ public class Agelion implements ISpaceCraft {
     }
 
 
+
     //TODO some sort of rotation engine?
     //TODO Spacecraft flight system. (Acc pan etc)
 
     //TODO Geometry?
     //TODO More?
+
+    public float getTargetAcceleration() {
+        return targetAcceleration;
+    }
+
+    public float getTargetSpeed() {
+        return targetSpeed;
+    }
+
+    public Vector2f getPanTarget() {
+        return panTarget;
+    }
 
 
     @Override
