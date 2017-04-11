@@ -35,10 +35,14 @@ public class ParallaxLibGdxLayer implements ApplicationListener, InputProcessor 
 	private TextureRegion textureRegion;
 	private SpriteBatch spriteBatch;
 
-	private Player player;
+	private Model course;
+	private ModelInstance courseInstance;
 
+	private Player player;
 	private Parallax parallaxGame;
-	
+
+	private G3dModelLoader modelLoader;
+
 	@Override
 	public void create () {
 		Gdx.input.setInputProcessor(this);
@@ -72,7 +76,7 @@ public class ParallaxLibGdxLayer implements ApplicationListener, InputProcessor 
 		UBJsonReader jsonReader = new UBJsonReader();
 
 		// Create a model loader passing in our json reader
-		G3dModelLoader modelLoader = new G3dModelLoader(jsonReader);
+		 modelLoader = new G3dModelLoader(jsonReader);
 
 		// Now load the model by name
 		// Note, the model (g3db file ) and textures need to be added to the assets folder of the Android proj
@@ -135,6 +139,14 @@ public class ParallaxLibGdxLayer implements ApplicationListener, InputProcessor 
 
 		// Like spriteBatch, just with models!  pass in the box Instance and the environment
 		modelBatch.begin(camera);
+
+		course = modelLoader.loadModel(Gdx.files.getFileHandle("course.g3db",Files.FileType.Internal));
+
+		courseInstance = new ModelInstance(course);
+
+		modelBatch.render(courseInstance);
+
+
 		List<ISpaceCraft> spaceCrafts = parallaxGame.getSpaceCraft();
 		for (ISpaceCraft spaceCraft : spaceCrafts){
 			ModelInstance tempModel = new ModelInstance(model);
