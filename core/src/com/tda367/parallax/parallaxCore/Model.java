@@ -8,11 +8,11 @@ public class Model {
     private String modelName;
     private String modelDirectory;
 
-    Model(String modelName){
+    public Model(String modelName){
         this.modelName = modelName;
         this.modelDirectory = "";
     }
-    Model(String modelName, String modelDirectory){
+    public Model(String modelName, String modelDirectory){
         this.modelName = modelName;
         this.modelDirectory = modelDirectory;
     }

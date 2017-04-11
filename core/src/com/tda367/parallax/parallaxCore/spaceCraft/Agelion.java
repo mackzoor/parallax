@@ -1,5 +1,6 @@
 package com.tda367.parallax.parallaxCore.spaceCraft;
 
+import com.tda367.parallax.parallaxCore.Model;
 import com.tda367.parallax.parallaxCore.powerUps.IPowerUp;
 
 import javax.vecmath.*;
@@ -27,8 +28,11 @@ public class Agelion implements ISpaceCraft {
     private Vector3f pos;
     private Quat4f rot;
 
+    private Model agelionModel;
+
 
     public Agelion(int health, float velocity, float panSpeed, Vector3f pos, Quat4f rot) {
+        this.agelionModel = new Model("agelion.gg3db");
         this.health = health;
         this.velocity = velocity;
         this.panSpeed = panSpeed;
@@ -184,6 +188,11 @@ public class Agelion implements ISpaceCraft {
         accelerateCraft(milliSinceLastUpdate);
         panCraft(milliSinceLastUpdate);
         advanceCraft(milliSinceLastUpdate);
+    }
+
+    @Override
+    public Model getModel() {
+        return agelionModel;
     }
 }
 
