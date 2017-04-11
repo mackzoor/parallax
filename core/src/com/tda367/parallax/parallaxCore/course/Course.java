@@ -103,7 +103,7 @@ public class Course implements Updatable {
                 new Quat4f(),
                 3
         ));
-        minionEnemy.getSpaceCraft().setAccelerateTarget(-0.5f);
+        minionEnemy.getSpaceCraft().setAcceleration(-0.5f);
 //        minionEnemy.setTarget(spaceCrafts.get(0));
         spaceCrafts.add(minionEnemy.getSpaceCraft());
         RenderManager.getInstance().addRenderTask(minionEnemy.getSpaceCraft());

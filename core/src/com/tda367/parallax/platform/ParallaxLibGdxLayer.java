@@ -26,6 +26,8 @@ public class ParallaxLibGdxLayer implements ApplicationListener, InputProcessor 
 	public void create () {
 		Gdx.input.setInputProcessor(this);
 
+		Gdx.graphics.setTitle("Galactica space wars of justice, ultimate edition");
+
 		// Initiate game with space craft "Agelion"
 		this.player = new Player(new Agelion(10));
 		this.parallaxGame = new Parallax(player);
