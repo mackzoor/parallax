@@ -1,5 +1,6 @@
 package com.tda367.parallax.parallaxCore;
 
+import com.tda367.parallax.parallaxCore.course.Course;
 import com.tda367.parallax.parallaxCore.spaceCraft.ISpaceCraft;
 
 import java.util.List;
@@ -9,10 +10,13 @@ import java.util.List;
  */
 public class Parallax implements Updatable{
 
-    private com.tda367.parallax.parallaxCore.course.Course course;
+    private RenderManager renderManager;
+    private Course course;
     private Camera camera;
 
     public Parallax(Player player){
+        renderManager = RenderManager.getInstance();
+
         course = new com.tda367.parallax.parallaxCore.course.Course();
         course.addSpaceCraft(player.getSpaceCraft());
 
@@ -30,6 +34,10 @@ public class Parallax implements Updatable{
 
     public List<ISpaceCraft> getSpaceCraft(){
         return course.getSpaceCrafts();
+    }
+
+    public RenderManager getRenderManager(){
+        return renderManager;
     }
 
     public Camera getCamera(){
