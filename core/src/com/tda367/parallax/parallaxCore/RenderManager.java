@@ -1,5 +1,6 @@
 package com.tda367.parallax.parallaxCore;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -9,19 +10,23 @@ public class RenderManager {
     private List<Renderable> renderables;
 
     private static RenderManager instance;
-    RenderManager getInstance(){
+    public static RenderManager getInstance(){
         if (instance == null) instance = new RenderManager();
         return instance;
     }
 
-    void addRenderTask(Renderable renderable){
+    private RenderManager(){
+        renderables = new ArrayList<Renderable>();
+    }
+
+    public void addRenderTask(Renderable renderable){
         renderables.add(renderable);
     }
-    void removeRenderTask(Renderable renderable){
+    public void removeRenderTask(Renderable renderable){
         renderables.remove(renderable);
     }
 
-    List<Renderable> getRenderables(){
+    public List<Renderable> getRenderables(){
         return renderables;
     }
 
