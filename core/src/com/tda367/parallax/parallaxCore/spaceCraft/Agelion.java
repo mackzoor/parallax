@@ -10,13 +10,13 @@ import javax.vecmath.*;
 public class Agelion implements ISpaceCraft {
 
     private int health; //Current health
+
     private IPowerUp pu; //Current stored power up
 
     private float velocity;
     private float targetSpeed;
     private float targetAcceleration;
     private boolean speedTargetMode;
-
 
     private float panSpeed; // m/s
 
@@ -52,7 +52,6 @@ public class Agelion implements ISpaceCraft {
         this(1);
     }
 
-
     public synchronized void setSpeedTarget(float speed){
         targetSpeed = speed;
         speedTargetMode = true;
@@ -60,27 +59,6 @@ public class Agelion implements ISpaceCraft {
     public synchronized void setAccelerateTarget(float accelerate){
         targetAcceleration = accelerate;
         speedTargetMode = false;
-    }
-
-    @Override
-    public synchronized void setPanPoint(Vector2f target) {
-        panTarget = new Vector2f(target);
-        pointMode = true;
-    }
-    @Override
-    public synchronized void addPanPoint(Vector2f target) {
-        panTarget.add((Tuple2f) target);
-        pointMode = true;
-    }
-    @Override
-    public synchronized void setPanVelocity(Vector2f velocity) {
-        velTarget = new Vector2f(velocity);
-        pointMode = false;
-    }
-    @Override
-    public synchronized void addPanVelocity(Vector2f velocity) {
-        velTarget.add((Tuple2f) velocity);
-        pointMode = false;
     }
 
     private void panCraft(int timeMilli){
@@ -150,6 +128,10 @@ public class Agelion implements ISpaceCraft {
         return speed * ((float)timeMilli/1000);
     }
 
+    public void incHealth(){
+        health++;
+    }
+
     public void action(){
         if (pu != null){
             pu.usePU(pos, rot);
@@ -157,29 +139,54 @@ public class Agelion implements ISpaceCraft {
             System.out.println("NO POWERUP");
         }
     }
+
+    @Override
+    public void update(int milliSinceLastUpdate) {
+        accelerateCraft(milliSinceLastUpdate);
+        panCraft(milliSinceLastUpdate);
+        advanceCraft(milliSinceLastUpdate);
+    }
+
+    @Override
+    public synchronized void addPanVelocity(Vector2f velocity) {
+        velTarget.add((Tuple2f) velocity);
+        pointMode = false;
+    }
+    @Override
+    public synchronized void addPanPoint(Vector2f target) {
+        panTarget.add((Tuple2f) target);
+        pointMode = true;
+    }
+    @Override
+    public synchronized void setPanVelocity(Vector2f velocity) {
+        velTarget = new Vector2f(velocity);
+        pointMode = false;
+    }
+    @Override
+    public synchronized void setPanPoint(Vector2f target) {
+        panTarget = new Vector2f(target);
+        pointMode = true;
+    }
     @Override
     public void setPU(IPowerUp pu) {
         this.pu = pu;
     }
 
 
-
-    //TODO some sort of rotation engine?
-    //TODO Spacecraft flight system. (Acc pan etc)
-
-    //TODO Geometry?
-    //TODO More?
-
     public float getTargetAcceleration() {
         return targetAcceleration;
     }
-
     public float getTargetSpeed() {
         return targetSpeed;
     }
-
     public Vector2f getPanTarget() {
         return panTarget;
+    }
+    public Vector2f getVelTarget() {
+        return velTarget;
+    }
+    public int getHealth() {
+        return health;
     }
 
 
@@ -192,11 +199,5 @@ public class Agelion implements ISpaceCraft {
         return rot;
     }
 
-    @Override
-    public void update(int milliSinceLastUpdate) {
-        accelerateCraft(milliSinceLastUpdate);
-        panCraft(milliSinceLastUpdate);
-        advanceCraft(milliSinceLastUpdate);
-    }
 }
 

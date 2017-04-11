@@ -68,25 +68,29 @@ public class AgelionTest {
         assertTrue(agilion.getPanTarget().equals(new Vector2f(vec.getX(), vec.getY() + 1)));
     }
 
-
+    //Test to check if addPanVelocity(0, 1) adds one to the y coordinate.
     @Test
     public void addPanVelocity() throws Exception {
+        Vector2f vec = new Vector2f(agilion.getVelTarget().getX(), agilion.getVelTarget().getY());
+
+        agilion.addPanVelocity(new Vector2f(0, 1));
+
+        assertTrue(!(agilion.getVelTarget().getX() == vec.getX() && agilion.getVelTarget().getY() == vec.getY()));
+
+        assertTrue(agilion.getVelTarget().equals(new Vector2f(vec.getX(), vec.getY() + 1)));
+    }
+
+    @Test
+    public void incHealth(){
+        int health = agilion.getHealth();
+
+        agilion.getHealth();
+
+        assertTrue(agilion.getHealth() == health + 1);
     }
 
     @Test
     public void action() throws Exception {
-    }
-
-    @Test
-    public void setPU() throws Exception {
-    }
-
-    @Test
-    public void getPos() throws Exception {
-    }
-
-    @Test
-    public void getRot() throws Exception {
     }
 
     @Test
