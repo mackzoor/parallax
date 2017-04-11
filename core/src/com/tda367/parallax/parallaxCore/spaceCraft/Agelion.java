@@ -194,5 +194,25 @@ public class Agelion implements ISpaceCraft {
     public Model getModel() {
         return agelionModel;
     }
+
+    public float getTargetAcceleration() {
+        return targetAcceleration;
+    }
+
+    public Vector2f getPanTarget() {
+        return panTarget;
+    }
+
+    public Vector2f getVelTarget() {
+        return velTarget;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public float getTargetSpeed() {
+        return targetSpeed;
+    }
 }
 
