@@ -1,14 +1,18 @@
 package com.tda367.parallax.parallaxCore.powerUps;
 
 import com.tda367.parallax.parallaxCore.Usable;
+import com.tda367.parallax.parallaxCore.spaceCraft.Agelion;
+import com.tda367.parallax.parallaxCore.spaceCraft.ISpaceCraft;
+
 
 /**
- * Created by Rasmus on 2017-04-11.
+ * gives the player a shield that last for several seconds.
  */
+
 public class Shield implements Usable {
 
     @Override
-    public void activate() {
+    public void activate(ISpaceCraft agelion) {
 
     }
 }

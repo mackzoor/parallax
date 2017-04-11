@@ -1,9 +1,11 @@
 package com.tda367.parallax.parallaxCore.spaceCraft;
 
 import com.tda367.parallax.parallaxCore.Model;
-import com.tda367.parallax.parallaxCore.powerUps.IPowerUp;
+
+import com.tda367.parallax.parallaxCore.powerUps.PowerUp;
 
 import javax.vecmath.*;
+import java.nio.FloatBuffer;
 
 /**
  * Represents the spacecraft in our game.
@@ -11,7 +13,7 @@ import javax.vecmath.*;
 public class Agelion implements ISpaceCraft {
 
     private int health; //Current health
-    private IPowerUp pu; //Current stored power up
+    private PowerUp pu; //Current stored power up
 
     private float velocity;
     private float targetSpeed;
@@ -38,6 +40,7 @@ public class Agelion implements ISpaceCraft {
         this.panSpeed = panSpeed;
         this.pos = pos;
         this.rot = rot;
+
 
         panTarget = new Vector2f();
         velTarget = new Vector2f();
@@ -162,10 +165,9 @@ public class Agelion implements ISpaceCraft {
         }
     }
     @Override
-    public void setPU(IPowerUp pu) {
+    public void setPU(PowerUp pu) {
         this.pu = pu;
     }
-
 
     //TODO some sort of rotation engine?
     //TODO Spacecraft flight system. (Acc pan etc)

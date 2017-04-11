@@ -4,13 +4,11 @@ import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
 
 /**
- * Created by Rasmus on 2017-04-11.
+ * Gives the player a random powerUp
  */
-public class MysteryPower implements IPowerUp {
-    @Override
-    public void activate() {
 
-    }
+public class MysteryPower extends PowerUp {
+
 
     @Override
     public void usePU(Vector3f pos, Quat4f rot) {

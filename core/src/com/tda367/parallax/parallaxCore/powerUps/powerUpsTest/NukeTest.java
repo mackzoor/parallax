@@ -1,6 +1,11 @@
 package com.tda367.parallax.parallaxCore.powerUps.powerUpsTest;
 
+import com.tda367.parallax.parallaxCore.powerUps.Nuke;
+import com.tda367.parallax.parallaxCore.spaceCraft.Agelion;
 import org.junit.Test;
+
+import javax.vecmath.Quat4f;
+import javax.vecmath.Vector3f;
 
 import static org.junit.Assert.*;
 
