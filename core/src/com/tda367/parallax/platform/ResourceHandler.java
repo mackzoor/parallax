@@ -14,7 +14,7 @@ import java.util.Map;
  * Created by Anthony on 11/04/2017.
  */
 public class ResourceHandler {
-    private ResourceHandler instance;
+    private static ResourceHandler instance;
     private Map<String,Model> loadedModels;
 
     private G3dModelLoader modelLoader;
@@ -26,7 +26,7 @@ public class ResourceHandler {
         loadedModels = new HashMap<String, Model>();
     }
 
-    public ResourceHandler getInstance(){
+    public static ResourceHandler getInstance(){
         if (instance == null) instance = new ResourceHandler();
         return instance;
     }
