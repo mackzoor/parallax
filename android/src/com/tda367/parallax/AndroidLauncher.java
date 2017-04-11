@@ -1,17 +1,25 @@
 package com.tda367.parallax;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
-import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
-import com.badlogic.gdx.backends.android.CardBoardAndroidApplication;
-import com.tda367.parallax.platform.ParallaxCardboardLayer;
-
-public class AndroidLauncher extends CardBoardAndroidApplication {
+public class AndroidLauncher extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
-		initialize(new ParallaxCardboardLayer(), config);
+		setContentView(R.layout.android_launcher_layout);
+	}
+
+	public void launchCardboard(View view) {
+		Intent launchCardboardIntent = new Intent(this, CardboardLauncher.class);
+		startActivity(launchCardboardIntent);
+	}
+
+	public void launchNormal(View view) {
+		Intent launchNormalIntent = new Intent(this, NormalLauncher.class);
+		startActivity(launchNormalIntent);
 	}
 }

@@ -2,5 +2,8 @@
 <resources>
 
     <string name="app_name">Parallax</string>
+    <string name="select_game_mode">Choose which game mode to use:</string>
+    <string name="cardboard">Cardboard</string>
+    <string name="normal">Normal</string>
 
 </resources>

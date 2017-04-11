@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:padding="20dp"
+    android:orientation="horizontal"
+    android:screenOrientation="landscape" >
+
+    <TextView
+        android:id="@+id/game_mode_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/select_game_mode"
+        android:textSize="60sp"
+        android:layout_centerHorizontal="true"/>
+
+    <Button
+        android:id="@+id/cardboard_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/game_mode_text"
+        android:text="@string/cardboard"
+        android:textSize="40sp"
+        android:onClick="launchCardboard"/>
+
+    <Button
+        android:id="@+id/normal_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/cardboard_button"
+        android:layout_below="@id/game_mode_text"
+        android:textSize="40sp"
+        android:text="@string/normal"
+        android:onClick="launchNormal"/>
+
+</RelativeLayout>
