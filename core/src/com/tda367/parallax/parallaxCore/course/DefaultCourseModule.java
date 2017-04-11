@@ -1,13 +1,12 @@
 package com.tda367.parallax.parallaxCore.course;
 
-import com.tda367.parallax.parallaxCore.Collidable;
-import com.tda367.parallax.parallaxCore.IModel;
-import com.tda367.parallax.parallaxCore.Model;
+import com.tda367.parallax.parallaxCore.*;
 
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by Anthony on 10/04/2017.
@@ -22,18 +21,49 @@ public class DefaultCourseModule implements ICourseModule, IModel {
     private List<Collidable> usables;
     private Model model;
 
-    DefaultCourseModule(){
-        pos = new Vector3f();
+
+    DefaultCourseModule(Vector3f pos,int obstacleAmmount){
+        this.pos = pos;
+        this.pos.setY(pos.getY()+getLength()/2);
         rot = new Quat4f();
 
         model = new Model("course.g3db");
         length = 64;
-        obstacles = new ArrayList<Collidable>();
+        this.obstacles = new ArrayList<Collidable>();
         usables = new ArrayList<Collidable>();
 
-        //TODO add obstacles in course
+        addObstacles(obstacleAmmount);
 
         //TODO add usables in course
+    }
+
+    public DefaultCourseModule(Vector3f pos){
+        this(pos,10);
+    }
+
+    private void addObstacles(int i){
+        for (int x = 0; x < i; x++){
+            Obstacle obstacleNew = new Obstacle();
+
+            Random rand = new Random();
+            Vector3f obstaclePos = new Vector3f(
+                    rand.nextFloat()*20-10,
+                    rand.nextFloat()*length-length/2+(this.pos.getY()),
+                    rand.nextFloat()*20-10
+            );
+
+            obstacleNew.getPos().set(obstaclePos);
+
+            this.obstacles.add(obstacleNew);
+            addToRenderer(obstacleNew);
+        }
+    }
+
+    private void addToRenderer(Renderable renderable){
+        RenderManager.getInstance().addRenderTask(renderable);
+    }
+    private void removeFromRenderer(Renderable renderable){
+        RenderManager.getInstance().removeRenderTask(renderable);
     }
 
     @Override

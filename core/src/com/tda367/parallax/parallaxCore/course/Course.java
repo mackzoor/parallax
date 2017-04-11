@@ -25,10 +25,14 @@ public class Course implements Updatable {
         modules = new ArrayList<ICourseModule>();
         spaceCrafts = new ArrayList<ISpaceCraft>();
 
-        ICourseModule defModule = new DefaultCourseModule();
+        ICourseModule defModule = new DefaultCourseModule(new Vector3f());
         modules.add(defModule);
 
-        ICourseModule defModule2 = new DefaultCourseModule();
+        ICourseModule defModule2 = new DefaultCourseModule(new Vector3f(
+                0,
+                64,
+                0
+        ));
         defModule2.getPos().setY(defModule2.getLength());
         modules.add(defModule2);
 
@@ -75,9 +79,13 @@ public class Course implements Updatable {
     private void addModules(int i){
         for (int x = 0; x < i; x++){
             float endOfLastModulePos = modules.get(modules.size()-1).getPos().getY()+modules.get(modules.size()-1).getLength()/2;
-            ICourseModule tempModule = new DefaultCourseModule();
+            ICourseModule tempModule = new DefaultCourseModule(new Vector3f(
+                    0,
+                    endOfLastModulePos,
+                    0
+            ));
             modules.add(tempModule);
-            tempModule.getPos().setY(endOfLastModulePos+tempModule.getLength()/2);
+            tempModule.getPos().setY(endOfLastModulePos);
             RenderManager.getInstance().addRenderTask(tempModule);
         }
     }
