@@ -13,10 +13,10 @@ import javax.vecmath.Vector2f;
  */
 public interface ISpaceCraft extends Collidable, Updatable, Renderable {
     void setSpeedTarget(float speed);
-    void setAccelerateTarget(float accelerate);
+    void setAcceleration(float accelerate);
 
-    void setPanPoint(Vector2f target);
-    void addPanPoint(Vector2f target);
+    void setPanTarget(Vector2f target);
+    void addPanTarget(Vector2f target);
 
     void setPanVelocity(Vector2f velocity);
     void addPanVelocity(Vector2f velocity);
