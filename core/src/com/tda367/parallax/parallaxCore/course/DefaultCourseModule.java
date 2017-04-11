@@ -15,19 +15,30 @@ import java.util.List;
 public class DefaultCourseModule implements ICourseModule, IModel {
     private Vector3f pos;
     private Quat4f rot;
+    private float length;
+
 
     private List<Collidable> obstacles;
     private List<Collidable> usables;
     private Model model;
 
     DefaultCourseModule(){
+        pos = new Vector3f();
+        rot = new Quat4f();
+
         model = new Model("course.g3db");
+        length = 64;
         obstacles = new ArrayList<Collidable>();
         usables = new ArrayList<Collidable>();
 
         //TODO add obstacles in course
 
         //TODO add usables in course
+    }
+
+    @Override
+    public float getLength(){
+        return length;
     }
 
     @Override
