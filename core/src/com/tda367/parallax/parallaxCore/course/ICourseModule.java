@@ -12,6 +12,6 @@ public interface ICourseModule extends Renderable{
     List<Collidable> getObstacles();
     List<Collidable> getUsables();
 
-
+    float getLength();
     //TODO Get start point & get end point?
 }
