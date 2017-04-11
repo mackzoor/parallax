@@ -8,6 +8,7 @@ import javax.vecmath.Vector3f;
  */
 public class Cannon implements IPowerUp {
 
+
     @Override
     public void activate() {
 
