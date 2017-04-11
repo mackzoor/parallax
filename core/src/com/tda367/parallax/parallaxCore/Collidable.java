@@ -6,9 +6,7 @@ import javax.vecmath.Vector3f;
 /**
  * Created by Anthony on 03/04/2017.
  */
-public interface Collidable {
-    Vector3f getPos();
-    Quat4f getRot();
+public interface Collidable extends Transformable {
 
     //Get geo?
 }

@@ -4,6 +4,8 @@ import com.tda367.parallax.parallaxCore.Collidable;
 import com.tda367.parallax.parallaxCore.IModel;
 import com.tda367.parallax.parallaxCore.Model;
 
+import javax.vecmath.Quat4f;
+import javax.vecmath.Vector3f;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +13,9 @@ import java.util.List;
  * Created by Anthony on 10/04/2017.
  */
 public class DefaultCourseModule implements ICourseModule, IModel {
+    private Vector3f pos;
+    private Quat4f rot;
+
     private List<Collidable> obstacles;
     private List<Collidable> usables;
     private Model model;
@@ -38,5 +43,15 @@ public class DefaultCourseModule implements ICourseModule, IModel {
     @Override
     public List<Collidable> getUsables() {
         return usables;
+    }
+
+    @Override
+    public Vector3f getPos() {
+        return pos;
+    }
+
+    @Override
+    public Quat4f getRot() {
+        return rot;
     }
 }
