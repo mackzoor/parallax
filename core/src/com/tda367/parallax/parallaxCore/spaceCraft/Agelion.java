@@ -32,7 +32,7 @@ public class Agelion implements ISpaceCraft {
 
 
     public Agelion(int health, float velocity, float panSpeed, Vector3f pos, Quat4f rot) {
-        this.agelionModel = new Model("agelion.gg3db");
+        this.agelionModel = new Model("agelion.g3db");
         this.health = health;
         this.velocity = velocity;
         this.panSpeed = panSpeed;
