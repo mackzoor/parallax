@@ -86,6 +86,8 @@ project(":core") {
         compile "com.badlogicgames.gdx:gdx-bullet:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-controllers:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-ai:$aiVersion"
+        compile fileTree(dir: 'libs', include: ['*.jar']) //Cardboard extension
+        compile "com.github.yangweigbh:libgdx-cardboard-core:0.3" //Cardboard extension
     }
 }
 
