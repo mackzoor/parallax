@@ -96,7 +96,6 @@ public class ParallaxLibGDXController implements InputProcessor,IScreenControlle
     }
 
     private void spaceShipTurn(int keycode, float panSpeed){
-        System.out.println("desktop");
         if (keycode == Input.Keys.W || keycode == Input.Keys.UP){
             player.getSpaceCraft().addPanVelocity(new Vector2f(0,panSpeed));
         } else if (keycode == Input.Keys.A || keycode == Input.Keys.LEFT){

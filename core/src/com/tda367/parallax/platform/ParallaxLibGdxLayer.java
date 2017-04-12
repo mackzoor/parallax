@@ -45,6 +45,7 @@ public class ParallaxLibGdxLayer implements ApplicationListener {
 		camera.far = 300.0f;
 
 		renderer = new Renderer(camera);
+		sound = new Sound();
 	}
 
 	@Override
