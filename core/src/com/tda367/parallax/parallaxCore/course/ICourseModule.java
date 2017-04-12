@@ -9,9 +9,8 @@ import java.util.List;
  * A single module of a course in the game. Will automatically create usables and obstacles.
  */
 public interface ICourseModule extends Renderable{
-    List<Collidable> getObstacles();
-    List<Collidable> getUsables();
+    List<? extends Collidable> getObstacles();
+    List<? extends Collidable> getUsables();
 
     float getLength();
-    //TODO Get start point & get end point?
 }

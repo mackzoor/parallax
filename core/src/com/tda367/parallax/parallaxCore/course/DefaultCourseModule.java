@@ -17,7 +17,7 @@ public class DefaultCourseModule implements ICourseModule, IModel {
     private float length;
 
 
-    private List<Collidable> obstacles;
+    private List<Obstacle> obstacles;
     private List<Collidable> usables;
     private Model model;
 
@@ -29,11 +29,12 @@ public class DefaultCourseModule implements ICourseModule, IModel {
 
         model = new Model("course.g3db");
         length = 64;
-        this.obstacles = new ArrayList<Collidable>();
+        this.obstacles = new ArrayList<Obstacle>();
         usables = new ArrayList<Collidable>();
 
         addObstacles(obstacleAmmount);
 
+        addToRenderManager();
         //TODO add usables in course
     }
 
@@ -55,7 +56,6 @@ public class DefaultCourseModule implements ICourseModule, IModel {
             obstacleNew.getPos().set(obstaclePos);
 
             this.obstacles.add(obstacleNew);
-            addToRenderer(obstacleNew);
         }
     }
 
@@ -77,7 +77,7 @@ public class DefaultCourseModule implements ICourseModule, IModel {
     }
 
     @Override
-    public List<Collidable> getObstacles() {
+    public List<? extends Collidable> getObstacles() {
         return obstacles;
     }
 
@@ -94,5 +94,25 @@ public class DefaultCourseModule implements ICourseModule, IModel {
     @Override
     public Quat4f getRot() {
         return rot;
+    }
+
+    @Override
+    public void addToRenderManager() {
+        RenderManager.getInstance().addRenderTask(this);
+
+        for (Obstacle obstacle : obstacles){
+            obstacle.addToRenderManager();
+        }
+
+    }
+
+    @Override
+    public void removeFromRenderManager() {
+        RenderManager.getInstance().removeRenderTask(this);
+
+        for (Obstacle obstacle : obstacles){
+            obstacle.removeFromRenderManager();
+        }
+
     }
 }

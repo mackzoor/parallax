@@ -86,15 +86,14 @@ public class Course implements Updatable {
             ));
             modules.add(tempModule);
             tempModule.getPos().setY(endOfLastModulePos);
-            RenderManager.getInstance().addRenderTask(tempModule);
+            tempModule.addToRenderManager();
         }
     }
 
     private void removeModules(int i){
         for (int x = 0; x < i; x++){
             ICourseModule module = modules.get(0);
-            modules.remove(module);
-            RenderManager.getInstance().removeRenderTask(module);
+            module.removeFromRenderManager();
             modules.remove(0);
         }
     }
