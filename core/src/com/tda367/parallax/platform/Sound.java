@@ -18,17 +18,6 @@ public class Sound implements SoundListener {
         SoundManager.getInstance().addListener(this);
     }
 
-    public void playBackgroundMusic(){
-        //backgroundMusic.setLooping(true);
-        //backgroundMusic.setVolume(.6f);
-        //backgroundMusic.play();
-    }
-
-    public void playPewPew(){
-//        backgroundMusic.setVolume(.9f);
-  //      pewpew.play();
-    }
-
     @Override
     public void playSound(String sound) {
         resources.getSound(sound).play();
@@ -49,5 +38,6 @@ public class Sound implements SoundListener {
         Music playing = resources.getMusic(music);
         playing.play();
         playing.setVolume(volume);
+        playing.setLooping(true);
     }
 }
