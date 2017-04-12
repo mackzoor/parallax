@@ -2,6 +2,7 @@ package com.tda367.parallax.parallaxCore;
 
 import com.badlogic.gdx.audio.Music;
 import com.tda367.parallax.platform.Sound;
+import javafx.util.Pair;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,8 +14,8 @@ import java.util.Map;
 public class SoundManager {
 
     private List<SoundListener> listeners = new ArrayList<SoundListener>();
-    private List<String> soundQueue = new ArrayList<String>();
-    private List<String> musicQueue = new ArrayList<String>();
+    private List<Pair<String,Float>> soundQueue = new ArrayList<Pair<String, Float>>();
+    private List<Pair<String,Float>> musicQueue = new ArrayList<Pair<String, Float>>();
 
     private static SoundManager instance;
     public static SoundManager getInstance(){
@@ -24,21 +25,29 @@ public class SoundManager {
 
     public void addListener(SoundListener listener){
         listeners.add(listener);
-        playQueuedSound();
+        playQueuedSoundAndMusic();
     }
 
-    private void playQueuedSound(){
-        for (String sound: soundQueue){
-            playSound(sound);
+    private void playQueuedSoundAndMusic(){
+        for (int i = 0; i < soundQueue.size(); i++){
+            if(soundQueue.get(i).getValue() == 1f){
+                playMusic(soundQueue.get(i).getKey());
+            } else{
+                playMusic(soundQueue.get(i).getKey(), soundQueue.get(i).getValue());
+            }
         }
-        for (String music : musicQueue){
-            playMusic(music);
+        for (int i = 0; i < musicQueue.size(); i++){
+            if(musicQueue.get(i).getValue() == 1f){
+                playMusic(musicQueue.get(i).getKey());
+            } else{
+                playMusic(musicQueue.get(i).getKey(), musicQueue.get(i).getValue());
+            }
         }
     }
 
     public void playSound(String sound){
         if(listeners.size() < 1){
-            soundQueue.add(sound);
+            soundQueue.add(new Pair<String, Float>(sound, 1f));
         }
         // Notify listeners to play sound.
         for (SoundListener Sl : listeners){
@@ -46,9 +55,19 @@ public class SoundManager {
         }
     }
 
+    public void playSound(String sound, float volume){
+        if(listeners.size() < 1){
+            soundQueue.add(new Pair<String, Float>(sound, volume));
+        }
+        // Notify listeners to play sound.
+        for (SoundListener Sl : listeners){
+            Sl.playSound(sound, volume);
+        }
+    }
+
     public void playMusic(String music){
         if(listeners.size() < 1){
-            musicQueue.add(music);
+            musicQueue.add(new Pair<String, Float>(music, 1f));
         }
         // Notify listeners to play music.
         for (SoundListener Sl : listeners){
@@ -56,5 +75,14 @@ public class SoundManager {
         }
     }
 
+    public void playMusic(String music, float volume){
+        if(listeners.size() < 1){
+            musicQueue.add(new Pair(music,volume));
+        }
+        // Notify listeners to play music.
+        for (SoundListener Sl : listeners){
+            Sl.playMusic(music, volume);
+        }
+    }
 
 }

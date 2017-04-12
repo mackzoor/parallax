@@ -20,6 +20,6 @@ public class Cannon extends PowerUp {
 
     @Override
     public void usePU(Vector3f pos, Quat4f rot) {
-        soundManager.playSound("cannon.mp3");
+        soundManager.playSound("cannon.mp3", 0.8f);
     }
 }

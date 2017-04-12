@@ -38,4 +38,16 @@ public class Sound implements SoundListener {
     public void playMusic(String music) {
         resources.getMusic(music).play();
     }
+
+    @Override
+    public void playSound(String sound, float volume) {
+        resources.getSound(sound).play(volume);
+    }
+
+    @Override
+    public void playMusic(String music, float volume) {
+        Music playing = resources.getMusic(music);
+        playing.play();
+        playing.setVolume(volume);
+    }
 }
