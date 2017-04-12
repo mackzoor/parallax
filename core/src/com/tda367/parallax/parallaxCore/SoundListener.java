@@ -6,4 +6,6 @@ package com.tda367.parallax.parallaxCore;
 public interface SoundListener {
     void playSound(String sound);
     void playMusic(String music);
+    void playSound(String sound, float volume);
+    void playMusic(String music, float volume);
 }

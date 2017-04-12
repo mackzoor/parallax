@@ -2,6 +2,7 @@ package com.tda367.parallax.parallaxCore.spaceCraft;
 
 import com.tda367.parallax.parallaxCore.Model;
 import com.tda367.parallax.parallaxCore.RenderManager;
+import com.tda367.parallax.parallaxCore.powerUps.Cannon;
 import com.tda367.parallax.parallaxCore.powerUps.PowerUp;
 
 import javax.vecmath.*;
@@ -134,6 +135,8 @@ public class Agelion implements ISpaceCraft {
         if (pu != null){
             pu.usePU(pos, rot);
         } else {
+            pu = new Cannon();
+            pu.usePU(pos, rot);
             System.out.println("NO POWERUP");
         }
     }

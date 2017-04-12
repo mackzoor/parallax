@@ -71,7 +71,6 @@ public class ResourceHandler {
         return modelInstance;
     }
 
-
     private Sound loadSound(String soundName, String soundDirectory){
         Sound newSound;
 

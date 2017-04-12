@@ -23,6 +23,7 @@ public class ParallaxCardboardLayer implements CardBoardApplicationListener {
     private ParallaxLibGDXController controller;
     private static final float Z_NEAR = 0.1f;
     private static final float Z_FAR = 300.0f;
+    private Sound sound;
 
     @Override
     public void create() {
@@ -46,6 +47,7 @@ public class ParallaxCardboardLayer implements CardBoardApplicationListener {
         camera.far = Z_FAR;
 
         renderer = new Renderer(camera);
+        sound = new Sound();
     }
 
     @Override

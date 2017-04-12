@@ -16,18 +16,6 @@ public class Sound implements SoundListener {
     public Sound(){
         this.resources = ResourceHandler.getInstance();
         SoundManager.getInstance().addListener(this);
-
-    }
-
-    public void playBackgroundMusic(){
-        //backgroundMusic.setLooping(true);
-        //backgroundMusic.setVolume(.6f);
-        //backgroundMusic.play();
-    }
-
-    public void playPewPew(){
-//        backgroundMusic.setVolume(.9f);
-  //      pewpew.play();
     }
 
     @Override
@@ -38,5 +26,18 @@ public class Sound implements SoundListener {
     @Override
     public void playMusic(String music) {
         resources.getMusic(music).play();
+    }
+
+    @Override
+    public void playSound(String sound, float volume) {
+        resources.getSound(sound).play(volume);
+    }
+
+    @Override
+    public void playMusic(String music, float volume) {
+        Music playing = resources.getMusic(music);
+        playing.play();
+        playing.setVolume(volume);
+        playing.setLooping(true);
     }
 }
