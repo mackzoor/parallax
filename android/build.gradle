@@ -16,11 +16,16 @@ android {
     }
     packagingOptions {
         exclude 'META-INF/robovm/ios/robovm.xml'
+        exclude 'libs/arm64-v8a'
+        exclude 'libs/x86_64'
     }
     defaultConfig {
         applicationId "com.tda367.parallax"
         minSdkVersion 9
         targetSdkVersion 23
+        ndk {
+            abiFilters 'armeabi-v7a', 'x86', 'armeabi'
+        }
     }
 }
 

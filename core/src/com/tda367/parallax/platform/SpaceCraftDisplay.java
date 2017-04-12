@@ -24,7 +24,7 @@ public class SpaceCraftDisplay implements ApplicationListener, InputProcessor {
     private FrameBuffer frameBuffer;
     private Texture texture = null;
     private TextureRegion textureRegion;
-    private SpriteBatch spriteBatch;
+    public static SpriteBatch spriteBatch;
     private CameraInputController controller;
 
     @Override
@@ -36,16 +36,14 @@ public class SpaceCraftDisplay implements ApplicationListener, InputProcessor {
                 Gdx.graphics.getHeight());
 
         // Move the camera 5 units back along the z-axis and look at the origin
-        camera.position.set(0f,0f,1f);
-        camera.lookAt(0f,0f,0f);
+        camera.position.set(0f, 0f, 1f);
+        camera.lookAt(0f, 0f, 0f);
 
         // Near and Far (plane) represent the minimum and maximum ranges of the camera in, um, units
         camera.near = 0.1f;
         camera.far = 300.0f;
-
         controller = new CameraInputController(camera);
         Gdx.input.setInputProcessor(controller);
-
         // A ModelBatch is like a SpriteBatch, just for models.  Use it to batch up geometry for OpenGL
         modelBatch = new ModelBatch();
 
@@ -72,9 +70,8 @@ public class SpaceCraftDisplay implements ApplicationListener, InputProcessor {
         environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.8f, 0.8f, 0.8f, 1.0f));
 
 
-        frameBuffer = new FrameBuffer(Pixmap.Format.RGB888,Gdx.graphics.getWidth(),Gdx.graphics.getHeight(),false);
+        frameBuffer = new FrameBuffer(Pixmap.Format.RGB888, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), false);
 //        Gdx.input.setInputProcessor(this);
-
         spriteBatch = new SpriteBatch();
     }
 
@@ -87,7 +84,7 @@ public class SpaceCraftDisplay implements ApplicationListener, InputProcessor {
     @Override
     public void render() {
 
-        // Update camera controller
+        // Update camera onScreenController
         controller.update();
 
         // You've seen all this before, just be sure to clear the GL_DEPTH_BUFFER_BIT when working in 3D
@@ -96,15 +93,13 @@ public class SpaceCraftDisplay implements ApplicationListener, InputProcessor {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 
 
-
         // When you change the camera details, you need to call update();
         // Also note, you need to call update() at least once.
         camera.update();
 
-
         // If the user requested a screenshot, we need to call begin on our framebuffer
         // This redirects output to the framebuffer instead of the screen.
-        if(screenShot)
+        if (screenShot)
             frameBuffer.begin();
 
         // Like spriteBatch, just with models!  pass in the box Instance and the environment
@@ -138,13 +133,13 @@ public class SpaceCraftDisplay implements ApplicationListener, InputProcessor {
         } */
     }
 
-    public void resume () {
+    public void resume() {
     }
 
-    public void resize (int width, int height) {
+    public void resize(int width, int height) {
     }
 
-    public void pause () {
+    public void pause() {
     }
 
     @Override
