@@ -25,7 +25,7 @@ public class DefaultCourseModule implements ICourseModule, IModel {
     DefaultCourseModule(Vector3f pos,int obstacleAmmount){
         this.pos = pos;
         this.pos.setY(pos.getY()+getLength()/2);
-        rot = new Quat4f();
+        this.rot = new Quat4f();
 
         model = new Model("course.g3db");
         length = 64;
@@ -34,12 +34,11 @@ public class DefaultCourseModule implements ICourseModule, IModel {
 
         addObstacles(obstacleAmmount);
 
-        addToRenderManager();
         //TODO add usables in course
     }
 
     public DefaultCourseModule(Vector3f pos){
-        this(pos,10);
+        this(pos,4);
     }
 
     private void addObstacles(int i){
@@ -57,13 +56,6 @@ public class DefaultCourseModule implements ICourseModule, IModel {
 
             this.obstacles.add(obstacleNew);
         }
-    }
-
-    private void addToRenderer(Renderable renderable){
-        RenderManager.getInstance().addRenderTask(renderable);
-    }
-    private void removeFromRenderer(Renderable renderable){
-        RenderManager.getInstance().removeRenderTask(renderable);
     }
 
     @Override

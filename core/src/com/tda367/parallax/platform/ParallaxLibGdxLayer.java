@@ -14,6 +14,7 @@ public class ParallaxLibGdxLayer implements ApplicationListener {
 	private Renderer renderer;
 	private ParallaxLibGDXController controller;
 	private Sound sound;
+    private OnScreenController onScreenController2;
 
 	@Override
 	public void create () {
@@ -44,7 +45,6 @@ public class ParallaxLibGdxLayer implements ApplicationListener {
 		camera.far = 300.0f;
 
 		renderer = new Renderer(camera);
-		sound = new Sound();
 	}
 
 	@Override
@@ -59,23 +59,33 @@ public class ParallaxLibGdxLayer implements ApplicationListener {
 		//Updates Parallax game logic
 		parallaxGame.update((int)(Gdx.graphics.getDeltaTime() * 1000));
 
-		//Updates camera
-		camera.position.set(
-				parallaxGame.getCamera().getPos().getX(),
-				parallaxGame.getCamera().getPos().getZ(),
-				parallaxGame.getCamera().getPos().getY()*-1
-		);
+        //Updates camera
+        camera.position.set(
+                parallaxGame.getCamera().getPos().getX(),
+                parallaxGame.getCamera().getPos().getZ(),
+                parallaxGame.getCamera().getPos().getY() * -1
+        );
 
 		camera.update();
 
-		renderer.renderAll();
-}
+        renderer.renderAll();
+
+        if (Gdx.app.getType() == Application.ApplicationType.Android) {
+            controller.draw();
+
+        }
+    }
+
 
 	@Override
-	public void pause() {}
+	public void pause() {
+
+	}
 
 	@Override
-	public void resume() {}
+	public void resume() {
+
+	}
 
 	@Override
 	public void dispose() {
