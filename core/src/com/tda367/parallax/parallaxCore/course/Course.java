@@ -21,33 +21,22 @@ public class Course implements Updatable {
     private List<ISpaceCraft> spaceCrafts;
 
 
-    public Course(){
+    public Course() {
         modules = new ArrayList<ICourseModule>();
         spaceCrafts = new ArrayList<ISpaceCraft>();
 
-        ICourseModule defModule = new DefaultCourseModule(new Vector3f());
-        modules.add(defModule);
-
-        ICourseModule defModule2 = new DefaultCourseModule(new Vector3f(
-                0,
-                64,
-                0
-        ));
-        defModule2.getPos().setY(defModule2.getLength());
-        modules.add(defModule2);
-
-        RenderManager.getInstance().addRenderTask(defModule);
-        RenderManager.getInstance().addRenderTask(defModule2);
+        updateModuleRange();
 
         //Debug purpose only
 //        createTestEnemy();
     }
 
-    public void addSpaceCraft(ISpaceCraft spaceCraft){
+    public void addSpaceCraft(ISpaceCraft spaceCraft) {
         spaceCrafts.add(spaceCraft);
         RenderManager.getInstance().addRenderTask(spaceCraft);
     }
-    public void removeSpaceCraft(ISpaceCraft spaceCraft){
+
+    public void removeSpaceCraft(ISpaceCraft spaceCraft) {
         spaceCrafts.remove(spaceCraft);
         RenderManager.getInstance().removeRenderTask(spaceCraft);
     }
@@ -55,7 +44,7 @@ public class Course implements Updatable {
     @Override
     public void update(int milliSinceLastUpdate) {
 
-        for (ISpaceCraft spaceCraft : spaceCrafts){
+        for (ISpaceCraft spaceCraft : spaceCrafts) {
             spaceCraft.update(milliSinceLastUpdate);
         }
 
@@ -63,38 +52,47 @@ public class Course implements Updatable {
         //TODO Check collision detection
     }
 
-    private void updateModuleRange(){
-        float firstCraft = getFirstSpaceCraftDistance();
-        float lastCraft = getLastSpaceCraftDistance();
+    private void updateModuleRange() {
 
-        float firstModule = modules.get(modules.size()-1).getPos().getY()+modules.get(modules.size()-1).getLength();
-        float lastModule = modules.get(0).getPos().getY();
+        if (modules.size() > 0) {
+            float firstCraft = getFirstSpaceCraftDistance();
+            float lastCraft = getLastSpaceCraftDistance();
 
-        int modulesToAdd = (int) ((firstCraft-firstModule + 512) / 64);
-        int modulesToRemove = (int) ((lastCraft - lastModule) / 64);
-        addModules(modulesToAdd);
-        removeModules(modulesToRemove);
+            float firstModule = modules.get(modules.size() - 1).getPos().getY() + modules.get(modules.size() - 1).getLength();
+            float lastModule = modules.get(0).getPos().getY();
+
+            int modulesToAdd = (int) ((firstCraft - firstModule + 256) / 64);
+            int modulesToRemove = (int) ((lastCraft - lastModule) / 16);
+
+
+            addModules(modulesToAdd);
+            removeModules(modulesToRemove);
+        } else {
+            ICourseModule defModule = new DefaultCourseModule(new Vector3f());
+            modules.add(defModule);
+            updateModuleRange();
+        }
+
     }
 
-    private void addModules(int i){
-        for (int x = 0; x < i; x++){
-            float endOfLastModulePos = modules.get(modules.size()-1).getPos().getY()+modules.get(modules.size()-1).getLength()/2;
+    private void addModules(int i) {
+        for (int x = 0; x < i; x++) {
+            float endOfLastModulePos = modules.get(modules.size() - 1).getPos().getY() + modules.get(modules.size() - 1).getLength() / 2;
             ICourseModule tempModule = new DefaultCourseModule(new Vector3f(
                     0,
                     endOfLastModulePos,
                     0
             ));
             modules.add(tempModule);
-            tempModule.getPos().setY(endOfLastModulePos);
             tempModule.addToRenderManager();
         }
     }
 
-    private void removeModules(int i){
-        for (int x = 0; x < i; x++){
+    private void removeModules(int i) {
+        for (int x = 0; x < i; x++) {
             ICourseModule module = modules.get(0);
             module.removeFromRenderManager();
-            modules.remove(0);
+            modules.remove(module);
         }
     }
 
@@ -102,11 +100,11 @@ public class Course implements Updatable {
         return spaceCrafts;
     }
 
-    private void createTestEnemy(){
+    private void createTestEnemy() {
         Random rand = new Random();
 
         MinionEnemy minionEnemy = new MinionEnemy(new Agelion(
-                new Vector3f(1.5f,-2, 1),
+                new Vector3f(1.5f, -2, 1),
                 new Quat4f(),
                 3
         ));
@@ -116,12 +114,12 @@ public class Course implements Updatable {
         RenderManager.getInstance().addRenderTask(minionEnemy.getSpaceCraft());
     }
 
-    private float getFirstSpaceCraftDistance(){
-        if (spaceCrafts.size() > 0){
+    private float getFirstSpaceCraftDistance() {
+        if (spaceCrafts.size() > 0) {
             float dist = spaceCrafts.get(0).getPos().getY();
-            for (int i = 1; i < spaceCrafts.size(); i++){
+            for (int i = 1; i < spaceCrafts.size(); i++) {
                 float tempDist = spaceCrafts.get(i).getPos().getY();
-                if (tempDist > dist){
+                if (tempDist > dist) {
                     dist = tempDist;
                 }
             }
@@ -131,12 +129,12 @@ public class Course implements Updatable {
         }
     }
 
-    private float getLastSpaceCraftDistance(){
-        if (spaceCrafts.size() > 0){
+    private float getLastSpaceCraftDistance() {
+        if (spaceCrafts.size() > 0) {
             float dist = spaceCrafts.get(0).getPos().getY();
-            for (int i = 1; i < spaceCrafts.size(); i++){
+            for (int i = 1; i < spaceCrafts.size(); i++) {
                 float tempDist = spaceCrafts.get(i).getPos().getY();
-                if (tempDist < dist){
+                if (tempDist < dist) {
                     dist = tempDist;
                 }
             }
