@@ -14,7 +14,6 @@ public class ParallaxLibGdxLayer implements ApplicationListener {
 	private Renderer renderer;
 	private ParallaxLibGDXController controller;
 	private Sound sound;
-    private OnScreenController onScreenController2;
 
 	@Override
 	public void create () {
@@ -72,7 +71,7 @@ public class ParallaxLibGdxLayer implements ApplicationListener {
         renderer.renderAll();
 
         if (Gdx.app.getType() == Application.ApplicationType.Android) {
-            controller.draw();
+            controller.drawTouchpad();
 
         }
     }

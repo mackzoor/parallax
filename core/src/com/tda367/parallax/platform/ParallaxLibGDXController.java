@@ -22,7 +22,7 @@ public class ParallaxLibGDXController implements InputProcessor,IScreenControlle
     private Parallax parallax;
     private Controller controller;
     private Player player;
-    OnScreenController onScreenController;
+    OnScreenTouchpad onScreenTouchpad;
 
 
 
@@ -39,8 +39,8 @@ public class ParallaxLibGDXController implements InputProcessor,IScreenControlle
         }
 
         if (Gdx.app.getType() == Application.ApplicationType.Android) {
-            onScreenController = new OnScreenController();
-            onScreenController.setListener(this);
+            onScreenTouchpad = new OnScreenTouchpad();
+            onScreenTouchpad.setListener(this);
         }
     }
 
@@ -104,23 +104,6 @@ public class ParallaxLibGDXController implements InputProcessor,IScreenControlle
             player.getSpaceCraft().addPanVelocity(new Vector2f(0,-panSpeed));
         } else if (keycode == Input.Keys.D || keycode == Input.Keys.RIGHT){
             player.getSpaceCraft().addPanVelocity(new Vector2f(panSpeed,0));
-        }
-    }
-
-    public void touchTurn(float panSpeed, int direction) {
-        System.out.println("touchturn");
-        if (1 == direction) {
-            System.out.println("Up");
-            player.getSpaceCraft().addPanVelocity(new Vector2f(0, panSpeed));
-        } else if (2 == direction) {
-            System.out.println("Left");
-            player.getSpaceCraft().addPanVelocity(new Vector2f(-panSpeed, 0));
-        } else if (3 == direction) {
-            System.out.println("down");
-            player.getSpaceCraft().addPanVelocity(new Vector2f(0, -panSpeed));
-        } else if (4 == direction) {
-            System.out.println("right");
-            player.getSpaceCraft().addPanVelocity(new Vector2f(panSpeed, 0));
         }
     }
 
@@ -195,21 +178,27 @@ public class ParallaxLibGDXController implements InputProcessor,IScreenControlle
 
 
     @Override
-    public void onUpdate() {
-        if (onScreenController.isUpPressed()) {
-            System.out.println("up");
-            touchTurn(2, 1);
-        } else if (onScreenController.isLeftPressed()) {
-            touchTurn(2, 2);
-        } else if (onScreenController.isDownPressed()) {
-            touchTurn(2, 3);
-        } else if (onScreenController.isRightPressed()) {
-            touchTurn(2, 4);
-        }
+    public void onUpdate(float x, float y) {
+        joystickPosition(x,y);
     }
 
-    public void draw() {
-        onScreenController.draw();
+
+    public void drawTouchpad(){
+        onScreenTouchpad.drawTouchpad();
+    }
+
+    public void joystickPosition(float x, float y){
+        float panSpeed = 10;
+
+        float xMove = panSpeed*x;
+        float yMove = panSpeed*y;
+
+        player.getSpaceCraft().setPanVelocity(
+                new Vector2f(
+                        xMove,
+                        yMove
+                )
+        );
     }
 }
 
