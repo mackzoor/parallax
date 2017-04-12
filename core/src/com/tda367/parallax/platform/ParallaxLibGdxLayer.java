@@ -13,6 +13,7 @@ public class ParallaxLibGdxLayer implements ApplicationListener {
 	private Parallax parallaxGame;
 	private Renderer renderer;
 	private ParallaxLibGDXController controller;
+	private Sound sound;
 
 	@Override
 	public void create () {
@@ -22,7 +23,7 @@ public class ParallaxLibGdxLayer implements ApplicationListener {
 		// Initiate game with space craft "Agelion"
 		this.player = new Player(new Agelion(10));
 		this.parallaxGame = new Parallax(player);
-		controller = new ParallaxLibGDXController(player);
+		controller = new ParallaxLibGDXController(parallaxGame);
 
 		// Create camera sized to screens width/height with Field of View of 75 degrees
 		camera = new PerspectiveCamera(
@@ -43,6 +44,7 @@ public class ParallaxLibGdxLayer implements ApplicationListener {
 		camera.far = 300.0f;
 
 		renderer = new Renderer(camera);
+		sound = new Sound();
 	}
 
 	@Override
@@ -67,19 +69,13 @@ public class ParallaxLibGdxLayer implements ApplicationListener {
 		camera.update();
 
 		renderer.renderAll();
-
-
-	}
+}
 
 	@Override
-	public void pause() {
-
-	}
+	public void pause() {}
 
 	@Override
-	public void resume() {
-
-	}
+	public void resume() {}
 
 	@Override
 	public void dispose() {

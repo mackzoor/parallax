@@ -3,7 +3,7 @@ package com.tda367.parallax.platform;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.controllers.ControllerListener;
+import com.tda367.parallax.parallaxCore.Parallax;
 import com.tda367.parallax.parallaxCore.Player;
 
 import javax.vecmath.Vector2f;
@@ -14,16 +14,20 @@ import javax.vecmath.Vector2f;
 public class ParallaxLibGDXController implements InputProcessor {
 
     Player player;
+    Parallax parallax;
 
-    ParallaxLibGDXController(Player player) {
+
+    ParallaxLibGDXController(Parallax parallax) {
         Gdx.input.setInputProcessor(this);
-        this.player = player;
+        this.parallax = parallax;
+        this.player = parallax.getPlayer();
     }
 
     @Override
     public boolean keyDown(int keycode) {
         float panSpeed = 5;
         spaceShipTurn(keycode, panSpeed);
+        usePowerUp(keycode);
         return false;
     }
 
@@ -62,6 +66,12 @@ public class ParallaxLibGDXController implements InputProcessor {
     @Override
     public boolean scrolled(int amount) {
         return false;
+    }
+
+    private void usePowerUp(int keycode){
+        if(keycode == Input.Keys.SPACE){
+            player.getSpaceCraft().action();
+        }
     }
 
     private void spaceShipTurn(int keycode, float panSpeed){
