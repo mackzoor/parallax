@@ -16,7 +16,6 @@ public class Sound implements SoundListener {
     public Sound(){
         this.resources = ResourceHandler.getInstance();
         SoundManager.getInstance().addListener(this);
-
     }
 
     public void playBackgroundMusic(){

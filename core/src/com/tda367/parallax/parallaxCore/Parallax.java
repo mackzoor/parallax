@@ -5,6 +5,7 @@ import com.tda367.parallax.parallaxCore.spaceCraft.ISpaceCraft;
 import com.tda367.parallax.platform.Sound;
 
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by Anthony on 05/04/2017.
@@ -28,7 +29,14 @@ public class Parallax implements Updatable{
         camera.trackTo(player.getSpaceCraft());
         this.player = player;
 
-        soundManager.playMusic("Track.mp3");
+        Random rand = new Random();
+        int randomSong = rand.nextInt(100 - 1 + 1) + 1;
+
+        if(randomSong == 50){
+            soundManager.playMusic("secretTrack.mp3");
+        } else {
+            soundManager.playMusic("Track.mp3");
+        }
     }
 
     @Override

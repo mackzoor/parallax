@@ -24,8 +24,6 @@ public class ParallaxLibGDXController implements InputProcessor,IScreenControlle
     private Player player;
     OnScreenController onScreenController;
 
-
-
     ParallaxLibGDXController(Parallax parallax) {
         Gdx.input.setInputProcessor(this);
         this.parallax = parallax;
@@ -190,9 +188,6 @@ public class ParallaxLibGDXController implements InputProcessor,IScreenControlle
     public boolean accelerometerMoved(Controller controller, int accelerometerCode, Vector3 value) {
         return false;
     }
-
-
-
 
     @Override
     public void onUpdate() {

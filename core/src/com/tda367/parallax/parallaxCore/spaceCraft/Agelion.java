@@ -134,6 +134,7 @@ public class Agelion implements ISpaceCraft {
         if (pu != null){
             pu.usePU(pos, rot);
         } else {
+
             System.out.println("NO POWERUP");
         }
     }
