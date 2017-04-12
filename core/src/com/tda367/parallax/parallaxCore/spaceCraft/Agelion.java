@@ -1,6 +1,7 @@
 package com.tda367.parallax.parallaxCore.spaceCraft;
 
 import com.tda367.parallax.parallaxCore.Model;
+import com.tda367.parallax.parallaxCore.RenderManager;
 import com.tda367.parallax.parallaxCore.powerUps.PowerUp;
 
 import javax.vecmath.*;
@@ -212,6 +213,16 @@ public class Agelion implements ISpaceCraft {
     public synchronized void setAcceleration(float accelerate){
         acceleration = accelerate;
         speedTargetMode = false;
+    }
+
+    @Override
+    public void addToRenderManager() {
+        RenderManager.getInstance().addRenderTask(this);
+    }
+
+    @Override
+    public void removeFromRenderManager() {
+        RenderManager.getInstance().removeRenderTask(this);
     }
 }
 

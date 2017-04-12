@@ -1,9 +1,6 @@
 package com.tda367.parallax.parallaxCore.course;
 
-import com.tda367.parallax.parallaxCore.Collidable;
-import com.tda367.parallax.parallaxCore.Model;
-import com.tda367.parallax.parallaxCore.Renderable;
-import com.tda367.parallax.parallaxCore.Updatable;
+import com.tda367.parallax.parallaxCore.*;
 
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
@@ -42,5 +39,15 @@ public class Obstacle implements Collidable, Renderable, Updatable {
     @Override
     public Quat4f getRot() {
         return rot;
+    }
+
+    @Override
+    public void addToRenderManager() {
+        RenderManager.getInstance().addRenderTask(this);
+    }
+
+    @Override
+    public void removeFromRenderManager() {
+        RenderManager.getInstance().removeRenderTask(this);
     }
 }
