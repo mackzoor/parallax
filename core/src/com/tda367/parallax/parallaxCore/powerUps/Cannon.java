@@ -4,6 +4,7 @@ import com.tda367.parallax.parallaxCore.SoundManager;
 
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
+import java.util.Random;
 
 
 /**
@@ -20,6 +21,14 @@ public class Cannon extends PowerUp {
 
     @Override
     public void usePU(Vector3f pos, Quat4f rot) {
-        soundManager.playSound("cannon.mp3", 0.8f);
+        Random rand = new Random();
+        int randomSong = rand.nextInt(100 - 1 + 1) + 1;
+
+        if(randomSong < 95){
+            soundManager.playSound("cannonLow.mp3", 0.8f);
+        } else {
+            soundManager.playSound("cannon.mp3", 0.8f);
+        }
+
     }
 }
