@@ -51,15 +51,9 @@ public class ResourceHandler {
     }
 
     public ModelInstance getModel(String modelName){
-        Model entry = loadedModels.get(modelName);
-        ModelInstance modelInstance;
-        if (entry == null){
-            modelInstance = loadModel(modelName,"");
-        } else {
-            modelInstance = new ModelInstance(entry);
-        }
-        return modelInstance;
+        return loadModel(modelName,"");
     }
+
     public ModelInstance getModel(String modelName, String modelDirectory){
         Model entry = loadedModels.get(modelName);
         ModelInstance modelInstance;
