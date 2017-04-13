@@ -5,6 +5,6 @@ package com.tda367.parallax.platform;
  */
 public interface IScreenControllerListener {
 
-    public void onUpdate();
+    public void onUpdate(float x, float y);
 
 }
