@@ -138,8 +138,8 @@ public class ParallaxLibGDXController implements InputProcessor,IScreenControlle
 
         float panSpeed = 10;
 
-        float xMove = panSpeed*controller.getAxis(1);
-        float yMove = panSpeed*controller.getAxis(0)*-1;
+        float xMove = panSpeed*controller.getAxis(0);
+        float yMove = panSpeed*controller.getAxis(1)*-1;
 
         player.getSpaceCraft().setPanVelocity(
                 new Vector2f(
