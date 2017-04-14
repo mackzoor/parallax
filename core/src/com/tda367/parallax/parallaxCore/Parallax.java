@@ -33,9 +33,9 @@ public class Parallax implements Updatable{
         int randomSong = rand.nextInt(100 - 1 + 1) + 1;
 
         if(randomSong == 50){
-            soundManager.playMusic("secretTrack.mp3","sounds\\music");
+            soundManager.playMusic("secretTrack.mp3","sounds/music");
         } else {
-            soundManager.playMusic("track.mp3","sounds\\music", new Float(0.7f));
+            soundManager.playMusic("track.mp3","sounds/music", new Float(0.7f));
         }
     }
 

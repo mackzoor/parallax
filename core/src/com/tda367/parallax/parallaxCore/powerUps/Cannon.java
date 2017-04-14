@@ -25,9 +25,9 @@ public class Cannon extends PowerUp {
         int randomSong = rand.nextInt(100 - 1 + 1) + 1;
 
         if(randomSong > 97){
-            soundManager.playSound("cannonLow.mp3","sounds\\effects", new Float(0.8f));
+            soundManager.playSound("cannonLow.mp3","sounds/effects", new Float(0.8f));
         } else {
-            soundManager.playSound("cannon.mp3","sounds\\effects", new Float(0.8f));
+            soundManager.playSound("cannon.mp3","sounds/effects", new Float(0.8f));
         }
 
     }

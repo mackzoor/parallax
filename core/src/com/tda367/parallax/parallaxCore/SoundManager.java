@@ -70,7 +70,7 @@ public class SoundManager {
     }
 
     public void playSound(String sound, String directory) {
-        playSound(directory + "\\" + sound);
+        playSound(directory + "/" + sound);
     }
 
     public void playSound(String sound, Float volume) {
@@ -84,7 +84,7 @@ public class SoundManager {
     }
 
     public void playSound(String sound, String directory, Float volume) {
-        playSound(directory + "\\" + sound, volume);
+        playSound(directory + "/" + sound, volume);
     }
 
     public void playMusic(String music) {
@@ -98,7 +98,7 @@ public class SoundManager {
     }
 
     public void playMusic(String music, String directory) {
-        playMusic(directory + "\\" + music);
+        playMusic(directory + "/" + music);
     }
 
     public void playMusic(String music, Float volume) {
@@ -112,6 +112,6 @@ public class SoundManager {
     }
 
     public void playMusic(String music, String directory, Float volume){
-        playMusic(directory+"\\"+music,volume);
+        playMusic(directory+"/"+music,volume);
     }
 }

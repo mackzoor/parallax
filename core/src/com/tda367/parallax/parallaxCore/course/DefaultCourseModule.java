@@ -27,7 +27,7 @@ public class DefaultCourseModule implements ICourseModule, IModel {
         this.pos.setY(pos.getY()+getLength()/2);
         this.rot = new Quat4f();
 
-        model = new Model("course.g3db", "3dModels\\defaultCourse");
+        model = new Model("course.g3db", "3dModels/defaultCourse");
         length = 64;
         this.obstacles = new ArrayList<Obstacle>();
         usables = new ArrayList<Collidable>();
