@@ -21,15 +21,15 @@ public class OnScreenTouchpad implements EventListener {
     OnScreenTouchpad() {
 
         touchpadSkin = new Skin();
-        touchpadSkin.add("touchpadBackground", new Texture(
-                "touchpad/touchpadBackground.png"));
-        touchpadSkin.add("touchpadKnob", new Texture("touchpad/touchpadKnob.png"));
+        touchpadSkin.add("background", new Texture(
+                "touchpad/background.png"));
+        touchpadSkin.add("knob", new Texture("touchpad/knob.png"));
 
         touchpadStyle = new Touchpad.TouchpadStyle();
 
-        touchBackground = touchpadSkin.getDrawable("touchpadBackground");
+        touchBackground = touchpadSkin.getDrawable("background");
 
-        touchKnob = touchpadSkin.getDrawable("touchpadKnob");
+        touchKnob = touchpadSkin.getDrawable("knob");
         touchKnob.setMinWidth(200);
         touchKnob.setMinHeight(200);
 
