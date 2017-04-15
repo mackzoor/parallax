@@ -41,7 +41,7 @@ public class ResourceHandler {
         Model modelNew;
 
         if (modelDirectory.length() > 0){
-            modelNew = modelLoader.loadModel(Gdx.files.getFileHandle(modelDirectory+"\\"+modelName, Files.FileType.Internal));
+            modelNew = modelLoader.loadModel(Gdx.files.getFileHandle(modelDirectory+"/"+modelName, Files.FileType.Internal));
         } else {
             modelNew = modelLoader.loadModel(Gdx.files.getFileHandle(modelName, Files.FileType.Internal));
         }
@@ -51,15 +51,9 @@ public class ResourceHandler {
     }
 
     public ModelInstance getModel(String modelName){
-        Model entry = loadedModels.get(modelName);
-        ModelInstance modelInstance;
-        if (entry == null){
-            modelInstance = loadModel(modelName,"");
-        } else {
-            modelInstance = new ModelInstance(entry);
-        }
-        return modelInstance;
+        return loadModel(modelName,"");
     }
+
     public ModelInstance getModel(String modelName, String modelDirectory){
         Model entry = loadedModels.get(modelName);
         ModelInstance modelInstance;
@@ -75,7 +69,7 @@ public class ResourceHandler {
         Sound newSound;
 
         if (soundDirectory.length() > 0){
-            newSound = Gdx.audio.newSound(Gdx.files.internal((soundDirectory+"\\"+soundName)));
+            newSound = Gdx.audio.newSound(Gdx.files.internal((soundDirectory+"/"+soundName)));
         } else {
             newSound = Gdx.audio.newSound(Gdx.files.internal((soundName)));
         }
@@ -105,7 +99,7 @@ public class ResourceHandler {
         Music newMusic;
 
         if (musicDirectory.length() > 0){
-            newMusic = Gdx.audio.newMusic(Gdx.files.internal((musicDirectory+"\\"+musicName)));
+            newMusic = Gdx.audio.newMusic(Gdx.files.internal((musicDirectory+"/"+musicName)));
         } else {
             newMusic = Gdx.audio.newMusic(Gdx.files.internal((musicName)));
         }

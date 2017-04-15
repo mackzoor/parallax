@@ -45,7 +45,7 @@ public class Renderer {
         List<Renderable> renderables = RenderManager.getInstance().getRenderables();
 
         for (Renderable renderable : renderables){
-            ModelInstance modelInstance = rh.getModel(renderable.getModel().getModelName());
+            ModelInstance modelInstance = rh.getModel(renderable.getModel().getModelName(),renderable.getModel().getModelDirectory());
 
             modelInstance.transform.setToTranslation(
                     renderable.getPos().getX(),

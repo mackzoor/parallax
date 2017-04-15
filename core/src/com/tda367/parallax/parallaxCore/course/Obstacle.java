@@ -17,7 +17,7 @@ public class Obstacle implements Collidable, Renderable, Updatable {
     public Obstacle(){
         pos = new Vector3f();
         rot = new Quat4f();
-        model = new Model("boxObstacle.g3db");
+        model = new Model("boxObstacle.g3db", "3dModels/boxObstacle");
     }
 
 
