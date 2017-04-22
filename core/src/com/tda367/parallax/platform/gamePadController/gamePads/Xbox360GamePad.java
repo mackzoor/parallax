@@ -1,11 +1,11 @@
-package com.tda367.parallax.platform.GamePads;
+package com.tda367.parallax.platform.gamePadController.gamePads;
 
 import com.badlogic.gdx.controllers.PovDirection;
 
 /**
  * Created by Markus on 2017-04-12.
  */
-public class Xbox360Controller {
+public class Xbox360GamePad implements GamePad {
     public static final int BUTTON_X = 2;
     public static final int BUTTON_Y = 3;
     public static final int BUTTON_A = 0;
@@ -26,4 +26,59 @@ public class Xbox360Controller {
     public static final int AXIS_RIGHT_X = 3; //-1 is left | +1 is right
     public static final int AXIS_RIGHT_Y = 2; //-1 is up | +1 is down
     public static final int AXIS_RIGHT_TRIGGER = 4; //value 0 to -1f
+
+    @Override
+    public int GetActionButtonCode() {
+        return 0;
+    }
+
+    @Override
+    public int GetSecondaryActionButtonCode() {
+        return 0;
+    }
+
+    @Override
+    public int GetPauseButtonCode() {
+        return 0;
+    }
+
+    @Override
+    public int GetUpButtonCode() {
+        return 0;
+    }
+
+    @Override
+    public int GetRightButtonCode() {
+        return 0;
+    }
+
+    @Override
+    public int GetDownButtonCode() {
+        return 0;
+    }
+
+    @Override
+    public int GetLeftButtonCode() {
+        return 0;
+    }
+
+    @Override
+    public int GetXAxisJoystickCode() {
+        return 0;
+    }
+
+    @Override
+    public int GetYAxisJoystickCode() {
+        return 0;
+    }
+
+    @Override
+    public int XAxisValueConverter(int value) {
+        return 0;
+    }
+
+    @Override
+    public int YAxisValueConverter(int value) {
+        return 0;
+    }
 }
