@@ -8,13 +8,13 @@ import javax.vecmath.Vector3f;
 /**
  * Created by amk19 on 11/04/2017.
  */
-public class Obstacle implements Collidable, Renderable, Updatable {
+public class BoxObstacle implements Collidable, Renderable, Updatable {
     private Vector3f pos;
     private Quat4f rot;
 
     private Model model;
 
-    public Obstacle(){
+    public BoxObstacle(){
         pos = new Vector3f();
         rot = new Quat4f();
         model = new Model("boxObstacle.g3db", "3dModels/boxObstacle");
