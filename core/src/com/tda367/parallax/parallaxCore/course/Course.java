@@ -3,8 +3,10 @@ package com.tda367.parallax.parallaxCore.course;
 import com.tda367.parallax.parallaxCore.RenderManager;
 import com.tda367.parallax.parallaxCore.enemies.MinionEnemy;
 import com.tda367.parallax.parallaxCore.Updatable;
+import com.tda367.parallax.parallaxCore.powerUps.PowerUp;
 import com.tda367.parallax.parallaxCore.spaceCraft.Agelion;
 import com.tda367.parallax.parallaxCore.spaceCraft.ISpaceCraft;
+import com.tda367.parallax.parallaxCore.spaceCraft.SpaceCraftListener;
 
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
@@ -15,24 +17,27 @@ import java.util.Random;
 /**
  * A class that binds together different course modules and creates several enemy ai's..
  */
-public class Course implements Updatable {
+public class Course implements Updatable, SpaceCraftListener {
 
     private List<ICourseModule> modules;
     private List<ISpaceCraft> spaceCrafts;
+    private List<PowerUp> activePowerups;
 
 
-    public Course() {
+    public Course(){
         modules = new ArrayList<ICourseModule>();
         spaceCrafts = new ArrayList<ISpaceCraft>();
 
         updateModuleRange();
+        activePowerups = new ArrayList<PowerUp>();
 
-        //Debug purpose only
-//        createTestEnemy();
+        //Debug purpose only//
+        // createTestEnemy();
     }
 
     public void addSpaceCraft(ISpaceCraft spaceCraft) {
         spaceCrafts.add(spaceCraft);
+        spaceCraft.addSpaceCraftListener(this);
         RenderManager.getInstance().addRenderTask(spaceCraft);
     }
 
@@ -46,6 +51,10 @@ public class Course implements Updatable {
 
         for (ISpaceCraft spaceCraft : spaceCrafts) {
             spaceCraft.update(milliSinceLastUpdate);
+        }
+
+        for (PowerUp pu : activePowerups) {
+            pu.update(milliSinceLastUpdate);
         }
 
         updateModuleRange();
@@ -104,14 +113,14 @@ public class Course implements Updatable {
         Random rand = new Random();
 
         MinionEnemy minionEnemy = new MinionEnemy(new Agelion(
-                new Vector3f(1.5f, -2, 1),
+                new Vector3f(1.5f, 2, 1),
                 new Quat4f(),
-                3
+                10
         ));
-        minionEnemy.getSpaceCraft().setAcceleration(-0.5f);
-//        minionEnemy.setTarget(spaceCrafts.get(0));
+        //minionEnemy.getSpaceCraft().setAcceleration(-0.5f);
         spaceCrafts.add(minionEnemy.getSpaceCraft());
         RenderManager.getInstance().addRenderTask(minionEnemy.getSpaceCraft());
+        minionEnemy.update(1000);
     }
 
     private float getFirstSpaceCraftDistance() {
@@ -142,6 +151,11 @@ public class Course implements Updatable {
         } else {
             return 0;
         }
+    }
+
+    @Override
+    public void powerUPUsed(PowerUp pu) {
+        activePowerups.add(pu);
     }
 
     //TODO Check collisions between spacecraft and obstacles
