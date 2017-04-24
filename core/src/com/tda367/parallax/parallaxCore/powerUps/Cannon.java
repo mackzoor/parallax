@@ -29,6 +29,7 @@ public class Cannon extends PowerUp {
         this.spaceCraft = spaceCraft;
     }
 
+
     @Override
     public void usePU(Vector3f pos, Quat4f rot) {
         Random rand = new Random();
