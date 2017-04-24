@@ -12,6 +12,6 @@ public interface LibGdxGameController {
     void RightButtonPressed();
     void DownButtonPressed();
     void LeftButtonPressed();
-    void XAxisJoystickMovement(float value);
-    void YAxisJoystickMovement(float value);
+    void XAxisJoystickMovement(float xValue);
+    void YAxisJoystickMovement(float yValue);
 }

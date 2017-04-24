@@ -13,15 +13,15 @@ import com.tda367.parallax.platform.gamePadController.gamePads.GamePadFactory;
 
 public class LibGdxGamePadHandler implements ControllerListener {
 
-    private LibGdxGameController controller;
+    private LibGdxGameController gameController;
     private GamePad gamePad;
 
-    public LibGdxGamePadHandler(LibGdxGameController controller) {
-        this.controller = controller;
+    public LibGdxGamePadHandler(LibGdxGameController gameController) {
+        this.gameController = gameController;
     }
 
-    public void setController(LibGdxGameController controller) {
-        this.controller = controller;
+    public void setGameController(LibGdxGameController gameController) {
+        this.gameController = gameController;
     }
 
     @Override
@@ -36,11 +36,35 @@ public class LibGdxGamePadHandler implements ControllerListener {
 
     @Override
     public boolean buttonDown(Controller controller, int buttonCode) {
+
+        if(buttonCode == gamePad.GetActionButtonCode()) {
+            gameController.ActionButtonPressed();
+        } else if (buttonCode == gamePad.GetSecondaryActionButtonCode()) {
+            gameController.SecondaryActionButtonPressed();
+        } else if (buttonCode == gamePad.GetLeftButtonCode()) {
+            gameController.LeftButtonPressed();
+        } else if (buttonCode == gamePad.GetUpButtonCode()) {
+            gameController.UpButtonPressed();
+        } else if (buttonCode == gamePad.GetRightButtonCode()) {
+            gameController.RightButtonPressed();
+        } else if (buttonCode == gamePad.GetDownButtonCode()) {
+            gameController.DownButtonPressed();
+        } else if (buttonCode == gamePad.GetPauseButtonCode()) {
+            gameController.PauseButtonPressed();
+        }
+
         return false;
     }
 
     @Override
     public boolean axisMoved(Controller controller, int axisCode, float value) {
+
+        if(axisCode == gamePad.GetXAxisJoystickCode()) {
+            gameController.XAxisJoystickMovement(gamePad.XAxisValueConverter(value));
+        } else if (axisCode == gamePad.GetYAxisJoystickCode()) {
+            gameController.YAxisJoystickMovement(gamePad.YAxisValueConverter(value));
+        }
+
         return false;
     }
 

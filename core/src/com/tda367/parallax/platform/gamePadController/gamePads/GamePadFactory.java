@@ -5,6 +5,8 @@ package com.tda367.parallax.platform.gamePadController.gamePads;
  */
 
 public class GamePadFactory {
+
+    //Returns a game pad class with the correct key codes for the connected controller
     public static GamePad getGamePad(String gamePadName){
         gamePadName = gamePadName.toLowerCase();
         if(gamePadName.contains("playstation") && gamePadName.contains("3")) {

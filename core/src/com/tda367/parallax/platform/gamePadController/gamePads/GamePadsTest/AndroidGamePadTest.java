@@ -44,7 +44,7 @@ public class AndroidGamePadTest {
 
         float convertedValue = gamePad.YAxisValueConverter(value);
 
-        assertTrue(convertedValue == value);
+        assertTrue(convertedValue == -1f * value);
     }
 
     @Test
