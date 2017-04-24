@@ -1,5 +1,6 @@
 package com.tda367.parallax.parallaxCore;
 
+import com.tda367.parallax.parallaxCore.Collision.ICollisionCalculator;
 import com.tda367.parallax.parallaxCore.course.Course;
 import com.tda367.parallax.parallaxCore.spaceCraft.ISpaceCraft;
 import com.tda367.parallax.platform.Sound;
@@ -41,8 +42,16 @@ public class Parallax implements Updatable{
 
     @Override
     public void update(int milliSinceLastUpdate) {
+
+        if (milliSinceLastUpdate > 100){
+            milliSinceLastUpdate = 100;
+        }
+
         course.update(milliSinceLastUpdate);
         camera.update(milliSinceLastUpdate);
+    }
+    public void setCollisionCalculator(ICollisionCalculator collisionCalculator){
+        course.setCollisionCalculator(collisionCalculator);
     }
 
     public Player getPlayer() {

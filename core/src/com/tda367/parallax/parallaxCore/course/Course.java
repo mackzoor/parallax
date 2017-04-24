@@ -1,5 +1,8 @@
 package com.tda367.parallax.parallaxCore.course;
 
+import com.tda367.parallax.parallaxCore.Collidable;
+import com.tda367.parallax.parallaxCore.Collision.CollisionPair;
+import com.tda367.parallax.parallaxCore.Collision.ICollisionCalculator;
 import com.tda367.parallax.parallaxCore.RenderManager;
 import com.tda367.parallax.parallaxCore.enemies.MinionEnemy;
 import com.tda367.parallax.parallaxCore.Updatable;
@@ -19,11 +22,13 @@ public class Course implements Updatable {
 
     private List<ICourseModule> modules;
     private List<ISpaceCraft> spaceCrafts;
+    private ICollisionCalculator collisionCalculator;
 
 
     public Course() {
         modules = new ArrayList<ICourseModule>();
         spaceCrafts = new ArrayList<ISpaceCraft>();
+        collisionCalculator = null;
 
         updateModuleRange();
 
@@ -48,8 +53,19 @@ public class Course implements Updatable {
             spaceCraft.update(milliSinceLastUpdate);
         }
 
+
+        if (collisionCalculator != null){
+            List<Collidable> obstacleList = new ArrayList<Collidable>();
+
+            for (ICourseModule module : modules){
+                obstacleList.addAll((module.getObstacles()));
+                obstacleList.addAll(module.getUsables());
+            }
+
+            List<CollisionPair> collisionList = collisionCalculator.getCollisions(obstacleList, spaceCrafts);
+        }
+
         updateModuleRange();
-        //TODO Check collision detection
     }
 
     private void updateModuleRange() {
@@ -142,6 +158,10 @@ public class Course implements Updatable {
         } else {
             return 0;
         }
+    }
+
+    public void setCollisionCalculator(ICollisionCalculator collisionCalculator) {
+        this.collisionCalculator = collisionCalculator;
     }
 
     //TODO Check collisions between spacecraft and obstacles
