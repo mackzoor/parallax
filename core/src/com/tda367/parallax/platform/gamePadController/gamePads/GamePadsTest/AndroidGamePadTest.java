@@ -42,7 +42,7 @@ public class AndroidGamePadTest {
 
         float value = rand.nextFloat() * (maxY - minY) + minY;
 
-        float convertedValue = gamePad.XAxisValueConverter(value);
+        float convertedValue = gamePad.YAxisValueConverter(value);
 
         assertTrue(convertedValue == value);
     }
