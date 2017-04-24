@@ -73,12 +73,17 @@ public class Xbox360GamePad implements GamePad {
     }
 
     @Override
-    public int XAxisValueConverter(int value) {
+    public int XAxisValueConverter(float value) {
         return 0;
     }
 
     @Override
-    public int YAxisValueConverter(int value) {
+    public int YAxisValueConverter(float value) {
         return 0;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return (o != null && getClass() == o.getClass());
     }
 }

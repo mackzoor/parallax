@@ -14,6 +14,6 @@ public interface GamePad {
     int GetLeftButtonCode();
     int GetXAxisJoystickCode();
     int GetYAxisJoystickCode();
-    int XAxisValueConverter(int value);
-    int YAxisValueConverter(int value);
+    int XAxisValueConverter(float value);
+    int YAxisValueConverter(float value);
 }
