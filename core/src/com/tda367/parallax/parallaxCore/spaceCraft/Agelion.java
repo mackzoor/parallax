@@ -37,10 +37,12 @@ public class Agelion implements ISpaceCraft {
     private Quat4f rot;
 
     private Model agelionModel;
+    private Model collisionModel;
 
 
     public Agelion(int health, float velocity, float panSpeed, Vector3f pos, Quat4f rot) {
         this.agelionModel = new Model("agelion.g3db", "3dModels/agelion");
+        this.collisionModel = new Model(agelionModel.getModelName(), agelionModel.getModelDirectory());
         this.health = health;
         this.velocity = velocity;
         this.panSpeed = panSpeed;
@@ -226,6 +228,11 @@ public class Agelion implements ISpaceCraft {
     @Override
     public void removeFromRenderManager() {
         RenderManager.getInstance().removeRenderTask(this);
+    }
+
+    @Override
+    public Model getCollisionModel() {
+        return collisionModel;
     }
 }
 

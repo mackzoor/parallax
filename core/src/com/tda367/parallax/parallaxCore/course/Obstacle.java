@@ -13,11 +13,13 @@ public class Obstacle implements Collidable, Renderable, Updatable {
     private Quat4f rot;
 
     private Model model;
+    private Model collisionModel;
 
     public Obstacle(){
+        model = new Model("boxObstacle.g3db", "3dModels/boxObstacle");
+        collisionModel = new Model(model.getModelName(), model.getModelDirectory());
         pos = new Vector3f();
         rot = new Quat4f();
-        model = new Model("boxObstacle.g3db", "3dModels/boxObstacle");
     }
 
 
@@ -49,5 +51,10 @@ public class Obstacle implements Collidable, Renderable, Updatable {
     @Override
     public void removeFromRenderManager() {
         RenderManager.getInstance().removeRenderTask(this);
+    }
+
+    @Override
+    public Model getCollisionModel() {
+        return collisionModel;
     }
 }
