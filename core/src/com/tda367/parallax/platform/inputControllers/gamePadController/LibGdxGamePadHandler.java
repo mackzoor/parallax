@@ -16,18 +16,19 @@ import com.tda367.parallax.platform.inputControllers.gamePadController.gamePads.
 public class LibGdxGamePadHandler implements ControllerListener {
 
     private LibGdxGameController gameController;
-    private Controller controller;
     private GamePad gamePad;
 
-    public LibGdxGamePadHandler(LibGdxGameController gameController) {
-        this.gameController = gameController;
+    public LibGdxGamePadHandler() {
         Controllers.addListener(this);
         for (Controller controller : Controllers.getControllers()) {
             System.out.println(controller.getName());
-            this.controller = controller;
             controller.addListener(this);
             connected(controller);
         }
+    }
+
+    public void setListener(LibGdxGameController gameController) {
+        this.gameController = gameController;
     }
 
     @Override
@@ -43,20 +44,22 @@ public class LibGdxGamePadHandler implements ControllerListener {
     @Override
     public boolean buttonDown(Controller controller, int buttonCode) {
 
-        if(buttonCode == gamePad.GetActionButtonCode()) {
-            gameController.actionButtonPressed();
-        } else if (buttonCode == gamePad.GetSecondaryActionButtonCode()) {
-            gameController.secondaryActionButtonPressed();
-        } else if (buttonCode == gamePad.GetLeftButtonCode()) {
-            gameController.leftButtonPressed();
-        } else if (buttonCode == gamePad.GetUpButtonCode()) {
-            gameController.upButtonPressed();
-        } else if (buttonCode == gamePad.GetRightButtonCode()) {
-            gameController.rightButtonPressed();
-        } else if (buttonCode == gamePad.GetDownButtonCode()) {
-            gameController.downButtonPressed();
-        } else if (buttonCode == gamePad.GetPauseButtonCode()) {
-            gameController.pauseButtonPressed();
+        if(gameController != null) {
+            if(buttonCode == gamePad.GetActionButtonCode()) {
+                gameController.actionButtonPressed();
+            } else if (buttonCode == gamePad.GetSecondaryActionButtonCode()) {
+                gameController.secondaryActionButtonPressed();
+            } else if (buttonCode == gamePad.GetLeftButtonCode()) {
+                gameController.leftButtonPressed();
+            } else if (buttonCode == gamePad.GetUpButtonCode()) {
+                gameController.upButtonPressed();
+            } else if (buttonCode == gamePad.GetRightButtonCode()) {
+                gameController.rightButtonPressed();
+            } else if (buttonCode == gamePad.GetDownButtonCode()) {
+                gameController.downButtonPressed();
+            } else if (buttonCode == gamePad.GetPauseButtonCode()) {
+                gameController.pauseButtonPressed();
+            }
         }
 
         return false;
@@ -65,14 +68,16 @@ public class LibGdxGamePadHandler implements ControllerListener {
     @Override
     public boolean buttonUp(Controller controller, int buttonCode) {
 
-        if (buttonCode == gamePad.GetLeftButtonCode()) {
-            gameController.leftButtonUp();
-        } else if (buttonCode == gamePad.GetUpButtonCode()) {
-            gameController.upButtonUp();
-        } else if (buttonCode == gamePad.GetRightButtonCode()) {
-            gameController.rightButtonUp();
-        } else if (buttonCode == gamePad.GetDownButtonCode()) {
-            gameController.downButtonUp();
+        if (gameController != null) {
+            if (buttonCode == gamePad.GetLeftButtonCode()) {
+                gameController.leftButtonUp();
+            } else if (buttonCode == gamePad.GetUpButtonCode()) {
+                gameController.upButtonUp();
+            } else if (buttonCode == gamePad.GetRightButtonCode()) {
+                gameController.rightButtonUp();
+            } else if (buttonCode == gamePad.GetDownButtonCode()) {
+                gameController.downButtonUp();
+            }
         }
 
         return false;
@@ -81,10 +86,12 @@ public class LibGdxGamePadHandler implements ControllerListener {
     @Override
     public boolean axisMoved(Controller controller, int axisCode, float value) {
 
-        if(axisCode == gamePad.GetXAxisJoystickCode()) {
-            gameController.xAxisJoystickMovement(gamePad.XAxisValueConverter(value));
-        } else if (axisCode == gamePad.GetYAxisJoystickCode()) {
-            gameController.yAxisJoystickMovement(gamePad.YAxisValueConverter(value));
+        if (gameController != null) {
+            if(axisCode == gamePad.GetXAxisJoystickCode()) {
+                gameController.xAxisJoystickMovement(gamePad.XAxisValueConverter(value));
+            } else if (axisCode == gamePad.GetYAxisJoystickCode()) {
+                gameController.yAxisJoystickMovement(gamePad.YAxisValueConverter(value));
+            }
         }
 
         return false;

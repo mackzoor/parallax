@@ -12,8 +12,11 @@ public class LibGdxKeyboardHandler implements InputProcessor {
 
     private LibGdxGameController gameController;
 
-    public LibGdxKeyboardHandler(LibGdxGameController gameController) {
+    public LibGdxKeyboardHandler() {
         Gdx.input.setInputProcessor(this);
+    }
+
+    public void setListener(LibGdxGameController gameController) {
         this.gameController = gameController;
     }
 

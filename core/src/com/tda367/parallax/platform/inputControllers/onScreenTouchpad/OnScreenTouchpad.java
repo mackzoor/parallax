@@ -14,7 +14,7 @@ public class OnScreenTouchpad implements EventListener {
     private Touchpad touchpad;
     private Drawable touchBackground;
     private Drawable touchKnob;
-    private com.tda367.parallax.platform.inputControllers.onScreenTouchpad.IScreenControllerListener listener;
+    private IScreenControllerListener listener;
     private Skin touchpadSkin;
     private Stage stage;
 
@@ -44,7 +44,7 @@ public class OnScreenTouchpad implements EventListener {
         stage.addActor(touchpad);
         Gdx.input.setInputProcessor(stage);
     }
-    public void setListener(com.tda367.parallax.platform.inputControllers.onScreenTouchpad.IScreenControllerListener listener) {
+    public void setListener(IScreenControllerListener listener) {
         this.listener = listener;
     }
 

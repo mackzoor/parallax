@@ -14,12 +14,15 @@ public class LibGdxTouchHandler implements IScreenControllerListener {
     private LibGdxGameController gameController;
     private OnScreenTouchpad onScreenTouchpad;
 
-    public LibGdxTouchHandler(LibGdxGameController gameController) {
-        this.gameController = gameController;
+    public LibGdxTouchHandler() {
         if (Gdx.app.getType() == Application.ApplicationType.Android) {
             onScreenTouchpad = new OnScreenTouchpad();
             onScreenTouchpad.setListener(this);
         }
+    }
+
+    public void setListener(LibGdxGameController gameController) {
+        this.gameController = gameController;
     }
 
     public void drawTouchpad(){
