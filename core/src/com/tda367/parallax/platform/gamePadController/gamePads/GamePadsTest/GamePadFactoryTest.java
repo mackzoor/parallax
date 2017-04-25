@@ -16,7 +16,7 @@ import static org.junit.Assert.*;
 public class GamePadFactoryTest {
     @Test
     public void getGamePad() throws Exception {
-        GamePad factoryPlaystation3GamePad = GamePadFactory.getGamePad("PLAYSTATION_DUALSHOCK_3");
+        GamePad factoryPlaystation3GamePad = GamePadFactory.getGamePad("Sony PLAYSTATION(R)3 Controller");
         GamePad factoryXbox360GamePad = GamePadFactory.getGamePad("XBOX360");
         GamePad factoryAndroidGamePad = GamePadFactory.getGamePad("RL_android_bluetooth_game_pad");
         GamePad playstation3GamePad = new Playstation3GamePad();

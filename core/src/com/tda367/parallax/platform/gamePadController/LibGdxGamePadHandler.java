@@ -2,6 +2,7 @@ package com.tda367.parallax.platform.gamePadController;
 
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.ControllerListener;
+import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.controllers.PovDirection;
 import com.badlogic.gdx.math.Vector3;
 import com.tda367.parallax.platform.gamePadController.gamePads.GamePad;
@@ -14,10 +15,19 @@ import com.tda367.parallax.platform.gamePadController.gamePads.GamePadFactory;
 public class LibGdxGamePadHandler implements ControllerListener {
 
     private LibGdxGameController gameController;
+    private Controller controller;
     private GamePad gamePad;
 
     public LibGdxGamePadHandler(LibGdxGameController gameController) {
         this.gameController = gameController;
+        System.out.println("Hit");
+        Controllers.addListener(this);
+        for (Controller controller : Controllers.getControllers()) {
+            System.out.println(controller.getName());
+            this.controller = controller;
+            controller.addListener(this);
+            connected(controller);
+        }
     }
 
     public void setGameController(LibGdxGameController gameController) {

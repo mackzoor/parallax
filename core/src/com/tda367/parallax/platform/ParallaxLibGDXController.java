@@ -37,7 +37,9 @@ public class ParallaxLibGDXController implements InputProcessor,IScreenControlle
     public boolean keyDown(int keycode) {
         float panSpeed = 5;
         spaceShipTurn(keycode, panSpeed);
-        usePowerUp(keycode);
+        if(keycode == Input.Keys.SPACE){
+            usePowerUp();
+        }
         return false;
     }
 
@@ -78,10 +80,8 @@ public class ParallaxLibGDXController implements InputProcessor,IScreenControlle
         return false;
     }
 
-    private void usePowerUp(int keycode){
-        if(keycode == Input.Keys.SPACE){
-            player.getSpaceCraft().action();
-        }
+    private void usePowerUp(){
+        player.getSpaceCraft().action();
     }
 
     private void spaceShipTurn(int keycode, float panSpeed){
@@ -98,7 +98,11 @@ public class ParallaxLibGDXController implements InputProcessor,IScreenControlle
 
     @Override
     public void onUpdate(float x, float y) {
-        setVelocity(x,y);
+        float panSpeed = 5;
+
+        float xMove = panSpeed*x;
+        float yMove = panSpeed*y;
+        setVelocity(xMove,yMove);
     }
 
 
@@ -107,22 +111,17 @@ public class ParallaxLibGDXController implements InputProcessor,IScreenControlle
     }
 
     public void setVelocity(float x, float y){
-        float panSpeed = 10;
-
-        float xMove = panSpeed*x;
-        float yMove = panSpeed*y;
-
         player.getSpaceCraft().setPanVelocity(
                 new Vector2f(
-                        xMove,
-                        yMove
+                        x,
+                        y
                 )
         );
     }
 
     @Override
     public void ActionButtonPressed() {
-
+        usePowerUp();
     }
 
     @Override
@@ -157,12 +156,14 @@ public class ParallaxLibGDXController implements InputProcessor,IScreenControlle
 
     @Override
     public void XAxisJoystickMovement(float xValue) {
+        xValue = xValue * 5;
         float yValue = player.getSpaceCraft().getPanVelocity().getY();
         setVelocity(xValue, yValue);
     }
 
     @Override
     public void YAxisJoystickMovement(float yValue) {
+        yValue = yValue * 5;
         float xValue = player.getSpaceCraft().getPanVelocity().getX();
         setVelocity(xValue, yValue);
     }
