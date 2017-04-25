@@ -15,11 +15,14 @@ public class Obstacle implements Collidable, Renderable, Updatable {
     private Model model;
     private Model collisionModel;
 
+    private boolean collisionEnabled;
+
     public Obstacle(){
         model = new Model("boxObstacle.g3db", "3dModels/boxObstacle");
         collisionModel = new Model(model.getModelName(), model.getModelDirectory());
         pos = new Vector3f();
         rot = new Quat4f();
+        collisionEnabled = true;
     }
 
 
@@ -51,6 +54,19 @@ public class Obstacle implements Collidable, Renderable, Updatable {
     @Override
     public void removeFromRenderManager() {
         RenderManager.getInstance().removeRenderTask(this);
+    }
+
+    public void enableCollision(){
+        collisionEnabled = true;
+    }
+
+    public void disableCollision(){
+        collisionEnabled = true;
+    }
+
+    @Override
+    public boolean isActive() {
+        return collisionEnabled;
     }
 
     @Override
