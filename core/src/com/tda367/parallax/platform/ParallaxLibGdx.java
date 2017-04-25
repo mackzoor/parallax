@@ -31,6 +31,7 @@ public class ParallaxLibGdx implements ApplicationListener {
 
     @Override
     public void resize(int width, int height) {
+        gameStateManager.getGameState(GameStateManager.State.PLAY).resize(width,height);
 
     }
 
