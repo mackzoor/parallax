@@ -68,7 +68,7 @@ public class Sound implements SoundListener {
 
 
 
-    private void stopActiveMusic(Music musicFile){
+    public void stopActiveMusic(Music musicFile){
     for (int i = 0; i < activeMusic.size(); i++) {
             if (this.activeMusic.get(i).getMusicPlying().equals(musicFile)){
                 this.activeMusic.get(this.activeMusic.indexOf(this.activeMusic.get(i))).getMusicPlying().stop();
@@ -77,7 +77,7 @@ public class Sound implements SoundListener {
         }
     }
 
-    private void pauseActiveMusic(Music musicFile){
+    public void pauseActiveMusic(Music musicFile){
         for (int i = 0; i < activeMusic.size(); i++) {
             if (this.activeMusic.get(i).getMusicPlying().equals(musicFile)){
                 this.activeMusic.get(this.activeMusic.indexOf(this.activeMusic.get(i))).getMusicPlying().pause();
@@ -85,7 +85,7 @@ public class Sound implements SoundListener {
         }
     }
 
-    private void unPauseActiveMusic(Music musicFile){
+    public void unPauseActiveMusic(Music musicFile){
         for (int i = 0; i < activeMusic.size(); i++) {
             if (this.activeMusic.get(i).getMusicPlying().equals(musicFile)){
                 this.activeMusic.get(this.activeMusic.indexOf(this.activeMusic.get(i))).getMusicPlying().play();
@@ -93,7 +93,7 @@ public class Sound implements SoundListener {
         }
     }
 
-    private void stopActiveMusic(String fileName){
+    public void stopActiveMusic(String fileName){
         for (int i = 0; i < activeMusic.size(); i++) {
             if (this.activeMusic.get(i).getFileName().equals(fileName)){
                 this.activeMusic.get(this.activeMusic.indexOf(this.activeMusic.get(i))).getMusicPlying().stop();
@@ -102,7 +102,7 @@ public class Sound implements SoundListener {
         }
     }
 
-    private void pauseActiveMusic(String fileName){
+    public void pauseActiveMusic(String fileName){
            for (int i = 0; i < activeMusic.size(); i++) {
             if (this.activeMusic.get(i).getFileName().equals(fileName)){
                 this.activeMusic.get(this.activeMusic.indexOf(this.activeMusic.get(i))).getMusicPlying().pause();
@@ -110,7 +110,7 @@ public class Sound implements SoundListener {
         }
     }
 
-    private void unPauseActiveMusic(String fileName){
+    public void unPauseActiveMusic(String fileName){
            for (int i = 0; i < activeMusic.size(); i++) {
             if (this.activeMusic.get(i).getFileName().equals(fileName)){
                 this.activeMusic.get(this.activeMusic.indexOf(this.activeMusic.get(i))).getMusicPlying().play();
