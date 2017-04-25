@@ -26,4 +26,6 @@ public abstract class PowerUp implements Usable {
         return (powerUp != null && powerUp.equals(this));
     }
 
+    public void update(int milliSinceLastUpdate) {
+    }
 }

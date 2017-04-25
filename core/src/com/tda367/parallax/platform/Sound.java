@@ -4,6 +4,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.tda367.parallax.parallaxCore.SoundListener;
 import com.tda367.parallax.parallaxCore.SoundManager;
+import org.omg.PortableInterceptor.ACTIVE;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by xoxLU on 2017-04-11.
@@ -11,7 +15,27 @@ import com.tda367.parallax.parallaxCore.SoundManager;
 
 public class Sound implements SoundListener {
 
+    private final class ActiveMusicCombination {
+        private final String fileName;
+        private final Music playing;
+
+        private ActiveMusicCombination(String fileName, Music playing) {
+            this.fileName = fileName;
+            this.playing = playing;
+        }
+
+        public String getFileName() {
+            return fileName;
+        }
+
+        public Music getMusicPlying() {
+            return playing;
+        }
+    }
+
     ResourceHandler resources;
+
+    List<ActiveMusicCombination> activeMusic = new ArrayList<ActiveMusicCombination>();
 
     public Sound(){
         this.resources = ResourceHandler.getInstance();
@@ -36,8 +60,66 @@ public class Sound implements SoundListener {
     @Override
     public void playMusic(String music, float volume) {
         Music playing = resources.getMusic(music);
-        playing.play();
         playing.setVolume(volume);
         playing.setLooping(true);
+        playing.play();
+        activeMusic.add(new ActiveMusicCombination(music, playing));
     }
+
+
+
+    public void stopActiveMusic(Music musicFile){
+    for (int i = 0; i < activeMusic.size(); i++) {
+            if (this.activeMusic.get(i).getMusicPlying().equals(musicFile)){
+                this.activeMusic.get(this.activeMusic.indexOf(this.activeMusic.get(i))).getMusicPlying().stop();
+                this.activeMusic.remove(this.activeMusic.get(i));
+            }
+        }
+    }
+
+    public void pauseActiveMusic(Music musicFile){
+        for (int i = 0; i < activeMusic.size(); i++) {
+            if (this.activeMusic.get(i).getMusicPlying().equals(musicFile)){
+                this.activeMusic.get(this.activeMusic.indexOf(this.activeMusic.get(i))).getMusicPlying().pause();
+            }
+        }
+    }
+
+    public void unPauseActiveMusic(Music musicFile){
+        for (int i = 0; i < activeMusic.size(); i++) {
+            if (this.activeMusic.get(i).getMusicPlying().equals(musicFile)){
+                this.activeMusic.get(this.activeMusic.indexOf(this.activeMusic.get(i))).getMusicPlying().play();
+            }
+        }
+    }
+
+    public void stopActiveMusic(String fileName){
+        for (int i = 0; i < activeMusic.size(); i++) {
+            if (this.activeMusic.get(i).getFileName().equals(fileName)){
+                this.activeMusic.get(this.activeMusic.indexOf(this.activeMusic.get(i))).getMusicPlying().stop();
+                this.activeMusic.remove(this.activeMusic.get(i));
+            }
+        }
+    }
+
+    public void pauseActiveMusic(String fileName){
+           for (int i = 0; i < activeMusic.size(); i++) {
+            if (this.activeMusic.get(i).getFileName().equals(fileName)){
+                this.activeMusic.get(this.activeMusic.indexOf(this.activeMusic.get(i))).getMusicPlying().pause();
+            }
+        }
+    }
+
+    public void unPauseActiveMusic(String fileName){
+           for (int i = 0; i < activeMusic.size(); i++) {
+            if (this.activeMusic.get(i).getFileName().equals(fileName)){
+                this.activeMusic.get(this.activeMusic.indexOf(this.activeMusic.get(i))).getMusicPlying().play();
+            }
+        }
+    }
+
+
+
+
+
 }
