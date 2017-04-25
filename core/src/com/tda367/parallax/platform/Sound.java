@@ -33,9 +33,9 @@ public class Sound implements SoundListener {
         }
     }
 
-    ResourceHandler resources;
+    private ResourceHandler resources;
 
-    List<ActiveMusicCombination> activeMusic = new ArrayList<ActiveMusicCombination>();
+    private List<ActiveMusicCombination> activeMusic = new ArrayList<ActiveMusicCombination>();
 
     public Sound(){
         this.resources = ResourceHandler.getInstance();
@@ -49,7 +49,9 @@ public class Sound implements SoundListener {
 
     @Override
     public void playMusic(String music) {
-        resources.getMusic(music).play();
+        Music playing = resources.getMusic(music);
+        playing.play();
+        activeMusic.add(new ActiveMusicCombination(music, playing));
     }
 
     @Override
@@ -65,8 +67,6 @@ public class Sound implements SoundListener {
         playing.play();
         activeMusic.add(new ActiveMusicCombination(music, playing));
     }
-
-
 
     public void stopActiveMusic(Music musicFile){
     for (int i = 0; i < activeMusic.size(); i++) {
@@ -93,33 +93,29 @@ public class Sound implements SoundListener {
         }
     }
 
-    public void stopActiveMusic(String fileName){
+    public void stopActiveMusic(String fileNameAndDirectory){
         for (int i = 0; i < activeMusic.size(); i++) {
-            if (this.activeMusic.get(i).getFileName().equals(fileName)){
+            if (this.activeMusic.get(i).getFileName().equals(fileNameAndDirectory)){
                 this.activeMusic.get(this.activeMusic.indexOf(this.activeMusic.get(i))).getMusicPlying().stop();
                 this.activeMusic.remove(this.activeMusic.get(i));
             }
         }
     }
 
-    public void pauseActiveMusic(String fileName){
+    public void pauseActiveMusic(String fileNameAndDirectory){
            for (int i = 0; i < activeMusic.size(); i++) {
-            if (this.activeMusic.get(i).getFileName().equals(fileName)){
+            if (this.activeMusic.get(i).getFileName().equals(fileNameAndDirectory)){
                 this.activeMusic.get(this.activeMusic.indexOf(this.activeMusic.get(i))).getMusicPlying().pause();
             }
         }
     }
 
-    public void unPauseActiveMusic(String fileName){
+    public void unPauseActiveMusic(String fileNameAndDirectory){
            for (int i = 0; i < activeMusic.size(); i++) {
-            if (this.activeMusic.get(i).getFileName().equals(fileName)){
+            if (this.activeMusic.get(i).getFileName().equals(fileNameAndDirectory)){
                 this.activeMusic.get(this.activeMusic.indexOf(this.activeMusic.get(i))).getMusicPlying().play();
             }
         }
     }
-
-
-
-
 
 }
