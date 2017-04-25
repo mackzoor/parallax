@@ -20,11 +20,12 @@ public class ParallaxLibGdx implements ApplicationListener {
     private Renderer renderer;
     private ParallaxLibGDXController controller;
     private Sound sound;
+    private GameStateManager gameStateManager;
 
     @Override
     public void create() {
         Gdx.graphics.setTitle("Galactica space wars of justice, ultimate edition");
-
+        gameStateManager = GameStateManager.getInstance();
 
     }
 
@@ -35,7 +36,7 @@ public class ParallaxLibGdx implements ApplicationListener {
 
     @Override
     public void render() {
-
+       gameStateManager.render();
     }
 
     @Override
