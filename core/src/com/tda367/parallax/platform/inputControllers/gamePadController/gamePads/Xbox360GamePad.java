@@ -1,6 +1,4 @@
-package com.tda367.parallax.platform.gamePadController.gamePads;
-
-import com.badlogic.gdx.controllers.PovDirection;
+package com.tda367.parallax.platform.inputControllers.gamePadController.gamePads;
 
 /**
  * Created by Markus on 2017-04-12.

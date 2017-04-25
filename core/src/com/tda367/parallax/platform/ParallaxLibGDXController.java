@@ -6,8 +6,8 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.tda367.parallax.parallaxCore.Parallax;
 import com.tda367.parallax.parallaxCore.Player;
-import com.tda367.parallax.platform.gamePadController.LibGdxGameController;
-import com.tda367.parallax.platform.gamePadController.LibGdxGamePadHandler;
+import com.tda367.parallax.platform.inputControllers.LibGdxGameController;
+import com.tda367.parallax.platform.inputControllers.gamePadController.LibGdxGamePadHandler;
 
 import javax.vecmath.Vector2f;
 
@@ -20,13 +20,14 @@ public class ParallaxLibGDXController implements InputProcessor,IScreenControlle
     private LibGdxGamePadHandler gamePadHandler;
     private Player player;
     OnScreenTouchpad onScreenTouchpad;
+    private float panSpeed;
 
     ParallaxLibGDXController(Parallax parallax) {
         Gdx.input.setInputProcessor(this);
         gamePadHandler = new LibGdxGamePadHandler(this);
         this.parallax = parallax;
         this.player = parallax.getPlayer();
-
+        this.panSpeed = 5f;
         if (Gdx.app.getType() == Application.ApplicationType.Android) {
             onScreenTouchpad = new OnScreenTouchpad();
             onScreenTouchpad.setListener(this);
@@ -35,8 +36,7 @@ public class ParallaxLibGDXController implements InputProcessor,IScreenControlle
 
     @Override
     public boolean keyDown(int keycode) {
-        float panSpeed = 5;
-        spaceShipTurn(keycode, panSpeed);
+        spaceShipTurn(keycode);
         if(keycode == Input.Keys.SPACE){
             usePowerUp();
         }
@@ -45,8 +45,7 @@ public class ParallaxLibGDXController implements InputProcessor,IScreenControlle
 
     @Override
     public boolean keyUp(int keycode) {
-        float panSpeed = -5;
-        spaceShipTurn(keycode, panSpeed);
+        spaceShipTurn(keycode);
         return false;
     }
 
@@ -84,7 +83,7 @@ public class ParallaxLibGDXController implements InputProcessor,IScreenControlle
         player.getSpaceCraft().action();
     }
 
-    private void spaceShipTurn(int keycode, float panSpeed){
+    private void spaceShipTurn(int keycode){
         if (keycode == Input.Keys.W || keycode == Input.Keys.UP){
             player.getSpaceCraft().addPanVelocity(new Vector2f(0,panSpeed));
         } else if (keycode == Input.Keys.A || keycode == Input.Keys.LEFT){
@@ -156,20 +155,15 @@ public class ParallaxLibGDXController implements InputProcessor,IScreenControlle
 
     @Override
     public void XAxisJoystickMovement(float xValue) {
-        xValue = xValue * 5;
+        xValue = xValue * panSpeed;
         float yValue = player.getSpaceCraft().getPanVelocity().getY();
         setVelocity(xValue, yValue);
     }
 
     @Override
     public void YAxisJoystickMovement(float yValue) {
-        yValue = yValue * 5;
+        yValue = yValue * panSpeed;
         float xValue = player.getSpaceCraft().getPanVelocity().getX();
         setVelocity(xValue, yValue);
     }
 }
-
-
-
-
-

@@ -1,4 +1,4 @@
-package com.tda367.parallax.platform.gamePadController.gamePads;
+package com.tda367.parallax.platform.inputControllers.gamePadController.gamePads;
 
 /**
  * Created by Markus on 2017-04-22.
@@ -14,7 +14,7 @@ public class GamePadFactory {
         } else if (gamePadName.contains("xbox") && gamePadName.contains("360")) {
             return new Xbox360GamePad();
         } else if (gamePadName.contains("android")) {
-            return new AndroidGamePad();
+            return new com.tda367.parallax.platform.inputControllers.gamePadController.gamePads.AndroidGamePad();
         } else {
             return null;
             //TODO Implement support for unrecognised devices. Special setup?
