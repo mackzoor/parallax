@@ -68,6 +68,12 @@ public class Course implements Updatable {
             if (collisionList.size() > 0){
                 SoundManager.getInstance().playSound("flashBang.mp3","sounds/effects");
             }
+
+            for (CollisionPair pair : collisionList){
+                pair.getColl1().disableCollision();
+            }
+
+
         }
 
         updateModuleRange();

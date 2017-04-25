@@ -41,6 +41,8 @@ public class CollisionCalculator implements ICollisionCalculator {
     @Override
     public boolean hasCollided(Collidable first, Collidable second) {
 
+        if (!first.isActive() || !second.isActive()) return false;
+
         obj1.setWorldTransform(obj1.getWorldTransform().setTranslation(new Vector3(
                 first.getPos().getX(),
                 first.getPos().getZ(),

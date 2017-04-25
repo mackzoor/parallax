@@ -6,6 +6,8 @@ package com.tda367.parallax.parallaxCore;
 public interface Collidable extends Transformable {
 
     boolean isActive();
+    void disableCollision();
+    void enableCollision();
     Model getCollisionModel();
 
 }

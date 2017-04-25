@@ -39,6 +39,8 @@ public class Agelion implements ISpaceCraft {
     private Model agelionModel;
     private Model collisionModel;
 
+    private boolean collisionEnabled;
+
 
     public Agelion(int health, float velocity, float panSpeed, Vector3f pos, Quat4f rot) {
         this.agelionModel = new Model("agelion.g3db", "3dModels/agelion");
@@ -55,6 +57,7 @@ public class Agelion implements ISpaceCraft {
         this.pointMode = false;
         this.speedTargetMode = true;
 
+        collisionEnabled = true;
     }
     public Agelion(Vector3f position, Quat4f rotation, float startVelocity){
         this(5,startVelocity,2,position,rotation);
@@ -232,7 +235,17 @@ public class Agelion implements ISpaceCraft {
 
     @Override
     public boolean isActive() {
-        return true;
+        return collisionEnabled;
+    }
+
+    @Override
+    public void disableCollision() {
+        collisionEnabled = false;
+    }
+
+    @Override
+    public void enableCollision() {
+        collisionEnabled = true;
     }
 
     @Override

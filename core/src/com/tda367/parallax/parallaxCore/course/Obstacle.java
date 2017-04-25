@@ -61,7 +61,7 @@ public class Obstacle implements Collidable, Renderable, Updatable {
     }
 
     public void disableCollision(){
-        collisionEnabled = true;
+        collisionEnabled = false;
     }
 
     @Override
