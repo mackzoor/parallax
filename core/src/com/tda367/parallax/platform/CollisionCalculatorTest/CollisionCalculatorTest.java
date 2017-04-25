@@ -1,7 +1,7 @@
 package com.tda367.parallax.platform.CollisionCalculatorTest;
 
 import com.badlogic.gdx.physics.bullet.Bullet;
-import com.tda367.parallax.parallaxCore.course.Obstacle;
+import com.tda367.parallax.parallaxCore.course.BoxObstacle;
 import com.tda367.parallax.platform.CollisionCalculator;
 import org.junit.*;
 
@@ -25,9 +25,9 @@ public class CollisionCalculatorTest {
     @Test
     public void hasCollided() throws Exception {
 
-        Obstacle obstacle0 = new Obstacle();
-        Obstacle obstacle1 = new Obstacle();
-        Obstacle obstacle2 = new Obstacle();
+        BoxObstacle obstacle0 = new BoxObstacle();
+        BoxObstacle obstacle1 = new BoxObstacle();
+        BoxObstacle obstacle2 = new BoxObstacle();
 
         obstacle0.getPos().setY(0f);
 

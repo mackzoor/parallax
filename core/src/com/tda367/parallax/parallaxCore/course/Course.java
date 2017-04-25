@@ -70,7 +70,7 @@ public class Course implements Updatable, SpaceCraftListener {
             List<Collidable> obstacleList = new ArrayList<Collidable>();
 
             for (ICourseModule module : modules){
-                obstacleList.addAll((module.getObstacles()));
+                obstacleList.addAll((module.getBoxObstacles()));
                 obstacleList.addAll(module.getUsables());
             }
 
@@ -192,7 +192,5 @@ public class Course implements Updatable, SpaceCraftListener {
             activePowerups.add(pu);
         }
     }
-
-    //TODO Check collisions between spacecraft and obstacles
 
 }
