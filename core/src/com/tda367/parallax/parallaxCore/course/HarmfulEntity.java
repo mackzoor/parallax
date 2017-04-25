@@ -72,9 +72,7 @@ public class HarmfulEntity implements Collidable, Renderable, Updatable {
     }
 
     private void advanceHarmfulEntity(int timeMilli){
-        //System.out.println(this.getPos());
         float posYAdded = velocity * ((float)timeMilli/1000);
         pos.add((Tuple3f)new Vector3f(0, posYAdded, 0));
-        System.out.println(timeMilli);
     }
 }
