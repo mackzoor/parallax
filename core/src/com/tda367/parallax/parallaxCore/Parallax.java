@@ -29,14 +29,7 @@ public class Parallax implements Updatable{
         camera.trackTo(player.getSpaceCraft());
         this.player = player;
 
-        Random rand = new Random();
-        int randomSong = rand.nextInt(100 - 1 + 1) + 1;
-
-        if(randomSong == 50){
-            soundManager.playMusic("secretTrack.mp3","sounds/music");
-        } else {
-            soundManager.playMusic("track.mp3","sounds/music", new Float(0.7f));
-        }
+        startBackgroundMusic();
     }
 
     @Override
@@ -59,5 +52,16 @@ public class Parallax implements Updatable{
 
     public Camera getCamera(){
         return camera;
+    }
+
+    private void startBackgroundMusic(){
+        Random rand = new Random();
+        int randomSong = rand.nextInt(100 - 1 + 1) + 1;
+
+        if(randomSong == 50){
+            soundManager.playMusic("secretTrack.mp3","sounds/music");
+        } else {
+            soundManager.playMusic("track.mp3","sounds/music", new Float(0.7f));
+        }
     }
 }
