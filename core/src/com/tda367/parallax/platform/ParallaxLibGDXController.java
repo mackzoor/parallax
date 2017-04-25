@@ -7,6 +7,7 @@ import com.badlogic.gdx.InputProcessor;
 import com.tda367.parallax.parallaxCore.Parallax;
 import com.tda367.parallax.parallaxCore.Player;
 import com.tda367.parallax.platform.inputControllers.LibGdxGameController;
+import com.tda367.parallax.platform.inputControllers.LibGdxKeyboardHandler;
 import com.tda367.parallax.platform.inputControllers.gamePadController.LibGdxGamePadHandler;
 
 import javax.vecmath.Vector2f;
@@ -18,6 +19,7 @@ public class ParallaxLibGDXController implements InputProcessor,IScreenControlle
 
     private Parallax parallax;
     private LibGdxGamePadHandler gamePadHandler;
+    private LibGdxKeyboardHandler keyboardHandler;
     private Player player;
     OnScreenTouchpad onScreenTouchpad;
     private float panSpeed;
@@ -25,6 +27,7 @@ public class ParallaxLibGDXController implements InputProcessor,IScreenControlle
     ParallaxLibGDXController(Parallax parallax) {
         Gdx.input.setInputProcessor(this);
         gamePadHandler = new LibGdxGamePadHandler(this);
+        keyboardHandler = new LibGdxKeyboardHandler(this);
         this.parallax = parallax;
         this.player = parallax.getPlayer();
         this.panSpeed = 5f;
@@ -36,16 +39,16 @@ public class ParallaxLibGDXController implements InputProcessor,IScreenControlle
 
     @Override
     public boolean keyDown(int keycode) {
-        spaceShipTurn(keycode);
+        /*spaceShipTurn(keycode);
         if(keycode == Input.Keys.SPACE){
             usePowerUp();
-        }
+        }*/
         return false;
     }
 
     @Override
     public boolean keyUp(int keycode) {
-        spaceShipTurn(keycode);
+        /*spaceShipTurn(keycode);*/
         return false;
     }
 
@@ -119,49 +122,85 @@ public class ParallaxLibGDXController implements InputProcessor,IScreenControlle
     }
 
     @Override
-    public void ActionButtonPressed() {
+    public void actionButtonPressed() {
         usePowerUp();
     }
 
     @Override
-    public void SecondaryActionButtonPressed() {
+    public void secondaryActionButtonPressed() {
 
     }
 
     @Override
-    public void PauseButtonPressed() {
+    public void pauseButtonPressed() {
 
     }
 
     @Override
-    public void UpButtonPressed() {
-
+    public void upButtonPressed() {
+        float xValue = player.getSpaceCraft().getPanVelocity().getX();
+        float yValue = panSpeed;
+        setVelocity(xValue, yValue);
     }
 
     @Override
-    public void RightButtonPressed() {
-
+    public void upButtonUp() {
+        float xValue = player.getSpaceCraft().getPanVelocity().getX();
+        float yValue = 0;
+        setVelocity(xValue, yValue);
     }
 
     @Override
-    public void DownButtonPressed() {
-
+    public void rightButtonPressed() {
+        float xValue = panSpeed;
+        float yValue = player.getSpaceCraft().getPanVelocity().getY();
+        setVelocity(xValue, yValue);
     }
 
     @Override
-    public void LeftButtonPressed() {
-
+    public void rightButtonUp() {
+        float xValue = 0;
+        float yValue = player.getSpaceCraft().getPanVelocity().getY();
+        setVelocity(xValue, yValue);
     }
 
     @Override
-    public void XAxisJoystickMovement(float xValue) {
+    public void downButtonPressed() {
+        float xValue = player.getSpaceCraft().getPanVelocity().getX();
+        float yValue = -panSpeed;
+        setVelocity(xValue, yValue);
+    }
+
+    @Override
+    public void downButtonUp() {
+        float xValue = player.getSpaceCraft().getPanVelocity().getX();
+        float yValue = 0;
+        setVelocity(xValue, yValue);
+    }
+
+    @Override
+    public void leftButtonPressed() {
+        float xValue = -panSpeed;
+        float yValue = player.getSpaceCraft().getPanVelocity().getY();
+        setVelocity(xValue, yValue);
+    }
+
+    @Override
+    public void leftButtonUp() {
+        float xValue = 0;
+        float yValue = player.getSpaceCraft().getPanVelocity().getY();
+        setVelocity(xValue, yValue);
+    }
+
+    @Override
+    public void xAxisJoystickMovement(float xValue) {
         xValue = xValue * panSpeed;
         float yValue = player.getSpaceCraft().getPanVelocity().getY();
         setVelocity(xValue, yValue);
     }
 
     @Override
-    public void YAxisJoystickMovement(float yValue) {
+    public void yAxisJoystickMovement(float yValue) {
         yValue = yValue * panSpeed;
         float xValue = player.getSpaceCraft().getPanVelocity().getX();
         setVelocity(xValue, yValue);

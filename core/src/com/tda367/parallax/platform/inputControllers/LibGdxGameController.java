@@ -5,13 +5,17 @@ package com.tda367.parallax.platform.inputControllers;
  */
 
 public interface LibGdxGameController {
-    void ActionButtonPressed();
-    void SecondaryActionButtonPressed();
-    void PauseButtonPressed();
-    void UpButtonPressed();
-    void RightButtonPressed();
-    void DownButtonPressed();
-    void LeftButtonPressed();
-    void XAxisJoystickMovement(float xValue);
-    void YAxisJoystickMovement(float yValue);
+    void actionButtonPressed();
+    void secondaryActionButtonPressed();
+    void pauseButtonPressed();
+    void upButtonPressed();
+    void upButtonUp();
+    void rightButtonPressed();
+    void rightButtonUp();
+    void downButtonPressed();
+    void downButtonUp();
+    void leftButtonPressed();
+    void leftButtonUp();
+    void xAxisJoystickMovement(float xValue);
+    void yAxisJoystickMovement(float yValue);
 }
