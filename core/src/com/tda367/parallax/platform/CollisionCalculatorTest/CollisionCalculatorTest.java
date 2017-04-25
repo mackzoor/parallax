@@ -48,6 +48,10 @@ public class CollisionCalculatorTest {
 
         assertTrue(collisionCalculator.hasCollided(obstacle1, obstacle2));
         assertTrue(collisionCalculator.hasCollided(obstacle2, obstacle1));
+
+        obstacle0.disableCollision();
+        assertFalse(collisionCalculator.hasCollided(obstacle0,obstacle1));
+
     }
 
     @Test
