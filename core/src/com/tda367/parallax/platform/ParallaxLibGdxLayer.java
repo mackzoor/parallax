@@ -76,16 +76,11 @@ public class ParallaxLibGdxLayer implements ApplicationListener {
         }
     }
 
+	@Override
+	public void pause() {}
 
 	@Override
-	public void pause() {
-
-	}
-
-	@Override
-	public void resume() {
-
-	}
+	public void resume() {}
 
 	@Override
 	public void dispose() {
