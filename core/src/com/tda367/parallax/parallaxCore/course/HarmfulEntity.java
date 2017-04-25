@@ -15,7 +15,6 @@ public class HarmfulEntity implements Collidable, Renderable, Updatable {
     private Quat4f rot;
     private float velocity;
     private Model model;
-
     private int time;
 
     public HarmfulEntity(Float shipVelocity, String modelName, String modelDirectory){
