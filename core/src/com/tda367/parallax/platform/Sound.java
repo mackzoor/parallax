@@ -36,8 +36,8 @@ public class Sound implements SoundListener {
     @Override
     public void playMusic(String music, float volume) {
         Music playing = resources.getMusic(music);
-        playing.play();
         playing.setVolume(volume);
         playing.setLooping(true);
+        playing.play();
     }
 }

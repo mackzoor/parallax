@@ -33,11 +33,16 @@ public class Cannon extends PowerUp {
     @Override
     public void usePU(Vector3f pos, Quat4f rot) {
         Random rand = new Random();
+        rot = new Quat4f(0,0,0.7071f,0.7071f);
         int randomSong = rand.nextInt(100 - 1 + 1) + 1;
 
-        laserBeems.add(new HarmfulEntity(spaceCraft.getVelocity()));
+        laserBeems.add(new HarmfulEntity(spaceCraft.getVelocity(), "laser.g3db", "3dModels/laser"));
 
         laserBeems.get(laserBeems.size()-1).getPos().set(new Vector3f(spaceCraft.getPos().getX(),spaceCraft.getPos().getY(),spaceCraft.getPos().getZ()));
+
+
+        laserBeems.get(laserBeems.size()-1).getRot().set(rot);
+        laserBeems.get(laserBeems.size()-1).getRot().normalize();
 
         RenderManager.getInstance().addRenderTask(laserBeems.get(laserBeems.size()-1));
 
