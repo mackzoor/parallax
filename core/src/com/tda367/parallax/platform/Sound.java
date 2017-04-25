@@ -93,7 +93,6 @@ public class Sound implements SoundListener {
         }
     }
 
-
     private void stopActiveMusic(String fileName){
         for (int i = 0; i < activeMusic.size(); i++) {
             if (this.activeMusic.get(i).getFileName().equals(fileName)){
