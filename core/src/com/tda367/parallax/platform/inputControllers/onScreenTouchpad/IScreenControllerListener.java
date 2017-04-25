@@ -1,4 +1,4 @@
-package com.tda367.parallax.platform;
+package com.tda367.parallax.platform.inputControllers.onScreenTouchpad;
 
 /**
  * Created by Rasmus on 2017-04-12.

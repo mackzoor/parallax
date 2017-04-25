@@ -1,4 +1,4 @@
-package com.tda367.parallax.platform;
+package com.tda367.parallax.platform.inputControllers.onScreenTouchpad;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -14,11 +14,11 @@ public class OnScreenTouchpad implements EventListener {
     private Touchpad touchpad;
     private Drawable touchBackground;
     private Drawable touchKnob;
-    private IScreenControllerListener listener;
+    private com.tda367.parallax.platform.inputControllers.onScreenTouchpad.IScreenControllerListener listener;
     private Skin touchpadSkin;
     private Stage stage;
 
-    OnScreenTouchpad() {
+    public OnScreenTouchpad() {
 
         touchpadSkin = new Skin();
         touchpadSkin.add("background", new Texture(
@@ -44,7 +44,7 @@ public class OnScreenTouchpad implements EventListener {
         stage.addActor(touchpad);
         Gdx.input.setInputProcessor(stage);
     }
-    public void setListener(IScreenControllerListener listener) {
+    public void setListener(com.tda367.parallax.platform.inputControllers.onScreenTouchpad.IScreenControllerListener listener) {
         this.listener = listener;
     }
 

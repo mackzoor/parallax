@@ -30,10 +30,6 @@ public class LibGdxGamePadHandler implements ControllerListener {
         }
     }
 
-    public void setGameController(LibGdxGameController gameController) {
-        this.gameController = gameController;
-    }
-
     @Override
     public void connected(Controller controller) {
         gamePad = GamePadFactory.getGamePad(controller.getName());
