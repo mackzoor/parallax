@@ -18,11 +18,19 @@ public class HarmfulEntity implements Collidable, Renderable, Updatable {
 
     private int time;
 
-    public HarmfulEntity(Float shipVelocity){
+    public HarmfulEntity(Float shipVelocity, String modelName, String modelDirectory){
         velocity = shipVelocity + 10;
         pos = new Vector3f();
         rot = new Quat4f();
-        model = new Model("laser.g3db", "3dModels/laser");
+        model = new Model(modelName, modelDirectory);
+        time = 1000;
+    }
+
+    public HarmfulEntity(Float shipVelocity, String modelName, String modelDirectory, Vector3f pos){
+        velocity = shipVelocity + 10;
+        this.pos = pos;
+        rot = new Quat4f();
+        model = new Model(modelName, modelDirectory);
         time = 1000;
     }
 
@@ -65,7 +73,9 @@ public class HarmfulEntity implements Collidable, Renderable, Updatable {
     }
 
     private void advanceHarmfulEntity(int timeMilli){
+        //System.out.println(this.getPos());
         float posYAdded = velocity * ((float)timeMilli/1000);
         pos.add((Tuple3f)new Vector3f(0, posYAdded, 0));
+        System.out.println(timeMilli);
     }
 }
