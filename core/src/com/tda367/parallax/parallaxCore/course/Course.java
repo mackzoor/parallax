@@ -4,6 +4,7 @@ import com.tda367.parallax.parallaxCore.Collidable;
 import com.tda367.parallax.parallaxCore.Collision.CollisionPair;
 import com.tda367.parallax.parallaxCore.Collision.ICollisionCalculator;
 import com.tda367.parallax.parallaxCore.RenderManager;
+import com.tda367.parallax.parallaxCore.SoundManager;
 import com.tda367.parallax.parallaxCore.enemies.MinionEnemy;
 import com.tda367.parallax.parallaxCore.Updatable;
 import com.tda367.parallax.parallaxCore.spaceCraft.Agelion;
@@ -63,6 +64,10 @@ public class Course implements Updatable {
             }
 
             List<CollisionPair> collisionList = collisionCalculator.getCollisions(obstacleList, spaceCrafts);
+
+            if (collisionList.size() > 0){
+                SoundManager.getInstance().playSound("flashBang.mp3","sounds/effects");
+            }
         }
 
         updateModuleRange();

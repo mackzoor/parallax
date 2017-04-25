@@ -66,7 +66,7 @@ public class CollisionCalculator implements ICollisionCalculator {
         algorithm.processCollision(co0.wrapper, co1.wrapper, info, result);
 
         boolean r = result.getPersistentManifold().getNumContacts() > 0;
-//        System.out.println(result.getPersistentManifold().getNumContacts());
+
         result.dispose();
         info.dispose();
         algorithm.dispose();
@@ -79,35 +79,26 @@ public class CollisionCalculator implements ICollisionCalculator {
 
     @Override
     public List<CollisionPair> getCollisions(List<? extends Collidable> collidables) {
-        System.out.println("Single list coll calc");
         return new ArrayList<CollisionPair>();
     }
 
     @Override
     public List<CollisionPair> getCollisions(List<? extends Collidable> firstGroup,
                                               List<? extends Collidable> secondGroup) {
-        System.out.println("Pair list coll calc");
-
         List<CollisionPair> collisionPairs = new ArrayList<CollisionPair>();
 
         for (int i = 0; i < firstGroup.size(); i++){
             for (int j = 0; j < secondGroup.size(); j++){
-
-
                 if (hasCollided(firstGroup.get(i),secondGroup.get(j))){
-//                    System.out.println("COLLISION: " + firstGroup.get(i).toString() +" and " + secondGroup.get(j));
-                    System.out.println("COLLISION");
                     collisionPairs.add(new CollisionPair(
                             firstGroup.get(i),
                             secondGroup.get(j)
                     ));
                 }
-
-
             }
         }
 
-        return new ArrayList<CollisionPair>();
+        return collisionPairs;
     }
 
 
