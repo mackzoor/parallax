@@ -1,7 +1,6 @@
 package com.tda367.parallax.platform;
 
 import com.badlogic.gdx.ApplicationListener;
-import com.tda367.parallax.parallaxCore.menuModels.MainMenu;
 
 import static com.tda367.parallax.platform.GameStateManager.State.MAIN_MENU;
 import static com.tda367.parallax.platform.GameStateManager.State.PLAY;
