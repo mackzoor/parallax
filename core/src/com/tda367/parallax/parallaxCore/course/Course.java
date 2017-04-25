@@ -1,6 +1,10 @@
 package com.tda367.parallax.parallaxCore.course;
 
+import com.tda367.parallax.parallaxCore.Collidable;
+import com.tda367.parallax.parallaxCore.Collision.CollisionPair;
+import com.tda367.parallax.parallaxCore.Collision.ICollisionCalculator;
 import com.tda367.parallax.parallaxCore.RenderManager;
+import com.tda367.parallax.parallaxCore.SoundManager;
 import com.tda367.parallax.parallaxCore.enemies.MinionEnemy;
 import com.tda367.parallax.parallaxCore.Updatable;
 import com.tda367.parallax.parallaxCore.powerUps.PowerUp;
@@ -21,6 +25,7 @@ public class Course implements Updatable, SpaceCraftListener {
 
     private List<ICourseModule> modules;
     private List<ISpaceCraft> spaceCrafts;
+    private ICollisionCalculator collisionCalculator;
 
     //TODO, remove the power-up after used
     private List<PowerUp> activePowerups;
@@ -29,6 +34,7 @@ public class Course implements Updatable, SpaceCraftListener {
     public Course(){
         modules = new ArrayList<ICourseModule>();
         spaceCrafts = new ArrayList<ISpaceCraft>();
+        collisionCalculator = null;
 
         updateModuleRange();
         activePowerups = new ArrayList<PowerUp>();
@@ -59,8 +65,29 @@ public class Course implements Updatable, SpaceCraftListener {
             pu.update(milliSinceLastUpdate);
         }
 
+
+        if (collisionCalculator != null){
+            List<Collidable> obstacleList = new ArrayList<Collidable>();
+
+            for (ICourseModule module : modules){
+                obstacleList.addAll((module.getBoxObstacles()));
+                obstacleList.addAll(module.getUsables());
+            }
+
+            List<CollisionPair> collisionList = collisionCalculator.getCollisions(obstacleList, spaceCrafts);
+
+            if (collisionList.size() > 0){
+                SoundManager.getInstance().playSound("flashBang.mp3","sounds/effects", 0.2f);
+            }
+
+            for (CollisionPair pair : collisionList){
+                pair.getColl1().disableCollision();
+            }
+
+
+        }
+
         updateModuleRange();
-        //TODO Check collision detection
     }
 
     private void updateModuleRange() {
@@ -155,13 +182,15 @@ public class Course implements Updatable, SpaceCraftListener {
         }
     }
 
+    public void setCollisionCalculator(ICollisionCalculator collisionCalculator) {
+        this.collisionCalculator = collisionCalculator;
+    }
+
     @Override
     public void powerUPUsed(PowerUp pu) {
         if (activePowerups.indexOf(pu) == -1) {
             activePowerups.add(pu);
         }
     }
-
-    //TODO Check collisions between spacecraft and obstacles
 
 }

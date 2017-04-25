@@ -1,5 +1,7 @@
 package com.tda367.parallax.parallaxCore;
 
+import com.badlogic.gdx.audio.Music;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,14 +42,15 @@ public class SoundManager {
     public void addListener(SoundListener listener) {
         listeners.add(listener);
         playQueuedSoundAndMusic();
+        //pauseActiveMusic("sounds/music/track.mp3");
     }
 
     private void playQueuedSoundAndMusic() {
         for (int i = 0; i < soundQueue.size(); i++) {
             if (soundQueue.get(i).getVolume() == 1f) {
-                playMusic(soundQueue.get(i).getFileName());
+                playSound(soundQueue.get(i).getFileName());
             } else {
-                playMusic(soundQueue.get(i).getFileName(), soundQueue.get(i).getVolume());
+                playSound(soundQueue.get(i).getFileName(), soundQueue.get(i).getVolume());
             }
         }
         for (int i = 0; i < musicQueue.size(); i++) {
@@ -59,7 +62,7 @@ public class SoundManager {
         }
     }
 
-    public void playSound(String sound) {
+    private void playSound(String sound) {
         if (listeners.size() < 1) {
             soundQueue.add(new SoundCombiantion(sound, new Float(1f)));
         }
@@ -87,13 +90,54 @@ public class SoundManager {
         playSound(directory + "/" + sound, volume);
     }
 
-    public void playMusic(String music) {
+    private void playMusic(String music) {
         if (listeners.size() < 1) {
             musicQueue.add(new SoundCombiantion(music, new Float(1f)));
         }
         // Notify listeners to play music.
         for (SoundListener Sl : listeners) {
             Sl.playMusic(music);
+        }
+    }
+
+    //TODO might want to remove methods using musicFile as parameter, they might never get used.
+
+    public void stopActiveMusic(Music musicFile){
+        for (SoundListener Sl : listeners) {
+            Sl.stopActiveMusic(musicFile);
+        }
+    }
+
+    //Stops a playing music file. Uses directory "slash" filename for correct input.
+    public void stopActiveMusic(String fileNameAndDirectory){
+        for (SoundListener Sl : listeners) {
+            Sl.stopActiveMusic(fileNameAndDirectory);
+        }
+    }
+
+    public void pauseActiveMusic(Music musicFile){
+        for (SoundListener Sl : listeners) {
+            Sl.pauseActiveMusic(musicFile);
+        }
+    }
+
+    //Pauses a music file that is running. Uses filename "slash" the directory for correct input.
+    public void pauseActiveMusic(String fileNameAndDirectory){
+        for (SoundListener Sl : listeners) {
+            Sl.pauseActiveMusic(fileNameAndDirectory);
+        }
+    }
+
+    public void unPauseActiveMusic(Music musicFile){
+        for (SoundListener Sl : listeners) {
+            Sl.unPauseActiveMusic(musicFile);
+        }
+    }
+
+    //Un pauses a music file that has previously been paused. Uses filename "slash" the directory for correct input.
+    public void unPauseActiveMusic(String fileNameAndDirectory){
+        for (SoundListener Sl : listeners) {
+            Sl.unPauseActiveMusic(fileNameAndDirectory);
         }
     }
 
