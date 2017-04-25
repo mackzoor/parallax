@@ -18,15 +18,18 @@ public class ParallaxLibGdxPlayState implements ApplicationListener {
     private Sound sound;
     GameStateManager gameStateManager;
     SoundManager soundManager;
+    CollisionCalculator collisionCalculator;
 
     public ParallaxLibGdxPlayState(GameStateManager gameStateManager) {
         this.gameStateManager = gameStateManager;
 
+        this.collisionCalculator = new CollisionCalculator();
         Gdx.graphics.setTitle("Galactica space wars of justice, ultimate edition");
 
         // Initiate game with space craft "Agelion"
         this.player = new Player(new Agelion(10));
         this.parallaxGame = new Parallax(player);
+        this.parallaxGame.setCollisionCalculator(collisionCalculator);
         controller = new ParallaxLibGDXController(parallaxGame);
 
         // Create camera sized to screens width/height with Field of View of 75 degrees
