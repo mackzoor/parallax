@@ -75,4 +75,24 @@ public class HarmfulEntity implements Collidable, Renderable, Updatable {
         float posYAdded = velocity * ((float)timeMilli/1000);
         pos.add((Tuple3f)new Vector3f(0, posYAdded, 0));
     }
+
+    @Override
+    public boolean isActive() {
+        return false;
+    }
+
+    @Override
+    public void disableCollision() {
+
+    }
+
+    @Override
+    public void enableCollision() {
+
+    }
+
+    @Override
+    public Model getCollisionModel() {
+        return null;
+    }
 }

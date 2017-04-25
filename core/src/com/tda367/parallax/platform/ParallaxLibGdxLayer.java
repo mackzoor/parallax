@@ -14,15 +14,18 @@ public class ParallaxLibGdxLayer implements ApplicationListener {
 	private Renderer renderer;
 	private ParallaxLibGDXController controller;
 	private Sound sound;
+	private CollisionCalculator collisionCalculator;
 
 	@Override
 	public void create () {
 
 		Gdx.graphics.setTitle("Galactica space wars of justice, ultimate edition");
+		this.collisionCalculator = new CollisionCalculator();
 
 		// Initiate game with space craft "Agelion"
 		this.player = new Player(new Agelion(10));
 		this.parallaxGame = new Parallax(player);
+		this.parallaxGame.setCollisionCalculator(collisionCalculator);
 		controller = new ParallaxLibGDXController(parallaxGame);
 
 		// Create camera sized to screens width/height with Field of View of 75 degrees
@@ -37,7 +40,7 @@ public class ParallaxLibGdxLayer implements ApplicationListener {
 		camera.position.set(
 				parallaxGame.getCamera().getPos().getX(),
 				parallaxGame.getCamera().getPos().getZ(),
-				parallaxGame.getCamera().getPos().getY()
+				parallaxGame.getCamera().getPos().getY()*-1
 		);
 
 		camera.near = 0.1f;
