@@ -21,6 +21,8 @@ public class Course implements Updatable, SpaceCraftListener {
 
     private List<ICourseModule> modules;
     private List<ISpaceCraft> spaceCrafts;
+
+    //TODO, remove the power-up after used
     private List<PowerUp> activePowerups;
 
 
@@ -155,7 +157,9 @@ public class Course implements Updatable, SpaceCraftListener {
 
     @Override
     public void powerUPUsed(PowerUp pu) {
-        activePowerups.add(pu);
+        if (activePowerups.indexOf(pu) == -1) {
+            activePowerups.add(pu);
+        }
     }
 
     //TODO Check collisions between spacecraft and obstacles
