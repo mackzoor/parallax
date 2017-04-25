@@ -66,7 +66,7 @@ public class Course implements Updatable {
             List<CollisionPair> collisionList = collisionCalculator.getCollisions(obstacleList, spaceCrafts);
 
             if (collisionList.size() > 0){
-                SoundManager.getInstance().playSound("flashBang.mp3","sounds/effects");
+                SoundManager.getInstance().playSound("flashBang.mp3","sounds/effects", 0.2f);
             }
 
             for (CollisionPair pair : collisionList){
