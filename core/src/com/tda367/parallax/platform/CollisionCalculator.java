@@ -1,7 +1,5 @@
 package com.tda367.parallax.platform;
 
-import com.badlogic.gdx.math.Matrix4;
-import com.badlogic.gdx.math.Quaternion;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.bullet.*;
 import com.badlogic.gdx.physics.bullet.collision.*;
@@ -22,7 +20,7 @@ public class CollisionCalculator implements ICollisionCalculator {
     private btCollisionObject obj1;
     private btCollisionObject obj2;
 
-    CollisionCalculator() {
+    public CollisionCalculator() {
         Bullet.init();
 
         btCollisionShape sphereShape = new btSphereShape(1f);

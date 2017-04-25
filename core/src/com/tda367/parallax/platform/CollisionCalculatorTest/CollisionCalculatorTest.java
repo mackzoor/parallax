@@ -1,0 +1,70 @@
+package com.tda367.parallax.platform.CollisionCalculatorTest;
+
+import com.badlogic.gdx.physics.bullet.Bullet;
+import com.tda367.parallax.parallaxCore.course.Obstacle;
+import com.tda367.parallax.platform.CollisionCalculator;
+import org.junit.*;
+
+import static org.junit.Assert.*;
+
+/**
+ * Created by amk19 on 25/04/2017.
+ */
+public class CollisionCalculatorTest {
+
+    static CollisionCalculator collisionCalculator;
+
+    @BeforeClass
+    public static void setUp(){
+
+        Bullet.init();
+        collisionCalculator = new CollisionCalculator();
+
+    }
+
+    @Test
+    public void hasCollided() throws Exception {
+
+        Obstacle obstacle0 = new Obstacle();
+        Obstacle obstacle1 = new Obstacle();
+        Obstacle obstacle2 = new Obstacle();
+
+        obstacle0.getPos().setY(0f);
+
+        obstacle1.getPos().setY(1.1f);
+
+        obstacle2.getPos().setY(2.2f);
+
+        //Obs0 y = 0
+        //Obs1 y = 1
+        //Obs2 y = 2
+
+        assertTrue(collisionCalculator.hasCollided(obstacle0, obstacle1));
+        assertTrue(collisionCalculator.hasCollided(obstacle1, obstacle0));
+
+        assertFalse(collisionCalculator.hasCollided(obstacle0, obstacle2));
+        assertFalse(collisionCalculator.hasCollided(obstacle2, obstacle0));
+
+
+        assertTrue(collisionCalculator.hasCollided(obstacle1, obstacle2));
+        assertTrue(collisionCalculator.hasCollided(obstacle2, obstacle1));
+    }
+
+    @Test
+    public void getCollisions() throws Exception {
+
+
+
+    }
+
+    @Test
+    public void getCollisions1() throws Exception {
+
+    }
+
+
+    @AfterClass
+    public static void end(){
+
+    }
+}
