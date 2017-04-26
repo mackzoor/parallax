@@ -1,17 +1,17 @@
-package com.tda367.parallax.platform;
+package com.tda367.parallax.platform.gameModeStates;
 
 import com.tda367.parallax.platform.inputControllers.InputControlsListener;
-import com.tda367.parallax.platform.inputControllers.gamePadController.LibGdxGamePadHandler;
+import com.tda367.parallax.platform.inputControllers.LibGdxGamePadHandler;
 
 /**
  * Created by Markus on 2017-04-25.
  */
 
-public class CardboardMode implements GameModeState {
+class CardboardMode implements GameModeState {
 
-    LibGdxGamePadHandler gamePadHandler;
+    private LibGdxGamePadHandler gamePadHandler;
 
-    public CardboardMode() {
+    CardboardMode() {
         this.gamePadHandler = new LibGdxGamePadHandler();
     }
 

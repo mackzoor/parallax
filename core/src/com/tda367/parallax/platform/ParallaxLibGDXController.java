@@ -11,7 +11,7 @@ class ParallaxLibGDXController implements InputControlsListener {
     private Parallax parallax;
     private float panSpeed;
 
-    ParallaxLibGDXController(Parallax parallax, GameModeState gameModeState) {
+    ParallaxLibGDXController(Parallax parallax, com.tda367.parallax.platform.gameModeStates.GameModeState gameModeState) {
         gameModeState.addInputDevices(this);
         this.parallax = parallax;
         this.panSpeed = 5f;

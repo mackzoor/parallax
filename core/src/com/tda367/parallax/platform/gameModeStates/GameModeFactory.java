@@ -1,4 +1,4 @@
-package com.tda367.parallax.platform;
+package com.tda367.parallax.platform.gameModeStates;
 
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationListener;

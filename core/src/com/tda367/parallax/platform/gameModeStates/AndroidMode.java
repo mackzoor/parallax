@@ -1,19 +1,19 @@
-package com.tda367.parallax.platform;
+package com.tda367.parallax.platform.gameModeStates;
 
 import com.tda367.parallax.platform.inputControllers.InputControlsListener;
 import com.tda367.parallax.platform.inputControllers.LibGdxTouchHandler;
-import com.tda367.parallax.platform.inputControllers.gamePadController.LibGdxGamePadHandler;
+import com.tda367.parallax.platform.inputControllers.LibGdxGamePadHandler;
 
 /**
  * Created by Markus on 2017-04-25.
  */
 
-public class AndroidMode implements GameModeState {
+class AndroidMode implements GameModeState {
 
-    LibGdxTouchHandler touchHandler;
-    LibGdxGamePadHandler gamePadHandler;
+    private LibGdxTouchHandler touchHandler;
+    private LibGdxGamePadHandler gamePadHandler;
 
-    public AndroidMode() {
+    AndroidMode() {
         this.touchHandler = new LibGdxTouchHandler();
         this.gamePadHandler = new LibGdxGamePadHandler();
     }

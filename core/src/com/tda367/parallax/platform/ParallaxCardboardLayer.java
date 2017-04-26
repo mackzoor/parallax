@@ -10,6 +10,7 @@ import com.google.vrtoolkit.cardboard.Viewport;
 import com.tda367.parallax.parallaxCore.Parallax;
 import com.tda367.parallax.parallaxCore.Player;
 import com.tda367.parallax.parallaxCore.spaceCraft.Agelion;
+import com.tda367.parallax.platform.gameModeStates.GameModeState;
 
 /**
  * Created by Markus on 2017-04-11.
@@ -34,7 +35,7 @@ public class ParallaxCardboardLayer implements CardBoardApplicationListener {
         // Initiate game with space craft "Agelion"
         this.player = new Player(new Agelion(10));
         this.parallaxGame = new Parallax(player);
-        this.gameModeState = GameModeFactory.getGameModeState(this);
+        this.gameModeState = com.tda367.parallax.platform.gameModeStates.GameModeFactory.getGameModeState(this);
         controller = new ParallaxLibGDXController(parallaxGame, gameModeState);
 
         // Setup of special camera for VR

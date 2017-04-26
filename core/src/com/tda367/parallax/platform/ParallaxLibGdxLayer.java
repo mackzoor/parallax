@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.*;
 import com.tda367.parallax.parallaxCore.spaceCraft.Agelion;
 import com.tda367.parallax.parallaxCore.Player;
 import com.tda367.parallax.parallaxCore.Parallax;
+import com.tda367.parallax.platform.gameModeStates.GameModeState;
 
 public class ParallaxLibGdxLayer implements ApplicationListener {
 
@@ -19,7 +20,7 @@ public class ParallaxLibGdxLayer implements ApplicationListener {
 	@Override
 	public void create () {
 
-		gameModeState = GameModeFactory.getGameModeState(this);
+		gameModeState = com.tda367.parallax.platform.gameModeStates.GameModeFactory.getGameModeState(this);
 
 		Gdx.graphics.setTitle("Galactica space wars of justice, ultimate edition");
 

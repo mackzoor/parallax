@@ -1,9 +1,9 @@
-package com.tda367.parallax.platform.inputControllers.gamePadController.gamePads.GamePadsTest;
+package com.tda367.parallax.platform.inputControllers.gamePads.GamePadsTest;
 
-import com.tda367.parallax.platform.inputControllers.gamePadController.gamePads.AndroidGamePad;
-import com.tda367.parallax.platform.inputControllers.gamePadController.gamePads.GamePad;
-import com.tda367.parallax.platform.inputControllers.gamePadController.gamePads.Playstation3GamePad;
-import com.tda367.parallax.platform.inputControllers.gamePadController.gamePads.Xbox360GamePad;
+import com.tda367.parallax.platform.inputControllers.gamePads.AndroidGamePad;
+import com.tda367.parallax.platform.inputControllers.gamePads.GamePad;
+import com.tda367.parallax.platform.inputControllers.gamePads.Playstation3GamePad;
+import com.tda367.parallax.platform.inputControllers.gamePads.Xbox360GamePad;
 
 import org.junit.Test;
 
@@ -14,7 +14,8 @@ import static org.junit.Assert.*;
 /**
  * Created by Markus on 2017-04-24.
  */
-public class AndroidGamePadTest {
+public class Playstation3GamePadTest {
+
     @Test
     public void XAxisValueConverter() throws Exception {
         float minX = -1f;
@@ -22,7 +23,7 @@ public class AndroidGamePadTest {
 
         Random rand = new Random();
 
-        GamePad gamePad = new AndroidGamePad();
+        GamePad gamePad = new Playstation3GamePad();
 
         float value = rand.nextFloat() * (maxX - minX) + minX;
 
@@ -38,7 +39,7 @@ public class AndroidGamePadTest {
 
         Random rand = new Random();
 
-        GamePad gamePad = new AndroidGamePad();
+        GamePad gamePad = new Playstation3GamePad();
 
         float value = rand.nextFloat() * (maxY - minY) + minY;
 
@@ -49,10 +50,10 @@ public class AndroidGamePadTest {
 
     @Test
     public void equals() throws Exception {
-        GamePad gamePad1 = new AndroidGamePad();
-        GamePad gamePad2 = new AndroidGamePad();
-        GamePad gamePad3 = new Playstation3GamePad();
-        GamePad gamePad4 = new Xbox360GamePad();
+        GamePad gamePad1 = new Playstation3GamePad();
+        GamePad gamePad2 = new Playstation3GamePad();
+        GamePad gamePad3 = new Xbox360GamePad();
+        GamePad gamePad4 = new AndroidGamePad();
         assertTrue(gamePad1.equals(gamePad2));
         assertFalse(gamePad1.equals(gamePad3));
         assertFalse(gamePad1.equals(gamePad4));

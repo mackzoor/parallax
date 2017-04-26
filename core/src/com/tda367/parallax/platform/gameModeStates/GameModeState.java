@@ -1,4 +1,4 @@
-package com.tda367.parallax.platform;
+package com.tda367.parallax.platform.gameModeStates;
 
 import com.tda367.parallax.platform.inputControllers.InputControlsListener;
 

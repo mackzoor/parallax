@@ -1,47 +1,67 @@
-package com.tda367.parallax.platform.inputControllers.gamePadController.gamePads;
+package com.tda367.parallax.platform.inputControllers.gamePads;
 
 /**
- * Created by Markus on 2017-04-24.
+ * Created by Markus on 2017-04-12.
  */
-
-public class AndroidGamePad implements GamePad {
-
-    //Button codes can be found at:
-    //https://developer.android.com/training/game-controllers/controller-input.html
+public class Playstation3GamePad implements com.tda367.parallax.platform.inputControllers.gamePads.GamePad {
+    /*
+    All of the key codes are listed below:
+    BUTTON_X = 14
+    BUTTON_CIRCLE = 13
+    BUTTON_TRIANGLE = 12
+    BUTTON_SQUARE = 15
+    BUTTON_L1 = 10
+    BUTTON_L2 = 8
+    BUTTON_L3 = 1
+    BUTTON_R1 = 11
+    BUTTON_R2 = 9
+    BUTTON_R3 = 2
+    BUTTON_PAD_DOWN = 6
+    BUTTON_PAD_RIGHT = 5
+    BUTTON_PAD_UP = 4
+    BUTTON_PAD_LEFT = 7
+    BUTTON_SELECT = 0
+    BUTTON_START = 3
+    BUTTON_PS = 16
+    AXIS_LEFT_X = 0
+    AXIS_LEFT_Y = 1
+    AXIS_RIGHT_X = 2
+    AXIS_RIGHT_Y = 3
+     */
 
     @Override
     public int GetActionButtonCode() {
-        return 96;
+        return 14;
     }
 
     @Override
     public int GetSecondaryActionButtonCode() {
-        return 97;
+        return 13;
     }
 
     @Override
     public int GetPauseButtonCode() {
-        return 108;
+        return 3;
     }
 
     @Override
     public int GetUpButtonCode() {
-        return 19;
+        return 4;
     }
 
     @Override
     public int GetRightButtonCode() {
-        return 22;
+        return 5;
     }
 
     @Override
     public int GetDownButtonCode() {
-        return 20;
+        return 6;
     }
 
     @Override
     public int GetLeftButtonCode() {
-        return 21;
+        return 7;
     }
 
     @Override

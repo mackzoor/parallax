@@ -1,13 +1,12 @@
-package com.tda367.parallax.platform.inputControllers.gamePadController;
+package com.tda367.parallax.platform.inputControllers;
 
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.ControllerListener;
 import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.controllers.PovDirection;
 import com.badlogic.gdx.math.Vector3;
-import com.tda367.parallax.platform.inputControllers.InputControlsListener;
-import com.tda367.parallax.platform.inputControllers.gamePadController.gamePads.GamePad;
-import com.tda367.parallax.platform.inputControllers.gamePadController.gamePads.GamePadFactory;
+import com.tda367.parallax.platform.inputControllers.gamePads.GamePad;
+import com.tda367.parallax.platform.inputControllers.gamePads.GamePadFactory;
 
 /**
  * Created by Markus on 2017-04-22.

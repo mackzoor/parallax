@@ -1,9 +1,10 @@
-package com.tda367.parallax.platform.inputControllers.gamePadController.gamePads.GamePadsTest;
+package com.tda367.parallax.platform.inputControllers.gamePads.GamePadsTest;
 
-import com.tda367.parallax.platform.inputControllers.gamePadController.gamePads.AndroidGamePad;
-import com.tda367.parallax.platform.inputControllers.gamePadController.gamePads.GamePad;
-import com.tda367.parallax.platform.inputControllers.gamePadController.gamePads.GamePadFactory;
-import com.tda367.parallax.platform.inputControllers.gamePadController.gamePads.Playstation3GamePad;
+import com.tda367.parallax.platform.inputControllers.gamePads.AndroidGamePad;
+import com.tda367.parallax.platform.inputControllers.gamePads.GamePad;
+import com.tda367.parallax.platform.inputControllers.gamePads.GamePadFactory;
+import com.tda367.parallax.platform.inputControllers.gamePads.Playstation3GamePad;
+import com.tda367.parallax.platform.inputControllers.gamePads.Xbox360GamePad;
 
 import org.junit.Test;
 
@@ -19,7 +20,7 @@ public class GamePadFactoryTest {
         GamePad factoryXbox360GamePad = GamePadFactory.getGamePad("XBOX360");
         GamePad factoryAndroidGamePad = GamePadFactory.getGamePad("RL_android_bluetooth_game_pad");
         GamePad playstation3GamePad = new Playstation3GamePad();
-        GamePad xbox360GamePad = new com.tda367.parallax.platform.inputControllers.gamePadController.gamePads.Xbox360GamePad();
+        GamePad xbox360GamePad = new Xbox360GamePad();
         GamePad androidGamePad = new AndroidGamePad();
         assertTrue(playstation3GamePad.equals(factoryPlaystation3GamePad));
         assertTrue(xbox360GamePad.equals(factoryXbox360GamePad));
