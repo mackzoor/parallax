@@ -1,12 +1,11 @@
 package com.tda367.parallax.platform;
 
 import com.badlogic.gdx.*;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.*;
-import com.badlogic.gdx.graphics.g3d.Renderable;
 import com.tda367.parallax.parallaxCore.*;
 import com.tda367.parallax.parallaxCore.spaceCraft.Agelion;
-import javafx.stage.*;
+import com.tda367.parallax.platform.gameModeStates.GameModeFactory;
+import com.tda367.parallax.platform.gameModeStates.GameModeState;
 
 public class ParallaxLibGdxPlayState implements ApplicationListener {
 
@@ -15,6 +14,7 @@ public class ParallaxLibGdxPlayState implements ApplicationListener {
     private Parallax parallaxGame;
     private Renderer renderer;
     private ParallaxLibGDXController controller;
+    private GameModeState gameModeState;
     private Sound sound;
     GameStateManager gameStateManager;
     SoundManager soundManager;
@@ -22,7 +22,7 @@ public class ParallaxLibGdxPlayState implements ApplicationListener {
 
     public ParallaxLibGdxPlayState(GameStateManager gameStateManager) {
         this.gameStateManager = gameStateManager;
-
+        this.gameModeState = GameModeFactory.getGameModeState(this);
         this.collisionCalculator = new CollisionCalculator();
         Gdx.graphics.setTitle("Galactica space wars of justice, ultimate edition");
 
@@ -30,7 +30,7 @@ public class ParallaxLibGdxPlayState implements ApplicationListener {
         this.player = new Player(new Agelion(10));
         this.parallaxGame = new Parallax(player);
         this.parallaxGame.setCollisionCalculator(collisionCalculator);
-        controller = new ParallaxLibGDXController(parallaxGame);
+        controller = new ParallaxLibGDXController(parallaxGame, gameModeState);
 
         // Create camera sized to screens width/height with Field of View of 75 degrees
         camera = new PerspectiveCamera(
@@ -73,6 +73,7 @@ public class ParallaxLibGdxPlayState implements ApplicationListener {
 
         //Updates Parallax game logic
         parallaxGame.update((int) (Gdx.graphics.getDeltaTime() * 1000));
+        gameModeState.update();
 
         camera.update();
 
@@ -83,12 +84,6 @@ public class ParallaxLibGdxPlayState implements ApplicationListener {
         );
 
         renderer.renderAll();
-
-        if (Gdx.app.getType() == Application.ApplicationType.Android) {
-            controller.drawTouchpad();
-
-        }
-
     }
 
 

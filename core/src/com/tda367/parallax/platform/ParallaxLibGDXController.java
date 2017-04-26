@@ -17,10 +17,6 @@ class ParallaxLibGDXController implements InputControlsListener {
         this.panSpeed = 5f;
     }
 
-//    void drawTouchpad(){
-//        touchHandler.drawTouchpad();
-//    }
-
     @Override
     public void actionButtonPressed() {
         parallax.getPlayer().getSpaceCraft().action();

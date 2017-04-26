@@ -1,18 +1,11 @@
 package com.tda367.parallax.platform;
 
 import com.badlogic.gdx.ApplicationListener;
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.tda367.parallax.parallaxCore.Camera;
 import com.tda367.parallax.parallaxCore.Parallax;
 import com.tda367.parallax.parallaxCore.Player;
-import com.tda367.parallax.parallaxCore.spaceCraft.Agelion;
-import javafx.scene.PerspectiveCamera;
-
-
 
 public class ParallaxLibGdx implements ApplicationListener {
-
 
     private com.badlogic.gdx.graphics.PerspectiveCamera camera;
     private Player player;
