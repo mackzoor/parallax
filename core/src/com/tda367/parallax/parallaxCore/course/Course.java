@@ -99,14 +99,14 @@ public class Course implements Updatable, SpaceCraftListener {
             float firstModule = modules.get(modules.size() - 1).getPos().getY() + modules.get(modules.size() - 1).getLength();
             float lastModule = modules.get(0).getPos().getY();
 
-            int modulesToAdd = (int) ((firstCraft - firstModule + 256) / 64);
-            int modulesToRemove = (int) ((lastCraft - lastModule) / 16);
+            int modulesToAdd = (int) ((firstCraft + 256 - firstModule) / 64);
+            int modulesToRemove = (int) ((lastCraft - lastModule) / 128);
 
 
             addModules(modulesToAdd);
             removeModules(modulesToRemove);
         } else {
-            ICourseModule defModule = new DefaultCourseModule(new Vector3f());
+            ICourseModule defModule = new DefaultCourseModule(new Vector3f(0,-32,0));
             modules.add(defModule);
             updateModuleRange();
         }
@@ -115,10 +115,10 @@ public class Course implements Updatable, SpaceCraftListener {
 
     private void addModules(int i) {
         for (int x = 0; x < i; x++) {
-            float endOfLastModulePos = modules.get(modules.size() - 1).getPos().getY() + modules.get(modules.size() - 1).getLength() / 2;
+            float endOfLastModulePos = modules.get(modules.size() - 1).getPos().getY();
             ICourseModule tempModule = new DefaultCourseModule(new Vector3f(
                     0,
-                    endOfLastModulePos,
+                    endOfLastModulePos+modules.get(modules.size()-1).getLength(),
                     0
             ));
             modules.add(tempModule);
