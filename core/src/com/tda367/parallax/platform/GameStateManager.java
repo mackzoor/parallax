@@ -24,6 +24,7 @@ public class GameStateManager implements ApplicationListener {
 
     private GameStateManager(){
         this.setState(PLAY);
+        this.getGameState(state);
     }
 
     @Override
@@ -39,7 +40,6 @@ public class GameStateManager implements ApplicationListener {
     @Override
     public void render() {
         instance.getGameState(state).render();
-        previousState = state;
         instance.getGameState(previousState).dispose();
 
     }
@@ -74,13 +74,19 @@ public class GameStateManager implements ApplicationListener {
     }
 
     public ApplicationListener getGameState(State state){
+
         if (state == PLAY && previousState != PLAY) {
-            return parallaxLibGdxPlayState = new ParallaxLibGdxPlayState(this);
+            previousState = state;
+            this.parallaxLibGdxPlayState = new ParallaxLibGdxPlayState(this);
+            return parallaxLibGdxPlayState;
         } else if (state == PLAY && previousState == PLAY) {
+            previousState = state;
             return parallaxLibGdxPlayState;
         } else if (state == MAIN_MENU && previousState != MAIN_MENU) {
+            previousState = state;
             return mainMenuState = new MainMenuState(this);
         } else {
+            previousState = state;
             return mainMenuState;
         }
     }
