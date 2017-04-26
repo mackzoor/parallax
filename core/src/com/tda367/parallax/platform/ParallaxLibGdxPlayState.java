@@ -44,7 +44,7 @@ public class ParallaxLibGdxPlayState implements ApplicationListener {
         camera.position.set(
                 parallaxGame.getCamera().getPos().getX(),
                 parallaxGame.getCamera().getPos().getZ(),
-                parallaxGame.getCamera().getPos().getY()*-1
+                parallaxGame.getCamera().getPos().getY() * -1
         );
 
         camera.near = 0.1f;

@@ -24,7 +24,7 @@ public class DefaultCourseModule implements ICourseModule, IModel {
 
     DefaultCourseModule(Vector3f pos,int obstacleAmmount){
         this.pos = pos;
-        this.pos.setY(pos.getY()+getLength()/2);
+        this.pos.setY(pos.getY());
         this.rot = new Quat4f();
 
         model = new Model("course.g3db", "3dModels/defaultCourse");
@@ -47,9 +47,9 @@ public class DefaultCourseModule implements ICourseModule, IModel {
 
             Random rand = new Random();
             Vector3f obstaclePos = new Vector3f(
-                    rand.nextFloat()*20-10,
+                    rand.nextFloat()*12-6,
                     rand.nextFloat()*length-length/2+(this.pos.getY()),
-                    rand.nextFloat()*20-10
+                    rand.nextFloat()*12-6
             );
 
             boxObstacleNew.getPos().set(obstaclePos);
