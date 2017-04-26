@@ -73,7 +73,6 @@ public class ParallaxLibGdxPlayState implements ApplicationListener {
 
         //Updates Parallax game logic
         parallaxGame.update((int) (Gdx.graphics.getDeltaTime() * 1000));
-        gameModeState.update();
 
         camera.update();
 
@@ -84,6 +83,8 @@ public class ParallaxLibGdxPlayState implements ApplicationListener {
         );
 
         renderer.renderAll();
+
+        gameModeState.update();
     }
 
 
