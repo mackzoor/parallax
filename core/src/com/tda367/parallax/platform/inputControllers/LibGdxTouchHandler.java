@@ -11,7 +11,7 @@ import com.tda367.parallax.platform.inputControllers.onScreenTouchpad.OnScreenTo
 
 public class LibGdxTouchHandler implements IScreenControllerListener {
 
-    private LibGdxGameController gameController;
+    private InputControlsListener listener;
     private OnScreenTouchpad onScreenTouchpad;
 
     public LibGdxTouchHandler() {
@@ -21,8 +21,8 @@ public class LibGdxTouchHandler implements IScreenControllerListener {
         }
     }
 
-    public void setListener(LibGdxGameController gameController) {
-        this.gameController = gameController;
+    public void setListener(InputControlsListener listener) {
+        this.listener = listener;
     }
 
     public void drawTouchpad(){
@@ -31,7 +31,7 @@ public class LibGdxTouchHandler implements IScreenControllerListener {
 
     @Override
     public void onUpdate(float x, float y) {
-        gameController.xAxisJoystickMovement(x);
-        gameController.yAxisJoystickMovement(y);
+        listener.xAxisJoystickMovement(x);
+        listener.yAxisJoystickMovement(y);
     }
 }

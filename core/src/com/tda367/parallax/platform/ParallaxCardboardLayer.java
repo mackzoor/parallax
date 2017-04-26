@@ -33,7 +33,7 @@ public class ParallaxCardboardLayer implements CardBoardApplicationListener {
         // Initiate game with space craft "Agelion"
         this.player = new Player(new Agelion(10));
         this.parallaxGame = new Parallax(player);
-        controller = new ParallaxLibGDXController(parallaxGame);
+        controller = new ParallaxLibGDXController(parallaxGame, new CardboardMode());
 
         // Setup of special camera for VR
         camera = new CardboardCamera();

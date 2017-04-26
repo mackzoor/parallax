@@ -10,33 +10,33 @@ import com.badlogic.gdx.InputProcessor;
 
 public class LibGdxKeyboardHandler implements InputProcessor {
 
-    private LibGdxGameController gameController;
+    private InputControlsListener listener;
 
     public LibGdxKeyboardHandler() {
         Gdx.input.setInputProcessor(this);
     }
 
-    public void setListener(LibGdxGameController gameController) {
-        this.gameController = gameController;
+    public void setListener(InputControlsListener listener) {
+        this.listener = listener;
     }
 
     @Override
     public boolean keyDown(int keycode) {
 
         if (keycode == Input.Keys.SPACE || keycode == Input.Keys.Z) {
-            gameController.actionButtonPressed();
+            listener.actionButtonPressed();
         } else if (keycode == Input.Keys.X) {
-            gameController.secondaryActionButtonPressed();
+            listener.secondaryActionButtonPressed();
         } else if (keycode == Input.Keys.A || keycode == Input.Keys.LEFT) {
-            gameController.leftButtonPressed();
+            listener.leftButtonPressed();
         } else if (keycode == Input.Keys.W || keycode == Input.Keys.UP) {
-            gameController.upButtonPressed();
+            listener.upButtonPressed();
         } else if (keycode == Input.Keys.D || keycode == Input.Keys.RIGHT) {
-            gameController.rightButtonPressed();
+            listener.rightButtonPressed();
         } else if (keycode == Input.Keys.S || keycode == Input.Keys.DOWN) {
-            gameController.downButtonPressed();
+            listener.downButtonPressed();
         } else if (keycode == Input.Keys.ESCAPE) {
-            gameController.pauseButtonPressed();
+            listener.pauseButtonPressed();
         }
 
         return false;
@@ -46,13 +46,13 @@ public class LibGdxKeyboardHandler implements InputProcessor {
     public boolean keyUp(int keycode) {
 
         if (keycode == Input.Keys.A || keycode == Input.Keys.LEFT) {
-            gameController.leftButtonUp();
+            listener.leftButtonUp();
         } else if (keycode == Input.Keys.W || keycode == Input.Keys.UP) {
-            gameController.upButtonUp();
+            listener.upButtonUp();
         } else if (keycode == Input.Keys.D || keycode == Input.Keys.RIGHT) {
-            gameController.rightButtonUp();
+            listener.rightButtonUp();
         } else if (keycode == Input.Keys.S || keycode == Input.Keys.DOWN) {
-            gameController.downButtonUp();
+            listener.downButtonUp();
         }
 
         return false;

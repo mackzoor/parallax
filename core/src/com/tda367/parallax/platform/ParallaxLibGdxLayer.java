@@ -23,7 +23,7 @@ public class ParallaxLibGdxLayer implements ApplicationListener {
 		// Initiate game with space craft "Agelion"
 		this.player = new Player(new Agelion(10));
 		this.parallaxGame = new Parallax(player);
-		controller = new ParallaxLibGDXController(parallaxGame);
+		controller = new ParallaxLibGDXController(parallaxGame, new DesktopMode());
 
 		// Create camera sized to screens width/height with Field of View of 75 degrees
 		camera = new PerspectiveCamera(
@@ -71,7 +71,7 @@ public class ParallaxLibGdxLayer implements ApplicationListener {
         renderer.renderAll();
 
         if (Gdx.app.getType() == Application.ApplicationType.Android) {
-            controller.drawTouchpad();
+            //controller.drawTouchpad();
 
         }
     }

@@ -1,36 +1,25 @@
 package com.tda367.parallax.platform;
 
 import com.tda367.parallax.parallaxCore.Parallax;
-import com.tda367.parallax.platform.inputControllers.LibGdxGameController;
-import com.tda367.parallax.platform.inputControllers.LibGdxKeyboardHandler;
-import com.tda367.parallax.platform.inputControllers.LibGdxTouchHandler;
-import com.tda367.parallax.platform.inputControllers.gamePadController.LibGdxGamePadHandler;
+import com.tda367.parallax.platform.inputControllers.InputControlsListener;
 
 /**
  * Created by Markus on 2017-04-11.
  */
-public class ParallaxLibGDXController implements LibGdxGameController{
+class ParallaxLibGDXController implements InputControlsListener {
 
     private Parallax parallax;
-    private LibGdxGamePadHandler gamePadHandler;
-    private LibGdxKeyboardHandler keyboardHandler;
-    private LibGdxTouchHandler touchHandler;
     private float panSpeed;
 
-    ParallaxLibGDXController(Parallax parallax) {
-        gamePadHandler = new LibGdxGamePadHandler();
-        gamePadHandler.setListener(this);
-        keyboardHandler = new LibGdxKeyboardHandler();
-        keyboardHandler.setListener(this);
-        touchHandler = new LibGdxTouchHandler();
-        touchHandler.setListener(this);
+    ParallaxLibGDXController(Parallax parallax, GameModeState gameModeState) {
+        gameModeState.addInputDevices(this);
         this.parallax = parallax;
         this.panSpeed = 5f;
     }
 
-    void drawTouchpad(){
-        touchHandler.drawTouchpad();
-    }
+//    void drawTouchpad(){
+//        touchHandler.drawTouchpad();
+//    }
 
     @Override
     public void actionButtonPressed() {
