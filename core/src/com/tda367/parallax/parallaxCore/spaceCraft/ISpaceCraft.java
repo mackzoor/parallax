@@ -20,6 +20,8 @@ public interface ISpaceCraft extends Collidable, Updatable, Renderable {
     void addPanTarget(Vector2f target);
 
     void setPanVelocity(Vector2f velocity);
+    void setPanVelocity(float x, float y);
+    Vector2f getPanVelocity();
     void addPanVelocity(Vector2f velocity);
 
     public void action();

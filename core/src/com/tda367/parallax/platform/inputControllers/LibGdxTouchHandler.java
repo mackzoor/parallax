@@ -1,25 +1,30 @@
-package com.tda367.parallax.platform;
+package com.tda367.parallax.platform.inputControllers;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.scenes.scene2d.*;
+import com.badlogic.gdx.scenes.scene2d.Event;
+import com.badlogic.gdx.scenes.scene2d.EventListener;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 
+/**
+ * Created by Markus on 2017-04-25.
+ */
 
-public class OnScreenTouchpad implements EventListener {
+public class LibGdxTouchHandler implements EventListener {
 
     private Touchpad.TouchpadStyle touchpadStyle;
     private Touchpad touchpad;
     private Drawable touchBackground;
     private Drawable touchKnob;
-    private IScreenControllerListener listener;
     private Skin touchpadSkin;
     private Stage stage;
 
-    OnScreenTouchpad() {
+    private InputControlsListener listener;
 
+    public LibGdxTouchHandler() {
         touchpadSkin = new Skin();
         touchpadSkin.add("background", new Texture(
                 "touchpad/background.png"));
@@ -44,25 +49,23 @@ public class OnScreenTouchpad implements EventListener {
         stage.addActor(touchpad);
         Gdx.input.setInputProcessor(stage);
     }
-    public void setListener(IScreenControllerListener listener) {
+
+    public void setListener(InputControlsListener listener) {
         this.listener = listener;
     }
 
-    public void drawTouchpad(){
+    public void drawTouchPad(){
         stage.draw();
     }
 
-
-    public void alertListener(){
-        if(listener != null){
-            listener.onUpdate(touchpad.getKnobPercentX(),touchpad.getKnobPercentY());
-        }
-    }
-
-
     @Override
     public boolean handle(Event event) {
-        alertListener();
+        if(listener != null){
+            if(event.getListenerActor() == touchpad) {
+                listener.xAxisJoystickMovement(touchpad.getKnobPercentX());
+                listener.yAxisJoystickMovement(touchpad.getKnobPercentY());
+            }
+        }
         return false;
     }
 }

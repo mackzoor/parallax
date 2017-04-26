@@ -219,6 +219,17 @@ public class Agelion implements ISpaceCraft {
         velTarget = new Vector2f(velocity);
         pointMode = false;
     }
+
+    @Override
+    public void setPanVelocity(float x, float y) {
+        setPanVelocity(new Vector2f(x, y));
+    }
+
+    @Override
+    public Vector2f getPanVelocity() {
+        return velTarget;
+    }
+
     @Override
     public synchronized void setPanTarget(Vector2f target) {
         panTarget = new Vector2f(target);
