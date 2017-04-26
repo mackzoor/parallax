@@ -32,7 +32,7 @@ public class Renderer {
         camera.far = 50f;
 
         environment = new Environment();
-        environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.4f, 0.4f, 0.4f, 1.f));
+        environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 1f, 1f, 1f, 1.f));
         environment.set(new ColorAttribute(ColorAttribute.Fog, 0f, 0f, 0f, -1f));
 //        environment.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -1f, -0.8f, -0.2f));
 
