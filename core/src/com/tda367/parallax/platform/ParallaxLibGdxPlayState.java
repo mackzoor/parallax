@@ -74,14 +74,13 @@ public class ParallaxLibGdxPlayState implements ApplicationListener {
         //Updates Parallax game logic
         parallaxGame.update((int) (Gdx.graphics.getDeltaTime() * 1000));
 
-        //Updates camera
-        camera.position.set(
-                parallaxGame.getPlayer().getSpaceCraft().getPos().getX() * 1 / 2,
-                parallaxGame.getPlayer().getSpaceCraft().getPos().getZ() * 1 / 2 + 1,
-                (parallaxGame.getPlayer().getSpaceCraft().getPos().getY() * -1) + 4
-        );
-
         camera.update();
+
+        camera.position.set(
+                parallaxGame.getCamera().getPos().getX(),
+                parallaxGame.getCamera().getPos().getZ(),
+                parallaxGame.getCamera().getPos().getY()*-1
+        );
 
         renderer.renderAll();
 
