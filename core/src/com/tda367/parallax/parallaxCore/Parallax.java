@@ -1,5 +1,6 @@
 package com.tda367.parallax.parallaxCore;
 
+import com.tda367.parallax.parallaxCore.Collision.ICollisionCalculator;
 import com.tda367.parallax.parallaxCore.course.Course;
 import com.tda367.parallax.parallaxCore.spaceCraft.ISpaceCraft;
 import com.tda367.parallax.platform.Sound;
@@ -29,20 +30,21 @@ public class Parallax implements Updatable{
         camera.trackTo(player.getSpaceCraft());
         this.player = player;
 
-        Random rand = new Random();
-        int randomSong = rand.nextInt(100 - 1 + 1) + 1;
-
-        if(randomSong == 50){
-            soundManager.playMusic("secretTrack.mp3","sounds/music");
-        } else {
-            soundManager.playMusic("track.mp3","sounds/music", new Float(0.7f));
-        }
+        startBackgroundMusic();
     }
 
     @Override
     public void update(int milliSinceLastUpdate) {
+
+        if (milliSinceLastUpdate > 100){
+            milliSinceLastUpdate = 100;
+        }
+
         course.update(milliSinceLastUpdate);
         camera.update(milliSinceLastUpdate);
+    }
+    public void setCollisionCalculator(ICollisionCalculator collisionCalculator){
+        course.setCollisionCalculator(collisionCalculator);
     }
 
     public Player getPlayer() {
@@ -59,5 +61,16 @@ public class Parallax implements Updatable{
 
     public Camera getCamera(){
         return camera;
+    }
+
+    private void startBackgroundMusic(){
+        Random rand = new Random();
+        int randomSong = rand.nextInt(100 - 1 + 1) + 1;
+
+        if(randomSong == 50){
+            soundManager.playMusic("secretTrack.mp3","sounds/music");
+        } else {
+            soundManager.playMusic("track.mp3","sounds/music", new Float(0.7f));
+        }
     }
 }

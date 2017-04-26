@@ -1,6 +1,5 @@
 package com.tda367.parallax.parallaxCore;
 
-import javax.vecmath.Matrix3f;
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
 
@@ -37,7 +36,14 @@ public class Camera implements Updatable, Transformable{
     public void trackTo(Collidable collidable){
         trackingTarget = collidable;
     }
-    public void trackMode(){
+    public void updatePosition(){
+
+        //Updates camera
+        this.pos.set(
+                trackingTarget.getPos().getX()/ 2,
+                (trackingTarget.getPos().getY()) - 4,
+                trackingTarget.getPos().getZ()/ 2 + 1
+        );
 
     }
 
@@ -53,7 +59,8 @@ public class Camera implements Updatable, Transformable{
 
     @Override
     public void update(int milliSinceLastUpdate) {
-        float targetYPos = trackingTarget.getPos().getY();
-        pos = new Vector3f(pos.getX(),targetYPos-4, pos.getZ());
+        updatePosition();
+//        float targetYPos = trackingTarget.getPos().getY();
+//        pos = new Vector3f(pos.getX(),targetYPos-4, pos.getZ());
     }
 }

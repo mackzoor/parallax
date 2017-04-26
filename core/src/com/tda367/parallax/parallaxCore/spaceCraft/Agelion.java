@@ -3,9 +3,12 @@ package com.tda367.parallax.parallaxCore.spaceCraft;
 import com.tda367.parallax.parallaxCore.Model;
 import com.tda367.parallax.parallaxCore.RenderManager;
 import com.tda367.parallax.parallaxCore.powerUps.Cannon;
+import com.tda367.parallax.parallaxCore.powerUps.Missile;
 import com.tda367.parallax.parallaxCore.powerUps.PowerUp;
 
 import javax.vecmath.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Represents the spacecraft in our game.
@@ -20,7 +23,9 @@ import javax.vecmath.*;
 public class Agelion implements ISpaceCraft {
 
     private int health; //Current health
-    private PowerUp pu; //Current stored power up
+
+    //TODO, "private powerUp pu;" when done testing
+    private PowerUp pu = new Missile(this); //Current stored power up
 
     private float velocity;
     private float targetSpeed;
@@ -37,10 +42,13 @@ public class Agelion implements ISpaceCraft {
     private Quat4f rot;
 
     private Model agelionModel;
+    private Model collisionModel;
+    private List<SpaceCraftListener> spaceCraftListeners;
 
-
+    private boolean collisionEnabled;
     public Agelion(int health, float velocity, float panSpeed, Vector3f pos, Quat4f rot) {
         this.agelionModel = new Model("agelion.g3db", "3dModels/agelion");
+        this.collisionModel = new Model(agelionModel.getModelName(), agelionModel.getModelDirectory());
         this.health = health;
         this.velocity = velocity;
         this.panSpeed = panSpeed;
@@ -53,6 +61,8 @@ public class Agelion implements ISpaceCraft {
         this.pointMode = false;
         this.speedTargetMode = true;
 
+        collisionEnabled = true;
+        spaceCraftListeners = new ArrayList<SpaceCraftListener>();
     }
     public Agelion(Vector3f position, Quat4f rotation, float startVelocity){
         this(5,startVelocity,2,position,rotation);
@@ -127,6 +137,11 @@ public class Agelion implements ISpaceCraft {
         pos.add((Tuple3f) new Vector3f(addedXPos,0,addedZPos));
     }
 
+    @Override
+    public void addSpaceCraftListener(SpaceCraftListener listener){
+        spaceCraftListeners.add(listener);
+    }
+
     private float distanceCalc(float speed, float timeMilli){
         return speed * ((float)timeMilli/1000);
     }
@@ -134,9 +149,10 @@ public class Agelion implements ISpaceCraft {
     public void action(){
         if (pu != null){
             pu.usePU(pos, rot);
+            for (SpaceCraftListener spaceCraftListener : spaceCraftListeners) {
+                spaceCraftListener.powerUPUsed(pu);
+            }
         } else {
-            pu = new Cannon();
-            pu.usePU(pos, rot);
             System.out.println("NO POWERUP");
         }
     }
@@ -190,6 +206,9 @@ public class Agelion implements ISpaceCraft {
     public float getTargetSpeed() {
         return targetSpeed;
     }
+    public float getVelocity() {
+        return velocity;
+    }
 
     @Override
     public void setPU(PowerUp pu) {
@@ -237,6 +256,26 @@ public class Agelion implements ISpaceCraft {
     @Override
     public void removeFromRenderManager() {
         RenderManager.getInstance().removeRenderTask(this);
+    }
+
+    @Override
+    public boolean isActive() {
+        return collisionEnabled;
+    }
+
+    @Override
+    public void disableCollision() {
+        collisionEnabled = false;
+    }
+
+    @Override
+    public void enableCollision() {
+        collisionEnabled = true;
+    }
+
+    @Override
+    public Model getCollisionModel() {
+        return collisionModel;
     }
 }
 

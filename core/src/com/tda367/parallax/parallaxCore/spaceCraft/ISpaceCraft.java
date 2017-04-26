@@ -3,6 +3,7 @@ package com.tda367.parallax.parallaxCore.spaceCraft;
 import com.tda367.parallax.parallaxCore.Collidable;
 import com.tda367.parallax.parallaxCore.IModel;
 import com.tda367.parallax.parallaxCore.Renderable;
+import com.tda367.parallax.parallaxCore.course.Course;
 import com.tda367.parallax.parallaxCore.powerUps.PowerUp;
 import com.tda367.parallax.parallaxCore.Updatable;
 
@@ -25,6 +26,8 @@ public interface ISpaceCraft extends Collidable, Updatable, Renderable {
 
     public void action();
     public void setPU(PowerUp pu);
+
+    void addSpaceCraftListener(SpaceCraftListener listener);
 }
 
 

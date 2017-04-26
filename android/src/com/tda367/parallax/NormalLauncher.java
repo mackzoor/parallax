@@ -4,7 +4,8 @@ import android.os.Bundle;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
-import com.tda367.parallax.platform.ParallaxLibGdxLayer;
+import com.tda367.parallax.platform.ParallaxLibGdx;
+import com.tda367.parallax.platform.ParallaxLibGdxPlayState;
 
 /**
  * Created by Markus on 2017-04-11.
@@ -15,6 +16,7 @@ public class NormalLauncher extends AndroidApplication {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
-        initialize(new ParallaxLibGdxLayer(), config);
+        config.numSamples = 2;
+        initialize(new ParallaxLibGdx(), config);
     }
 }

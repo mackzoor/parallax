@@ -10,7 +10,7 @@ public abstract class HunterAI implements Updatable {
     private Collidable target;
     private boolean isActive;
     
-    void setTarget(Collidable collidableObject){
+    public void setTarget(Collidable collidableObject){
         target = collidableObject;
         isActive = false;
     }
