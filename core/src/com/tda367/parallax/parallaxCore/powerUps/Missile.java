@@ -19,13 +19,10 @@ public class Missile extends PowerUp {
 
     private List<HarmfulEntity> missiles = new ArrayList<HarmfulEntity>();
 
-
     public Missile(Agelion spaceCraft){
         soundManager = SoundManager.getInstance();
         this.spaceCraft = spaceCraft;
     }
-
-
 
     //Creates a missile and calls upon a sound.
     @Override
