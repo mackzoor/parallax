@@ -22,8 +22,10 @@ public class Parallax implements Updatable{
     public Parallax(Player player){
         renderManager = RenderManager.getInstance();
         soundManager = SoundManager.getInstance();
+
         course = new com.tda367.parallax.parallaxCore.course.Course();
         course.addSpaceCraft(player.getSpaceCraft());
+
         camera = new Camera();
         camera.trackTo(player.getSpaceCraft());
         this.player = player;

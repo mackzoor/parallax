@@ -42,8 +42,8 @@ public class SoundManager {
     public void addListener(SoundListener listener) {
         listeners.add(listener);
         playQueuedSoundAndMusic();
-        //pauseActiveMusic("sounds/music/track.mp3");
     }
+
 
     private void playQueuedSoundAndMusic() {
         for (int i = 0; i < soundQueue.size(); i++) {

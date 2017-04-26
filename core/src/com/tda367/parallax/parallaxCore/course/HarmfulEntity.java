@@ -18,7 +18,7 @@ public class HarmfulEntity implements Collidable, Renderable, Updatable {
     private int time;
 
     public HarmfulEntity(Float shipVelocity, String modelName, String modelDirectory){
-        velocity = shipVelocity + 10;
+        setStartingVelocity(shipVelocity, modelName);
         pos = new Vector3f();
         rot = new Quat4f();
         model = new Model(modelName, modelDirectory);
@@ -31,6 +31,17 @@ public class HarmfulEntity implements Collidable, Renderable, Updatable {
         rot = new Quat4f();
         model = new Model(modelName, modelDirectory);
         time = 1000;
+    }
+
+    private void setStartingVelocity(Float shipVelocity, String modelName) {
+        //Check to see what type of HarmfulEntity it is and then put the right velocity.
+
+        //Slower for missile, faster for laser. (And everything else at this moment)
+        if (modelName.equals("agelion.g3db")) {
+            velocity = shipVelocity + 7;
+        } else {
+            velocity = shipVelocity + 20;
+        }
     }
 
     @Override
