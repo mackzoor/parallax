@@ -44,7 +44,7 @@ public class Xbox360GamePadTest {
 
         float convertedValue = gamePad.XAxisValueConverter(value);
 
-        assertTrue(convertedValue == value);
+        assertTrue(convertedValue == -value);
     }
 
     @Test

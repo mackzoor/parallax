@@ -80,7 +80,7 @@ public class Xbox360GamePad implements com.tda367.parallax.platform.inputControl
 
     @Override
     public float YAxisValueConverter(float value) {
-        return value;
+        return -value;
     }
 
     @Override
