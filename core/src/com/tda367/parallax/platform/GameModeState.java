@@ -8,4 +8,5 @@ import com.tda367.parallax.platform.inputControllers.InputControlsListener;
 
 public interface GameModeState {
     public void addInputDevices(InputControlsListener controller);
+    public void update();
 }

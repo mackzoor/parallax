@@ -19,7 +19,13 @@ public class AndroidMode implements GameModeState {
     }
 
     @Override
-    public void addInputDevices(InputControlsListener controller) {
+    public void addInputDevices(InputControlsListener listener) {
+        touchHandler.setListener(listener);
+        gamePadHandler.setListener(listener);
+    }
 
+    @Override
+    public void update() {
+        touchHandler.drawTouchPad();
     }
 }

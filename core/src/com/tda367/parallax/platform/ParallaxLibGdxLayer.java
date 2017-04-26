@@ -14,16 +14,19 @@ public class ParallaxLibGdxLayer implements ApplicationListener {
 	private Renderer renderer;
 	private ParallaxLibGDXController controller;
 	private Sound sound;
+	private GameModeState gameModeState;
 
 	@Override
 	public void create () {
+
+		gameModeState = new AndroidMode();
 
 		Gdx.graphics.setTitle("Galactica space wars of justice, ultimate edition");
 
 		// Initiate game with space craft "Agelion"
 		this.player = new Player(new Agelion(10));
 		this.parallaxGame = new Parallax(player);
-		controller = new ParallaxLibGDXController(parallaxGame, new DesktopMode());
+		controller = new ParallaxLibGDXController(parallaxGame, gameModeState);
 
 		// Create camera sized to screens width/height with Field of View of 75 degrees
 		camera = new PerspectiveCamera(
@@ -70,10 +73,7 @@ public class ParallaxLibGdxLayer implements ApplicationListener {
 
         renderer.renderAll();
 
-        if (Gdx.app.getType() == Application.ApplicationType.Android) {
-            //controller.drawTouchpad();
-
-        }
+        gameModeState.update();
     }
 
 

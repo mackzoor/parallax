@@ -16,7 +16,12 @@ public class CardboardMode implements GameModeState {
     }
 
     @Override
-    public void addInputDevices(InputControlsListener controller) {
-        gamePadHandler.setListener(controller);
+    public void addInputDevices(InputControlsListener listener) {
+        gamePadHandler.setListener(listener);
+    }
+
+    @Override
+    public void update() {
+
     }
 }

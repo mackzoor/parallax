@@ -43,22 +43,21 @@ public class OnScreenTouchpad implements EventListener {
         stage = new Stage();
         stage.addActor(touchpad);
         Gdx.input.setInputProcessor(stage);
+
     }
     public void setListener(IScreenControllerListener listener) {
         this.listener = listener;
     }
 
-    public void drawTouchpad(){
+    public void drawTouchPad(){
         stage.draw();
     }
-
 
     public void alertListener(){
         if(listener != null){
             listener.onUpdate(touchpad.getKnobPercentX(),touchpad.getKnobPercentY());
         }
     }
-
 
     @Override
     public boolean handle(Event event) {
