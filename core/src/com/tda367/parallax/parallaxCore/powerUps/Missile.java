@@ -25,6 +25,9 @@ public class Missile extends PowerUp {
         this.spaceCraft = spaceCraft;
     }
 
+
+
+    //Creates a missile and calls upon a sound.
     @Override
     public void usePU(Vector3f pos, Quat4f rot){
 
@@ -34,7 +37,7 @@ public class Missile extends PowerUp {
 
         RenderManager.getInstance().addRenderTask(missiles.get(missiles.size()-1));
 
-        soundManager.playSound("cannonLow.mp3","sounds/effects", new Float(0.8f));
+        soundManager.playSound("MissileDemo.mp3","sounds/effects", new Float(0.6f));
     }
 
     public void update(int milliSinceLastUpdate){
