@@ -59,20 +59,12 @@ public class LibGdxTouchHandler implements EventListener {
         stage.draw();
     }
 
-    public void alertListener(){
-        if(listener != null){
-            onUpdate(touchpad.getKnobPercentX(),touchpad.getKnobPercentY());
-        }
-    }
-
-    public void onUpdate(float x, float y) {
-        listener.xAxisJoystickMovement(x);
-        listener.yAxisJoystickMovement(y);
-    }
-
     @Override
     public boolean handle(Event event) {
-        alertListener();
+        if(listener != null){
+            listener.xAxisJoystickMovement(touchpad.getKnobPercentX());
+            listener.yAxisJoystickMovement(touchpad.getKnobPercentY());
+        }
         return false;
     }
 }
