@@ -44,6 +44,7 @@ public class SoundManager {
         playQueuedSoundAndMusic();
     }
 
+
     private void playQueuedSoundAndMusic() {
         for (int i = 0; i < soundQueue.size(); i++) {
             if (soundQueue.get(i).getVolume() == 1f) {
