@@ -28,7 +28,7 @@ public class Missile extends PowerUp {
     @Override
     public void usePU(Vector3f pos, Quat4f rot){
 
-        missiles.add(new HarmfulEntity(spaceCraft.getVelocity(), "agelion.g3db", "3dModels/agelion"));
+        missiles.add(new HarmfulEntity(spaceCraft.getVelocity(), "missile.g3db", "3dModels/missile"));
 
         missiles.get(missiles.size()-1).getPos().set(new Vector3f(spaceCraft.getPos().getX(),spaceCraft.getPos().getY(),spaceCraft.getPos().getZ()));
 
