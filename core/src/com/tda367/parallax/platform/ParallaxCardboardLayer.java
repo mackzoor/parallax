@@ -21,6 +21,7 @@ public class ParallaxCardboardLayer implements CardBoardApplicationListener {
     private Parallax parallaxGame;
     private Renderer renderer;
     private ParallaxLibGDXController controller;
+    private GameModeState gameModeState;
     private static final float Z_NEAR = 0.1f;
     private static final float Z_FAR = 300.0f;
     private Sound sound;
@@ -33,7 +34,8 @@ public class ParallaxCardboardLayer implements CardBoardApplicationListener {
         // Initiate game with space craft "Agelion"
         this.player = new Player(new Agelion(10));
         this.parallaxGame = new Parallax(player);
-        controller = new ParallaxLibGDXController(parallaxGame, new CardboardMode());
+        this.gameModeState = GameModeFactory.getGameModeState(this);
+        controller = new ParallaxLibGDXController(parallaxGame, gameModeState);
 
         // Setup of special camera for VR
         camera = new CardboardCamera();
@@ -85,7 +87,7 @@ public class ParallaxCardboardLayer implements CardBoardApplicationListener {
                 parallaxGame.getCamera().getPos().getY()*-1
         );
         camera.update();
-
+        gameModeState.update();
     }
 
     @Override

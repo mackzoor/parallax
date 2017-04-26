@@ -19,7 +19,7 @@ public class ParallaxLibGdxLayer implements ApplicationListener {
 	@Override
 	public void create () {
 
-		gameModeState = new AndroidMode();
+		gameModeState = GameModeFactory.getGameModeState(this);
 
 		Gdx.graphics.setTitle("Galactica space wars of justice, ultimate edition");
 

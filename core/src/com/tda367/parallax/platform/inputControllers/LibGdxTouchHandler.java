@@ -22,7 +22,6 @@ public class LibGdxTouchHandler implements EventListener {
     private Skin touchpadSkin;
     private Stage stage;
 
-
     private InputControlsListener listener;
 
     public LibGdxTouchHandler() {
@@ -62,8 +61,10 @@ public class LibGdxTouchHandler implements EventListener {
     @Override
     public boolean handle(Event event) {
         if(listener != null){
-            listener.xAxisJoystickMovement(touchpad.getKnobPercentX());
-            listener.yAxisJoystickMovement(touchpad.getKnobPercentY());
+            if(event.getListenerActor() == touchpad) {
+                listener.xAxisJoystickMovement(touchpad.getKnobPercentX());
+                listener.yAxisJoystickMovement(touchpad.getKnobPercentY());
+            }
         }
         return false;
     }
