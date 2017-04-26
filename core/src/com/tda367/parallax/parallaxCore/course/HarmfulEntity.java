@@ -22,7 +22,7 @@ public class HarmfulEntity implements Collidable, Renderable, Updatable {
         pos = new Vector3f();
         rot = new Quat4f();
         model = new Model(modelName, modelDirectory);
-        time = 2000;
+        time = 1000;
     }
 
     public HarmfulEntity(Float shipVelocity, String modelName, String modelDirectory, Vector3f pos){
