@@ -3,6 +3,8 @@ package com.tda367.parallax.platform;
 import com.tda367.parallax.parallaxCore.Parallax;
 import com.tda367.parallax.platform.inputControllers.InputControlsListener;
 
+import javax.vecmath.Vector2f;
+
 /**
  * Created by Markus on 2017-04-11.
  */
@@ -34,58 +36,42 @@ class ParallaxLibGDXController implements InputControlsListener {
 
     @Override
     public void upButtonPressed() {
-        float xValue = parallax.getPlayer().getSpaceCraft().getPanVelocity().getX();
-        float yValue = panSpeed;
-        parallax.getPlayer().getSpaceCraft().setPanVelocity(xValue, yValue);
+        parallax.getPlayer().getSpaceCraft().addPanVelocity(new Vector2f(0,panSpeed));
     }
 
     @Override
     public void upButtonUp() {
-        float xValue = parallax.getPlayer().getSpaceCraft().getPanVelocity().getX();
-        float yValue = 0;
-        parallax.getPlayer().getSpaceCraft().setPanVelocity(xValue, yValue);
+        parallax.getPlayer().getSpaceCraft().addPanVelocity(new Vector2f(0,-panSpeed));
     }
 
     @Override
     public void rightButtonPressed() {
-        float xValue = panSpeed;
-        float yValue = parallax.getPlayer().getSpaceCraft().getPanVelocity().getY();
-        parallax.getPlayer().getSpaceCraft().setPanVelocity(xValue, yValue);
+        parallax.getPlayer().getSpaceCraft().addPanVelocity(new Vector2f(panSpeed,0));
     }
 
     @Override
     public void rightButtonUp() {
-        float xValue = 0;
-        float yValue = parallax.getPlayer().getSpaceCraft().getPanVelocity().getY();
-        parallax.getPlayer().getSpaceCraft().setPanVelocity(xValue, yValue);
+        parallax.getPlayer().getSpaceCraft().addPanVelocity(new Vector2f(-panSpeed,0));
     }
 
     @Override
     public void downButtonPressed() {
-        float xValue = parallax.getPlayer().getSpaceCraft().getPanVelocity().getX();
-        float yValue = -panSpeed;
-        parallax.getPlayer().getSpaceCraft().setPanVelocity(xValue, yValue);
+        parallax.getPlayer().getSpaceCraft().addPanVelocity(new Vector2f(0,-panSpeed));
     }
 
     @Override
     public void downButtonUp() {
-        float xValue = parallax.getPlayer().getSpaceCraft().getPanVelocity().getX();
-        float yValue = 0;
-        parallax.getPlayer().getSpaceCraft().setPanVelocity(xValue, yValue);
+        parallax.getPlayer().getSpaceCraft().addPanVelocity(new Vector2f(0,panSpeed));
     }
 
     @Override
     public void leftButtonPressed() {
-        float xValue = -panSpeed;
-        float yValue = parallax.getPlayer().getSpaceCraft().getPanVelocity().getY();
-        parallax.getPlayer().getSpaceCraft().setPanVelocity(xValue, yValue);
+        parallax.getPlayer().getSpaceCraft().addPanVelocity(new Vector2f(-panSpeed,0));
     }
 
     @Override
     public void leftButtonUp() {
-        float xValue = 0;
-        float yValue = parallax.getPlayer().getSpaceCraft().getPanVelocity().getY();
-        parallax.getPlayer().getSpaceCraft().setPanVelocity(xValue, yValue);
+        parallax.getPlayer().getSpaceCraft().addPanVelocity(new Vector2f(panSpeed,0));
     }
 
     @Override
