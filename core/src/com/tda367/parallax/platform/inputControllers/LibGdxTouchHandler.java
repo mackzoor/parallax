@@ -27,8 +27,8 @@ public class LibGdxTouchHandler implements EventListener {
     public LibGdxTouchHandler() {
         touchpadSkin = new Skin();
         touchpadSkin.add("background", new Texture(
-                "touchpad/bgKnobWork.png"));
-        touchpadSkin.add("knob", new Texture("touchpad/tronKnobWork.png"));
+                "touchpad/background.png"));
+        touchpadSkin.add("knob", new Texture("touchpad/knob.png"));
 
         touchpadStyle = new Touchpad.TouchpadStyle();
 
