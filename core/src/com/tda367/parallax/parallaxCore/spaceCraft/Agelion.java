@@ -55,7 +55,7 @@ public class Agelion implements ISpaceCraft {
         panAbsoluteTarget = new Vector2f();
         currentPanVelocity = new Vector2f();
 
-        this.relativePanMode = false;
+        this.relativePanMode = true;
         this.forwardRelativeVelocityMode = true;
 
         collisionEnabled = true;
@@ -175,6 +175,8 @@ public class Agelion implements ISpaceCraft {
     }
     private void accelerateCraft(int timeMilli){
         if (forwardRelativeVelocityMode){
+            forwardVelocity = forwardVelocity + forwardAcceleration * ((float)timeMilli/1000);
+        } else {
             if (forwardVelocity < forwardTargetSpeed){
                 float speedIncrease = forwardVelocity + forwardAcceleration * ((float)timeMilli/1000);
 
@@ -185,8 +187,6 @@ public class Agelion implements ISpaceCraft {
                 }
 
             }
-        } else {
-            forwardVelocity = forwardVelocity + forwardAcceleration * ((float)timeMilli/1000);
         }
     }
     private void advanceCraft(int timeMilli){
