@@ -5,7 +5,7 @@ import static com.tda367.parallax.platform.GameStateManager.State.MAIN_MENU;
 import static com.tda367.parallax.platform.GameStateManager.State.PLAY;
 
 
-/*
+/**
     Manager Class that manages which State should be rendered.
  */
 public class GameStateManager implements ApplicationListener {

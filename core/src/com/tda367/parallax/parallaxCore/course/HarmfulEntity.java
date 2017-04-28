@@ -84,7 +84,7 @@ public class HarmfulEntity implements Collidable, Renderable, Updatable {
 
     private void advanceHarmfulEntity(int timeMilli){
         float posYAdded = velocity * ((float)timeMilli/1000);
-        pos.add((Tuple3f)new Vector3f(0, posYAdded, 0));
+        pos.add(new Vector3f(0, posYAdded, 0));
     }
 
     @Override

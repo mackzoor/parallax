@@ -11,6 +11,5 @@ import java.util.List;
 public interface ICourseModule extends Renderable{
     List<? extends Collidable> getBoxObstacles();
     List<? extends Collidable> getUsables();
-
     float getLength();
 }

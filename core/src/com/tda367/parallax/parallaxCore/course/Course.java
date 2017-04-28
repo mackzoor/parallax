@@ -19,14 +19,12 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * A class that binds together different course modules and creates several enemy ai's..
+ * A course that handles the visual representation and updating of {@link ISpaceCraft} and {@link Collidable}.
  */
 public class Course implements Updatable, SpaceCraftListener {
-
     private List<ICourseModule> modules;
     private List<ISpaceCraft> spaceCrafts;
     private ICollisionCalculator collisionCalculator;
-
     //TODO, remove the power-up after used
     private List<PowerUp> activePowerups;
 
@@ -38,25 +36,52 @@ public class Course implements Updatable, SpaceCraftListener {
 
         updateModuleRange();
         activePowerups = new ArrayList<PowerUp>();
-
-        //Debug purpose only//
-        // createTestEnemy();
     }
 
+    public List<ISpaceCraft> getSpaceCrafts() {
+        return spaceCrafts;
+    }
     public void addSpaceCraft(ISpaceCraft spaceCraft) {
         spaceCrafts.add(spaceCraft);
         spaceCraft.addSpaceCraftListener(this);
         RenderManager.getInstance().addRenderTask(spaceCraft);
     }
-
     public void removeSpaceCraft(ISpaceCraft spaceCraft) {
         spaceCrafts.remove(spaceCraft);
+        spaceCraft.removeSpaceCraftListener(this);
         RenderManager.getInstance().removeRenderTask(spaceCraft);
+    }
+    private float getFirstSpaceCraftYPosition() {
+        if (spaceCrafts.size() > 0) {
+            float yPosition = spaceCrafts.get(0).getPos().getY();
+            for (int i = 1; i < spaceCrafts.size(); i++) {
+                float tempYPosition = spaceCrafts.get(i).getPos().getY();
+                if (tempYPosition > yPosition) {
+                    yPosition = tempYPosition;
+                }
+            }
+            return yPosition;
+        } else {
+            return 0;
+        }
+    }
+    private float getLastSpaceCraftYPosition() {
+        if (spaceCrafts.size() > 0) {
+            float yPosition = spaceCrafts.get(0).getPos().getY();
+            for (int i = 1; i < spaceCrafts.size(); i++) {
+                float tempYPosition = spaceCrafts.get(i).getPos().getY();
+                if (tempYPosition < yPosition) {
+                    yPosition = tempYPosition;
+                }
+            }
+            return yPosition;
+        } else {
+            return 0;
+        }
     }
 
     @Override
     public void update(int milliSinceLastUpdate) {
-
         for (ISpaceCraft spaceCraft : spaceCrafts) {
             spaceCraft.update(milliSinceLastUpdate);
         }
@@ -81,7 +106,7 @@ public class Course implements Updatable, SpaceCraftListener {
             }
 
             for (CollisionPair pair : collisionList){
-                pair.getColl1().disableCollision();
+                pair.getFirstCollidable().disableCollision();
             }
 
 
@@ -89,12 +114,11 @@ public class Course implements Updatable, SpaceCraftListener {
 
         updateModuleRange();
     }
-
     private void updateModuleRange() {
 
         if (modules.size() > 0) {
-            float firstCraft = getFirstSpaceCraftDistance();
-            float lastCraft = getLastSpaceCraftDistance();
+            float firstCraft = getFirstSpaceCraftYPosition();
+            float lastCraft = getLastSpaceCraftYPosition();
 
             float firstModule = modules.get(modules.size() - 1).getPos().getY() + modules.get(modules.size() - 1).getLength();
             float lastModule = modules.get(0).getPos().getY();
@@ -112,7 +136,6 @@ public class Course implements Updatable, SpaceCraftListener {
         }
 
     }
-
     private void addModules(int i) {
         for (int x = 0; x < i; x++) {
             float endOfLastModulePos = modules.get(modules.size() - 1).getPos().getY();
@@ -125,7 +148,6 @@ public class Course implements Updatable, SpaceCraftListener {
             tempModule.addToRenderManager();
         }
     }
-
     private void removeModules(int i) {
         for (int x = 0; x < i; x++) {
             ICourseModule module = modules.get(0);
@@ -134,13 +156,8 @@ public class Course implements Updatable, SpaceCraftListener {
         }
     }
 
-    public List<ISpaceCraft> getSpaceCrafts() {
-        return spaceCrafts;
-    }
-
+    //Debug only
     private void createTestEnemy() {
-        Random rand = new Random();
-
         MinionEnemy minionEnemy = new MinionEnemy(new Agelion(
                 new Vector3f(1.5f, 2, 1),
                 new Quat4f(),
@@ -150,36 +167,6 @@ public class Course implements Updatable, SpaceCraftListener {
         spaceCrafts.add(minionEnemy.getSpaceCraft());
         RenderManager.getInstance().addRenderTask(minionEnemy.getSpaceCraft());
         minionEnemy.update(1000);
-    }
-
-    private float getFirstSpaceCraftDistance() {
-        if (spaceCrafts.size() > 0) {
-            float dist = spaceCrafts.get(0).getPos().getY();
-            for (int i = 1; i < spaceCrafts.size(); i++) {
-                float tempDist = spaceCrafts.get(i).getPos().getY();
-                if (tempDist > dist) {
-                    dist = tempDist;
-                }
-            }
-            return dist;
-        } else {
-            return 0;
-        }
-    }
-
-    private float getLastSpaceCraftDistance() {
-        if (spaceCrafts.size() > 0) {
-            float dist = spaceCrafts.get(0).getPos().getY();
-            for (int i = 1; i < spaceCrafts.size(); i++) {
-                float tempDist = spaceCrafts.get(i).getPos().getY();
-                if (tempDist < dist) {
-                    dist = tempDist;
-                }
-            }
-            return dist;
-        } else {
-            return 0;
-        }
     }
 
     public void setCollisionCalculator(ICollisionCalculator collisionCalculator) {

@@ -1,7 +1,7 @@
 package com.tda367.parallax.parallaxCore;
 
 /**
- * Handels 3d models.
+ * Handles 3d models.
  */
 public class Model {
 

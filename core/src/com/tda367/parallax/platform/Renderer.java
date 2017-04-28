@@ -15,7 +15,7 @@ import com.tda367.parallax.parallaxCore.Renderable;
 import java.util.List;
 
 /**
- * Created by Anthony on 11/04/2017.
+ * Class that renders {@link Renderable} objects.
  */
 public class Renderer {
     private ModelBatch modelBatch;

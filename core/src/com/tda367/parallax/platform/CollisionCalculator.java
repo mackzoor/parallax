@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by amk19 on 12/04/2017.
+ * Class that calculates collisions of {@link Collidable}with the use of bullet physics.
  */
 public class CollisionCalculator implements ICollisionCalculator {
 
@@ -34,9 +34,7 @@ public class CollisionCalculator implements ICollisionCalculator {
 
         collisionConfig = new btDefaultCollisionConfiguration();
         dispatcher = new btCollisionDispatcher(collisionConfig);
-
     }
-
 
     @Override
     public boolean hasCollided(Collidable first, Collidable second) {
@@ -103,17 +101,13 @@ public class CollisionCalculator implements ICollisionCalculator {
         return collisionPairs;
     }
 
-
     private btCollisionObject CollidableConverter(Collidable coll) {
-
         btCollisionObject collisionObject = new btCollisionObject();
-
 
         return null;
     }
 
     private btCollisionShape getCollisionShape(Collidable coll) {
-
 
         return null;
     }

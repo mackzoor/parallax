@@ -9,13 +9,12 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * Created by Anthony on 10/04/2017.
+ * A course module that will represent the visual part of a course.
  */
 public class DefaultCourseModule implements ICourseModule, IModel {
     private Vector3f pos;
     private Quat4f rot;
     private float length;
-
 
     private List<BoxObstacle> boxObstacles;
     private List<Collidable> usables;
@@ -34,9 +33,8 @@ public class DefaultCourseModule implements ICourseModule, IModel {
 
         addObstacles(obstacleAmmount);
 
-        //TODO add usables in course
+        //TODO add usables in courseModule
     }
-
     public DefaultCourseModule(Vector3f pos){
         this(pos,4);
     }
@@ -58,36 +56,25 @@ public class DefaultCourseModule implements ICourseModule, IModel {
         }
     }
 
+    //ICourseModule
     @Override
     public float getLength(){
         return length;
     }
-
-    @Override
-    public Model getModel(){
-        return model;
-    }
-
     @Override
     public List<? extends Collidable> getBoxObstacles() {
         return boxObstacles;
     }
-
     @Override
     public List<Collidable> getUsables() {
         return usables;
     }
 
+    //Renderable
     @Override
-    public Vector3f getPos() {
-        return pos;
+    public Model getModel(){
+        return model;
     }
-
-    @Override
-    public Quat4f getRot() {
-        return rot;
-    }
-
     @Override
     public void addToRenderManager() {
         RenderManager.getInstance().addRenderTask(this);
@@ -97,7 +84,6 @@ public class DefaultCourseModule implements ICourseModule, IModel {
         }
 
     }
-
     @Override
     public void removeFromRenderManager() {
         RenderManager.getInstance().removeRenderTask(this);
@@ -107,4 +93,15 @@ public class DefaultCourseModule implements ICourseModule, IModel {
         }
 
     }
+
+    //Transformable
+    @Override
+    public Vector3f getPos() {
+        return pos;
+    }
+    @Override
+    public Quat4f getRot() {
+        return rot;
+    }
+
 }

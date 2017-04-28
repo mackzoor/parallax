@@ -3,13 +3,12 @@ package com.tda367.parallax.parallaxCore;
 import com.tda367.parallax.parallaxCore.Collision.ICollisionCalculator;
 import com.tda367.parallax.parallaxCore.course.Course;
 import com.tda367.parallax.parallaxCore.spaceCraft.ISpaceCraft;
-import com.tda367.parallax.platform.Sound;
 
 import java.util.List;
 import java.util.Random;
 
 /**
- * Created by Anthony on 05/04/2017.
+ * The startup class for the game "Parallax".
  */
 public class Parallax implements Updatable{
 
@@ -23,7 +22,7 @@ public class Parallax implements Updatable{
         renderManager = RenderManager.getInstance();
         soundManager = SoundManager.getInstance();
 
-        course = new com.tda367.parallax.parallaxCore.course.Course();
+        course = new Course();
         course.addSpaceCraft(player.getSpaceCraft());
 
         camera = new Camera();

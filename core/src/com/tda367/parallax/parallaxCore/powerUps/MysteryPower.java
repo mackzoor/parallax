@@ -12,6 +12,6 @@ public class MysteryPower extends PowerUp {
 
     @Override
     public void usePU(Vector3f pos, Quat4f rot) {
-
+        //TODO Implement MysteryPower
     }
 }

@@ -1,14 +1,13 @@
 package com.tda367.parallax.parallaxCore.course;
 
 import com.tda367.parallax.parallaxCore.*;
-
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
 
 /**
- * Created by amk19 on 11/04/2017.
+ * A cube that is renderable and collidable.
  */
-public class BoxObstacle implements Collidable, Renderable, Updatable {
+public class BoxObstacle implements Collidable, Renderable {
     private Vector3f pos;
     private Quat4f rot;
 
@@ -16,6 +15,7 @@ public class BoxObstacle implements Collidable, Renderable, Updatable {
     private Model collisionModel;
 
     private boolean collisionEnabled;
+
 
     public BoxObstacle(){
         model = new Model("boxObstacle.g3db", "3dModels/boxObstacle");
@@ -25,22 +25,14 @@ public class BoxObstacle implements Collidable, Renderable, Updatable {
         collisionEnabled = true;
     }
 
-
     @Override
     public Model getModel() {
         return model;
     }
-
-    @Override
-    public void update(int milliSinceLastUpdate) {
-
-    }
-
     @Override
     public Vector3f getPos() {
         return pos;
     }
-
     @Override
     public Quat4f getRot() {
         return rot;
@@ -50,25 +42,23 @@ public class BoxObstacle implements Collidable, Renderable, Updatable {
     public void addToRenderManager() {
         RenderManager.getInstance().addRenderTask(this);
     }
-
     @Override
     public void removeFromRenderManager() {
         RenderManager.getInstance().removeRenderTask(this);
     }
 
+    @Override
     public void enableCollision(){
         collisionEnabled = true;
     }
-
+    @Override
     public void disableCollision(){
         collisionEnabled = false;
     }
-
     @Override
     public boolean isActive() {
         return collisionEnabled;
     }
-
     @Override
     public Model getCollisionModel() {
         return collisionModel;

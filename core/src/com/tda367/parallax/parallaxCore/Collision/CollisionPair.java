@@ -3,23 +3,21 @@ package com.tda367.parallax.parallaxCore.Collision;
 import com.tda367.parallax.parallaxCore.Collidable;
 
 /**
- * Created by amk19 on 24/04/2017.
+ * A class that holds a pair of {@link Collidable} that has collided.
  */
 public class CollisionPair {
+    private Collidable firstCollidable;
+    private Collidable secondCollidable;
 
-    private Collidable coll1;
-    private Collidable coll2;
-
-    public CollisionPair(Collidable coll1, Collidable coll2) {
-        this.coll1 = coll1;
-        this.coll2 = coll2;
+    public CollisionPair(Collidable firstCollidable, Collidable secondCollidable) {
+        this.firstCollidable = firstCollidable;
+        this.secondCollidable = secondCollidable;
     }
 
-    public Collidable getColl1() {
-        return coll1;
+    public Collidable getFirstCollidable() {
+        return firstCollidable;
     }
-
-    public Collidable getColl2() {
-        return coll2;
+    public Collidable getSecondCollidable() {
+        return secondCollidable;
     }
 }

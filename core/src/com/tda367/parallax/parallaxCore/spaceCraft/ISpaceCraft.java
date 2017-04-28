@@ -18,19 +18,16 @@ public interface ISpaceCraft extends Collidable, Updatable, Renderable {
 
     void setPanAbsoluteTarget(Vector2f target);
     void offsetAbsolutePanTarget(Vector2f target);
-
-    //Controls
-    void setDesiredPanVelocity(Vector2f desiredPanVelocity);
-
-    void setDesiredPanVelocity(float x, float y);
-
     void setPanAcceleration(Vector2f velocity);
-    Vector2f getPanVelocity();
+
+    void setDesiredPanVelocity(Vector2f desiredPanVelocity);
+    void setDesiredPanVelocity(float x, float y);
 
     void action();
     void setPU(PowerUp pu);
 
     void addSpaceCraftListener(SpaceCraftListener listener);
+    void removeSpaceCraftListener(SpaceCraftListener listener);
 
     void incHealth();
     void decHealth();

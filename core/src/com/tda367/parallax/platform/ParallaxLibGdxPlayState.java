@@ -47,9 +47,6 @@ public class ParallaxLibGdxPlayState implements ApplicationListener {
                 parallaxGame.getCamera().getPos().getY() * -1
         );
 
-        camera.near = 0.1f;
-        camera.far = 300.0f;
-
         renderer = new Renderer(camera);
         sound = new Sound();
 
@@ -64,7 +61,6 @@ public class ParallaxLibGdxPlayState implements ApplicationListener {
     public void resize(int width, int height) {
         camera.viewportWidth = width;
         camera.viewportHeight = height;
-
     }
 
 
@@ -74,16 +70,14 @@ public class ParallaxLibGdxPlayState implements ApplicationListener {
         //Updates Parallax game logic
         parallaxGame.update((int) (Gdx.graphics.getDeltaTime() * 1000));
 
-        camera.update();
-
         camera.position.set(
                 parallaxGame.getCamera().getPos().getX(),
                 parallaxGame.getCamera().getPos().getZ(),
                 parallaxGame.getCamera().getPos().getY()*-1
         );
+        camera.update();
 
         renderer.renderAll();
-
         gameModeState.update();
     }
 

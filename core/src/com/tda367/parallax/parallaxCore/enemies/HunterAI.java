@@ -1,16 +1,16 @@
 package com.tda367.parallax.parallaxCore.enemies;
 
-import com.tda367.parallax.parallaxCore.Collidable;
+import com.tda367.parallax.parallaxCore.Transformable;
 import com.tda367.parallax.parallaxCore.Updatable;
 
 /**
  * Interface for ai that will try to destroy its target.
  */
 public abstract class HunterAI implements Updatable {
-    private Collidable target;
+    private Transformable target;
     private boolean isActive;
     
-    public void setTarget(Collidable collidableObject){
+    public void setTarget(Transformable collidableObject){
         target = collidableObject;
         isActive = false;
     }
@@ -20,8 +20,8 @@ public abstract class HunterAI implements Updatable {
     void stop(){
         isActive = false;
     }
-    
-    public Collidable getTarget(){
+
+    public Transformable getTarget(){
         return target;
     }
 }

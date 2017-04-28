@@ -10,14 +10,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Represents the spacecraft in our game.
+ * The spacecraft "Agelion" in the game "Parallax".
  */
 
 public class Agelion implements ISpaceCraft {
 
     //TODO, "private powerUp pu;" when done testing
-    private PowerUp pu = new Missile(this); //Current stored power up
-    private int health; //Current health
+    private PowerUp pu = new Missile(this);
+    private int health;
 
     private float forwardVelocity;
     private float forwardTargetSpeed;
@@ -25,12 +25,11 @@ public class Agelion implements ISpaceCraft {
     private boolean forwardRelativeVelocityMode;
 
     private float maxPanVelocity;
-
+    private boolean relativePanMode;
     private Vector2f desiredPanVelocity;
     private Vector2f panAcceleration;
     private Vector2f currentPanVelocity;
     private Vector2f panAbsoluteTarget;
-    private boolean relativePanMode;
 
     private Vector3f pos;
     private Quat4f rot;
@@ -39,7 +38,6 @@ public class Agelion implements ISpaceCraft {
     private Model collisionModel;
     private List<SpaceCraftListener> spaceCraftListeners;
     private boolean collisionEnabled;
-
 
 
     //Constructors
@@ -74,7 +72,6 @@ public class Agelion implements ISpaceCraft {
     }
 
 
-
     //Controls
     @Override
     public void setDesiredPanVelocity(Vector2f desiredPanVelocity) {
@@ -90,7 +87,6 @@ public class Agelion implements ISpaceCraft {
         panAcceleration = velocity;
         relativePanMode = true;
     }
-
     @Override
     public synchronized void setPanAbsoluteTarget(Vector2f target) {
         panAbsoluteTarget = new Vector2f(target);
@@ -101,7 +97,6 @@ public class Agelion implements ISpaceCraft {
         panAbsoluteTarget.add( target);
         relativePanMode = false;
     }
-
     public void setMaxPanVelocity(float panVelocity) {
         this.maxPanVelocity = panVelocity;
     }
@@ -115,7 +110,6 @@ public class Agelion implements ISpaceCraft {
     }
 
 
-
     //Update
     @Override
     public void update(int milliSinceLastUpdate) {
@@ -123,9 +117,7 @@ public class Agelion implements ISpaceCraft {
         updatePanAcceleration();
         panCraft(milliSinceLastUpdate);
         advanceCraft(milliSinceLastUpdate);
-//        System.out.println(pos);
     }
-
     private void updatePanAcceleration(){
         Vector2f truePanVector = new Vector2f(desiredPanVelocity);
         truePanVector.scale(maxPanVelocity);
@@ -141,26 +133,6 @@ public class Agelion implements ISpaceCraft {
         } else {
             panAbsoluteMode(timeMilli);
         }
-    }
-    private void accelerateCraft(int timeMilli){
-        if (forwardRelativeVelocityMode){
-            if (forwardVelocity < forwardTargetSpeed){
-                float speedIncrease = forwardVelocity + forwardAcceleration * ((float)timeMilli/1000);
-
-                if (forwardTargetSpeed < speedIncrease+ forwardVelocity){
-                    forwardVelocity = forwardTargetSpeed;
-                } else {
-                    forwardVelocity += speedIncrease;
-                }
-
-            }
-        } else {
-            forwardVelocity = forwardVelocity + forwardAcceleration * ((float)timeMilli/1000);
-        }
-    }
-    private void advanceCraft(int timeMilli){
-        float posYAdded = forwardVelocity * ((float)timeMilli/1000);
-        pos.add(new Vector3f(0, posYAdded, 0));
     }
 
 
@@ -198,9 +170,28 @@ public class Agelion implements ISpaceCraft {
 
         pos.add(new Vector3f(addedXPos,0,addedZPos));
     }
-
     private float distanceCalc(float speed, float timeMilli){
         return speed * (timeMilli/1000);
+    }
+    private void accelerateCraft(int timeMilli){
+        if (forwardRelativeVelocityMode){
+            if (forwardVelocity < forwardTargetSpeed){
+                float speedIncrease = forwardVelocity + forwardAcceleration * ((float)timeMilli/1000);
+
+                if (forwardTargetSpeed < speedIncrease+ forwardVelocity){
+                    forwardVelocity = forwardTargetSpeed;
+                } else {
+                    forwardVelocity += speedIncrease;
+                }
+
+            }
+        } else {
+            forwardVelocity = forwardVelocity + forwardAcceleration * ((float)timeMilli/1000);
+        }
+    }
+    private void advanceCraft(int timeMilli){
+        float posYAdded = forwardVelocity * ((float)timeMilli/1000);
+        pos.add(new Vector3f(0, posYAdded, 0));
     }
 
 
@@ -208,6 +199,10 @@ public class Agelion implements ISpaceCraft {
     @Override
     public void addSpaceCraftListener(SpaceCraftListener listener){
         spaceCraftListeners.add(listener);
+    }
+    @Override
+    public void removeSpaceCraftListener(SpaceCraftListener listener) {
+        spaceCraftListeners.remove(listener);
     }
     @Override
     public void action(){
@@ -234,10 +229,6 @@ public class Agelion implements ISpaceCraft {
     public int getHealth() {
         return health;
     }
-    @Override
-    public Vector2f getPanVelocity() {
-        return new Vector2f(currentPanVelocity);
-    }
 
 
     // Getters for testing
@@ -258,8 +249,6 @@ public class Agelion implements ISpaceCraft {
     }
 
 
-
-
     //Transformable
     @Override
     public Vector3f getPos() {
@@ -269,7 +258,6 @@ public class Agelion implements ISpaceCraft {
     public Quat4f getRot() {
         return rot;
     }
-
 
 
     //Render
@@ -285,7 +273,6 @@ public class Agelion implements ISpaceCraft {
     public Model getModel() {
         return agelionModel;
     }
-
 
 
     //Collision

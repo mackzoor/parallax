@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by xoxLU on 2017-04-12.
+ * A singleton bus class that holds the current audio that need to be played.
  */
 public class SoundManager {
 

@@ -1,7 +1,7 @@
 package com.tda367.parallax.parallaxCore;
 
 /**
- * Created by Anthony on 11/04/2017.
+ * Interface for classes with models.
  */
 public interface IModel {
 

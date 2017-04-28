@@ -10,7 +10,9 @@ import javax.vecmath.Vector3f;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * A tracking "fire and forget" missle.
+ */
 public class Missile extends PowerUp {
 
     SoundManager soundManager;

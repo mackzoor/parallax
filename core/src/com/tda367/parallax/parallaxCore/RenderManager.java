@@ -3,8 +3,10 @@ package com.tda367.parallax.parallaxCore;
 import java.util.ArrayList;
 import java.util.List;
 
+//TODO change getRenderables() to send back a defencive copy of the renderables list.
+
 /**
- * Created by Anthony on 11/04/2017.
+ * A singleton bus class that holds the current objects that need to be rendered.
  */
 public class RenderManager {
     private List<Renderable> renderables;

@@ -1,12 +1,11 @@
 package com.tda367.parallax.parallaxCore.Collision;
 
 import com.tda367.parallax.parallaxCore.Collidable;
-
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by amk19 on 12/04/2017.
+ * A singleton bus class that holds the current objects that need to be checked for collision.
  */
 public class CollisionManager {
     private List<Collidable> collidables;
@@ -17,15 +16,14 @@ public class CollisionManager {
         return instance;
     }
 
-
     private CollisionManager(){
         collidables = new ArrayList<Collidable>();
     }
 
-    public void addRenderTask(Collidable collidable){
+    public void addCollisionCheck(Collidable collidable){
         collidables.add(collidable);
     }
-    public void removeRenderTask(Collidable collidable){
+    public void removeCollisionCheck(Collidable collidable){
         collidables.remove(collidable);
     }
 
