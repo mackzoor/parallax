@@ -1,3 +1,5 @@
+package com.tda367.parallax.parallaxCore.spaceCraft.spaceCraftTest;
+
 import com.tda367.parallax.parallaxCore.spaceCraft.Agelion;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,38 +22,38 @@ public class AgelionTest {
         agilion = new Agelion(5, 0, 0, new Vector3f(0,0,0), new Quat4f());
     }
 
-    //Test to make sure that the setSpeedTarget() method does what it should (setting the speed to a float value) and is not being interfered with at a different location.
+    //Test to make sure that the setForwardSpeedTarget() method does what it should (setting the speed to a float value) and is not being interfered with at a different location.
     @Test
     public void setSpeedTarget() throws Exception {
-        float previousSpeed = agilion.getTargetSpeed();
+        float previousSpeed = agilion.getForwardTargetSpeed();
 
         float addedSpeed = 50;
 
-        agilion.setSpeedTarget(addedSpeed);
+        agilion.setForwardSpeedTarget(addedSpeed);
 
-        assertTrue(previousSpeed + addedSpeed == agilion.getTargetSpeed());
+        assertTrue(previousSpeed + addedSpeed == agilion.getForwardTargetSpeed());
     }
 
     //Test to make sure that the setAccelerationTarget() method does what it should (setting the Acceleration to a float value) and is not being interfered with at a different location.
     @Test
     public void setAccelerateTarget() throws Exception {
-        float previousAcceleration = agilion.getAcceleration();
+        float previousAcceleration = agilion.getForwardAcceleration();
 
         float addedAcc = 50;
 
-        agilion.setAcceleration(addedAcc);
+        agilion.setForwardAcceleration(addedAcc);
 
-        assertTrue(previousAcceleration + addedAcc == agilion.getAcceleration());
+        assertTrue(previousAcceleration + addedAcc == agilion.getForwardAcceleration());
     }
 
-    //Test to make sure that the method setPanTarget() changes its value then added a new Vector.
+    //Test to make sure that the method setPanAbsoluteTarget() changes its value then added a new Vector.
     @Test
     public void setPanPoint() throws Exception {
-        Vector2f vec = agilion.getPanTarget();
+        Vector2f vec = agilion.getPanAbsoluteTarget();
 
-        agilion.setPanTarget(new Vector2f(1, 1));
+        agilion.setPanAbsoluteTarget(new Vector2f(1, 1));
 
-        assertTrue(!agilion.getPanTarget().equals(vec));
+        assertTrue(!agilion.getPanAbsoluteTarget().equals(vec));
     }
 
     @Test
@@ -61,25 +63,13 @@ public class AgelionTest {
     //Test to check if addPanPoint(0, 1) adds one to the y coordinate.
     @Test
     public void addPanPoint() throws Exception {
-        Vector2f vec = new Vector2f(agilion.getPanTarget().getX(), agilion.getPanTarget().getY());
+        Vector2f vec = new Vector2f(agilion.getPanAbsoluteTarget().getX(), agilion.getPanAbsoluteTarget().getY());
 
-        agilion.addPanTarget(new Vector2f(0, 1));
+        agilion.offsetAbsolutePanTarget(new Vector2f(0, 1));
 
-        assertTrue(!(agilion.getPanTarget().getX() == vec.getX() && agilion.getPanTarget().getY() == vec.getY()));
+        assertTrue(!(agilion.getPanAbsoluteTarget().getX() == vec.getX() && agilion.getPanAbsoluteTarget().getY() == vec.getY()));
 
-        assertTrue(agilion.getPanTarget().equals(new Vector2f(vec.getX(), vec.getY() + 1)));
-    }
-
-    //Test to check if addPanVelocity(0, 1) adds one to the y coordinate.
-    @Test
-    public void addPanVelocity() throws Exception {
-        Vector2f vec = new Vector2f(agilion.getVelTarget().getX(), agilion.getVelTarget().getY());
-
-        agilion.addPanVelocity(new Vector2f(0, 1));
-
-        assertTrue(!(agilion.getVelTarget().getX() == vec.getX() && agilion.getVelTarget().getY() == vec.getY()));
-
-        assertTrue(agilion.getVelTarget().equals(new Vector2f(vec.getX(), vec.getY() + 1)));
+        assertTrue(agilion.getPanAbsoluteTarget().equals(new Vector2f(vec.getX(), vec.getY() + 1)));
     }
 
     @Test
@@ -101,8 +91,8 @@ public class AgelionTest {
         Vector3f pos = agilion.getPos();
 
         //Sets the position we want the ship to pan to. Also set that speed to 1.
-        agilion.setPanSpeed(1);
-        agilion.setPanTarget(new Vector2f(10,10));
+        agilion.setMaxPanVelocity(1);
+        agilion.setPanAbsoluteTarget(new Vector2f(10,10));
 
         //Calls the update method and says that 1 second has passed
         agilion.update(1000);
@@ -123,10 +113,10 @@ public class AgelionTest {
         /*
         agilion.addPanPoint(new Vector2f(10,10));
         agilion.setAccelerateTarget(1);
-        agilion.setSpeedTarget(4);
+        agilion.setForwardSpeedTarget(4);
         */
 
-        //agilion.setPanVelocity(new Vector2f(1,1));
+        //agilion.setMaxPanVelocity(new Vector2f(1,1));
     }
 
     @Test
@@ -135,8 +125,8 @@ public class AgelionTest {
         Vector3f pos = new Vector3f(agilion.getPos().getX(), agilion.getPos().getY(), agilion.getPos().getZ() );
 
         //Sets the speed we want to achieve to 4, and the acceleration to 1.
-        agilion.setAcceleration(1);
-        agilion.setSpeedTarget(4);
+        agilion.setForwardAcceleration(1);
+        agilion.setForwardSpeedTarget(4);
 
         //Calls the update method and says that 1 second has passed
         agilion.update(1000);
