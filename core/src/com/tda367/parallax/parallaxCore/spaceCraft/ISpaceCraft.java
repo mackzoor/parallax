@@ -13,21 +13,24 @@ import javax.vecmath.Vector2f;
  * Interface for all spaceCraft in the game.
  */
 public interface ISpaceCraft extends Collidable, Updatable, Renderable {
-    void setSpeedTarget(float speed);
-    void setAcceleration(float accelerate);
+    void setForwardSpeedTarget(float speed);
+    void setForwardAcceleration(float acceleration);
 
-    void setPanTarget(Vector2f target);
-    void addPanTarget(Vector2f target);
+    void setPanAbsoluteTarget(Vector2f target);
+    void offsetAbsolutePanTarget(Vector2f target);
 
-    void setPanVelocity(Vector2f velocity);
-    void setPanVelocity(float x, float y);
+    void setPanAcceleration(Vector2f velocity);
+    void setPanAcceleration(float x, float y);
     Vector2f getPanVelocity();
-    void addPanVelocity(Vector2f velocity);
 
-    public void action();
-    public void setPU(PowerUp pu);
+    void action();
+    void setPU(PowerUp pu);
 
     void addSpaceCraftListener(SpaceCraftListener listener);
+
+    void incHealth();
+    void decHealth();
+    int getHealth();
 }
 
 

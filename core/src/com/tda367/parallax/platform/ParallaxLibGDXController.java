@@ -16,7 +16,7 @@ class ParallaxLibGDXController implements InputControlsListener {
     ParallaxLibGDXController(Parallax parallax, com.tda367.parallax.platform.gameModeStates.GameModeState gameModeState) {
         gameModeState.addInputDevices(this);
         this.parallax = parallax;
-        this.panSpeed = 5f;
+        this.panSpeed = 45;
     }
 
     @Override
@@ -36,55 +36,58 @@ class ParallaxLibGDXController implements InputControlsListener {
 
     @Override
     public void upButtonPressed() {
-        parallax.getPlayer().getSpaceCraft().addPanVelocity(new Vector2f(0,panSpeed));
+        parallax.getPlayer().getSpaceCraft().setPanAcceleration(new Vector2f(0,panSpeed));
     }
 
     @Override
     public void upButtonUp() {
-        parallax.getPlayer().getSpaceCraft().addPanVelocity(new Vector2f(0,-panSpeed));
+        parallax.getPlayer().getSpaceCraft().setPanAcceleration(new Vector2f(0,-0));
     }
 
     @Override
     public void rightButtonPressed() {
-        parallax.getPlayer().getSpaceCraft().addPanVelocity(new Vector2f(panSpeed,0));
+        parallax.getPlayer().getSpaceCraft().setPanAcceleration(new Vector2f(panSpeed,0));
     }
 
     @Override
     public void rightButtonUp() {
-        parallax.getPlayer().getSpaceCraft().addPanVelocity(new Vector2f(-panSpeed,0));
+        parallax.getPlayer().getSpaceCraft().setPanAcceleration(new Vector2f(-0,0));
     }
 
     @Override
     public void downButtonPressed() {
-        parallax.getPlayer().getSpaceCraft().addPanVelocity(new Vector2f(0,-panSpeed));
+        parallax.getPlayer().getSpaceCraft().setPanAcceleration(new Vector2f(0,-panSpeed));
     }
 
     @Override
     public void downButtonUp() {
-        parallax.getPlayer().getSpaceCraft().addPanVelocity(new Vector2f(0,panSpeed));
+        parallax.getPlayer().getSpaceCraft().setPanAcceleration(new Vector2f(0,0));
     }
 
     @Override
     public void leftButtonPressed() {
-        parallax.getPlayer().getSpaceCraft().addPanVelocity(new Vector2f(-panSpeed,0));
+        parallax.getPlayer().getSpaceCraft().setPanAcceleration(new Vector2f(-panSpeed,0));
     }
 
     @Override
     public void leftButtonUp() {
-        parallax.getPlayer().getSpaceCraft().addPanVelocity(new Vector2f(panSpeed,0));
+        parallax.getPlayer().getSpaceCraft().setPanAcceleration(new Vector2f(0,0));
     }
+
+    private float yValue;
+    private float xValue;
 
     @Override
     public void xAxisJoystickMovement(float xValue) {
-        xValue = xValue * panSpeed;
-        float yValue = parallax.getPlayer().getSpaceCraft().getPanVelocity().getY();
-        parallax.getPlayer().getSpaceCraft().setPanVelocity(xValue, yValue);
+        xValue = xValue*panSpeed;
+        this.xValue = xValue;
+        parallax.getPlayer().getSpaceCraft().setPanAcceleration(xValue, yValue);
     }
 
     @Override
     public void yAxisJoystickMovement(float yValue) {
-        yValue = yValue * panSpeed;
-        float xValue = parallax.getPlayer().getSpaceCraft().getPanVelocity().getX();
-        parallax.getPlayer().getSpaceCraft().setPanVelocity(xValue, yValue);
+        yValue = yValue*panSpeed;
+        this.yValue = yValue;
+        parallax.getPlayer().getSpaceCraft().setPanAcceleration(xValue, yValue);
     }
 }
