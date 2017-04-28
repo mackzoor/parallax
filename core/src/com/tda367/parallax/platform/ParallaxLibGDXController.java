@@ -10,6 +10,9 @@ import javax.vecmath.Vector2f;
  */
 class ParallaxLibGDXController implements InputControlsListener {
 
+    private float yValue = 0;
+    private float xValue = 0;
+
     private Parallax parallax;
     private float panSpeed;
 
@@ -36,68 +39,73 @@ class ParallaxLibGDXController implements InputControlsListener {
 
     @Override
     public void upButtonPressed() {
-        parallax.getPlayer().getSpaceCraft().setDesiredPanVelocity(new Vector2f(0,panSpeed));
+        yValue += 1;
+        updateControls();
     }
 
     @Override
     public void upButtonUp() {
-        parallax.getPlayer().getSpaceCraft().setDesiredPanVelocity(new Vector2f(0,-0));
+        yValue -= 1;
+        updateControls();
     }
 
     @Override
     public void rightButtonPressed() {
-        parallax.getPlayer().getSpaceCraft().setDesiredPanVelocity(new Vector2f(panSpeed,0));
+        xValue += 1;
+        updateControls();
     }
 
     @Override
     public void rightButtonUp() {
-        parallax.getPlayer().getSpaceCraft().setDesiredPanVelocity(new Vector2f(-0,0));
+        xValue -= 1;
+        updateControls();
     }
 
     @Override
     public void downButtonPressed() {
-        parallax.getPlayer().getSpaceCraft().setDesiredPanVelocity(new Vector2f(0,-panSpeed));
+        yValue = -1;
+        updateControls();
     }
 
     @Override
     public void downButtonUp() {
-        parallax.getPlayer().getSpaceCraft().setDesiredPanVelocity(new Vector2f(0,0));
+        yValue += 1;
+        updateControls();
     }
 
     @Override
     public void leftButtonPressed() {
-        parallax.getPlayer().getSpaceCraft().setDesiredPanVelocity(new Vector2f(-panSpeed,0));
+        xValue -= 1;
+        updateControls();
     }
 
     @Override
     public void leftButtonUp() {
-        parallax.getPlayer().getSpaceCraft().setDesiredPanVelocity(new Vector2f(0,0));
+        xValue += 1;
+        updateControls();
     }
-
-    private float yValue = 0;
-    private float xValue = 0;
 
     @Override
     public void xAxisJoystickMovement(float xValue) {
-        if (Math.abs(xValue) > 0.1){
+        if (Math.abs(xValue) > 0.15){
             this.xValue = xValue;
         } else {
             this.xValue = 0;
         }
-        updateJoysticks();
+        updateControls();
     }
 
     @Override
     public void yAxisJoystickMovement(float yValue) {
-        if (Math.abs(yValue) > 0.1){
+        if (Math.abs(yValue) > 0.15){
             this.yValue = yValue;
         } else {
             this.yValue = 0;
         }
-        updateJoysticks();
+        updateControls();
     }
 
-    private void updateJoysticks(){
+    private synchronized void updateControls(){
         parallax.getPlayer().getSpaceCraft().setDesiredPanVelocity(xValue, yValue);
     }
 }
