@@ -5,7 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.tda367.parallax.parallaxCore.Parallax;
 import com.tda367.parallax.parallaxCore.Player;
 
-public class ParallaxLibGdx implements ApplicationListener {
+public class ParallaxLibGdx implements ApplicationListener{
 
     private com.badlogic.gdx.graphics.PerspectiveCamera camera;
     private Player player;
@@ -24,7 +24,7 @@ public class ParallaxLibGdx implements ApplicationListener {
 
     @Override
     public void resize(int width, int height) {
-        gameStateManager.getGameState(GameStateManager.State.PLAY).resize(width,height);
+        gameStateManager.getGameState(gameStateManager.getState()).resize(width,height);
 
     }
 
