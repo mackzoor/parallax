@@ -1,7 +1,6 @@
 package com.tda367.parallax.platform;
 
 import com.badlogic.gdx.ApplicationListener;
-
 import static com.tda367.parallax.platform.GameStateManager.State.MAIN_MENU;
 import static com.tda367.parallax.platform.GameStateManager.State.PLAY;
 
@@ -16,14 +15,15 @@ public class GameStateManager implements ApplicationListener {
     private static GameStateManager instance;
     private ParallaxLibGdxPlayState parallaxLibGdxPlayState;
     private MainMenuState mainMenuState;
+
     public enum State {
         PLAY,
         MAIN_MENU,
         PAUSE;
     }
 
-    private GameStateManager(){
-        this.setState(PLAY);
+    private GameStateManager() {
+        this.setState(MAIN_MENU);
         this.getGameState(state);
     }
 
@@ -39,8 +39,10 @@ public class GameStateManager implements ApplicationListener {
 
     @Override
     public void render() {
+        if (state != previousState) {
+            instance.getGameState(previousState).dispose();
+        }
         instance.getGameState(state).render();
-        instance.getGameState(previousState).dispose();
 
     }
 
@@ -60,11 +62,11 @@ public class GameStateManager implements ApplicationListener {
     }
 
 
-    public void setState(State state){
+    public void setState(State state) {
         this.state = state;
     }
 
-    public State getState(){
+    public State getState() {
         return state;
     }
 
@@ -78,16 +80,16 @@ public class GameStateManager implements ApplicationListener {
         if (state == PLAY && previousState != PLAY) {
             previousState = state;
             this.parallaxLibGdxPlayState = new ParallaxLibGdxPlayState(this);
-            return parallaxLibGdxPlayState;
+            return this.parallaxLibGdxPlayState;
         } else if (state == PLAY && previousState == PLAY) {
             previousState = state;
-            return parallaxLibGdxPlayState;
+            return this.parallaxLibGdxPlayState;
         } else if (state == MAIN_MENU && previousState != MAIN_MENU) {
             previousState = state;
-            return mainMenuState = new MainMenuState(this);
+            return this.mainMenuState = new MainMenuState(this);
         } else {
             previousState = state;
-            return mainMenuState;
+            return this.mainMenuState;
         }
     }
 
