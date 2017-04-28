@@ -146,7 +146,7 @@ public class Course implements Updatable, SpaceCraftListener {
                 new Quat4f(),
                 10
         ));
-        //minionEnemy.getSpaceCraft().setAcceleration(-0.5f);
+        //minionEnemy.getSpaceCraft().setForwardAcceleration(-0.5f);
         spaceCrafts.add(minionEnemy.getSpaceCraft());
         RenderManager.getInstance().addRenderTask(minionEnemy.getSpaceCraft());
         minionEnemy.update(1000);

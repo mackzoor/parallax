@@ -31,7 +31,7 @@ public class Cannon extends PowerUp {
     @Override
     public void usePU(Vector3f pos, Quat4f rot) {
         //Adds a HarmfulEntity (object) to the laser-beam list
-        laserBeams.add(new HarmfulEntity(spaceCraft.getVelocity(), "laser.g3db", "3dModels/laser"));
+        laserBeams.add(new HarmfulEntity(spaceCraft.getForwardVelocity(), "laser.g3db", "3dModels/laser"));
 
         //Sets the rotation of the laser to the correct values
         rot = new Quat4f(0,0,0.7071f,0.7071f);

@@ -2,7 +2,6 @@ package com.tda367.parallax.parallaxCore.spaceCraft;
 
 import com.tda367.parallax.parallaxCore.Model;
 import com.tda367.parallax.parallaxCore.RenderManager;
-import com.tda367.parallax.parallaxCore.powerUps.Cannon;
 import com.tda367.parallax.parallaxCore.powerUps.Missile;
 import com.tda367.parallax.parallaxCore.powerUps.PowerUp;
 
@@ -14,29 +13,24 @@ import java.util.List;
  * Represents the spacecraft in our game.
  */
 
-//TODO some sort of rotation engine?
-//TODO Spacecraft flight system. (Acc pan etc)
-
-//TODO Geometry?
-//TODO More?
-
 public class Agelion implements ISpaceCraft {
-
-    private int health; //Current health
 
     //TODO, "private powerUp pu;" when done testing
     private PowerUp pu = new Missile(this); //Current stored power up
+    private int health; //Current health
 
-    private float velocity;
-    private float targetSpeed;
-    private float acceleration;
-    private boolean speedTargetMode;
+    private float forwardVelocity;
+    private float forwardTargetSpeed;
+    private float forwardAcceleration;
+    private boolean forwardRelativeVelocityMode;
 
-    private float panSpeed; // m/s
+    private float maxPanVelocity;
 
-    private boolean pointMode;
-    private Vector2f panTarget;
-    private Vector2f velTarget;
+    private Vector2f desiredPanVelocity;
+    private Vector2f panAcceleration;
+    private Vector2f currentPanVelocity;
+    private Vector2f panAbsoluteTarget;
+    private boolean relativePanMode;
 
     private Vector3f pos;
     private Quat4f rot;
@@ -44,108 +38,178 @@ public class Agelion implements ISpaceCraft {
     private Model agelionModel;
     private Model collisionModel;
     private List<SpaceCraftListener> spaceCraftListeners;
-
     private boolean collisionEnabled;
-    public Agelion(int health, float velocity, float panSpeed, Vector3f pos, Quat4f rot) {
+
+
+
+    //Constructors
+    public Agelion(int health, float forwardVelocity, float maxPanVelocity, Vector3f pos, Quat4f rot) {
         this.agelionModel = new Model("agelion.g3db", "3dModels/agelion");
         this.collisionModel = new Model(agelionModel.getModelName(), agelionModel.getModelDirectory());
         this.health = health;
-        this.velocity = velocity;
-        this.panSpeed = panSpeed;
+        this.forwardVelocity = forwardVelocity;
+        this.maxPanVelocity = maxPanVelocity;
         this.pos = pos;
         this.rot = rot;
+        this.panAcceleration = new Vector2f();
+        this.desiredPanVelocity = new Vector2f();
 
-        panTarget = new Vector2f();
-        velTarget = new Vector2f();
+        panAbsoluteTarget = new Vector2f();
+        currentPanVelocity = new Vector2f();
 
-        this.pointMode = false;
-        this.speedTargetMode = true;
+        this.relativePanMode = false;
+        this.forwardRelativeVelocityMode = true;
 
         collisionEnabled = true;
         spaceCraftListeners = new ArrayList<SpaceCraftListener>();
     }
     public Agelion(Vector3f position, Quat4f rotation, float startVelocity){
-        this(5,startVelocity,2,position,rotation);
+        this(5,startVelocity,8,position,rotation);
     }
-    public Agelion(float velocity){
-        this(new Vector3f(), new Quat4f(), velocity);
+    public Agelion(float forwardVelocity){
+        this(new Vector3f(), new Quat4f(), forwardVelocity);
     }
     public Agelion(){
         this(1);
     }
 
+
+
+    //Controls
+    @Override
+    public void setDesiredPanVelocity(Vector2f desiredPanVelocity) {
+        this.desiredPanVelocity = desiredPanVelocity;
+        relativePanMode = true;
+    }
+    @Override
+    public void setDesiredPanVelocity(float x, float y){
+        this.setDesiredPanVelocity(new Vector2f(x,y));
+    }
+    @Override
+    public synchronized void setPanAcceleration(Vector2f velocity) {
+        panAcceleration = velocity;
+        relativePanMode = true;
+    }
+
+    @Override
+    public synchronized void setPanAbsoluteTarget(Vector2f target) {
+        panAbsoluteTarget = new Vector2f(target);
+        relativePanMode = false;
+    }
+    @Override
+    public synchronized void offsetAbsolutePanTarget(Vector2f target) {
+        panAbsoluteTarget.add( target);
+        relativePanMode = false;
+    }
+
+    public void setMaxPanVelocity(float panVelocity) {
+        this.maxPanVelocity = panVelocity;
+    }
+    public synchronized void setForwardSpeedTarget(float speed){
+        forwardTargetSpeed = speed;
+        forwardRelativeVelocityMode = false;
+    }
+    public synchronized void setForwardAcceleration(float accelerate){
+        forwardAcceleration = accelerate;
+        forwardRelativeVelocityMode = true;
+    }
+
+
+
+    //Update
+    @Override
+    public void update(int milliSinceLastUpdate) {
+        accelerateCraft(milliSinceLastUpdate);
+        updatePanAcceleration();
+        panCraft(milliSinceLastUpdate);
+        advanceCraft(milliSinceLastUpdate);
+//        System.out.println(pos);
+    }
+
+    private void updatePanAcceleration(){
+        Vector2f truePanVector = new Vector2f(desiredPanVelocity);
+        truePanVector.scale(maxPanVelocity);
+
+        truePanVector.sub( currentPanVelocity);
+        truePanVector.scale(maxPanVelocity);
+
+        panAcceleration = new Vector2f(truePanVector);
+    }
     private void panCraft(int timeMilli){
-        if (pointMode) {
-            panPointMode(timeMilli);
+        if (relativePanMode) {
+            panRelativeMode(timeMilli);
         } else {
-            panVelocityMode(timeMilli);
+            panAbsoluteMode(timeMilli);
         }
     }
     private void accelerateCraft(int timeMilli){
-        if (speedTargetMode){
-            if (velocity < targetSpeed){
-                float speedIncrease = velocity + acceleration * ((float)timeMilli/1000);
+        if (forwardRelativeVelocityMode){
+            if (forwardVelocity < forwardTargetSpeed){
+                float speedIncrease = forwardVelocity + forwardAcceleration * ((float)timeMilli/1000);
 
-                if (targetSpeed < speedIncrease+velocity){
-                    velocity = targetSpeed;
+                if (forwardTargetSpeed < speedIncrease+ forwardVelocity){
+                    forwardVelocity = forwardTargetSpeed;
                 } else {
-                    velocity += speedIncrease;
+                    forwardVelocity += speedIncrease;
                 }
 
             }
         } else {
-            velocity = velocity + acceleration * ((float)timeMilli/1000);
+            forwardVelocity = forwardVelocity + forwardAcceleration * ((float)timeMilli/1000);
         }
     }
     private void advanceCraft(int timeMilli){
-        float posYAdded = velocity * ((float)timeMilli/1000);
-        pos.add((Tuple3f)new Vector3f(0, posYAdded, 0));
+        float posYAdded = forwardVelocity * ((float)timeMilli/1000);
+        pos.add(new Vector3f(0, posYAdded, 0));
     }
 
-    private void panPointMode(int timeMilli){
-        /*X AXIS */
-        float xDiff = Math.abs(panTarget.getX() - pos.getX());
-        float xMovement = Math.abs(panSpeed * ((float)timeMilli/1000));
-        float posXNew;
 
-        if (xDiff < xMovement){
-            posXNew = pos.getX()+xDiff;
+    //position calculation
+    private void panAbsoluteMode(int timeMilli){
+        //Calculate direction vector
+        Vector2f targetDirection = new Vector2f(
+                panAbsoluteTarget
+        );
+
+        targetDirection.sub(new Vector2f(
+                pos.getX(), pos.getZ()
+        ));
+
+        if (targetDirection.getX() == 0 && targetDirection.getY() == 0){
+
         } else {
-            posXNew = pos.getX()+xMovement;
+            targetDirection.normalize();
+            targetDirection.scale(maxPanVelocity);
+            desiredPanVelocity = targetDirection;
+            panRelativeMode(timeMilli);
         }
 
-
-        /* Z AXIS */
-        float ZDiff = panTarget.getY() - pos.getZ();
-        float ZMovement = panSpeed * ((float)timeMilli/1000);
-        float posZNew;
-
-        if (ZDiff < ZMovement){
-            posZNew = pos.getZ()+ZDiff;
-        } else {
-            posZNew = pos.getZ()+ZMovement;
-        }
-
-
-        /* Sets new position */
-        pos = new Vector3f(posXNew,pos.getY(),posZNew);
     }
-    private void panVelocityMode(int timeMilli){
-        float addedXPos = distanceCalc(velTarget.getX(),timeMilli);
-        float addedZPos = distanceCalc(velTarget.getY(),timeMilli);
+    private void panRelativeMode(int timeMilli){
+        Vector2f addedVelocity = new Vector2f(panAcceleration);
+        addedVelocity.scale((float)timeMilli/1000);
 
-        pos.add((Tuple3f) new Vector3f(addedXPos,0,addedZPos));
+        currentPanVelocity.add(addedVelocity);
+        currentPanVelocity.clamp(-maxPanVelocity,maxPanVelocity);
+
+
+        float addedXPos = distanceCalc(currentPanVelocity.getX(),timeMilli);
+        float addedZPos = distanceCalc(currentPanVelocity.getY(),timeMilli);
+
+        pos.add(new Vector3f(addedXPos,0,addedZPos));
     }
 
+    private float distanceCalc(float speed, float timeMilli){
+        return speed * (timeMilli/1000);
+    }
+
+
+    //ISpaceCraft
     @Override
     public void addSpaceCraftListener(SpaceCraftListener listener){
         spaceCraftListeners.add(listener);
     }
-
-    private float distanceCalc(float speed, float timeMilli){
-        return speed * ((float)timeMilli/1000);
-    }
-
+    @Override
     public void action(){
         if (pu != null){
             pu.usePU(pos, rot);
@@ -156,22 +220,47 @@ public class Agelion implements ISpaceCraft {
             System.out.println("NO POWERUP");
         }
     }
-
     @Override
-    public synchronized void addPanTarget(Vector2f target) {
-        panTarget.add((Tuple2f) target);
-        pointMode = true;
+    public void setPU(PowerUp pu) {
+        this.pu = pu;
     }
     @Override
-    public synchronized void addPanVelocity(Vector2f velocity) {
-        velTarget.add((Tuple2f) velocity);
-        pointMode = false;
-    }
-
     public void incHealth(){
         health++;
     }
+    @Override
+    public void decHealth() { health--; }
+    @Override
+    public int getHealth() {
+        return health;
+    }
+    @Override
+    public Vector2f getPanVelocity() {
+        return new Vector2f(currentPanVelocity);
+    }
 
+
+    // Getters for testing
+    public float getForwardAcceleration() {
+        return forwardAcceleration;
+    }
+    public Vector2f getPanAbsoluteTarget() {
+        return panAbsoluteTarget;
+    }
+    public Vector2f getCurrentPanVelocity() {
+        return currentPanVelocity;
+    }
+    public float getForwardTargetSpeed() {
+        return forwardTargetSpeed;
+    }
+    public float getForwardVelocity() {
+        return forwardVelocity;
+    }
+
+
+
+
+    //Transformable
     @Override
     public Vector3f getPos() {
         return pos;
@@ -180,99 +269,38 @@ public class Agelion implements ISpaceCraft {
     public Quat4f getRot() {
         return rot;
     }
-    @Override
-    public void update(int milliSinceLastUpdate) {
-        accelerateCraft(milliSinceLastUpdate);
-        panCraft(milliSinceLastUpdate);
-        advanceCraft(milliSinceLastUpdate);
-    }
-    @Override
 
-    public Model getModel() {
-        return agelionModel;
-    }
-    public float getAcceleration() {
-        return acceleration;
-    }
-    public Vector2f getPanTarget() {
-        return panTarget;
-    }
-    public Vector2f getVelTarget() {
-        return velTarget;
-    }
-    public int getHealth() {
-        return health;
-    }
-    public float getTargetSpeed() {
-        return targetSpeed;
-    }
-    public float getVelocity() {
-        return velocity;
-    }
 
-    @Override
-    public void setPU(PowerUp pu) {
-        this.pu = pu;
-    }
-    @Override
-    public synchronized void setPanVelocity(Vector2f velocity) {
-        velTarget = new Vector2f(velocity);
-        pointMode = false;
-    }
 
-    @Override
-    public void setPanVelocity(float x, float y) {
-        setPanVelocity(new Vector2f(x, y));
-    }
-
-    @Override
-    public Vector2f getPanVelocity() {
-        return velTarget;
-    }
-
-    @Override
-    public synchronized void setPanTarget(Vector2f target) {
-        panTarget = new Vector2f(target);
-        pointMode = true;
-    }
-
-    public void setPanSpeed(float panSpeed) {
-        this.panSpeed = panSpeed;
-    }
-    public synchronized void setSpeedTarget(float speed){
-        targetSpeed = speed;
-        speedTargetMode = true;
-    }
-    public synchronized void setAcceleration(float accelerate){
-        acceleration = accelerate;
-        speedTargetMode = false;
-    }
-
+    //Render
     @Override
     public void addToRenderManager() {
         RenderManager.getInstance().addRenderTask(this);
     }
-
     @Override
     public void removeFromRenderManager() {
         RenderManager.getInstance().removeRenderTask(this);
     }
+    @Override
+    public Model getModel() {
+        return agelionModel;
+    }
 
+
+
+    //Collision
     @Override
     public boolean isActive() {
         return collisionEnabled;
     }
-
     @Override
     public void disableCollision() {
         collisionEnabled = false;
     }
-
     @Override
     public void enableCollision() {
         collisionEnabled = true;
     }
-
     @Override
     public Model getCollisionModel() {
         return collisionModel;
