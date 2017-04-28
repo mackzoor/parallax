@@ -156,19 +156,6 @@ public class Course implements Updatable, SpaceCraftListener {
         }
     }
 
-    //Debug only
-    private void createTestEnemy() {
-        MinionEnemy minionEnemy = new MinionEnemy(new Agelion(
-                new Vector3f(1.5f, 2, 1),
-                new Quat4f(),
-                10
-        ));
-        //minionEnemy.getSpaceCraft().setForwardAcceleration(-0.5f);
-        spaceCrafts.add(minionEnemy.getSpaceCraft());
-        RenderManager.getInstance().addRenderTask(minionEnemy.getSpaceCraft());
-        minionEnemy.update(1000);
-    }
-
     public void setCollisionCalculator(ICollisionCalculator collisionCalculator) {
         this.collisionCalculator = collisionCalculator;
     }

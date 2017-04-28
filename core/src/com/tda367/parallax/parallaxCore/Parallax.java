@@ -2,8 +2,14 @@ package com.tda367.parallax.parallaxCore;
 
 import com.tda367.parallax.parallaxCore.Collision.ICollisionCalculator;
 import com.tda367.parallax.parallaxCore.course.Course;
+import com.tda367.parallax.parallaxCore.enemies.HunterAI;
+import com.tda367.parallax.parallaxCore.enemies.MinionEnemy;
+import com.tda367.parallax.parallaxCore.spaceCraft.Agelion;
 import com.tda367.parallax.parallaxCore.spaceCraft.ISpaceCraft;
 
+import javax.vecmath.Quat4f;
+import javax.vecmath.Vector3f;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -18,6 +24,8 @@ public class Parallax implements Updatable{
     private Camera camera;
     private Player player;
 
+    private List<HunterAI> ais;
+
     public Parallax(Player player){
         renderManager = RenderManager.getInstance();
         soundManager = SoundManager.getInstance();
@@ -29,6 +37,10 @@ public class Parallax implements Updatable{
         camera.trackTo(player.getSpaceCraft());
         this.player = player;
 
+        ais = new ArrayList<HunterAI>();
+
+        createTestEnemy();
+
         startBackgroundMusic();
     }
 
@@ -37,6 +49,10 @@ public class Parallax implements Updatable{
 
         if (milliSinceLastUpdate > 100){
             milliSinceLastUpdate = 100;
+        }
+
+        for (HunterAI ai : ais){
+            ai.update(milliSinceLastUpdate);
         }
 
         course.update(milliSinceLastUpdate);
@@ -71,5 +87,18 @@ public class Parallax implements Updatable{
         } else {
             soundManager.playMusic("track.mp3","sounds/music", new Float(0.7f));
         }
+    }
+
+    //Debug only
+    private void createTestEnemy() {
+        MinionEnemy minionEnemy = new MinionEnemy(new Agelion(
+                new Vector3f(1.5f, -2, 1),
+                new Quat4f(),
+                13
+        ));
+        minionEnemy.getSpaceCraft().setForwardAcceleration(-3f);
+        course.addSpaceCraft(minionEnemy.getSpaceCraft());
+        ais.add(minionEnemy);
+        minionEnemy.setTarget(player.getSpaceCraft());
     }
 }
