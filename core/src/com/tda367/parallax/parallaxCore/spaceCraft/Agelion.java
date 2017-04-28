@@ -25,6 +25,8 @@ public class Agelion implements ISpaceCraft {
     private boolean forwardRelativeVelocityMode;
 
     private float maxPanVelocity;
+
+    private Vector2f desiredPanVelocity;
     private Vector2f panAcceleration;
     private Vector2f currentPanVelocity;
     private Vector2f panAbsoluteTarget;
@@ -50,6 +52,7 @@ public class Agelion implements ISpaceCraft {
         this.pos = pos;
         this.rot = rot;
         this.panAcceleration = new Vector2f();
+        this.desiredPanVelocity = new Vector2f();
 
         panAbsoluteTarget = new Vector2f();
         currentPanVelocity = new Vector2f();
@@ -74,14 +77,20 @@ public class Agelion implements ISpaceCraft {
 
     //Controls
     @Override
-    public synchronized void setPanAcceleration(Vector2f velocity) {
-        panAcceleration = new Vector2f(velocity);
+    public void setDesiredPanVelocity(Vector2f desiredPanVelocity) {
+        this.desiredPanVelocity = desiredPanVelocity;
         relativePanMode = true;
     }
     @Override
-    public void setPanAcceleration(float x, float y) {
-        setPanAcceleration(new Vector2f(x, y));
+    public void setDesiredPanVelocity(float x, float y){
+        this.setDesiredPanVelocity(new Vector2f(x,y));
     }
+    @Override
+    public synchronized void setPanAcceleration(Vector2f velocity) {
+        panAcceleration = velocity;
+        relativePanMode = true;
+    }
+
     @Override
     public synchronized void setPanAbsoluteTarget(Vector2f target) {
         panAbsoluteTarget = new Vector2f(target);
@@ -89,7 +98,7 @@ public class Agelion implements ISpaceCraft {
     }
     @Override
     public synchronized void offsetAbsolutePanTarget(Vector2f target) {
-        panAbsoluteTarget.add((Tuple2f) target);
+        panAbsoluteTarget.add( target);
         relativePanMode = false;
     }
 
@@ -111,11 +120,21 @@ public class Agelion implements ISpaceCraft {
     @Override
     public void update(int milliSinceLastUpdate) {
         accelerateCraft(milliSinceLastUpdate);
+        updatePanAcceleration();
         panCraft(milliSinceLastUpdate);
         advanceCraft(milliSinceLastUpdate);
 //        System.out.println(pos);
     }
 
+    private void updatePanAcceleration(){
+        Vector2f truePanVector = new Vector2f(desiredPanVelocity);
+        truePanVector.scale(maxPanVelocity);
+
+        truePanVector.sub( currentPanVelocity);
+        truePanVector.scale(maxPanVelocity);
+
+        panAcceleration = new Vector2f(truePanVector);
+    }
     private void panCraft(int timeMilli){
         if (relativePanMode) {
             panRelativeMode(timeMilli);
@@ -141,7 +160,7 @@ public class Agelion implements ISpaceCraft {
     }
     private void advanceCraft(int timeMilli){
         float posYAdded = forwardVelocity * ((float)timeMilli/1000);
-        pos.add((Tuple3f)new Vector3f(0, posYAdded, 0));
+        pos.add(new Vector3f(0, posYAdded, 0));
     }
 
 
@@ -161,30 +180,27 @@ public class Agelion implements ISpaceCraft {
         } else {
             targetDirection.normalize();
             targetDirection.scale(maxPanVelocity);
-            panAcceleration = targetDirection;
+            desiredPanVelocity = targetDirection;
             panRelativeMode(timeMilli);
         }
 
     }
     private void panRelativeMode(int timeMilli){
-
-        //TODO see if the first calculations can also use distanceCalc
-        //Update currentPanVelocity with panAcceleration;
         Vector2f addedVelocity = new Vector2f(panAcceleration);
         addedVelocity.scale((float)timeMilli/1000);
 
         currentPanVelocity.add(addedVelocity);
         currentPanVelocity.clamp(-maxPanVelocity,maxPanVelocity);
-        System.out.println(currentPanVelocity);
-        //Calculate new position with currentPanVelocity;
+
+
         float addedXPos = distanceCalc(currentPanVelocity.getX(),timeMilli);
         float addedZPos = distanceCalc(currentPanVelocity.getY(),timeMilli);
 
-        pos.add((Tuple3f) new Vector3f(addedXPos,0,addedZPos));
+        pos.add(new Vector3f(addedXPos,0,addedZPos));
     }
 
     private float distanceCalc(float speed, float timeMilli){
-        return speed * ((float)timeMilli/1000);
+        return speed * (timeMilli/1000);
     }
 
 
