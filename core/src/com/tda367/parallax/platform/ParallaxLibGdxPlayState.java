@@ -23,8 +23,8 @@ public class ParallaxLibGdxPlayState implements ApplicationListener {
     public ParallaxLibGdxPlayState(GameStateManager gameStateManager) {
         this.gameStateManager = gameStateManager;
         this.gameModeState = GameModeFactory.getGameModeState(this);
+        soundManager = SoundManager.getInstance();
         this.collisionCalculator = new CollisionCalculator();
-        Gdx.graphics.setTitle("Galactica space wars of justice, ultimate edition");
 
         // Initiate game with space craft "Agelion"
         this.player = new Player(new Agelion(10));
@@ -100,6 +100,7 @@ public class ParallaxLibGdxPlayState implements ApplicationListener {
 
     @Override
     public void dispose() {
-
+        parallaxGame.getRenderManager().getRenderables().clear();
+        soundManager.stopActiveMusic("sounds/music/track.mp3");
     }
 }
