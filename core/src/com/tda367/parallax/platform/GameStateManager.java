@@ -24,7 +24,6 @@ public class GameStateManager implements ApplicationListener {
 
     private GameStateManager() {
         this.setState(MAIN_MENU);
-        this.getGameState(state);
     }
 
     @Override
@@ -61,7 +60,6 @@ public class GameStateManager implements ApplicationListener {
         this.getGameState(state).dispose();
     }
 
-
     public void setState(State state) {
         this.state = state;
     }
@@ -71,10 +69,18 @@ public class GameStateManager implements ApplicationListener {
     }
 
     public static GameStateManager getInstance() {
-        if (instance == null) instance = new com.tda367.parallax.platform.GameStateManager();
-        return instance;
+        if (instance == null) {
+            instance = new com.tda367.parallax.platform.GameStateManager();
+            return instance;
+        } else {
+            return instance;
+        }
     }
 
+    //TODO Split this method into several or simplify
+    /**
+     * Method returns the current state which is to be rendered
+     */
     public ApplicationListener getGameState(State state){
 
         if (state == PLAY && previousState != PLAY) {
