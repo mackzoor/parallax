@@ -1,6 +1,5 @@
 package com.tda367.parallax.CoreAbstraction;
 
-import com.badlogic.gdx.audio.Music;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -102,12 +101,6 @@ public class SoundManager {
 
     //TODO might want to remove methods using musicFile as parameter, they might never get used.
 
-    public void stopActiveMusic(Music musicFile){
-        for (SoundListener Sl : listeners) {
-            Sl.stopActiveMusic(musicFile);
-        }
-    }
-
     //Stops a playing music file. Uses directory "slash" filename for correct input.
     public void stopActiveMusic(String fileNameAndDirectory){
         for (SoundListener Sl : listeners) {
@@ -115,22 +108,11 @@ public class SoundManager {
         }
     }
 
-    public void pauseActiveMusic(Music musicFile){
-        for (SoundListener Sl : listeners) {
-            Sl.pauseActiveMusic(musicFile);
-        }
-    }
 
     //Pauses a music file that is running. Uses filename "slash" the directory for correct input.
     public void pauseActiveMusic(String fileNameAndDirectory){
         for (SoundListener Sl : listeners) {
             Sl.pauseActiveMusic(fileNameAndDirectory);
-        }
-    }
-
-    public void unPauseActiveMusic(Music musicFile){
-        for (SoundListener Sl : listeners) {
-            Sl.unPauseActiveMusic(musicFile);
         }
     }
 
