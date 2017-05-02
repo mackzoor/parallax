@@ -4,14 +4,12 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 
 
 /**
@@ -22,17 +20,19 @@ import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 
 public class MainMenuState implements ApplicationListener {
 
-    Texture texture;
-    Stage stage;
-    Skin skin;
-    SpriteBatch batch;
-    TextButton.TextButtonStyle textButtonStyle;
+    private Stage stage;
+    private Skin playButtonSkin;
+    private Skin exitButtonSkin;
+    private Skin backgroundSkin;
+    private SpriteBatch batch;
     GameStateManager gameStateManager;
-    Table table;
-    TextButton playButton;
-    BitmapFont font;
-    Drawable drawable;
-    TextButton exitButton;
+    private Table table;
+    ImageButton playButton;
+    private Drawable playButtonDrawable;
+    private Drawable backgroundDrawable;
+    private Drawable exitButtonDrawable;
+    ImageButton exitButton;
+
 
     float w = Gdx.graphics.getWidth(); //the width of the window
     float h = Gdx.graphics.getHeight();//the height of the window
@@ -40,36 +40,30 @@ public class MainMenuState implements ApplicationListener {
     public MainMenuState(final GameStateManager gameStateManager) {
         this.gameStateManager = gameStateManager;
 
-        texture = new Texture("mainMenuBackground.jpg");
-        font = new BitmapFont();
-        stage = new Stage();
+        stage = new Stage(new FitViewport(w,h));
         batch = new SpriteBatch();
         table = new Table();
-        skin = new Skin();
+        playButtonSkin = new Skin();
+        backgroundSkin = new Skin();
+        exitButtonSkin = new Skin();
 
+        backgroundSkin.add("background",new Texture("gridBg.jpg"));
+        backgroundDrawable = backgroundSkin.getDrawable("background");
 
-        //skin.add("playButtonBackground", new Texture("badlogic.jpg"));
-        //drawable = skin.getDrawable("playButtonBackground");
+        playButtonSkin.add("playButtonBackground", new Texture("playWhite.png"));
+        playButtonDrawable = playButtonSkin.getDrawable("playButtonBackground");
 
+        exitButtonSkin.add("exitButtonBackground", new Texture("exitWhite.png"));
+        exitButtonDrawable = exitButtonSkin.getDrawable("exitButtonBackground");
 
-        textButtonStyle = new TextButton.TextButtonStyle();
-        textButtonStyle.font = font;
-
-        playButton = new TextButton("Play", textButtonStyle);
-        //playButton.setBackground(drawable);
-        playButton.setSize(100, 100);
-        playButton.getLabel().setFontScale(3, 3);
-
-        exitButton = new TextButton("Exit",textButtonStyle);
-        exitButton.setSize(100,100);
-        exitButton.getLabel().setFontScale(3,3);
-
+        playButton = new ImageButton(playButtonDrawable);
+        exitButton = new ImageButton(exitButtonDrawable);
 
         table.setFillParent(true);
-        table.bottom();
-        table.add(playButton);
-        table.add();
-        table.add(exitButton);
+        table.add(playButton).size(Gdx.graphics.getWidth()/3,Gdx.graphics.getHeight()/3);
+        table.row();
+        table.add(exitButton).size(Gdx.graphics.getWidth()/3,Gdx.graphics.getHeight()/3);
+        table.setBackground(backgroundDrawable);
 
         playButton.addListener(new ChangeListener() {
             @Override
@@ -77,6 +71,7 @@ public class MainMenuState implements ApplicationListener {
                 gameStateManager.setState(GameStateManager.State.PLAY);
             }
         });
+
         exitButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -87,11 +82,11 @@ public class MainMenuState implements ApplicationListener {
 
         Gdx.input.setInputProcessor(stage);
 
-
         stage.addActor(table);
+        stage.addListener(new InputListener());
+
 
     }
-
 
 
     @Override
@@ -101,13 +96,19 @@ public class MainMenuState implements ApplicationListener {
 
     @Override
     public void resize(int width, int height) {
+        table.setFillParent(true);
+        stage.setViewport(new FitViewport(width,height));
+        stage.getViewport().update(width,height,true);
+        table.getCell(playButton).size(Gdx.graphics.getWidth()/3,Gdx.graphics.getHeight()/3);
+        table.getCell(exitButton).size(Gdx.graphics.getWidth()/3,Gdx.graphics.getHeight()/3);
     }
 
     @Override
     public void render() {
-        batch.begin();
-        batch.draw(texture, 0, 0, w, h);
-        batch.end();
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        //batch.begin();
+        //batch.draw(backgroundTexture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        //batch.end();
         stage.act();
         stage.draw();
     }
@@ -126,9 +127,12 @@ public class MainMenuState implements ApplicationListener {
 
     @Override
     public void dispose() {
-        texture.dispose();
+        batch.dispose();
+        playButtonSkin.dispose();
+        exitButtonSkin.dispose();
+        backgroundSkin.dispose();
         Gdx.gl.glClearColor(0, 0, 0, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-    }
 
+    }
 }
