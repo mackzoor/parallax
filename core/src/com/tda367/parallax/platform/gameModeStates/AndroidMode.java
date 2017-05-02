@@ -1,5 +1,6 @@
 package com.tda367.parallax.platform.gameModeStates;
 
+import com.tda367.parallax.platform.GameStateManager;
 import com.tda367.parallax.platform.TouchPadView;
 import com.tda367.parallax.platform.inputControllers.InputControlsListener;
 import com.tda367.parallax.platform.inputControllers.LibGdxTouchHandler;
@@ -29,6 +30,7 @@ class AndroidMode implements GameModeState {
 
     @Override
     public void update() {
-        touchPadView.drawTouchPad();
+        if(GameStateManager.getInstance().getState() == GameStateManager.State.PLAY)
+            touchPadView.drawTouchPad();
     }
 }
