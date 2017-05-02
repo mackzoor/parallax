@@ -1,5 +1,6 @@
 package com.tda367.parallax.platform;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
@@ -10,28 +11,41 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.tda367.parallax.platform.gameModeStates.GameModeFactory;
+import com.tda367.parallax.platform.gameModeStates.GameModeState;
+
+import java.util.ArrayList;
 
 
 /**
-    Class that renders and starts the Main Menu
+ * Class that renders and starts the Main Menu
  */
 //TODO Create GUI for the menu
 //TODO Get TrueTypeFontFactory
 
 public class MainMenuState implements ApplicationListener {
 
+    private ImageButton.ImageButtonStyle playButtonStyle;
+    private ImageButton.ImageButtonStyle exitButtonStyle;
     private Stage stage;
     private Skin playButtonSkin;
+    private Skin playButtonFocusSkin;
     private Skin exitButtonSkin;
+    private Skin exitButtonFocusSkin;
     private Skin backgroundSkin;
     private SpriteBatch batch;
     GameStateManager gameStateManager;
     private Table table;
     ImageButton playButton;
     private Drawable playButtonDrawable;
+    private Drawable playButtonFocusDrawable;
     private Drawable backgroundDrawable;
     private Drawable exitButtonDrawable;
+    private Drawable exitButtonFocusDrawable;
     ImageButton exitButton;
+    ArrayList<ImageButton> buttons;
+    GameModeState gameModeState;
+    MainMenuController mainMenuController;
 
 
     float w = Gdx.graphics.getWidth(); //the width of the window
@@ -39,52 +53,53 @@ public class MainMenuState implements ApplicationListener {
 
     public MainMenuState(final GameStateManager gameStateManager) {
         this.gameStateManager = gameStateManager;
+        gameModeState = GameModeFactory.getGameModeState(this);
 
-        stage = new Stage(new FitViewport(w,h));
+        stage = new Stage(new FitViewport(w, h));
         batch = new SpriteBatch();
         table = new Table();
         playButtonSkin = new Skin();
+        playButtonFocusSkin = new Skin();
         backgroundSkin = new Skin();
         exitButtonSkin = new Skin();
+        exitButtonFocusSkin = new Skin();
+        playButtonStyle = new ImageButton.ImageButtonStyle();
+        exitButtonStyle = new ImageButton.ImageButtonStyle();
 
-        backgroundSkin.add("background",new Texture("gridBg.jpg"));
+
+        backgroundSkin.add("background", new Texture("gridBg.jpg"));
         backgroundDrawable = backgroundSkin.getDrawable("background");
+
 
         playButtonSkin.add("playButtonBackground", new Texture("playWhite.png"));
         playButtonDrawable = playButtonSkin.getDrawable("playButtonBackground");
+        playButtonFocusSkin.add("playButtonFocus", new Texture("playButtonFocus.png"));
+        playButtonFocusDrawable = playButtonFocusSkin.getDrawable("playButtonFocus");
+
+        playButtonStyle.imageUp = playButtonDrawable;
+        playButtonStyle.imageChecked = playButtonFocusDrawable;
 
         exitButtonSkin.add("exitButtonBackground", new Texture("exitWhite.png"));
         exitButtonDrawable = exitButtonSkin.getDrawable("exitButtonBackground");
+        exitButtonFocusSkin.add("exitButtonFocus", new Texture("exitButtonFocus.png"));
+        exitButtonFocusDrawable = exitButtonFocusSkin.getDrawable("exitButtonFocus");
 
-        playButton = new ImageButton(playButtonDrawable);
-        exitButton = new ImageButton(exitButtonDrawable);
+        exitButtonStyle.imageUp = exitButtonDrawable;
+        exitButtonStyle.imageChecked = exitButtonFocusDrawable;
+
+        playButton = new ImageButton(playButtonStyle);
+        exitButton = new ImageButton(exitButtonStyle);
 
         table.setFillParent(true);
-        table.add(playButton).size(Gdx.graphics.getWidth()/3,Gdx.graphics.getHeight()/3);
+        table.add(playButton).size(Gdx.graphics.getWidth() / 3, Gdx.graphics.getHeight() / 3);
         table.row();
-        table.add(exitButton).size(Gdx.graphics.getWidth()/3,Gdx.graphics.getHeight()/3);
+        table.add(exitButton).size(Gdx.graphics.getWidth() / 3, Gdx.graphics.getHeight() / 3);
         table.setBackground(backgroundDrawable);
 
-        playButton.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                gameStateManager.setState(GameStateManager.State.PLAY);
-            }
-        });
-
-        exitButton.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                Gdx.app.exit();
-            }
-        });
-
-
-        Gdx.input.setInputProcessor(stage);
 
         stage.addActor(table);
-        stage.addListener(new InputListener());
 
+        mainMenuController = new MainMenuController(this, gameModeState);
 
     }
 
@@ -97,10 +112,10 @@ public class MainMenuState implements ApplicationListener {
     @Override
     public void resize(int width, int height) {
         table.setFillParent(true);
-        stage.setViewport(new FitViewport(width,height));
-        stage.getViewport().update(width,height,true);
-        table.getCell(playButton).size(Gdx.graphics.getWidth()/3,Gdx.graphics.getHeight()/3);
-        table.getCell(exitButton).size(Gdx.graphics.getWidth()/3,Gdx.graphics.getHeight()/3);
+        stage.setViewport(new FitViewport(width, height));
+        stage.getViewport().update(width, height, true);
+        table.getCell(playButton).size(Gdx.graphics.getWidth() / 3, Gdx.graphics.getHeight() / 3);
+        table.getCell(exitButton).size(Gdx.graphics.getWidth() / 3, Gdx.graphics.getHeight() / 3);
     }
 
     @Override
@@ -111,6 +126,7 @@ public class MainMenuState implements ApplicationListener {
         //batch.end();
         stage.act();
         stage.draw();
+        gameModeState.update();
     }
 
 
@@ -134,5 +150,18 @@ public class MainMenuState implements ApplicationListener {
         Gdx.gl.glClearColor(0, 0, 0, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+    }
+
+    public ImageButton getPlayButton() {
+        return playButton;
+    }
+
+    public ImageButton getExitButton() {
+        return exitButton;
+
+    }
+
+    public Stage getStage(){
+        return stage;
     }
 }
