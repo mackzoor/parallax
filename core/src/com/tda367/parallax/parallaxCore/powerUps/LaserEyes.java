@@ -1,5 +1,7 @@
 package com.tda367.parallax.parallaxCore.powerUps;
 
+import com.tda367.parallax.parallaxCore.spaceCraft.ISpaceCraft;
+
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
 
@@ -8,11 +10,20 @@ import javax.vecmath.Vector3f;
  * LaserEyes fires a laserbeam that is controlled by the player using google cardboard.
  */
 
-public class LaserEyes extends PowerUp {
+public class LaserEyes implements IPowerUp {
 
+
+    public void usePU(Vector3f pos, Quat4f rot) {
+
+    }
 
     @Override
-    public void usePU(Vector3f pos, Quat4f rot) {
+    public void activate(ISpaceCraft agelion) {
+
+    }
+
+    @Override
+    public void update(int milliSinceLastUpdate) {
 
     }
 }

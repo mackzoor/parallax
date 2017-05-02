@@ -4,6 +4,7 @@ import com.tda367.parallax.parallaxCore.RenderManager;
 import com.tda367.parallax.parallaxCore.SoundManager;
 import com.tda367.parallax.parallaxCore.course.HarmfulEntity;
 import com.tda367.parallax.parallaxCore.spaceCraft.Agelion;
+import com.tda367.parallax.parallaxCore.spaceCraft.ISpaceCraft;
 
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
@@ -15,7 +16,7 @@ import java.util.Random;
  * The cannon PowerUp gives Agelion the ability to fire a shot towards the direction it is pointed at
  */
 
-public class Cannon extends PowerUp {
+public class Cannon implements IPowerUp {
 
     SoundManager soundManager;
     Agelion spaceCraft;
@@ -28,7 +29,6 @@ public class Cannon extends PowerUp {
     }
 
     //Creates a laser-beam and calls upon a sound.
-    @Override
     public void usePU(Vector3f pos, Quat4f rot) {
         //Adds a HarmfulEntity (object) to the laser-beam list
         laserBeams.add(new HarmfulEntity(spaceCraft.getForwardVelocity(), "laser.g3db", "3dModels/laser"));
@@ -71,6 +71,11 @@ public class Cannon extends PowerUp {
     //Sets the laser position at the given position in the laserBeams list.
     private void setLaserPos(Vector3f pos, int placeInList){
         laserBeams.get(placeInList).getPos().set(pos);
+    }
+
+    @Override
+    public void activate(ISpaceCraft agelion) {
+
     }
 
     //Calls upon the chain of update classes. Adding this to the rendering and updating. Also checks if the beam has been in the course the right amount of time. (the time set in the constructor

@@ -5,18 +5,14 @@ import com.tda367.parallax.parallaxCore.Collision.CollisionPair;
 import com.tda367.parallax.parallaxCore.Collision.ICollisionCalculator;
 import com.tda367.parallax.parallaxCore.RenderManager;
 import com.tda367.parallax.parallaxCore.SoundManager;
-import com.tda367.parallax.parallaxCore.enemies.MinionEnemy;
 import com.tda367.parallax.parallaxCore.Updatable;
-import com.tda367.parallax.parallaxCore.powerUps.PowerUp;
-import com.tda367.parallax.parallaxCore.spaceCraft.Agelion;
+import com.tda367.parallax.parallaxCore.powerUps.IPowerUp;
 import com.tda367.parallax.parallaxCore.spaceCraft.ISpaceCraft;
 import com.tda367.parallax.parallaxCore.spaceCraft.SpaceCraftListener;
 
-import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 /**
  * A course that handles the visual representation and updating of {@link ISpaceCraft} and {@link Collidable}.
@@ -26,7 +22,7 @@ public class Course implements Updatable, SpaceCraftListener {
     private List<ISpaceCraft> spaceCrafts;
     private ICollisionCalculator collisionCalculator;
     //TODO, remove the power-up after used
-    private List<PowerUp> activePowerups;
+    private List<IPowerUp> activePowerups;
 
 
     public Course(){
@@ -35,7 +31,7 @@ public class Course implements Updatable, SpaceCraftListener {
         collisionCalculator = null;
 
         updateModuleRange();
-        activePowerups = new ArrayList<PowerUp>();
+        activePowerups = new ArrayList<IPowerUp>();
     }
 
     public List<ISpaceCraft> getSpaceCrafts() {
@@ -86,7 +82,7 @@ public class Course implements Updatable, SpaceCraftListener {
             spaceCraft.update(milliSinceLastUpdate);
         }
 
-        for (PowerUp pu : activePowerups) {
+        for (IPowerUp pu : activePowerups) {
             pu.update(milliSinceLastUpdate);
         }
 
@@ -160,8 +156,8 @@ public class Course implements Updatable, SpaceCraftListener {
         this.collisionCalculator = collisionCalculator;
     }
 
-    @Override
-    public void powerUPUsed(PowerUp pu) {
+
+    public void powerUPUsed(IPowerUp pu) {
         if (activePowerups.indexOf(pu) == -1) {
             activePowerups.add(pu);
         }

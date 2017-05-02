@@ -4,6 +4,7 @@ import com.tda367.parallax.parallaxCore.RenderManager;
 import com.tda367.parallax.parallaxCore.SoundManager;
 import com.tda367.parallax.parallaxCore.course.HarmfulEntity;
 import com.tda367.parallax.parallaxCore.spaceCraft.Agelion;
+import com.tda367.parallax.parallaxCore.spaceCraft.ISpaceCraft;
 
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
@@ -13,7 +14,7 @@ import java.util.List;
 /**
  * A tracking "fire and forget" missle.
  */
-public class Missile extends PowerUp {
+public class Missile implements IPowerUp {
 
     SoundManager soundManager;
     Agelion spaceCraft;
@@ -26,7 +27,6 @@ public class Missile extends PowerUp {
     }
 
     //Creates a missile and calls upon a sound.
-    @Override
     public void usePU(Vector3f pos, Quat4f rot){
 
         missiles.add(new HarmfulEntity(spaceCraft.getForwardVelocity(), "missile.g3db", "3dModels/missile"));
@@ -36,6 +36,11 @@ public class Missile extends PowerUp {
         RenderManager.getInstance().addRenderTask(missiles.get(missiles.size()-1));
 
         soundManager.playSound("MissileDemo.mp3","sounds/effects", new Float(0.6f));
+    }
+
+    @Override
+    public void activate(ISpaceCraft agelion) {
+
     }
 
     public void update(int milliSinceLastUpdate){

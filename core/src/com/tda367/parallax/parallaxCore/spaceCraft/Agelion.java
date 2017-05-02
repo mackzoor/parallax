@@ -2,8 +2,8 @@ package com.tda367.parallax.parallaxCore.spaceCraft;
 
 import com.tda367.parallax.parallaxCore.Model;
 import com.tda367.parallax.parallaxCore.RenderManager;
+import com.tda367.parallax.parallaxCore.powerUps.IPowerUp;
 import com.tda367.parallax.parallaxCore.powerUps.Missile;
-import com.tda367.parallax.parallaxCore.powerUps.PowerUp;
 
 import javax.vecmath.*;
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ import java.util.List;
 public class Agelion implements ISpaceCraft {
 
     //TODO, "private powerUp pu;" when done testing
-    private PowerUp pu = new Missile(this);
+    private IPowerUp pu = new Missile(this);
     private int health;
 
     private float forwardVelocity;
@@ -216,7 +216,7 @@ public class Agelion implements ISpaceCraft {
         }
     }
     @Override
-    public void setPU(PowerUp pu) {
+    public void setPU(IPowerUp pu) {
         this.pu = pu;
     }
     @Override
