@@ -1,7 +1,7 @@
 package com.tda367.parallax.parallaxCore.spaceCraft;
 
-import com.tda367.parallax.parallaxCore.Model;
-import com.tda367.parallax.parallaxCore.RenderManager;
+import com.tda367.parallax.CoreAbstraction.Model;
+import com.tda367.parallax.CoreAbstraction.RenderManager;
 import com.tda367.parallax.parallaxCore.powerUps.IPowerUp;
 import com.tda367.parallax.parallaxCore.powerUps.Missile;
 
@@ -269,10 +269,6 @@ public class Agelion implements ISpaceCraft {
     public void removeFromRenderManager() {
         RenderManager.getInstance().removeRenderTask(this);
     }
-    @Override
-    public Model getModel() {
-        return agelionModel;
-    }
 
 
     //Collision
@@ -291,6 +287,11 @@ public class Agelion implements ISpaceCraft {
     @Override
     public Model getCollisionModel() {
         return collisionModel;
+    }
+
+    @Override
+    public Model getModel() {
+        return agelionModel;
     }
 }
 

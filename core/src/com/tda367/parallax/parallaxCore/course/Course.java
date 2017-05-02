@@ -1,11 +1,11 @@
 package com.tda367.parallax.parallaxCore.course;
 
-import com.tda367.parallax.parallaxCore.Collidable;
+import com.tda367.parallax.CoreAbstraction.Collidable;
 import com.tda367.parallax.parallaxCore.Collision.CollisionPair;
 import com.tda367.parallax.parallaxCore.Collision.ICollisionCalculator;
-import com.tda367.parallax.parallaxCore.RenderManager;
-import com.tda367.parallax.parallaxCore.SoundManager;
-import com.tda367.parallax.parallaxCore.Updatable;
+import com.tda367.parallax.CoreAbstraction.RenderManager;
+import com.tda367.parallax.CoreAbstraction.SoundManager;
+import com.tda367.parallax.CoreAbstraction.Updatable;
 import com.tda367.parallax.parallaxCore.powerUps.IPowerUp;
 import com.tda367.parallax.parallaxCore.spaceCraft.ISpaceCraft;
 import com.tda367.parallax.parallaxCore.spaceCraft.SpaceCraftListener;

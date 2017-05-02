@@ -1,10 +1,10 @@
-package com.tda367.parallax.parallaxCore;
+package com.tda367.parallax.CoreAbstraction;
 
 /**
  * Interface for classes with models.
  */
 public interface IModel {
 
-    Model getModel();
+    public Model getModel();
 
 }

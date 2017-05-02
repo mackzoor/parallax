@@ -1,4 +1,4 @@
-package com.tda367.parallax.parallaxCore;
+package com.tda367.parallax.CoreAbstraction;
 
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;

@@ -1,4 +1,6 @@
-package com.tda367.parallax.parallaxCore;
+package com.tda367.parallax.CoreAbstraction;
+
+import com.tda367.parallax.CoreAbstraction.IModel;
 
 /**
  * Handles 3d models.
@@ -17,10 +19,10 @@ public class Model {
         this.modelDirectory = modelDirectory;
     }
 
-
     public String getModelName() {
         return modelName;
     }
+
     public String getModelDirectory() {
         return modelDirectory;
     }

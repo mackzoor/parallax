@@ -1,4 +1,4 @@
-package com.tda367.parallax.parallaxCore;
+package com.tda367.parallax.CoreAbstraction;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,6 +1,6 @@
 package com.tda367.parallax.parallaxCore.Collision;
 
-import com.tda367.parallax.parallaxCore.Collidable;
+import com.tda367.parallax.CoreAbstraction.Collidable;
 
 /**
  * A class that holds a pair of {@link Collidable} that has collided.

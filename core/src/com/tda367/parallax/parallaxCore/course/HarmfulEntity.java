@@ -1,27 +1,26 @@
 package com.tda367.parallax.parallaxCore.course;
 
-import com.tda367.parallax.parallaxCore.*;
+import com.tda367.parallax.CoreAbstraction.*;
 
 import javax.vecmath.Quat4f;
-import javax.vecmath.Tuple3f;
 import javax.vecmath.Vector3f;
 
 /**
  * Created by xoxLU on 2017-04-24.
  */
-public class HarmfulEntity implements Collidable, Renderable, Updatable {
+public class HarmfulEntity implements com.tda367.parallax.CoreAbstraction.Collidable, Renderable, com.tda367.parallax.CoreAbstraction.Updatable {
 
     private Vector3f pos;
     private Quat4f rot;
     private float velocity;
-    private Model model;
+    private com.tda367.parallax.CoreAbstraction.Model model;
     private int time;
 
     public HarmfulEntity(Float shipVelocity, String modelName, String modelDirectory){
         setStartingVelocity(shipVelocity, modelName);
         pos = new Vector3f();
         rot = new Quat4f();
-        model = new Model(modelName, modelDirectory);
+        model = new com.tda367.parallax.CoreAbstraction.Model(modelName, modelDirectory);
         time = 1000;
     }
 
@@ -29,7 +28,7 @@ public class HarmfulEntity implements Collidable, Renderable, Updatable {
         velocity = shipVelocity + 10;
         this.pos = pos;
         rot = new Quat4f();
-        model = new Model(modelName, modelDirectory);
+        model = new com.tda367.parallax.CoreAbstraction.Model(modelName, modelDirectory);
         time = 1000;
     }
 
@@ -44,19 +43,15 @@ public class HarmfulEntity implements Collidable, Renderable, Updatable {
         }
     }
 
-    @Override
-    public Model getModel() {
-        return model;
-    }
 
     @Override
     public void addToRenderManager()  {
-        RenderManager.getInstance().addRenderTask(this);
+        com.tda367.parallax.CoreAbstraction.RenderManager.getInstance().addRenderTask(this);
     }
 
     @Override
     public void removeFromRenderManager() {
-        RenderManager.getInstance().removeRenderTask(this);
+        com.tda367.parallax.CoreAbstraction.RenderManager.getInstance().removeRenderTask(this);
     }
 
     @Override
@@ -103,7 +98,13 @@ public class HarmfulEntity implements Collidable, Renderable, Updatable {
     }
 
     @Override
-    public Model getCollisionModel() {
+    public com.tda367.parallax.CoreAbstraction.Model getCollisionModel() {
         return null;
+    }
+
+
+    @Override
+    public Model getModel() {
+        return model;
     }
 }

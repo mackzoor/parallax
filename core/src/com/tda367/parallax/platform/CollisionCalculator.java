@@ -3,7 +3,7 @@ package com.tda367.parallax.platform;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.bullet.*;
 import com.badlogic.gdx.physics.bullet.collision.*;
-import com.tda367.parallax.parallaxCore.Collidable;
+import com.tda367.parallax.CoreAbstraction.Collidable;
 import com.tda367.parallax.parallaxCore.Collision.CollisionPair;
 import com.tda367.parallax.parallaxCore.Collision.ICollisionCalculator;
 

@@ -16,10 +16,10 @@ import java.util.Random;
 /**
  * The startup class for the game "Parallax".
  */
-public class Parallax implements Updatable{
+public class Parallax implements com.tda367.parallax.CoreAbstraction.Updatable {
 
-    private RenderManager renderManager;
-    private SoundManager soundManager;
+    private com.tda367.parallax.CoreAbstraction.RenderManager renderManager;
+    private com.tda367.parallax.CoreAbstraction.SoundManager soundManager;
     private Course course;
     private Camera camera;
     private Player player;
@@ -27,8 +27,8 @@ public class Parallax implements Updatable{
     private List<HunterAI> ais;
 
     public Parallax(Player player){
-        renderManager = RenderManager.getInstance();
-        soundManager = SoundManager.getInstance();
+        renderManager = com.tda367.parallax.CoreAbstraction.RenderManager.getInstance();
+        soundManager = com.tda367.parallax.CoreAbstraction.SoundManager.getInstance();
 
         course = new Course();
         course.addSpaceCraft(player.getSpaceCraft());
@@ -70,7 +70,7 @@ public class Parallax implements Updatable{
         return course.getSpaceCrafts();
     }
 
-    public RenderManager getRenderManager(){
+    public com.tda367.parallax.CoreAbstraction.RenderManager getRenderManager(){
         return renderManager;
     }
 

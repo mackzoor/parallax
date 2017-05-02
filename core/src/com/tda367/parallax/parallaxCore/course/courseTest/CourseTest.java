@@ -1,13 +1,9 @@
 package com.tda367.parallax.parallaxCore.course.courseTest;
 
-import com.tda367.parallax.parallaxCore.RenderManager;
+import com.tda367.parallax.CoreAbstraction.RenderManager;
 import com.tda367.parallax.parallaxCore.course.Course;
 import com.tda367.parallax.parallaxCore.spaceCraft.Agelion;
-import com.tda367.parallax.parallaxCore.spaceCraft.ISpaceCraft;
 import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.Assert.*;
 

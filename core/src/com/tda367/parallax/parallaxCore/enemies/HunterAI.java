@@ -1,7 +1,7 @@
 package com.tda367.parallax.parallaxCore.enemies;
 
-import com.tda367.parallax.parallaxCore.Transformable;
-import com.tda367.parallax.parallaxCore.Updatable;
+import com.tda367.parallax.CoreAbstraction.Transformable;
+import com.tda367.parallax.CoreAbstraction.Updatable;
 
 /**
  * Interface for ai that will try to destroy its target.

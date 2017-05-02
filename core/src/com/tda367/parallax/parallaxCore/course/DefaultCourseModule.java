@@ -1,6 +1,6 @@
 package com.tda367.parallax.parallaxCore.course;
 
-import com.tda367.parallax.parallaxCore.*;
+import com.tda367.parallax.CoreAbstraction.Model;
 
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
@@ -11,14 +11,14 @@ import java.util.Random;
 /**
  * A course module that will represent the visual part of a course.
  */
-public class DefaultCourseModule implements ICourseModule, IModel {
+public class DefaultCourseModule implements ICourseModule, com.tda367.parallax.CoreAbstraction.IModel {
     private Vector3f pos;
     private Quat4f rot;
     private float length;
 
     private List<BoxObstacle> boxObstacles;
-    private List<Collidable> usables;
-    private Model model;
+    private List<com.tda367.parallax.CoreAbstraction.Collidable> usables;
+    private com.tda367.parallax.CoreAbstraction.Model model;
 
 
     DefaultCourseModule(Vector3f pos,int obstacleAmmount){
@@ -26,10 +26,10 @@ public class DefaultCourseModule implements ICourseModule, IModel {
         this.pos.setY(pos.getY());
         this.rot = new Quat4f();
 
-        model = new Model("course.g3db", "3dModels/defaultCourse");
+        model = new com.tda367.parallax.CoreAbstraction.Model("course.g3db", "3dModels/defaultCourse");
         length = 64;
         this.boxObstacles = new ArrayList<BoxObstacle>();
-        usables = new ArrayList<Collidable>();
+        usables = new ArrayList<com.tda367.parallax.CoreAbstraction.Collidable>();
 
         addObstacles(obstacleAmmount);
 
@@ -62,22 +62,18 @@ public class DefaultCourseModule implements ICourseModule, IModel {
         return length;
     }
     @Override
-    public List<? extends Collidable> getBoxObstacles() {
+    public List<? extends com.tda367.parallax.CoreAbstraction.Collidable> getBoxObstacles() {
         return boxObstacles;
     }
     @Override
-    public List<Collidable> getUsables() {
+    public List<com.tda367.parallax.CoreAbstraction.Collidable> getUsables() {
         return usables;
     }
 
     //Renderable
     @Override
-    public Model getModel(){
-        return model;
-    }
-    @Override
     public void addToRenderManager() {
-        RenderManager.getInstance().addRenderTask(this);
+        com.tda367.parallax.CoreAbstraction.RenderManager.getInstance().addRenderTask(this);
 
         for (BoxObstacle boxObstacle : boxObstacles){
             boxObstacle.addToRenderManager();
@@ -86,7 +82,7 @@ public class DefaultCourseModule implements ICourseModule, IModel {
     }
     @Override
     public void removeFromRenderManager() {
-        RenderManager.getInstance().removeRenderTask(this);
+        com.tda367.parallax.CoreAbstraction.RenderManager.getInstance().removeRenderTask(this);
 
         for (BoxObstacle boxObstacle : boxObstacles){
             boxObstacle.removeFromRenderManager();
@@ -104,4 +100,8 @@ public class DefaultCourseModule implements ICourseModule, IModel {
         return rot;
     }
 
+    @Override
+    public Model getModel() {
+        return model;
+    }
 }

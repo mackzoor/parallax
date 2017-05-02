@@ -1,10 +1,8 @@
 package com.tda367.parallax.parallaxCore.powerUps;
 
-import com.tda367.parallax.parallaxCore.RenderManager;
-import com.tda367.parallax.parallaxCore.SoundManager;
-import com.tda367.parallax.parallaxCore.course.HarmfulEntity;
-import com.tda367.parallax.parallaxCore.spaceCraft.Agelion;
-import com.tda367.parallax.parallaxCore.spaceCraft.ISpaceCraft;
+import com.tda367.parallax.CoreAbstraction.RenderManager;
+import com.tda367.parallax.CoreAbstraction.SoundManager;
+import com.tda367.parallax.CoreAbstraction.Transformable;
 
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
@@ -19,31 +17,29 @@ import java.util.Random;
 public class Cannon implements IPowerUp {
 
     SoundManager soundManager;
-    Agelion spaceCraft;
+    Transformable transformable;
 
-    private List<HarmfulEntity> laserBeams = new ArrayList<HarmfulEntity>();
-
-    public Cannon(Agelion spaceCraft){
+    public Cannon(Transformable transformable){
         soundManager = SoundManager.getInstance();
-        this.spaceCraft = spaceCraft;
+        this.transformable = transformable;
     }
 
     //Creates a laser-beam and calls upon a sound.
     public void usePU(Vector3f pos, Quat4f rot) {
         //Adds a HarmfulEntity (object) to the laser-beam list
-        laserBeams.add(new HarmfulEntity(spaceCraft.getForwardVelocity(), "laser.g3db", "3dModels/laser"));
+//        laserBeams.add(new HarmfulEntity(25f, "laser.g3db", "3dModels/laser"));
 
         //Sets the rotation of the laser to the correct values
         rot = new Quat4f(0,0,0.7071f,0.7071f);
 
         //Set laser rotation
-        setLaserRot(rot, laserBeams.size()-1);
+//        setLaserRot(rot, laserBeams.size()-1);
 
         //Set laser position to the ships current position
-        setLaserPos(new Vector3f(spaceCraft.getPos().getX(),spaceCraft.getPos().getY(),spaceCraft.getPos().getZ()), laserBeams.size()-1);
+//        setLaserPos(new Vector3f(transformable.getPos().getX(),transformable.getPos().getY(),transformable.getPos().getZ()), laserBeams.size()-1);
 
         //Adds the latest added laser-beam to the render task
-        RenderManager.getInstance().addRenderTask(laserBeams.get(laserBeams.size()-1));
+//        RenderManager.getInstance().addRenderTask(laserBeams.get(laserBeams.size()-1));
 
         //Plays a sound for the laser
         playLaserSound();
@@ -64,22 +60,22 @@ public class Cannon implements IPowerUp {
 
     //Sets the laser rotation at the given position in the laserBeams list.
     private void setLaserRot(Quat4f rot, int placeInList){
-        laserBeams.get(placeInList).getRot().set(rot);
-        laserBeams.get(placeInList).getRot().normalize();
+//        laserBeams.get(placeInList).getRot().set(rot);
+//        laserBeams.get(placeInList).getRot().normalize();
     }
 
     //Sets the laser position at the given position in the laserBeams list.
     private void setLaserPos(Vector3f pos, int placeInList){
-        laserBeams.get(placeInList).getPos().set(pos);
+        /*laserBeams.get(placeInList).getPos().set(pos);*/
     }
 
     @Override
-    public void activate(ISpaceCraft agelion) {
+    public void activate() {
 
     }
 
     //Calls upon the chain of update classes. Adding this to the rendering and updating. Also checks if the beam has been in the course the right amount of time. (the time set in the constructor
-    public void update(int milliSinceLastUpdate){
+    public void update(int milliSinceLastUpdate){/*
         for(int i = 0; i< laserBeams.size(); i++){
             laserBeams.get(i).update(milliSinceLastUpdate);
             laserBeams.get(i).removeTime(milliSinceLastUpdate);
@@ -88,11 +84,7 @@ public class Cannon implements IPowerUp {
                 laserBeams.remove(i);
                 i--;
             }
-        }
-    }
-
-    public List<HarmfulEntity> getLaserBeams() {
-        return laserBeams;
+        }*/
     }
 
 }

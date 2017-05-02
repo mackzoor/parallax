@@ -16,7 +16,7 @@ public class Nuke implements IPowerUp {
     }
 
     @Override
-    public void activate(ISpaceCraft agelion) {
+    public void activate() {
 
     }
 

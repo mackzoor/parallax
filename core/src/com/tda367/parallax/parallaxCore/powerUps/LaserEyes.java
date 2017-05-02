@@ -18,7 +18,7 @@ public class LaserEyes implements IPowerUp {
     }
 
     @Override
-    public void activate(ISpaceCraft agelion) {
+    public void activate() {
 
     }
 

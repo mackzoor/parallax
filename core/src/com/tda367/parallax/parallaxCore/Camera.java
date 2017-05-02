@@ -6,15 +6,15 @@ import javax.vecmath.Vector3f;
 //TODO implement different tracking modes.
 
 /**
- * A virtual camera with capabilities to track {@link Transformable}
+ * A virtual camera with capabilities to track {@link com.tda367.parallax.CoreAbstraction.Transformable}
  */
-public class Camera implements Updatable, Transformable{
+public class Camera implements com.tda367.parallax.CoreAbstraction.Updatable, com.tda367.parallax.CoreAbstraction.Transformable {
 
     private Vector3f pos;
     private Quat4f rot;
     private float fov;
 
-    private Transformable trackingTarget;
+    private com.tda367.parallax.CoreAbstraction.Transformable trackingTarget;
 
 
     public Camera(Vector3f pos, Quat4f rot, float fov){
@@ -27,7 +27,7 @@ public class Camera implements Updatable, Transformable{
     }
 
 
-    public void trackTo(Transformable transformable){
+    public void trackTo(com.tda367.parallax.CoreAbstraction.Transformable transformable){
         trackingTarget = transformable;
     }
     public void updatePosition(){

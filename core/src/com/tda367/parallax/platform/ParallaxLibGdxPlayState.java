@@ -17,13 +17,13 @@ public class ParallaxLibGdxPlayState implements ApplicationListener {
     private GameModeState gameModeState;
     private Sound sound;
     GameStateManager gameStateManager;
-    SoundManager soundManager;
+    com.tda367.parallax.CoreAbstraction.SoundManager soundManager;
     CollisionCalculator collisionCalculator;
 
     public ParallaxLibGdxPlayState(GameStateManager gameStateManager) {
         this.gameStateManager = gameStateManager;
         this.gameModeState = GameModeFactory.getGameModeState(this);
-        soundManager = SoundManager.getInstance();
+        soundManager = com.tda367.parallax.CoreAbstraction.SoundManager.getInstance();
         this.collisionCalculator = new CollisionCalculator();
 
         // Initiate game with space craft "Agelion"

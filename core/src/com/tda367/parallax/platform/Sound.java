@@ -1,10 +1,8 @@
 package com.tda367.parallax.platform;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
-import com.tda367.parallax.parallaxCore.SoundListener;
-import com.tda367.parallax.parallaxCore.SoundManager;
-import org.omg.PortableInterceptor.ACTIVE;
+import com.tda367.parallax.CoreAbstraction.SoundListener;
+import com.tda367.parallax.CoreAbstraction.SoundManager;
 
 import java.util.ArrayList;
 import java.util.List;

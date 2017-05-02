@@ -1,6 +1,6 @@
 package com.tda367.parallax.parallaxCore.powerUps;
 
-import com.tda367.parallax.parallaxCore.Usable;
+import com.tda367.parallax.CoreAbstraction.Usable;
 import com.tda367.parallax.parallaxCore.spaceCraft.ISpaceCraft;
 
 /**
@@ -14,7 +14,12 @@ import com.tda367.parallax.parallaxCore.spaceCraft.ISpaceCraft;
 public class ExtraLife implements Usable {
 
     @Override
-    public void activate(ISpaceCraft agelion) {
+    public void activate() {
+
+    }
+
+    @Override
+    public void update(int milliSinceLastUpdate) {
 
     }
 }

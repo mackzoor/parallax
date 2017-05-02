@@ -1,4 +1,7 @@
-package com.tda367.parallax.parallaxCore;
+package com.tda367.parallax.CoreAbstraction;
+
+import com.tda367.parallax.CoreAbstraction.IModel;
+import com.tda367.parallax.CoreAbstraction.Transformable;
 
 /**
  * Interface for classes that are renderable.
