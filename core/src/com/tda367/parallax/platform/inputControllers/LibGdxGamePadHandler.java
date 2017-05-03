@@ -19,14 +19,13 @@ public class LibGdxGamePadHandler implements ControllerListener {
 
     public LibGdxGamePadHandler() {
         Controllers.addListener(this);
-        connected(Controllers.getControllers().first());
-        /*for (Controller controller : Controllers.getControllers()) {
+        for (Controller controller : Controllers.getControllers()) {
             System.out.println(controller.getName());
             controller.addListener(this);
             connected(controller);
         }
-        */
     }
+
 
     public void setListener(InputControlsListener listener) {
         this.listener = listener;
@@ -45,8 +44,8 @@ public class LibGdxGamePadHandler implements ControllerListener {
     @Override
     public boolean buttonDown(Controller controller, int buttonCode) {
 
-        if(listener != null) {
-            if(buttonCode == gamePad.GetActionButtonCode()) {
+        if (listener != null) {
+            if (buttonCode == gamePad.GetActionButtonCode()) {
                 listener.actionButtonPressed();
             } else if (buttonCode == gamePad.GetSecondaryActionButtonCode()) {
                 listener.secondaryActionButtonPressed();
@@ -90,7 +89,7 @@ public class LibGdxGamePadHandler implements ControllerListener {
         if (value * value < 0.02f) value = 0f;
 
         if (listener != null) {
-            if(axisCode == gamePad.GetXAxisJoystickCode()) {
+            if (axisCode == gamePad.GetXAxisJoystickCode()) {
                 listener.xAxisJoystickMovement(gamePad.XAxisValueConverter(value));
             } else if (axisCode == gamePad.GetYAxisJoystickCode()) {
                 listener.yAxisJoystickMovement(gamePad.YAxisValueConverter(value));
