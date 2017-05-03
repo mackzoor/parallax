@@ -39,7 +39,7 @@ public class Parallax implements com.tda367.parallax.CoreAbstraction.Updatable {
 
         ais = new ArrayList<HunterAI>();
 
-        createTestEnemy();
+//        createTestEnemy();
 
         startBackgroundMusic();
     }
