@@ -3,134 +3,119 @@ package com.tda367.parallax.parallaxCore.powerUps;
 import com.tda367.parallax.CoreAbstraction.Model;
 import com.tda367.parallax.CoreAbstraction.RenderManager;
 import com.tda367.parallax.CoreAbstraction.SoundManager;
-import com.tda367.parallax.CoreAbstraction.Transformable;
-
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 /**
- * The cannon PowerUp gives Agelion the ability to fire a shot towards the direction it is pointed at
+ * The cannon PowerUp fires a cannon shot towards the direction it is pointed at.
  */
 
 public class Cannon implements IPowerUp {
 
-    SoundManager soundManager;
-    Transformable transformable;
+    private Vector3f pos;
+    private Quat4f rot;
+    private Vector3f velocity;
+    private Vector3f acceleration; //Will it ever use this?
 
-    public Cannon(Transformable transformable){
-        soundManager = SoundManager.getInstance();
-        this.transformable = transformable;
+    private Model model;
+    private Model collisionModel;
+    private boolean isCollisionOn;
+
+    public Cannon(){
+        this.pos = new Vector3f();
+        this.rot = new Quat4f();
+        this.velocity = new Vector3f();
+        this.acceleration = new Vector3f();
+        this.model = new Model("laser.g3db", "3dModels/laser");
+        this.isCollisionOn = false;
     }
 
-    //Creates a laser-beam and calls upon a sound.
-    public void usePU(Vector3f pos, Quat4f rot) {
-        //Adds a HarmfulEntity (object) to the laser-beam list
-//        laserBeams.add(new HarmfulEntity(25f, "laser.g3db", "3dModels/laser"));
 
-        //Sets the rotation of the laser to the correct values
+    //Launches the cannon round.
+    @Override
+    public void usePU(Vector3f pos, Quat4f rot) {
+        //Offset cannon round rotation by 90 degrees due to rotated 3d model.
         rot = new Quat4f(0,0,0.7071f,0.7071f);
 
-        //Set laser rotation
-//        setLaserRot(rot, laserBeams.size()-1);
+        //Rotate the cannon round with the given rotation.
+        rot.mul(rot);
 
-        //Set laser position to the ships current position
-//        setLaserPos(new Vector3f(transformable.getPos().getX(),transformable.getPos().getY(),transformable.getPos().getZ()), laserBeams.size()-1);
-
-        //Adds the latest added laser-beam to the render task
-//        RenderManager.getInstance().addRenderTask(laserBeams.get(laserBeams.size()-1));
+        //Sets the cannon round starting position to the one given in the arguments.
+        pos = new Vector3f(pos);
 
         //Plays a sound for the laser
-        playLaserSound();
+        playCannonSound();
     }
-
-    //Calls upon the sound class to play the laser sound based on a String name and String directory.
-    private void playLaserSound(){
-        Random rand = new Random();
-        int randomSong = rand.nextInt(200 - 1 + 1) + 1;
-
-        //Plays a funny sound every 200 shots
-        if(randomSong > 199){
-            soundManager.playSound("cannonLow.mp3","sounds/effects", new Float(0.8f));
-        } else {
-            soundManager.playSound("cannon.mp3","sounds/effects", new Float(0.8f));
-        }
-    }
-
-    //Sets the laser rotation at the given position in the laserBeams list.
-    private void setLaserRot(Quat4f rot, int placeInList){
-//        laserBeams.get(placeInList).getRot().set(rot);
-//        laserBeams.get(placeInList).getRot().normalize();
-    }
-
-    //Sets the laser position at the given position in the laserBeams list.
-    private void setLaserPos(Vector3f pos, int placeInList){
-        /*laserBeams.get(placeInList).getPos().set(pos);*/
-    }
-
     @Override
     public void activate() {
 
     }
 
-    //Calls upon the chain of update classes. Adding this to the rendering and updating. Also checks if the beam has been in the course the right amount of time. (the time set in the constructor
-    public void update(int milliSinceLastUpdate){/*
-        for(int i = 0; i< laserBeams.size(); i++){
-            laserBeams.get(i).update(milliSinceLastUpdate);
-            laserBeams.get(i).removeTime(milliSinceLastUpdate);
-            if(laserBeams.get(i).getTime() < 0){
-                RenderManager.getInstance().removeRenderTask(laserBeams.get(i));
-                laserBeams.remove(i);
-                i--;
-            }
-        }*/
-    }
 
+    //Updates the cannon.
     @Override
-    public Model getModel() {
-        return null;
+    public void update(int milliSinceLastUpdate){
+        updatePosition();
     }
-
-    @Override
-    public boolean isActive() {
-        return false;
-    }
-
-    @Override
-    public void disableCollision() {
+    private void updatePosition(){
 
     }
+    private void playCannonSound(){
+        Random rand = new Random();
+        int randomSong = rand.nextInt(200 - 1 + 1) + 1;
 
-    @Override
-    public void enableCollision() {
-
+        //Plays a funny sound every 200 shots
+        if(randomSong > 199){
+            SoundManager.getInstance().playSound("cannonLow.mp3","sounds/effects", new Float(0.8f));
+        } else {
+            SoundManager.getInstance().playSound("cannon.mp3","sounds/effects", new Float(0.8f));
+        }
     }
 
-    @Override
-    public Model getCollisionModel() {
-        return null;
-    }
-
+    //Transformable
     @Override
     public Vector3f getPos() {
-        return null;
+        return pos;
     }
-
     @Override
     public Quat4f getRot() {
-        return null;
+        return rot;
     }
 
+
+    //Collision
+    @Override
+    public boolean isActive() {
+        return isCollisionOn;
+    }
+    @Override
+    public void disableCollision() {
+        isCollisionOn = false;
+    }
+    @Override
+    public void enableCollision() {
+        isCollisionOn = true;
+    }
+    @Override
+    public Model getCollisionModel() {
+        return collisionModel;
+    }
+
+
+    //Render
     @Override
     public void addToRenderManager() {
-
+        RenderManager.getInstance().addRenderTask(this);
     }
-
+    @Override
+    public Model getModel() {
+        return model;
+    }
     @Override
     public void removeFromRenderManager() {
-
+        RenderManager.getInstance().addRenderTask(this);
     }
+
 }
 
