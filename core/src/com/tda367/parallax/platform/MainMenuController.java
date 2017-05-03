@@ -111,7 +111,8 @@ public class MainMenuController implements InputControlsListener {
     public void yAxisJoystickMovement(float yValue) {
         if(yValue > 0){
             upButtonPressed();
+        } else if (yValue < 0) {
+            downButtonPressed();
         }
-        else downButtonPressed();
     }
 }
