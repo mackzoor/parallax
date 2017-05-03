@@ -1,4 +1,4 @@
-package com.tda367.parallax.parallaxCore.course.courseTest;
+package com.tda367.parallax.parallaxCore.course;
 
 import com.tda367.parallax.CoreAbstraction.RenderManager;
 import com.tda367.parallax.parallaxCore.course.Course;

@@ -1,4 +1,4 @@
-package com.tda367.parallax.platform.inputControllers.gamePads.GamePadsTest;
+package com.tda367.parallax.platform.inputControllers.gamePads;
 
 import com.tda367.parallax.platform.inputControllers.gamePads.AndroidGamePad;
 import com.tda367.parallax.platform.inputControllers.gamePads.GamePad;

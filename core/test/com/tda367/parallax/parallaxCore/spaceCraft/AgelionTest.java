@@ -1,4 +1,4 @@
-package com.tda367.parallax.parallaxCore.spaceCraft.spaceCraftTest;
+package com.tda367.parallax.parallaxCore.spaceCraft;
 
 import com.tda367.parallax.parallaxCore.spaceCraft.Agelion;
 import org.junit.Before;
@@ -8,6 +8,7 @@ import javax.vecmath.Quat4f;
 import javax.vecmath.Vector2f;
 import javax.vecmath.Vector3f;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -98,7 +99,7 @@ public class AgelionTest {
         agilion.update(1000);
 
         //Check to see that the ship has panned in at all
-        assertTrue((!(pos.getX() == agilion.getPos().getX())) || (!(pos.getZ() == agilion.getPos().getZ())));
+        assertFalse(pos.getX() == agilion.getPos().getX() && pos.getZ() == agilion.getPos().getZ());
 
         //Checks that the ship has panned to the right position after another 9s
         agilion.update(9000);
