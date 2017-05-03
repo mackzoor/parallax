@@ -19,11 +19,13 @@ public class LibGdxGamePadHandler implements ControllerListener {
 
     public LibGdxGamePadHandler() {
         Controllers.addListener(this);
-        for (Controller controller : Controllers.getControllers()) {
+        connected(Controllers.getControllers().first());
+        /*for (Controller controller : Controllers.getControllers()) {
             System.out.println(controller.getName());
             controller.addListener(this);
             connected(controller);
         }
+        */
     }
 
     public void setListener(InputControlsListener listener) {
