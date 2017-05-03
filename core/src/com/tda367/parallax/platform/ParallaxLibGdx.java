@@ -2,17 +2,9 @@ package com.tda367.parallax.platform;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
-import com.tda367.parallax.parallaxCore.Parallax;
-import com.tda367.parallax.parallaxCore.Player;
 
 public class ParallaxLibGdx implements ApplicationListener{
 
-    private com.badlogic.gdx.graphics.PerspectiveCamera camera;
-    private Player player;
-    private Parallax parallaxGame;
-    private Renderer renderer;
-    private ParallaxLibGDXController controller;
-    private Sound sound;
     private GameStateManager gameStateManager;
 
     @Override
