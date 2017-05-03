@@ -160,6 +160,7 @@ public class Course implements Updatable, SpaceCraftListener {
     public void powerUPUsed(IPowerUp pu) {
         if (activePowerups.indexOf(pu) == -1) {
             activePowerups.add(pu);
+            RenderManager.getInstance().addRenderTask(pu);
         }
     }
 

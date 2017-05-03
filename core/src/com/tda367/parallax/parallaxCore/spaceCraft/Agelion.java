@@ -212,6 +212,7 @@ public class Agelion implements ISpaceCraft {
             for (SpaceCraftListener spaceCraftListener : spaceCraftListeners) {
                 spaceCraftListener.powerUPUsed(pu);
             }
+            pu = new Cannon();
         } else {
             System.out.println("NO POWERUP");
         }

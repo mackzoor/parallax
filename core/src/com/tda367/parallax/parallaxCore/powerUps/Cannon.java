@@ -36,13 +36,15 @@ public class Cannon implements IPowerUp {
     @Override
     public void usePU(Vector3f pos, Quat4f rot) {
         //Offset cannon round rotation by 90 degrees due to rotated 3d model.
-        rot = new Quat4f(0,0,0.7071f,0.7071f);
+        this.rot = new Quat4f(0,0,0.7071f,0.7071f);
 
         //Rotate the cannon round with the given rotation.
-        rot.mul(rot);
+//        this.rot.mul(rot);
 
         //Sets the cannon round starting position to the one given in the arguments.
-        pos = new Vector3f(pos);
+        this.pos = new Vector3f(pos);
+
+        velocity.setY(20);
 
         //Plays a sound for the laser
         playCannonSound();
@@ -59,7 +61,7 @@ public class Cannon implements IPowerUp {
         updatePosition(milliSinceLastUpdate);
     }
     private void updatePosition(int milliSinceLastUpdate){
-        pos.add(new Vector3f(velocity.getX() * (milliSinceLastUpdate/1000),(velocity.getY() * (milliSinceLastUpdate/1000)),(velocity.getZ() * (milliSinceLastUpdate/1000))));
+        pos.add(new Vector3f(velocity.getX() * ((float) milliSinceLastUpdate/1000),(velocity.getY() * ((float) milliSinceLastUpdate/1000)),(velocity.getZ() * ((float)milliSinceLastUpdate/1000))));
     }
 
     private void playCannonSound(){
