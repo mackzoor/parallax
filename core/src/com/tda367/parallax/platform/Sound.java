@@ -116,4 +116,10 @@ public class Sound implements SoundListener {
         }
     }
 
+    public void clearAllActiveMusic(){
+        while(!(activeMusic.size() == 0)){
+            activeMusic.remove(0);
+        }
+    }
+
 }

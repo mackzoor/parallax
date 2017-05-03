@@ -140,4 +140,10 @@ public class SoundManager {
     public void playMusic(String music, String directory, Float volume){
         playMusic(directory+"/"+music,volume);
     }
+
+    public void clearAllActiveMusic(){
+        for(SoundListener Sl: listeners){
+            Sl.clearAllActiveMusic();
+        }
+    }
 }

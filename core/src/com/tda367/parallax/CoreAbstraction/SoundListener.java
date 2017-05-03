@@ -13,4 +13,5 @@ public interface SoundListener {
     void stopActiveMusic(String fileNameAndDirectory);
     void pauseActiveMusic(String fileNameAndDirectory);
     void unPauseActiveMusic(String fileNameAndDirectory);
+    void clearAllActiveMusic();
 }
