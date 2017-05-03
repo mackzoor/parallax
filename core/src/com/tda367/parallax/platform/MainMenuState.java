@@ -3,6 +3,7 @@ package com.tda367.parallax.platform;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -98,7 +99,7 @@ public class MainMenuState implements ApplicationListener {
 
 
         stage.addActor(table);
-
+        System.out.println("menu");
         mainMenuController = new MainMenuController(this, gameModeState);
 
     }
@@ -143,6 +144,7 @@ public class MainMenuState implements ApplicationListener {
 
     @Override
     public void dispose() {
+        Controllers.clearListeners();
         batch.dispose();
         playButtonSkin.dispose();
         exitButtonSkin.dispose();

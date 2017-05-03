@@ -23,6 +23,7 @@ class ParallaxLibGDXController implements InputControlsListener {
 
     @Override
     public void actionButtonPressed() {
+        System.out.println("play");
         parallax.getPlayer().getSpaceCraft().action();
     }
 
@@ -33,7 +34,7 @@ class ParallaxLibGDXController implements InputControlsListener {
 
     @Override
     public void pauseButtonPressed() {
-
+        GameStateManager.getInstance().setState(GameStateManager.State.MAIN_MENU);
     }
 
     @Override

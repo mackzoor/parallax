@@ -16,14 +16,13 @@ public class MainMenuController implements InputControlsListener {
 
     private MainMenuState mainMenuView;
     private ImageButton currentButton;
-    private ImageButton playButton;
 
 
     public MainMenuController(MainMenuState view, GameModeState gameModeState) {
         mainMenuView = view;
         gameModeState.addInputDevices(this);
         currentButton = mainMenuView.getPlayButton();
-        if(Gdx.app.getType() == Application.ApplicationType.Android){
+        if (Gdx.app.getType() == Application.ApplicationType.Android) {
             Gdx.input.setInputProcessor(mainMenuView.getStage());
             mainMenuView.playButton.addListener(new ChangeListener() {
                 @Override
@@ -109,7 +108,7 @@ public class MainMenuController implements InputControlsListener {
 
     @Override
     public void yAxisJoystickMovement(float yValue) {
-        if(yValue > 0){
+        if (yValue > 0) {
             upButtonPressed();
         } else if (yValue < 0) {
             downButtonPressed();

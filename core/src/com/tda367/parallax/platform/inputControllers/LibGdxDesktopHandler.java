@@ -22,7 +22,6 @@ public class LibGdxDesktopHandler implements InputProcessor {
 
     @Override
     public boolean keyDown(int keycode) {
-
         if (keycode == Input.Keys.SPACE || keycode == Input.Keys.Z) {
             listener.actionButtonPressed();
         } else if (keycode == Input.Keys.X) {
@@ -66,7 +65,6 @@ public class LibGdxDesktopHandler implements InputProcessor {
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         listener.onScreenClick(screenX, screenY);
-        System.out.println("x: " + screenX + " y: " + screenY);
         return false;
     }
 
