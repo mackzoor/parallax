@@ -1,5 +1,6 @@
 package com.tda367.parallax.parallaxCore.powerUps;
 
+import com.tda367.parallax.CoreAbstraction.Model;
 import com.tda367.parallax.parallaxCore.spaceCraft.ISpaceCraft;
 
 import javax.vecmath.Quat4f;
@@ -24,6 +25,51 @@ public class LaserEyes implements IPowerUp {
 
     @Override
     public void update(int milliSinceLastUpdate) {
+
+    }
+
+    @Override
+    public Model getModel() {
+        return null;
+    }
+
+    @Override
+    public boolean isActive() {
+        return false;
+    }
+
+    @Override
+    public void disableCollision() {
+
+    }
+
+    @Override
+    public void enableCollision() {
+
+    }
+
+    @Override
+    public Model getCollisionModel() {
+        return null;
+    }
+
+    @Override
+    public Vector3f getPos() {
+        return null;
+    }
+
+    @Override
+    public Quat4f getRot() {
+        return null;
+    }
+
+    @Override
+    public void addToRenderManager() {
+
+    }
+
+    @Override
+    public void removeFromRenderManager() {
 
     }
 }
