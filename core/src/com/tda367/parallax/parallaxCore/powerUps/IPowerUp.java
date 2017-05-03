@@ -1,15 +1,10 @@
 package com.tda367.parallax.parallaxCore.powerUps;
 
-import com.tda367.parallax.CoreAbstraction.Usable;
+import com.tda367.parallax.CoreAbstraction.*;
 
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
 
-/**
- * Created by Rasmus on 2017-05-02.
- */
-public interface IPowerUp extends Usable{
-
+public interface IPowerUp extends Usable, Collidable, Renderable, Updatable, IModel {
     void usePU(Vector3f pos, Quat4f rot);
-
 }
