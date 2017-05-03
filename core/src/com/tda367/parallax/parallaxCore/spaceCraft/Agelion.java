@@ -2,6 +2,7 @@ package com.tda367.parallax.parallaxCore.spaceCraft;
 
 import com.tda367.parallax.CoreAbstraction.Model;
 import com.tda367.parallax.CoreAbstraction.RenderManager;
+import com.tda367.parallax.parallaxCore.powerUps.Cannon;
 import com.tda367.parallax.parallaxCore.powerUps.IPowerUp;
 import com.tda367.parallax.parallaxCore.powerUps.Missile;
 
@@ -16,7 +17,7 @@ import java.util.List;
 public class Agelion implements ISpaceCraft {
 
     //TODO, "private powerUp pu;" when done testing
-    private IPowerUp pu = new Missile();
+    private IPowerUp pu = new Cannon();
     private int health;
 
     private float forwardVelocity;

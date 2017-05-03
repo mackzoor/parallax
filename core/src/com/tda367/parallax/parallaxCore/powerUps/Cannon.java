@@ -56,11 +56,12 @@ public class Cannon implements IPowerUp {
     //Updates the cannon.
     @Override
     public void update(int milliSinceLastUpdate){
-        updatePosition();
+        updatePosition(milliSinceLastUpdate);
     }
-    private void updatePosition(){
+    private void updatePosition(int milliSinceLastUpdate){
+        pos.add(new Vector3f(velocity.getX() * (milliSinceLastUpdate/1000),(velocity.getY() * (milliSinceLastUpdate/1000)),(velocity.getZ() * (milliSinceLastUpdate/1000))));
+    }
 
-    }
     private void playCannonSound(){
         Random rand = new Random();
         int randomSong = rand.nextInt(200 - 1 + 1) + 1;
