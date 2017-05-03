@@ -86,21 +86,13 @@ class ParallaxLibGDXController implements InputControlsListener {
 
     @Override
     public void xAxisJoystickMovement(float xValue) {
-        if (Math.abs(xValue) > 0.15){
-            this.xValue = xValue;
-        } else {
-            this.xValue = 0;
-        }
+        this.xValue = xValue;
         updateControls();
     }
 
     @Override
     public void yAxisJoystickMovement(float yValue) {
-        if (Math.abs(yValue) > 0.15){
-            this.yValue = yValue;
-        } else {
-            this.yValue = 0;
-        }
+        this.yValue = yValue;
         updateControls();
     }
 

@@ -85,7 +85,7 @@ public class LibGdxGamePadHandler implements ControllerListener {
     @Override
     public boolean axisMoved(Controller controller, int axisCode, float value) {
 
-        if (value * value < 0.01f) value = 0f;
+        if (value * value < 0.02f) value = 0f;
 
         if (listener != null) {
             if(axisCode == gamePad.GetXAxisJoystickCode()) {
