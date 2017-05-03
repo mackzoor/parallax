@@ -1,55 +1,93 @@
 package com.tda367.parallax.parallaxCore.powerUps;
 
+import com.tda367.parallax.CoreAbstraction.Model;
 import com.tda367.parallax.CoreAbstraction.RenderManager;
-import com.tda367.parallax.CoreAbstraction.SoundManager;
-import com.tda367.parallax.CoreAbstraction.Transformable;
-//import com.tda367.parallax.parallaxCore.course.HarmfulEntity;
 
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
- * A tracking "fire and forget" missle.
+ * Created by xoxLU on 2017-05-02.
  */
 public class Missile implements IPowerUp {
 
-    SoundManager soundManager;
-    Transformable transformable;
+    private static final String modelName = "missile.g3db";
+    private Vector3f pos;
+    private Quat4f rot;
+    private Boolean collisionEnabled;
+    private Model missileModel;
 
-    public Missile(Transformable transformable){
-        soundManager = SoundManager.getInstance();
-        this.transformable = transformable;
+    public Missile(){
     }
 
-    //Creates a missile and calls upon a sound.
+    //Creating a missile with position set in the constructor
+    public Missile(Vector3f pos, Quat4f rot, Boolean collision){
+        this.pos = pos;
+        this.rot = rot;
+        collisionEnabled = collision;
+    }
+
+    //Creation of missile with standard settings (collision enabled)
+    public Missile(Vector3f pos, Quat4f rot){
+        this(pos, rot, true);
+    }
+
+    public static String getModelName() {
+        return modelName;
+    }
+
+    //Collision
+    @Override
+    public boolean isActive() {
+        return collisionEnabled;
+    }
+    @Override
+    public void disableCollision() {
+        collisionEnabled = false;
+    }
+    @Override
+    public void enableCollision() {
+        collisionEnabled = true;
+    }
+    @Override
+    public Model getCollisionModel() {
+        return null;
+    }
+
+    @Override
+    public void addToRenderManager() {
+        RenderManager.getInstance().addRenderTask(this);
+    }
+
+    @Override
+    public void removeFromRenderManager() {
+        RenderManager.getInstance().removeRenderTask(this);
+    }
+
+    @Override
+    public Vector3f getPos() {
+        return pos;
+    }
+
+    @Override
+    public Quat4f getRot() {
+        return rot;
+    }
+
+    @Override
     public void usePU(Vector3f pos, Quat4f rot){
-
-//        missiles.add(new HarmfulEntity(25f, "missile.g3db", "3dModels/missile"));
-
-//        missiles.get(missiles.size()-1).getPos().set(new Vector3f(transformable.getPos().getX(),transformable.getPos().getY(),transformable.getPos().getZ()));
-
-//        RenderManager.getInstance().addRenderTask(missiles.get(missiles.size()-1));
-
-        soundManager.playSound("MissileDemo.mp3","sounds/effects", new Float(0.6f));
     }
 
     @Override
     public void activate() {
-
     }
 
-    public void update(int milliSinceLastUpdate){
-/*        for(int i = 0; i<missiles.size(); i++){
-            missiles.get(i).update(milliSinceLastUpdate);
-            missiles.get(i).removeTime(milliSinceLastUpdate);
-            if(missiles.get(i).getTime() < 0){
-                RenderManager.getInstance().removeRenderTask(missiles.get(i));
-                missiles.remove(i);
-                i--;
-            }
-        }
-        */
+    @Override
+    public void update(int milliSinceLastUpdate) {
+    }
+
+    @Override
+    public Model getModel() {
+        return missileModel;
     }
 }
