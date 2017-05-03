@@ -18,8 +18,8 @@ public class ParallaxLibGdx implements ApplicationListener{
     @Override
     public void create() {
         Gdx.graphics.setTitle("Galactica space wars of justice, ultimate edition");
+        Gdx.input.setCatchBackKey(true); //Stops game from exiting when user presses back key
         gameStateManager = GameStateManager.getInstance();
-
     }
 
     @Override

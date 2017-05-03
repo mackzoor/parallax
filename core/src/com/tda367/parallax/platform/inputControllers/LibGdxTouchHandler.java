@@ -1,21 +1,16 @@
 package com.tda367.parallax.platform.inputControllers;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
-import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.tda367.parallax.platform.TouchPadView;
 
 /**
  * Created by Markus on 2017-04-25.
  */
 
-public class LibGdxTouchHandler implements EventListener {
+public class LibGdxTouchHandler implements EventListener, InputProcessor {
 
     private TouchPadView view;
     private InputControlsListener listener;
@@ -39,6 +34,51 @@ public class LibGdxTouchHandler implements EventListener {
                 listener.actionButtonPressed();
             }
         }
+        return false;
+    }
+
+    @Override
+    public boolean keyDown(int keycode) {
+        if (listener != null) {
+            if (keycode == Input.Keys.BACK || keycode == Input.Keys.MENU) {
+                listener.pauseButtonPressed();
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean keyUp(int keycode) {
+        return false;
+    }
+
+    @Override
+    public boolean keyTyped(char character) {
+        return false;
+    }
+
+    @Override
+    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        return false;
+    }
+
+    @Override
+    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        return false;
+    }
+
+    @Override
+    public boolean touchDragged(int screenX, int screenY, int pointer) {
+        return false;
+    }
+
+    @Override
+    public boolean mouseMoved(int screenX, int screenY) {
+        return false;
+    }
+
+    @Override
+    public boolean scrolled(int amount) {
         return false;
     }
 }
