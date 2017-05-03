@@ -1,9 +1,8 @@
 package com.tda367.parallax.platform;
 
 import com.tda367.parallax.parallaxCore.Parallax;
+import com.tda367.parallax.platform.gameModeStates.GameModeState;
 import com.tda367.parallax.platform.inputControllers.InputControlsListener;
-
-import javax.vecmath.Vector2f;
 
 /**
  * Created by Markus on 2017-04-11.
@@ -16,7 +15,7 @@ class ParallaxLibGDXController implements InputControlsListener {
     private Parallax parallax;
     private float panSpeed;
 
-    ParallaxLibGDXController(Parallax parallax, com.tda367.parallax.platform.gameModeStates.GameModeState gameModeState) {
+    ParallaxLibGDXController(Parallax parallax, GameModeState gameModeState) {
         gameModeState.addInputDevices(this);
         this.parallax = parallax;
         this.panSpeed = 1;
@@ -103,6 +102,11 @@ class ParallaxLibGDXController implements InputControlsListener {
             this.yValue = 0;
         }
         updateControls();
+    }
+
+    @Override
+    public void onScreenClick(int xValue, int yValue) {
+
     }
 
     private synchronized void updateControls(){

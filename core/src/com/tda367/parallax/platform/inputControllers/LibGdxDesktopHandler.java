@@ -8,11 +8,11 @@ import com.badlogic.gdx.InputProcessor;
  * Created by Markus on 2017-04-25.
  */
 
-public class LibGdxKeyboardHandler implements InputProcessor {
+public class LibGdxDesktopHandler implements InputProcessor {
 
     private InputControlsListener listener;
 
-    public LibGdxKeyboardHandler() {
+    public LibGdxDesktopHandler() {
         Gdx.input.setInputProcessor(this);
     }
 
@@ -65,6 +65,8 @@ public class LibGdxKeyboardHandler implements InputProcessor {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        listener.onScreenClick(screenX, screenY);
+        System.out.println("x: " + screenX + " y: " + screenY);
         return false;
     }
 

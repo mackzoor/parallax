@@ -115,4 +115,9 @@ public class MainMenuController implements InputControlsListener {
             downButtonPressed();
         }
     }
+
+    @Override
+    public void onScreenClick(int xValue, int yValue) {
+
+    }
 }

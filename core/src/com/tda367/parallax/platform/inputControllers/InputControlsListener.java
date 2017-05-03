@@ -18,4 +18,5 @@ public interface InputControlsListener {
     void leftButtonUp();
     void xAxisJoystickMovement(float xValue);
     void yAxisJoystickMovement(float yValue);
+    void onScreenClick(int xValue, int yValue);
 }

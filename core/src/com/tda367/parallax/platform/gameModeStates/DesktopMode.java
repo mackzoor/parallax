@@ -1,7 +1,7 @@
 package com.tda367.parallax.platform.gameModeStates;
 
 import com.tda367.parallax.platform.inputControllers.InputControlsListener;
-import com.tda367.parallax.platform.inputControllers.LibGdxKeyboardHandler;
+import com.tda367.parallax.platform.inputControllers.LibGdxDesktopHandler;
 import com.tda367.parallax.platform.inputControllers.LibGdxGamePadHandler;
 
 /**
@@ -11,11 +11,11 @@ import com.tda367.parallax.platform.inputControllers.LibGdxGamePadHandler;
 class DesktopMode implements GameModeState {
 
     private LibGdxGamePadHandler gamePadHandler;
-    private LibGdxKeyboardHandler keyboardHandler;
+    private LibGdxDesktopHandler keyboardHandler;
 
     DesktopMode() {
         this.gamePadHandler = new LibGdxGamePadHandler();
-        this.keyboardHandler = new LibGdxKeyboardHandler();
+        this.keyboardHandler = new LibGdxDesktopHandler();
     }
 
     @Override
