@@ -16,7 +16,7 @@ import java.util.List;
 public class Agelion implements ISpaceCraft {
 
     //TODO, "private powerUp pu;" when done testing
-    private IPowerUp pu = new Missile(this);
+    private IPowerUp pu = new Missile();
     private int health;
 
     private float forwardVelocity;
