@@ -8,6 +8,8 @@ import com.tda367.parallax.parallaxCore.powerUps.Missile;
 
 import javax.vecmath.*;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -17,7 +19,7 @@ import java.util.List;
 public class Agelion implements ISpaceCraft {
 
     //TODO, "private powerUp pu;" when done testing
-    private IPowerUp pu = new Cannon();
+    private List <IPowerUp> pu = new ArrayList <IPowerUp>();
     private int health;
 
     private float forwardVelocity;
@@ -207,19 +209,41 @@ public class Agelion implements ISpaceCraft {
     }
     @Override
     public void action(){
-        if (pu != null){
-            pu.usePU(pos, rot);
+        if (pu.get(0) != null){
+            pu.get(pu.size()-1).usePU(pos, rot);
             for (SpaceCraftListener spaceCraftListener : spaceCraftListeners) {
-                spaceCraftListener.powerUPUsed(pu);
+                spaceCraftListener.powerUPUsed(pu.get(pu.size()-1));
+                pu.remove(pu.size()-1);
             }
-            pu = new Cannon();
+            addPU(new Cannon());
         } else {
             System.out.println("NO POWERUP");
         }
     }
     @Override
-    public void setPU(IPowerUp pu) {
-        this.pu = pu;
+    public void addPU(IPowerUp pu) {
+        //Adds a single powerUp in a list with the same powerUps
+        if(pu.getClass().equals(this.pu.get(0).getClass()) && pu != null){
+            if(this.pu.size() <= 3) {
+                this.pu.add(pu);
+            }
+        }
+    }
+    @Override
+    public void addPU(List<IPowerUp> listOfPowerUps){
+        //Adds list of powerUps if it's the same type. Maximum 3 of powerUps.
+        for (int i = 0; i < listOfPowerUps.size(); i++) {
+            if (pu.size() <= 3 && listOfPowerUps.get(i).getClass().equals(pu.get(0).getClass()) && listOfPowerUps.get(0) != null){
+                pu.add(listOfPowerUps.get(i));
+            }
+        }
+    }
+    @Override
+    public void removePU(IPowerUp pu) {
+        //Removes a powerUp if it exists in the PU-List
+        if(this.pu.contains(pu)) {
+            this.pu.remove(pu);
+        }
     }
     @Override
     public void incHealth(){

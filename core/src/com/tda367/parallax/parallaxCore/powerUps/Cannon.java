@@ -31,7 +31,6 @@ public class Cannon implements IPowerUp {
         this.isCollisionOn = false;
     }
 
-
     //Launches the cannon round.
     @Override
     public void usePU(Vector3f pos, Quat4f rot) {
@@ -51,9 +50,7 @@ public class Cannon implements IPowerUp {
     }
     @Override
     public void activate() {
-
     }
-
 
     //Updates the cannon.
     @Override
