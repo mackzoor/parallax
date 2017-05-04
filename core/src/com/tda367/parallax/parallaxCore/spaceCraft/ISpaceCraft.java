@@ -6,6 +6,7 @@ import com.tda367.parallax.CoreAbstraction.Updatable;
 import com.tda367.parallax.parallaxCore.powerUps.IPowerUp;
 
 import javax.vecmath.Vector2f;
+import java.util.List;
 
 /**
  * Interface for all spaceCraft in the game.
@@ -22,7 +23,9 @@ public interface ISpaceCraft extends Collidable, Updatable, Renderable {
     void setDesiredPanVelocity(float x, float y);
 
     void action();
-    void setPU(IPowerUp pu);
+    void addPU(IPowerUp pu);
+    void addPU(List<IPowerUp> listOfPowerUps);
+    void removePU(IPowerUp pu);
 
     void addSpaceCraftListener(SpaceCraftListener listener);
     void removeSpaceCraftListener(SpaceCraftListener listener);
