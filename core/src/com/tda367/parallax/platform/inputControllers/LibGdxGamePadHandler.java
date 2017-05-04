@@ -49,13 +49,13 @@ public class LibGdxGamePadHandler implements ControllerListener {
             } else if (buttonCode == gamePad.GetSecondaryActionButtonCode()) {
                 listener.secondaryActionButtonPressed();
             } else if (buttonCode == gamePad.GetLeftButtonCode()) {
-                listener.leftButtonPressed();
+                listener.leftButtonDown();
             } else if (buttonCode == gamePad.GetUpButtonCode()) {
-                listener.upButtonPressed();
+                listener.upButtonDown();
             } else if (buttonCode == gamePad.GetRightButtonCode()) {
-                listener.rightButtonPressed();
+                listener.rightButtonDown();
             } else if (buttonCode == gamePad.GetDownButtonCode()) {
-                listener.downButtonPressed();
+                listener.downButtonDown();
             } else if (buttonCode == gamePad.GetPauseButtonCode()) {
                 listener.pauseButtonPressed();
             }

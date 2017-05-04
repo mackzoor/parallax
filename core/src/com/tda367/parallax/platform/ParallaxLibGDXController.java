@@ -37,7 +37,7 @@ class ParallaxLibGDXController implements InputControlsListener {
     }
 
     @Override
-    public void upButtonPressed() {
+    public void upButtonDown() {
         yValue += 1;
         updateControls();
     }
@@ -49,7 +49,7 @@ class ParallaxLibGDXController implements InputControlsListener {
     }
 
     @Override
-    public void rightButtonPressed() {
+    public void rightButtonDown() {
         xValue += 1;
         updateControls();
     }
@@ -61,7 +61,7 @@ class ParallaxLibGDXController implements InputControlsListener {
     }
 
     @Override
-    public void downButtonPressed() {
+    public void downButtonDown() {
         yValue = -1;
         updateControls();
     }
@@ -73,7 +73,7 @@ class ParallaxLibGDXController implements InputControlsListener {
     }
 
     @Override
-    public void leftButtonPressed() {
+    public void leftButtonDown() {
         xValue -= 1;
         updateControls();
     }

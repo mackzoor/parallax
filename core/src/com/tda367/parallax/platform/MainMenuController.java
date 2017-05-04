@@ -59,7 +59,7 @@ public class MainMenuController implements InputControlsListener {
     }
 
     @Override
-    public void upButtonPressed() {
+    public void upButtonDown() {
         currentButton.setChecked(false);
         currentButton = mainMenuView.getPlayButton();
         currentButton.setChecked(true);
@@ -71,7 +71,7 @@ public class MainMenuController implements InputControlsListener {
     }
 
     @Override
-    public void rightButtonPressed() {
+    public void rightButtonDown() {
 
     }
 
@@ -81,7 +81,7 @@ public class MainMenuController implements InputControlsListener {
     }
 
     @Override
-    public void downButtonPressed() {
+    public void downButtonDown() {
         currentButton.setChecked(false);
         currentButton = mainMenuView.getExitButton();
         currentButton.setChecked(true);
@@ -93,7 +93,7 @@ public class MainMenuController implements InputControlsListener {
     }
 
     @Override
-    public void leftButtonPressed() {
+    public void leftButtonDown() {
 
     }
 
@@ -110,9 +110,9 @@ public class MainMenuController implements InputControlsListener {
     @Override
     public void yAxisJoystickMovement(float yValue) {
         if(yValue > 0){
-            upButtonPressed();
+            upButtonDown();
         } else if (yValue < 0) {
-            downButtonPressed();
+            downButtonDown();
         }
     }
 

@@ -21,20 +21,20 @@ public class LibGdxDesktopHandler implements InputProcessor {
     }
 
     @Override
-    public boolean keyDown(int keycode) {
+    public synchronized boolean keyDown(int keycode) {
 
         if (keycode == Input.Keys.SPACE || keycode == Input.Keys.Z) {
             listener.actionButtonPressed();
         } else if (keycode == Input.Keys.X) {
             listener.secondaryActionButtonPressed();
         } else if (keycode == Input.Keys.A || keycode == Input.Keys.LEFT) {
-            listener.leftButtonPressed();
+            listener.leftButtonDown();
         } else if (keycode == Input.Keys.W || keycode == Input.Keys.UP) {
-            listener.upButtonPressed();
+            listener.upButtonDown();
         } else if (keycode == Input.Keys.D || keycode == Input.Keys.RIGHT) {
-            listener.rightButtonPressed();
+            listener.rightButtonDown();
         } else if (keycode == Input.Keys.S || keycode == Input.Keys.DOWN) {
-            listener.downButtonPressed();
+            listener.downButtonDown();
         } else if (keycode == Input.Keys.ESCAPE) {
             listener.pauseButtonPressed();
         }
@@ -43,7 +43,7 @@ public class LibGdxDesktopHandler implements InputProcessor {
     }
 
     @Override
-    public boolean keyUp(int keycode) {
+    public synchronized boolean keyUp(int keycode) {
 
         if (keycode == Input.Keys.A || keycode == Input.Keys.LEFT) {
             listener.leftButtonUp();

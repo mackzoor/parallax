@@ -8,13 +8,13 @@ public interface InputControlsListener {
     void actionButtonPressed();
     void secondaryActionButtonPressed();
     void pauseButtonPressed();
-    void upButtonPressed();
+    void upButtonDown();
     void upButtonUp();
-    void rightButtonPressed();
+    void rightButtonDown();
     void rightButtonUp();
-    void downButtonPressed();
+    void downButtonDown();
     void downButtonUp();
-    void leftButtonPressed();
+    void leftButtonDown();
     void leftButtonUp();
     void xAxisJoystickMovement(float xValue);
     void yAxisJoystickMovement(float yValue);
