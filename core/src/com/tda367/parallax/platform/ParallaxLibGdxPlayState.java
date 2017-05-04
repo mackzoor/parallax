@@ -1,14 +1,18 @@
 package com.tda367.parallax.platform;
 
 import com.badlogic.gdx.*;
-import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.graphics.*;
-import com.tda367.parallax.parallaxCore.*;
-import com.tda367.parallax.parallaxCore.spaceCraft.Agelion;
+import com.tda367.parallax.controller.ParallaxLibGDXController;
+import com.tda367.parallax.model.CollisionCalculator;
+import com.tda367.parallax.model.CoreAbstraction.SoundManager;
+import com.tda367.parallax.model.parallaxCore.Parallax;
+import com.tda367.parallax.model.parallaxCore.Player;
+import com.tda367.parallax.model.parallaxCore.spaceCraft.Agelion;
 import com.tda367.parallax.platform.gameModeStates.GameModeFactory;
 import com.tda367.parallax.platform.gameModeStates.GameModeState;
-import com.tda367.parallax.platform.inputControllers.LibGdxGamePadHandler;
+import com.tda367.parallax.view.Renderer;
+import com.tda367.parallax.view.Sound;
 
 public class ParallaxLibGdxPlayState implements ApplicationListener {
 
@@ -20,13 +24,13 @@ public class ParallaxLibGdxPlayState implements ApplicationListener {
     private GameModeState gameModeState;
     private Sound sound;
     GameStateManager gameStateManager;
-    com.tda367.parallax.CoreAbstraction.SoundManager soundManager;
+    SoundManager soundManager;
     CollisionCalculator collisionCalculator;
 
     public ParallaxLibGdxPlayState(GameStateManager gameStateManager) {
         this.gameStateManager = gameStateManager;
         this.gameModeState = GameModeFactory.getGameModeState(this);
-        soundManager = com.tda367.parallax.CoreAbstraction.SoundManager.getInstance();
+        soundManager = SoundManager.getInstance();
         this.collisionCalculator = new CollisionCalculator();
 
         // Initiate game with space craft "Agelion"
