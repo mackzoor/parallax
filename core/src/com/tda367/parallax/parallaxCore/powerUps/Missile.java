@@ -11,43 +11,36 @@ import javax.vecmath.Vector3f;
  */
 public class Missile implements IPowerUp {
 
-    private static final String modelName = "missile.g3db";
     private Vector3f pos;
     private Quat4f rot;
-    private Boolean collisionEnabled;
-    private Model missileModel;
+    private Vector3f velocity;
+    private Vector3f acceleration;
+
+    private Model model;
+    private Model collisionModel;
+    private boolean isCollisionOn;
 
     public Missile(){
-    }
-
-    //Creating a missile with position set in the constructor
-    public Missile(Vector3f pos, Quat4f rot, Boolean collision){
-        this.pos = pos;
-        this.rot = rot;
-        collisionEnabled = collision;
-    }
-
-    //Creation of missile with standard settings (collision enabled)
-    public Missile(Vector3f pos, Quat4f rot){
-        this(pos, rot, true);
-    }
-
-    public static String getModelName() {
-        return modelName;
+        this.pos = new Vector3f();
+        this.rot = new Quat4f();
+        this.velocity = new Vector3f();
+        this.acceleration = new Vector3f();
+        this.model = new Model("missile.g3db", "3dModels/missile");
+        this.isCollisionOn = false;
     }
 
     //Collision
     @Override
     public boolean isActive() {
-        return collisionEnabled;
+        return isCollisionOn;
     }
     @Override
     public void disableCollision() {
-        collisionEnabled = false;
+        isCollisionOn = false;
     }
     @Override
     public void enableCollision() {
-        collisionEnabled = true;
+        isCollisionOn = true;
     }
     @Override
     public Model getCollisionModel() {
@@ -88,6 +81,6 @@ public class Missile implements IPowerUp {
 
     @Override
     public Model getModel() {
-        return missileModel;
+        return model;
     }
 }
