@@ -1,5 +1,6 @@
 package com.tda367.parallax.platform;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.controllers.Controllers;
@@ -8,9 +9,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.tda367.parallax.controller.MainMenuController;
 import com.tda367.parallax.platform.gameModeStates.GameModeFactory;
 import com.tda367.parallax.platform.gameModeStates.GameModeState;
 
@@ -36,14 +37,13 @@ public class MainMenuState implements ApplicationListener {
     private SpriteBatch batch;
     GameStateManager gameStateManager;
     private Table table;
-    public ImageButton playButton;
+    ImageButton playButton;
     private Drawable playButtonDrawable;
     private Drawable playButtonFocusDrawable;
     private Drawable backgroundDrawable;
     private Drawable exitButtonDrawable;
     private Drawable exitButtonFocusDrawable;
-    public ImageButton exitButton;
-    ArrayList<ImageButton> buttons;
+    ImageButton exitButton;
     GameModeState gameModeState;
     MainMenuController mainMenuController;
 
@@ -162,7 +162,7 @@ public class MainMenuState implements ApplicationListener {
 
     }
 
-    public Stage getStage(){
+    public Stage getStage() {
         return stage;
     }
 }

@@ -2,6 +2,7 @@ package com.tda367.parallax.platform;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
+import com.tda367.parallax.parallaxCore.Player;
 
 public class ParallaxLibGdx implements ApplicationListener{
 
