@@ -1,4 +1,4 @@
-package com.tda367.parallax.platform.CollisionCalculatorTest;
+package com.tda367.parallax.platform;
 
 import com.badlogic.gdx.physics.bullet.Bullet;
 import com.tda367.parallax.parallaxCore.course.BoxObstacle;
