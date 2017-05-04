@@ -1,11 +1,14 @@
 package com.tda367.parallax.platform;
 
 import com.badlogic.gdx.*;
+import com.badlogic.gdx.controllers.Controller;
+import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.graphics.*;
 import com.tda367.parallax.parallaxCore.*;
 import com.tda367.parallax.parallaxCore.spaceCraft.Agelion;
 import com.tda367.parallax.platform.gameModeStates.GameModeFactory;
 import com.tda367.parallax.platform.gameModeStates.GameModeState;
+import com.tda367.parallax.platform.inputControllers.LibGdxGamePadHandler;
 
 public class ParallaxLibGdxPlayState implements ApplicationListener {
 
@@ -94,6 +97,7 @@ public class ParallaxLibGdxPlayState implements ApplicationListener {
 
     @Override
     public void dispose() {
+        Controllers.clearListeners();
         parallaxGame.getRenderManager().getRenderables().clear();
         soundManager.stopActiveMusic("sounds/music/track.mp3");
     }
