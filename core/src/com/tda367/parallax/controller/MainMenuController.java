@@ -7,7 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.tda367.parallax.platform.GameStateManager;
 import com.tda367.parallax.platform.MainMenuState;
-import com.tda367.parallax.platform.gameModeStates.GameModeState;
+import com.tda367.parallax.controller.devicestates.Device;
 import com.tda367.parallax.controller.inputControllers.InputControlsListener;
 
 
@@ -20,9 +20,9 @@ public class MainMenuController implements InputControlsListener {
     private ImageButton currentButton;
 
 
-    public MainMenuController(MainMenuState view, GameModeState gameModeState) {
+    public MainMenuController(MainMenuState view, Device device) {
         mainMenuView = view;
-        gameModeState.addInputDevices(this);
+        device.addInputDevices(this);
         currentButton = mainMenuView.getPlayButton();
         if (Gdx.app.getType() == Application.ApplicationType.Android) {
             Gdx.input.setInputProcessor(mainMenuView.getStage());

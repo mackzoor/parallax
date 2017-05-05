@@ -11,7 +11,7 @@ import com.tda367.parallax.model.CoreAbstraction.SoundManager;
 import com.tda367.parallax.model.parallaxCore.Parallax;
 import com.tda367.parallax.model.parallaxCore.Player;
 import com.tda367.parallax.model.parallaxCore.spaceCraft.Agelion;
-import com.tda367.parallax.platform.gameModeStates.GameModeFactory;
+import com.tda367.parallax.controller.devicestates.DeviceManager;
 import com.tda367.parallax.view.Renderer;
 import com.tda367.parallax.view.Sound;
 
@@ -43,7 +43,7 @@ class GameScreen implements Screen {
         this.player = new Player(new Agelion(10));
         this.parallaxGame = new Parallax(player);
         this.parallaxGame.setCollisionCalculator(collisionCalculator);
-        controller = new GameController(parallaxGame, GameModeFactory.getGameModeState(game));
+        controller = new GameController(parallaxGame, DeviceManager.getGameModeState(game));
 
         // Create camera sized to screens width/height with Field of View of 75 degrees
         camera = new PerspectiveCamera(

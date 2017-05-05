@@ -2,7 +2,7 @@ package com.tda367.parallax.controller;
 
 import com.tda367.parallax.model.parallaxCore.Parallax;
 import com.tda367.parallax.platform.GameStateManager;
-import com.tda367.parallax.platform.gameModeStates.GameModeState;
+import com.tda367.parallax.controller.devicestates.Device;
 import com.tda367.parallax.controller.inputControllers.InputControlsListener;
 
 /**
@@ -15,8 +15,8 @@ public class GameController implements InputControlsListener {
 
     private Parallax parallax;
 
-    public GameController(Parallax parallax, GameModeState gameModeState) {
-        gameModeState.addInputDevices(this);
+    public GameController(Parallax parallax, Device device) {
+        device.addInputDevices(this);
         this.parallax = parallax;
     }
 

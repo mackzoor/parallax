@@ -1,5 +1,10 @@
 package com.tda367.parallax.platform.inputControllers.gamePads;
 
+import com.tda367.parallax.controller.inputControllers.gamePads.AndroidGamePad;
+import com.tda367.parallax.controller.inputControllers.gamePads.GamePad;
+import com.tda367.parallax.controller.inputControllers.gamePads.Playstation3GamePad;
+import com.tda367.parallax.controller.inputControllers.gamePads.Xbox360GamePad;
+
 import org.junit.Test;
 
 import java.util.Random;
@@ -9,7 +14,7 @@ import static org.junit.Assert.*;
 /**
  * Created by Markus on 2017-04-24.
  */
-public class AndroidGamePadTest {
+public class AndroidDeviceGamePadTest {
     @Test
     public void XAxisValueConverter() throws Exception {
         float minX = -1f;

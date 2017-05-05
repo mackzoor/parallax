@@ -11,7 +11,8 @@ import com.tda367.parallax.controller.GameController;
 import com.tda367.parallax.model.parallaxCore.Parallax;
 import com.tda367.parallax.model.parallaxCore.Player;
 import com.tda367.parallax.model.parallaxCore.spaceCraft.Agelion;
-import com.tda367.parallax.platform.gameModeStates.GameModeState;
+import com.tda367.parallax.controller.devicestates.DeviceManager;
+import com.tda367.parallax.controller.devicestates.Device;
 import com.tda367.parallax.view.Renderer;
 import com.tda367.parallax.view.Sound;
 
@@ -25,7 +26,7 @@ public class ParallaxCardboardLayer implements CardBoardApplicationListener {
     private Parallax parallaxGame;
     private Renderer renderer;
     private GameController controller;
-    private GameModeState gameModeState;
+    private Device device;
     private static final float Z_NEAR = 0.1f;
     private static final float Z_FAR = 300.0f;
     private Sound sound;
@@ -38,8 +39,8 @@ public class ParallaxCardboardLayer implements CardBoardApplicationListener {
         // Initiate game with space craft "Agelion"
         this.player = new Player(new Agelion(10));
         this.parallaxGame = new Parallax(player);
-        this.gameModeState = com.tda367.parallax.platform.gameModeStates.GameModeFactory.getGameModeState(this);
-        controller = new GameController(parallaxGame, gameModeState);
+        this.device = DeviceManager.getGameModeState(this);
+        controller = new GameController(parallaxGame, device);
 
         // Setup of special camera for VR
         camera = new CardboardCamera();
@@ -91,7 +92,7 @@ public class ParallaxCardboardLayer implements CardBoardApplicationListener {
                 parallaxGame.getCamera().getPos().getY()*-1
         );
         camera.update();
-        gameModeState.update();
+        device.update();
     }
 
     @Override

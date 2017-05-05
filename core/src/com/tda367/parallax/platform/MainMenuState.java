@@ -1,6 +1,5 @@
 package com.tda367.parallax.platform;
 
-import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.controllers.Controllers;
@@ -9,11 +8,11 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.tda367.parallax.platform.gameModeStates.GameModeFactory;
-import com.tda367.parallax.platform.gameModeStates.GameModeState;
+import com.tda367.parallax.controller.MainMenuController;
+import com.tda367.parallax.controller.devicestates.DeviceManager;
+import com.tda367.parallax.controller.devicestates.Device;
 
 import java.util.ArrayList;
 
@@ -37,14 +36,15 @@ public class MainMenuState implements ApplicationListener {
     private SpriteBatch batch;
     GameStateManager gameStateManager;
     private Table table;
-    ImageButton playButton;
+    public ImageButton playButton;
     private Drawable playButtonDrawable;
     private Drawable playButtonFocusDrawable;
     private Drawable backgroundDrawable;
     private Drawable exitButtonDrawable;
     private Drawable exitButtonFocusDrawable;
-    ImageButton exitButton;
-    GameModeState gameModeState;
+    public ImageButton exitButton;
+    ArrayList<ImageButton> buttons;
+    Device device;
     MainMenuController mainMenuController;
 
 
@@ -53,7 +53,7 @@ public class MainMenuState implements ApplicationListener {
 
     public MainMenuState(final GameStateManager gameStateManager) {
         this.gameStateManager = gameStateManager;
-        gameModeState = GameModeFactory.getGameModeState(this);
+        device = DeviceManager.getGameModeState(this);
 
         stage = new Stage(new FitViewport(w, h));
         batch = new SpriteBatch();
@@ -99,7 +99,7 @@ public class MainMenuState implements ApplicationListener {
 
         stage.addActor(table);
         System.out.println("menu");
-        mainMenuController = new MainMenuController(this, gameModeState);
+        mainMenuController = new MainMenuController(this, device);
 
     }
 
@@ -126,7 +126,7 @@ public class MainMenuState implements ApplicationListener {
         //batch.end();
         stage.act();
         stage.draw();
-        gameModeState.update();
+        device.update();
     }
 
 
@@ -162,7 +162,7 @@ public class MainMenuState implements ApplicationListener {
 
     }
 
-    public Stage getStage() {
+    public Stage getStage(){
         return stage;
     }
 }
