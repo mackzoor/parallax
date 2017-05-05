@@ -64,7 +64,7 @@ public class ParallaxLibGDXController implements InputControlsListener {
 
     @Override
     public void downButtonDown() {
-        yValue = -1;
+        yValue -= 1;
         updateControls();
     }
 
