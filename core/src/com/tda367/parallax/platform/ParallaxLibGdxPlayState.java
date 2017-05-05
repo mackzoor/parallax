@@ -1,11 +1,18 @@
 package com.tda367.parallax.platform;
 
 import com.badlogic.gdx.*;
+import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.graphics.*;
-import com.tda367.parallax.parallaxCore.*;
-import com.tda367.parallax.parallaxCore.spaceCraft.Agelion;
+import com.tda367.parallax.controller.GameController;
+import com.tda367.parallax.model.CollisionCalculator;
+import com.tda367.parallax.model.CoreAbstraction.SoundManager;
+import com.tda367.parallax.model.parallaxCore.Parallax;
+import com.tda367.parallax.model.parallaxCore.Player;
+import com.tda367.parallax.model.parallaxCore.spaceCraft.Agelion;
 import com.tda367.parallax.platform.gameModeStates.GameModeFactory;
 import com.tda367.parallax.platform.gameModeStates.GameModeState;
+import com.tda367.parallax.view.Renderer;
+import com.tda367.parallax.view.Sound;
 
 public class ParallaxLibGdxPlayState implements ApplicationListener {
 
@@ -13,24 +20,24 @@ public class ParallaxLibGdxPlayState implements ApplicationListener {
     private Player player;
     private Parallax parallaxGame;
     private Renderer renderer;
-    private ParallaxLibGDXController controller;
+    private GameController controller;
     private GameModeState gameModeState;
     private Sound sound;
     GameStateManager gameStateManager;
-    com.tda367.parallax.CoreAbstraction.SoundManager soundManager;
+    SoundManager soundManager;
     CollisionCalculator collisionCalculator;
 
     public ParallaxLibGdxPlayState(GameStateManager gameStateManager) {
         this.gameStateManager = gameStateManager;
         this.gameModeState = GameModeFactory.getGameModeState(this);
-        soundManager = com.tda367.parallax.CoreAbstraction.SoundManager.getInstance();
+        soundManager = SoundManager.getInstance();
         this.collisionCalculator = new CollisionCalculator();
 
         // Initiate game with space craft "Agelion"
         this.player = new Player(new Agelion(10));
         this.parallaxGame = new Parallax(player);
         this.parallaxGame.setCollisionCalculator(collisionCalculator);
-        controller = new ParallaxLibGDXController(parallaxGame, gameModeState);
+        controller = new GameController(parallaxGame, gameModeState);
 
         // Create camera sized to screens width/height with Field of View of 75 degrees
         camera = new PerspectiveCamera(
@@ -92,6 +99,7 @@ public class ParallaxLibGdxPlayState implements ApplicationListener {
 
     @Override
     public void dispose() {
+        Controllers.clearListeners();
         parallaxGame.getRenderManager().getRenderables().clear();
         soundManager.stopActiveMusic("sounds/music/track.mp3");
     }
