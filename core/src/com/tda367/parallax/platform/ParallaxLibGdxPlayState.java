@@ -63,7 +63,6 @@ public class ParallaxLibGdxPlayState implements ApplicationListener {
         camera.viewportHeight = height;
     }
 
-
     @Override
     public synchronized void render() {
 
@@ -80,7 +79,6 @@ public class ParallaxLibGdxPlayState implements ApplicationListener {
         renderer.renderAll();
         gameModeState.update();
     }
-
 
     @Override
     public void pause() {

@@ -4,6 +4,7 @@ import com.tda367.parallax.CoreAbstraction.Model;
 import com.tda367.parallax.CoreAbstraction.RenderManager;
 import com.tda367.parallax.parallaxCore.powerUps.Cannon;
 import com.tda367.parallax.parallaxCore.powerUps.IPowerUp;
+import lombok.Getter;
 
 import javax.vecmath.*;
 import java.util.ArrayList;
@@ -19,9 +20,10 @@ public class Agelion implements ISpaceCraft {
     private List <IPowerUp> pu = new ArrayList <IPowerUp>();
     private int health;
 
-    private float forwardVelocity;
+
+    protected float forwardVelocity;
     private float forwardTargetSpeed;
-    private float forwardAcceleration;
+    @Getter private float forwardAcceleration;
     private boolean forwardRelativeVelocityMode;
 
     private float maxPanVelocity;
@@ -144,7 +146,7 @@ public class Agelion implements ISpaceCraft {
     }
 
 
-    //position calculation
+    //Position calculation
     private void panAbsoluteMode(int timeMilli){
         //Calculate direction vector
         Vector2f targetDirection = new Vector2f(
@@ -267,10 +269,11 @@ public class Agelion implements ISpaceCraft {
     }
 
 
-    // Getters for testing
-    public float getForwardAcceleration() {
+    //Getters for testing
+   /* public float getForwardAcceleration() {
         return forwardAcceleration;
     }
+    */
     public Vector2f getPanAbsoluteTarget() {
         return panAbsoluteTarget;
     }
