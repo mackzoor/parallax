@@ -34,7 +34,8 @@ public class ParallaxLibGdxPlayState implements ApplicationListener {
         this.collisionCalculator = new CollisionCalculator();
 
         // Initiate game with space craft "Agelion"
-        this.player = new Player(new Agelion(10));
+        this.player = new Player();
+        this.player.addSpaceCraft(new Agelion(10));
         this.parallaxGame = new Parallax(player);
         this.parallaxGame.setCollisionCalculator(collisionCalculator);
         controller = new GameController(parallaxGame, device);

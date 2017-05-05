@@ -37,7 +37,8 @@ public class ParallaxCardboardLayer implements CardBoardApplicationListener {
         Gdx.graphics.setTitle("Galactica space wars of justice, ultimate edition");
 
         // Initiate game with space craft "Agelion"
-        this.player = new Player(new Agelion(10));
+        this.player = new Player();
+        this.player.addSpaceCraft(new Agelion(10));
         this.parallaxGame = new Parallax(player);
         this.device = DeviceManager.getGameModeState(this);
         controller = new GameController(parallaxGame, device);

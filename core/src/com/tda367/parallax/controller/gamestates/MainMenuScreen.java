@@ -21,7 +21,7 @@ import com.tda367.parallax.controller.devicestates.DeviceManager;
  * Created by Markus on 2017-05-04.
  */
 
-class MainMenuScreen implements Screen {
+public class MainMenuScreen implements Screen {
 
     Game game;
     Device device;
@@ -45,7 +45,7 @@ class MainMenuScreen implements Screen {
     private Drawable exitButtonFocusDrawable;
     public ImageButton exitButton;
 
-    MainMenuScreen(final Game game) {
+    public MainMenuScreen(final Game game) {
         this.game = game;
         this.device = DeviceManager.getDevice();
 

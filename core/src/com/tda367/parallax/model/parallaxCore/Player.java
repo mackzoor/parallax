@@ -11,8 +11,7 @@ public class Player {
     private String userName;
     private ISpaceCraft spaceCraft;
 
-    public Player(ISpaceCraft spaceCraft) {
-        this.spaceCraft = spaceCraft;
+    public Player() {
         this.score = 0;
     }
 
@@ -26,5 +25,9 @@ public class Player {
 
     public ISpaceCraft getSpaceCraft() {
         return spaceCraft;
+    }
+
+    public void addSpaceCraft(ISpaceCraft spaceCraft){
+        this.spaceCraft = spaceCraft;
     }
 }
