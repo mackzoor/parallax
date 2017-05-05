@@ -8,14 +8,14 @@ import com.badlogic.gdx.Game;
 
 public class GameStateManager {
 
-    private static MenuScreen menuScreen;
+    private static MainMenuScreen mainMenuScreen;
     private static GameScreen gameScreen;
 
-    public static void setMenuScreen(Game game) {
-        if (menuScreen == null) {
-            menuScreen = new MenuScreen(game);
+    public static void setMainMenuScreen(Game game) {
+        if (mainMenuScreen == null) {
+            mainMenuScreen = new MainMenuScreen(game);
         }
-        game.setScreen(menuScreen);
+        game.setScreen(mainMenuScreen);
     }
 
     public static void setGameScreen(Game game) {

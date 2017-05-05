@@ -7,7 +7,7 @@ import com.badlogic.gdx.math.Matrix4;
 import com.google.vrtoolkit.cardboard.Eye;
 import com.google.vrtoolkit.cardboard.HeadTransform;
 import com.google.vrtoolkit.cardboard.Viewport;
-import com.tda367.parallax.controller.ParallaxLibGDXController;
+import com.tda367.parallax.controller.GameController;
 import com.tda367.parallax.model.parallaxCore.Parallax;
 import com.tda367.parallax.model.parallaxCore.Player;
 import com.tda367.parallax.model.parallaxCore.spaceCraft.Agelion;
@@ -24,7 +24,7 @@ public class ParallaxCardboardLayer implements CardBoardApplicationListener {
     private Player player;
     private Parallax parallaxGame;
     private Renderer renderer;
-    private ParallaxLibGDXController controller;
+    private GameController controller;
     private GameModeState gameModeState;
     private static final float Z_NEAR = 0.1f;
     private static final float Z_FAR = 300.0f;
@@ -39,7 +39,7 @@ public class ParallaxCardboardLayer implements CardBoardApplicationListener {
         this.player = new Player(new Agelion(10));
         this.parallaxGame = new Parallax(player);
         this.gameModeState = com.tda367.parallax.platform.gameModeStates.GameModeFactory.getGameModeState(this);
-        controller = new ParallaxLibGDXController(parallaxGame, gameModeState);
+        controller = new GameController(parallaxGame, gameModeState);
 
         // Setup of special camera for VR
         camera = new CardboardCamera();

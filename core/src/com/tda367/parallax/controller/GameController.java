@@ -8,23 +8,20 @@ import com.tda367.parallax.controller.inputControllers.InputControlsListener;
 /**
  * Created by Markus on 2017-04-11.
  */
-public class ParallaxLibGDXController implements InputControlsListener {
+public class GameController implements InputControlsListener {
 
     private float yValue = 0;
     private float xValue = 0;
 
     private Parallax parallax;
-    private float panSpeed;
 
-    public ParallaxLibGDXController(Parallax parallax, GameModeState gameModeState) {
+    public GameController(Parallax parallax, GameModeState gameModeState) {
         gameModeState.addInputDevices(this);
         this.parallax = parallax;
-        this.panSpeed = 1;
     }
 
     @Override
     public void actionButtonPressed() {
-        System.out.println("play");
         parallax.getPlayer().getSpaceCraft().action();
     }
 
