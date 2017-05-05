@@ -1,8 +1,8 @@
 package com.tda367.parallax.platform;
 
 import com.badlogic.gdx.physics.bullet.Bullet;
-import com.tda367.parallax.parallaxCore.course.BoxObstacle;
-import com.tda367.parallax.platform.CollisionCalculator;
+import com.tda367.parallax.model.CollisionCalculator;
+import com.tda367.parallax.model.parallaxCore.course.BoxObstacle;
 import org.junit.*;
 
 import static org.junit.Assert.*;
