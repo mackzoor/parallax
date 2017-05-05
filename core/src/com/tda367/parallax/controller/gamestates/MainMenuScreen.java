@@ -19,7 +19,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
  * Created by Markus on 2017-05-04.
  */
 
-class MenuScreen implements Screen {
+class MainMenuScreen implements Screen {
 
     Game game;
 
@@ -42,7 +42,7 @@ class MenuScreen implements Screen {
     private Drawable exitButtonFocusDrawable;
     public ImageButton exitButton;
 
-    MenuScreen(final Game game) {
+    MainMenuScreen(final Game game) {
         this.game = game;
 
         stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));

@@ -3,7 +3,7 @@ package com.tda367.parallax.platform;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.graphics.*;
-import com.tda367.parallax.controller.ParallaxLibGDXController;
+import com.tda367.parallax.controller.GameController;
 import com.tda367.parallax.model.CollisionCalculator;
 import com.tda367.parallax.model.CoreAbstraction.SoundManager;
 import com.tda367.parallax.model.parallaxCore.Parallax;
@@ -20,7 +20,7 @@ public class ParallaxLibGdxPlayState implements ApplicationListener {
     private Player player;
     private Parallax parallaxGame;
     private Renderer renderer;
-    private ParallaxLibGDXController controller;
+    private GameController controller;
     private GameModeState gameModeState;
     private Sound sound;
     GameStateManager gameStateManager;
@@ -37,7 +37,7 @@ public class ParallaxLibGdxPlayState implements ApplicationListener {
         this.player = new Player(new Agelion(10));
         this.parallaxGame = new Parallax(player);
         this.parallaxGame.setCollisionCalculator(collisionCalculator);
-        controller = new ParallaxLibGDXController(parallaxGame, gameModeState);
+        controller = new GameController(parallaxGame, gameModeState);
 
         // Create camera sized to screens width/height with Field of View of 75 degrees
         camera = new PerspectiveCamera(
