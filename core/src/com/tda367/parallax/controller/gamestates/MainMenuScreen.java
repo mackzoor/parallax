@@ -14,6 +14,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.tda367.parallax.controller.devicestates.Device;
+import com.tda367.parallax.controller.devicestates.DeviceManager;
 
 /**
  * Created by Markus on 2017-05-04.
@@ -22,6 +24,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 class MainMenuScreen implements Screen {
 
     Game game;
+    Device device;
 
     //Almost everything is copied straight of from MainMenuState. Should be split up in the future
     private ImageButton.ImageButtonStyle playButtonStyle;
@@ -44,6 +47,7 @@ class MainMenuScreen implements Screen {
 
     MainMenuScreen(final Game game) {
         this.game = game;
+        this.device = DeviceManager.getDevice();
 
         stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
         batch = new SpriteBatch();

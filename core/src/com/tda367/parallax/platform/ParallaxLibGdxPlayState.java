@@ -9,8 +9,8 @@ import com.tda367.parallax.model.CoreAbstraction.SoundManager;
 import com.tda367.parallax.model.parallaxCore.Parallax;
 import com.tda367.parallax.model.parallaxCore.Player;
 import com.tda367.parallax.model.parallaxCore.spaceCraft.Agelion;
-import com.tda367.parallax.platform.gameModeStates.GameModeFactory;
-import com.tda367.parallax.platform.gameModeStates.GameModeState;
+import com.tda367.parallax.controller.devicestates.DeviceManager;
+import com.tda367.parallax.controller.devicestates.Device;
 import com.tda367.parallax.view.Renderer;
 import com.tda367.parallax.view.Sound;
 
@@ -21,7 +21,7 @@ public class ParallaxLibGdxPlayState implements ApplicationListener {
     private Parallax parallaxGame;
     private Renderer renderer;
     private GameController controller;
-    private GameModeState gameModeState;
+    private Device device;
     private Sound sound;
     GameStateManager gameStateManager;
     SoundManager soundManager;
@@ -29,7 +29,7 @@ public class ParallaxLibGdxPlayState implements ApplicationListener {
 
     public ParallaxLibGdxPlayState(GameStateManager gameStateManager) {
         this.gameStateManager = gameStateManager;
-        this.gameModeState = GameModeFactory.getGameModeState(this);
+        this.device = DeviceManager.getGameModeState(this);
         soundManager = SoundManager.getInstance();
         this.collisionCalculator = new CollisionCalculator();
 
@@ -37,7 +37,7 @@ public class ParallaxLibGdxPlayState implements ApplicationListener {
         this.player = new Player(new Agelion(10));
         this.parallaxGame = new Parallax(player);
         this.parallaxGame.setCollisionCalculator(collisionCalculator);
-        controller = new GameController(parallaxGame, gameModeState);
+        controller = new GameController(parallaxGame, device);
 
         // Create camera sized to screens width/height with Field of View of 75 degrees
         camera = new PerspectiveCamera(
@@ -85,7 +85,7 @@ public class ParallaxLibGdxPlayState implements ApplicationListener {
         camera.update();
 
         renderer.renderAll();
-        gameModeState.update();
+        device.update();
     }
 
 

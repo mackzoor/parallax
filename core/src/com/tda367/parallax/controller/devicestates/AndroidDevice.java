@@ -1,4 +1,4 @@
-package com.tda367.parallax.platform.gameModeStates;
+package com.tda367.parallax.controller.devicestates;
 
 import com.tda367.parallax.platform.GameStateManager;
 import com.tda367.parallax.view.TouchPadView;
@@ -10,13 +10,13 @@ import com.tda367.parallax.controller.inputControllers.LibGdxGamePadHandler;
  * Created by Markus on 2017-04-25.
  */
 
-class AndroidMode implements GameModeState {
+class AndroidDevice implements Device {
 
     private LibGdxTouchHandler touchHandler;
     private TouchPadView touchPadView;
     private LibGdxGamePadHandler gamePadHandler;
 
-    AndroidMode() {
+    AndroidDevice() {
         this.touchPadView = new TouchPadView();
         this.touchHandler = new LibGdxTouchHandler(touchPadView);
         this.gamePadHandler = new LibGdxGamePadHandler();
