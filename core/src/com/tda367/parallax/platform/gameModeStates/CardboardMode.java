@@ -1,7 +1,7 @@
 package com.tda367.parallax.platform.gameModeStates;
 
-import com.tda367.parallax.platform.inputControllers.InputControlsListener;
-import com.tda367.parallax.platform.inputControllers.LibGdxGamePadHandler;
+import com.tda367.parallax.controller.inputControllers.InputControlsListener;
+import com.tda367.parallax.controller.inputControllers.LibGdxGamePadHandler;
 
 /**
  * Created by Markus on 2017-04-25.
