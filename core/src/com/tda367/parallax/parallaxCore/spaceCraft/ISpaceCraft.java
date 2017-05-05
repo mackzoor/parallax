@@ -23,9 +23,9 @@ public interface ISpaceCraft extends Collidable, Updatable, Renderable {
     void setDesiredPanVelocity(float x, float y);
 
     void action();
-    void addPU(IPowerUp pu);
-    void addPU(List<IPowerUp> listOfPowerUps);
-    void removePU(IPowerUp pu);
+    void pushPU(IPowerUp pu);
+    void pushPU(List<IPowerUp> listOfPowerUps);
+    IPowerUp popPU();
 
     void addSpaceCraftListener(SpaceCraftListener listener);
     void removeSpaceCraftListener(SpaceCraftListener listener);

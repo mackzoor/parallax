@@ -4,12 +4,10 @@ import com.tda367.parallax.CoreAbstraction.Model;
 import com.tda367.parallax.CoreAbstraction.RenderManager;
 import com.tda367.parallax.parallaxCore.powerUps.Cannon;
 import com.tda367.parallax.parallaxCore.powerUps.IPowerUp;
-import com.tda367.parallax.parallaxCore.powerUps.Missile;
 
 import javax.vecmath.*;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedList;
+import java.util.EmptyStackException;
 import java.util.List;
 
 /**
@@ -18,7 +16,6 @@ import java.util.List;
 
 public class Agelion implements ISpaceCraft {
 
-    //TODO, "private powerUp pu;" when done testing
     private List <IPowerUp> pu = new ArrayList <IPowerUp>();
     private int health;
 
@@ -54,6 +51,14 @@ public class Agelion implements ISpaceCraft {
         this.rot = rot;
         this.panAcceleration = new Vector2f();
         this.desiredPanVelocity = new Vector2f();
+        this.pu = new ArrayList<IPowerUp>();
+
+        //Debug to add 3 cannon shots at spawn.
+        List<IPowerUp> addedPus = new ArrayList<IPowerUp>();
+        for (int i = 0; i < 3; i++){
+            addedPus.add(new Cannon());
+        }
+        pushPU(addedPus);
 
         panAbsoluteTarget = new Vector2f();
         currentPanVelocity = new Vector2f();
@@ -209,41 +214,46 @@ public class Agelion implements ISpaceCraft {
     }
     @Override
     public void action(){
-        if (pu.get(0) != null){
-            pu.get(pu.size()-1).usePU(pos, rot);
+        if (!pu.isEmpty()){
+            IPowerUp activePowerUP = pu.get(pu.size()-1);
+
+            activePowerUP.usePU(pos,rot);
+
             for (SpaceCraftListener spaceCraftListener : spaceCraftListeners) {
                 spaceCraftListener.powerUPUsed(pu.get(pu.size()-1));
                 pu.remove(pu.size()-1);
             }
-            addPU(new Cannon());
         } else {
             System.out.println("NO POWERUP");
         }
     }
     @Override
-    public void addPU(IPowerUp pu) {
-        //Adds a single powerUp in a list with the same powerUps
-        if(pu.getClass().equals(this.pu.get(0).getClass()) && pu != null){
-            if(this.pu.size() <= 3) {
-                this.pu.add(pu);
-            }
+    public void pushPU(IPowerUp singlePu) {
+        //Adds a single powerUp in a list if empty or only if the other powerups in it are the same type of powerUps
+        if (pu.size() <= 0){
+            this.pu.add(singlePu);
+        } else if (
+                pu.get(0).getClass().equals(singlePu.getClass())
+                && pu.size() < 4
+                ){
+            this.pu.add(singlePu);
         }
     }
     @Override
-    public void addPU(List<IPowerUp> listOfPowerUps){
-        //Adds list of powerUps if it's the same type. Maximum 3 of powerUps.
-        for (int i = 0; i < listOfPowerUps.size(); i++) {
-            if (pu.size() <= 3 && listOfPowerUps.get(i).getClass().equals(pu.get(0).getClass()) && listOfPowerUps.get(0) != null){
-                pu.add(listOfPowerUps.get(i));
-            }
+    public void pushPU(List<IPowerUp> listOfPowerUps){
+        for (IPowerUp pu : listOfPowerUps){
+            pushPU(pu);
         }
     }
     @Override
-    public void removePU(IPowerUp pu) {
-        //Removes a powerUp if it exists in the PU-List
-        if(this.pu.contains(pu)) {
-            this.pu.remove(pu);
-        }
+    public IPowerUp popPU() throws EmptyStackException{
+        //Pops a PowerUp if the list isn't empty, otherwise throws exception.
+        if(this.pu.isEmpty()) throw new EmptyStackException();
+
+        IPowerUp singlePU = this.pu.get(this.pu.size()-1);
+        this.pu.remove(singlePU);
+
+        return singlePU;
     }
     @Override
     public void incHealth(){
