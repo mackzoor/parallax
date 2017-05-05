@@ -5,6 +5,7 @@ import com.tda367.parallax.CoreAbstraction.RenderManager;
 import com.tda367.parallax.parallaxCore.powerUps.Cannon;
 import com.tda367.parallax.parallaxCore.powerUps.IPowerUp;
 import lombok.Getter;
+import lombok.Value;
 
 import javax.vecmath.*;
 import java.util.ArrayList;
@@ -20,9 +21,8 @@ public class Agelion implements ISpaceCraft {
     private List <IPowerUp> pu = new ArrayList <IPowerUp>();
     private int health;
 
-
-    protected float forwardVelocity;
-    private float forwardTargetSpeed;
+    @Getter protected float forwardVelocity;
+    @Getter private float forwardTargetSpeed;
     @Getter private float forwardAcceleration;
     private boolean forwardRelativeVelocityMode;
 
@@ -30,8 +30,8 @@ public class Agelion implements ISpaceCraft {
     private boolean relativePanMode;
     private Vector2f desiredPanVelocity;
     private Vector2f panAcceleration;
-    private Vector2f currentPanVelocity;
-    private Vector2f panAbsoluteTarget;
+    @Getter private Vector2f currentPanVelocity;
+    @Getter private Vector2f panAbsoluteTarget;
 
     private Vector3f pos;
     private Quat4f rot;
@@ -267,26 +267,6 @@ public class Agelion implements ISpaceCraft {
     public int getHealth() {
         return health;
     }
-
-
-    //Getters for testing
-   /* public float getForwardAcceleration() {
-        return forwardAcceleration;
-    }
-    */
-    public Vector2f getPanAbsoluteTarget() {
-        return panAbsoluteTarget;
-    }
-    public Vector2f getCurrentPanVelocity() {
-        return currentPanVelocity;
-    }
-    public float getForwardTargetSpeed() {
-        return forwardTargetSpeed;
-    }
-    public float getForwardVelocity() {
-        return forwardVelocity;
-    }
-
 
     //Transformable
     @Override
