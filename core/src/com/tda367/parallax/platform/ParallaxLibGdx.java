@@ -3,7 +3,6 @@ package com.tda367.parallax.platform;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 
-
 public class ParallaxLibGdx implements ApplicationListener{
 
     private GameStateManager gameStateManager;

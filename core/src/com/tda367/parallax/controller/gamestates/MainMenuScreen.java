@@ -49,7 +49,7 @@ public class MainMenuScreen implements Screen {
         this.game = game;
         this.device = DeviceManager.getDevice();
 
-        stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
+        stage = new Stage();
         batch = new SpriteBatch();
         table = new Table();
         playButtonSkin = new Skin();
