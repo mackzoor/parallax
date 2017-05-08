@@ -7,11 +7,11 @@ import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.tda367.parallax.controller.GameController;
 import com.tda367.parallax.model.CollisionCalculator;
-import com.tda367.parallax.model.CoreAbstraction.SoundManager;
-import com.tda367.parallax.model.parallaxCore.Parallax;
-import com.tda367.parallax.model.parallaxCore.Player;
-import com.tda367.parallax.model.parallaxCore.spaceCraft.Agelion;
-import com.tda367.parallax.platform.gameModeStates.GameModeFactory;
+import com.tda367.parallax.model.coreabstraction.SoundManager;
+import com.tda367.parallax.model.parallaxcore.Parallax;
+import com.tda367.parallax.model.parallaxcore.Player;
+import com.tda367.parallax.model.parallaxcore.spacecraft.Agelion;
+import com.tda367.parallax.platform.gamemodestates.GameModeFactory;
 import com.tda367.parallax.view.Renderer;
 import com.tda367.parallax.view.Sound;
 

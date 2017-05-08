@@ -1,8 +1,8 @@
 package com.tda367.parallax.parallaxCore.course;
 
-import com.tda367.parallax.model.CoreAbstraction.RenderManager;
-import com.tda367.parallax.model.parallaxCore.course.Course;
-import com.tda367.parallax.model.parallaxCore.spaceCraft.Agelion;
+import com.tda367.parallax.model.coreabstraction.RenderManager;
+import com.tda367.parallax.model.parallaxcore.course.Course;
+import com.tda367.parallax.model.parallaxcore.spacecraft.Agelion;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

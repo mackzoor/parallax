@@ -1,7 +1,7 @@
 package com.tda367.parallax.parallaxCore.spaceCraft;
 
 
-import com.tda367.parallax.model.parallaxCore.spaceCraft.Agelion;
+import com.tda367.parallax.model.parallaxcore.spacecraft.Agelion;
 import org.junit.Before;
 import org.junit.Test;
 

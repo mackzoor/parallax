@@ -2,7 +2,7 @@ package com.tda367.parallax.platform.inputControllers.gamePads;
 
 
 
-import com.tda367.parallax.controller.inputControllers.gamePads.*;
+import com.tda367.parallax.controller.inputcontrollers.gamepads.*;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

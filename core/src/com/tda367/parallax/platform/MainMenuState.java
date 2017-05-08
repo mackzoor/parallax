@@ -11,8 +11,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.tda367.parallax.controller.MainMenuController;
-import com.tda367.parallax.platform.gameModeStates.GameModeFactory;
-import com.tda367.parallax.platform.gameModeStates.GameModeState;
+import com.tda367.parallax.platform.gamemodestates.GameModeFactory;
+import com.tda367.parallax.platform.gamemodestates.GameModeState;
 
 import java.util.ArrayList;
 

@@ -1,8 +1,8 @@
 package com.tda367.parallax.view;
 
 import com.badlogic.gdx.audio.Music;
-import com.tda367.parallax.model.CoreAbstraction.SoundListener;
-import com.tda367.parallax.model.CoreAbstraction.SoundManager;
+import com.tda367.parallax.model.coreabstraction.SoundListener;
+import com.tda367.parallax.model.coreabstraction.SoundManager;
 
 import java.util.ArrayList;
 import java.util.List;
