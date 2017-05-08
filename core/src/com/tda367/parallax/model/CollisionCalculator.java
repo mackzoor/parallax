@@ -3,10 +3,7 @@ package com.tda367.parallax.model;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.bullet.*;
 import com.badlogic.gdx.physics.bullet.collision.*;
-import com.tda367.parallax.model.parallaxcore.collision.Collidable;
-import com.tda367.parallax.model.parallaxcore.collision.CollisionManager;
-import com.tda367.parallax.model.parallaxcore.collision.CollisionPair;
-import com.tda367.parallax.model.parallaxcore.collision.ICollisionCalculator;
+import com.tda367.parallax.model.parallaxcore.collision.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +37,12 @@ public class CollisionCalculator implements ICollisionCalculator {
 
     @Override
     public boolean hasCollided(Collidable first, Collidable second) {
-
+        if (
+            first.getCollidableType() == CollidableType.OBSTACLE &&
+            second.getCollidableType() == CollidableType.OBSTACLE
+            ) {
+            return false;
+        }
         if (!first.isActive() || !second.isActive()) return false;
 
         obj1.setWorldTransform(obj1.getWorldTransform().setTranslation(new Vector3(

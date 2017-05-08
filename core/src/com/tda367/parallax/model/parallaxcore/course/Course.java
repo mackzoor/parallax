@@ -140,7 +140,10 @@ public class Course implements Updatable, SpaceCraftListener, CollisionObserver 
 
     @Override
     public void respondToCollision(CollisionPair collisionPair) {
-            SoundManager.getInstance().playSound("flashBang.mp3","sounds/effects", 0.2f);
+        Collidable first = collisionPair.getFirstCollidable();
+        Collidable second = collisionPair.getSecondCollidable();
 
+        first.handleCollision(second.getCollidableType());
+        second.handleCollision(first.getCollidableType());
     }
 }

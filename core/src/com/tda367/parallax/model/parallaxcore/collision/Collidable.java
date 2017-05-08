@@ -8,11 +8,12 @@ import com.tda367.parallax.model.coreabstraction.Transformable;
  */
 
 public interface Collidable extends Transformable {
-
     boolean isActive();
     void disableCollision();
     void enableCollision();
     Model getCollisionModel();
     void addToCollisionManager();
     void removeFromCollisionManager();
+    CollidableType getCollidableType();
+    void handleCollision(CollidableType type);
 }

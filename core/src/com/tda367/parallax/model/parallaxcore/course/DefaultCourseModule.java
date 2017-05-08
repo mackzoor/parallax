@@ -86,7 +86,7 @@ public class DefaultCourseModule implements ICourseModule {
         return boxObstacles;
     }
     @Override
-    public List<Collidable> getUsables() {
+    public List<Collidable> getContainers() {
         return usables;
     }
 
