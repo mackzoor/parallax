@@ -45,6 +45,10 @@ public abstract class Button {
         return pos;
     }
 
+    public void setPos(Vector2f pos) {
+        this.pos = pos;
+    }
+
     public int getWidth() {
         return width;
     }

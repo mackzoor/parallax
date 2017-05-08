@@ -1,4 +1,4 @@
-package com.tda367.parallax.model.menu.mainmenu;
+package com.tda367.parallax.model.menu;
 
 import com.tda367.parallax.model.menu.buttons.Button;
 import com.tda367.parallax.model.menu.buttons.ExitButton;
@@ -67,12 +67,21 @@ public class MainMenuModel {
         return exitButton;
     }
 
+    public void resize(int screenWidth, int screenHeight) {
+        startButton.setHeight(calculateButtonHeight(screenHeight));
+        startButton.setWidth(calculateButtonWidth(screenWidth));
+        startButton.setPos(calculateStartButtonPosition(screenWidth, screenHeight));
+        exitButton.setHeight(calculateButtonHeight(screenHeight));
+        exitButton.setWidth(calculateButtonWidth(screenWidth));
+        exitButton.setPos(calculateExitButtonPosition(screenWidth, screenHeight));
+    }
+
     private Vector2f calculateStartButtonPosition(int screenWidth, int screenHeight) {
-        return new Vector2f(screenWidth/3,screenHeight/5);
+        return new Vector2f(screenWidth/3,screenHeight * 3/5);
     }
 
     private Vector2f calculateExitButtonPosition(int screenWidth, int screenHeight) {
-        return new Vector2f(screenWidth/3,screenHeight * 3/5);
+        return new Vector2f(screenWidth/3,screenHeight / 5);
     }
 
     private int calculateButtonWidth(int screenWidth) {

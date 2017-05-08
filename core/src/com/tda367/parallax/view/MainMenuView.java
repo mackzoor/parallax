@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.tda367.parallax.model.menu.mainmenu.MainMenuModel;
+import com.tda367.parallax.model.menu.MainMenuModel;
 
 /**
  * Created by Markus on 2017-05-08.
@@ -26,7 +26,7 @@ public class MainMenuView {
         this.mainMenuModel = mainMenuModel;
 
         batch = new SpriteBatch();
-        background = new Texture("background");
+        background = new Texture("gridBg.jpg");
         unSelectedPlayButton = new Texture("playWhite.png");
         selectedPlayButton = new Texture("playButtonFocus.png");
         unSelectedExitButton = new Texture("exitWhite.png");
@@ -36,6 +36,8 @@ public class MainMenuView {
     public void render() {
 
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        batch.begin();
 
         batch.draw(background,0,0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
 
@@ -74,5 +76,12 @@ public class MainMenuView {
                     mainMenuModel.getExitButton().getHeight()
             );
         }
+
+        batch.end();
+
+    }
+
+    public void dispose() {
+        batch.dispose();
     }
 }

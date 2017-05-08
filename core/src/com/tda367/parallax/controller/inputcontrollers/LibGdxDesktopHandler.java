@@ -60,7 +60,7 @@ public class LibGdxDesktopHandler implements InputProcessor {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        listener.onScreenClick(screenX, screenY);
+        listener.onScreenClick(screenX, Gdx.graphics.getHeight() - screenY);
         return false;
     }
 

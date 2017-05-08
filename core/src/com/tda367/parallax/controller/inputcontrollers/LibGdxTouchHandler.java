@@ -1,5 +1,6 @@
 package com.tda367.parallax.controller.inputcontrollers;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.scenes.scene2d.Event;
@@ -52,7 +53,8 @@ public class LibGdxTouchHandler implements EventListener, InputProcessor {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        listener.onScreenClick(screenX, screenY);
+        Gdx.app.debug("TOUCHDOWN", "X: " + screenX + " Y: " + screenY);
+        listener.onScreenClick(screenX, Gdx.graphics.getHeight() - screenY);
         return false;
     }
 

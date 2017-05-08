@@ -1,4 +1,4 @@
-package com.tda367.parallax.platform.inputControllers.gamePads;
+package com.tda367.parallax.platform.gamepads;
 
 
 

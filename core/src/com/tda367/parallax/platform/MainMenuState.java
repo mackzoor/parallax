@@ -99,7 +99,7 @@ public class MainMenuState implements ApplicationListener {
 
         stage.addActor(table);
         System.out.println("menu");
-        mainMenuController = new MainMenuController(this, device);
+        //mainMenuController = new MainMenuController(this, device);
 
     }
 

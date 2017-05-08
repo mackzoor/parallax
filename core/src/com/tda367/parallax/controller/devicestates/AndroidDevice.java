@@ -3,7 +3,6 @@ package com.tda367.parallax.controller.devicestates;
 import com.tda367.parallax.controller.inputcontrollers.InputControlsListener;
 import com.tda367.parallax.controller.inputcontrollers.LibGdxGamePadHandler;
 import com.tda367.parallax.controller.inputcontrollers.LibGdxTouchHandler;
-import com.tda367.parallax.platform.GameStateManager;
 import com.tda367.parallax.view.TouchPadView;
 
 class AndroidDevice implements Device {
@@ -26,7 +25,6 @@ class AndroidDevice implements Device {
 
     @Override
     public void update() {
-        if(GameStateManager.getInstance().getState() == GameStateManager.State.PLAY)
-            touchPadView.drawTouchPad();
+        touchPadView.drawTouchPad();
     }
 }
