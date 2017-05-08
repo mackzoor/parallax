@@ -13,12 +13,27 @@ import javax.vecmath.Vector3f;
 
 public class MysteryPower implements IPowerUp {
 
-    public void usePU(Vector3f pos, Quat4f rot) {
+    private boolean isActive;
+    private boolean isDead;
+
+    public void activate(Vector3f pos, Quat4f rot) {
         //TODO Implement MysteryPower
     }
 
     @Override
-    public void activate() {}
+    public boolean isActive() {
+        return isActive;
+    }
+
+    @Override
+    public void use() {
+        isActive = true;
+    }
+
+    @Override
+    public boolean isDead() {
+        return isDead;
+    }
 
     @Override
     public void update(int milliSinceLastUpdate) {}

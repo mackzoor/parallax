@@ -7,5 +7,6 @@ import com.tda367.parallax.model.parallaxcore.spacecraft.ISpaceCraft;
  */
 
 public interface Usable extends Updatable {
-    void activate(/*TODO Add interface for classes that can use Usables*/);
+    void use(/*TODO Add interface for classes that can use Usables*/);
+    boolean isDead();
 }

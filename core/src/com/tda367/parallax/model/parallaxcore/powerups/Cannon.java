@@ -25,6 +25,9 @@ public class Cannon implements IPowerUp {
     private Model collisionModel;
     private boolean isCollisionOn;
 
+    private boolean isActive;
+    private boolean isDead;
+
     public Cannon(){
         this.pos = new Vector3f();
         this.rot = new Quat4f();
@@ -32,11 +35,14 @@ public class Cannon implements IPowerUp {
         this.acceleration = new Vector3f();
         this.model = new Model("laser.g3db", "3dModels/laser");
         this.isCollisionOn = false;
+
+        isActive = false;
+        isDead = false;
     }
 
     //Launches the cannon round.
     @Override
-    public void usePU(Vector3f pos, Quat4f rot) {
+    public void activate(Vector3f pos, Quat4f rot) {
         //Offset cannon round rotation by 90 degrees due to rotated 3d model.
         this.rot = new Quat4f(0,0,0.7071f,0.7071f);
 
@@ -48,11 +54,25 @@ public class Cannon implements IPowerUp {
 
         velocity.setY(20);
 
-        //Plays a sound for the laser
+        isActive = true;
+
         playCannonSound();
+        addToCollisionManager();
+        addToRenderManager();
     }
+
     @Override
-    public void activate() {
+    public boolean isActive() {
+        return isActive;
+    }
+
+    @Override
+    public void use() {
+    }
+
+    @Override
+    public boolean isDead() {
+        return isDead;
     }
 
     //Updates the cannon.

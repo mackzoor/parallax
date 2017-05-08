@@ -40,7 +40,6 @@ public class Agelion implements ISpaceCraft {
 
     private Model agelionModel;
     private Model collisionModel;
-    private List<SpaceCraftListener> spaceCraftListeners;
     private boolean collisionEnabled;
 
 
@@ -71,7 +70,6 @@ public class Agelion implements ISpaceCraft {
         this.forwardRelativeVelocityMode = true;
 
         collisionEnabled = true;
-        spaceCraftListeners = new ArrayList<SpaceCraftListener>();
     }
     public Agelion(Vector3f position, Quat4f rotation, float startVelocity){
         this(5,startVelocity,8,position,rotation);
@@ -209,24 +207,12 @@ public class Agelion implements ISpaceCraft {
 
     //ISpaceCraft
     @Override
-    public void addSpaceCraftListener(SpaceCraftListener listener){
-        spaceCraftListeners.add(listener);
-    }
-    @Override
-    public void removeSpaceCraftListener(SpaceCraftListener listener) {
-        spaceCraftListeners.remove(listener);
-    }
-    @Override
     public void action(){
         if (!pu.isEmpty()){
             IPowerUp activePowerUP = pu.get(pu.size()-1);
 
-            activePowerUP.usePU(pos,rot);
-
-            for (SpaceCraftListener spaceCraftListener : spaceCraftListeners) {
-                spaceCraftListener.powerUPUsed(pu.get(pu.size()-1));
-                pu.remove(pu.size()-1);
-            }
+            activePowerUP.activate(pos,rot);
+            pu.remove(pu.size()-1);
         } else {
             System.out.println("NO POWERUP");
         }

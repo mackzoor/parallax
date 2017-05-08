@@ -27,9 +27,6 @@ public interface ISpaceCraft extends Collidable, Updatable, Renderable {
     void pushPU(List<IPowerUp> listOfPowerUps);
     IPowerUp popPU();
 
-    void addSpaceCraftListener(SpaceCraftListener listener);
-    void removeSpaceCraftListener(SpaceCraftListener listener);
-
     void incHealth();
     void decHealth();
     int getHealth();

@@ -21,10 +21,11 @@ public class Missile implements IPowerUp {
     private Model model;
     private Model collisionModel;
     private boolean isCollisionOn;
+    private boolean isActive;
+    private boolean isDead;
 
     //Target variables
     @Getter private Vector3f enemyTargetPosition;
-
 
     public Missile(){
         this.pos = new Vector3f();
@@ -33,11 +34,24 @@ public class Missile implements IPowerUp {
         this.acceleration = new Vector3f();
         this.model = new Model("missile.g3db", "3dModels/missile");
         this.isCollisionOn = false;
+
+        isActive = true;
+        isDead = false;
+
+
+        addToRenderManager();
+        addToCollisionManager();
     }
 
     //IPowerUp
     @Override
-    public void usePU(Vector3f pos, Quat4f rot){
+    public void activate(Vector3f pos, Quat4f rot){
+        isActive = true;
+    }
+
+    @Override
+    public boolean isActive() {
+        return isActive;
     }
 
 
@@ -72,7 +86,15 @@ public class Missile implements IPowerUp {
     }
     @Override
     public void handleCollision(CollidableType type) {
-        //Todo Disable powerup and create explosion
+        //Todo Create explosion
+
+        if (type != CollidableType.SPACECRAFT) {
+
+            isActive = false;
+            isDead = true;
+            removeFromRenderManager();
+            removeFromCollisionManager();
+        }
     }
 
 
@@ -103,7 +125,12 @@ public class Missile implements IPowerUp {
 
     //Usable
     @Override
-    public void activate() {
+    public void use() {
+    }
+
+    @Override
+    public boolean isDead() {
+        return isDead;
     }
 
 

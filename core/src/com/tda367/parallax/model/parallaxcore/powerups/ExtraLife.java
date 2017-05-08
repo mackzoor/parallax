@@ -8,9 +8,17 @@ import com.tda367.parallax.model.coreabstraction.Usable;
 
 public class ExtraLife implements Usable {
 
-    @Override
-    public void activate() {
 
+    private boolean isDead = false;
+
+    @Override
+    public void use() {
+
+    }
+
+    @Override
+    public boolean isDead() {
+        return isDead;
     }
 
     @Override

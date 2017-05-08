@@ -2,11 +2,8 @@ package com.tda367.parallax.model.parallaxcore.course;
 
 import com.tda367.parallax.model.parallaxcore.collision.*;
 import com.tda367.parallax.model.parallaxcore.spacecraft.ISpaceCraft;
-import com.tda367.parallax.model.coreabstraction.RenderManager;
-import com.tda367.parallax.model.coreabstraction.SoundManager;
 import com.tda367.parallax.model.coreabstraction.Updatable;
 import com.tda367.parallax.model.parallaxcore.powerups.IPowerUp;
-import com.tda367.parallax.model.parallaxcore.spacecraft.SpaceCraftListener;
 
 import javax.vecmath.Vector3f;
 import java.util.ArrayList;
@@ -16,7 +13,7 @@ import java.util.List;
  * A course that handles the visual representation and updating of {@link ISpaceCraft} and {@link Collidable}.
  */
 
-public class Course implements Updatable, SpaceCraftListener, CollisionObserver {
+public class Course implements Updatable, CollisionObserver {
     private List<ICourseModule> modules;
     private List<ISpaceCraft> spaceCrafts;
     //TODO, remove the power-up after used
@@ -36,13 +33,11 @@ public class Course implements Updatable, SpaceCraftListener, CollisionObserver 
     }
     public void addSpaceCraft(ISpaceCraft spaceCraft) {
         spaceCrafts.add(spaceCraft);
-        spaceCraft.addSpaceCraftListener(this);
         spaceCraft.addToCollisionManager();
         spaceCraft.addToRenderManager();
     }
     public void removeSpaceCraft(ISpaceCraft spaceCraft) {
         spaceCrafts.remove(spaceCraft);
-        spaceCraft.removeSpaceCraftListener(this);
         spaceCraft.addToRenderManager();
         spaceCraft.addToCollisionManager();
     }
@@ -82,7 +77,8 @@ public class Course implements Updatable, SpaceCraftListener, CollisionObserver 
         }
 
         for (IPowerUp pu : activePowerups) {
-            pu.update(milliSinceLastUpdate);
+            if (pu.isActive()) pu.update(milliSinceLastUpdate);
+            if (pu.isDead()) activePowerups.remove(pu);
         }
 
         updateModuleRange();
@@ -128,13 +124,6 @@ public class Course implements Updatable, SpaceCraftListener, CollisionObserver 
             module.removeFromRenderManager();
             modules.remove(module);
             module.remove3dObjectsFromCollisionManager();
-        }
-    }
-
-    public void powerUPUsed(IPowerUp pu) {
-        if (activePowerups.indexOf(pu) == -1) {
-            activePowerups.add(pu);
-            RenderManager.getInstance().addRenderTask(pu);
         }
     }
 
