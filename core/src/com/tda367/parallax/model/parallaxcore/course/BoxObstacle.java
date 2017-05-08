@@ -1,9 +1,10 @@
 package com.tda367.parallax.model.parallaxcore.course;
 
-import com.tda367.parallax.model.coreabstraction.Collidable;
+import com.tda367.parallax.model.parallaxcore.collision.Collidable;
 import com.tda367.parallax.model.coreabstraction.Model;
 import com.tda367.parallax.model.coreabstraction.RenderManager;
 import com.tda367.parallax.model.coreabstraction.Renderable;
+import com.tda367.parallax.model.parallaxcore.collision.CollisionManager;
 
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
@@ -46,6 +47,10 @@ public class BoxObstacle implements Collidable, Renderable {
     public void removeFromRenderManager() {
         RenderManager.getInstance().removeRenderTask(this);
     }
+    @Override
+    public Model getModel() {
+        return model;
+    }
 
     @Override
     public void enableCollision(){
@@ -65,7 +70,11 @@ public class BoxObstacle implements Collidable, Renderable {
     }
 
     @Override
-    public Model getModel() {
-        return model;
+    public void addToCollisionManager() {
+        CollisionManager.getInstance().addCollisionCheck(this);
+    }
+    @Override
+    public void removeFromCollisionManager() {
+        CollisionManager.getInstance().removeCollisionCheck(this);
     }
 }

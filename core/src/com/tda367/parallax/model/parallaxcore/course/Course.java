@@ -1,9 +1,7 @@
 package com.tda367.parallax.model.parallaxcore.course;
 
-import com.tda367.parallax.model.coreabstraction.Collidable;
+import com.tda367.parallax.model.parallaxcore.collision.*;
 import com.tda367.parallax.model.parallaxcore.spacecraft.ISpaceCraft;
-import com.tda367.parallax.model.parallaxcore.collision.CollisionPair;
-import com.tda367.parallax.model.parallaxcore.collision.ICollisionCalculator;
 import com.tda367.parallax.model.coreabstraction.RenderManager;
 import com.tda367.parallax.model.coreabstraction.SoundManager;
 import com.tda367.parallax.model.coreabstraction.Updatable;
@@ -17,18 +15,17 @@ import java.util.List;
 /**
  * A course that handles the visual representation and updating of {@link ISpaceCraft} and {@link Collidable}.
  */
-public class Course implements Updatable, SpaceCraftListener {
+public class Course implements Updatable, SpaceCraftListener, CollisionObserver {
     private List<ICourseModule> modules;
     private List<ISpaceCraft> spaceCrafts;
-    private ICollisionCalculator collisionCalculator;
     //TODO, remove the power-up after used
     private List<IPowerUp> activePowerups;
 
 
     public Course(){
+        CollisionManager.getInstance().subscribeToCollisions(this);
         modules = new ArrayList<ICourseModule>();
         spaceCrafts = new ArrayList<ISpaceCraft>();
-        collisionCalculator = null;
 
         updateModuleRange();
         activePowerups = new ArrayList<IPowerUp>();
@@ -40,12 +37,14 @@ public class Course implements Updatable, SpaceCraftListener {
     public void addSpaceCraft(ISpaceCraft spaceCraft) {
         spaceCrafts.add(spaceCraft);
         spaceCraft.addSpaceCraftListener(this);
-        RenderManager.getInstance().addRenderTask(spaceCraft);
+        spaceCraft.addToCollisionManager();
+        spaceCraft.addToRenderManager();
     }
     public void removeSpaceCraft(ISpaceCraft spaceCraft) {
         spaceCrafts.remove(spaceCraft);
         spaceCraft.removeSpaceCraftListener(this);
-        RenderManager.getInstance().removeRenderTask(spaceCraft);
+        spaceCraft.addToRenderManager();
+        spaceCraft.addToCollisionManager();
     }
     private float getFirstSpaceCraftYPosition() {
         if (spaceCrafts.size() > 0) {
@@ -86,28 +85,6 @@ public class Course implements Updatable, SpaceCraftListener {
             pu.update(milliSinceLastUpdate);
         }
 
-
-        if (collisionCalculator != null){
-            List<Collidable> obstacleList = new ArrayList<Collidable>();
-
-            for (ICourseModule module : modules){
-                obstacleList.addAll((module.getBoxObstacles()));
-                obstacleList.addAll(module.getUsables());
-            }
-
-            List<CollisionPair> collisionList = collisionCalculator.getCollisions(obstacleList, spaceCrafts);
-
-            if (collisionList.size() > 0){
-                SoundManager.getInstance().playSound("flashBang.mp3","sounds/effects", 0.2f);
-            }
-
-            for (CollisionPair pair : collisionList){
-                pair.getFirstCollidable().disableCollision();
-            }
-
-
-        }
-
         updateModuleRange();
     }
     private void updateModuleRange() {
@@ -142,6 +119,7 @@ public class Course implements Updatable, SpaceCraftListener {
             ));
             modules.add(tempModule);
             tempModule.addToRenderManager();
+            tempModule.add3dObjectsToCollisionManager();
         }
     }
     private void removeModules(int i) {
@@ -149,13 +127,9 @@ public class Course implements Updatable, SpaceCraftListener {
             ICourseModule module = modules.get(0);
             module.removeFromRenderManager();
             modules.remove(module);
+            module.remove3dObjectsFromCollisionManager();
         }
     }
-
-    public void setCollisionCalculator(ICollisionCalculator collisionCalculator) {
-        this.collisionCalculator = collisionCalculator;
-    }
-
 
     public void powerUPUsed(IPowerUp pu) {
         if (activePowerups.indexOf(pu) == -1) {
@@ -164,4 +138,9 @@ public class Course implements Updatable, SpaceCraftListener {
         }
     }
 
+    @Override
+    public void respondToCollision(CollisionPair collisionPair) {
+            SoundManager.getInstance().playSound("flashBang.mp3","sounds/effects", 0.2f);
+
+    }
 }

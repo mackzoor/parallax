@@ -8,6 +8,7 @@ import com.tda367.parallax.model.CollisionCalculator;
 import com.tda367.parallax.model.coreabstraction.SoundManager;
 import com.tda367.parallax.model.parallaxcore.Parallax;
 import com.tda367.parallax.model.parallaxcore.Player;
+import com.tda367.parallax.model.parallaxcore.collision.CollisionManager;
 import com.tda367.parallax.model.parallaxcore.spacecraft.Agelion;
 import com.tda367.parallax.controller.devicestates.DeviceManager;
 import com.tda367.parallax.controller.devicestates.Device;
@@ -32,12 +33,11 @@ public class ParallaxLibGdxPlayState implements ApplicationListener {
         this.device = DeviceManager.getGameModeState(this);
         soundManager = SoundManager.getInstance();
         this.collisionCalculator = new CollisionCalculator();
-
+        CollisionManager.getInstance().addCollisionCalculator(collisionCalculator);
         // Initiate game with space craft "Agelion"
         this.player = new Player();
         this.player.addSpaceCraft(new Agelion(10));
         this.parallaxGame = new Parallax(player);
-        this.parallaxGame.setCollisionCalculator(collisionCalculator);
         controller = new GameController(parallaxGame, device);
 
         // Create camera sized to screens width/height with Field of View of 75 degrees

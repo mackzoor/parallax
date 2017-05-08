@@ -61,9 +61,6 @@ public class Parallax implements Updatable {
         course.update(milliSinceLastUpdate);
         camera.update(milliSinceLastUpdate);
     }
-    public void setCollisionCalculator(ICollisionCalculator collisionCalculator){
-        course.setCollisionCalculator(collisionCalculator);
-    }
 
     public Player getPlayer() {
         return player;

@@ -1,6 +1,5 @@
 package com.tda367.parallax.model.parallaxcore.collision;
 
-import com.tda367.parallax.model.coreabstraction.Collidable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +8,8 @@ import java.util.List;
  */
 public class CollisionManager {
     private List<Collidable> collidables;
+    private List<ICollisionCalculator> calculators;
+    private List<CollisionObserver> observers;
 
     private static CollisionManager instance;
     public static CollisionManager getInstance(){
@@ -18,6 +19,8 @@ public class CollisionManager {
 
     private CollisionManager(){
         collidables = new ArrayList<Collidable>();
+        calculators = new ArrayList<ICollisionCalculator>();
+        observers = new ArrayList<CollisionObserver>();
     }
 
     public void addCollisionCheck(Collidable collidable){
@@ -27,7 +30,28 @@ public class CollisionManager {
         collidables.remove(collidable);
     }
 
+    public void subscribeToCollisions(CollisionObserver observer){
+        observers.add(observer);
+    }
+    public void unnubscribeToCollisions(CollisionObserver observer){
+        observers.remove(observer);
+    }
+
+    public void addCollisionCalculator(ICollisionCalculator calculator){
+        calculators.add(calculator);
+    }
+    public void removeCollisionCalculator(ICollisionCalculator calculator){
+        calculators.remove(calculator);
+    }
+
+
     public List<Collidable> getCollidables(){
         return collidables;
+    }
+
+    public void alertObservers(CollisionPair collisionPair) {
+        for (CollisionObserver observer : observers) {
+            observer.respondToCollision(collisionPair);
+        }
     }
 }

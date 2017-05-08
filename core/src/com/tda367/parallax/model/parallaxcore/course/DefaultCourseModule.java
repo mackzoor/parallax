@@ -1,6 +1,6 @@
 package com.tda367.parallax.model.parallaxcore.course;
 
-import com.tda367.parallax.model.coreabstraction.Collidable;
+import com.tda367.parallax.model.parallaxcore.collision.Collidable;
 import com.tda367.parallax.model.coreabstraction.IModel;
 import com.tda367.parallax.model.coreabstraction.Model;
 import com.tda367.parallax.model.coreabstraction.RenderManager;
@@ -14,7 +14,7 @@ import java.util.Random;
 /**
  * A course module that will represent the visual part of a course.
  */
-public class DefaultCourseModule implements ICourseModule, IModel {
+public class DefaultCourseModule implements ICourseModule {
     private Vector3f pos;
     private Quat4f rot;
     private float length;
@@ -64,6 +64,22 @@ public class DefaultCourseModule implements ICourseModule, IModel {
     public float getLength(){
         return length;
     }
+
+    @Override
+    public void add3dObjectsToCollisionManager() {
+        for (BoxObstacle boxObstacle : boxObstacles) {
+            boxObstacle.addToCollisionManager();
+        }
+    }
+
+    @Override
+    public void remove3dObjectsFromCollisionManager() {
+        for (BoxObstacle boxObstacle : boxObstacles) {
+            boxObstacle.removeFromCollisionManager();
+        }
+
+    }
+
     @Override
     public List<? extends Collidable> getBoxObstacles() {
         return boxObstacles;

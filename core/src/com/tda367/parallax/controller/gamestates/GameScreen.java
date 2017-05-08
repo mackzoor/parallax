@@ -11,6 +11,7 @@ import com.tda367.parallax.model.CollisionCalculator;
 import com.tda367.parallax.model.coreabstraction.SoundManager;
 import com.tda367.parallax.model.parallaxcore.Parallax;
 import com.tda367.parallax.model.parallaxcore.Player;
+import com.tda367.parallax.model.parallaxcore.collision.CollisionManager;
 import com.tda367.parallax.model.parallaxcore.spacecraft.Agelion;
 import com.tda367.parallax.view.Renderer;
 import com.tda367.parallax.view.Sound;
@@ -37,13 +38,12 @@ class GameScreen implements Screen {
         this.game = game;
 
         soundManager = SoundManager.getInstance();
-        this.collisionCalculator = new CollisionCalculator();
+        CollisionManager.getInstance().addCollisionCalculator(collisionCalculator = new CollisionCalculator());
 
         // Initiate game with space craft "Agelion"
         this.player = new Player();
         this.player.addSpaceCraft(new Agelion(10));
         this.parallaxGame = new Parallax(player);
-        this.parallaxGame.setCollisionCalculator(collisionCalculator);
         controller = new GameController(parallaxGame, DeviceManager.getGameModeState(game));
 
         // Create camera sized to screens width/height with Field of View of 75 degrees
@@ -82,7 +82,7 @@ class GameScreen implements Screen {
                 parallaxGame.getCamera().getPos().getY()*-1
         );
         camera.update();
-
+        collisionCalculator.run();
         renderer.renderAll();
     }
 

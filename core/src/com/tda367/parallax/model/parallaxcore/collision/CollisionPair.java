@@ -1,7 +1,5 @@
 package com.tda367.parallax.model.parallaxcore.collision;
 
-import com.tda367.parallax.model.coreabstraction.Collidable;
-
 /**
  * A class that holds a pair of {@link Collidable} that has collided.
  */

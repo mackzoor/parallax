@@ -3,7 +3,8 @@ package com.tda367.parallax.model;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.bullet.*;
 import com.badlogic.gdx.physics.bullet.collision.*;
-import com.tda367.parallax.model.coreabstraction.Collidable;
+import com.tda367.parallax.model.parallaxcore.collision.Collidable;
+import com.tda367.parallax.model.parallaxcore.collision.CollisionManager;
 import com.tda367.parallax.model.parallaxcore.collision.CollisionPair;
 import com.tda367.parallax.model.parallaxcore.collision.ICollisionCalculator;
 
@@ -99,6 +100,33 @@ public class CollisionCalculator implements ICollisionCalculator {
         }
 
         return collisionPairs;
+    }
+
+    @Override
+    public void run() {
+        CollisionManager collisionManager = CollisionManager.getInstance();
+        List<Collidable> collidables = collisionManager.getCollidables();
+
+        for (int i = 0; i < collidables.size(); i++) {
+            for (int j = 0; j < collidables.size(); j++) {
+                if (i != j){
+
+                    if (hasCollided(
+                            collidables.get(i),
+                            collidables.get(j)
+                    )){
+                        collisionManager.alertObservers(
+                                new CollisionPair(
+                                        collidables.get(i),
+                                        collidables.get(j)
+                                        )
+                        );
+                    }
+
+                }
+            }
+        }
+
     }
 
     private btCollisionObject CollidableConverter(Collidable coll) {

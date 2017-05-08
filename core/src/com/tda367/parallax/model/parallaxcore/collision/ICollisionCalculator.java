@@ -1,6 +1,5 @@
 package com.tda367.parallax.model.parallaxcore.collision;
 
-import com.tda367.parallax.model.coreabstraction.Collidable;
 import java.util.List;
 
 /**
@@ -12,4 +11,5 @@ public interface ICollisionCalculator {
     List<CollisionPair> getCollisions(List<? extends Collidable> collidables);
     List<CollisionPair> getCollisions(List<? extends Collidable> firstGroup,List<? extends Collidable> secondGroup);
 
+    void run();
 }

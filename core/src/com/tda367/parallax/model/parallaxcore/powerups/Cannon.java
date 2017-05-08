@@ -4,6 +4,7 @@ package com.tda367.parallax.model.parallaxcore.powerups;
 import com.tda367.parallax.model.coreabstraction.Model;
 import com.tda367.parallax.model.coreabstraction.RenderManager;
 import com.tda367.parallax.model.coreabstraction.SoundManager;
+import com.tda367.parallax.model.parallaxcore.collision.CollisionManager;
 
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
@@ -102,6 +103,14 @@ public class Cannon implements IPowerUp {
     @Override
     public Model getCollisionModel() {
         return collisionModel;
+    }
+    @Override
+    public void addToCollisionManager() {
+        CollisionManager.getInstance().addCollisionCheck(this);
+    }
+    @Override
+    public void removeFromCollisionManager() {
+        CollisionManager.getInstance().removeCollisionCheck(this);
     }
 
 

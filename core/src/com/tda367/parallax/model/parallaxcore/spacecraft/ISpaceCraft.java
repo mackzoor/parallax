@@ -1,6 +1,6 @@
 package com.tda367.parallax.model.parallaxcore.spacecraft;
 
-import com.tda367.parallax.model.coreabstraction.Collidable;
+import com.tda367.parallax.model.parallaxcore.collision.Collidable;
 import com.tda367.parallax.model.coreabstraction.Renderable;
 import com.tda367.parallax.model.coreabstraction.Updatable;
 import com.tda367.parallax.model.parallaxcore.powerups.IPowerUp;

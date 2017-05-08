@@ -1,5 +1,6 @@
 package com.tda367.parallax.model.parallaxcore.spacecraft;
 
+import com.tda367.parallax.model.parallaxcore.collision.CollisionManager;
 import lombok.Getter;
 import com.tda367.parallax.model.parallaxcore.powerups.Cannon;
 import com.tda367.parallax.model.coreabstraction.Model;
@@ -305,6 +306,15 @@ public class Agelion implements ISpaceCraft {
     @Override
     public Model getCollisionModel() {
         return collisionModel;
+    }
+
+    @Override
+    public void addToCollisionManager() {
+        CollisionManager.getInstance().addCollisionCheck(this);
+    }
+    @Override
+    public void removeFromCollisionManager() {
+        CollisionManager.getInstance().addCollisionCheck(this);
     }
 
     @Override
