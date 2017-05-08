@@ -58,6 +58,7 @@ class GameScreen implements Screen {
     public void render(float delta) {
         //Updates Parallax game logic
         parallaxGame.update((int) (Gdx.graphics.getDeltaTime() * 1000));
+        collisionCalculator.run();
         renderer.renderAll();
     }
 

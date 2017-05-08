@@ -22,6 +22,7 @@ public class ParallaxLibGdxPlayState implements ApplicationListener {
     private Device device;
     private Sound sound;
     GameStateManager gameStateManager;
+    CollisionCalculator collisionCalculator;
     SoundManager soundManager;
 
     public ParallaxLibGdxPlayState(GameStateManager gameStateManager) {

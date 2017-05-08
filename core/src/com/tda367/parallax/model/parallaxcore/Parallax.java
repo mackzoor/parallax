@@ -74,11 +74,6 @@ public class Parallax implements Updatable {
         rm.setCamZCoord(camera.getPos().getZ());
     }
 
-    public void setCollisionCalculator(ICollisionCalculator collisionCalculator){
-        course.setCollisionCalculator(collisionCalculator);
-    }
-
-
     public List<ISpaceCraft> getSpaceCraft(){
         return course.getSpaceCrafts();
     }
