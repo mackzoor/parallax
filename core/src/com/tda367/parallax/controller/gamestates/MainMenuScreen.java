@@ -19,7 +19,6 @@ public class MainMenuScreen implements Screen {
     private MainMenuController mainMenuController;
     private MainMenuView mainMenuView;
 
-    //Almost everything is copied straight of from MainMenuState. Should be split up in the future
 
     public MainMenuScreen(final Game game) {
         this.game = game;

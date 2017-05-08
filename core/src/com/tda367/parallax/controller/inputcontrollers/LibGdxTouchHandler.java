@@ -15,6 +15,7 @@ public class LibGdxTouchHandler implements EventListener, InputProcessor {
 
     public LibGdxTouchHandler(TouchPadView view) {
         this.view = view;
+        Gdx.input.setInputProcessor(this);
         view.addListener(this);
     }
 
@@ -53,7 +54,6 @@ public class LibGdxTouchHandler implements EventListener, InputProcessor {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        Gdx.app.debug("TOUCHDOWN", "X: " + screenX + " Y: " + screenY);
         listener.onScreenClick(screenX, Gdx.graphics.getHeight() - screenY);
         return false;
     }
