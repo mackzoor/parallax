@@ -15,12 +15,12 @@ import java.util.List;
 /**
  * A course that handles the visual representation and updating of {@link ISpaceCraft} and {@link Collidable}.
  */
+
 public class Course implements Updatable, SpaceCraftListener, CollisionObserver {
     private List<ICourseModule> modules;
     private List<ISpaceCraft> spaceCrafts;
     //TODO, remove the power-up after used
     private List<IPowerUp> activePowerups;
-
 
     public Course(){
         CollisionManager.getInstance().subscribeToCollisions(this);

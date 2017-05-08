@@ -14,6 +14,7 @@ import java.util.Random;
 /**
  * A course module that will represent the visual part of a course.
  */
+
 public class DefaultCourseModule implements ICourseModule {
     private Vector3f pos;
     private Quat4f rot;

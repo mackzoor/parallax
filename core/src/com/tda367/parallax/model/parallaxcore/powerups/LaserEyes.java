@@ -1,18 +1,16 @@
-
 package com.tda367.parallax.model.parallaxcore.powerups;
+
 import com.tda367.parallax.model.coreabstraction.Model;
 import com.tda367.parallax.model.parallaxcore.collision.CollisionManager;
 
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
 
-
 /**
  * LaserEyes fires a laserbeam that is controlled by the player using google cardboard.
  */
 
 public class LaserEyes implements IPowerUp {
-
 
     public void usePU(Vector3f pos, Quat4f rot) {
 

@@ -16,13 +16,9 @@ import com.tda367.parallax.model.parallaxcore.spacecraft.Agelion;
 import com.tda367.parallax.view.Renderer;
 import com.tda367.parallax.view.Sound;
 
-/**
- * Created by Markus on 2017-05-04.
- */
-
 class GameScreen implements Screen {
 
-    Game game;
+    private Game game;
 
     //Almost everything is copied straight of from PlayState. Should be split up in the future
     private PerspectiveCamera camera;
@@ -31,8 +27,8 @@ class GameScreen implements Screen {
     private Renderer renderer;
     private GameController controller;
     private Sound sound;
-    SoundManager soundManager;
-    CollisionCalculator collisionCalculator;
+    private SoundManager soundManager;
+    private CollisionCalculator collisionCalculator;
 
     GameScreen(Game game) {
         this.game = game;
@@ -63,12 +59,10 @@ class GameScreen implements Screen {
 
         renderer = new Renderer(camera);
         sound = new Sound();
-
     }
 
     @Override
     public void show() {
-
     }
 
     @Override
@@ -94,17 +88,14 @@ class GameScreen implements Screen {
 
     @Override
     public void pause() {
-
     }
 
     @Override
     public void resume() {
-
     }
 
     @Override
     public void hide() {
-
     }
 
     @Override

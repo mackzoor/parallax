@@ -7,9 +7,6 @@ import com.tda367.parallax.model.parallaxcore.collision.CollisionManager;
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
 
-/**
- * Created by xoxLU on 2017-05-02.
- */
 public class Missile implements IPowerUp {
 
     private Vector3f pos;

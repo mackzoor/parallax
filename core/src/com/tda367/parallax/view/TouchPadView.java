@@ -9,16 +9,13 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
-
-/**
- * Created by Markus on 2017-05-02.
- */
+import lombok.Getter;
 
 public class TouchPadView {
 
+    @Getter private Touchpad touchpad;
+    @Getter private ImageButton actionButton;
     private Touchpad.TouchpadStyle touchpadStyle;
-    private Touchpad touchpad;
-    private ImageButton actionButton;
     private Drawable touchBackground;
     private Drawable touchKnob;
     private Drawable actionButtonBackground;
@@ -27,8 +24,7 @@ public class TouchPadView {
 
     public TouchPadView() {
         touchpadSkin = new Skin();
-        touchpadSkin.add("background", new Texture(
-                "touchpad/background.png"));
+        touchpadSkin.add("background", new Texture("touchpad/background.png"));
         touchpadSkin.add("knob", new Texture("touchpad/knob.png"));
         touchpadSkin.add("actionButton", new Texture("touchpad/actionButton.png"));
 
@@ -64,16 +60,7 @@ public class TouchPadView {
         actionButton.addListener(listener);
     }
 
-    public Touchpad getTouchpad() {
-        return touchpad;
-    }
-
-    public Actor getActionButton() {
-        return actionButton;
-    }
-
     public void drawTouchPad(){
         stage.draw();
     }
-
 }

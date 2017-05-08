@@ -12,9 +12,6 @@ import com.badlogic.gdx.utils.UBJsonReader;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by Anthony on 11/04/2017.
- */
 public class ResourceHandler {
     private static ResourceHandler instance;
     private Map<String,Model> loadedModels;

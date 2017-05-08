@@ -7,10 +7,6 @@ import com.tda367.parallax.model.coreabstraction.SoundManager;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by xoxLU on 2017-04-11.
- */
-
 public class Sound implements SoundListener {
 
     private final class ActiveMusicCombination {
@@ -22,11 +18,11 @@ public class Sound implements SoundListener {
             this.playing = playing;
         }
 
-        public String getFileName() {
+        String getFileName() {
             return fileName;
         }
 
-        public Music getMusicPlying() {
+        Music getMusicPlying() {
             return playing;
         }
     }

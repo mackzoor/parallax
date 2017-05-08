@@ -307,7 +307,6 @@ public class Agelion implements ISpaceCraft {
     public Model getCollisionModel() {
         return collisionModel;
     }
-
     @Override
     public void addToCollisionManager() {
         CollisionManager.getInstance().addCollisionCheck(this);

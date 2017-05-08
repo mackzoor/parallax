@@ -7,19 +7,14 @@ import org.junit.*;
 
 import static org.junit.Assert.*;
 
-/**
- * Created by amk19 on 25/04/2017.
- */
 public class CollisionCalculatorTest {
 
-    static CollisionCalculator collisionCalculator;
+    private static CollisionCalculator collisionCalculator;
 
     @BeforeClass
     public static void setUp(){
-
         Bullet.init();
         collisionCalculator = new CollisionCalculator();
-
     }
 
     @Test

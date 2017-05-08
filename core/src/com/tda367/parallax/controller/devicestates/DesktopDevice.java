@@ -5,10 +5,6 @@ import com.tda367.parallax.controller.inputcontrollers.InputControlsListener;
 import com.tda367.parallax.controller.inputcontrollers.LibGdxDesktopHandler;
 import com.tda367.parallax.controller.inputcontrollers.LibGdxGamePadHandler;
 
-/**
- * Created by Markus on 2017-04-25.
- */
-
 class DesktopDevice implements Device {
 
     private LibGdxGamePadHandler gamePadHandler;

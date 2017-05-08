@@ -1,6 +1,5 @@
 package com.tda367.parallax.model.parallaxcore.powerups;
 
-
 import com.tda367.parallax.model.coreabstraction.Model;
 import com.tda367.parallax.model.coreabstraction.RenderManager;
 import com.tda367.parallax.model.coreabstraction.SoundManager;
@@ -70,9 +69,9 @@ public class Cannon implements IPowerUp {
 
         //Plays a funny sound every 200 shots
         if(randomSong > 199){
-            SoundManager.getInstance().playSound("cannonLow.mp3","sounds/effects", new Float(0.8f));
+            SoundManager.getInstance().playSound("cannonLow.mp3","sounds/effects", 0.8f);
         } else {
-            SoundManager.getInstance().playSound("cannon.mp3","sounds/effects", new Float(0.8f));
+            SoundManager.getInstance().playSound("cannon.mp3","sounds/effects", 0.8f);
         }
     }
 

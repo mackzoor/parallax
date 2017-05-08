@@ -1,6 +1,5 @@
 package com.tda367.parallax.model.parallaxcore.powerups;
 
-
 import com.tda367.parallax.model.coreabstraction.*;
 
 import javax.vecmath.Quat4f;

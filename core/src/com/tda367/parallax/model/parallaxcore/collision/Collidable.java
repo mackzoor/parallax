@@ -6,6 +6,7 @@ import com.tda367.parallax.model.coreabstraction.Transformable;
 /**
  * Interface for objects with the ability to collide.
  */
+
 public interface Collidable extends Transformable {
 
     boolean isActive();
@@ -14,5 +15,4 @@ public interface Collidable extends Transformable {
     Model getCollisionModel();
     void addToCollisionManager();
     void removeFromCollisionManager();
-
 }

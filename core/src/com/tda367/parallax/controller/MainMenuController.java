@@ -10,15 +10,10 @@ import com.tda367.parallax.platform.MainMenuState;
 import com.tda367.parallax.controller.devicestates.Device;
 import com.tda367.parallax.controller.inputcontrollers.InputControlsListener;
 
-
-/**
- * Created by Rasmus on 2017-05-02.
- */
 public class MainMenuController implements InputControlsListener {
 
     private MainMenuState mainMenuView;
     private ImageButton currentButton;
-
 
     public MainMenuController(MainMenuState view, Device device) {
         mainMenuView = view;

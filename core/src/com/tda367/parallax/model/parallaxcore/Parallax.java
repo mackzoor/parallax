@@ -9,6 +9,7 @@ import com.tda367.parallax.model.parallaxcore.enemies.HunterAI;
 import com.tda367.parallax.model.parallaxcore.enemies.MinionEnemy;
 import com.tda367.parallax.model.parallaxcore.spacecraft.Agelion;
 import com.tda367.parallax.model.parallaxcore.spacecraft.ISpaceCraft;
+import lombok.Getter;
 
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
@@ -19,13 +20,14 @@ import java.util.Random;
 /**
  * The startup class for the game "Parallax".
  */
+
 public class Parallax implements Updatable {
 
-    private RenderManager renderManager;
+    @Getter private RenderManager renderManager;
     private SoundManager soundManager;
     private Course course;
-    private Camera camera;
-    private Player player;
+    @Getter private Camera camera;
+    @Getter private Player player;
 
     private List<HunterAI> ais;
 
@@ -62,20 +64,9 @@ public class Parallax implements Updatable {
         camera.update(milliSinceLastUpdate);
     }
 
-    public Player getPlayer() {
-        return player;
-    }
 
     public List<ISpaceCraft> getSpaceCraft(){
         return course.getSpaceCrafts();
-    }
-
-    public RenderManager getRenderManager(){
-        return renderManager;
-    }
-
-    public Camera getCamera(){
-        return camera;
     }
 
     private void startBackgroundMusic(){
@@ -85,7 +76,7 @@ public class Parallax implements Updatable {
         if(randomSong == 50){
             soundManager.playMusic("secretTrack.mp3","sounds/music");
         } else {
-            soundManager.playMusic("track.mp3","sounds/music", new Float(0.7f));
+            soundManager.playMusic("track.mp3","sounds/music", 0.7f);
         }
     }
 

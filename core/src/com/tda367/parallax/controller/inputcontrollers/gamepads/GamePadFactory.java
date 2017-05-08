@@ -1,9 +1,5 @@
 package com.tda367.parallax.controller.inputcontrollers.gamepads;
 
-/**
- * Created by Markus on 2017-04-22.
- */
-
 public class GamePadFactory {
 
     //Returns a game pad class with the correct key codes for the connected controller

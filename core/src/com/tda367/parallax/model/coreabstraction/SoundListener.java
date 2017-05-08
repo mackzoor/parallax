@@ -1,8 +1,5 @@
 package com.tda367.parallax.model.coreabstraction;
 
-/**
- * Created by xoxLU on 2017-04-12.
- */
 public interface SoundListener {
     //TODO might want to remove method-heads using musicFile as parameter, they might never get used.
 

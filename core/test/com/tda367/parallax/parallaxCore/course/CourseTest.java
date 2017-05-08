@@ -7,15 +7,12 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-/**
- * Created by Rasmus on 2017-05-01.
- */
 public class CourseTest {
-    RenderManager renderManager = RenderManager.getInstance();
-    Course course = new Course();
-    Agelion agelion1 = new Agelion();
-    Agelion agelion2 = new Agelion();
-    Agelion agelion3 = new Agelion();
+    private RenderManager renderManager = RenderManager.getInstance();
+    private Course course = new Course();
+    private Agelion agelion1 = new Agelion();
+    private Agelion agelion2 = new Agelion();
+    private Agelion agelion3 = new Agelion();
 
     @Test
     public void addSpaceCraft() throws Exception {

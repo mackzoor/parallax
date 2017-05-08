@@ -13,45 +13,45 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.tda367.parallax.controller.MainMenuController;
 import com.tda367.parallax.controller.devicestates.DeviceManager;
 import com.tda367.parallax.controller.devicestates.Device;
+import lombok.Getter;
 
 import java.util.ArrayList;
-
 
 /**
  * Class that renders and starts the Main Menu
  */
+
 //TODO Create GUI for the menu
 //TODO Get TrueTypeFontFactory
 
 public class MainMenuState implements ApplicationListener {
 
+    @Getter private Stage stage;
+    @Getter public ImageButton playButton;
+    @Getter public ImageButton exitButton;
     private ImageButton.ImageButtonStyle playButtonStyle;
     private ImageButton.ImageButtonStyle exitButtonStyle;
-    private Stage stage;
     private Skin playButtonSkin;
     private Skin playButtonFocusSkin;
     private Skin exitButtonSkin;
     private Skin exitButtonFocusSkin;
     private Skin backgroundSkin;
     private SpriteBatch batch;
-    GameStateManager gameStateManager;
-    private Table table;
-    public ImageButton playButton;
     private Drawable playButtonDrawable;
     private Drawable playButtonFocusDrawable;
     private Drawable backgroundDrawable;
     private Drawable exitButtonDrawable;
     private Drawable exitButtonFocusDrawable;
-    public ImageButton exitButton;
+    private Table table;
+    private GameStateManager gameStateManager;
     ArrayList<ImageButton> buttons;
-    Device device;
-    MainMenuController mainMenuController;
+    private Device device;
+    private MainMenuController mainMenuController;
 
+    private float w = Gdx.graphics.getWidth(); //the width of the window
+    private float h = Gdx.graphics.getHeight();//the height of the window
 
-    float w = Gdx.graphics.getWidth(); //the width of the window
-    float h = Gdx.graphics.getHeight();//the height of the window
-
-    public MainMenuState(final GameStateManager gameStateManager) {
+    MainMenuState(final GameStateManager gameStateManager) {
         this.gameStateManager = gameStateManager;
         device = DeviceManager.getGameModeState(this);
 
@@ -129,7 +129,6 @@ public class MainMenuState implements ApplicationListener {
         device.update();
     }
 
-
     @Override
     public void pause() {
 
@@ -139,7 +138,6 @@ public class MainMenuState implements ApplicationListener {
     public void resume() {
 
     }
-
 
     @Override
     public void dispose() {
@@ -151,18 +149,5 @@ public class MainMenuState implements ApplicationListener {
         Gdx.gl.glClearColor(0, 0, 0, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-    }
-
-    public ImageButton getPlayButton() {
-        return playButton;
-    }
-
-    public ImageButton getExitButton() {
-        return exitButton;
-
-    }
-
-    public Stage getStage(){
-        return stage;
     }
 }

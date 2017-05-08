@@ -14,6 +14,7 @@ import java.util.List;
 /**
  * Class that calculates collisions of {@link Collidable}with the use of bullet physics.
  */
+
 public class CollisionCalculator implements ICollisionCalculator {
 
     private final btDefaultCollisionConfiguration collisionConfig;
@@ -129,6 +130,8 @@ public class CollisionCalculator implements ICollisionCalculator {
 
     }
 
+    //
+    // TODO, Make these methods not return at a later date.
     private btCollisionObject CollidableConverter(Collidable coll) {
         btCollisionObject collisionObject = new btCollisionObject();
 

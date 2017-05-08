@@ -12,6 +12,7 @@ import javax.vecmath.Vector3f;
 /**
  * A cube that is renderable and collidable.
  */
+
 public class BoxObstacle implements Collidable, Renderable {
     private Vector3f pos;
     private Quat4f rot;
@@ -20,7 +21,6 @@ public class BoxObstacle implements Collidable, Renderable {
     private Model collisionModel;
 
     private boolean collisionEnabled;
-
 
     public BoxObstacle(){
         model = new Model("boxObstacle.g3db", "3dModels/boxObstacle");

@@ -1,9 +1,5 @@
 package com.tda367.parallax.controller.inputcontrollers;
 
-/**
- * Created by Markus on 2017-04-22.
- */
-
 public interface InputControlsListener {
     void actionButtonPressed();
     void secondaryActionButtonPressed();

@@ -5,9 +5,6 @@ import com.tda367.parallax.platform.GameStateManager;
 import com.tda367.parallax.controller.inputcontrollers.InputControlsListener;
 import com.tda367.parallax.controller.devicestates.Device;
 
-/**
- * Created by Markus on 2017-04-11.
- */
 public class GameController implements InputControlsListener {
 
     private float yValue = 0;

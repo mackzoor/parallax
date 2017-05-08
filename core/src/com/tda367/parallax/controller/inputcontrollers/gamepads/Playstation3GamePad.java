@@ -1,8 +1,5 @@
 package com.tda367.parallax.controller.inputcontrollers.gamepads;
 
-/**
- * Created by Markus on 2017-04-12.
- */
 public class Playstation3GamePad implements GamePad {
     /*
     All of the key codes are listed below:

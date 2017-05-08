@@ -17,14 +17,10 @@ public class Nuke implements IPowerUp {
     }
 
     @Override
-    public void activate() {
-
-    }
+    public void activate() {}
 
     @Override
-    public void update(int milliSinceLastUpdate) {
-
-    }
+    public void update(int milliSinceLastUpdate) {}
 
     @Override
     public Model getModel() {
@@ -37,14 +33,10 @@ public class Nuke implements IPowerUp {
     }
 
     @Override
-    public void disableCollision() {
-
-    }
+    public void disableCollision() {}
 
     @Override
-    public void enableCollision() {
-
-    }
+    public void enableCollision() {}
 
     @Override
     public Model getCollisionModel() {
@@ -71,12 +63,8 @@ public class Nuke implements IPowerUp {
     }
 
     @Override
-    public void addToRenderManager() {
-
-    }
+    public void addToRenderManager() {}
 
     @Override
-    public void removeFromRenderManager() {
-
-    }
+    public void removeFromRenderManager() {}
 }

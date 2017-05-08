@@ -5,10 +5,6 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.android.CardBoardApplicationListener;
 
-/**
- * Created by Markus on 2017-04-26.
- */
-
 public class DeviceManager {
 
     private static Device device;
