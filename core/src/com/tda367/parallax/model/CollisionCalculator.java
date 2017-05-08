@@ -43,7 +43,7 @@ public class CollisionCalculator implements ICollisionCalculator {
             ) {
             return false;
         }
-        if (!first.isActive() || !second.isActive()) return false;
+        if (!first.collisionActivated() || !second.collisionActivated()) return false;
 
         obj1.setWorldTransform(obj1.getWorldTransform().setTranslation(new Vector3(
                 first.getPos().getX(),

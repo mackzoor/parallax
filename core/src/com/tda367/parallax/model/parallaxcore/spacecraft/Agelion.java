@@ -294,7 +294,7 @@ public class Agelion implements ISpaceCraft {
 
     //Collision
     @Override
-    public boolean isActive() {
+    public boolean collisionActivated() {
         return collisionEnabled;
     }
     @Override
