@@ -8,11 +8,11 @@ import com.google.vrtoolkit.cardboard.Eye;
 import com.google.vrtoolkit.cardboard.HeadTransform;
 import com.google.vrtoolkit.cardboard.Viewport;
 import com.tda367.parallax.controller.GameController;
-import com.tda367.parallax.model.parallaxCore.Parallax;
-import com.tda367.parallax.model.parallaxCore.Player;
-import com.tda367.parallax.model.parallaxCore.spaceCraft.Agelion;
 import com.tda367.parallax.controller.devicestates.DeviceManager;
 import com.tda367.parallax.controller.devicestates.Device;
+import com.tda367.parallax.model.parallaxcore.Parallax;
+import com.tda367.parallax.model.parallaxcore.Player;
+import com.tda367.parallax.model.parallaxcore.spacecraft.Agelion;
 import com.tda367.parallax.view.Renderer;
 import com.tda367.parallax.view.Sound;
 

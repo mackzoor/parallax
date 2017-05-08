@@ -1,9 +1,10 @@
 package com.tda367.parallax.parallaxCore.menuModels.menuModelsTest;
 
-import com.tda367.parallax.model.parallaxCore.Parallax;
-import com.tda367.parallax.model.parallaxCore.Player;
-import com.tda367.parallax.model.parallaxCore.spaceCraft.Agelion;
-import com.tda367.parallax.model.parallaxCore.spaceCraft.ISpaceCraft;
+
+import com.tda367.parallax.model.parallaxcore.Parallax;
+import com.tda367.parallax.model.parallaxcore.Player;
+import com.tda367.parallax.model.parallaxcore.spacecraft.Agelion;
+import com.tda367.parallax.model.parallaxcore.spacecraft.ISpaceCraft;
 import com.tda367.parallax.parallaxCore.menuModels.PauseMenu;
 import org.junit.Test;
 

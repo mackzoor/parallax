@@ -1,8 +1,8 @@
 package com.tda367.parallax.view;
 
 import com.badlogic.gdx.audio.Music;
-import com.tda367.parallax.model.CoreAbstraction.SoundListener;
-import com.tda367.parallax.model.CoreAbstraction.SoundManager;
+import com.tda367.parallax.model.coreabstraction.SoundListener;
+import com.tda367.parallax.model.coreabstraction.SoundManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -113,6 +113,12 @@ public class Sound implements SoundListener {
             if (this.activeMusic.get(i).getFileName().equals(fileNameAndDirectory)){
                 this.activeMusic.get(this.activeMusic.indexOf(this.activeMusic.get(i))).getMusicPlying().play();
             }
+        }
+    }
+
+    public void clearAllActiveMusic(){
+        while(!(activeMusic.size() == 0)){
+            activeMusic.remove(0);
         }
     }
 

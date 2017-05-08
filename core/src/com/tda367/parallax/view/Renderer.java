@@ -8,8 +8,8 @@ import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.math.Quaternion;
-import com.tda367.parallax.model.CoreAbstraction.RenderManager;
-import com.tda367.parallax.model.CoreAbstraction.Renderable;
+import com.tda367.parallax.model.coreabstraction.RenderManager;
+import com.tda367.parallax.model.coreabstraction.Renderable;
 
 import java.util.List;
 

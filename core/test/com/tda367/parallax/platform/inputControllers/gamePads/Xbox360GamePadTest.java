@@ -1,10 +1,9 @@
 package com.tda367.parallax.platform.inputControllers.gamePads;
 
-import com.tda367.parallax.platform.inputControllers.gamePads.GamePad;
-import com.tda367.parallax.platform.inputControllers.gamePads.AndroidGamePad;
-import com.tda367.parallax.platform.inputControllers.gamePads.Playstation3GamePad;
-import com.tda367.parallax.platform.inputControllers.gamePads.Xbox360GamePad;
-
+import com.tda367.parallax.controller.inputcontrollers.gamepads.AndroidGamePad;
+import com.tda367.parallax.controller.inputcontrollers.gamepads.GamePad;
+import com.tda367.parallax.controller.inputcontrollers.gamepads.Playstation3GamePad;
+import com.tda367.parallax.controller.inputcontrollers.gamepads.Xbox360GamePad;
 import org.junit.Test;
 
 import java.util.Random;

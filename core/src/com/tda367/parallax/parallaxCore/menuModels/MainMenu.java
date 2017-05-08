@@ -1,9 +1,8 @@
 package com.tda367.parallax.parallaxCore.menuModels;
 
 
-import com.tda367.parallax.model.CoreAbstraction.RenderManager;
-import com.tda367.parallax.model.parallaxCore.Parallax;
-import com.tda367.parallax.model.parallaxCore.Player;
+import com.tda367.parallax.model.parallaxcore.Parallax;
+import com.tda367.parallax.model.parallaxcore.Player;
 
 public class MainMenu {
 

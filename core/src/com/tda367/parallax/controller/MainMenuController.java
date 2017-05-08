@@ -8,7 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.tda367.parallax.platform.GameStateManager;
 import com.tda367.parallax.platform.MainMenuState;
 import com.tda367.parallax.controller.devicestates.Device;
-import com.tda367.parallax.controller.inputControllers.InputControlsListener;
+import com.tda367.parallax.controller.inputcontrollers.InputControlsListener;
 
 
 /**

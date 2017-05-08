@@ -1,9 +1,9 @@
 package com.tda367.parallax.controller;
 
-import com.tda367.parallax.model.parallaxCore.Parallax;
+import com.tda367.parallax.model.parallaxcore.Parallax;
 import com.tda367.parallax.platform.GameStateManager;
+import com.tda367.parallax.controller.inputcontrollers.InputControlsListener;
 import com.tda367.parallax.controller.devicestates.Device;
-import com.tda367.parallax.controller.inputControllers.InputControlsListener;
 
 /**
  * Created by Markus on 2017-04-11.

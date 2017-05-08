@@ -3,9 +3,9 @@ package com.tda367.parallax.model;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.bullet.*;
 import com.badlogic.gdx.physics.bullet.collision.*;
-import com.tda367.parallax.model.CoreAbstraction.Collidable;
-import com.tda367.parallax.model.parallaxCore.Collision.CollisionPair;
-import com.tda367.parallax.model.parallaxCore.Collision.ICollisionCalculator;
+import com.tda367.parallax.model.coreabstraction.Collidable;
+import com.tda367.parallax.model.parallaxcore.collision.CollisionPair;
+import com.tda367.parallax.model.parallaxcore.collision.ICollisionCalculator;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,10 +1,10 @@
 package com.tda367.parallax.controller.devicestates;
 
+import com.tda367.parallax.controller.inputcontrollers.InputControlsListener;
+import com.tda367.parallax.controller.inputcontrollers.LibGdxGamePadHandler;
+import com.tda367.parallax.controller.inputcontrollers.LibGdxTouchHandler;
 import com.tda367.parallax.platform.GameStateManager;
 import com.tda367.parallax.view.TouchPadView;
-import com.tda367.parallax.controller.inputControllers.InputControlsListener;
-import com.tda367.parallax.controller.inputControllers.LibGdxTouchHandler;
-import com.tda367.parallax.controller.inputControllers.LibGdxGamePadHandler;
 
 /**
  * Created by Markus on 2017-04-25.
