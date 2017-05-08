@@ -1,12 +1,12 @@
 package com.tda367.parallax.controller;
 
-import com.badlogic.gdx.Application;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.tda367.parallax.platform.GameStateManager;
-import com.tda367.parallax.platform.MainMenuState;
+import com.tda367.parallax.controller.gamestates.GameStateManager;
+import com.tda367.parallax.model.menu.buttons.Button;
+import com.tda367.parallax.model.menu.buttons.ExitButton;
+import com.tda367.parallax.model.menu.buttons.StartButton;
+import com.tda367.parallax.model.menu.mainmenu.MainMenuModel;
 import com.tda367.parallax.controller.devicestates.Device;
 import com.tda367.parallax.controller.inputcontrollers.InputControlsListener;
 
@@ -16,37 +16,22 @@ import com.tda367.parallax.controller.inputcontrollers.InputControlsListener;
  */
 public class MainMenuController implements InputControlsListener {
 
-    private MainMenuState mainMenuView;
-    private ImageButton currentButton;
+    private MainMenuModel mainMenuModel;
+    private Game game;
 
-
-    public MainMenuController(MainMenuState view, Device device) {
-        mainMenuView = view;
+    public MainMenuController(MainMenuModel mainMenuModel, Device device, Game game) {
+        this.mainMenuModel = mainMenuModel;
+        this.game = game;
         device.addInputDevices(this);
-        currentButton = mainMenuView.getPlayButton();
-        if (Gdx.app.getType() == Application.ApplicationType.Android) {
-            Gdx.input.setInputProcessor(mainMenuView.getStage());
-            mainMenuView.playButton.addListener(new ChangeListener() {
-                @Override
-                public void changed(ChangeEvent event, Actor actor) {
-                    GameStateManager.getInstance().setState(GameStateManager.State.PLAY);
-                }
-            });
-            mainMenuView.exitButton.addListener(new ChangeListener() {
-                @Override
-                public void changed(ChangeEvent event, Actor actor) {
-                    Gdx.app.exit();
-                }
-            });
-        }
     }
 
     @Override
     public void actionButtonPressed() {
-        if (currentButton == mainMenuView.getPlayButton()) {
-            GameStateManager.getInstance().setState(GameStateManager.State.PLAY);
-        } else
+        if (mainMenuModel.getStartButton().isMarked()) {
+            GameStateManager.setGameScreen(game);
+        } else if (mainMenuModel.getExitButton().isMarked()) {
             Gdx.app.exit();
+        }
     }
 
     @Override
@@ -61,9 +46,7 @@ public class MainMenuController implements InputControlsListener {
 
     @Override
     public void upButtonDown() {
-        currentButton.setChecked(false);
-        currentButton = mainMenuView.getPlayButton();
-        currentButton.setChecked(true);
+        mainMenuModel.iterateUp();
     }
 
     @Override
@@ -83,9 +66,7 @@ public class MainMenuController implements InputControlsListener {
 
     @Override
     public void downButtonDown() {
-        currentButton.setChecked(false);
-        currentButton = mainMenuView.getExitButton();
-        currentButton.setChecked(true);
+        mainMenuModel.iterateDown();
     }
 
     @Override
@@ -110,7 +91,7 @@ public class MainMenuController implements InputControlsListener {
 
     @Override
     public void yAxisJoystickMovement(float yValue) {
-        if(yValue > 0){
+        if (yValue > 0) {
             upButtonDown();
         } else if (yValue < 0) {
             downButtonDown();
@@ -120,5 +101,12 @@ public class MainMenuController implements InputControlsListener {
     @Override
     public void onScreenClick(int xValue, int yValue) {
 
+        Button pressedButton = mainMenuModel.buttonPressed(xValue, yValue);
+
+        if (pressedButton instanceof StartButton) {
+            GameStateManager.setGameScreen(game);
+        } else if (pressedButton instanceof ExitButton) {
+            Gdx.app.exit();
+        }
     }
 }

@@ -51,4 +51,11 @@ public class MainMenuModel {
         buttonSequence.addFirst(lastButton);
     }
 
+    public StartButton getStartButton() {
+        return startButton;
+    }
+
+    public ExitButton getExitButton() {
+        return exitButton;
+    }
 }
