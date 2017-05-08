@@ -124,7 +124,7 @@ public class Agelion implements ISpaceCraft {
 
     //Update
     @Override
-    public void update(int milliSinceLastUpdate) {
+    public void update(int milliSinceLastUpdate){
         accelerateCraft(milliSinceLastUpdate);
         updatePanAcceleration();
         panCraft(milliSinceLastUpdate);
