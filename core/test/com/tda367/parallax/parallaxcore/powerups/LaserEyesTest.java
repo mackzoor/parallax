@@ -1,10 +1,8 @@
-package com.tda367.parallax.parallaxCore.powerUps;
+package com.tda367.parallax.parallaxcore.powerups;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
-public class MysteryPowerTest {
+public class LaserEyesTest {
     @Test
     public void activate() throws Exception {
     }

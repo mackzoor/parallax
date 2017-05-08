@@ -98,9 +98,6 @@ public class SoundManager {
             Sl.playSound(sound);
         }
     }
-    public void playSound(String sound, String directory) {
-        playSound(directory + "/" + sound);
-    }
     public void playSound(String sound, Float volume) {
         if (listeners.size() < 1) {
             soundQueue.add(new SoundCombiantion(sound, volume));
@@ -109,6 +106,9 @@ public class SoundManager {
         for (SoundListener Sl : listeners) {
             Sl.playSound(sound, volume);
         }
+    }
+    public void playSound(String sound, String directory) {
+        playSound(directory + "/" + sound);
     }
     public void playSound(String sound, String directory, Float volume) {
         playSound(directory + "/" + sound, volume);
@@ -123,9 +123,6 @@ public class SoundManager {
             Sl.playMusic(music);
         }
     }
-    public void playMusic(String music, String directory) {
-        playMusic(directory + "/" + music);
-    }
     public void playMusic(String music, Float volume) {
         if (listeners.size() < 1) {
             musicQueue.add(new SoundCombiantion(music, volume));
@@ -134,6 +131,9 @@ public class SoundManager {
         for (SoundListener Sl : listeners) {
             Sl.playMusic(music, volume);
         }
+    }
+    public void playMusic(String music, String directory) {
+        playMusic(directory + "/" + music);
     }
     public void playMusic(String music, String directory, Float volume){
         playMusic(directory+"/"+music,volume);

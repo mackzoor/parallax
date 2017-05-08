@@ -62,8 +62,17 @@ public class Parallax implements Updatable {
 
         course.update(milliSinceLastUpdate);
         camera.update(milliSinceLastUpdate);
+
+        updateRenderManagerCameraPosition();
     }
 
+    private void updateRenderManagerCameraPosition() {
+        RenderManager rm = RenderManager.getInstance();
+
+        rm.setCamXCoord(camera.getPos().getX());
+        rm.setCamYCoord(camera.getPos().getY());
+        rm.setCamZCoord(camera.getPos().getZ());
+    }
 
     public List<ISpaceCraft> getSpaceCraft(){
         return course.getSpaceCrafts();

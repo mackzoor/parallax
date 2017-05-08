@@ -42,22 +42,11 @@ class GameScreen implements Screen {
         this.parallaxGame = new Parallax(player);
         controller = new GameController(parallaxGame, DeviceManager.getGameModeState(game));
 
-        // Create camera sized to screens width/height with Field of View of 75 degrees
-        camera = new PerspectiveCamera(
+        renderer = new Renderer(
                 parallaxGame.getCamera().getFov(),
                 Gdx.graphics.getWidth(),
-                Gdx.graphics.getHeight());
-
-        // Move the camera 5 units behind the ship along the z-axis and look at the origin
-
-        // Near and Far (plane) represent the minimum and maximum ranges of the camera in, um, units
-        camera.position.set(
-                parallaxGame.getCamera().getPos().getX(),
-                parallaxGame.getCamera().getPos().getZ(),
-                parallaxGame.getCamera().getPos().getY() * -1
+                Gdx.graphics.getHeight()
         );
-
-        renderer = new Renderer(camera);
         sound = new Sound();
     }
 
@@ -69,21 +58,14 @@ class GameScreen implements Screen {
     public void render(float delta) {
         //Updates Parallax game logic
         parallaxGame.update((int) (Gdx.graphics.getDeltaTime() * 1000));
-
-        camera.position.set(
-                parallaxGame.getCamera().getPos().getX(),
-                parallaxGame.getCamera().getPos().getZ(),
-                parallaxGame.getCamera().getPos().getY()*-1
-        );
-        camera.update();
         collisionCalculator.run();
         renderer.renderAll();
     }
 
     @Override
     public void resize(int width, int height) {
-        camera.viewportWidth = width;
-        camera.viewportHeight = height;
+        renderer.setWidth(width);
+        renderer.setHeight(height);
     }
 
     @Override

@@ -1,8 +1,8 @@
-package com.tda367.parallax.parallaxCore.powerUps;
+package com.tda367.parallax.parallaxcore.powerups;
 
 import org.junit.Test;
 
-public class NukeTest {
+public class MysteryPowerTest {
     @Test
     public void activate() throws Exception {
     }
@@ -10,5 +10,4 @@ public class NukeTest {
     @Test
     public void usePU() throws Exception {
     }
-
 }

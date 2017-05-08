@@ -2,7 +2,6 @@ package com.tda367.parallax.platform;
 
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.controllers.Controllers;
-import com.badlogic.gdx.graphics.*;
 import com.tda367.parallax.controller.GameController;
 import com.tda367.parallax.model.CollisionCalculator;
 import com.tda367.parallax.model.coreabstraction.SoundManager;
@@ -16,8 +15,6 @@ import com.tda367.parallax.view.Renderer;
 import com.tda367.parallax.view.Sound;
 
 public class ParallaxLibGdxPlayState implements ApplicationListener {
-
-    private PerspectiveCamera camera;
     private Player player;
     private Parallax parallaxGame;
     private Renderer renderer;
@@ -25,8 +22,8 @@ public class ParallaxLibGdxPlayState implements ApplicationListener {
     private Device device;
     private Sound sound;
     GameStateManager gameStateManager;
-    SoundManager soundManager;
     CollisionCalculator collisionCalculator;
+    SoundManager soundManager;
 
     public ParallaxLibGdxPlayState(GameStateManager gameStateManager) {
         this.gameStateManager = gameStateManager;
@@ -40,25 +37,13 @@ public class ParallaxLibGdxPlayState implements ApplicationListener {
         this.parallaxGame = new Parallax(player);
         controller = new GameController(parallaxGame, device);
 
-        // Create camera sized to screens width/height with Field of View of 75 degrees
-        camera = new PerspectiveCamera(
+        renderer = new Renderer(
                 parallaxGame.getCamera().getFov(),
                 Gdx.graphics.getWidth(),
-                Gdx.graphics.getHeight());
-
-        // Move the camera 5 units behind the ship along the z-axis and look at the origin
-
-        // Near and Far (plane) represent the minimum and maximum ranges of the camera in, um, units
-        camera.position.set(
-                parallaxGame.getCamera().getPos().getX(),
-                parallaxGame.getCamera().getPos().getZ(),
-                parallaxGame.getCamera().getPos().getY() * -1
+                Gdx.graphics.getHeight()
         );
 
-        renderer = new Renderer(camera);
         sound = new Sound();
-
-
     }
 
     @Override
@@ -67,23 +52,13 @@ public class ParallaxLibGdxPlayState implements ApplicationListener {
 
     @Override
     public void resize(int width, int height) {
-        camera.viewportWidth = width;
-        camera.viewportHeight = height;
+        renderer.setWidth(width);
+        renderer.setHeight(height);
     }
 
     @Override
     public synchronized void render() {
-
-        //Updates Parallax game logic
         parallaxGame.update((int) (Gdx.graphics.getDeltaTime() * 1000));
-
-        camera.position.set(
-                parallaxGame.getCamera().getPos().getX(),
-                parallaxGame.getCamera().getPos().getZ(),
-                parallaxGame.getCamera().getPos().getY()*-1
-        );
-        camera.update();
-
         renderer.renderAll();
         device.update();
     }

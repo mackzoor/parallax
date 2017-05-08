@@ -1,10 +1,8 @@
-package com.tda367.parallax.parallaxCore.powerUps;
+package com.tda367.parallax.parallaxcore.powerups;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
-public class LaserEyesTest {
+public class NukeTest {
     @Test
     public void activate() throws Exception {
     }
@@ -12,4 +10,5 @@ public class LaserEyesTest {
     @Test
     public void usePU() throws Exception {
     }
+
 }
