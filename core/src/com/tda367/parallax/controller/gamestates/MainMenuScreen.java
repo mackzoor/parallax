@@ -34,7 +34,13 @@ public class MainMenuScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        mainMenuView.render();
+        if (mainMenuController.isStartButtonPressed()) {
+            GameStateManager.setGameScreen(game);
+        } else if (mainMenuController.isExitButtonPressed()) {
+            Gdx.app.exit();
+        } else {
+            mainMenuView.render();
+        }
     }
 
     @Override

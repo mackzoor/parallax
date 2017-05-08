@@ -10,6 +10,8 @@ import com.tda367.parallax.model.menu.MainMenuModel;
 import com.tda367.parallax.controller.devicestates.Device;
 import com.tda367.parallax.controller.inputcontrollers.InputControlsListener;
 
+import lombok.Getter;
+
 
 /**
  * Created by Rasmus on 2017-05-02.
@@ -18,19 +20,23 @@ public class MainMenuController implements InputControlsListener {
 
     private MainMenuModel mainMenuModel;
     private Game game;
+    @Getter private boolean startButtonPressed;
+    @Getter private boolean exitButtonPressed;
 
     public MainMenuController(MainMenuModel mainMenuModel, Device device, Game game) {
         this.mainMenuModel = mainMenuModel;
         this.game = game;
+        startButtonPressed = false;
+        exitButtonPressed = false;
         device.addInputDevices(this);
     }
 
     @Override
     public void actionButtonPressed() {
         if (mainMenuModel.getStartButton().isMarked()) {
-            GameStateManager.setGameScreen(game);
+            startButtonPressed = true;
         } else if (mainMenuModel.getExitButton().isMarked()) {
-            Gdx.app.exit();
+            exitButtonPressed = true;
         }
     }
 
@@ -104,9 +110,9 @@ public class MainMenuController implements InputControlsListener {
         Button pressedButton = mainMenuModel.buttonPressed(xValue, yValue);
 
         if (pressedButton instanceof StartButton) {
-            GameStateManager.setGameScreen(game);
+            startButtonPressed = true;
         } else if (pressedButton instanceof ExitButton) {
-            Gdx.app.exit();
+            exitButtonPressed = true;
         }
     }
 }
