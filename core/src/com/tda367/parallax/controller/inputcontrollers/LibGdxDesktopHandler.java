@@ -4,10 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 
-/**
- * Created by Markus on 2017-04-25.
- */
-
 public class LibGdxDesktopHandler implements InputProcessor {
 
     private InputControlsListener listener;

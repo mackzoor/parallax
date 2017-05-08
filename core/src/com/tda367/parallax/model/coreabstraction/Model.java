@@ -1,12 +1,15 @@
 package com.tda367.parallax.model.coreabstraction;
 
+import lombok.Getter;
+
 /**
  * Handles 3d models.
  */
+
 public class Model {
 
-    private String modelName;
-    private String modelDirectory;
+    @Getter private String modelName;
+    @Getter private String modelDirectory;
 
     public Model(String modelName){
         this.modelName = modelName;
@@ -15,13 +18,5 @@ public class Model {
     public Model(String modelName, String modelDirectory){
         this.modelName = modelName;
         this.modelDirectory = modelDirectory;
-    }
-
-    public String getModelName() {
-        return modelName;
-    }
-
-    public String getModelDirectory() {
-        return modelDirectory;
     }
 }

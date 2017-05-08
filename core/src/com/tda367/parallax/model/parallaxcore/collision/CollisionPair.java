@@ -1,21 +1,17 @@
 package com.tda367.parallax.model.parallaxcore.collision;
 
+import lombok.Getter;
+
 /**
  * A class that holds a pair of {@link Collidable} that has collided.
  */
+
 public class CollisionPair {
-    private Collidable firstCollidable;
-    private Collidable secondCollidable;
+    @Getter private Collidable firstCollidable;
+    @Getter private Collidable secondCollidable;
 
     public CollisionPair(Collidable firstCollidable, Collidable secondCollidable) {
         this.firstCollidable = firstCollidable;
         this.secondCollidable = secondCollidable;
-    }
-
-    public Collidable getFirstCollidable() {
-        return firstCollidable;
-    }
-    public Collidable getSecondCollidable() {
-        return secondCollidable;
     }
 }

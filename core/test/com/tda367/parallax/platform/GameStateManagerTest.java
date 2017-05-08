@@ -1,17 +1,13 @@
 package com.tda367.parallax.platform;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
 import static com.tda367.parallax.platform.GameStateManager.State.MAIN_MENU;
 import static org.junit.Assert.*;
 
-
 public class GameStateManagerTest {
 
-    GameStateManager.State state;
-    GameStateManager gameStateManager;
+    private GameStateManager.State state;
 
     @Test
     public void getState() throws Exception {
@@ -33,5 +29,4 @@ public class GameStateManagerTest {
     @Test
     public void dispose() throws Exception {
     }
-
 }

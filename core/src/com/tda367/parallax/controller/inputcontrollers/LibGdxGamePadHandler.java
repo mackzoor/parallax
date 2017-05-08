@@ -7,14 +7,11 @@ import com.badlogic.gdx.controllers.PovDirection;
 import com.badlogic.gdx.math.Vector3;
 import com.tda367.parallax.controller.inputcontrollers.gamepads.GamePad;
 import com.tda367.parallax.controller.inputcontrollers.gamepads.GamePadFactory;
-
-/**
- * Created by Markus on 2017-04-22.
- */
+import lombok.Setter;
 
 public class LibGdxGamePadHandler implements ControllerListener {
 
-    private InputControlsListener listener;
+    @Setter private InputControlsListener listener;
     private GamePad gamePad;
 
     public LibGdxGamePadHandler() {
@@ -24,11 +21,6 @@ public class LibGdxGamePadHandler implements ControllerListener {
             //controller.addListener(this);
             connected(controller);
         }
-    }
-
-
-    public void setListener(InputControlsListener listener) {
-        this.listener = listener;
     }
 
     @Override

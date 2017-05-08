@@ -14,6 +14,7 @@ import java.util.Random;
 /**
  * A course module that will represent the visual part of a course.
  */
+
 public class DefaultCourseModule implements ICourseModule {
     private Vector3f pos;
     private Quat4f rot;
@@ -85,7 +86,7 @@ public class DefaultCourseModule implements ICourseModule {
         return boxObstacles;
     }
     @Override
-    public List<Collidable> getUsables() {
+    public List<Collidable> getContainers() {
         return usables;
     }
 

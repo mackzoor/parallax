@@ -6,10 +6,6 @@ import com.tda367.parallax.controller.inputcontrollers.LibGdxTouchHandler;
 import com.tda367.parallax.platform.GameStateManager;
 import com.tda367.parallax.view.TouchPadView;
 
-/**
- * Created by Markus on 2017-04-25.
- */
-
 class AndroidDevice implements Device {
 
     private LibGdxTouchHandler touchHandler;

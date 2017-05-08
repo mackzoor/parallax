@@ -3,10 +3,7 @@ package com.tda367.parallax.model;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.bullet.*;
 import com.badlogic.gdx.physics.bullet.collision.*;
-import com.tda367.parallax.model.parallaxcore.collision.Collidable;
-import com.tda367.parallax.model.parallaxcore.collision.CollisionManager;
-import com.tda367.parallax.model.parallaxcore.collision.CollisionPair;
-import com.tda367.parallax.model.parallaxcore.collision.ICollisionCalculator;
+import com.tda367.parallax.model.parallaxcore.collision.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +11,7 @@ import java.util.List;
 /**
  * Class that calculates collisions of {@link Collidable}with the use of bullet physics.
  */
+
 public class CollisionCalculator implements ICollisionCalculator {
 
     private final btDefaultCollisionConfiguration collisionConfig;
@@ -39,7 +37,12 @@ public class CollisionCalculator implements ICollisionCalculator {
 
     @Override
     public boolean hasCollided(Collidable first, Collidable second) {
-
+        if (
+            first.getCollidableType() == CollidableType.OBSTACLE &&
+            second.getCollidableType() == CollidableType.OBSTACLE
+            ) {
+            return false;
+        }
         if (!first.isActive() || !second.isActive()) return false;
 
         obj1.setWorldTransform(obj1.getWorldTransform().setTranslation(new Vector3(
@@ -129,6 +132,8 @@ public class CollisionCalculator implements ICollisionCalculator {
 
     }
 
+    //
+    // TODO, Make these methods not return at a later date.
     private btCollisionObject CollidableConverter(Collidable coll) {
         btCollisionObject collisionObject = new btCollisionObject();
 

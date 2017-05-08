@@ -7,9 +7,6 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-/**
- * Created by Markus on 2017-04-24.
- */
 public class GamePadFactoryTest {
     @Test
     public void getGamePad() throws Exception {

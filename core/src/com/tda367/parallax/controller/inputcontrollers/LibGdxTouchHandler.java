@@ -5,23 +5,16 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.tda367.parallax.view.TouchPadView;
-
-/**
- * Created by Markus on 2017-04-25.
- */
+import lombok.Setter;
 
 public class LibGdxTouchHandler implements EventListener, InputProcessor {
 
     private TouchPadView view;
-    private InputControlsListener listener;
+    @Setter private InputControlsListener listener;
 
     public LibGdxTouchHandler(TouchPadView view) {
         this.view = view;
         view.addListener(this);
-    }
-
-    public void setListener(InputControlsListener listener) {
-        this.listener = listener;
     }
 
     @Override

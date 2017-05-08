@@ -2,10 +2,6 @@ package com.tda367.parallax.controller.gamestates;
 
 import com.badlogic.gdx.Game;
 
-/**
- * Created by Markus on 2017-05-04.
- */
-
 public class GameStateManager {
 
     private static MainMenuScreen mainMenuScreen;
@@ -28,5 +24,4 @@ public class GameStateManager {
     private static void garbageCollect() {
         System.gc();
     }
-
 }

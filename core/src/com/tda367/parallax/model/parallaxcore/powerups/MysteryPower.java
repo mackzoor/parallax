@@ -1,6 +1,7 @@
 package com.tda367.parallax.model.parallaxcore.powerups;
 
 import com.tda367.parallax.model.coreabstraction.Model;
+import com.tda367.parallax.model.parallaxcore.collision.CollidableType;
 import com.tda367.parallax.model.parallaxcore.collision.CollisionManager;
 
 import javax.vecmath.Quat4f;
@@ -12,20 +13,15 @@ import javax.vecmath.Vector3f;
 
 public class MysteryPower implements IPowerUp {
 
-
     public void usePU(Vector3f pos, Quat4f rot) {
         //TODO Implement MysteryPower
     }
 
     @Override
-    public void activate() {
-
-    }
+    public void activate() {}
 
     @Override
-    public void update(int milliSinceLastUpdate) {
-
-    }
+    public void update(int milliSinceLastUpdate) {}
 
     @Override
     public Model getModel() {
@@ -38,14 +34,10 @@ public class MysteryPower implements IPowerUp {
     }
 
     @Override
-    public void disableCollision() {
-
-    }
+    public void disableCollision() {}
 
     @Override
-    public void enableCollision() {
-
-    }
+    public void enableCollision() {}
 
     @Override
     public Model getCollisionModel() {
@@ -62,6 +54,16 @@ public class MysteryPower implements IPowerUp {
     }
 
     @Override
+    public CollidableType getCollidableType() {
+        return CollidableType.HARMFUL;
+    }
+
+    @Override
+    public void handleCollision(CollidableType type) {
+        //Do nothing
+    }
+
+    @Override
     public Vector3f getPos() {
         return null;
     }
@@ -72,12 +74,8 @@ public class MysteryPower implements IPowerUp {
     }
 
     @Override
-    public void addToRenderManager() {
-
-    }
+    public void addToRenderManager() {}
 
     @Override
-    public void removeFromRenderManager() {
-
-    }
+    public void removeFromRenderManager() {}
 }

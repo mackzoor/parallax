@@ -1,9 +1,5 @@
 package com.tda367.parallax.controller.inputcontrollers.gamepads;
 
-/**
- * Created by Markus on 2017-04-22.
- */
-
 public interface GamePad {
     int GetActionButtonCode();
     int GetSecondaryActionButtonCode();

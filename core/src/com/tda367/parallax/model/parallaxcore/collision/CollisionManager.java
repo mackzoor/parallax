@@ -1,13 +1,16 @@
 package com.tda367.parallax.model.parallaxcore.collision;
 
+import lombok.Getter;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * A singleton bus class that holds the current objects that need to be checked for collision.
  */
+
 public class CollisionManager {
-    private List<Collidable> collidables;
+    @Getter private List<Collidable> collidables;
     private List<ICollisionCalculator> calculators;
     private List<CollisionObserver> observers;
 
@@ -42,11 +45,6 @@ public class CollisionManager {
     }
     public void removeCollisionCalculator(ICollisionCalculator calculator){
         calculators.remove(calculator);
-    }
-
-
-    public List<Collidable> getCollidables(){
-        return collidables;
     }
 
     public void alertObservers(CollisionPair collisionPair) {

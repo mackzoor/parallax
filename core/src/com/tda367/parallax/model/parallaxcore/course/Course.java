@@ -15,12 +15,12 @@ import java.util.List;
 /**
  * A course that handles the visual representation and updating of {@link ISpaceCraft} and {@link Collidable}.
  */
+
 public class Course implements Updatable, SpaceCraftListener, CollisionObserver {
     private List<ICourseModule> modules;
     private List<ISpaceCraft> spaceCrafts;
     //TODO, remove the power-up after used
     private List<IPowerUp> activePowerups;
-
 
     public Course(){
         CollisionManager.getInstance().subscribeToCollisions(this);
@@ -140,7 +140,10 @@ public class Course implements Updatable, SpaceCraftListener, CollisionObserver 
 
     @Override
     public void respondToCollision(CollisionPair collisionPair) {
-            SoundManager.getInstance().playSound("flashBang.mp3","sounds/effects", 0.2f);
+        Collidable first = collisionPair.getFirstCollidable();
+        Collidable second = collisionPair.getSecondCollidable();
 
+        first.handleCollision(second.getCollidableType());
+        second.handleCollision(first.getCollidableType());
     }
 }

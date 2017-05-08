@@ -1,13 +1,14 @@
 package com.tda367.parallax.model.parallaxcore.enemies;
 
 import com.tda367.parallax.model.parallaxcore.spacecraft.ISpaceCraft;
+import lombok.Getter;
 
 /**
  * An enemy minion. Will try to destroy its target.
  */
 
 public class MinionEnemy extends HunterAI {
-    private ISpaceCraft spaceCraft;
+    @Getter private ISpaceCraft spaceCraft;
 
     public MinionEnemy(ISpaceCraft spaceCraft){
         this.spaceCraft = spaceCraft;
@@ -49,9 +50,5 @@ public class MinionEnemy extends HunterAI {
     @Override
     public void update(int milliSinceLastUpdate) {
         operate();
-    }
-
-    public ISpaceCraft getSpaceCraft() {
-        return spaceCraft;
     }
 }

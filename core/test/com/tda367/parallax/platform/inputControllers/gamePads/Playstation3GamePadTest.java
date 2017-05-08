@@ -10,9 +10,6 @@ import java.util.Random;
 
 import static org.junit.Assert.*;
 
-/**
- * Created by Markus on 2017-04-24.
- */
 public class Playstation3GamePadTest {
 
     @Test
@@ -57,5 +54,4 @@ public class Playstation3GamePadTest {
         assertFalse(gamePad1.equals(gamePad3));
         assertFalse(gamePad1.equals(gamePad4));
     }
-
 }

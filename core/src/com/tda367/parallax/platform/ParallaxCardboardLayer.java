@@ -16,9 +16,6 @@ import com.tda367.parallax.model.parallaxcore.spacecraft.Agelion;
 import com.tda367.parallax.view.Renderer;
 import com.tda367.parallax.view.Sound;
 
-/**
- * Created by Markus on 2017-04-11.
- */
 public class ParallaxCardboardLayer implements CardBoardApplicationListener {
 
     private CardboardCamera camera;

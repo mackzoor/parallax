@@ -1,30 +1,16 @@
 package com.tda367.parallax.model.parallaxcore;
 
 import com.tda367.parallax.model.parallaxcore.spacecraft.ISpaceCraft;
+import lombok.Getter;
 
-/**
- * Created by Markus on 2017-04-05.
- */
 public class Player {
 
-    private int score;
-    private String userName;
-    private ISpaceCraft spaceCraft;
+    @Getter private int score;
+    @Getter private String userName;
+    @Getter private ISpaceCraft spaceCraft;
 
     public Player() {
         this.score = 0;
-    }
-
-    public int getScore() {
-        return score;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public ISpaceCraft getSpaceCraft() {
-        return spaceCraft;
     }
 
     public void addSpaceCraft(ISpaceCraft spaceCraft){

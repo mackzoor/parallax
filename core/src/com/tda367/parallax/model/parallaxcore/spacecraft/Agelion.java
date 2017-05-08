@@ -1,5 +1,7 @@
 package com.tda367.parallax.model.parallaxcore.spacecraft;
 
+import com.tda367.parallax.model.coreabstraction.SoundManager;
+import com.tda367.parallax.model.parallaxcore.collision.CollidableType;
 import com.tda367.parallax.model.parallaxcore.collision.CollisionManager;
 import lombok.Getter;
 import com.tda367.parallax.model.parallaxcore.powerups.Cannon;
@@ -307,7 +309,6 @@ public class Agelion implements ISpaceCraft {
     public Model getCollisionModel() {
         return collisionModel;
     }
-
     @Override
     public void addToCollisionManager() {
         CollisionManager.getInstance().addCollisionCheck(this);
@@ -315,6 +316,17 @@ public class Agelion implements ISpaceCraft {
     @Override
     public void removeFromCollisionManager() {
         CollisionManager.getInstance().addCollisionCheck(this);
+    }
+    @Override
+    public CollidableType getCollidableType() {
+        return CollidableType.SPACECRAFT;
+    }
+    @Override
+    public void handleCollision(CollidableType type) {
+        if (type == CollidableType.OBSTACLE || type == CollidableType.HARMFUL){
+            SoundManager.getInstance().playSound("flashBang.mp3","sounds/effects", 0.2f);
+            decHealth();
+        }
     }
 
     @Override

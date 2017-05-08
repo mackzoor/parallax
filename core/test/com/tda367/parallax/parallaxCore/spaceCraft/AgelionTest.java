@@ -1,6 +1,5 @@
 package com.tda367.parallax.parallaxCore.spaceCraft;
 
-
 import com.tda367.parallax.model.parallaxcore.spacecraft.Agelion;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,12 +11,9 @@ import javax.vecmath.Vector3f;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-/**
- * Created by xoxLU on 2017-04-07.
- */
 public class AgelionTest {
 
-    Agelion agilion;
+    private Agelion agilion;
 
     @Before
     public void setUp() throws Exception {

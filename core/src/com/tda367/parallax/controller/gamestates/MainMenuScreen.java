@@ -17,14 +17,10 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.tda367.parallax.controller.devicestates.Device;
 import com.tda367.parallax.controller.devicestates.DeviceManager;
 
-/**
- * Created by Markus on 2017-05-04.
- */
-
 public class MainMenuScreen implements Screen {
 
-    Game game;
-    Device device;
+    private Game game;
+    private Device device;
 
     //Almost everything is copied straight of from MainMenuState. Should be split up in the future
     private ImageButton.ImageButtonStyle playButtonStyle;
@@ -37,15 +33,15 @@ public class MainMenuScreen implements Screen {
     private Skin backgroundSkin;
     private SpriteBatch batch;
     private Table table;
-    public ImageButton playButton;
+    private ImageButton playButton;
+    private ImageButton exitButton;
     private Drawable playButtonDrawable;
     private Drawable playButtonFocusDrawable;
     private Drawable backgroundDrawable;
     private Drawable exitButtonDrawable;
     private Drawable exitButtonFocusDrawable;
-    public ImageButton exitButton;
 
-    public MainMenuScreen(final Game game) {
+    MainMenuScreen(final Game game) {
         this.game = game;
         this.device = DeviceManager.getDevice();
 

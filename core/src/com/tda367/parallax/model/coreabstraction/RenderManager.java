@@ -1,5 +1,7 @@
 package com.tda367.parallax.model.coreabstraction;
 
+import lombok.Getter;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,8 +10,9 @@ import java.util.List;
 /**
  * A singleton bus class that holds the current objects that need to be rendered.
  */
+
 public class RenderManager {
-    private List<Renderable> renderables;
+    @Getter private List<Renderable> renderables;
 
     private static RenderManager instance;
     public static RenderManager getInstance(){
@@ -27,9 +30,4 @@ public class RenderManager {
     public void removeRenderTask(Renderable renderable){
         renderables.remove(renderable);
     }
-
-    public List<Renderable> getRenderables(){
-        return renderables;
-    }
-
 }

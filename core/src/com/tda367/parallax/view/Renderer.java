@@ -16,6 +16,7 @@ import java.util.List;
 /**
  * Class that renders {@link Renderable} objects.
  */
+
 public class Renderer {
     private ModelBatch modelBatch;
     private Camera camera;
@@ -33,11 +34,11 @@ public class Renderer {
         environment = new Environment();
         environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 1f, 1f, 1f, 1.f));
         environment.set(new ColorAttribute(ColorAttribute.Fog, 0f, 0f, 0f, -1f));
-//        environment.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -1f, -0.8f, -0.2f));
+        //environment.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -1f, -0.8f, -0.2f));
 
     }
 
-    public void renderAll(){
+    public void renderAll() {
 
         camera.update();
 
@@ -50,26 +51,25 @@ public class Renderer {
 
         List<Renderable> renderables = RenderManager.getInstance().getRenderables();
 
-        for (Renderable renderable : renderables){
-            ModelInstance modelInstance = rh.getModel(renderable.getModel().getModelName(),renderable.getModel().getModelDirectory());
+        for (Renderable renderable : renderables) {
+            ModelInstance modelInstance = rh.getModel(renderable.getModel().getModelName(), renderable.getModel().getModelDirectory());
 
             modelInstance.transform.setToTranslation(
                     renderable.getPos().getX(),
                     renderable.getPos().getZ(),
-                    renderable.getPos().getY()*-1
-                    );
+                    renderable.getPos().getY() * -1
+            );
 
             modelInstance.transform.rotate(
                     new Quaternion(
                             renderable.getRot().getX(),
                             renderable.getRot().getZ(),
-                            renderable.getRot().getY()*-1,
+                            renderable.getRot().getY() * -1,
                             renderable.getRot().getW()
                     )
             );
-            modelBatch.render(modelInstance,environment);
+            modelBatch.render(modelInstance, environment);
         }
         modelBatch.end();
     }
-
 }
