@@ -43,7 +43,7 @@ public class Missile implements IPowerUp {
 
     //Collision
     @Override
-    public boolean isActive() {
+    public boolean collisionActivated() {
         return isCollisionOn;
     }
     @Override

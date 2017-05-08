@@ -63,7 +63,7 @@ public class BoxObstacle implements Collidable, Renderable {
         collisionEnabled = false;
     }
     @Override
-    public boolean isActive() {
+    public boolean collisionActivated() {
         return collisionEnabled;
     }
     @Override

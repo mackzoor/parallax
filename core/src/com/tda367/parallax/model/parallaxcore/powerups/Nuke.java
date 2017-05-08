@@ -29,7 +29,7 @@ public class Nuke implements IPowerUp {
     }
 
     @Override
-    public boolean isActive() {
+    public boolean collisionActivated() {
         return false;
     }
 

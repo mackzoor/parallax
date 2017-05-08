@@ -33,7 +33,7 @@ public class LaserEyes implements IPowerUp {
     }
 
     @Override
-    public boolean isActive() {
+    public boolean collisionActivated() {
         return false;
     }
 
