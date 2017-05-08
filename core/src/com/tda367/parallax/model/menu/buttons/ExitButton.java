@@ -7,7 +7,7 @@ import javax.vecmath.Vector2f;
  */
 
 public class ExitButton extends Button {
-    public ExitButton(Vector2f pos) {
-        super(pos);
+    public ExitButton(Vector2f pos, int width, int height) {
+        super(pos, width, height);
     }
 }

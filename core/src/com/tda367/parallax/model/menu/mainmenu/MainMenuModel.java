@@ -19,8 +19,16 @@ public class MainMenuModel {
     private LinkedList<Button> buttonSequence;
 
     public MainMenuModel(int screenWidth, int screenHeight) {
-        this.startButton = new StartButton(new Vector2f(screenWidth/2,screenHeight/2)); //Should have better values
-        this.exitButton = new ExitButton(new Vector2f(screenWidth/2,screenHeight/2)); //Should have better values
+        this.startButton = new StartButton(
+                calculateStartButtonPosition(screenWidth, screenHeight),
+                calculateButtonWidth(screenWidth),
+                calculateButtonHeight(screenHeight)
+        );
+        this.exitButton = new ExitButton(
+                calculateExitButtonPosition(screenWidth, screenHeight),
+                calculateButtonWidth(screenWidth),
+                calculateButtonHeight(screenHeight)
+        );
         buttonSequence = new LinkedList<Button>();
         buttonSequence.add(startButton);
         buttonSequence.add(exitButton);
@@ -57,5 +65,21 @@ public class MainMenuModel {
 
     public ExitButton getExitButton() {
         return exitButton;
+    }
+
+    private Vector2f calculateStartButtonPosition(int screenWidth, int screenHeight) {
+        return new Vector2f(screenWidth/3,screenHeight/5);
+    }
+
+    private Vector2f calculateExitButtonPosition(int screenWidth, int screenHeight) {
+        return new Vector2f(screenWidth/3,screenHeight * 3/5);
+    }
+
+    private int calculateButtonWidth(int screenWidth) {
+        return screenWidth/3;
+    }
+
+    private int calculateButtonHeight(int screenHeight) {
+        return screenHeight/5;
     }
 }

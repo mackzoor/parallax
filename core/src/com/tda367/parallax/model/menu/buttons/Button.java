@@ -13,8 +13,10 @@ public abstract class Button {
     int height;
     boolean isMarked;
 
-    Button(Vector2f pos) {
+    public Button(Vector2f pos, int width, int height) {
         this.pos = pos;
+        this.width = width;
+        this.height = height;
     }
 
     public void markButton() {
