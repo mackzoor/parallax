@@ -1,8 +1,6 @@
-package com.tda367.parallax.parallaxCore.powerUps;
+package com.tda367.parallax.parallaxcore.powerups;
 
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class ShieldTest {
     @Test

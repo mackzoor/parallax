@@ -1,4 +1,4 @@
-package com.tda367.parallax.parallaxCore.spaceCraft;
+package com.tda367.parallax.parallaxcore.spacecraft;
 
 import com.tda367.parallax.model.parallaxcore.spacecraft.Agelion;
 import org.junit.Before;
