@@ -51,16 +51,18 @@ public class Parallax implements Updatable {
     @Override
     public void update(int milliSinceLastUpdate) {
 
+        int updateTime = milliSinceLastUpdate;
+
         if (milliSinceLastUpdate > 100){
-            milliSinceLastUpdate = 100;
+            updateTime = 100;
         }
 
         for (HunterAI ai : ais){
-            ai.update(milliSinceLastUpdate);
+            ai.update(updateTime);
         }
 
-        course.update(milliSinceLastUpdate);
-        camera.update(milliSinceLastUpdate);
+        course.update(updateTime);
+        camera.update(updateTime);
 
         updateRenderManagerCameraPosition();
     }

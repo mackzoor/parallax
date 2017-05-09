@@ -32,7 +32,8 @@ class GameScreen implements Screen {
         this.game = game;
 
         soundManager = SoundManager.getInstance();
-        CollisionManager.getInstance().addCollisionCalculator(collisionCalculator = new CollisionCalculator());
+        collisionCalculator = new CollisionCalculator();
+        CollisionManager.getInstance().addCollisionCalculator(collisionCalculator);
 
         // Initiate game with space craft "Agelion"
         this.player = new Player();

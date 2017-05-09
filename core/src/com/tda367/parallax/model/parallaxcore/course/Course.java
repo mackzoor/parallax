@@ -77,8 +77,12 @@ public class Course implements Updatable, CollisionObserver {
         }
 
         for (IPowerUp pu : activePowerups) {
-            if (pu.isActive()) pu.update(milliSinceLastUpdate);
-            if (pu.isDead()) activePowerups.remove(pu);
+            if (pu.isActive()){
+                pu.update(milliSinceLastUpdate);
+            }
+            if (pu.isDead()){
+                activePowerups.remove(pu);
+            }
         }
 
         updateModuleRange();

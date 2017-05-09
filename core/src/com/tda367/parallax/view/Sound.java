@@ -9,24 +9,6 @@ import java.util.List;
 
 public class Sound implements SoundListener {
 
-    private final static class ActiveMusicCombination {
-        private final String fileName;
-        private final Music playing;
-
-        private ActiveMusicCombination(String fileName, Music playing) {
-            this.fileName = fileName;
-            this.playing = playing;
-        }
-
-        String getFileName() {
-            return fileName;
-        }
-
-        Music getMusicPlying() {
-            return playing;
-        }
-    }
-
     private ResourceHandler resources;
 
     private List<ActiveMusicCombination> activeMusic = new ArrayList<ActiveMusicCombination>();
@@ -115,6 +97,27 @@ public class Sound implements SoundListener {
     public void clearAllActiveMusic(){
         while(!(activeMusic.size() == 0)){
             activeMusic.remove(0);
+        }
+    }
+
+
+    //Inner class for combination class, soundname and file of playing sound.
+
+    private final class ActiveMusicCombination {
+        private final String fileName;
+        private final Music playing;
+
+        private ActiveMusicCombination(String fileName, Music playing) {
+            this.fileName = fileName;
+            this.playing = playing;
+        }
+
+        String getFileName() {
+            return fileName;
+        }
+
+        Music getMusicPlying() {
+            return playing;
         }
     }
 

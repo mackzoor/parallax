@@ -27,7 +27,9 @@ public class RenderManager {
     private static RenderManager instance;
 
     public static RenderManager getInstance(){
-        if (instance == null) instance = new RenderManager();
+        if (instance == null){
+            instance = new RenderManager();
+        }
         return instance;
     }
 
