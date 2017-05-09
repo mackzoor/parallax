@@ -6,7 +6,7 @@ import com.badlogic.gdx.Screen;
 import com.tda367.parallax.controller.MainMenuController;
 import com.tda367.parallax.controller.devicestates.DeviceManager;
 import com.tda367.parallax.model.menu.MainMenuModel;
-import com.tda367.parallax.view.MainMenuView;
+import com.tda367.parallax.view.menu.MainMenuView;
 
 class MainMenuScreen implements Screen {
 
