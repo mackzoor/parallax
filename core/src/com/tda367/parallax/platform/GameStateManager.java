@@ -87,7 +87,8 @@ public class GameStateManager implements ApplicationListener {
             return this.parallaxLibGdxPlayState;
         } else if (state == MAIN_MENU && previousState != MAIN_MENU) {
             previousState = state;
-            return this.mainMenuState = new MainMenuState(this);
+            this.mainMenuState = new MainMenuState(this);
+            return this.mainMenuState;
         } else {
             previousState = state;
             return this.mainMenuState;

@@ -9,24 +9,6 @@ import java.util.List;
 
 public class SoundManager {
 
-    private final static class SoundCombiantion {
-        private final String fileName;
-        private final Float volume;
-
-        private SoundCombiantion(String fileName, Float volume) {
-            this.fileName = fileName;
-            this.volume = volume;
-        }
-
-        public String getFileName() {
-            return fileName;
-        }
-
-        public Float getVolume() {
-            return volume;
-        }
-    }
-
     private List<SoundListener> listeners = new ArrayList<SoundListener>();
     private List<SoundCombiantion> soundQueue = new ArrayList<SoundCombiantion>();
     private List<SoundCombiantion> musicQueue = new ArrayList<SoundCombiantion>();
@@ -34,7 +16,9 @@ public class SoundManager {
     private static SoundManager instance;
 
     public static SoundManager getInstance() {
-        if (instance == null) instance = new SoundManager();
+        if (instance == null) {
+            instance = new SoundManager();
+        }
         return instance;
     }
 
@@ -47,28 +31,28 @@ public class SoundManager {
 
     //Stops a playing music file. Uses directory "slash" filename for correct input.
     public void stopActiveMusic(String fileNameAndDirectory){
-        for (SoundListener Sl : listeners) {
-            Sl.stopActiveMusic(fileNameAndDirectory);
+        for (SoundListener sl : listeners) {
+            sl.stopActiveMusic(fileNameAndDirectory);
         }
     }
 
     //Pauses a music file that is running. Uses filename "slash" the directory for correct input.
     public void pauseActiveMusic(String fileNameAndDirectory){
-        for (SoundListener Sl : listeners) {
-            Sl.pauseActiveMusic(fileNameAndDirectory);
+        for (SoundListener sl : listeners) {
+            sl.pauseActiveMusic(fileNameAndDirectory);
         }
     }
 
     //Un pauses a music file that has previously been paused. Uses filename "slash" the directory for correct input.
     public void unPauseActiveMusic(String fileNameAndDirectory){
-        for (SoundListener Sl : listeners) {
-            Sl.unPauseActiveMusic(fileNameAndDirectory);
+        for (SoundListener sl : listeners) {
+            sl.unPauseActiveMusic(fileNameAndDirectory);
         }
     }
 
     public void clearAllActiveMusic(){
-        for(SoundListener Sl: listeners){
-            Sl.clearAllActiveMusic();
+        for(SoundListener sl: listeners){
+            sl.clearAllActiveMusic();
         }
     }
 
@@ -94,8 +78,8 @@ public class SoundManager {
             soundQueue.add(new SoundCombiantion(sound,1f));
         }
         // Notify listeners to play sound.
-        for (SoundListener Sl : listeners) {
-            Sl.playSound(sound);
+        for (SoundListener sl : listeners) {
+            sl.playSound(sound);
         }
     }
     public void playSound(String sound, Float volume) {
@@ -103,8 +87,8 @@ public class SoundManager {
             soundQueue.add(new SoundCombiantion(sound, volume));
         }
         // Notify listeners to play sound.
-        for (SoundListener Sl : listeners) {
-            Sl.playSound(sound, volume);
+        for (SoundListener sl : listeners) {
+            sl.playSound(sound, volume);
         }
     }
     public void playSound(String sound, String directory) {
@@ -119,8 +103,8 @@ public class SoundManager {
             musicQueue.add(new SoundCombiantion(music, 1f));
         }
         // Notify listeners to play music.
-        for (SoundListener Sl : listeners) {
-            Sl.playMusic(music);
+        for (SoundListener sl : listeners) {
+            sl.playMusic(music);
         }
     }
     public void playMusic(String music, Float volume) {
@@ -128,8 +112,8 @@ public class SoundManager {
             musicQueue.add(new SoundCombiantion(music, volume));
         }
         // Notify listeners to play music.
-        for (SoundListener Sl : listeners) {
-            Sl.playMusic(music, volume);
+        for (SoundListener sl : listeners) {
+            sl.playMusic(music, volume);
         }
     }
     public void playMusic(String music, String directory) {
@@ -138,4 +122,25 @@ public class SoundManager {
     public void playMusic(String music, String directory, Float volume){
         playMusic(directory+"/"+music,volume);
     }
+
+
+    //Inner class for combination of sound and name
+    private final class SoundCombiantion {
+        private final String fileName;
+        private final Float volume;
+
+        private SoundCombiantion(String fileName, Float volume) {
+            this.fileName = fileName;
+            this.volume = volume;
+        }
+
+        public String getFileName() {
+            return fileName;
+        }
+
+        public Float getVolume() {
+            return volume;
+        }
+    }
+
 }

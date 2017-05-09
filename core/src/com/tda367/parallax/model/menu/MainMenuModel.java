@@ -73,12 +73,14 @@ public class MainMenuModel {
         exitButton.setPos(calculateExitButtonPosition(screenWidth, screenHeight));
     }
 
+
+    //TODO, make sure that the float casting doesn't negatively impact the program.
     private Vector2f calculateStartButtonPosition(int screenWidth, int screenHeight) {
-        return new Vector2f(screenWidth/3,screenHeight * 3/5);
+        return new Vector2f((float) screenWidth/3,(float) screenHeight * 3/5);
     }
 
     private Vector2f calculateExitButtonPosition(int screenWidth, int screenHeight) {
-        return new Vector2f(screenWidth/3,screenHeight / 5);
+        return new Vector2f((float) screenWidth/3,(float) screenHeight / 5);
     }
 
     private int calculateButtonWidth(int screenWidth) {

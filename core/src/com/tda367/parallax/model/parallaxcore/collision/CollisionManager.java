@@ -16,7 +16,9 @@ public class CollisionManager {
 
     private static CollisionManager instance;
     public static CollisionManager getInstance(){
-        if (instance == null) instance = new CollisionManager();
+        if (instance == null) {
+            instance = new CollisionManager();
+        }
         return instance;
     }
 

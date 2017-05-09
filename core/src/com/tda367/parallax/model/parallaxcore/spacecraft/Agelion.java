@@ -236,7 +236,9 @@ public class Agelion implements ISpaceCraft {
     @Override
     public IPowerUp popPU() throws EmptyStackException{
         //Pops a PowerUp if the list isn't empty, otherwise throws exception.
-        if(this.pu.isEmpty()) throw new EmptyStackException();
+        if(this.pu.isEmpty()){
+            throw new EmptyStackException();
+        }
 
         IPowerUp singlePU = this.pu.get(this.pu.size()-1);
         this.pu.remove(singlePU);

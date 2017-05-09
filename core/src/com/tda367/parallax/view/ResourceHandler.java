@@ -30,7 +30,9 @@ public class ResourceHandler {
     }
 
     public static ResourceHandler getInstance(){
-        if (instance == null) instance = new ResourceHandler();
+        if (instance == null){
+            instance = new ResourceHandler();
+        }
         return instance;
     }
 
