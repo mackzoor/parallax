@@ -10,7 +10,7 @@ import com.tda367.parallax.model.menu.buttons.Button;
 public final class StartButtonView extends ButtonView {
     public StartButtonView(Button button) {
         super(button);
-        unselected = new Texture("mainmenu/unselectedPlayButton.png");
-        selected = new Texture("mainmenu/selectedPlayButton.png");
+        unselected = new Texture("mainmenu/unselectedStartButton.png");
+        selected = new Texture("mainmenu/selectedStartButton.png");
     }
 }
