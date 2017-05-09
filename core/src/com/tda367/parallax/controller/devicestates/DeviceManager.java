@@ -5,9 +5,13 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.android.CardBoardApplicationListener;
 
-public class DeviceManager {
+public final class DeviceManager {
 
     private static Device device;
+
+    private DeviceManager() {
+
+    }
 
     public static Device getGameModeState(ApplicationListener application) {
         if (Gdx.app.getType() == Application.ApplicationType.Desktop) {

@@ -44,7 +44,7 @@ public class MainMenuState implements ApplicationListener {
     private Drawable exitButtonFocusDrawable;
     private Table table;
     private GameStateManager gameStateManager;
-    ArrayList<ImageButton> buttons;
+    List<ImageButton> buttons;
     private Device device;
     private MainMenuController mainMenuController;
 

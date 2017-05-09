@@ -14,24 +14,20 @@ public class TouchPadView {
 
     @Getter private Touchpad touchpad;
     @Getter private ImageButton actionButton;
-    private Touchpad.TouchpadStyle touchpadStyle;
-    private Drawable touchBackground;
-    private Drawable touchKnob;
-    private Drawable actionButtonBackground;
-    private Skin touchpadSkin;
+
     private Stage stage;
 
     public TouchPadView() {
-        touchpadSkin = new Skin();
+        Skin touchpadSkin = new Skin();
         touchpadSkin.add("background", new Texture("touchpad/background.png"));
         touchpadSkin.add("knob", new Texture("touchpad/knob.png"));
         touchpadSkin.add("actionButton", new Texture("touchpad/actionButton.png"));
 
-        touchpadStyle = new Touchpad.TouchpadStyle();
+        Touchpad.TouchpadStyle touchpadStyle = new Touchpad.TouchpadStyle();
 
-        touchBackground = touchpadSkin.getDrawable("background");
-        actionButtonBackground = touchpadSkin.getDrawable("actionButton");
-        touchKnob = touchpadSkin.getDrawable("knob");
+        Drawable touchBackground = touchpadSkin.getDrawable("background");
+        Drawable actionButtonBackground = touchpadSkin.getDrawable("actionButton");
+        Drawable touchKnob = touchpadSkin.getDrawable("knob");
 
         touchKnob.setMinWidth(200);
         touchKnob.setMinHeight(200);

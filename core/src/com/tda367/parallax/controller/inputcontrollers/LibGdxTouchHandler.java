@@ -17,10 +17,8 @@ public class LibGdxTouchHandler implements InputProcessor {
 
     @Override
     public boolean keyDown(int keycode) {
-        if (listener != null) {
-            if (keycode == Input.Keys.BACK || keycode == Input.Keys.MENU) {
-                listener.pauseButtonPressed();
-            }
+        if (listener != null && (keycode == Input.Keys.BACK || keycode == Input.Keys.MENU)) {
+            listener.pauseButtonPressed();
         }
         return false;
     }

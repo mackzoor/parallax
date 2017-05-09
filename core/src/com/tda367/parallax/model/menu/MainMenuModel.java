@@ -5,6 +5,7 @@ import com.tda367.parallax.model.menu.buttons.ExitButton;
 import com.tda367.parallax.model.menu.buttons.StartButton;
 
 import java.util.LinkedList;
+import java.util.List;
 
 import javax.vecmath.Vector2f;
 
@@ -12,7 +13,7 @@ public class MainMenuModel {
 
     private StartButton startButton;
     private ExitButton exitButton;
-    private LinkedList<Button> buttonSequence;
+    private List<Button> buttonSequence;
 
     public MainMenuModel(int screenWidth, int screenHeight) {
         this.startButton = new StartButton(
@@ -40,19 +41,19 @@ public class MainMenuModel {
     }
 
     public void iterateUp() {
-        Button firstButton = buttonSequence.getFirst();
+        Button firstButton = ((LinkedList<Button>)buttonSequence).getFirst();
         firstButton.unMarkButton();
-        buttonSequence.removeFirst();
-        buttonSequence.addLast(firstButton);
-        buttonSequence.getFirst().markButton();
+        ((LinkedList<Button>)buttonSequence).removeFirst();
+        ((LinkedList<Button>)buttonSequence).addLast(firstButton);
+        ((LinkedList<Button>)buttonSequence).getFirst().markButton();
     }
 
     public void iterateDown() {
-        Button lastButton = buttonSequence.getLast();
+        Button lastButton = ((LinkedList<Button>)buttonSequence).getLast();
         lastButton.markButton();
-        buttonSequence.removeLast();
-        buttonSequence.getFirst().unMarkButton();
-        buttonSequence.addFirst(lastButton);
+        ((LinkedList<Button>)buttonSequence).removeLast();
+        ((LinkedList<Button>)buttonSequence).getFirst().unMarkButton();
+        ((LinkedList<Button>)buttonSequence).addFirst(lastButton);
     }
 
     public StartButton getStartButton() {

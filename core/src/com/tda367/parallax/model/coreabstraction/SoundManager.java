@@ -9,7 +9,7 @@ import java.util.List;
 
 public class SoundManager {
 
-    private final class SoundCombiantion {
+    private final static class SoundCombiantion {
         private final String fileName;
         private final Float volume;
 

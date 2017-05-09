@@ -4,7 +4,6 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.controllers.Controllers;
-import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.tda367.parallax.controller.GameController;
 import com.tda367.parallax.controller.devicestates.DeviceManager;
 import com.tda367.parallax.model.CollisionCalculator;
@@ -21,7 +20,6 @@ class GameScreen implements Screen {
     private Game game;
 
     //Almost everything is copied straight of from PlayState. Should be split up in the future
-    private PerspectiveCamera camera;
     private Player player;
     private Parallax parallaxGame;
     private Renderer renderer;

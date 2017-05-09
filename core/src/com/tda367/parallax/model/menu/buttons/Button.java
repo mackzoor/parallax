@@ -2,12 +2,15 @@ package com.tda367.parallax.model.menu.buttons;
 
 import javax.vecmath.Vector2f;
 
+import lombok.Getter;
+import lombok.Setter;
+
 public abstract class Button {
 
-    Vector2f pos;
-    int width;
-    int height;
-    boolean isMarked;
+    @Getter @Setter private Vector2f pos;
+    @Getter @Setter private int width;
+    @Getter @Setter private int height;
+    @Getter private boolean isMarked;
 
     public Button(Vector2f pos, int width, int height) {
         this.pos = pos;
@@ -27,33 +30,5 @@ public abstract class Button {
         boolean inX = (pos.getX() < x && x < (pos.getX() + width));
         boolean inY = (pos.getY() < y && y < (pos.getY() + width));
         return (inX && inY);
-    }
-
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
-    }
-
-    public Vector2f getPos() {
-        return pos;
-    }
-
-    public void setPos(Vector2f pos) {
-        this.pos = pos;
-    }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public boolean isMarked() {
-        return isMarked;
     }
 }

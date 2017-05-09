@@ -1,7 +1,6 @@
 package com.tda367.parallax.model.parallaxcore.course;
 
 import com.tda367.parallax.model.parallaxcore.collision.Collidable;
-import com.tda367.parallax.model.coreabstraction.IModel;
 import com.tda367.parallax.model.coreabstraction.Model;
 import com.tda367.parallax.model.coreabstraction.RenderManager;
 

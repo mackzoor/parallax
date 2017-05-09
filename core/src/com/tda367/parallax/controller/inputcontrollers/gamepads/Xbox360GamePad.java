@@ -79,9 +79,4 @@ public class Xbox360GamePad implements GamePad {
     public float yAxisValueConverter(float value) {
         return -value;
     }
-
-    @Override
-    public boolean equals(Object o) {
-        return (o != null && getClass() == o.getClass());
-    }
 }

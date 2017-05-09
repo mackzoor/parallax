@@ -1,8 +1,5 @@
 package com.tda367.parallax.controller.inputcontrollers;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.tda367.parallax.view.TouchPadView;

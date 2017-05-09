@@ -4,7 +4,6 @@ import com.tda367.parallax.model.coreabstraction.Model;
 import com.tda367.parallax.model.coreabstraction.RenderManager;
 import com.tda367.parallax.model.parallaxcore.collision.CollidableType;
 import com.tda367.parallax.model.parallaxcore.collision.CollisionManager;
-import jdk.nashorn.internal.objects.annotations.Setter;
 import lombok.Getter;
 
 import javax.vecmath.Quat4f;

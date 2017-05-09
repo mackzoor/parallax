@@ -63,12 +63,22 @@ public class LibGdxGamePadHandler implements ControllerListener {
         if (listener != null) {
             if (buttonCode == gamePad.getLeftButtonCode()) {
                 listener.leftButtonUp();
-            } else if (buttonCode == gamePad.getUpButtonCode()) {
+                return false;
+            }
+
+            if (buttonCode == gamePad.getUpButtonCode()) {
                 listener.upButtonUp();
-            } else if (buttonCode == gamePad.getRightButtonCode()) {
+                return false;
+            }
+
+            if (buttonCode == gamePad.getRightButtonCode()) {
                 listener.rightButtonUp();
-            } else if (buttonCode == gamePad.getDownButtonCode()) {
+                return false;
+            }
+
+            if (buttonCode == gamePad.getDownButtonCode()) {
                 listener.downButtonUp();
+                return false;
             }
         }
 
@@ -83,8 +93,12 @@ public class LibGdxGamePadHandler implements ControllerListener {
         if (listener != null) {
             if (axisCode == gamePad.getXAxisJoystickCode()) {
                 listener.xAxisJoystickMovement(gamePad.xAxisValueConverter(value));
-            } else if (axisCode == gamePad.getYAxisJoystickCode()) {
+                return false;
+            }
+
+            if (axisCode == gamePad.getYAxisJoystickCode()) {
                 listener.yAxisJoystickMovement(gamePad.yAxisValueConverter(value));
+                return false;
             }
         }
 

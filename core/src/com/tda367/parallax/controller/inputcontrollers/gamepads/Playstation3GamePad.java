@@ -79,9 +79,4 @@ public class Playstation3GamePad implements GamePad {
     public float yAxisValueConverter(float value) {
         return -1f * value;
     }
-
-    @Override
-    public boolean equals(Object o) {
-        return (o != null && getClass() == o.getClass());
-    }
 }

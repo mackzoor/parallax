@@ -23,7 +23,7 @@ public class Agelion implements ISpaceCraft {
     private List <IPowerUp> pu = new ArrayList <IPowerUp>();
     private int health;
 
-    @Getter protected float forwardVelocity;
+    @Getter private float forwardVelocity;
     @Getter private float forwardTargetSpeed;
     @Getter private float forwardAcceleration;
     private boolean forwardRelativeVelocityMode;
@@ -157,9 +157,7 @@ public class Agelion implements ISpaceCraft {
                 pos.getX(), pos.getZ()
         ));
 
-        if (targetDirection.getX() == 0 && targetDirection.getY() == 0){
-
-        } else {
+        if (targetDirection.getX() != 0 || targetDirection.getY() != 0){
             targetDirection.normalize();
             targetDirection.scale(maxPanVelocity);
             desiredPanVelocity = targetDirection;

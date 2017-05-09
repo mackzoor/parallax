@@ -1,6 +1,8 @@
 package com.tda367.parallax.controller.inputcontrollers.gamepads;
 
-public class GamePadFactory {
+public final class GamePadFactory {
+
+    private GamePadFactory() {}
 
     //Returns a game pad class with the correct key codes for the connected controller
     public static GamePad getGamePad(String gamePadName){

@@ -18,20 +18,41 @@ public class LibGdxDesktopHandler implements InputProcessor {
 
     @Override
     public boolean keyDown(int keycode) {
-        if (keycode == Input.Keys.SPACE || keycode == Input.Keys.Z) {
-            listener.actionButtonPressed();
-        } else if (keycode == Input.Keys.X) {
-            listener.secondaryActionButtonPressed();
-        } else if (keycode == Input.Keys.A || keycode == Input.Keys.LEFT) {
-            listener.leftButtonDown();
-        } else if (keycode == Input.Keys.W || keycode == Input.Keys.UP) {
-            listener.upButtonDown();
-        } else if (keycode == Input.Keys.D || keycode == Input.Keys.RIGHT) {
-            listener.rightButtonDown();
-        } else if (keycode == Input.Keys.S || keycode == Input.Keys.DOWN) {
-            listener.downButtonDown();
-        } else if (keycode == Input.Keys.ESCAPE) {
-            listener.pauseButtonPressed();
+        if (listener != null) {
+            if (keycode == Input.Keys.SPACE || keycode == Input.Keys.Z) {
+                listener.actionButtonPressed();
+                return false;
+            }
+
+            if (keycode == Input.Keys.X) {
+                listener.secondaryActionButtonPressed();
+                return false;
+            }
+
+            if (keycode == Input.Keys.A || keycode == Input.Keys.LEFT) {
+                listener.leftButtonDown();
+                return false;
+            }
+
+            if (keycode == Input.Keys.W || keycode == Input.Keys.UP) {
+                listener.upButtonDown();
+                return false;
+            }
+
+            if (keycode == Input.Keys.D || keycode == Input.Keys.RIGHT) {
+                listener.rightButtonDown();
+                return false;
+            }
+
+            if (keycode == Input.Keys.S || keycode == Input.Keys.DOWN) {
+                listener.downButtonDown();
+                return false;
+            }
+
+            if (keycode == Input.Keys.ESCAPE) {
+                listener.pauseButtonPressed();
+                return false;
+            }
         }
 
         return false;

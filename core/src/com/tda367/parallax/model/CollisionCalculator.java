@@ -112,20 +112,11 @@ public class CollisionCalculator implements ICollisionCalculator {
 
         for (int i = 0; i < collidables.size(); i++) {
             for (int j = 0; j < collidables.size(); j++) {
-                if (i != j){
-
-                    if (hasCollided(
-                            collidables.get(i),
-                            collidables.get(j)
-                    )){
-                        collisionManager.alertObservers(
-                                new CollisionPair(
-                                        collidables.get(i),
-                                        collidables.get(j)
-                                        )
-                        );
-                    }
-
+                if (i != j && hasCollided(collidables.get(i), collidables.get(j))) {
+                    collisionManager.alertObservers(
+                            new CollisionPair(collidables.get(i), collidables.get(j)
+                            )
+                    );
                 }
             }
         }

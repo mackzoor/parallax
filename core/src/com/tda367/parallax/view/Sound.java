@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Sound implements SoundListener {
 
-    private final class ActiveMusicCombination {
+    private final static class ActiveMusicCombination {
         private final String fileName;
         private final Music playing;
 

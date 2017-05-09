@@ -2,7 +2,9 @@ package com.tda367.parallax.controller.gamestates;
 
 import com.badlogic.gdx.Game;
 
-public class GameStateManager {
+public final class GameStateManager {
+
+    private GameStateManager() {}
 
     private static MainMenuScreen mainMenuScreen;
     private static GameScreen gameScreen;
@@ -19,9 +21,5 @@ public class GameStateManager {
             gameScreen = new GameScreen(game);
         }
         game.setScreen(gameScreen);
-    }
-
-    private static void garbageCollect() {
-        System.gc();
     }
 }

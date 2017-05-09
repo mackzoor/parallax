@@ -1,8 +1,5 @@
 package com.tda367.parallax.controller;
 
-import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
-import com.tda367.parallax.controller.gamestates.GameStateManager;
 import com.tda367.parallax.model.menu.buttons.Button;
 import com.tda367.parallax.model.menu.buttons.ExitButton;
 import com.tda367.parallax.model.menu.buttons.StartButton;
