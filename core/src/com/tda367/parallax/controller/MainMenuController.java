@@ -19,13 +19,11 @@ import lombok.Getter;
 public class MainMenuController implements InputControlsListener {
 
     private MainMenuModel mainMenuModel;
-    private Game game;
     @Getter private boolean startButtonPressed;
     @Getter private boolean exitButtonPressed;
 
-    public MainMenuController(MainMenuModel mainMenuModel, Device device, Game game) {
+    public MainMenuController(MainMenuModel mainMenuModel, Device device) {
         this.mainMenuModel = mainMenuModel;
-        this.game = game;
         startButtonPressed = false;
         exitButtonPressed = false;
         device.addInputDevices(this);

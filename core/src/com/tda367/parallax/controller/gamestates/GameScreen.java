@@ -60,6 +60,7 @@ class GameScreen implements Screen {
         parallaxGame.update((int) (Gdx.graphics.getDeltaTime() * 1000));
         collisionCalculator.run();
         renderer.renderAll();
+        DeviceManager.getDevice().update();
     }
 
     @Override

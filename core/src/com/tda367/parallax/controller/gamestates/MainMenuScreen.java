@@ -23,7 +23,7 @@ public class MainMenuScreen implements Screen {
     public MainMenuScreen(final Game game) {
         this.game = game;
         this.mainMenuModel = new MainMenuModel(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        this.mainMenuController = new MainMenuController(mainMenuModel, DeviceManager.getDevice(), game);
+        this.mainMenuController = new MainMenuController(mainMenuModel, DeviceManager.getDevice());
         this.mainMenuView = new MainMenuView(mainMenuModel);
     }
 
@@ -39,7 +39,7 @@ public class MainMenuScreen implements Screen {
         } else if (mainMenuController.isExitButtonPressed()) {
             Gdx.app.exit();
         } else {
-            mainMenuView.render();
+            GameStateManager.setGameScreen(game);
         }
     }
 
