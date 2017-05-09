@@ -35,7 +35,7 @@ public class MainMenuScreen implements Screen {
         } else if (mainMenuController.isExitButtonPressed()) {
             Gdx.app.exit();
         } else {
-            GameStateManager.setGameScreen(game);
+            mainMenuView.render();
         }
     }
 
