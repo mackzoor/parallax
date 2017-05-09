@@ -16,7 +16,7 @@ public final class GameStateManager {
         game.setScreen(mainMenuScreen);
     }
 
-    public static void setGameScreen(Game game) {
+    static void setGameScreen(Game game) {
         if (gameScreen == null) {
             gameScreen = new GameScreen(game);
         }

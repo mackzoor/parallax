@@ -1,6 +1,6 @@
 package com.tda367.parallax.controller.inputcontrollers.gamepads;
 
-public class AndroidGamePad implements GamePad {
+public final class AndroidGamePad implements GamePad {
 
     //Button codes can be found at:
     //https://developer.android.com/training/game-controllers/controller-input.html

@@ -72,11 +72,11 @@ public class Missile implements IPowerUp {
         return null;
     }
     @Override
-    public void addToCollisionManager() {
+    public final void addToCollisionManager() {
         CollisionManager.getInstance().addCollisionCheck(this);
     }
     @Override
-    public void removeFromCollisionManager() {
+    public final void removeFromCollisionManager() {
         CollisionManager.getInstance().removeCollisionCheck(this);
     }
     @Override
@@ -99,11 +99,11 @@ public class Missile implements IPowerUp {
 
     //Renderable
     @Override
-    public void addToRenderManager() {
+    public final void addToRenderManager() {
         RenderManager.getInstance().addRenderTask(this);
     }
     @Override
-    public void removeFromRenderManager() {
+    public final void removeFromRenderManager() {
         RenderManager.getInstance().removeRenderTask(this);
     }
     //--->  IModel

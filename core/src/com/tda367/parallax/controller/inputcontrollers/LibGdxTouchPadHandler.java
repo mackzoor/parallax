@@ -5,7 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.tda367.parallax.view.TouchPadView;
 import lombok.Setter;
 
-public class LibGdxTouchPadHandler implements EventListener {
+public final class LibGdxTouchPadHandler implements EventListener {
 
     private TouchPadView view;
     @Setter private InputControlsListener listener;

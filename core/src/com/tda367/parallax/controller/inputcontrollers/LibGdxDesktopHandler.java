@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 
-public class LibGdxDesktopHandler implements InputProcessor {
+public final class LibGdxDesktopHandler implements InputProcessor {
 
     private InputControlsListener listener;
 

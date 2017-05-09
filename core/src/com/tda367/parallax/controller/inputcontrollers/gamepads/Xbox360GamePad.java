@@ -1,6 +1,6 @@
 package com.tda367.parallax.controller.inputcontrollers.gamepads;
 
-public class Xbox360GamePad implements GamePad {
+public final class Xbox360GamePad implements GamePad {
     /*
     All of the key codes are listed below:
     BUTTON_X = 2

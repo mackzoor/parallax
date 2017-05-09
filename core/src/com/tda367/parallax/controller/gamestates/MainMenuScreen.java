@@ -8,7 +8,7 @@ import com.tda367.parallax.controller.devicestates.DeviceManager;
 import com.tda367.parallax.model.menu.MainMenuModel;
 import com.tda367.parallax.view.MainMenuView;
 
-public class MainMenuScreen implements Screen {
+class MainMenuScreen implements Screen {
 
     private Game game;
     private MainMenuModel mainMenuModel;
@@ -16,7 +16,7 @@ public class MainMenuScreen implements Screen {
     private MainMenuView mainMenuView;
 
 
-    public MainMenuScreen(final Game game) {
+    MainMenuScreen(final Game game) {
         this.game = game;
         this.mainMenuModel = new MainMenuModel(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         this.mainMenuController = new MainMenuController(mainMenuModel, DeviceManager.getDevice());

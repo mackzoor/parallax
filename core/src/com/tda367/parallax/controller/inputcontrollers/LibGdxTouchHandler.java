@@ -6,7 +6,7 @@ import com.badlogic.gdx.InputProcessor;
 
 import lombok.Setter;
 
-public class LibGdxTouchHandler implements InputProcessor {
+public final class LibGdxTouchHandler implements InputProcessor {
 
     @Setter
     private InputControlsListener listener;

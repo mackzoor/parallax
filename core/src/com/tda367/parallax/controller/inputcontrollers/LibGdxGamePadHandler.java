@@ -9,7 +9,7 @@ import com.tda367.parallax.controller.inputcontrollers.gamepads.GamePad;
 import com.tda367.parallax.controller.inputcontrollers.gamepads.GamePadFactory;
 import lombok.Setter;
 
-public class LibGdxGamePadHandler implements ControllerListener {
+public final class LibGdxGamePadHandler implements ControllerListener {
 
     @Setter private InputControlsListener listener;
     private GamePad gamePad;
