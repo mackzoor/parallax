@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
 
 public class Xbox360GamePadTest {
     @Test
-    public void XAxisValueConverter() throws Exception {
+    public void xAxisValueConverter() throws Exception {
         float minY = -1f;
         float maxY = 1f;
 
@@ -28,7 +28,7 @@ public class Xbox360GamePadTest {
     }
 
     @Test
-    public void YAxisValueConverter() throws Exception {
+    public void yAxisValueConverter() throws Exception {
         float minY = -1f;
         float maxY = 1f;
 
