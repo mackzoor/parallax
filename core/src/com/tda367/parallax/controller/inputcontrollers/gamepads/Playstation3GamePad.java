@@ -27,57 +27,56 @@ public class Playstation3GamePad implements GamePad {
      */
 
     @Override
-    public int GetActionButtonCode() {
+    public int getActionButtonCode() {
         return 14;
     }
 
-    @Override
-    public int GetSecondaryActionButtonCode() {
+    public int getSecondaryActionButtonCode() {
         return 13;
     }
 
     @Override
-    public int GetPauseButtonCode() {
+    public int getPauseButtonCode() {
         return 3;
     }
 
     @Override
-    public int GetUpButtonCode() {
+    public int getUpButtonCode() {
         return 4;
     }
 
     @Override
-    public int GetRightButtonCode() {
+    public int getRightButtonCode() {
         return 5;
     }
 
     @Override
-    public int GetDownButtonCode() {
+    public int getDownButtonCode() {
         return 6;
     }
 
     @Override
-    public int GetLeftButtonCode() {
+    public int getLeftButtonCode() {
         return 7;
     }
 
     @Override
-    public int GetXAxisJoystickCode() {
+    public int getXAxisJoystickCode() {
         return 0;
     }
 
     @Override
-    public int GetYAxisJoystickCode() {
+    public int getYAxisJoystickCode() {
         return 1;
     }
 
     @Override
-    public float XAxisValueConverter(float value) {
+    public float xAxisValueConverter(float value) {
         return value;
     }
 
     @Override
-    public float YAxisValueConverter(float value) {
+    public float yAxisValueConverter(float value) {
         return -1f * value;
     }
 

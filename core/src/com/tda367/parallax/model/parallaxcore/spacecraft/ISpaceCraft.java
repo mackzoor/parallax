@@ -11,6 +11,7 @@ import java.util.List;
 /**
  * Interface for all spaceCraft in the game.
  */
+
 public interface ISpaceCraft extends Collidable, Updatable, Renderable {
     void setForwardSpeedTarget(float speed);
     void setForwardAcceleration(float acceleration);

@@ -26,57 +26,57 @@ public class Xbox360GamePad implements GamePad {
     */
 
     @Override
-    public int GetActionButtonCode() {
+    public int getActionButtonCode() {
         return 0;
     }
 
     @Override
-    public int GetSecondaryActionButtonCode() {
+    public int getSecondaryActionButtonCode() {
         return 1;
     }
 
     @Override
-    public int GetPauseButtonCode() {
+    public int getPauseButtonCode() {
         return 7;
     }
 
     @Override
-    public int GetUpButtonCode() {
+    public int getUpButtonCode() {
         return 99;
     } //Unknown atm
 
     @Override
-    public int GetRightButtonCode() {
+    public int getRightButtonCode() {
         return 99;
     } //Unknown atm
 
     @Override
-    public int GetDownButtonCode() {
+    public int getDownButtonCode() {
         return 99;
     } //Unknown atm
 
     @Override
-    public int GetLeftButtonCode() {
+    public int getLeftButtonCode() {
         return 99;
     } //Unknown atm
 
     @Override
-    public int GetXAxisJoystickCode() {
+    public int getXAxisJoystickCode() {
         return 1;
     }
 
     @Override
-    public int GetYAxisJoystickCode() {
+    public int getYAxisJoystickCode() {
         return 0;
     }
 
     @Override
-    public float XAxisValueConverter(float value) {
+    public float xAxisValueConverter(float value) {
         return value;
     }
 
     @Override
-    public float YAxisValueConverter(float value) {
+    public float yAxisValueConverter(float value) {
         return -value;
     }
 

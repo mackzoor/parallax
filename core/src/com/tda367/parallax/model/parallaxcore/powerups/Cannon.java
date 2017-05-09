@@ -156,6 +156,5 @@ public class Cannon implements IPowerUp {
     public void removeFromRenderManager() {
         RenderManager.getInstance().addRenderTask(this);
     }
-
 }
 

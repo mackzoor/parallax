@@ -1,10 +1,7 @@
 package com.tda367.parallax.platform.gamepads;
 
-
-
 import com.tda367.parallax.controller.inputcontrollers.gamepads.*;
 import org.junit.Test;
-
 import static org.junit.Assert.*;
 
 public class GamePadFactoryTest {

@@ -37,19 +37,19 @@ public class LibGdxGamePadHandler implements ControllerListener {
     public boolean buttonDown(Controller controller, int buttonCode) {
 
         if (listener != null) {
-            if (buttonCode == gamePad.GetActionButtonCode()) {
+            if (buttonCode == gamePad.getActionButtonCode()) {
                 listener.actionButtonPressed();
-            } else if (buttonCode == gamePad.GetSecondaryActionButtonCode()) {
+            } else if (buttonCode == gamePad.getSecondaryActionButtonCode()) {
                 listener.secondaryActionButtonPressed();
-            } else if (buttonCode == gamePad.GetLeftButtonCode()) {
+            } else if (buttonCode == gamePad.getLeftButtonCode()) {
                 listener.leftButtonDown();
-            } else if (buttonCode == gamePad.GetUpButtonCode()) {
+            } else if (buttonCode == gamePad.getUpButtonCode()) {
                 listener.upButtonDown();
-            } else if (buttonCode == gamePad.GetRightButtonCode()) {
+            } else if (buttonCode == gamePad.getRightButtonCode()) {
                 listener.rightButtonDown();
-            } else if (buttonCode == gamePad.GetDownButtonCode()) {
+            } else if (buttonCode == gamePad.getDownButtonCode()) {
                 listener.downButtonDown();
-            } else if (buttonCode == gamePad.GetPauseButtonCode()) {
+            } else if (buttonCode == gamePad.getPauseButtonCode()) {
                 listener.pauseButtonPressed();
             }
         }
@@ -61,13 +61,13 @@ public class LibGdxGamePadHandler implements ControllerListener {
     public boolean buttonUp(Controller controller, int buttonCode) {
 
         if (listener != null) {
-            if (buttonCode == gamePad.GetLeftButtonCode()) {
+            if (buttonCode == gamePad.getLeftButtonCode()) {
                 listener.leftButtonUp();
-            } else if (buttonCode == gamePad.GetUpButtonCode()) {
+            } else if (buttonCode == gamePad.getUpButtonCode()) {
                 listener.upButtonUp();
-            } else if (buttonCode == gamePad.GetRightButtonCode()) {
+            } else if (buttonCode == gamePad.getRightButtonCode()) {
                 listener.rightButtonUp();
-            } else if (buttonCode == gamePad.GetDownButtonCode()) {
+            } else if (buttonCode == gamePad.getDownButtonCode()) {
                 listener.downButtonUp();
             }
         }
@@ -81,10 +81,10 @@ public class LibGdxGamePadHandler implements ControllerListener {
         if (value * value < 0.02f) value = 0f;
 
         if (listener != null) {
-            if (axisCode == gamePad.GetXAxisJoystickCode()) {
-                listener.xAxisJoystickMovement(gamePad.XAxisValueConverter(value));
-            } else if (axisCode == gamePad.GetYAxisJoystickCode()) {
-                listener.yAxisJoystickMovement(gamePad.YAxisValueConverter(value));
+            if (axisCode == gamePad.getXAxisJoystickCode()) {
+                listener.xAxisJoystickMovement(gamePad.xAxisValueConverter(value));
+            } else if (axisCode == gamePad.getYAxisJoystickCode()) {
+                listener.yAxisJoystickMovement(gamePad.yAxisValueConverter(value));
             }
         }
 

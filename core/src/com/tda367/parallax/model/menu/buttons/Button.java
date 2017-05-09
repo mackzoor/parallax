@@ -2,10 +2,6 @@ package com.tda367.parallax.model.menu.buttons;
 
 import javax.vecmath.Vector2f;
 
-/**
- * Created by Markus on 2017-05-06.
- */
-
 public abstract class Button {
 
     Vector2f pos;

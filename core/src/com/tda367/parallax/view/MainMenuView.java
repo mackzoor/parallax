@@ -6,10 +6,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.tda367.parallax.model.menu.MainMenuModel;
 
-/**
- * Created by Markus on 2017-05-08.
- */
-
 public class MainMenuView {
 
     private MainMenuModel mainMenuModel;

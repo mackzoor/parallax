@@ -8,10 +8,6 @@ import com.tda367.parallax.controller.devicestates.DeviceManager;
 import com.tda367.parallax.model.menu.MainMenuModel;
 import com.tda367.parallax.view.MainMenuView;
 
-/**
- * Created by Markus on 2017-05-04.
- */
-
 public class MainMenuScreen implements Screen {
 
     private Game game;

@@ -6,10 +6,6 @@ import com.badlogic.gdx.InputProcessor;
 
 import lombok.Setter;
 
-/**
- * Created by Markus on 2017-05-08.
- */
-
 public class LibGdxTouchHandler implements InputProcessor {
 
     @Setter

@@ -23,7 +23,7 @@ public class Playstation3GamePadTest {
 
         float value = rand.nextFloat() * (maxX - minX) + minX;
 
-        float convertedValue = gamePad.XAxisValueConverter(value);
+        float convertedValue = gamePad.xAxisValueConverter(value);
 
         assertTrue(convertedValue == value);
     }
@@ -39,7 +39,7 @@ public class Playstation3GamePadTest {
 
         float value = rand.nextFloat() * (maxY - minY) + minY;
 
-        float convertedValue = gamePad.YAxisValueConverter(value);
+        float convertedValue = gamePad.yAxisValueConverter(value);
 
         assertTrue(convertedValue == -1f * value);
     }

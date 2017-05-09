@@ -12,10 +12,6 @@ import com.tda367.parallax.controller.inputcontrollers.InputControlsListener;
 
 import lombok.Getter;
 
-
-/**
- * Created by Rasmus on 2017-05-02.
- */
 public class MainMenuController implements InputControlsListener {
 
     private MainMenuModel mainMenuModel;

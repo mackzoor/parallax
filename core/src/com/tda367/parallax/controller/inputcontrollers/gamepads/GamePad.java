@@ -1,15 +1,15 @@
 package com.tda367.parallax.controller.inputcontrollers.gamepads;
 
 public interface GamePad {
-    int GetActionButtonCode();
-    int GetSecondaryActionButtonCode();
-    int GetPauseButtonCode();
-    int GetUpButtonCode();
-    int GetRightButtonCode();
-    int GetDownButtonCode();
-    int GetLeftButtonCode();
-    int GetXAxisJoystickCode();
-    int GetYAxisJoystickCode();
-    float XAxisValueConverter(float value);
-    float YAxisValueConverter(float value);
+    int getActionButtonCode();
+    int getSecondaryActionButtonCode();
+    int getPauseButtonCode();
+    int getUpButtonCode();
+    int getRightButtonCode();
+    int getDownButtonCode();
+    int getLeftButtonCode();
+    int getXAxisJoystickCode();
+    int getYAxisJoystickCode();
+    float xAxisValueConverter(float value);
+    float yAxisValueConverter(float value);
 }
