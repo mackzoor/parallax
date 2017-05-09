@@ -10,7 +10,7 @@ import com.tda367.parallax.model.menu.buttons.Button;
 public final class ExitButtonView extends ButtonView {
     public ExitButtonView(Button button) {
         super(button);
-        unselected = new Texture("exitWhite.png");
-        selected = new Texture("exitButtonFocus.png");
+        unselected = new Texture("mainmenu/unselectedExitButton.png");
+        selected = new Texture("mainmenu/selectedExitButton.png");
     }
 }

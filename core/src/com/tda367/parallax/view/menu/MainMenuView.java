@@ -27,7 +27,7 @@ public class MainMenuView {
         this.buttonViews.add(new ExitButtonView(mainMenuModel.getExitButton()));
 
 
-        background = new Texture("gridBg.jpg");
+        background = new Texture("mainmenu/background.jpg");
     }
 
     public void render() {
