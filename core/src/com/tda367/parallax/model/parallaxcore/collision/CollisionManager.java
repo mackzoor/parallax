@@ -9,7 +9,7 @@ import java.util.List;
  * A singleton bus class that holds the current objects that need to be checked for collision.
  */
 
-public class CollisionManager {
+public final class CollisionManager {
     @Getter private List<Collidable> collidables;
     private List<ICollisionCalculator> calculators;
     private List<CollisionObserver> observers;

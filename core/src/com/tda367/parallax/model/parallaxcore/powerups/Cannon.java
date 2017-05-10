@@ -19,7 +19,6 @@ public class Cannon implements IPowerUp {
     private Vector3f pos;
     private Quat4f rot;
     private Vector3f velocity;
-    private Vector3f acceleration; //Will it ever use this?
 
     private Model model;
     private Model collisionModel;
@@ -32,7 +31,6 @@ public class Cannon implements IPowerUp {
         this.pos = new Vector3f();
         this.rot = new Quat4f();
         this.velocity = new Vector3f();
-        this.acceleration = new Vector3f();
         this.model = new Model("laser.g3db", "3dModels/laser");
         this.isCollisionOn = false;
 

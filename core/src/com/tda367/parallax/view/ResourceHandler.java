@@ -12,7 +12,7 @@ import com.badlogic.gdx.utils.UBJsonReader;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ResourceHandler {
+public final class ResourceHandler {
     private static ResourceHandler instance;
     private Map<String,Model> loadedModels;
     private Map<String,Sound> loadedSounds;

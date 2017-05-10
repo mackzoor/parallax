@@ -36,16 +36,14 @@ public class Missile implements IPowerUp {
 
         isActive = true;
         isDead = false;
-
-
-        addToRenderManager();
-        addToCollisionManager();
     }
 
     //IPowerUp
     @Override
     public void activate(Vector3f pos, Quat4f rot){
         isActive = true;
+        addToRenderManager();
+        addToCollisionManager();
     }
 
     @Override
