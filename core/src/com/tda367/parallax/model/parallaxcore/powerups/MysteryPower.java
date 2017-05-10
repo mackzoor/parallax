@@ -1,6 +1,7 @@
 package com.tda367.parallax.model.parallaxcore.powerups;
 
 import com.tda367.parallax.model.coreabstraction.Model;
+import com.tda367.parallax.model.parallaxcore.collision.Collidable;
 import com.tda367.parallax.model.parallaxcore.collision.CollidableType;
 import com.tda367.parallax.model.parallaxcore.collision.CollisionManager;
 
@@ -74,7 +75,7 @@ public class MysteryPower implements IPowerUp {
     }
 
     @Override
-    public void handleCollision(CollidableType type) {
+    public void handleCollision(Collidable collidable) {
         //Do nothing
     }
 

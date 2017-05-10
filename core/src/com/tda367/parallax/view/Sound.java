@@ -2,20 +2,20 @@ package com.tda367.parallax.view;
 
 import com.badlogic.gdx.audio.Music;
 import com.tda367.parallax.model.coreabstraction.SoundListener;
-import com.tda367.parallax.model.coreabstraction.SoundManager;
+import com.tda367.parallax.model.coreabstraction.AudioQueue;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Sound implements SoundListener {
 
-    private ResourceHandler resources;
+    private ResourceLoader resources;
 
     private List<ActiveMusicCombination> activeMusic = new ArrayList<ActiveMusicCombination>();
 
     public Sound(){
-        this.resources = ResourceHandler.getInstance();
-        SoundManager.getInstance().addListener(this);
+        this.resources = ResourceLoader.getInstance();
+        AudioQueue.getInstance().addListener(this);
     }
 
     @Override

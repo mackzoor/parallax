@@ -1,8 +1,9 @@
 package com.tda367.parallax.model.parallaxcore.powerups;
 
 import com.tda367.parallax.model.coreabstraction.Model;
-import com.tda367.parallax.model.coreabstraction.RenderManager;
-import com.tda367.parallax.model.coreabstraction.SoundManager;
+import com.tda367.parallax.model.coreabstraction.RenderQueue;
+import com.tda367.parallax.model.coreabstraction.AudioQueue;
+import com.tda367.parallax.model.parallaxcore.collision.Collidable;
 import com.tda367.parallax.model.parallaxcore.collision.CollidableType;
 import com.tda367.parallax.model.parallaxcore.collision.CollisionManager;
 
@@ -76,7 +77,9 @@ public class Cannon implements IPowerUp {
     //Updates the cannon.
     @Override
     public void update(int milliSinceLastUpdate){
-        updatePosition(milliSinceLastUpdate);
+        if (isActive){
+            updatePosition(milliSinceLastUpdate);
+        }
     }
     private void updatePosition(int milliSinceLastUpdate){
         pos.add(new Vector3f(velocity.getX() * ((float) milliSinceLastUpdate/1000),(velocity.getY() * ((float) milliSinceLastUpdate/1000)),(velocity.getZ() * ((float)milliSinceLastUpdate/1000))));
@@ -88,9 +91,9 @@ public class Cannon implements IPowerUp {
 
         //Plays a funny sound every 200 shots
         if(randomSong > 199){
-            SoundManager.getInstance().playSound("cannonLow.mp3","sounds/effects", 0.8f);
+            AudioQueue.getInstance().playSound("cannonLow.mp3","sounds/effects", 0.8f);
         } else {
-            SoundManager.getInstance().playSound("cannon.mp3","sounds/effects", 0.8f);
+            AudioQueue.getInstance().playSound("cannon.mp3","sounds/effects", 0.8f);
         }
     }
 
@@ -136,7 +139,7 @@ public class Cannon implements IPowerUp {
     }
 
     @Override
-    public void handleCollision(CollidableType type) {
+    public void handleCollision(Collidable collidable) {
         //TODO Disable powerup
     }
 
@@ -144,7 +147,7 @@ public class Cannon implements IPowerUp {
     //Render
     @Override
     public void addToRenderManager() {
-        RenderManager.getInstance().addRenderTask(this);
+        RenderQueue.getInstance().addRenderTask(this);
     }
     @Override
     public Model getModel() {
@@ -152,7 +155,7 @@ public class Cannon implements IPowerUp {
     }
     @Override
     public void removeFromRenderManager() {
-        RenderManager.getInstance().addRenderTask(this);
+        RenderQueue.getInstance().addRenderTask(this);
     }
 }
 

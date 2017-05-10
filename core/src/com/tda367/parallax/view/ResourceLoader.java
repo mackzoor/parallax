@@ -12,15 +12,15 @@ import com.badlogic.gdx.utils.UBJsonReader;
 import java.util.HashMap;
 import java.util.Map;
 
-public final class ResourceHandler {
-    private static ResourceHandler instance;
+public final class ResourceLoader {
+    private static ResourceLoader instance;
     private Map<String,Model> loadedModels;
     private Map<String,Sound> loadedSounds;
     private Map<String, Music> loadedMusic;
 
     private G3dModelLoader modelLoader;
 
-    private ResourceHandler(){
+    private ResourceLoader(){
         UBJsonReader jsonReader = new UBJsonReader();
         modelLoader = new G3dModelLoader(jsonReader);
 
@@ -29,9 +29,9 @@ public final class ResourceHandler {
         loadedMusic = new HashMap<String, Music>();
     }
 
-    public static ResourceHandler getInstance(){
+    public static ResourceLoader getInstance(){
         if (instance == null){
-            instance = new ResourceHandler();
+            instance = new ResourceLoader();
         }
         return instance;
     }

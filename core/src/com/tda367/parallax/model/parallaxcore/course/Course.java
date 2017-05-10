@@ -1,6 +1,8 @@
 package com.tda367.parallax.model.parallaxcore.course;
 
 import com.tda367.parallax.model.parallaxcore.collision.*;
+import com.tda367.parallax.model.parallaxcore.powerups.Cannon;
+import com.tda367.parallax.model.parallaxcore.powerups.Missile;
 import com.tda367.parallax.model.parallaxcore.spacecraft.ISpaceCraft;
 import com.tda367.parallax.model.coreabstraction.Updatable;
 import com.tda367.parallax.model.parallaxcore.powerups.IPowerUp;
@@ -17,15 +19,19 @@ public class Course implements Updatable, CollisionObserver {
     private List<ICourseModule> modules;
     private List<ISpaceCraft> spaceCrafts;
     //TODO, remove the power-up after used
-    private List<IPowerUp> activePowerups;
+    private List<IPowerUp> powerUps;
+
+    private final int powerUpSpawnTime = 600; //Measured in tickrate
+    private int lastPowerUpSpawn; //Time since last powerup spawn
 
     public Course(){
+        lastPowerUpSpawn = 0;
         CollisionManager.getInstance().subscribeToCollisions(this);
         modules = new ArrayList<ICourseModule>();
         spaceCrafts = new ArrayList<ISpaceCraft>();
 
         updateModuleRange();
-        activePowerups = new ArrayList<IPowerUp>();
+        powerUps = new ArrayList<IPowerUp>();
     }
 
     public List<ISpaceCraft> getSpaceCrafts() {
@@ -72,21 +78,35 @@ public class Course implements Updatable, CollisionObserver {
 
     @Override
     public void update(int milliSinceLastUpdate) {
+        lastPowerUpSpawn++;
         for (ISpaceCraft spaceCraft : spaceCrafts) {
             spaceCraft.update(milliSinceLastUpdate);
         }
 
-        for (IPowerUp pu : activePowerups) {
-            if (pu.isActive()){
+        if (lastPowerUpSpawn >= powerUpSpawnTime){
+            lastPowerUpSpawn = 0;
+            spawnPowerUp();
+        }
+
+        for (IPowerUp pu : powerUps) {
                 pu.update(milliSinceLastUpdate);
-            }
             if (pu.isDead()){
-                activePowerups.remove(pu);
+                powerUps.remove(pu);
             }
         }
 
         updateModuleRange();
     }
+
+    private void spawnPowerUp() {
+        IPowerUp pu = new Cannon();
+        powerUps.add(pu);
+        Container container = new Container(pu);
+        container.setPos(new Vector3f(0,getFirstSpaceCraftYPosition()+20,0));
+        container.addToCollisionManager();
+        container.addToRenderManager();
+    }
+
     private void updateModuleRange() {
 
         if (modules.size() > 0) {
@@ -136,7 +156,7 @@ public class Course implements Updatable, CollisionObserver {
         Collidable first = collisionPair.getFirstCollidable();
         Collidable second = collisionPair.getSecondCollidable();
 
-        first.handleCollision(second.getCollidableType());
-        second.handleCollision(first.getCollidableType());
+        first.handleCollision(second);
+        second.handleCollision(first);
     }
 }

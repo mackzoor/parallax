@@ -2,7 +2,7 @@ package com.tda367.parallax.model.parallaxcore.course;
 
 import com.tda367.parallax.model.parallaxcore.collision.Collidable;
 import com.tda367.parallax.model.coreabstraction.Model;
-import com.tda367.parallax.model.coreabstraction.RenderManager;
+import com.tda367.parallax.model.coreabstraction.RenderQueue;
 
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
@@ -92,7 +92,7 @@ public class DefaultCourseModule implements ICourseModule {
     //Renderable
     @Override
     public void addToRenderManager() {
-        RenderManager.getInstance().addRenderTask(this);
+        RenderQueue.getInstance().addRenderTask(this);
 
         for (BoxObstacle boxObstacle : boxObstacles){
             boxObstacle.addToRenderManager();
@@ -101,7 +101,7 @@ public class DefaultCourseModule implements ICourseModule {
     }
     @Override
     public void removeFromRenderManager() {
-        RenderManager.getInstance().removeRenderTask(this);
+        RenderQueue.getInstance().removeRenderTask(this);
 
         for (BoxObstacle boxObstacle : boxObstacles){
             boxObstacle.removeFromRenderManager();

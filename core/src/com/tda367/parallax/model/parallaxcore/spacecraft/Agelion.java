@@ -1,12 +1,14 @@
 package com.tda367.parallax.model.parallaxcore.spacecraft;
 
-import com.tda367.parallax.model.coreabstraction.SoundManager;
+import com.tda367.parallax.model.coreabstraction.AudioQueue;
+import com.tda367.parallax.model.parallaxcore.collision.Collidable;
 import com.tda367.parallax.model.parallaxcore.collision.CollidableType;
 import com.tda367.parallax.model.parallaxcore.collision.CollisionManager;
+import com.tda367.parallax.model.parallaxcore.course.IContainer;
 import lombok.Getter;
 import com.tda367.parallax.model.parallaxcore.powerups.Cannon;
 import com.tda367.parallax.model.coreabstraction.Model;
-import com.tda367.parallax.model.coreabstraction.RenderManager;
+import com.tda367.parallax.model.coreabstraction.RenderQueue;
 import com.tda367.parallax.model.parallaxcore.powerups.IPowerUp;
 
 import javax.vecmath.*;
@@ -270,11 +272,11 @@ public class Agelion implements ISpaceCraft {
     //Render
     @Override
     public void addToRenderManager() {
-        RenderManager.getInstance().addRenderTask(this);
+        RenderQueue.getInstance().addRenderTask(this);
     }
     @Override
     public void removeFromRenderManager() {
-        RenderManager.getInstance().removeRenderTask(this);
+        RenderQueue.getInstance().removeRenderTask(this);
     }
 
 
@@ -308,10 +310,16 @@ public class Agelion implements ISpaceCraft {
         return CollidableType.SPACECRAFT;
     }
     @Override
-    public void handleCollision(CollidableType type) {
-        if (type == CollidableType.OBSTACLE || type == CollidableType.HARMFUL){
-            SoundManager.getInstance().playSound("flashBang.mp3","sounds/effects", 0.2f);
+    public void handleCollision(Collidable collidable) {
+        if (collidable.getCollidableType() == CollidableType.OBSTACLE || collidable.getCollidableType() == CollidableType.HARMFUL){
+            //Take damage if collided with obstacle or harmful
+            AudioQueue.getInstance().playSound("flashBang.mp3","sounds/effects", 0.2f);
             decHealth();
+        } else if (collidable.getCollidableType() == CollidableType.CONTAINER){
+            //take powerup of collided with container
+            System.out.println("POWERUP COLLECTED");
+            IContainer container = (IContainer) collidable;
+            pushPU(container.getPowerUp());
         }
     }
 

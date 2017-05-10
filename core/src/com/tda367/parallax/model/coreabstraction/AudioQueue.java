@@ -7,17 +7,17 @@ import java.util.List;
  * A singleton bus class that holds the current audio that need to be played.
  */
 
-public class SoundManager {
+public class AudioQueue {
 
     private List<SoundListener> listeners = new ArrayList<SoundListener>();
     private List<SoundCombiantion> soundQueue = new ArrayList<SoundCombiantion>();
     private List<SoundCombiantion> musicQueue = new ArrayList<SoundCombiantion>();
 
-    private static SoundManager instance;
+    private static AudioQueue instance;
 
-    public static SoundManager getInstance() {
+    public static AudioQueue getInstance() {
         if (instance == null) {
-            instance = new SoundManager();
+            instance = new AudioQueue();
         }
         return instance;
     }
