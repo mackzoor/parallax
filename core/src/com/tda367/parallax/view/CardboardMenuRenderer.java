@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.math.Quaternion;
-import com.tda367.parallax.model.coreabstraction.RenderManager;
+import com.tda367.parallax.model.coreabstraction.RenderQueue;
 import com.tda367.parallax.model.coreabstraction.Renderable;
 import com.tda367.parallax.model.parallaxcore.collision.CollisionManager;
 
@@ -21,10 +21,10 @@ public class CardboardMenuRenderer {
     private ModelBatch modelBatch;
     private Camera camera;
     private Environment environment;
-    private ResourceHandler rh;
+    private ResourceLoader rh;
 
     public CardboardMenuRenderer(Camera camera) {
-        rh = ResourceHandler.getInstance();
+        rh = ResourceLoader.getInstance();
         modelBatch = new ModelBatch();
         this.camera = camera;
 
@@ -50,7 +50,7 @@ public class CardboardMenuRenderer {
         // Like spriteBatch, just with models!  pass in the box Instance and the environment
         modelBatch.begin(camera);
 
-        List<Renderable> renderables = RenderManager.getInstance().getRenderables();
+        List<Renderable> renderables = RenderQueue.getInstance().getRenderables();
 
         for (Renderable renderable : renderables) {
             ModelInstance modelInstance = rh.getModel(renderable.getModel().getModelName(), renderable.getModel().getModelDirectory());

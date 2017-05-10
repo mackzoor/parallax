@@ -1,4 +1,4 @@
-package com.tda367.parallax;
+package com.tda367.parallax.controller.gamescreens.cardboardadapter;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -12,7 +12,7 @@ import com.google.vrtoolkit.cardboard.Viewport;
  */
 public abstract class CardboardGame extends Game implements CardBoardApplicationListener {
 
-    protected com.tda367.parallax.controller.gamestates.CardboardScreen cardboardScreen;
+    protected CardboardScreen cardboardScreen;
 
     @Override
     public void onNewFrame(HeadTransform paramHeadTransform) {
@@ -69,7 +69,7 @@ public abstract class CardboardGame extends Game implements CardBoardApplication
 
     }
 
-    public void setCardboardScreen(com.tda367.parallax.controller.gamestates.CardboardScreen screen){
+    public void setCardboardScreen(CardboardScreen screen){
         if (this.cardboardScreen != null) this.cardboardScreen.hide();
         this.cardboardScreen = screen;
         if (this.cardboardScreen != null) {

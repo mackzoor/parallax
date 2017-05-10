@@ -1,7 +1,11 @@
-package com.tda367.parallax.controller.gamestates;
+package com.tda367.parallax.controller;
 
 import com.badlogic.gdx.Game;
-import com.tda367.parallax.CardboardGame;
+import com.tda367.parallax.controller.gamescreens.CardboardMenuScreen;
+import com.tda367.parallax.controller.gamescreens.cardboardadapter.CardboardGame;
+import com.tda367.parallax.controller.gamescreens.CardboardGameScreen;
+import com.tda367.parallax.controller.gamescreens.GameScreen;
+import com.tda367.parallax.controller.gamescreens.MainMenuScreen;
 
 public final class GameStateManager {
 

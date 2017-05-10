@@ -1,6 +1,6 @@
 package com.tda367.parallax.model.cardboardmenu;
 
-import com.tda367.parallax.model.coreabstraction.RenderManager;
+import com.tda367.parallax.model.coreabstraction.RenderQueue;
 import com.tda367.parallax.model.coreabstraction.Updatable;
 import com.tda367.parallax.model.parallaxcore.Camera;
 import com.tda367.parallax.model.parallaxcore.Parallax;
@@ -17,7 +17,7 @@ public class MainMenu implements Updatable {
     Parallax parallax;
     CardboardMenu cbMenu;
     Camera camera;
-    RenderManager renderManager;
+    RenderQueue renderQueue;
 
     public MainMenu(Player player){
         this.player = player;

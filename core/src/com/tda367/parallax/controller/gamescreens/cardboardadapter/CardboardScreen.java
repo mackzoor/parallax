@@ -1,4 +1,4 @@
-package com.tda367.parallax.controller.gamestates;
+package com.tda367.parallax.controller.gamescreens.cardboardadapter;
 
 import com.badlogic.gdx.Screen;
 import com.google.vrtoolkit.cardboard.Eye;

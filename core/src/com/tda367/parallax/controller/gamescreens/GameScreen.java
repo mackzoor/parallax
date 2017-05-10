@@ -1,10 +1,10 @@
-package com.tda367.parallax.controller.gamestates;
+package com.tda367.parallax.controller.gamescreens;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.controllers.Controllers;
-import com.tda367.parallax.controller.GameController;
+import com.tda367.parallax.controller.gamecontrollers.GameController;
 import com.tda367.parallax.controller.devicestates.DeviceManager;
 import com.tda367.parallax.model.CollisionCalculator;
 import com.tda367.parallax.model.coreabstraction.AudioQueue;
@@ -15,7 +15,7 @@ import com.tda367.parallax.model.parallaxcore.spacecraft.Agelion;
 import com.tda367.parallax.view.Renderer;
 import com.tda367.parallax.view.Sound;
 
-class GameScreen implements Screen {
+public class GameScreen implements Screen {
 
     private Game game;
 
@@ -28,7 +28,7 @@ class GameScreen implements Screen {
     private AudioQueue audioQueue;
     private CollisionCalculator collisionCalculator;
 
-    GameScreen(Game game) {
+    public GameScreen(Game game) {
         this.game = game;
 
         audioQueue = AudioQueue.getInstance();

@@ -1,4 +1,4 @@
-package com.tda367.parallax.controller;
+package com.tda367.parallax.controller.gamecontrollers;
 
 import com.tda367.parallax.model.parallaxcore.Parallax;
 import com.tda367.parallax.controller.inputcontrollers.InputControlsListener;

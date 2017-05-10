@@ -1,7 +1,7 @@
 package com.tda367.parallax.model.cardboardmenu;
 
 import com.tda367.parallax.model.coreabstraction.Model;
-import com.tda367.parallax.model.coreabstraction.RenderManager;
+import com.tda367.parallax.model.coreabstraction.RenderQueue;
 import com.tda367.parallax.model.coreabstraction.Renderable;
 import com.tda367.parallax.model.parallaxcore.collision.Collidable;
 import com.tda367.parallax.model.parallaxcore.collision.CollidableType;
@@ -40,13 +40,12 @@ public class CardboardExitButton implements Renderable, Collidable {
 
     @Override
     public void addToRenderManager() {
-        RenderManager.getInstance().addRenderTask(this);
-
+        RenderQueue.getInstance().addRenderTask(this);
     }
 
     @Override
     public void removeFromRenderManager() {
-        RenderManager.getInstance().removeRenderTask(this);
+        RenderQueue.getInstance().removeRenderTask(this);
     }
 
     @Override
@@ -99,8 +98,8 @@ public class CardboardExitButton implements Renderable, Collidable {
     }
 
     @Override
-    public void handleCollision(CollidableType type) {
-        if(type == CollidableType.HARMFUL){
+    public void handleCollision(Collidable collidable) {
+        if(collidable.getCollidableType() == CollidableType.HARMFUL){
             isHit = true;
         }
     }

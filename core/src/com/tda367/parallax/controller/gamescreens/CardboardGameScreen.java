@@ -1,15 +1,16 @@
-package com.tda367.parallax.controller.gamestates;
+package com.tda367.parallax.controller.gamescreens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.android.CardboardCamera;
 import com.badlogic.gdx.math.Matrix4;
 import com.google.vrtoolkit.cardboard.Eye;
 import com.google.vrtoolkit.cardboard.HeadTransform;
-import com.tda367.parallax.CardboardGame;
-import com.tda367.parallax.controller.GameController;
+import com.tda367.parallax.controller.gamecontrollers.GameController;
+import com.tda367.parallax.controller.gamescreens.cardboardadapter.CardboardGame;
+import com.tda367.parallax.controller.gamescreens.cardboardadapter.CardboardScreen;
 import com.tda367.parallax.controller.devicestates.DeviceManager;
 import com.tda367.parallax.controller.devicestates.Device;
-import com.tda367.parallax.model.coreabstraction.RenderManager;
+import com.tda367.parallax.model.coreabstraction.RenderQueue;
 import com.tda367.parallax.model.parallaxcore.Parallax;
 import com.tda367.parallax.model.parallaxcore.Player;
 import com.tda367.parallax.model.parallaxcore.spacecraft.Agelion;
@@ -85,7 +86,7 @@ public class CardboardGameScreen implements CardboardScreen {
 
     @Override
     public void dispose() {
-        RenderManager.getInstance().getRenderables().clear();
+        RenderQueue.getInstance().getRenderables().clear();
     }
 
     @Override

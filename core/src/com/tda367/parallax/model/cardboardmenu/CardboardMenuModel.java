@@ -1,7 +1,7 @@
 package com.tda367.parallax.model.cardboardmenu;
 
 import com.tda367.parallax.model.coreabstraction.Model;
-import com.tda367.parallax.model.coreabstraction.RenderManager;
+import com.tda367.parallax.model.coreabstraction.RenderQueue;
 import com.tda367.parallax.model.coreabstraction.Renderable;
 
 import javax.vecmath.Quat4f;
@@ -31,12 +31,12 @@ public class CardboardMenuModel implements Renderable {
 
     @Override
     public void addToRenderManager() {
-        RenderManager.getInstance().addRenderTask(this);
+        RenderQueue.getInstance().addRenderTask(this);
     }
 
     @Override
     public void removeFromRenderManager() {
-        RenderManager.getInstance().removeRenderTask(this);
+        RenderQueue.getInstance().removeRenderTask(this);
     }
 
     @Override

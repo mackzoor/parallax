@@ -1,14 +1,15 @@
-package com.tda367.parallax.controller.gamestates;
+package com.tda367.parallax.controller.gamescreens;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.tda367.parallax.controller.MainMenuController;
+import com.tda367.parallax.controller.gamecontrollers.MainMenuController;
 import com.tda367.parallax.controller.devicestates.DeviceManager;
+import com.tda367.parallax.controller.GameStateManager;
 import com.tda367.parallax.model.menu.MainMenuModel;
 import com.tda367.parallax.view.menu.MainMenuView;
 
-class MainMenuScreen implements Screen {
+public class MainMenuScreen implements Screen {
 
     private Game game;
     private MainMenuModel mainMenuModel;
@@ -16,7 +17,7 @@ class MainMenuScreen implements Screen {
     private MainMenuView mainMenuView;
 
 
-    MainMenuScreen(final Game game) {
+    public MainMenuScreen(final Game game) {
         this.game = game;
         this.mainMenuModel = new MainMenuModel(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         this.mainMenuController = new MainMenuController(mainMenuModel, DeviceManager.getDevice());
