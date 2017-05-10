@@ -21,13 +21,13 @@ public class Camera implements Updatable, Transformable {
 
     private Transformable trackingTarget;
 
-    Camera(Vector3f pos, Quat4f rot, float fov){
+    public Camera(Vector3f pos, Quat4f rot, float fov){
         this.pos = pos;
         this.rot = rot;
         this.fov = fov;
     }
 
-    Camera(){
+    public Camera(){
         this(new Vector3f(0,0,1), new Quat4f(), 90);
     }
 
