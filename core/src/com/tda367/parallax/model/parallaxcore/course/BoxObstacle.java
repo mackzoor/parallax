@@ -84,8 +84,8 @@ public class BoxObstacle implements Collidable, Renderable {
     }
 
     @Override
-    public void handleCollision(CollidableType type) {
-        if (type == CollidableType.SPACECRAFT){
+    public void handleCollision(Collidable collidable) {
+        if (collidable.getCollidableType() == CollidableType.SPACECRAFT){
             disableCollision();
             SoundManager.getInstance().playSound("flashBang.mp3","sounds/effects", 0.1f);
         }

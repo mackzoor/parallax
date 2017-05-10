@@ -1,8 +1,10 @@
 package com.tda367.parallax.model.parallaxcore.spacecraft;
 
 import com.tda367.parallax.model.coreabstraction.SoundManager;
+import com.tda367.parallax.model.parallaxcore.collision.Collidable;
 import com.tda367.parallax.model.parallaxcore.collision.CollidableType;
 import com.tda367.parallax.model.parallaxcore.collision.CollisionManager;
+import com.tda367.parallax.model.parallaxcore.course.IContainer;
 import lombok.Getter;
 import com.tda367.parallax.model.parallaxcore.powerups.Cannon;
 import com.tda367.parallax.model.coreabstraction.Model;
@@ -308,10 +310,16 @@ public class Agelion implements ISpaceCraft {
         return CollidableType.SPACECRAFT;
     }
     @Override
-    public void handleCollision(CollidableType type) {
-        if (type == CollidableType.OBSTACLE || type == CollidableType.HARMFUL){
+    public void handleCollision(Collidable collidable) {
+        if (collidable.getCollidableType() == CollidableType.OBSTACLE || collidable.getCollidableType() == CollidableType.HARMFUL){
+            //Take damage if collided with obstacle or harmful
             SoundManager.getInstance().playSound("flashBang.mp3","sounds/effects", 0.2f);
             decHealth();
+        } else if (collidable.getCollidableType() == CollidableType.CONTAINER){
+            //take powerup of collided with container
+            System.out.println("POWERUP COLLECTED");
+            IContainer container = (IContainer) collidable;
+            pushPU(container.getPowerUp());
         }
     }
 

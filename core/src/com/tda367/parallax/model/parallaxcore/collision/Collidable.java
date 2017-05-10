@@ -18,5 +18,5 @@ public interface Collidable extends Transformable {
     void removeFromCollisionManager();
 
     CollidableType getCollidableType();
-    void handleCollision(CollidableType type);
+    void handleCollision(Collidable collidable);
 }

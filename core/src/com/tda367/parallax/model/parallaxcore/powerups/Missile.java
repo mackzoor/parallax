@@ -2,6 +2,7 @@ package com.tda367.parallax.model.parallaxcore.powerups;
 
 import com.tda367.parallax.model.coreabstraction.Model;
 import com.tda367.parallax.model.coreabstraction.RenderManager;
+import com.tda367.parallax.model.parallaxcore.collision.Collidable;
 import com.tda367.parallax.model.parallaxcore.collision.CollidableType;
 import com.tda367.parallax.model.parallaxcore.collision.CollisionManager;
 import lombok.Getter;
@@ -45,12 +46,14 @@ public class Missile implements IPowerUp {
         addToRenderManager();
         addToCollisionManager();
     }
-
     @Override
     public boolean isActive() {
         return isActive;
     }
-
+    @Override
+    public boolean isDead() {
+        return isDead;
+    }
 
     //Collision
     @Override
@@ -82,16 +85,13 @@ public class Missile implements IPowerUp {
         return CollidableType.HARMFUL;
     }
     @Override
-    public void handleCollision(CollidableType type) {
+    public void handleCollision(Collidable collidable) {
         //Todo Create explosion
 
-        if (type != CollidableType.SPACECRAFT) {
-
-            isActive = false;
-            isDead = true;
-            removeFromRenderManager();
-            removeFromCollisionManager();
-        }
+        isActive = false;
+        isDead = true;
+        removeFromRenderManager();
+        removeFromCollisionManager();
     }
 
 
@@ -125,18 +125,15 @@ public class Missile implements IPowerUp {
     public void use() {
     }
 
-    @Override
-    public boolean isDead() {
-        return isDead;
-    }
-
 
     //Updatable
     @Override
     public void update(int milliSinceLastUpdate) {
-        rotateShip(getEnemyTargetPosition());
-        Vector3f directionalVector = generateDirectionVector(getEnemyTargetPosition());
-        moveOnDirectionVector(directionalVector, milliSinceLastUpdate);
+        if (isActive){
+            rotateShip(getEnemyTargetPosition());
+            Vector3f directionalVector = generateDirectionVector(getEnemyTargetPosition());
+            moveOnDirectionVector(directionalVector, milliSinceLastUpdate);
+        }
     }
 
 
