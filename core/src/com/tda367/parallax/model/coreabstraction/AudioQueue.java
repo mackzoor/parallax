@@ -9,7 +9,7 @@ import java.util.List;
 
 public class AudioQueue {
 
-    private List<SoundListener> listeners = new ArrayList<SoundListener>();
+    private List<AudioObserver> listeners = new ArrayList<AudioObserver>();
     private List<SoundCombiantion> soundQueue = new ArrayList<SoundCombiantion>();
     private List<SoundCombiantion> musicQueue = new ArrayList<SoundCombiantion>();
 
@@ -22,7 +22,7 @@ public class AudioQueue {
         return instance;
     }
 
-    public void addListener(SoundListener listener) {
+    public void addListener(AudioObserver listener) {
         listeners.add(listener);
         playQueuedSoundAndMusic();
     }
@@ -31,27 +31,27 @@ public class AudioQueue {
 
     //Stops a playing music file. Uses directory "slash" filename for correct input.
     public void stopActiveMusic(String fileNameAndDirectory){
-        for (SoundListener sl : listeners) {
+        for (AudioObserver sl : listeners) {
             sl.stopActiveMusic(fileNameAndDirectory);
         }
     }
 
     //Pauses a music file that is running. Uses filename "slash" the directory for correct input.
     public void pauseActiveMusic(String fileNameAndDirectory){
-        for (SoundListener sl : listeners) {
+        for (AudioObserver sl : listeners) {
             sl.pauseActiveMusic(fileNameAndDirectory);
         }
     }
 
     //Un pauses a music file that has previously been paused. Uses filename "slash" the directory for correct input.
     public void unPauseActiveMusic(String fileNameAndDirectory){
-        for (SoundListener sl : listeners) {
+        for (AudioObserver sl : listeners) {
             sl.unPauseActiveMusic(fileNameAndDirectory);
         }
     }
 
     public void clearAllActiveMusic(){
-        for(SoundListener sl: listeners){
+        for(AudioObserver sl: listeners){
             sl.clearAllActiveMusic();
         }
     }
@@ -78,7 +78,7 @@ public class AudioQueue {
             soundQueue.add(new SoundCombiantion(sound,1f));
         }
         // Notify listeners to play sound.
-        for (SoundListener sl : listeners) {
+        for (AudioObserver sl : listeners) {
             sl.playSound(sound);
         }
     }
@@ -87,7 +87,7 @@ public class AudioQueue {
             soundQueue.add(new SoundCombiantion(sound, volume));
         }
         // Notify listeners to play sound.
-        for (SoundListener sl : listeners) {
+        for (AudioObserver sl : listeners) {
             sl.playSound(sound, volume);
         }
     }
@@ -103,7 +103,7 @@ public class AudioQueue {
             musicQueue.add(new SoundCombiantion(music, 1f));
         }
         // Notify listeners to play music.
-        for (SoundListener sl : listeners) {
+        for (AudioObserver sl : listeners) {
             sl.playMusic(music);
         }
     }
@@ -112,7 +112,7 @@ public class AudioQueue {
             musicQueue.add(new SoundCombiantion(music, volume));
         }
         // Notify listeners to play music.
-        for (SoundListener sl : listeners) {
+        for (AudioObserver sl : listeners) {
             sl.playMusic(music, volume);
         }
     }

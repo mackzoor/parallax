@@ -1,8 +1,8 @@
 package com.tda367.parallax.model.parallaxcore.spacecraft;
 
 import com.tda367.parallax.model.parallaxcore.collision.Collidable;
-import com.tda367.parallax.model.coreabstraction.Renderable;
-import com.tda367.parallax.model.coreabstraction.Updatable;
+import com.tda367.parallax.model.util.Renderable;
+import com.tda367.parallax.model.util.Updatable;
 import com.tda367.parallax.model.parallaxcore.powerups.IPowerUp;
 
 import javax.vecmath.Vector2f;

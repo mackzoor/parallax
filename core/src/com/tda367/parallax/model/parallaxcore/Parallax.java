@@ -2,7 +2,7 @@ package com.tda367.parallax.model.parallaxcore;
 
 import com.tda367.parallax.model.coreabstraction.RenderQueue;
 import com.tda367.parallax.model.coreabstraction.AudioQueue;
-import com.tda367.parallax.model.coreabstraction.Updatable;
+import com.tda367.parallax.model.util.Updatable;
 import com.tda367.parallax.model.parallaxcore.course.Course;
 import com.tda367.parallax.model.parallaxcore.enemies.HunterAI;
 import com.tda367.parallax.model.parallaxcore.enemies.MinionEnemy;

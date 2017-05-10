@@ -1,5 +1,6 @@
-package com.tda367.parallax.model.coreabstraction;
+package com.tda367.parallax.model.parallaxcore.powerups;
 
+import com.tda367.parallax.model.util.Updatable;
 import com.tda367.parallax.model.parallaxcore.spacecraft.ISpaceCraft;
 
 /**

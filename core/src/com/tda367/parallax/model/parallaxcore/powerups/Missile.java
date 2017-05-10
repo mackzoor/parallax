@@ -1,6 +1,6 @@
 package com.tda367.parallax.model.parallaxcore.powerups;
 
-import com.tda367.parallax.model.coreabstraction.Model;
+import com.tda367.parallax.model.util.Model;
 import com.tda367.parallax.model.coreabstraction.RenderQueue;
 import com.tda367.parallax.model.parallaxcore.collision.Collidable;
 import com.tda367.parallax.model.parallaxcore.collision.CollidableType;
@@ -104,11 +104,12 @@ public class Missile implements IPowerUp {
     public final void removeFromRenderManager() {
         RenderQueue.getInstance().removeRenderTask(this);
     }
-    //--->  IModel
     @Override
     public Model getModel() {
         return model;
     }
+
+
     //--->  Transformable
     @Override
     public Vector3f getPos() {

@@ -1,13 +1,13 @@
 package com.tda367.parallax.view;
 
 import com.badlogic.gdx.audio.Music;
-import com.tda367.parallax.model.coreabstraction.SoundListener;
+import com.tda367.parallax.model.coreabstraction.AudioObserver;
 import com.tda367.parallax.model.coreabstraction.AudioQueue;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Sound implements SoundListener {
+public class Sound implements AudioObserver {
 
     private ResourceLoader resources;
 

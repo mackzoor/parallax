@@ -1,7 +1,7 @@
 package com.tda367.parallax.model.parallaxcore;
 
-import com.tda367.parallax.model.coreabstraction.Transformable;
-import com.tda367.parallax.model.coreabstraction.Updatable;
+import com.tda367.parallax.model.util.Transformable;
+import com.tda367.parallax.model.util.Updatable;
 import lombok.Getter;
 
 import javax.vecmath.Quat4f;

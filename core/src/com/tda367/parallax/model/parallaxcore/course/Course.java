@@ -2,9 +2,9 @@ package com.tda367.parallax.model.parallaxcore.course;
 
 import com.tda367.parallax.model.parallaxcore.collision.*;
 import com.tda367.parallax.model.parallaxcore.powerups.Cannon;
-import com.tda367.parallax.model.parallaxcore.powerups.Missile;
+import com.tda367.parallax.model.parallaxcore.powerups.Container;
 import com.tda367.parallax.model.parallaxcore.spacecraft.ISpaceCraft;
-import com.tda367.parallax.model.coreabstraction.Updatable;
+import com.tda367.parallax.model.util.Updatable;
 import com.tda367.parallax.model.parallaxcore.powerups.IPowerUp;
 
 import javax.vecmath.Vector3f;

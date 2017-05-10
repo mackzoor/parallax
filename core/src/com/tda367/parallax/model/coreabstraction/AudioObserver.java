@@ -1,6 +1,6 @@
 package com.tda367.parallax.model.coreabstraction;
 
-public interface SoundListener {
+public interface AudioObserver {
     //TODO might want to remove method-heads using musicFile as parameter, they might never get used.
 
     void playSound(String sound);

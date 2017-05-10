@@ -1,6 +1,6 @@
 package com.tda367.parallax.model.parallaxcore.powerups;
 
-import com.tda367.parallax.model.coreabstraction.Model;
+import com.tda367.parallax.model.util.Model;
 import com.tda367.parallax.model.coreabstraction.RenderQueue;
 import com.tda367.parallax.model.coreabstraction.AudioQueue;
 import com.tda367.parallax.model.parallaxcore.collision.Collidable;

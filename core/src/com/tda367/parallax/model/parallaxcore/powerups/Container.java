@@ -1,10 +1,12 @@
-package com.tda367.parallax.model.parallaxcore.course;
+package com.tda367.parallax.model.parallaxcore.powerups;
 
 import com.tda367.parallax.model.coreabstraction.*;
 import com.tda367.parallax.model.parallaxcore.collision.Collidable;
 import com.tda367.parallax.model.parallaxcore.collision.CollidableType;
 import com.tda367.parallax.model.parallaxcore.collision.CollisionManager;
-import com.tda367.parallax.model.parallaxcore.powerups.IPowerUp;
+import com.tda367.parallax.model.util.Model;
+import com.tda367.parallax.model.util.Renderable;
+import com.tda367.parallax.model.util.Updatable;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -27,7 +29,7 @@ public class Container implements Renderable, Collidable, Updatable, IContainer 
 
     @Getter private boolean isCollected;
 
-    Container(IPowerUp pu){
+    public Container(IPowerUp pu){
         this.usable = pu;
 
         pos = new Vector3f();

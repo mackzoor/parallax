@@ -1,7 +1,7 @@
 package com.tda367.parallax.model.cardboardmenu;
 
 import com.tda367.parallax.model.coreabstraction.RenderQueue;
-import com.tda367.parallax.model.coreabstraction.Updatable;
+import com.tda367.parallax.model.util.Updatable;
 import com.tda367.parallax.model.parallaxcore.Camera;
 import com.tda367.parallax.model.parallaxcore.Parallax;
 import com.tda367.parallax.model.parallaxcore.Player;

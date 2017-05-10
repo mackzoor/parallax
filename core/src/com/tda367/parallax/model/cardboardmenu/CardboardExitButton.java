@@ -1,8 +1,8 @@
 package com.tda367.parallax.model.cardboardmenu;
 
-import com.tda367.parallax.model.coreabstraction.Model;
+import com.tda367.parallax.model.util.Model;
 import com.tda367.parallax.model.coreabstraction.RenderQueue;
-import com.tda367.parallax.model.coreabstraction.Renderable;
+import com.tda367.parallax.model.util.Renderable;
 import com.tda367.parallax.model.parallaxcore.collision.Collidable;
 import com.tda367.parallax.model.parallaxcore.collision.CollidableType;
 import com.tda367.parallax.model.parallaxcore.collision.CollisionManager;

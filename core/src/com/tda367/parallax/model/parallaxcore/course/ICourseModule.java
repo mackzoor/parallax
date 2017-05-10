@@ -1,7 +1,7 @@
 package com.tda367.parallax.model.parallaxcore.course;
 
 import com.tda367.parallax.model.parallaxcore.collision.Collidable;
-import com.tda367.parallax.model.coreabstraction.Renderable;
+import com.tda367.parallax.model.util.Renderable;
 
 import java.util.List;
 

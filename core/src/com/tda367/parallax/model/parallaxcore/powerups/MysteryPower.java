@@ -1,6 +1,6 @@
 package com.tda367.parallax.model.parallaxcore.powerups;
 
-import com.tda367.parallax.model.coreabstraction.Model;
+import com.tda367.parallax.model.util.Model;
 import com.tda367.parallax.model.parallaxcore.collision.Collidable;
 import com.tda367.parallax.model.parallaxcore.collision.CollidableType;
 import com.tda367.parallax.model.parallaxcore.collision.CollisionManager;

@@ -1,4 +1,4 @@
-package com.tda367.parallax.model.coreabstraction;
+package com.tda367.parallax.model.util;
 
 import lombok.Getter;
 

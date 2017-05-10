@@ -1,7 +1,7 @@
 package com.tda367.parallax.model.parallaxcore.collision;
 
-import com.tda367.parallax.model.coreabstraction.Model;
-import com.tda367.parallax.model.coreabstraction.Transformable;
+import com.tda367.parallax.model.util.Model;
+import com.tda367.parallax.model.util.Transformable;
 
 /**
  * Interface for objects with the ability to collide.

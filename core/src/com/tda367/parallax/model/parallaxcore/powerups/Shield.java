@@ -1,7 +1,5 @@
 package com.tda367.parallax.model.parallaxcore.powerups;
 
-import com.tda367.parallax.model.coreabstraction.Usable;
-
 /**
  * Gives the player a shield that last for several seconds.
  */

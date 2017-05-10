@@ -1,5 +1,6 @@
 package com.tda367.parallax.model.coreabstraction;
 
+import com.tda367.parallax.model.util.Renderable;
 import lombok.Getter;
 import lombok.Setter;
 

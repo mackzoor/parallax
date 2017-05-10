@@ -1,6 +1,6 @@
 package com.tda367.parallax.model.cardboardmenu;
 
-import com.tda367.parallax.model.coreabstraction.Updatable;
+import com.tda367.parallax.model.util.Updatable;
 import com.tda367.parallax.model.parallaxcore.collision.CollisionObserver;
 import com.tda367.parallax.model.parallaxcore.collision.CollisionPair;
 

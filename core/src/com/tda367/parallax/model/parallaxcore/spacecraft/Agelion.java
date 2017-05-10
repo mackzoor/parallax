@@ -4,10 +4,10 @@ import com.tda367.parallax.model.coreabstraction.AudioQueue;
 import com.tda367.parallax.model.parallaxcore.collision.Collidable;
 import com.tda367.parallax.model.parallaxcore.collision.CollidableType;
 import com.tda367.parallax.model.parallaxcore.collision.CollisionManager;
-import com.tda367.parallax.model.parallaxcore.course.IContainer;
+import com.tda367.parallax.model.parallaxcore.powerups.IContainer;
 import lombok.Getter;
 import com.tda367.parallax.model.parallaxcore.powerups.Cannon;
-import com.tda367.parallax.model.coreabstraction.Model;
+import com.tda367.parallax.model.util.Model;
 import com.tda367.parallax.model.coreabstraction.RenderQueue;
 import com.tda367.parallax.model.parallaxcore.powerups.IPowerUp;
 
