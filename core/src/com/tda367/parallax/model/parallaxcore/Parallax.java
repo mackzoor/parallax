@@ -1,7 +1,7 @@
 package com.tda367.parallax.model.parallaxcore;
 
-import com.tda367.parallax.model.coreabstraction.RenderManager;
-import com.tda367.parallax.model.coreabstraction.SoundManager;
+import com.tda367.parallax.model.coreabstraction.RenderQueue;
+import com.tda367.parallax.model.coreabstraction.AudioQueue;
 import com.tda367.parallax.model.coreabstraction.Updatable;
 import com.tda367.parallax.model.parallaxcore.course.Course;
 import com.tda367.parallax.model.parallaxcore.enemies.HunterAI;
@@ -22,8 +22,8 @@ import java.util.Random;
 
 public class Parallax implements Updatable {
 
-    @Getter private RenderManager renderManager;
-    private SoundManager soundManager;
+    @Getter private RenderQueue renderQueue;
+    private AudioQueue audioQueue;
     private Course course;
     @Getter private Camera camera;
     @Getter private Player player;
@@ -31,8 +31,8 @@ public class Parallax implements Updatable {
     private List<HunterAI> ais;
 
     public Parallax(Player player){
-        renderManager = RenderManager.getInstance();
-        soundManager = SoundManager.getInstance();
+        renderQueue = RenderQueue.getInstance();
+        audioQueue = AudioQueue.getInstance();
 
         course = new Course();
         course.addSpaceCraft(player.getSpaceCraft());
@@ -68,7 +68,7 @@ public class Parallax implements Updatable {
     }
 
     private void updateRenderManagerCameraPosition() {
-        RenderManager rm = RenderManager.getInstance();
+        RenderQueue rm = RenderQueue.getInstance();
 
         rm.setCamXCoord(camera.getPos().getX());
         rm.setCamYCoord(camera.getPos().getY());
@@ -84,9 +84,9 @@ public class Parallax implements Updatable {
         int randomSong = rand.nextInt(100 - 1 + 1) + 1;
 
         if(randomSong == 50){
-            soundManager.playMusic("secretTrack.mp3","sounds/music");
+            audioQueue.playMusic("secretTrack.mp3","sounds/music");
         } else {
-            soundManager.playMusic("track.mp3","sounds/music", 0.7f);
+            audioQueue.playMusic("track.mp3","sounds/music", 0.7f);
         }
     }
 

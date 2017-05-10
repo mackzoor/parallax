@@ -47,11 +47,11 @@ public class Container implements Renderable, Collidable, Updatable, IContainer 
 
     @Override
     public void addToRenderManager() {
-        RenderManager.getInstance().addRenderTask(this);
+        RenderQueue.getInstance().addRenderTask(this);
     }
     @Override
     public void removeFromRenderManager() {
-        RenderManager.getInstance().removeRenderTask(this);
+        RenderQueue.getInstance().removeRenderTask(this);
     }
 
 

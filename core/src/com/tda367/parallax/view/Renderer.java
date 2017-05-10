@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.math.Quaternion;
-import com.tda367.parallax.model.coreabstraction.RenderManager;
+import com.tda367.parallax.model.coreabstraction.RenderQueue;
 import com.tda367.parallax.model.coreabstraction.Renderable;
 
 import java.util.List;
@@ -22,12 +22,12 @@ public class Renderer {
     private ModelBatch modelBatch;
     private Camera camera;
     private Environment environment;
-    private ResourceHandler rh;
+    private ResourceLoader rh;
 
 
     public Renderer(Camera camera){
         this.camera = camera;
-        rh = ResourceHandler.getInstance();
+        rh = ResourceLoader.getInstance();
         modelBatch = new ModelBatch();
 
         camera.near = 0.1f;
@@ -56,7 +56,7 @@ public class Renderer {
         Gdx.gl.glEnable(GL20.GL_DEPTH_TEST);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 
-        RenderManager rm = RenderManager.getInstance();
+        RenderQueue rm = RenderQueue.getInstance();
 
         //Update camera position
         camera.position.set(

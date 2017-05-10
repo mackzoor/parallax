@@ -12,7 +12,7 @@ import java.util.List;
  * A singleton bus class that holds the current objects that need to be rendered.
  */
 
-public class RenderManager {
+public class RenderQueue {
     @Getter private List<Renderable> renderables;
 
     @Getter @Setter private float camXCoord;
@@ -24,16 +24,16 @@ public class RenderManager {
     @Getter @Setter private float camZQuat;
     @Getter @Setter private float camWQuat;
 
-    private static RenderManager instance;
+    private static RenderQueue instance;
 
-    public static RenderManager getInstance(){
+    public static RenderQueue getInstance(){
         if (instance == null){
-            instance = new RenderManager();
+            instance = new RenderQueue();
         }
         return instance;
     }
 
-    private RenderManager(){
+    private RenderQueue(){
         renderables = new ArrayList<Renderable>();
 
         camXCoord = 0;

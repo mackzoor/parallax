@@ -4,7 +4,7 @@ import com.badlogic.gdx.*;
 import com.badlogic.gdx.controllers.Controllers;
 import com.tda367.parallax.controller.GameController;
 import com.tda367.parallax.model.CollisionCalculator;
-import com.tda367.parallax.model.coreabstraction.SoundManager;
+import com.tda367.parallax.model.coreabstraction.AudioQueue;
 import com.tda367.parallax.model.parallaxcore.Parallax;
 import com.tda367.parallax.model.parallaxcore.Player;
 import com.tda367.parallax.model.parallaxcore.collision.CollisionManager;
@@ -23,12 +23,12 @@ public class ParallaxLibGdxPlayState implements ApplicationListener {
     private Sound sound;
     GameStateManager gameStateManager;
     CollisionCalculator collisionCalculator;
-    SoundManager soundManager;
+    AudioQueue audioQueue;
 
     public ParallaxLibGdxPlayState(GameStateManager gameStateManager) {
         this.gameStateManager = gameStateManager;
         this.device = DeviceManager.getGameModeState(this);
-        soundManager = SoundManager.getInstance();
+        audioQueue = AudioQueue.getInstance();
         this.collisionCalculator = new CollisionCalculator();
         CollisionManager.getInstance().addCollisionCalculator(collisionCalculator);
         // Initiate game with space craft "Agelion"
@@ -76,7 +76,7 @@ public class ParallaxLibGdxPlayState implements ApplicationListener {
     @Override
     public void dispose() {
         Controllers.clearListeners();
-        parallaxGame.getRenderManager().getRenderables().clear();
-        soundManager.stopActiveMusic("sounds/music/track.mp3");
+        parallaxGame.getRenderQueue().getRenderables().clear();
+        audioQueue.stopActiveMusic("sounds/music/track.mp3");
     }
 }

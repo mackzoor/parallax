@@ -7,7 +7,7 @@ import com.badlogic.gdx.controllers.Controllers;
 import com.tda367.parallax.controller.GameController;
 import com.tda367.parallax.controller.devicestates.DeviceManager;
 import com.tda367.parallax.model.CollisionCalculator;
-import com.tda367.parallax.model.coreabstraction.SoundManager;
+import com.tda367.parallax.model.coreabstraction.AudioQueue;
 import com.tda367.parallax.model.parallaxcore.Parallax;
 import com.tda367.parallax.model.parallaxcore.Player;
 import com.tda367.parallax.model.parallaxcore.collision.CollisionManager;
@@ -25,13 +25,13 @@ class GameScreen implements Screen {
     private Renderer renderer;
     private GameController controller;
     private Sound sound;
-    private SoundManager soundManager;
+    private AudioQueue audioQueue;
     private CollisionCalculator collisionCalculator;
 
     GameScreen(Game game) {
         this.game = game;
 
-        soundManager = SoundManager.getInstance();
+        audioQueue = AudioQueue.getInstance();
         collisionCalculator = new CollisionCalculator();
         CollisionManager.getInstance().addCollisionCalculator(collisionCalculator);
 
@@ -83,7 +83,7 @@ class GameScreen implements Screen {
     @Override
     public void dispose() {
         Controllers.clearListeners();
-        parallaxGame.getRenderManager().getRenderables().clear();
-        soundManager.stopActiveMusic("sounds/music/track.mp3");
+        parallaxGame.getRenderQueue().getRenderables().clear();
+        audioQueue.stopActiveMusic("sounds/music/track.mp3");
     }
 }
