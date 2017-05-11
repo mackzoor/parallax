@@ -5,9 +5,6 @@ import com.tda367.parallax.controller.inputcontrollers.InputControlsListener;
 import com.tda367.parallax.model.cardboardmenu.MainMenu;
 import com.tda367.parallax.model.parallaxcore.powerups.Missile;
 
-/**
- * Created by Rasmus on 2017-05-10.
- */
 public class CardboardMenuController implements InputControlsListener {
 
     MainMenu mainMenu;
@@ -19,8 +16,8 @@ public class CardboardMenuController implements InputControlsListener {
 
     @Override
     public void actionButtonPressed() {
-        Missile missile = new Missile();
-        missile.activate(mainMenu.getCamera().getPos(),mainMenu.getCamera().getRot());
+       // Missile missile = new Missile();
+        //missile.activate(mainMenu.getCamera().getPos(),mainMenu.getCamera().getRot());
 
     }
 
