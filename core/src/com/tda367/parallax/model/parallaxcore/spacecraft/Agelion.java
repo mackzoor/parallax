@@ -157,7 +157,7 @@ public class Agelion implements ISpaceCraft {
         if (!pu.isEmpty()){
             IPowerUp activePowerUP = pu.get(pu.size()-1);
 
-            activePowerUP.activate(pos,rot);
+            activePowerUP.activate(this);
             pu.remove(pu.size()-1);
         } else {
             System.out.println("NO POWERUP");

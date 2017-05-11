@@ -6,6 +6,7 @@ import com.tda367.parallax.model.coreabstraction.AudioQueue;
 import com.tda367.parallax.model.parallaxcore.collision.Collidable;
 import com.tda367.parallax.model.parallaxcore.collision.CollidableType;
 import com.tda367.parallax.model.parallaxcore.collision.CollisionManager;
+import com.tda367.parallax.model.util.Transformable;
 
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
@@ -41,7 +42,7 @@ public class Cannon implements IPowerUp {
 
     //Launches the cannon round.
     @Override
-    public void activate(Vector3f pos, Quat4f rot) {
+    public void activate(Transformable ship) {
         //Offset cannon round rotation by 90 degrees due to rotated 3d model.
         this.rot = new Quat4f(0,0,0.7071f,0.7071f);
 
