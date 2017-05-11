@@ -1,8 +1,8 @@
 package com.tda367.parallax.model.parallaxcore.course;
 
 import com.tda367.parallax.model.parallaxcore.collision.*;
-import com.tda367.parallax.model.parallaxcore.powerups.Cannon;
 import com.tda367.parallax.model.parallaxcore.powerups.Container;
+import com.tda367.parallax.model.parallaxcore.powerups.Missile;
 import com.tda367.parallax.model.parallaxcore.spacecraft.ISpaceCraft;
 import com.tda367.parallax.model.util.Updatable;
 import com.tda367.parallax.model.parallaxcore.powerups.IPowerUp;
@@ -88,18 +88,26 @@ public class Course implements Updatable, CollisionObserver {
             spawnPowerUp();
         }
 
-        for (IPowerUp pu : powerUps) {
-                pu.update(milliSinceLastUpdate);
-            if (pu.isDead()){
-                powerUps.remove(pu);
+        //TODO, change number to better name.
+
+        List<Integer> numbers = new ArrayList<Integer>();
+
+        for (int i = 0; i < powerUps.size(); i++) {
+            powerUps.get(i).update(milliSinceLastUpdate);
+            if (powerUps.get(i).isDead()){
+                numbers.add(i);
             }
+        }
+
+        for (Integer number : numbers) {
+                powerUps.remove(number);
         }
 
         updateModuleRange();
     }
 
     private void spawnPowerUp() {
-        IPowerUp pu = new Cannon();
+        IPowerUp pu = new Missile();
         powerUps.add(pu);
         Container container = new Container(pu);
         container.setPos(new Vector3f(0,getFirstSpaceCraftYPosition()+20,0));
