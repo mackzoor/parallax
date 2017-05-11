@@ -44,30 +44,9 @@ public class AgelionTest {
         assertTrue(previousAcceleration + addedAcc == agilion.getForwardAcceleration());
 */    }
 
-    //Test to make sure that the method setPanAbsoluteTarget() changes its value then added a new Vector.
-    @Test
-    public void setPanPoint() throws Exception {
-        Vector2f vec = agilion.getPanAbsoluteTarget();
-
-        agilion.setPanAbsoluteTarget(new Vector2f(1, 1));
-
-        assertTrue(!agilion.getPanAbsoluteTarget().equals(vec));
-    }
 
     @Test
     public void setPanVelocity() throws Exception {
-    }
-
-    //Test to check if addPanPoint(0, 1) adds one to the y coordinate.
-    @Test
-    public void addPanPoint() throws Exception {
-        Vector2f vec = new Vector2f(agilion.getPanAbsoluteTarget().getX(), agilion.getPanAbsoluteTarget().getY());
-
-        agilion.offsetAbsolutePanTarget(new Vector2f(0, 1));
-
-        assertTrue(!(agilion.getPanAbsoluteTarget().getX() == vec.getX() && agilion.getPanAbsoluteTarget().getY() == vec.getY()));
-
-        assertTrue(agilion.getPanAbsoluteTarget().equals(new Vector2f(vec.getX(), vec.getY() + 1)));
     }
 
     @Test
@@ -81,40 +60,6 @@ public class AgelionTest {
 
     @Test
     public void action() {
-    }
-
-    @Test
-    public void updatePanning(){
-        //Saving original position
-        Vector3f pos = agilion.getPos();
-
-        //Sets the position we want the ship to pan to. Also set that speed to 1.
-        agilion.setMaxPanVelocity(1);
-        agilion.setPanAbsoluteTarget(new Vector2f(10,10));
-
-        //Calls the update method and says that 1 second has passed
-        agilion.update(1000);
-
-        //Check to see that the ship has panned in at all
-        assertFalse(pos.getX() == agilion.getPos().getX() && pos.getZ() == agilion.getPos().getZ());
-
-        //Checks that the ship has panned to the right position after another 9s
-        agilion.update(9000);
-        assertTrue(agilion.getPos().getX() == 10 && agilion.getPos().getZ() == 10);
-
-        //Checks that it doesn't keep panning after reaching its target, adds another second
-        agilion.update(1000);
-        assertTrue(agilion.getPos().getX() == 10 && agilion.getPos().getZ() == 10);
-
-        //testa add metoden
-
-        /*
-        agilion.addPanPoint(new Vector2f(10,10));
-        agilion.setAccelerateTarget(1);
-        agilion.setForwardSpeedTarget(4);
-        */
-
-        //agilion.setMaxPanVelocity(new Vector2f(1,1));
     }
 
     @Test

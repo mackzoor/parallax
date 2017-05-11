@@ -6,20 +6,17 @@ import com.tda367.parallax.model.parallaxcore.collision.CollidableType;
 import com.tda367.parallax.model.parallaxcore.collision.CollisionManager;
 import com.tda367.parallax.model.parallaxcore.powerups.IContainer;
 import lombok.Getter;
-import com.tda367.parallax.model.parallaxcore.powerups.Cannon;
 import com.tda367.parallax.model.util.Model;
 import com.tda367.parallax.model.coreabstraction.RenderQueue;
 import com.tda367.parallax.model.parallaxcore.powerups.IPowerUp;
 
 import javax.vecmath.*;
 import java.util.ArrayList;
-import java.util.EmptyStackException;
 import java.util.List;
 
 /**
  * The spacecraft "Agelion" in the game "Parallax".
  */
-
 public class Agelion implements ISpaceCraft {
 
     private List <IPowerUp> pu = new ArrayList <IPowerUp>();
@@ -31,7 +28,6 @@ public class Agelion implements ISpaceCraft {
     private boolean forwardRelativeVelocityMode;
 
     private float maxPanVelocity;
-    private boolean relativePanMode;
     private Vector2f desiredPanVelocity;
     private Vector2f panAcceleration;
     @Getter private Vector2f currentPanVelocity;
@@ -58,17 +54,9 @@ public class Agelion implements ISpaceCraft {
         this.desiredPanVelocity = new Vector2f();
         this.pu = new ArrayList<IPowerUp>();
 
-        //Debug to add 3 cannon shots at spawn.
-        List<IPowerUp> addedPus = new ArrayList<IPowerUp>();
-        for (int i = 0; i < 3; i++){
-            addedPus.add(new Cannon());
-        }
-        pushPU(addedPus);
-
         panAbsoluteTarget = new Vector2f();
         currentPanVelocity = new Vector2f();
 
-        this.relativePanMode = true;
         this.forwardRelativeVelocityMode = true;
 
         collisionEnabled = true;
@@ -88,26 +76,10 @@ public class Agelion implements ISpaceCraft {
     @Override
     public void setDesiredPanVelocity(Vector2f desiredPanVelocity) {
         this.desiredPanVelocity = desiredPanVelocity;
-        relativePanMode = true;
     }
     @Override
     public void setDesiredPanVelocity(float x, float y){
         this.setDesiredPanVelocity(new Vector2f(x,y));
-    }
-    @Override
-    public synchronized void setPanAcceleration(Vector2f velocity) {
-        panAcceleration = velocity;
-        relativePanMode = true;
-    }
-    @Override
-    public synchronized void setPanAbsoluteTarget(Vector2f target) {
-        panAbsoluteTarget = new Vector2f(target);
-        relativePanMode = false;
-    }
-    @Override
-    public synchronized void offsetAbsolutePanTarget(Vector2f target) {
-        panAbsoluteTarget.add( target);
-        relativePanMode = false;
     }
     public void setMaxPanVelocity(float panVelocity) {
         this.maxPanVelocity = panVelocity;
@@ -127,7 +99,7 @@ public class Agelion implements ISpaceCraft {
     public void update(int milliSinceLastUpdate){
         accelerateCraft(milliSinceLastUpdate);
         updatePanAcceleration();
-        panCraft(milliSinceLastUpdate);
+        panRelativeMode(milliSinceLastUpdate);
         advanceCraft(milliSinceLastUpdate);
     }
     private void updatePanAcceleration(){
@@ -139,34 +111,8 @@ public class Agelion implements ISpaceCraft {
 
         panAcceleration = new Vector2f(truePanVector);
     }
-    private void panCraft(int timeMilli){
-        if (relativePanMode) {
-            panRelativeMode(timeMilli);
-        } else {
-            panAbsoluteMode(timeMilli);
-        }
-    }
 
 
-    //Position calculation
-    private void panAbsoluteMode(int timeMilli){
-        //Calculate direction vector
-        Vector2f targetDirection = new Vector2f(
-                panAbsoluteTarget
-        );
-
-        targetDirection.sub(new Vector2f(
-                pos.getX(), pos.getZ()
-        ));
-
-        if (targetDirection.getX() != 0 || targetDirection.getY() != 0){
-            targetDirection.normalize();
-            targetDirection.scale(maxPanVelocity);
-            desiredPanVelocity = targetDirection;
-            panRelativeMode(timeMilli);
-        }
-
-    }
     private void panRelativeMode(int timeMilli){
         Vector2f addedVelocity = new Vector2f(panAcceleration);
         addedVelocity.scale((float)timeMilli/1000);
@@ -218,7 +164,7 @@ public class Agelion implements ISpaceCraft {
         }
     }
     @Override
-    public void pushPU(IPowerUp singlePu) {
+    public void add(IPowerUp singlePu) {
         //Adds a single powerUp in a list if empty or only if the other powerups in it are the same type of powerUps
         if (pu.size() <= 0){
             this.pu.add(singlePu);
@@ -230,22 +176,10 @@ public class Agelion implements ISpaceCraft {
         }
     }
     @Override
-    public void pushPU(List<IPowerUp> listOfPowerUps){
+    public void add(List<IPowerUp> listOfPowerUps){
         for (IPowerUp pu : listOfPowerUps){
-            pushPU(pu);
+            add(pu);
         }
-    }
-    @Override
-    public IPowerUp popPU() throws EmptyStackException{
-        //Pops a PowerUp if the list isn't empty, otherwise throws exception.
-        if(this.pu.isEmpty()){
-            throw new EmptyStackException();
-        }
-
-        IPowerUp singlePU = this.pu.get(this.pu.size()-1);
-        this.pu.remove(singlePU);
-
-        return singlePU;
     }
     @Override
     public void incHealth(){
@@ -319,7 +253,7 @@ public class Agelion implements ISpaceCraft {
             //take powerup of collided with container
             System.out.println("POWERUP COLLECTED");
             IContainer container = (IContainer) collidable;
-            pushPU(container.getPowerUp());
+            add(container.getPowerUp());
         }
     }
 
