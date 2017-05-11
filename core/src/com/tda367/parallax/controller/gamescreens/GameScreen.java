@@ -39,7 +39,7 @@ public class GameScreen implements Screen {
         this.player = new Player();
         this.player.addSpaceCraft(new Agelion(10));
         this.parallaxGame = new Parallax(player);
-        controller = new GameController(parallaxGame, DeviceManager.getGameModeState(game));
+        controller = new GameController(parallaxGame, DeviceManager.getDevice());
 
         renderer = new Renderer(
                 parallaxGame.getCamera().getFov(),
