@@ -4,6 +4,7 @@ import com.tda367.parallax.model.util.Model;
 import com.tda367.parallax.model.parallaxcore.collision.Collidable;
 import com.tda367.parallax.model.parallaxcore.collision.CollidableType;
 import com.tda367.parallax.model.parallaxcore.collision.CollisionManager;
+import com.tda367.parallax.model.util.Transformable;
 
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
@@ -17,7 +18,7 @@ public class MysteryPower implements IPowerUp {
     private boolean isActive;
     private boolean isDead;
 
-    public void activate(Vector3f pos, Quat4f rot) {
+    public void activate(Transformable ship) {
         //TODO Implement MysteryPower
     }
 
