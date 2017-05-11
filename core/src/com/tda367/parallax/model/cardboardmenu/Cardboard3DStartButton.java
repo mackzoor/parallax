@@ -13,7 +13,7 @@ import javax.vecmath.Vector3f;
 /**
  * Created by Rasmus on 2017-05-08.
  */
-public class CardboardStartButton implements Renderable,Collidable {
+public class Cardboard3DStartButton implements Renderable,Collidable {
 
     private Vector3f pos;
     private Quat4f rot;
@@ -25,7 +25,7 @@ public class CardboardStartButton implements Renderable,Collidable {
 
     private boolean collisionEnabled;
 
-    CardboardStartButton(){
+    Cardboard3DStartButton(){
         pos = new Vector3f();
         rot = new Quat4f();
         model = new Model("boxObstacle.g3db", "3dModels/boxObstacle");
@@ -66,7 +66,7 @@ public class CardboardStartButton implements Renderable,Collidable {
 
     @Override
     public boolean collisionActivated() {
-        return false;
+        return collisionEnabled;
     }
 
     @Override
@@ -96,7 +96,7 @@ public class CardboardStartButton implements Renderable,Collidable {
 
     @Override
     public CollidableType getCollidableType() {
-        return null;
+        return CollidableType.OBSTACLE;
     }
 
     @Override

@@ -10,14 +10,14 @@ import javax.vecmath.Vector3f;
 /**
  * Created by Rasmus on 2017-05-08.
  */
-public class CardboardMenuModel implements Renderable {
+public class Cardboard3DMenuModel implements Renderable {
 
     private Vector3f pos;
     private Quat4f rot;
 
     private Model model;
 
-    public CardboardMenuModel(){
+    public Cardboard3DMenuModel(){
         model = new Model("course.g3db", "3dModels/defaultCourse");
         pos = new Vector3f();
         rot = new Quat4f();

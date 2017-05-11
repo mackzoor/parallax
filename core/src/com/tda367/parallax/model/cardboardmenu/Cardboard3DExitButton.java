@@ -13,7 +13,7 @@ import javax.vecmath.Vector3f;
 /**
  * Created by Rasmus on 2017-05-08.
  */
-public class CardboardExitButton implements Renderable, Collidable {
+public class Cardboard3DExitButton implements Renderable, Collidable {
 
     private Vector3f pos;
     private Quat4f rot;
@@ -25,7 +25,7 @@ public class CardboardExitButton implements Renderable, Collidable {
 
     private boolean collisionEnabled;
 
-    public CardboardExitButton(){
+    public Cardboard3DExitButton(){
         pos = new Vector3f();
         rot = new Quat4f();
         model = new Model("boxObstacle.g3db", "3dModels/boxObstacle");
