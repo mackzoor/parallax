@@ -102,6 +102,8 @@ public class Agelion implements ISpaceCraft {
         panRelativeMode(milliSinceLastUpdate);
         advanceCraft(milliSinceLastUpdate);
     }
+
+    //Movement related methods
     private void updatePanAcceleration(){
         Vector2f truePanVector = new Vector2f(desiredPanVelocity);
         truePanVector.scale(maxPanVelocity);
@@ -111,8 +113,6 @@ public class Agelion implements ISpaceCraft {
 
         panAcceleration = new Vector2f(truePanVector);
     }
-
-
     private void panRelativeMode(int timeMilli){
         Vector2f addedVelocity = new Vector2f(panAcceleration);
         addedVelocity.scale((float)timeMilli/1000);
