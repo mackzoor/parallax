@@ -84,6 +84,6 @@ public class GameScreen implements Screen {
         CollisionManager.getInstance().getCollidables().clear();
         Controllers.clearListeners();
         parallaxGame.getRenderQueue().getRenderables().clear();
-        audioQueue.stopActiveMusic("sounds/music/track.mp3");
+        audioQueue.clearAllActiveMusic();
     }
 }
