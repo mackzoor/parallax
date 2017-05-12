@@ -16,6 +16,12 @@ public class CollisionCalculator implements ICollisionCalculator {
 
     private final btDefaultCollisionConfiguration collisionConfig;
     private final btCollisionDispatcher dispatcher;
+    private final CollisionObjectWrapper co0;
+    private final CollisionObjectWrapper co1;
+    private final btCollisionAlgorithmConstructionInfo ci;
+    private final btSphereSphereCollisionAlgorithm algorithm;
+    private final btDispatcherInfo info;
+    private final btManifoldResult result;
     private btCollisionObject obj1;
     private btCollisionObject obj2;
 
@@ -31,19 +37,28 @@ public class CollisionCalculator implements ICollisionCalculator {
         obj2 = new btCollisionObject();
         obj2.setCollisionShape(sphereShape2);
 
+        co0 = new CollisionObjectWrapper(obj1);
+        co1 = new CollisionObjectWrapper(obj2);
+
         collisionConfig = new btDefaultCollisionConfiguration();
         dispatcher = new btCollisionDispatcher(collisionConfig);
+
+        ci = new btCollisionAlgorithmConstructionInfo();
+        ci.setDispatcher1(dispatcher);
+        algorithm = new btSphereSphereCollisionAlgorithm(null,ci,co0.wrapper,co1.wrapper);
+        info = new btDispatcherInfo();
+        result = new btManifoldResult(co0.wrapper, co1.wrapper);
     }
 
     @Override
     public boolean hasCollided(Collidable first, Collidable second) {
+        if (!first.collisionActivated() || !second.collisionActivated()){
+            return false;
+        }
         if (
             first.getCollidableType() == CollidableType.OBSTACLE &&
             second.getCollidableType() == CollidableType.OBSTACLE
             ) {
-            return false;
-        }
-        if (!first.collisionActivated() || !second.collisionActivated()){
             return false;
         }
 
@@ -59,28 +74,9 @@ public class CollisionCalculator implements ICollisionCalculator {
                 second.getPos().getY()*-1
         )));
 
-
-        CollisionObjectWrapper co0 = new CollisionObjectWrapper(obj1);
-        CollisionObjectWrapper co1 = new CollisionObjectWrapper(obj2);
-
-        btCollisionAlgorithmConstructionInfo ci = new btCollisionAlgorithmConstructionInfo();
-        ci.setDispatcher1(dispatcher);
-        btCollisionAlgorithm algorithm = new btSphereSphereCollisionAlgorithm(null,ci,co0.wrapper,co1.wrapper);
-        btDispatcherInfo info = new btDispatcherInfo();
-        btManifoldResult result = new btManifoldResult(co0.wrapper, co1.wrapper);
-
         algorithm.processCollision(co0.wrapper, co1.wrapper, info, result);
 
-        boolean r = result.getPersistentManifold().getNumContacts() > 0;
-
-        result.dispose();
-        info.dispose();
-        algorithm.dispose();
-        ci.dispose();
-        co1.dispose();
-        co0.dispose();
-
-        return r;
+        return result.getPersistentManifold().getNumContacts() > 0;
     }
 
     @Override
@@ -111,16 +107,20 @@ public class CollisionCalculator implements ICollisionCalculator {
     public void run() {
         CollisionManager collisionManager = CollisionManager.getInstance();
         List<Collidable> collidables = collisionManager.getCollidables();
-
+        List<CollisionPair> pairs = new ArrayList<CollisionPair>();
         for (int i = 0; i < collidables.size(); i++) {
             for (int j = 0; j < collidables.size(); j++) {
                 if (i != j && hasCollided(collidables.get(i), collidables.get(j))) {
-                    collisionManager.alertObservers(
+                    pairs.add(
                             new CollisionPair(collidables.get(i), collidables.get(j)
                             )
                     );
                 }
             }
+        }
+
+        for (CollisionPair pair : pairs) {
+            collisionManager.alertObservers(pair);
         }
 
     }

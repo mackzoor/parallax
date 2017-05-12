@@ -58,17 +58,17 @@ public class Cannon implements IPowerUp {
 
     //Launches the cannon round.
     @Override
-    public void activate(Transformable ship) {
+    public void activate(Transformable transformable) {
         //Offset cannon round rotation by 90 degrees due to rotated 3d model.
         this.rot = new Quat4f(0,0,0.7071f,0.7071f);
 
         //Rotate the cannon round with the given rotation.
-        this.rot.mul(ship.getRot());
+        this.rot.mul(transformable.getRot());
 
         //Sets the cannon round starting position to the one given in the arguments.
-        this.pos = new Vector3f(ship.getPos());
+        this.pos = new Vector3f(transformable.getPos());
 
-        velocity = quatToDirection(ship.getRot());
+        velocity = quatToDirection(transformable.getRot());
         velocity.scale(20);
 
         isActive = true;
@@ -99,30 +99,33 @@ public class Cannon implements IPowerUp {
         if (isActive){
             timeAlive += milliSinceLastUpdate;
             updatePosition(milliSinceLastUpdate);
-            if (timeAlive > lifeLength){
-                removeFromRenderManager();
-                removeFromCollisionManager();
-                isDead = true;
-            }
         }
+        if (timeAlive > lifeLength){
+            die();
+        }
+    }
+    private void die() {
+        removeFromRenderManager();
+        removeFromCollisionManager();
+        disableCollision();
+        isActive = false;
+        isDead = true;
     }
     private void updatePosition(int milliSinceLastUpdate){
         pos.add(new Vector3f(velocity.getX() * ((float) milliSinceLastUpdate/1000),(velocity.getY() * ((float) milliSinceLastUpdate/1000)),(velocity.getZ() * ((float)milliSinceLastUpdate/1000))));
     }
-
-
-
     private void playCannonSound(){
         Random rand = new Random();
         int randomSong = rand.nextInt(200 - 1 + 1) + 1;
 
         //Plays a funny sound every 200 shots
         if(randomSong > 199){
-            AudioQueue.getInstance().playSound("cannonLow.mp3","sounds/effects", 0.8f);
+            AudioQueue.getInstance().playSound("cannonLow.mp3","sounds/effects", 0.3f);
         } else {
             AudioQueue.getInstance().playSound("cannon.mp3","sounds/effects", 0.8f);
         }
     }
+
 
     //Transformable
     @Override
@@ -167,7 +170,9 @@ public class Cannon implements IPowerUp {
 
     @Override
     public void handleCollision(Collidable collidable) {
-        //TODO Disable powerup
+        if ( timeAlive > 250 ) {
+            die();
+        }
     }
 
 
@@ -182,7 +187,7 @@ public class Cannon implements IPowerUp {
     }
     @Override
     public void removeFromRenderManager() {
-        RenderQueue.getInstance().addRenderTask(this);
+        RenderQueue.getInstance().removeRenderTask(this);
     }
 }
 
