@@ -2,23 +2,23 @@ package com.tda367.parallax.controller.gamecontrollers;
 
 import com.tda367.parallax.controller.devicestates.Device;
 import com.tda367.parallax.controller.inputcontrollers.InputControlsListener;
-import com.tda367.parallax.model.cardboardmenu.MainMenu;
-import com.tda367.parallax.model.parallaxcore.powerups.Missile;
+import com.tda367.parallax.model.cardboardmenu.CardboardMainMenu;
 
+/**
+ * Created by Rasmus on 2017-05-10.
+ */
 public class CardboardMenuController implements InputControlsListener {
 
-    MainMenu mainMenu;
+    CardboardMainMenu cardboardMainMenu;
 
-    public CardboardMenuController(MainMenu mainMenu, Device device){
-        this.mainMenu = mainMenu;
+    public CardboardMenuController(CardboardMainMenu mainMenu, Device device){
+        cardboardMainMenu = mainMenu;
         device.addInputDevices(this);
     }
 
     @Override
     public void actionButtonPressed() {
-       // Missile missile = new Missile();
-        //missile.activate(mainMenu.getCamera().getPos(),mainMenu.getCamera().getRot());
-
+        cardboardMainMenu.action();
     }
 
     @Override

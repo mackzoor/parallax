@@ -10,6 +10,7 @@ import com.tda367.parallax.controller.gamescreens.cardboardadapter.CardboardGame
 import com.tda367.parallax.controller.gamescreens.cardboardadapter.CardboardScreen;
 import com.tda367.parallax.controller.devicestates.DeviceManager;
 import com.tda367.parallax.controller.devicestates.Device;
+import com.tda367.parallax.model.CollisionCalculator;
 import com.tda367.parallax.model.coreabstraction.RenderQueue;
 import com.tda367.parallax.model.parallaxcore.Parallax;
 import com.tda367.parallax.model.parallaxcore.Player;
@@ -25,9 +26,9 @@ public class CardboardGameScreen implements CardboardScreen {
     private Parallax parallaxGame;
     private Renderer renderer;
     private GameController controller;
-    private Device device;
     private static final float Z_NEAR = 0.1f;
     private static final float Z_FAR = 300.0f;
+    private CollisionCalculator collisionCalculator;
     private Sound sound;
 
     public CardboardGameScreen(CardboardGame game){
@@ -52,7 +53,7 @@ public class CardboardGameScreen implements CardboardScreen {
 
         renderer = new Renderer(camera);
         sound = new Sound();
-
+        collisionCalculator = new CollisionCalculator();
     }
 
     @Override
@@ -94,13 +95,7 @@ public class CardboardGameScreen implements CardboardScreen {
         //Updates Parallax game logic
         parallaxGame.update((int)(Gdx.graphics.getDeltaTime() * 1000));
 
-        //Updates camera
-        camera.position.set(
-                parallaxGame.getCamera().getPos().getX(),
-                parallaxGame.getCamera().getPos().getZ(),
-                parallaxGame.getCamera().getPos().getY()*-1
-        );
-        camera.update();
+        collisionCalculator.run();
     }
 
     @Override

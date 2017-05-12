@@ -72,6 +72,7 @@ public class Cannon implements IPowerUp {
         velocity.scale(20);
 
         isActive = true;
+        isCollisionOn = true;
 
         playCannonSound();
         addToCollisionManager();

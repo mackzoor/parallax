@@ -42,13 +42,6 @@ public final class CollisionManager {
         observers.remove(observer);
     }
 
-    public void addCollisionCalculator(ICollisionCalculator calculator){
-        calculators.add(calculator);
-    }
-    public void removeCollisionCalculator(ICollisionCalculator calculator){
-        calculators.remove(calculator);
-    }
-
     public void alertObservers(CollisionPair collisionPair) {
         for (CollisionObserver observer : observers) {
             observer.respondToCollision(collisionPair);

@@ -10,16 +10,18 @@ import com.tda367.parallax.controller.gamescreens.cardboardadapter.CardboardGame
 import com.tda367.parallax.controller.gamescreens.cardboardadapter.CardboardScreen;
 import com.tda367.parallax.controller.devicestates.DeviceManager;
 import com.tda367.parallax.controller.GameStateManager;
-import com.tda367.parallax.model.cardboardmenu.CardboardMenu;
-import com.tda367.parallax.model.cardboardmenu.MainMenu;
+import com.tda367.parallax.model.CollisionCalculator;
+import com.tda367.parallax.model.cardboardmenu.CardboardMainMenu;
+import com.tda367.parallax.model.cardboardmenu.CardboardMenuObserver;
 import com.tda367.parallax.model.coreabstraction.RenderQueue;
 import com.tda367.parallax.model.parallaxcore.Player;
+import com.tda367.parallax.model.parallaxcore.collision.CollisionManager;
 import com.tda367.parallax.view.CardboardMenuRenderer;
+import com.tda367.parallax.view.Renderer;
 import com.tda367.parallax.view.Sound;
 
 
-
-public class CardboardMenuScreen implements CardboardScreen {
+public class CardboardMenuScreen implements CardboardScreen, CardboardMenuObserver {
     private CardboardCamera camera;
     private Player player;
     private CardboardMenuRenderer renderer;
@@ -28,39 +30,32 @@ public class CardboardMenuScreen implements CardboardScreen {
     private static final float Z_NEAR = 0.1f;
     private static final float Z_FAR = 300.0f;
     private Sound sound;
-    private CardboardMenu cbMenu;
-    private MainMenu mainMenu;
+    private CardboardMainMenu cardboardMainMenu;
+    private CollisionCalculator collisionCalculator;
 
 
-    public CardboardMenuScreen(CardboardGame game){
+    public CardboardMenuScreen(CardboardGame game) {
         this.game = game;
-        mainMenu = new MainMenu(player);
-        cbMenu = new CardboardMenu();
+        cardboardMainMenu = new CardboardMainMenu();
         player = new Player();
         camera = new CardboardCamera();
-        camera.position.set(0,0,0);
+        camera.position.set(0, 0, 0);
         camera.lookAt(0, 0, -1);
         camera.near = Z_NEAR;
         camera.far = Z_FAR;
         renderer = new CardboardMenuRenderer(camera);
         sound = new Sound();
-        controller = new CardboardMenuController(mainMenu,DeviceManager.getGameModeState(game));
+        controller = new CardboardMenuController(cardboardMainMenu, DeviceManager.getGameModeState(game));
+        cardboardMainMenu.addObservers(this);
+        collisionCalculator = new CollisionCalculator();
     }
-
     @Override
     public void onNewFrame(HeadTransform paramHeadTransform) {
-        //mainMenu.update((int) Gdx.graphics.getDeltaTime()*1000);
-        if(Gdx.input.justTouched()){
-            dispose();
-            GameStateManager.setCardboardGameScreen(game);
-        }
+        cardboardMainMenu.update((int) (Gdx.graphics.getDeltaTime() * 1000));
         camera.update();
-        if(cbMenu.getStartButton().isCollided()){
-        }else if(cbMenu.getExitButton().isCollided()){
-            Gdx.app.exit();
-        }
-
+        collisionCalculator.run();
     }
+
 
     @Override
     public void onDrawEye(Eye paramEye) {
@@ -108,7 +103,20 @@ public class CardboardMenuScreen implements CardboardScreen {
 
     @Override
     public void dispose() {
+        CollisionManager.getInstance().getCollidables().clear();
         RenderQueue.getInstance().getRenderables().clear();
+        sound.clearAllActiveMusic();
+    }
+
+    @Override
+    public void cardboardStartButtonAction() {
+        dispose();
+        GameStateManager.setCardboardGameScreen(game);
+    }
+
+    @Override
+    public void cardboardExitButtonAction() {
+        Gdx.app.exit();
     }
 }
 

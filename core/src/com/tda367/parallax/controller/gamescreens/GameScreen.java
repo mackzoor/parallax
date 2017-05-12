@@ -33,7 +33,6 @@ public class GameScreen implements Screen {
 
         audioQueue = AudioQueue.getInstance();
         collisionCalculator = new CollisionCalculator();
-        CollisionManager.getInstance().addCollisionCalculator(collisionCalculator);
 
         // Initiate game with space craft "Agelion"
         this.player = new Player();
@@ -82,6 +81,7 @@ public class GameScreen implements Screen {
 
     @Override
     public void dispose() {
+        CollisionManager.getInstance().getCollidables().clear();
         Controllers.clearListeners();
         parallaxGame.getRenderQueue().getRenderables().clear();
         audioQueue.stopActiveMusic("sounds/music/track.mp3");

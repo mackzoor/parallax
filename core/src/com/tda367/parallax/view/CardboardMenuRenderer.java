@@ -1,6 +1,7 @@
 package com.tda367.parallax.view;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.backends.android.CardboardCamera;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g3d.Environment;
@@ -18,11 +19,11 @@ import java.util.List;
  */
 public class CardboardMenuRenderer {
     private ModelBatch modelBatch;
-    private Camera camera;
+    private CardboardCamera camera;
     private Environment environment;
     private ResourceLoader rh;
 
-    public CardboardMenuRenderer(Camera camera) {
+    public CardboardMenuRenderer(CardboardCamera camera) {
         rh = ResourceLoader.getInstance();
         modelBatch = new ModelBatch();
         this.camera = camera;
@@ -40,6 +41,13 @@ public class CardboardMenuRenderer {
     public void renderAll() {
 
         camera.update();
+
+        RenderQueue rq = RenderQueue.getInstance();
+        Quaternion quat = camera.combined.getRotation(new Quaternion());
+        rq.setCamXQuat(quat.x);
+        rq.setCamYQuat(quat.z);
+        rq.setCamZQuat(quat.y*-1);
+        rq.setCamWQuat(quat.w);
 
 
         // You've seen all this before, just be sure to clear the GL_DEPTH_BUFFER_BIT when working in 3D
