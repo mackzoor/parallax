@@ -8,6 +8,7 @@ import com.tda367.parallax.model.parallaxcore.collision.CollidableType;
 import com.tda367.parallax.model.parallaxcore.collision.CollisionManager;
 import com.tda367.parallax.model.util.Transformable;
 
+import javax.vecmath.Matrix4f;
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
 import java.util.Random;
@@ -40,6 +41,17 @@ public class Cannon implements IPowerUp {
         isDead = false;
     }
 
+    private Vector3f quatToDirection(Quat4f q){
+        float div = (float) Math.sqrt(q.x * q.x + q.y * q.y + q.z * q.z);
+        float x = q.x / div;
+        float y = q.y / div;
+        float z = q.z / div;
+
+        Vector3f vec = new Vector3f(-z, x,-y);
+        vec.normalize();
+        return vec;
+    }
+
     //Launches the cannon round.
     @Override
     public void activate(Transformable ship) {
@@ -47,12 +59,13 @@ public class Cannon implements IPowerUp {
         this.rot = new Quat4f(0,0,0.7071f,0.7071f);
 
         //Rotate the cannon round with the given rotation.
-//        this.rot.mul(rot);
+        this.rot.mul(ship.getRot());
 
         //Sets the cannon round starting position to the one given in the arguments.
-        this.pos = new Vector3f(pos);
+        this.pos = new Vector3f(ship.getPos());
 
-        velocity.setY(20);
+        velocity = quatToDirection(ship.getRot());
+        velocity.scale(20);
 
         isActive = true;
 
