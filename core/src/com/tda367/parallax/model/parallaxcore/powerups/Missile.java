@@ -1,5 +1,6 @@
 package com.tda367.parallax.model.parallaxcore.powerups;
 
+import com.tda367.parallax.model.coreabstraction.AudioQueue;
 import com.tda367.parallax.model.util.Model;
 import com.tda367.parallax.model.coreabstraction.RenderQueue;
 import com.tda367.parallax.model.parallaxcore.collision.Collidable;
@@ -11,26 +12,49 @@ import lombok.Setter;
 
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
+import java.util.Random;
 
 public class Missile implements IPowerUp {
 
     //Missile variables
     private Vector3f pos;
     private Quat4f rot;
-    @Setter float velocity;
-    private Vector3f acceleration;
 
+    //Ships velocity at the start of the acceleration phase
+    private float startVelocity;
+
+    //Velocity that the missile is moving in.
+    @Setter private float velocity;
+
+    //Time that the missile has accelerated
+    private int accelerationTime;
+
+    //3D models for  missile appearance and collision
     private Model model;
     private Model collisionModel;
+
+    //Flags for if the ship should collide, move and a general variable for its lifecycle
     private boolean isCollisionOn;
     private boolean isActive;
     private boolean isDead;
 
+    //Saving variables for the transformable object the missile has its origin from
     private Vector3f transformableEarlierPosition;
     private Transformable transformable;
+    //Storing the position of the transformable object since last update, making it possible to track its movement
+    private Vector3f transPosLastUpdate;
 
     //Total time the missile has been activated
     private int timeStorage;
+
+    //Target variables
+    @Getter private Vector3f enemyTargetPosition;
+
+
+
+    /*
+        Variables for toggling the missile movement
+    */
 
     //Time to represent the falling phase, value compared to the timeStorage variable
     private static final int fallTime = 500;
@@ -38,22 +62,30 @@ public class Missile implements IPowerUp {
     //Time to represent the active phase, value compared to the timeStorage variable
     private static final int activeTime = 5000;
 
+    //Time that missile is tracking the ships movement, making sure that it doesn't go trough it.
+    private static final int timeTrackingTrans = 600;
+
     //Multiplier to change the speed of missile
-    private static final float velocityMultiplier = 4f;
+    private static final float velocityMultiplierX = 10f;
+    private static final float velocityMultiplierY = 1f;
+    private static final float velocityMultiplierZ = 10f;
     private static final float fallMultiplier = 2.5f;
 
-    //Target variables
-    @Getter private Vector3f enemyTargetPosition;
+    //How fast the missile will accelerate
+    private double acceleration = 0.8;
+
+    //Maximum velocity that the missile can reach.
+    private float forwardTargetVelocity = 80;
 
 
-
+    //Constructor for missile, deceleration for most variables.
     public Missile(){
         this.pos = new Vector3f();
         this.rot = new Quat4f();
-        this.acceleration = new Vector3f();
         this.model = new Model("missile.g3db", "3dModels/missile");
         this.isCollisionOn = false;
         this.enemyTargetPosition = new Vector3f();
+        this.transPosLastUpdate = new Vector3f();
 
         isActive = false;
         isDead = false;
@@ -80,6 +112,9 @@ public class Missile implements IPowerUp {
         //TODO, Temporary initialization for the enemy, will be controlled elsewhere later.
         enemyTargetPosition.set(new Vector3f(pos));
         enemyTargetPosition.add(new Vector3f(0,100,20));
+
+        //Plays the missile sound.
+        playMissileSound();
     }
     @Override
     public boolean isActive() {
@@ -162,7 +197,9 @@ public class Missile implements IPowerUp {
     }
 
 
-    //Updatable
+    //TODO, remove the fact that missile moves faster towards things further away.
+
+    //Updatable, things that control the missile each update
     @Override
     public void update(int milliSinceLastUpdate){
         //Check that the missile is not dead before updating
@@ -189,6 +226,7 @@ public class Missile implements IPowerUp {
     }
 
 
+
     //Methods for movement
 
     //Method for generating the velocity for the missile, gets the missile velocity based on the velocity of the transformable object.
@@ -198,6 +236,20 @@ public class Missile implements IPowerUp {
 
     //Method for general missile movement, separated from update for nicer looking code.
     private void moveTheMissile(int milliSinceLastUpdate, int timeStorage){
+
+        //System.out.println(pos.getX() + ", " + pos.getY() + ", " + pos.getZ());
+
+        if(timeStorage <= timeTrackingTrans){
+            if(transPosLastUpdate.getX() == 0 && transPosLastUpdate.getY() == 0 && transPosLastUpdate.getZ() == 0){
+                pos = new Vector3f(transformable.getPos());
+                transPosLastUpdate = new Vector3f(transformable.getPos());
+            }else{
+                if(transPosLastUpdate.getZ() > transformable.getPos().getZ()){
+                    pos.add(new Vector3f(0,0, transformable.getPos().getZ() - transPosLastUpdate.getZ()));
+                }
+            }
+            transPosLastUpdate = new Vector3f(transformable.getPos());
+        }
 
         //Two states of movement, decided based on the time spent active. Either falling or moving towards the target.
 
@@ -210,18 +262,48 @@ public class Missile implements IPowerUp {
             //Additional falling, simulating the missile aiming on the target
             fall(milliSinceLastUpdate);
 
+
         }else if(timeStorage <= activeTime){
+
+            //Add more velocity to the ship
+            accelerateMissile(milliSinceLastUpdate);
 
             //Move based on the velocity (Transformable object velocity)
             moveOnVelocity(milliSinceLastUpdate);
 
             //Additional moving and rotating to get the missile to the target location
             rotateShip(getEnemyTargetPosition());
-            Vector3f directionalVector = generateDirectionVector(getEnemyTargetPosition());
-            moveOnDirectionVector(directionalVector, milliSinceLastUpdate);
-
+            if(timeStorage > timeTrackingTrans){
+                Vector3f directionalVector = generateDirectionVector(getEnemyTargetPosition());
+                moveOnDirectionVector(directionalVector, milliSinceLastUpdate);
+            }
         } else{
             removeMissile();
+        }
+    }
+
+    public void accelerateMissile(int milliSinceLastUpdate){
+
+        //Adds time since last update to the accelerationTime variable
+        accelerationTime = accelerationTime + milliSinceLastUpdate;
+
+        //Makes the starting velocity the current velocity when the missile is said to accelerate
+        if(startVelocity == 0){
+            startVelocity = velocity;
+        }
+
+        //Check to see that the forwardTargetVelocity has not been reached, if it has, make the velocity the forwardTargetVelocity
+        if (velocity < forwardTargetVelocity) {
+            /*Calculate the velocity based on this formula: x(t) = x0 × (1 + r)^t
+            x(t) is the value at time t.
+            x0 is the initial value at time t=0.
+            r is the growth rate when r>0 or decay rate when r<0, in percent.
+            t is the time in discrete intervals and selected time units.
+             */
+            velocity = startVelocity * ((float) Math.pow((1 + acceleration), (((double) accelerationTime) / 1000)));
+        }else{
+            //Makes the forwardTargetVelocity the current velocity, if reached overflow velocity
+            velocity = forwardTargetVelocity;
         }
     }
 
@@ -264,6 +346,15 @@ public class Missile implements IPowerUp {
 
     //Method for moving the ship based on the direction vector generated from method "generateDirectionalVector"
     private void moveOnDirectionVector(Vector3f directionalVector, int milliSinceLastUpdate){
-        getPos().add(new Vector3f((directionalVector.getX()*(float)milliSinceLastUpdate/1000)*velocityMultiplier, (directionalVector.getY()*(float)milliSinceLastUpdate/1000)*velocityMultiplier, (directionalVector.getZ()*(float)milliSinceLastUpdate/1000)*velocityMultiplier));
+        getPos().add(new Vector3f((directionalVector.getX()*(float)milliSinceLastUpdate/1000)*velocityMultiplierX, (directionalVector.getY()*(float)milliSinceLastUpdate/1000)*velocityMultiplierY, (directionalVector.getZ()*(float)milliSinceLastUpdate/1000)*velocityMultiplierZ));
     }
+
+
+    //Sound
+
+    //Method for playing missile shooting sound
+    private void playMissileSound(){
+        AudioQueue.getInstance().playSound("MissileDemo.mp3","sounds/effects", 0.7f);
+    }
+
 }
