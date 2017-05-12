@@ -30,7 +30,11 @@ public class Cannon implements IPowerUp {
     private boolean isActive;
     private boolean isDead;
 
+    private int timeAlive;
+    private final int lifeLength = 4000;
+
     public Cannon(){
+        timeAlive = 0;
         this.pos = new Vector3f();
         this.rot = new Quat4f();
         this.velocity = new Vector3f();
@@ -92,12 +96,20 @@ public class Cannon implements IPowerUp {
     @Override
     public void update(int milliSinceLastUpdate){
         if (isActive){
+            timeAlive += milliSinceLastUpdate;
             updatePosition(milliSinceLastUpdate);
+            if (timeAlive > lifeLength){
+                removeFromRenderManager();
+                removeFromCollisionManager();
+                isDead = true;
+            }
         }
     }
     private void updatePosition(int milliSinceLastUpdate){
         pos.add(new Vector3f(velocity.getX() * ((float) milliSinceLastUpdate/1000),(velocity.getY() * ((float) milliSinceLastUpdate/1000)),(velocity.getZ() * ((float)milliSinceLastUpdate/1000))));
     }
+
+
 
     private void playCannonSound(){
         Random rand = new Random();
