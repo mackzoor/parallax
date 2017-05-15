@@ -9,10 +9,12 @@ import java.util.List;
 
 import javax.vecmath.Vector2f;
 
+import lombok.Getter;
+
 public class MainMenuModel {
 
-    private StartButton startButton;
-    private ExitButton exitButton;
+    @Getter private StartButton startButton;
+    @Getter private ExitButton exitButton;
     private List<Button> buttonSequence;
 
     public MainMenuModel(int screenWidth, int screenHeight) {
@@ -49,19 +51,11 @@ public class MainMenuModel {
     }
 
     public void iterateDown() {
-        Button lastButton = ((LinkedList<Button>)buttonSequence).getLast();
+        Button lastButton = ((LinkedList<Button>) buttonSequence).getLast();
         lastButton.markButton();
-        ((LinkedList<Button>)buttonSequence).removeLast();
-        ((LinkedList<Button>)buttonSequence).getFirst().unMarkButton();
-        ((LinkedList<Button>)buttonSequence).addFirst(lastButton);
-    }
-
-    public StartButton getStartButton() {
-        return startButton;
-    }
-
-    public ExitButton getExitButton() {
-        return exitButton;
+        ((LinkedList<Button>) buttonSequence).removeLast();
+        ((LinkedList<Button>) buttonSequence).getFirst().unMarkButton();
+        ((LinkedList<Button>) buttonSequence).addFirst(lastButton);
     }
 
     public void resize(int screenWidth, int screenHeight) {

@@ -14,7 +14,7 @@ public abstract class ButtonView {
     Texture unselected;
     Texture selected;
 
-    public ButtonView(Button button) {
+    ButtonView(Button button) {
         this.button = button;
     }
 
