@@ -1,11 +1,11 @@
 package com.tda367.parallax.model.cardboardmenu;
 
-import com.tda367.parallax.model.util.Model;
-import com.tda367.parallax.model.coreabstraction.RenderQueue;
-import com.tda367.parallax.model.util.Renderable;
+import com.tda367.parallax.view.Model;
+import com.tda367.parallax.view.Renderable;
 import com.tda367.parallax.model.parallaxcore.collision.Collidable;
 import com.tda367.parallax.model.parallaxcore.collision.CollidableType;
 import com.tda367.parallax.model.parallaxcore.collision.CollisionManager;
+import com.tda367.parallax.view.Renderer3D;
 
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
@@ -21,7 +21,7 @@ public class Cardboard3DStartButton implements Renderable,Collidable {
 
     private Model model;
 
-    private Model collisionModel;
+    private String collisionModel;
 
     private boolean collisionEnabled;
 
@@ -29,7 +29,7 @@ public class Cardboard3DStartButton implements Renderable,Collidable {
         pos = new Vector3f();
         rot = new Quat4f();
         model = new Model("boxObstacle.g3db", "3dModels/boxObstacle");
-        collisionModel = new Model(model.getModelName(), model.getModelDirectory());
+        collisionModel = "3dModels/boxObstacle/boxObstacle.g3db";
         collisionEnabled = true;
     }
 
@@ -41,12 +41,12 @@ public class Cardboard3DStartButton implements Renderable,Collidable {
 
     @Override
     public void addToRenderManager() {
-        RenderQueue.getInstance().addRenderTask(this);
+        Renderer3D.getInstance().addObjectToFrame(this);
     }
 
     @Override
     public void removeFromRenderManager() {
-        RenderQueue.getInstance().removeRenderTask(this);
+        Renderer3D.getInstance().addObjectToFrame(this);
     }
 
     @Override
@@ -80,7 +80,7 @@ public class Cardboard3DStartButton implements Renderable,Collidable {
     }
 
     @Override
-    public Model getCollisionModel() {
+    public String getCollisionModelPath() {
         return collisionModel;
     }
 

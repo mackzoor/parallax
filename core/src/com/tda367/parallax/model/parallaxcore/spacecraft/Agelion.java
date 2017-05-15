@@ -6,8 +6,7 @@ import com.tda367.parallax.model.parallaxcore.collision.CollidableType;
 import com.tda367.parallax.model.parallaxcore.collision.CollisionManager;
 import com.tda367.parallax.model.parallaxcore.powerups.IContainer;
 import lombok.Getter;
-import com.tda367.parallax.model.util.Model;
-import com.tda367.parallax.model.coreabstraction.RenderQueue;
+
 import com.tda367.parallax.model.parallaxcore.powerups.IPowerUp;
 
 import javax.vecmath.*;
@@ -36,8 +35,7 @@ public class Agelion implements ISpaceCraft {
     private Vector3f pos;
     private Quat4f rot;
 
-    private Model agelionModel;
-    private Model collisionModel;
+    private String collisionModel;
     private boolean collisionEnabled;
 
     private final float courseCircumference = 3; //Really shouldn't be handled by Agelion
@@ -45,8 +43,7 @@ public class Agelion implements ISpaceCraft {
 
     //Constructors
     public Agelion(int health, float forwardVelocity, float maxPanVelocity, Vector3f pos, Quat4f rot) {
-        this.agelionModel = new Model("agelion.g3db", "3dModels/agelion");
-        this.collisionModel = new Model(agelionModel.getModelName(), agelionModel.getModelDirectory());
+        this.collisionModel = "3dModels/agelion/agelion.g3db";
         this.health = health;
         this.forwardVelocity = forwardVelocity;
         this.maxPanVelocity = maxPanVelocity;
@@ -209,18 +206,6 @@ public class Agelion implements ISpaceCraft {
         return rot;
     }
 
-
-    //Render
-    @Override
-    public void addToRenderManager() {
-        RenderQueue.getInstance().addRenderTask(this);
-    }
-    @Override
-    public void removeFromRenderManager() {
-        RenderQueue.getInstance().removeRenderTask(this);
-    }
-
-
     //Collision
     @Override
     public boolean collisionActivated() {
@@ -235,7 +220,7 @@ public class Agelion implements ISpaceCraft {
         collisionEnabled = true;
     }
     @Override
-    public Model getCollisionModel() {
+    public String getCollisionModelPath() {
         return collisionModel;
     }
     @Override
@@ -262,11 +247,6 @@ public class Agelion implements ISpaceCraft {
             IContainer container = (IContainer) collidable;
             add(container.getPowerUp());
         }
-    }
-
-    @Override
-    public Model getModel() {
-        return agelionModel;
     }
 
     private Vector2f xzPos(Vector3f vector3f) {

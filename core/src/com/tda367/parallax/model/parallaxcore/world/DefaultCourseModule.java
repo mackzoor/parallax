@@ -4,8 +4,7 @@ import com.tda367.parallax.model.parallaxcore.collision.Collidable;
 import com.tda367.parallax.model.parallaxcore.powerups.Container;
 import com.tda367.parallax.model.parallaxcore.powerups.IPowerUp;
 import com.tda367.parallax.model.parallaxcore.powerups.Missile;
-import com.tda367.parallax.model.util.Model;
-import com.tda367.parallax.model.coreabstraction.RenderQueue;
+
 
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
@@ -24,7 +23,6 @@ public class DefaultCourseModule implements ICourseModule {
 
     private List<BoxObstacle> boxObstacles;
     private List<Collidable> usables;
-    private Model model;
     private List<IPowerUp> powerUps;
     private boolean active;
     private List<Container> containers;
@@ -37,8 +35,6 @@ public class DefaultCourseModule implements ICourseModule {
         active = true;
         powerUps = new ArrayList<IPowerUp>();
         containers = new ArrayList<Container>();
-
-        model = new Model("course.g3db", "3dModels/defaultCourse");
         length = 64;
         this.boxObstacles = new ArrayList<BoxObstacle>();
         usables = new ArrayList<Collidable>();
@@ -96,17 +92,14 @@ public class DefaultCourseModule implements ICourseModule {
     public List<IPowerUp> getPowerups() {
         return powerUps;
     }
-
     @Override
     public boolean isActive() {
         return active;
     }
-
     @Override
     public void setActiveState(boolean state) {
         active = state;
     }
-
     @Override
     public List<? extends Collidable> getBoxObstacles() {
         return boxObstacles;
@@ -116,26 +109,6 @@ public class DefaultCourseModule implements ICourseModule {
         return containers;
     }
 
-    //Renderable
-    @Override
-    public void addToRenderManager() {
-        RenderQueue.getInstance().addRenderTask(this);
-
-        for (BoxObstacle boxObstacle : boxObstacles){
-            boxObstacle.addToRenderManager();
-        }
-
-    }
-    @Override
-    public void removeFromRenderManager() {
-        RenderQueue.getInstance().removeRenderTask(this);
-
-        for (BoxObstacle boxObstacle : boxObstacles){
-            boxObstacle.removeFromRenderManager();
-        }
-
-    }
-
     private void spawnPowerUp() {
         IPowerUp pu = new Missile();
         powerUps.add(pu);
@@ -143,7 +116,6 @@ public class DefaultCourseModule implements ICourseModule {
         Random rand = new Random();
         container.setPos(new Vector3f(0,getPos().getY()+rand.nextFloat()*getLength(),0));
         container.addToCollisionManager();
-        container.addToRenderManager();
         containers.add(container);
     }
 
@@ -155,9 +127,5 @@ public class DefaultCourseModule implements ICourseModule {
     @Override
     public Quat4f getRot() {
         return rot;
-    }
-    @Override
-    public Model getModel() {
-        return model;
     }
 }

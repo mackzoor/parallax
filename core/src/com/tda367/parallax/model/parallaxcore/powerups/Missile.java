@@ -1,18 +1,15 @@
 package com.tda367.parallax.model.parallaxcore.powerups;
 
 import com.tda367.parallax.model.coreabstraction.AudioQueue;
-import com.tda367.parallax.model.util.Model;
-import com.tda367.parallax.model.coreabstraction.RenderQueue;
 import com.tda367.parallax.model.parallaxcore.collision.Collidable;
 import com.tda367.parallax.model.parallaxcore.collision.CollidableType;
 import com.tda367.parallax.model.parallaxcore.collision.CollisionManager;
-import com.tda367.parallax.model.util.Transformable;
+import com.tda367.parallax.model.parallaxcore.util.Transformable;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
-import java.util.Random;
 
 public class Missile implements IPowerUp {
 
@@ -29,9 +26,8 @@ public class Missile implements IPowerUp {
     //Time that the missile has accelerated
     private int accelerationTime;
 
-    //3D models for  missile appearance and collision
-    private Model model;
-    private Model collisionModel;
+    //Path to 3D model for  missile collision
+    private String collisionModel;
 
     //Flags for if the ship should collide, move and a general variable for its lifecycle
     private boolean isCollisionOn;
@@ -82,7 +78,7 @@ public class Missile implements IPowerUp {
     public Missile(){
         this.pos = new Vector3f();
         this.rot = new Quat4f();
-        this.model = new Model("missile.g3db", "3dModels/missile");
+        this.collisionModel ="3dModels/missile/missile.g3db";
         this.isCollisionOn = false;
         this.enemyTargetPosition = new Vector3f();
         this.transPosLastUpdate = new Vector3f();
@@ -102,7 +98,6 @@ public class Missile implements IPowerUp {
         this.transformable = transformable;
 
         //Add the missile to the world and make it collidable
-        addToRenderManager();
         addToCollisionManager();
 
         //Allow the update method to move the missile
@@ -139,7 +134,7 @@ public class Missile implements IPowerUp {
         isCollisionOn = true;
     }
     @Override
-    public Model getCollisionModel() {
+    public String getCollisionModelPath() {
         return null;
     }
     @Override
@@ -160,24 +155,8 @@ public class Missile implements IPowerUp {
         if (collidable.getCollidableType() == CollidableType.SPACECRAFT && timeStorage > 250){
             isActive = false;
             isDead = true;
-            removeFromRenderManager();
             removeFromCollisionManager();
         }
-    }
-
-
-    //Renderable
-    @Override
-    public final void addToRenderManager() {
-        RenderQueue.getInstance().addRenderTask(this);
-    }
-    @Override
-    public final void removeFromRenderManager() {
-        RenderQueue.getInstance().removeRenderTask(this);
-    }
-    @Override
-    public Model getModel() {
-        return model;
     }
 
 
@@ -311,7 +290,6 @@ public class Missile implements IPowerUp {
     //Method for calling methods removing the missile
     public void removeMissile(){
         removeFromCollisionManager();
-        removeFromRenderManager();
         isDead = true;
     }
 

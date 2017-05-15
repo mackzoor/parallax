@@ -1,8 +1,7 @@
 package com.tda367.parallax.view.parallaxview;
 
-import com.tda367.parallax.model.parallaxcore.collision.Collidable;
 import com.tda367.parallax.model.parallaxcore.powerups.Container;
-import com.tda367.parallax.model.util.Model;
+import com.tda367.parallax.view.Model;
 import com.tda367.parallax.view.Renderer3D;
 
 /**

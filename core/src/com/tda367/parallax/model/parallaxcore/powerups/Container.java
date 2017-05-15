@@ -1,12 +1,9 @@
 package com.tda367.parallax.model.parallaxcore.powerups;
 
-import com.tda367.parallax.model.coreabstraction.*;
 import com.tda367.parallax.model.parallaxcore.collision.Collidable;
 import com.tda367.parallax.model.parallaxcore.collision.CollidableType;
 import com.tda367.parallax.model.parallaxcore.collision.CollisionManager;
-import com.tda367.parallax.model.util.Model;
-import com.tda367.parallax.model.util.Renderable;
-import com.tda367.parallax.model.util.Updatable;
+import com.tda367.parallax.model.parallaxcore.util.Updatable;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,13 +13,12 @@ import javax.vecmath.Vector3f;
 /**
  * Container that holds a usable/Powerup.
  */
-public class Container implements Renderable, Collidable, Updatable, IContainer {
+public class Container implements Collidable, Updatable, IContainer {
 
     @Setter @Getter private Vector3f pos;
     @Setter @Getter private Quat4f rot;
 
-    @Setter @Getter private Model model;
-    @Setter @Getter private Model collisionModel;
+    @Setter @Getter private String collisionModelPath;
     private boolean collisionEnabled;
 
     private IPowerUp usable;
@@ -35,8 +31,7 @@ public class Container implements Renderable, Collidable, Updatable, IContainer 
         pos = new Vector3f();
         rot = new Quat4f();
 
-        model = new Model("agelion.g3db", "3dModels/agelion");
-        collisionModel = new Model("agelion.g3db", "3dModels/agelion");
+        collisionModelPath = "3dModels/agelion/agelion.g3db";
 
         collisionEnabled = true;
         isCollected = false;
@@ -46,16 +41,6 @@ public class Container implements Renderable, Collidable, Updatable, IContainer 
     public void update(int milliSinceLastUpdate) {
         //No position change for now
     }
-
-    @Override
-    public void addToRenderManager() {
-        RenderQueue.getInstance().addRenderTask(this);
-    }
-    @Override
-    public void removeFromRenderManager() {
-        RenderQueue.getInstance().removeRenderTask(this);
-    }
-
 
     @Override
     public boolean collisionActivated() {
@@ -69,6 +54,7 @@ public class Container implements Renderable, Collidable, Updatable, IContainer 
     public void enableCollision() {
         collisionEnabled = true;
     }
+
     @Override
     public void addToCollisionManager() {
         CollisionManager.getInstance().addCollisionCheck(this);
@@ -87,9 +73,8 @@ public class Container implements Renderable, Collidable, Updatable, IContainer 
     public void handleCollision(Collidable collidable) {
         if (collidable.getCollidableType() == CollidableType.SPACECRAFT) {
             isCollected = true;
+            removeFromCollisionManager();
         }
-        removeFromRenderManager();
-        removeFromCollisionManager();
     }
 
     @Override

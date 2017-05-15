@@ -1,4 +1,4 @@
-package com.tda367.parallax.model.util;
+package com.tda367.parallax.view;
 
 import lombok.Getter;
 

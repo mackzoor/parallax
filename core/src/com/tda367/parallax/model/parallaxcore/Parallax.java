@@ -1,8 +1,7 @@
 package com.tda367.parallax.model.parallaxcore;
 
-import com.tda367.parallax.model.coreabstraction.RenderQueue;
 import com.tda367.parallax.model.coreabstraction.AudioQueue;
-import com.tda367.parallax.model.util.Updatable;
+import com.tda367.parallax.model.parallaxcore.util.Updatable;
 import com.tda367.parallax.model.parallaxcore.world.World;
 import com.tda367.parallax.model.parallaxcore.enemies.HunterAI;
 import com.tda367.parallax.model.parallaxcore.enemies.MinionEnemy;
@@ -21,8 +20,6 @@ import java.util.Random;
  */
 
 public class Parallax implements Updatable {
-
-    @Getter private RenderQueue renderQueue;
     private AudioQueue audioQueue;
     @Getter private World world;
     @Getter private Camera camera;
@@ -31,7 +28,6 @@ public class Parallax implements Updatable {
     private List<HunterAI> ais;
 
     public Parallax(Player player){
-        renderQueue = RenderQueue.getInstance();
         audioQueue = AudioQueue.getInstance();
 
         world = new World();
@@ -64,16 +60,8 @@ public class Parallax implements Updatable {
         world.update(updateTime);
         camera.update(updateTime);
 
-        updateRenderManagerCameraPosition();
     }
 
-    private void updateRenderManagerCameraPosition() {
-        RenderQueue rm = RenderQueue.getInstance();
-
-        rm.setCamXCoord(camera.getPos().getX());
-        rm.setCamYCoord(camera.getPos().getY());
-        rm.setCamZCoord(camera.getPos().getZ());
-    }
 
     public List<ISpaceCraft> getSpaceCraft(){
         return world.getSpaceCrafts();

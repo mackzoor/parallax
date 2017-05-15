@@ -1,14 +1,11 @@
 package com.tda367.parallax.model.parallaxcore.powerups;
 
-import com.tda367.parallax.model.util.Model;
-import com.tda367.parallax.model.coreabstraction.RenderQueue;
 import com.tda367.parallax.model.coreabstraction.AudioQueue;
 import com.tda367.parallax.model.parallaxcore.collision.Collidable;
 import com.tda367.parallax.model.parallaxcore.collision.CollidableType;
 import com.tda367.parallax.model.parallaxcore.collision.CollisionManager;
-import com.tda367.parallax.model.util.Transformable;
+import com.tda367.parallax.model.parallaxcore.util.Transformable;
 
-import javax.vecmath.Matrix4f;
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
 import java.util.Random;
@@ -23,8 +20,7 @@ public class Cannon implements IPowerUp {
     private Quat4f rot;
     private Vector3f velocity;
 
-    private Model model;
-    private Model collisionModel;
+    private String collisionModel;
     private boolean isCollisionOn;
 
     private boolean isActive;
@@ -38,7 +34,6 @@ public class Cannon implements IPowerUp {
         this.pos = new Vector3f();
         this.rot = new Quat4f();
         this.velocity = new Vector3f();
-        this.model = new Model("laser.g3db", "3dModels/laser");
         this.isCollisionOn = false;
 
         isActive = false;
@@ -76,7 +71,6 @@ public class Cannon implements IPowerUp {
 
         playCannonSound();
         addToCollisionManager();
-        addToRenderManager();
     }
 
     @Override
@@ -105,7 +99,6 @@ public class Cannon implements IPowerUp {
         }
     }
     private void die() {
-        removeFromRenderManager();
         removeFromCollisionManager();
         disableCollision();
         isActive = false;
@@ -152,7 +145,7 @@ public class Cannon implements IPowerUp {
         isCollisionOn = true;
     }
     @Override
-    public Model getCollisionModel() {
+    public String getCollisionModelPath() {
         return collisionModel;
     }
     @Override
@@ -167,27 +160,11 @@ public class Cannon implements IPowerUp {
     public CollidableType getCollidableType() {
         return CollidableType.HARMFUL;
     }
-
     @Override
     public void handleCollision(Collidable collidable) {
         if ( timeAlive > 250 ) {
             die();
         }
-    }
-
-
-    //Render
-    @Override
-    public void addToRenderManager() {
-        RenderQueue.getInstance().addRenderTask(this);
-    }
-    @Override
-    public Model getModel() {
-        return model;
-    }
-    @Override
-    public void removeFromRenderManager() {
-        RenderQueue.getInstance().removeRenderTask(this);
     }
 }
 

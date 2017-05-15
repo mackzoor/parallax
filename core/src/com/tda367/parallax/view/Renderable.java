@@ -1,4 +1,6 @@
-package com.tda367.parallax.model.util;
+package com.tda367.parallax.view;
+
+import com.tda367.parallax.model.parallaxcore.util.Transformable;
 
 /**
  * Interface for classes that are renderable.

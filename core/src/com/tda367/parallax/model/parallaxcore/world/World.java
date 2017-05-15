@@ -2,7 +2,7 @@ package com.tda367.parallax.model.parallaxcore.world;
 
 import com.tda367.parallax.model.parallaxcore.collision.*;
 import com.tda367.parallax.model.parallaxcore.spacecraft.ISpaceCraft;
-import com.tda367.parallax.model.util.Updatable;
+import com.tda367.parallax.model.parallaxcore.util.Updatable;
 import com.tda367.parallax.model.parallaxcore.powerups.IPowerUp;
 import lombok.Getter;
 
@@ -38,11 +38,9 @@ public class World implements Updatable, CollisionObserver {
     public void addSpaceCraft(ISpaceCraft spaceCraft) {
         spaceCrafts.add(spaceCraft);
         spaceCraft.addToCollisionManager();
-        spaceCraft.addToRenderManager();
     }
     public void removeSpaceCraft(ISpaceCraft spaceCraft) {
         spaceCrafts.remove(spaceCraft);
-        spaceCraft.addToRenderManager();
         spaceCraft.addToCollisionManager();
     }
     private float getFirstSpaceCraftYPosition() {
@@ -112,7 +110,6 @@ public class World implements Updatable, CollisionObserver {
             );
             powerupsToSpawn = 0;
             modules.add(tempModule);
-            tempModule.addToRenderManager();
             tempModule.add3dObjectsToCollisionManager();
 
             //Add powerups from course module to world so they'll be updated.
@@ -124,7 +121,6 @@ public class World implements Updatable, CollisionObserver {
     private void removeModules(int i) {
         for (int x = 0; x < i; x++) {
             ICourseModule module = modules.get(0);
-            module.removeFromRenderManager();
             modules.remove(module);
             module.remove3dObjectsFromCollisionManager();
             module.setActiveState(false);

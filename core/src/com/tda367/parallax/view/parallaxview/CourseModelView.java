@@ -3,6 +3,7 @@ package com.tda367.parallax.view.parallaxview;
 import com.tda367.parallax.model.parallaxcore.collision.Collidable;
 import com.tda367.parallax.model.parallaxcore.powerups.Container;
 import com.tda367.parallax.model.parallaxcore.world.ICourseModule;
+import com.tda367.parallax.view.Model;
 import com.tda367.parallax.view.Renderer3D;
 
 import java.util.ArrayList;
@@ -25,7 +26,7 @@ public class CourseModelView implements View{
         courseModule3dObject = new Renderable3dObject(
                 courseModule.getPos(),
                 courseModule.getRot(),
-                courseModule.getModel()
+                new Model("3dModels/defaultCourse/course.g3db")
         );
 
         for (Collidable collidable : courseModule.getBoxObstacles()) {

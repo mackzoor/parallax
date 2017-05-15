@@ -1,10 +1,8 @@
 package com.tda367.parallax.view.parallaxview;
 
 import com.tda367.parallax.model.parallaxcore.spacecraft.ISpaceCraft;
-import com.tda367.parallax.model.util.Model;
+import com.tda367.parallax.view.Model;
 import com.tda367.parallax.view.Renderer3D;
-
-import javax.vecmath.Vector3f;
 
 /**
  * View class for the spacecraft {@link com.tda367.parallax.model.parallaxcore.spacecraft.Agelion}

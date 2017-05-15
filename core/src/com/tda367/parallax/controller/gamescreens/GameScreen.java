@@ -52,11 +52,6 @@ public class GameScreen implements Screen {
                 )
         );
 
-/*        renderer3D = new Renderer(
-                parallaxGame.getCamera().getFov(),
-                Gdx.graphics.getWidth(),
-                Gdx.graphics.getHeight()
-        );*/
         sound = new Sound();
     }
 
@@ -95,7 +90,8 @@ public class GameScreen implements Screen {
     public void dispose() {
         CollisionManager.getInstance().getCollidables().clear();
         Controllers.clearListeners();
-        parallaxGame.getRenderQueue().getRenderables().clear();
+        //TODO I think this below was important.
+//        parallaxGame.getRenderQueue().getRenderables().clear();
         audioQueue.clearAllActiveMusic();
     }
 }

@@ -1,7 +1,7 @@
 package com.tda367.parallax.view.parallaxview;
 
-import com.tda367.parallax.model.util.Model;
-import com.tda367.parallax.model.util.Renderable;
+import com.tda367.parallax.view.Model;
+import com.tda367.parallax.view.Renderable;
 
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;

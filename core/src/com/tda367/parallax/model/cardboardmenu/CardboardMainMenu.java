@@ -1,13 +1,12 @@
 package com.tda367.parallax.model.cardboardmenu;
 
-import com.tda367.parallax.model.coreabstraction.RenderQueue;
 import com.tda367.parallax.model.parallaxcore.Camera;
 import com.tda367.parallax.model.parallaxcore.collision.CollisionManager;
 import com.tda367.parallax.model.parallaxcore.collision.CollisionObserver;
 import com.tda367.parallax.model.parallaxcore.collision.CollisionPair;
 import com.tda367.parallax.model.parallaxcore.powerups.Cannon;
 import com.tda367.parallax.model.parallaxcore.powerups.IPowerUp;
-import com.tda367.parallax.model.util.Updatable;
+import com.tda367.parallax.model.parallaxcore.util.Updatable;
 import com.tda367.parallax.model.parallaxcore.Player;
 
 import javax.vecmath.Quat4f;
@@ -80,7 +79,7 @@ public class CardboardMainMenu implements Updatable, CollisionObserver {
         if(startButton.isCollided()){
             for (CardboardMenuObserver observer : observers) {
                 observer.cardboardStartButtonAction();
-            };
+            }
         }else if(exitButton.isCollided()){
             for (CardboardMenuObserver observer : observers) {
                 observer.cardboardExitButtonAction();
@@ -90,11 +89,16 @@ public class CardboardMainMenu implements Updatable, CollisionObserver {
         for (IPowerUp powerUp : powerUps) {
             powerUp.update(milliSinceLastUpdate);
         }
+        //TODO Fix to work with new render structure
+        //TODO Set camera rotation, see commented code below.
+        /*
         camera.getRot().set((new Quat4f(
                 RenderQueue.getInstance().getCamXQuat(),
                 RenderQueue.getInstance().getCamYQuat(),
                 RenderQueue.getInstance().getCamZQuat(),
-                RenderQueue.getInstance().getCamWQuat())));
+                RenderQueue.getInstance().getCamWQuat(
+        );
+        */
     }
 
     @Override

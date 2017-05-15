@@ -9,8 +9,6 @@ import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.math.Quaternion;
-import com.tda367.parallax.model.coreabstraction.RenderQueue;
-import com.tda367.parallax.view.parallaxview.Renderable3dObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,21 +60,10 @@ public class Renderer3D {
 
 
     private List<ModelInstance> modelsToRender = new ArrayList<ModelInstance>();
-    public void addObjectToFrame(Renderable3dObject renderObject) {
+    public void addObjectToFrame(Renderable renderObject) {
         // You've seen all this before, just be sure to clear the GL_DEPTH_BUFFER_BIT when working in 3D
         Gdx.gl.glEnable(GL20.GL_DEPTH_TEST);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
-
-        RenderQueue rm = RenderQueue.getInstance();
-
-        //Update camera position
-        camera.position.set(
-                rm.getCamXCoord(),
-                rm.getCamZCoord(),
-                rm.getCamYCoord() * -1
-        );
-        camera.update();
-
 
         //Start rendering for the camera.
         ModelInstance modelInstance = rh.getModel(renderObject.getModel().getModelName(), renderObject.getModel().getModelDirectory());
@@ -98,6 +85,15 @@ public class Renderer3D {
         modelsToRender.add(modelInstance);
     }
 
+    public void setCameraPosition(float x, float y, float z){
+        //Update camera position
+        camera.position.set(
+                x,
+                z,
+                y * -1
+        );
+        camera.update();
+    }
 
     public void renderFrame(){
         modelBatch.begin(camera);

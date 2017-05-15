@@ -19,6 +19,11 @@ public class ParallaxView {
     }
 
     public void render(){
+        Renderer3D.getInstance().setCameraPosition(
+                parallax.getCamera().getPos().getX(),
+                parallax.getCamera().getPos().getY(),
+                parallax.getCamera().getPos().getZ()
+        );
         worldView.render();
         playerHudView.render();
         Renderer3D.getInstance().renderFrame();

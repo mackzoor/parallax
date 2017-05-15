@@ -1,8 +1,8 @@
 package com.tda367.parallax.model.parallaxcore.spacecraft;
 
 import com.tda367.parallax.model.parallaxcore.collision.Collidable;
-import com.tda367.parallax.model.util.Renderable;
-import com.tda367.parallax.model.util.Updatable;
+import com.tda367.parallax.view.Renderable;
+import com.tda367.parallax.model.parallaxcore.util.Updatable;
 import com.tda367.parallax.model.parallaxcore.powerups.IPowerUp;
 
 import javax.vecmath.Vector2f;
@@ -12,7 +12,7 @@ import java.util.List;
  * Interface for all spaceCraft in the game.
  */
 
-public interface ISpaceCraft extends Collidable, Updatable, Renderable {
+public interface ISpaceCraft extends Collidable, Updatable {
     void setForwardSpeedTarget(float speed);
     void setForwardAcceleration(float acceleration);
 

@@ -2,15 +2,12 @@ package com.tda367.parallax.view;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.android.CardboardCamera;
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.math.Quaternion;
-import com.tda367.parallax.model.coreabstraction.RenderQueue;
-import com.tda367.parallax.model.util.Renderable;
 
 import java.util.List;
 
@@ -41,13 +38,15 @@ public class CardboardMenuRenderer {
     public void renderAll() {
 
         camera.update();
-
+//TODO Fix to work with new render structure
+/*
         RenderQueue rq = RenderQueue.getInstance();
         Quaternion quat = camera.combined.getRotation(new Quaternion());
         rq.setCamXQuat(quat.x);
         rq.setCamYQuat(quat.z);
         rq.setCamZQuat(quat.y*-1);
         rq.setCamWQuat(quat.w);
+*/
 
 
         // You've seen all this before, just be sure to clear the GL_DEPTH_BUFFER_BIT when working in 3D
@@ -57,7 +56,8 @@ public class CardboardMenuRenderer {
         // Like spriteBatch, just with models!  pass in the box Instance and the environment
         modelBatch.begin(camera);
 
-        List<Renderable> renderables = RenderQueue.getInstance().getRenderables();
+        //TODO Fix to work with new render structure
+        List<Renderable> renderables = null;// = RenderQueue.getInstance().getRenderables();
 
         for (Renderable renderable : renderables) {
             ModelInstance modelInstance = rh.getModel(renderable.getModel().getModelName(), renderable.getModel().getModelDirectory());

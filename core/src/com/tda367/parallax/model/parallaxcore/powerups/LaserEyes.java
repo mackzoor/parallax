@@ -1,10 +1,9 @@
 package com.tda367.parallax.model.parallaxcore.powerups;
 
-import com.tda367.parallax.model.util.Model;
 import com.tda367.parallax.model.parallaxcore.collision.Collidable;
 import com.tda367.parallax.model.parallaxcore.collision.CollidableType;
 import com.tda367.parallax.model.parallaxcore.collision.CollisionManager;
-import com.tda367.parallax.model.util.Transformable;
+import com.tda367.parallax.model.parallaxcore.util.Transformable;
 
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
@@ -43,11 +42,6 @@ public class LaserEyes implements IPowerUp {
     }
 
     @Override
-    public Model getModel() {
-        return null;
-    }
-
-    @Override
     public boolean collisionActivated() {
         return false;
     }
@@ -63,7 +57,8 @@ public class LaserEyes implements IPowerUp {
     }
 
     @Override
-    public Model getCollisionModel() {
+    public String getCollisionModelPath() {
+        //TODO Placeholder, add lazer 3d model.
         return null;
     }
 
@@ -94,15 +89,5 @@ public class LaserEyes implements IPowerUp {
     @Override
     public Quat4f getRot() {
         return null;
-    }
-
-    @Override
-    public void addToRenderManager() {
-
-    }
-
-    @Override
-    public void removeFromRenderManager() {
-
     }
 }
