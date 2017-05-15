@@ -24,7 +24,7 @@ public class Parallax implements Updatable {
 
     @Getter private RenderQueue renderQueue;
     private AudioQueue audioQueue;
-    private World world;
+    @Getter private World world;
     @Getter private Camera camera;
     @Getter private Player player;
 
