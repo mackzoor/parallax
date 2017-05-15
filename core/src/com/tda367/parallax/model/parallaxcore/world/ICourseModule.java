@@ -1,6 +1,8 @@
 package com.tda367.parallax.model.parallaxcore.world;
 
 import com.tda367.parallax.model.parallaxcore.collision.Collidable;
+import com.tda367.parallax.model.parallaxcore.powerups.Container;
+import com.tda367.parallax.model.parallaxcore.powerups.IPowerUp;
 import com.tda367.parallax.model.util.Renderable;
 
 import java.util.List;
@@ -11,8 +13,11 @@ import java.util.List;
 
 public interface ICourseModule extends Renderable{
     List<? extends Collidable> getBoxObstacles();
-    List<? extends Collidable> getContainers();
     float getLength();
     void add3dObjectsToCollisionManager();
     void remove3dObjectsFromCollisionManager();
+    List<IPowerUp> getPowerups();
+    List<Container> getContainers();
+    boolean isActive();
+    void setActiveState(boolean state);
 }
