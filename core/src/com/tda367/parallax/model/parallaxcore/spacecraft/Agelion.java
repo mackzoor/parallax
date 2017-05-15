@@ -40,6 +40,8 @@ public class Agelion implements ISpaceCraft {
     private Model collisionModel;
     private boolean collisionEnabled;
 
+    private final float courseCircumference = 3; //Really shouldn't be handled by Agelion
+
 
     //Constructors
     public Agelion(int health, float forwardVelocity, float maxPanVelocity, Vector3f pos, Quat4f rot) {
@@ -75,7 +77,11 @@ public class Agelion implements ISpaceCraft {
     //Controls
     @Override
     public void setDesiredPanVelocity(Vector2f desiredPanVelocity) {
-        this.desiredPanVelocity = desiredPanVelocity;
+        if (isShipOutsideCourse()) {
+            this.desiredPanVelocity = onWallSteering(desiredPanVelocity);
+        } else {
+            this.desiredPanVelocity = desiredPanVelocity;
+        }
     }
     @Override
     public void setDesiredPanVelocity(float x, float y){
@@ -101,6 +107,7 @@ public class Agelion implements ISpaceCraft {
         updatePanAcceleration();
         panRelativeMode(milliSinceLastUpdate);
         advanceCraft(milliSinceLastUpdate);
+        outOfBoundsCheck();
     }
 
     //Movement related methods
@@ -260,6 +267,35 @@ public class Agelion implements ISpaceCraft {
     @Override
     public Model getModel() {
         return agelionModel;
+    }
+
+    private Vector2f xzPos(Vector3f vector3f) {
+        return new Vector2f(vector3f.getX(), vector3f.getZ());
+    }
+
+    private boolean isShipOutsideCourse() {
+        Vector2f vector2f = xzPos(pos);
+        return (vector2f.length() > courseCircumference);
+    }
+
+    private Vector2f rotateNinetyDeg(Vector2f vector2f) {
+        return new Vector2f(-vector2f.getY(),vector2f.getX());
+    }
+
+    private Vector2f onWallSteering(Vector2f desiredPanVelocity) {
+        Vector2f alongWallVec = rotateNinetyDeg(xzPos(pos));
+        float scalar = desiredPanVelocity.dot(alongWallVec)/alongWallVec.lengthSquared();
+        desiredPanVelocity.scale(scalar, alongWallVec);
+        return desiredPanVelocity;
+    }
+
+    private void outOfBoundsCheck() {
+        if (isShipOutsideCourse()) {
+            Vector2f tempVec = xzPos(pos);
+            tempVec.normalize();
+            tempVec.scale(courseCircumference);
+            pos = new Vector3f(tempVec.getX(), pos.getY(), tempVec.getY());
+        }
     }
 }
 
