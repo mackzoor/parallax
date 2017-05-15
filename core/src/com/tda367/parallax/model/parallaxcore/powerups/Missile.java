@@ -157,11 +157,12 @@ public class Missile implements IPowerUp {
     @Override
     public void handleCollision(Collidable collidable) {
         //Todo Create explosion
-
-        isActive = false;
-        isDead = true;
-        removeFromRenderManager();
-        removeFromCollisionManager();
+        if (collidable.getCollidableType() == CollidableType.SPACECRAFT && timeStorage > 250){
+            isActive = false;
+            isDead = true;
+            removeFromRenderManager();
+            removeFromCollisionManager();
+        }
     }
 
 
