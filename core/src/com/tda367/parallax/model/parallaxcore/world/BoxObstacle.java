@@ -1,10 +1,7 @@
-package com.tda367.parallax.model.parallaxcore.course;
+package com.tda367.parallax.model.parallaxcore.world;
 
 import com.tda367.parallax.model.coreabstraction.AudioQueue;
 import com.tda367.parallax.model.parallaxcore.collision.Collidable;
-import com.tda367.parallax.model.util.Model;
-import com.tda367.parallax.model.coreabstraction.RenderQueue;
-import com.tda367.parallax.model.util.Renderable;
 import com.tda367.parallax.model.parallaxcore.collision.CollidableType;
 import com.tda367.parallax.model.parallaxcore.collision.CollisionManager;
 
@@ -15,18 +12,16 @@ import javax.vecmath.Vector3f;
  * A cube that is renderable and collidable.
  */
 
-public class BoxObstacle implements Collidable, Renderable {
+public class BoxObstacle implements Collidable {
     private Vector3f pos;
     private Quat4f rot;
 
-    private Model model;
-    private Model collisionModel;
+    private String collisionModel;
 
     private boolean collisionEnabled;
 
     public BoxObstacle(){
-        model = new Model("boxObstacle.g3db", "3dModels/boxObstacle");
-        collisionModel = new Model(model.getModelName(), model.getModelDirectory());
+        collisionModel = "3dModels/boxObstacle/boxObstacle.g3db";
         pos = new Vector3f();
         rot = new Quat4f();
         collisionEnabled = true;
@@ -42,19 +37,6 @@ public class BoxObstacle implements Collidable, Renderable {
     }
 
     @Override
-    public void addToRenderManager() {
-        RenderQueue.getInstance().addRenderTask(this);
-    }
-    @Override
-    public void removeFromRenderManager() {
-        RenderQueue.getInstance().removeRenderTask(this);
-    }
-    @Override
-    public Model getModel() {
-        return model;
-    }
-
-    @Override
     public void enableCollision(){
         collisionEnabled = true;
     }
@@ -67,7 +49,7 @@ public class BoxObstacle implements Collidable, Renderable {
         return collisionEnabled;
     }
     @Override
-    public Model getCollisionModel() {
+    public String getCollisionModelPath() {
         return collisionModel;
     }
     @Override

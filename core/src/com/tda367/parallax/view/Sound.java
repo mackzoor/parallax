@@ -9,12 +9,12 @@ import java.util.List;
 
 public class Sound implements AudioObserver {
 
-    private ResourceLoader resources;
+    private com.tda367.parallax.view.util.ResourceLoader resources;
 
     private List<ActiveMusicCombination> activeMusic = new ArrayList<ActiveMusicCombination>();
 
     public Sound(){
-        this.resources = ResourceLoader.getInstance();
+        this.resources = com.tda367.parallax.view.util.ResourceLoader.getInstance();
         AudioQueue.getInstance().addListener(this);
     }
 

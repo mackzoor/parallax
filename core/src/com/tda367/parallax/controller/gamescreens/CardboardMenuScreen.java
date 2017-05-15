@@ -13,11 +13,9 @@ import com.tda367.parallax.controller.GameStateManager;
 import com.tda367.parallax.model.CollisionCalculator;
 import com.tda367.parallax.model.cardboardmenu.CardboardMainMenu;
 import com.tda367.parallax.model.cardboardmenu.CardboardMenuObserver;
-import com.tda367.parallax.model.coreabstraction.RenderQueue;
 import com.tda367.parallax.model.parallaxcore.Player;
 import com.tda367.parallax.model.parallaxcore.collision.CollisionManager;
 import com.tda367.parallax.view.CardboardMenuRenderer;
-import com.tda367.parallax.view.Renderer;
 import com.tda367.parallax.view.Sound;
 
 
@@ -104,7 +102,8 @@ public class CardboardMenuScreen implements CardboardScreen, CardboardMenuObserv
     @Override
     public void dispose() {
         CollisionManager.getInstance().getCollidables().clear();
-        RenderQueue.getInstance().getRenderables().clear();
+        //TODO Fix to work with new render structure
+//        RenderQueue.getInstance().getRenderables().clear();
         sound.clearAllActiveMusic();
     }
 

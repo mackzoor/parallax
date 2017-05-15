@@ -1,4 +1,4 @@
-package com.tda367.parallax.model.util;
+package com.tda367.parallax.model.parallaxcore.util;
 
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;

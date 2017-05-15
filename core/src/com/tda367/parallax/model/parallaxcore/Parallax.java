@@ -1,9 +1,8 @@
 package com.tda367.parallax.model.parallaxcore;
 
-import com.tda367.parallax.model.coreabstraction.RenderQueue;
 import com.tda367.parallax.model.coreabstraction.AudioQueue;
-import com.tda367.parallax.model.util.Updatable;
-import com.tda367.parallax.model.parallaxcore.course.Course;
+import com.tda367.parallax.model.parallaxcore.util.Updatable;
+import com.tda367.parallax.model.parallaxcore.world.World;
 import com.tda367.parallax.model.parallaxcore.enemies.HunterAI;
 import com.tda367.parallax.model.parallaxcore.enemies.MinionEnemy;
 import com.tda367.parallax.model.parallaxcore.spacecraft.Agelion;
@@ -21,21 +20,18 @@ import java.util.Random;
  */
 
 public class Parallax implements Updatable {
-
-    @Getter private RenderQueue renderQueue;
     private AudioQueue audioQueue;
-    private Course course;
+    @Getter private World world;
     @Getter private Camera camera;
     @Getter private Player player;
 
     private List<HunterAI> ais;
 
     public Parallax(Player player){
-        renderQueue = RenderQueue.getInstance();
         audioQueue = AudioQueue.getInstance();
 
-        course = new Course();
-        course.addSpaceCraft(player.getSpaceCraft());
+        world = new World();
+        world.addSpaceCraft(player.getSpaceCraft());
 
         camera = new Camera();
         camera.trackTo(player.getSpaceCraft());
@@ -61,22 +57,14 @@ public class Parallax implements Updatable {
             ai.update(updateTime);
         }
 
-        course.update(updateTime);
+        world.update(updateTime);
         camera.update(updateTime);
 
-        updateRenderManagerCameraPosition();
     }
 
-    private void updateRenderManagerCameraPosition() {
-        RenderQueue rm = RenderQueue.getInstance();
-
-        rm.setCamXCoord(camera.getPos().getX());
-        rm.setCamYCoord(camera.getPos().getY());
-        rm.setCamZCoord(camera.getPos().getZ());
-    }
 
     public List<ISpaceCraft> getSpaceCraft(){
-        return course.getSpaceCrafts();
+        return world.getSpaceCrafts();
     }
 
     private void startBackgroundMusic(){
@@ -98,7 +86,7 @@ public class Parallax implements Updatable {
                 13
         ));
         minionEnemy.getSpaceCraft().setForwardAcceleration(-3f);
-        course.addSpaceCraft(minionEnemy.getSpaceCraft());
+        world.addSpaceCraft(minionEnemy.getSpaceCraft());
         ais.add(minionEnemy);
         minionEnemy.setTarget(player.getSpaceCraft());
     }

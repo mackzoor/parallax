@@ -1,7 +1,6 @@
 package com.tda367.parallax.model.parallaxcore.collision;
 
-import com.tda367.parallax.model.util.Model;
-import com.tda367.parallax.model.util.Transformable;
+import com.tda367.parallax.model.parallaxcore.util.Transformable;
 
 /**
  * Interface for objects with the ability to collide.
@@ -12,7 +11,7 @@ public interface Collidable extends Transformable {
     void disableCollision();
     void enableCollision();
 
-    Model getCollisionModel();
+    String getCollisionModelPath();
 
     void addToCollisionManager();
     void removeFromCollisionManager();

@@ -9,13 +9,11 @@ import com.tda367.parallax.controller.gamecontrollers.GameController;
 import com.tda367.parallax.controller.gamescreens.cardboardadapter.CardboardGame;
 import com.tda367.parallax.controller.gamescreens.cardboardadapter.CardboardScreen;
 import com.tda367.parallax.controller.devicestates.DeviceManager;
-import com.tda367.parallax.controller.devicestates.Device;
 import com.tda367.parallax.model.CollisionCalculator;
-import com.tda367.parallax.model.coreabstraction.RenderQueue;
 import com.tda367.parallax.model.parallaxcore.Parallax;
 import com.tda367.parallax.model.parallaxcore.Player;
 import com.tda367.parallax.model.parallaxcore.spacecraft.Agelion;
-import com.tda367.parallax.view.Renderer;
+import com.tda367.parallax.view.Renderer3D;
 import com.tda367.parallax.view.Sound;
 
 public class CardboardGameScreen implements CardboardScreen {
@@ -24,7 +22,7 @@ public class CardboardGameScreen implements CardboardScreen {
     private CardboardCamera camera;
     private Player player;
     private Parallax parallaxGame;
-    private Renderer renderer;
+    private Renderer3D renderer;
     private GameController controller;
     private static final float Z_NEAR = 0.1f;
     private static final float Z_FAR = 300.0f;
@@ -51,7 +49,7 @@ public class CardboardGameScreen implements CardboardScreen {
         camera.near = Z_NEAR;
         camera.far = Z_FAR;
 
-        renderer = new Renderer(camera);
+        renderer = Renderer3D.initialize(camera);
         sound = new Sound();
         collisionCalculator = new CollisionCalculator();
     }
@@ -87,7 +85,8 @@ public class CardboardGameScreen implements CardboardScreen {
 
     @Override
     public void dispose() {
-        RenderQueue.getInstance().getRenderables().clear();
+        //TODO Fix to work with new render structure
+//        RenderQueue.getInstance().getRenderables().clear();
     }
 
     @Override
@@ -109,6 +108,6 @@ public class CardboardGameScreen implements CardboardScreen {
         camera.update();
 
         //Renders scene for current eye
-        renderer.renderAll();
+        renderer.renderFrame();
     }
 }
