@@ -1,4 +1,4 @@
-package com.tda367.parallax.model.parallaxcore.course;
+package com.tda367.parallax.model.parallaxcore.world;
 
 import com.tda367.parallax.model.parallaxcore.collision.Collidable;
 import com.tda367.parallax.model.util.Renderable;

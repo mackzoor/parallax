@@ -1,4 +1,4 @@
-package com.tda367.parallax.model.parallaxcore.course;
+package com.tda367.parallax.model.parallaxcore.world;
 
 import com.tda367.parallax.model.parallaxcore.collision.*;
 import com.tda367.parallax.model.parallaxcore.powerups.Container;
@@ -15,7 +15,7 @@ import java.util.List;
  * A course that handles the visual representation and updating of {@link ISpaceCraft} and {@link Collidable}.
  */
 
-public class Course implements Updatable, CollisionObserver {
+public class World implements Updatable, CollisionObserver {
     private List<ICourseModule> modules;
     private List<ISpaceCraft> spaceCrafts;
     //TODO, remove the power-up after used
@@ -24,7 +24,7 @@ public class Course implements Updatable, CollisionObserver {
     private final int powerUpSpawnTime = 600; //Measured in tickrate
     private int lastPowerUpSpawn; //Time since last powerup spawn
 
-    public Course(){
+    public World(){
         lastPowerUpSpawn = 0;
         CollisionManager.getInstance().subscribeToCollisions(this);
         modules = new ArrayList<ICourseModule>();
