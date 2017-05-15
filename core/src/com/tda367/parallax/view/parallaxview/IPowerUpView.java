@@ -1,7 +1,7 @@
 package com.tda367.parallax.view.parallaxview;
 
 import com.tda367.parallax.model.parallaxcore.powerups.IPowerUp;
-import com.tda367.parallax.view.Model;
+import com.tda367.parallax.view.util.Model;
 import com.tda367.parallax.view.Renderer3D;
 
 /**
@@ -10,12 +10,12 @@ import com.tda367.parallax.view.Renderer3D;
 public class IPowerUpView implements View {
     private final String model3dInternalPath = "3dModels/missile/missile.g3db";
     private final IPowerUp powerUp;
-    private Renderable3dObject renderable3dObject;
+    private com.tda367.parallax.view.util.Renderable3dObject renderable3dObject;
 
 
     public IPowerUpView(IPowerUp powerUp) {
         this.powerUp = powerUp;
-        renderable3dObject = new Renderable3dObject(
+        renderable3dObject = new com.tda367.parallax.view.util.Renderable3dObject(
                 powerUp.getPos(),
                 powerUp.getRot(),
                 new Model("3dModels/missile/missile.g3db")

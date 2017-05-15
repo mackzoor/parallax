@@ -18,10 +18,10 @@ public class CardboardMenuRenderer {
     private ModelBatch modelBatch;
     private CardboardCamera camera;
     private Environment environment;
-    private ResourceLoader rh;
+    private com.tda367.parallax.view.util.ResourceLoader rh;
 
     public CardboardMenuRenderer(CardboardCamera camera) {
-        rh = ResourceLoader.getInstance();
+        rh = com.tda367.parallax.view.util.ResourceLoader.getInstance();
         modelBatch = new ModelBatch();
         this.camera = camera;
 
@@ -57,9 +57,9 @@ public class CardboardMenuRenderer {
         modelBatch.begin(camera);
 
         //TODO Fix to work with new render structure
-        List<Renderable> renderables = null;// = RenderQueue.getInstance().getRenderables();
+        List<com.tda367.parallax.view.util.Renderable> renderables = null;// = RenderQueue.getInstance().getRenderables();
 
-        for (Renderable renderable : renderables) {
+        for (com.tda367.parallax.view.util.Renderable renderable : renderables) {
             ModelInstance modelInstance = rh.getModel(renderable.getModel().getModelName(), renderable.getModel().getModelDirectory());
 
             modelInstance.transform.setToTranslation(

@@ -1,7 +1,7 @@
 package com.tda367.parallax.view.parallaxview;
 
 import com.tda367.parallax.model.parallaxcore.spacecraft.ISpaceCraft;
-import com.tda367.parallax.view.Model;
+import com.tda367.parallax.view.util.Model;
 import com.tda367.parallax.view.Renderer3D;
 
 /**
@@ -11,11 +11,11 @@ public class AgelionView implements View {
 
     private final String model3dInternalPath = "3dModels/agelion/agelion.g3db";
     private final ISpaceCraft agelion;
-    private Renderable3dObject renderable3dObject;
+    private com.tda367.parallax.view.util.Renderable3dObject renderable3dObject;
 
     public AgelionView(ISpaceCraft agelion) {
         this.agelion = agelion;
-        renderable3dObject = new Renderable3dObject(
+        renderable3dObject = new com.tda367.parallax.view.util.Renderable3dObject(
                 agelion.getPos(),
                 agelion.getRot(),
                 new Model("3dModels/agelion/agelion.g3db")

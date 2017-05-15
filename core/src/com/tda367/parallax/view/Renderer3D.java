@@ -21,7 +21,7 @@ public class Renderer3D {
     private ModelBatch modelBatch;
     private Camera camera;
     private Environment environment;
-    private ResourceLoader rh;
+    private com.tda367.parallax.view.util.ResourceLoader rh;
 
     //Singleton pattern
     private static Renderer3D renderer3D;
@@ -36,7 +36,7 @@ public class Renderer3D {
 
     private Renderer3D(Camera camera) {
         this.camera = camera;
-        rh = ResourceLoader.getInstance();
+        rh = com.tda367.parallax.view.util.ResourceLoader.getInstance();
         modelBatch = new ModelBatch();
 
         camera.near = 0.1f;
@@ -60,7 +60,7 @@ public class Renderer3D {
 
 
     private List<ModelInstance> modelsToRender = new ArrayList<ModelInstance>();
-    public void addObjectToFrame(Renderable renderObject) {
+    public void addObjectToFrame(com.tda367.parallax.view.util.Renderable renderObject) {
         // You've seen all this before, just be sure to clear the GL_DEPTH_BUFFER_BIT when working in 3D
         Gdx.gl.glEnable(GL20.GL_DEPTH_TEST);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);

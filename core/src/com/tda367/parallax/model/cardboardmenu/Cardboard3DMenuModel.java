@@ -1,7 +1,7 @@
 package com.tda367.parallax.model.cardboardmenu;
 
-import com.tda367.parallax.view.Model;
-import com.tda367.parallax.view.Renderable;
+import com.tda367.parallax.view.util.Model;
+import com.tda367.parallax.view.util.Renderable;
 import com.tda367.parallax.view.Renderer3D;
 
 import javax.vecmath.Quat4f;

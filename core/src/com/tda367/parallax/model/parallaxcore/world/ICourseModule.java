@@ -4,7 +4,6 @@ import com.tda367.parallax.model.parallaxcore.collision.Collidable;
 import com.tda367.parallax.model.parallaxcore.powerups.Container;
 import com.tda367.parallax.model.parallaxcore.powerups.IPowerUp;
 import com.tda367.parallax.model.parallaxcore.util.Transformable;
-import com.tda367.parallax.view.Renderable;
 
 import java.util.List;
 
