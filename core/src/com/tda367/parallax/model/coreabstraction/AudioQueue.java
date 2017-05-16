@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A singleton bus class that holds the current audio that need to be played.
+ * A singleton bus class that holds the current audio that needs to be played.
  */
 
 public class AudioQueue {
