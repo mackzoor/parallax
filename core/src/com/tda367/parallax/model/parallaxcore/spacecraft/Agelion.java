@@ -260,7 +260,7 @@ public class Agelion implements ISpaceCraft {
     public void handleCollision(Collidable collidable) {
         if (collidable.getCollidableType() == CollidableType.OBSTACLE || collidable.getCollidableType() == CollidableType.HARMFUL){
             //Take damage if collided with obstacle or harmful
-            AudioQueue.getInstance().playSound("flashBang.mp3","sounds/effects", 0.2f);
+            AudioQueue.getInstance().playSound("flashBang.mp3","sounds/effects", 0.07f);
             decHealth();
         } else if (collidable.getCollidableType() == CollidableType.CONTAINER){
             //take powerup of collided with container
@@ -269,6 +269,8 @@ public class Agelion implements ISpaceCraft {
             add(container.getPowerUp());
         }
     }
+
+
 
     private Vector2f xzPos(Vector3f vector3f) {
         return new Vector2f(vector3f.getX(), vector3f.getZ());

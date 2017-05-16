@@ -1,6 +1,5 @@
 package com.tda367.parallax.model.parallaxcore.world;
 
-import com.tda367.parallax.model.coreabstraction.AudioQueue;
 import com.tda367.parallax.model.parallaxcore.collision.Collidable;
 import com.tda367.parallax.model.parallaxcore.collision.CollidableType;
 import com.tda367.parallax.model.parallaxcore.collision.CollisionManager;
@@ -69,7 +68,6 @@ public class BoxObstacle implements Collidable {
     public void handleCollision(Collidable collidable) {
         if (collidable.getCollidableType() == CollidableType.SPACECRAFT){
             disableCollision();
-            AudioQueue.getInstance().playSound("flashBang.mp3","sounds/effects", 0.1f);
         }
     }
 }
