@@ -18,7 +18,8 @@ public class AgelionView implements View {
         renderable3dObject = new com.tda367.parallax.view.util.Renderable3dObject(
                 agelion.getPos(),
                 agelion.getRot(),
-                new Model("3dModels/agelion/agelion.g3db")
+                new Model("3dModels/agelion/agelion.g3db"),
+                1f
         );
     }
 

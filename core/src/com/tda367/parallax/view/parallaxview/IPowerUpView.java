@@ -18,7 +18,8 @@ public class IPowerUpView implements View {
         renderable3dObject = new com.tda367.parallax.view.util.Renderable3dObject(
                 powerUp.getPos(),
                 powerUp.getRot(),
-                new Model("3dModels/missile/missile.g3db")
+                new Model("3dModels/missile/missile.g3db"),
+                1f
         );
     }
 

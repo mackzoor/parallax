@@ -10,25 +10,28 @@ import com.tda367.parallax.view.Renderer3D;
 public class ContainerView implements View {
 
     private final String model3dInternalPath = "3dModels/agelion/agelion.g3db";
-    private final Container obstacle;
+    private final Container container;
     private com.tda367.parallax.view.util.Renderable3dObject renderable3dObject;
 
-    ContainerView(Container obstacle) {
-        this.obstacle = obstacle;
+    ContainerView(Container container) {
+        this.container = container;
         renderable3dObject = new com.tda367.parallax.view.util.Renderable3dObject(
-                obstacle.getPos(),
-                obstacle.getRot(),
-                new Model("3dModels/agelion/agelion.g3db")
+                container.getPos(),
+                container.getRot(),
+                new Model("3dModels/agelion/agelion.g3db"),
+                1f
         );
     }
 
     @Override
     public void render() {
-        Renderer3D.getInstance().addObjectToFrame(renderable3dObject);
+        if (!container.isCollected()){
+            Renderer3D.getInstance().addObjectToFrame(renderable3dObject);
+        }
     }
     @Override
     public boolean isObsolete() {
-        return !obstacle.isCollected();
+        return !container.isCollected();
     }
 
 }
