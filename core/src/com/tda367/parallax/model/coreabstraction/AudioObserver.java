@@ -1,7 +1,10 @@
 package com.tda367.parallax.model.coreabstraction;
 
+/**
+ * An interface for classes handling music playing
+ */
+
 public interface AudioObserver {
-    //TODO might want to remove method-heads using musicFile as parameter, they might never get used.
 
     void playSound(String sound);
     void playMusic(String music);
