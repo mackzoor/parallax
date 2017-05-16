@@ -67,7 +67,7 @@ public class Parallax implements Updatable {
 
     private void calculatePlayerScore(int milliSinceLastUpdate){
         totalPlayingTime = totalPlayingTime + milliSinceLastUpdate;
-        player.setScore(totalPlayingTime/1000);
+        player.setScore(totalPlayingTime/100);
     }
 
     public List<ISpaceCraft> getSpaceCraft(){
