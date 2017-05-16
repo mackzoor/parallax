@@ -26,7 +26,8 @@ public class CourseModelView implements View{
         courseModule3dObject = new com.tda367.parallax.view.util.Renderable3dObject(
                 courseModule.getPos(),
                 courseModule.getRot(),
-                new Model("3dModels/defaultCourse/course.g3db")
+                new Model("3dModels/defaultCourse/course.g3db"),
+                1f
         );
 
         for (Collidable collidable : courseModule.getBoxObstacles()) {

@@ -11,11 +11,13 @@ public class Renderable3dObject implements Renderable {
     private Vector3f pos;
     private Quat4f rot;
     private Model model;
+    private float opacity;
 
-    public Renderable3dObject(Vector3f pos, Quat4f rot, Model model) {
+    public Renderable3dObject(Vector3f pos, Quat4f rot, Model model, float opacity) {
         this.pos = pos;
         this.rot = rot;
         this.model = model;
+        this.opacity = opacity;
     }
 
     @Override
@@ -32,6 +34,12 @@ public class Renderable3dObject implements Renderable {
     public Model getModel() {
         return model;
     }
+
+    @Override
+    public float getOpacity() {
+        return opacity;
+    }
+
     @Override
     public Vector3f getPos() {
         return pos;

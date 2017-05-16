@@ -10,4 +10,5 @@ public interface Renderable extends Transformable {
     void addToRenderManager();
     void removeFromRenderManager();
     Model getModel();
+    float getOpacity();
 }

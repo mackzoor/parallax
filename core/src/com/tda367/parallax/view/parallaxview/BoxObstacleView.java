@@ -19,8 +19,9 @@ public class BoxObstacleView implements View{
         renderable3dObject = new com.tda367.parallax.view.util.Renderable3dObject(
                 collidable.getPos(),
                 collidable.getRot(),
-                new Model("3dModels/boxObstacle/boxObstacle.g3db"
-        ));
+                new Model("3dModels/boxObstacle/boxObstacle.g3db"),
+                0.5f
+        );
     }
 
     public BoxObstacleView(BoxObstacle obstacle) {
@@ -28,7 +29,8 @@ public class BoxObstacleView implements View{
         renderable3dObject = new com.tda367.parallax.view.util.Renderable3dObject(
                 obstacle.getPos(),
                 obstacle.getRot(),
-                new Model("3dModels/boxObstacle/boxObstacle.g3db")
+                new Model("3dModels/boxObstacle/boxObstacle.g3db"),
+                0.5f
         );
     }
 

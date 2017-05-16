@@ -10,9 +10,6 @@ import com.tda367.parallax.view.Renderer3D;
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
 
-/**
- * Created by Rasmus on 2017-05-08.
- */
 public class Cardboard3DStartButton implements Renderable,Collidable {
 
     private Vector3f pos;
@@ -37,6 +34,11 @@ public class Cardboard3DStartButton implements Renderable,Collidable {
     @Override
     public Model getModel() {
         return model;
+    }
+
+    @Override
+    public float getOpacity() {
+        return 1f;
     }
 
     @Override

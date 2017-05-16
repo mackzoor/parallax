@@ -5,8 +5,10 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.g3d.Environment;
+import com.badlogic.gdx.graphics.g3d.Material;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
+import com.badlogic.gdx.graphics.g3d.attributes.BlendingAttribute;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.math.Quaternion;
 
@@ -73,6 +75,12 @@ public class Renderer3D {
                 renderObject.getPos().getZ(),
                 renderObject.getPos().getY() * -1
         );
+
+        //Change opacity level
+        BlendingAttribute blendingAttribute = new BlendingAttribute();
+        blendingAttribute.opacity = renderObject.getOpacity();
+        Material material = modelInstance.materials.get(0);
+        material.set(blendingAttribute);
 
         modelInstance.transform.rotate(
                 new Quaternion(
