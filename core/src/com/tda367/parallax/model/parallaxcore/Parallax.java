@@ -8,6 +8,7 @@ import com.tda367.parallax.model.parallaxcore.enemies.MinionEnemy;
 import com.tda367.parallax.model.parallaxcore.spacecraft.Agelion;
 import com.tda367.parallax.model.parallaxcore.spacecraft.ISpaceCraft;
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
@@ -24,6 +25,7 @@ public class Parallax implements Updatable {
     @Getter private World world;
     @Getter private Camera camera;
     @Getter private Player player;
+    @Getter @Setter private int totalPlayingTime;
 
     private List<HunterAI> ais;
 
@@ -60,8 +62,13 @@ public class Parallax implements Updatable {
         world.update(updateTime);
         camera.update(updateTime);
 
+        calculatePlayerScore(milliSinceLastUpdate);
     }
 
+    private void calculatePlayerScore(int milliSinceLastUpdate){
+        totalPlayingTime = totalPlayingTime + milliSinceLastUpdate;
+        player.setScore(totalPlayingTime/1000);
+    }
 
     public List<ISpaceCraft> getSpaceCraft(){
         return world.getSpaceCrafts();
