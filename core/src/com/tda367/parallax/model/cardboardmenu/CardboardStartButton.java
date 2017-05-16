@@ -10,45 +10,24 @@ import com.tda367.parallax.view.Renderer3D;
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
 
-public class Cardboard3DExitButton implements Renderable, Collidable {
+
+public class CardboardStartButton implements Collidable {
 
     private Vector3f pos;
     private Quat4f rot;
     private boolean isHit;
 
-    private Model model;
-
     private String collisionModel;
 
     private boolean collisionEnabled;
 
-    public Cardboard3DExitButton(){
+    CardboardStartButton(){
         pos = new Vector3f();
         rot = new Quat4f();
-        model = new Model("boxObstacle.g3db", "3dModels/boxObstacle");
         collisionModel = "3dModels/boxObstacle/boxObstacle.g3db";
         collisionEnabled = true;
     }
 
-    @Override
-    public Model getModel() {
-        return model;
-    }
-
-    @Override
-    public float getOpacity() {
-        return 1f;
-    }
-
-    @Override
-    public void addToRenderManager() {
-        Renderer3D.getInstance().addObjectToFrame(this);
-    }
-
-    @Override
-    public void removeFromRenderManager() {
-        Renderer3D.getInstance().addObjectToFrame(this);
-    }
 
     @Override
     public Vector3f getPos() {
@@ -60,13 +39,14 @@ public class Cardboard3DExitButton implements Renderable, Collidable {
         return rot;
     }
 
+
     public boolean isActive() {
         return collisionEnabled;
     }
 
     @Override
     public boolean collisionActivated() {
-        return false;
+        return collisionEnabled;
     }
 
     @Override
@@ -96,7 +76,7 @@ public class Cardboard3DExitButton implements Renderable, Collidable {
 
     @Override
     public CollidableType getCollidableType() {
-        return CollidableType.CONTAINER;
+        return CollidableType.OBSTACLE;
     }
 
     @Override
@@ -105,11 +85,9 @@ public class Cardboard3DExitButton implements Renderable, Collidable {
             isHit = true;
         }
     }
-
     public void setPos(Vector3f vector3f){
         pos = vector3f;
     }
-
     public boolean isCollided(){
         return isHit;
     }
