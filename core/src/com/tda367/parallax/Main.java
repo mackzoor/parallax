@@ -4,13 +4,15 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.tda367.parallax.controller.GameStateManager;
 import com.tda367.parallax.controller.devicestates.DeviceManager;
+import com.tda367.parallax.model.parallaxcore.Player;
 
 public class Main extends Game {
 
     @Override
     public void create() {
+        Player player = new Player();
         DeviceManager.setDevice(this);
-        GameStateManager.setMainMenuScreen(this);
+        GameStateManager.setMainMenuScreen(this,player);
     }
 
     @Override

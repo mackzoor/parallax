@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
+import com.tda367.parallax.controller.GameStateManager;
 import com.tda367.parallax.controller.gamecontrollers.GameController;
 import com.tda367.parallax.controller.devicestates.DeviceManager;
 import com.tda367.parallax.model.CollisionCalculator;
@@ -31,27 +32,15 @@ public class GameScreen implements Screen {
     private CollisionCalculator collisionCalculator;
     private ParallaxView parallaxView;
 
-    public GameScreen(Game game) {
+    public GameScreen(Game game,Player player) {
         this.game = game;
 
         audioQueue = AudioQueue.getInstance();
         collisionCalculator = new CollisionCalculator();
 
         // Initiate game with space craft "Agelion"
-        this.player = new Player();
-        this.player.addSpaceCraft(new Agelion(15));
-        this.parallaxGame = new Parallax(player);
-        controller = new GameController(parallaxGame, DeviceManager.getDevice());
-
-        parallaxView = new ParallaxView(parallaxGame);
-        renderer3D = Renderer3D.initialize(
-                new PerspectiveCamera(
-                        parallaxGame.getCamera().getFov(),
-                        Gdx.graphics.getWidth(),
-                        Gdx.graphics.getHeight()
-                )
-        );
-
+        renderer3D = new Renderer3D(0,0,0);
+        this.player = player;
         sound = new Sound();
     }
 
@@ -61,12 +50,18 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
+        if(player.getSpaceCraft().getHealth() > 1) {
 //        System.out.println("Fps: " + 1/delta);
-        //Updates Parallax game logic
-        parallaxGame.update((int) (Gdx.graphics.getDeltaTime() * 1000));
-//        collisionCalculator.run();
-        parallaxView.render();
-        DeviceManager.getDevice().update();
+            //Updates Parallax game logic
+            parallaxGame.update((int) (Gdx.graphics.getDeltaTime() * 1000));
+            collisionCalculator.run();
+            parallaxView.render();
+            DeviceManager.getDevice().update();
+            System.out.println(player.getSpaceCraft().getHealth());
+        }else{
+            dispose();
+            GameStateManager.setGameOverScreen(game,player);
+        }
     }
 
     @Override
@@ -94,5 +89,20 @@ public class GameScreen implements Screen {
         //TODO I think this below was important.
 //        parallaxGame.getRenderQueue().getRenderables().clear();
         audioQueue.clearAllActiveMusic();
+    }
+
+
+    public void newGame(){
+        player.addSpaceCraft(new Agelion(15));
+        parallaxGame = new Parallax(player);
+        parallaxView = new ParallaxView(parallaxGame);
+        controller = new GameController(parallaxGame,DeviceManager.getDevice());
+        renderer3D = Renderer3D.initialize(
+                new PerspectiveCamera(
+                        parallaxGame.getCamera().getFov(),
+                        Gdx.graphics.getWidth(),
+                        Gdx.graphics.getHeight()
+                )
+        );
     }
 }

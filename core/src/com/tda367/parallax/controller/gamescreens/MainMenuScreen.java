@@ -7,21 +7,21 @@ import com.tda367.parallax.controller.gamecontrollers.MainMenuController;
 import com.tda367.parallax.controller.devicestates.DeviceManager;
 import com.tda367.parallax.controller.GameStateManager;
 import com.tda367.parallax.model.menu.MainMenuModel;
+import com.tda367.parallax.model.parallaxcore.Player;
 import com.tda367.parallax.view.menu.MainMenuView;
 
 public class MainMenuScreen implements Screen {
 
     private Game game;
+    private Player player;
     private MainMenuModel mainMenuModel;
     private MainMenuController mainMenuController;
     private MainMenuView mainMenuView;
 
 
-    public MainMenuScreen(final Game game) {
+    public MainMenuScreen(final Game game, Player player) {
+        this.player = player;
         this.game = game;
-        this.mainMenuModel = new MainMenuModel(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        this.mainMenuController = new MainMenuController(mainMenuModel, DeviceManager.getDevice());
-        this.mainMenuView = new MainMenuView(mainMenuModel);
     }
 
     @Override
@@ -32,7 +32,7 @@ public class MainMenuScreen implements Screen {
     @Override
     public void render(float delta) {
         if (mainMenuController.isStartButtonPressed()) {
-            GameStateManager.setGameScreen(game);
+            GameStateManager.setGameScreen(game,player);
         } else if (mainMenuController.isExitButtonPressed()) {
             Gdx.app.exit();
         } else {
@@ -42,7 +42,7 @@ public class MainMenuScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-        mainMenuModel.resize(width, height);
+        //mainMenuModel.resize(width, height);
     }
 
     @Override
@@ -63,5 +63,11 @@ public class MainMenuScreen implements Screen {
     @Override
     public void dispose() {
         mainMenuView.dispose();
+    }
+
+    public void newMainMenu(){
+        this.mainMenuModel = new MainMenuModel(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        this.mainMenuController = new MainMenuController(mainMenuModel, DeviceManager.getDevice());
+        this.mainMenuView = new MainMenuView(mainMenuModel);
     }
 }
