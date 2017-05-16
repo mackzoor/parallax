@@ -10,7 +10,7 @@ import com.tda367.parallax.view.util.Renderable3dObject;
 public class CardboardMenuStartButtonView implements View {
 
     private String internalPath;
-    CardboardStartButton startButton;
+    private CardboardStartButton startButton;
     private Renderable3dObject renderable3dObject;
 
 
@@ -21,7 +21,7 @@ public class CardboardMenuStartButtonView implements View {
         renderable3dObject = new Renderable3dObject(startButton.getPos(),
                 startButton.getRot(),
                 new com.tda367.parallax.view.util.Model("3dModels/boxObstacle/boxObstacle.g3db"
-                ));
+                ),0.5f);
     }
 
 

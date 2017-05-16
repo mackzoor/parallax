@@ -4,9 +4,7 @@ import com.tda367.parallax.controller.devicestates.Device;
 import com.tda367.parallax.controller.inputcontrollers.InputControlsListener;
 import com.tda367.parallax.model.cardboardmenu.CardboardMainMenu;
 
-/**
- * Created by Rasmus on 2017-05-10.
- */
+
 public class CardboardMenuController implements InputControlsListener {
 
     CardboardMainMenu cardboardMainMenu;

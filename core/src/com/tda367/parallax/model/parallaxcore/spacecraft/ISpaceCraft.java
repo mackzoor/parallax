@@ -5,6 +5,7 @@ import com.tda367.parallax.model.parallaxcore.util.Updatable;
 import com.tda367.parallax.model.parallaxcore.powerups.IPowerUp;
 
 import javax.vecmath.Vector2f;
+import javax.vecmath.Vector3f;
 import java.util.List;
 
 /**
@@ -25,6 +26,10 @@ public interface ISpaceCraft extends Collidable, Updatable {
     void incHealth();
     void decHealth();
     int getHealth();
+    void setHealth(int health);
+
+    Vector2f getCurrentPanVelocity();
+    void setCurrentPanVelocity(float x, float y);
 }
 
 

@@ -3,6 +3,7 @@ package com.tda367.parallax.view.cardboardmenu;
 import com.tda367.parallax.model.cardboardmenu.CardboardWorld;
 import com.tda367.parallax.view.Renderer3D;
 import com.tda367.parallax.view.parallaxview.View;
+import com.tda367.parallax.view.util.Model;
 import com.tda367.parallax.view.util.Renderable3dObject;
 
 
@@ -18,9 +19,7 @@ public class CardboardMenuWorldView implements View {
         internalPath = "/3dModels/defaultCourse/course.g3db";
         this.world = world;
         renderable3dObject = new Renderable3dObject(world.getPos(),
-                world.getRot(),
-                new com.tda367.parallax.view.util.Model("3dModels/defaultCourse/course.g3db"
-                ));
+                world.getRot(),new Model("3dModels/defaultCourse/course.g3db"),1f);
 
     }
 

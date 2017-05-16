@@ -11,9 +11,7 @@ import com.badlogic.gdx.math.Quaternion;
 
 import java.util.List;
 
-/**
- * Created by Rasmus on 2017-05-08.
- */
+
 public class CardboardMenuRenderer {
     private ModelBatch modelBatch;
     private CardboardCamera camera;

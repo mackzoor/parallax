@@ -19,7 +19,7 @@ public class CardboardMenuExitButtonView implements View {
                 exitButton.getPos(),
                 exitButton.getRot(),
                 new com.tda367.parallax.view.util.Model("3dModels/boxObstacle/boxObstacle.g3db"
-                ));
+                ),0.5f);
     }
 
 

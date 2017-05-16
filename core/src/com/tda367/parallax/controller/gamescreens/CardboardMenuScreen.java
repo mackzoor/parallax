@@ -2,6 +2,7 @@ package com.tda367.parallax.controller.gamescreens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.android.CardboardCamera;
+import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.math.Matrix4;
 import com.google.vrtoolkit.cardboard.Eye;
 import com.google.vrtoolkit.cardboard.HeadTransform;
@@ -16,12 +17,14 @@ import com.tda367.parallax.model.cardboardmenu.CardboardMenuObserver;
 import com.tda367.parallax.model.parallaxcore.Player;
 import com.tda367.parallax.model.parallaxcore.collision.CollisionManager;
 import com.tda367.parallax.view.CardboardMenuRenderer;
+import com.tda367.parallax.view.Renderer3D;
 import com.tda367.parallax.view.Sound;
+import com.tda367.parallax.view.cardboardmenu.CardboardMainMenuView;
+import com.tda367.parallax.view.cardboardmenu.CardboardMenuWorldView;
 
 
 public class CardboardMenuScreen implements CardboardScreen, CardboardMenuObserver {
     private CardboardCamera camera;
-    private Player player;
     private CardboardMenuRenderer renderer;
     private CardboardGame game;
     private CardboardMenuController controller;
@@ -30,12 +33,12 @@ public class CardboardMenuScreen implements CardboardScreen, CardboardMenuObserv
     private Sound sound;
     private CardboardMainMenu cardboardMainMenu;
     private CollisionCalculator collisionCalculator;
-
+    private CardboardMainMenuView view;
+    private Renderer3D renderer3D;
 
     public CardboardMenuScreen(CardboardGame game) {
         this.game = game;
         cardboardMainMenu = new CardboardMainMenu();
-        player = new Player();
         camera = new CardboardCamera();
         camera.position.set(0, 0, 0);
         camera.lookAt(0, 0, -1);
@@ -44,6 +47,9 @@ public class CardboardMenuScreen implements CardboardScreen, CardboardMenuObserv
         renderer = new CardboardMenuRenderer(camera);
         sound = new Sound();
         controller = new CardboardMenuController(cardboardMainMenu, DeviceManager.getGameModeState(game));
+        view = new CardboardMainMenuView(cardboardMainMenu);
+        renderer3D = Renderer3D.initialize(camera);
+
         cardboardMainMenu.addObservers(this);
         collisionCalculator = new CollisionCalculator();
     }
@@ -65,7 +71,7 @@ public class CardboardMenuScreen implements CardboardScreen, CardboardMenuObserv
         camera.update();
 
         //Renders scene for current eye
-        renderer.renderAll();
+        view.render();
     }
 
 

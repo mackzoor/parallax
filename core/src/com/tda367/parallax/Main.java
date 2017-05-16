@@ -10,7 +10,7 @@ public class Main extends Game {
     @Override
     public void create() {
         DeviceManager.setDevice(this);
-        GameStateManager.setGameScreen(this);
+        GameStateManager.setMainMenuScreen(this);
     }
 
     @Override
