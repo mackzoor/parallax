@@ -4,6 +4,8 @@ import com.tda367.parallax.model.parallaxcore.collision.Collidable;
 import com.tda367.parallax.model.parallaxcore.world.BoxObstacle;
 import com.tda367.parallax.view.util.Model;
 import com.tda367.parallax.view.Renderer3D;
+import com.tda367.parallax.view.util.Renderable3dObject;
+import com.tda367.parallax.view.util.ResourceLoader;
 
 /**
  * View class for {@link com.tda367.parallax.model.parallaxcore.world.BoxObstacle}.
@@ -16,20 +18,20 @@ public class BoxObstacleView implements View{
 
     public BoxObstacleView(Collidable collidable){
         obstacle = null;
-        renderable3dObject = new com.tda367.parallax.view.util.Renderable3dObject(
+        renderable3dObject = new Renderable3dObject(
                 collidable.getPos(),
                 collidable.getRot(),
-                new Model("3dModels/boxObstacle/boxObstacle.g3db"),
+                ResourceLoader.getInstance().getModel(model3dInternalPath),
                 0.5f
         );
     }
 
     public BoxObstacleView(BoxObstacle obstacle) {
         this.obstacle = obstacle;
-        renderable3dObject = new com.tda367.parallax.view.util.Renderable3dObject(
+        renderable3dObject = new Renderable3dObject(
                 obstacle.getPos(),
                 obstacle.getRot(),
-                new Model("3dModels/boxObstacle/boxObstacle.g3db"),
+                ResourceLoader.getInstance().getModel(model3dInternalPath),
                 0.5f
         );
     }

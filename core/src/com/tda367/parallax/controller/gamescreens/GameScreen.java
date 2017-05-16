@@ -61,6 +61,7 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
+//        System.out.println("Fps: " + 1/delta);
         //Updates Parallax game logic
         parallaxGame.update((int) (Gdx.graphics.getDeltaTime() * 1000));
         collisionCalculator.run();

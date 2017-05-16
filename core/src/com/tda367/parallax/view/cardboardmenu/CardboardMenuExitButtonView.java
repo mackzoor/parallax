@@ -3,6 +3,7 @@ package com.tda367.parallax.view.cardboardmenu;
 import com.tda367.parallax.model.cardboardmenu.CardboardExitButton;
 import com.tda367.parallax.view.Renderer3D;
 import com.tda367.parallax.view.parallaxview.View;
+import com.tda367.parallax.view.util.ResourceLoader;
 
 
 public class CardboardMenuExitButtonView implements View {
@@ -13,13 +14,14 @@ public class CardboardMenuExitButtonView implements View {
 
 
     CardboardMenuExitButtonView(CardboardExitButton exitButton) {
-        internalPath = "3dModels/boxObstacle";
+        internalPath = "3dModels/boxObstacle/boxObstacle.g3db";
         this.exitButton = exitButton;
         renderable3dObject = new com.tda367.parallax.view.util.Renderable3dObject(
                 exitButton.getPos(),
                 exitButton.getRot(),
-                new com.tda367.parallax.view.util.Model("3dModels/boxObstacle/boxObstacle.g3db"
-                ),0.5f);
+                ResourceLoader.getInstance().getModel("3dModels/boxObstacle/boxObstacle.g3db"),
+                0.5f
+        );
     }
 
 
