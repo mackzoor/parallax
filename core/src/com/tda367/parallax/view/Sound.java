@@ -3,6 +3,7 @@ package com.tda367.parallax.view;
 import com.badlogic.gdx.audio.Music;
 import com.tda367.parallax.model.coreabstraction.AudioObserver;
 import com.tda367.parallax.model.coreabstraction.AudioQueue;
+import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,82 +19,61 @@ public class Sound implements AudioObserver {
         AudioQueue.getInstance().addListener(this);
     }
 
-    @Override
-    public void playSound(String sound) {
-        resources.getSound(sound).play();
-    }
 
+    //AudioObserver methods
+
+    //Methods for playing music or sound using its location (directory\fileName).
+    //Methods use either 1f or "volume" variable for deciding volume level.
     @Override
-    public void playMusic(String music) {
-        Music playing = resources.getMusic(music);
+    public void playSound(String soundLocation) {
+        resources.getSound(soundLocation).play();
+    }
+    @Override
+    public void playMusic(String musicLocation) {
+        Music playing = resources.getMusic(musicLocation);
         playing.play();
-        activeMusic.add(new ActiveMusicCombination(music, playing));
+        activeMusic.add(new ActiveMusicCombination(musicLocation, playing));
     }
-
     @Override
-    public void playSound(String sound, float volume) {
-        resources.getSound(sound).play(volume);
+    public void playSound(String soundLocation, float volume) {
+        resources.getSound(soundLocation).play(volume);
     }
-
     @Override
-    public void playMusic(String music, float volume) {
-        Music playing = resources.getMusic(music);
+    public void playMusic(String musicLocation, float volume) {
+        Music playing = resources.getMusic(musicLocation);
         playing.setVolume(volume);
         playing.setLooping(true);
         playing.play();
-        activeMusic.add(new ActiveMusicCombination(music, playing));
+        activeMusic.add(new ActiveMusicCombination(musicLocation, playing));
     }
 
-    public void stopActiveMusic(Music musicFile){
-    for (int i = 0; i < activeMusic.size(); i++) {
-            if (this.activeMusic.get(i).getMusicPlying().equals(musicFile)){
-                this.activeMusic.get(this.activeMusic.indexOf(this.activeMusic.get(i))).getMusicPlying().stop();
-                this.activeMusic.remove(this.activeMusic.get(i));
-            }
-        }
-    }
-
-    public void pauseActiveMusic(Music musicFile){
-        for (int i = 0; i < activeMusic.size(); i++) {
-            if (this.activeMusic.get(i).getMusicPlying().equals(musicFile)){
-                this.activeMusic.get(this.activeMusic.indexOf(this.activeMusic.get(i))).getMusicPlying().pause();
-            }
-        }
-    }
-
-    public void unPauseActiveMusic(Music musicFile){
-        for (int i = 0; i < activeMusic.size(); i++) {
-            if (this.activeMusic.get(i).getMusicPlying().equals(musicFile)){
-                this.activeMusic.get(this.activeMusic.indexOf(this.activeMusic.get(i))).getMusicPlying().play();
-            }
-        }
-    }
-
+    //Methods interacting with active music. Either Stop, Pause, Un-pause or clear it.
+    @Override
     public void stopActiveMusic(String fileNameAndDirectory){
         for (int i = 0; i < activeMusic.size(); i++) {
             if (this.activeMusic.get(i).getFileName().equals(fileNameAndDirectory)){
-                this.activeMusic.get(this.activeMusic.indexOf(this.activeMusic.get(i))).getMusicPlying().stop();
+                this.activeMusic.get(this.activeMusic.indexOf(this.activeMusic.get(i))).getMusicPlaying().stop();
                 this.activeMusic.remove(this.activeMusic.get(i));
             }
         }
     }
-
+    @Override
     public void pauseActiveMusic(String fileNameAndDirectory){
            for (int i = 0; i < activeMusic.size(); i++) {
             if (this.activeMusic.get(i).getFileName().equals(fileNameAndDirectory)){
-                this.activeMusic.get(this.activeMusic.indexOf(this.activeMusic.get(i))).getMusicPlying().pause();
+                this.activeMusic.get(this.activeMusic.indexOf(this.activeMusic.get(i))).getMusicPlaying().pause();
             }
         }
     }
-
+    @Override
     public void unPauseActiveMusic(String fileNameAndDirectory){
            for (int i = 0; i < activeMusic.size(); i++) {
             if (this.activeMusic.get(i).getFileName().equals(fileNameAndDirectory)){
-                this.activeMusic.get(this.activeMusic.indexOf(this.activeMusic.get(i))).getMusicPlying().play();
+                this.activeMusic.get(this.activeMusic.indexOf(this.activeMusic.get(i))).getMusicPlaying().play();
             }
         }
     }
-
+    @Override
     public void clearAllActiveMusic(){
         while(!(activeMusic.size() == 0)){
             activeMusic.remove(0);
@@ -101,23 +81,46 @@ public class Sound implements AudioObserver {
     }
 
 
-    //Inner class for combination class, soundname and file of playing sound.
+
+    //Methods for interacting with the music using it's musicFile, generally only used within this class
+    //TODO, remove these methods if we never find a use for them.
+
+    public void stopActiveMusic(Music musicFile){
+        for (int i = 0; i < activeMusic.size(); i++) {
+            if (this.activeMusic.get(i).getMusicPlaying().equals(musicFile)){
+                this.activeMusic.get(this.activeMusic.indexOf(this.activeMusic.get(i))).getMusicPlaying().stop();
+                this.activeMusic.remove(this.activeMusic.get(i));
+            }
+        }
+    }
+
+    public void pauseActiveMusic(Music musicFile){
+        for (int i = 0; i < activeMusic.size(); i++) {
+            if (this.activeMusic.get(i).getMusicPlaying().equals(musicFile)){
+                this.activeMusic.get(this.activeMusic.indexOf(this.activeMusic.get(i))).getMusicPlaying().pause();
+            }
+        }
+    }
+
+    public void unPauseActiveMusic(Music musicFile){
+        for (int i = 0; i < activeMusic.size(); i++) {
+            if (this.activeMusic.get(i).getMusicPlaying().equals(musicFile)){
+                this.activeMusic.get(this.activeMusic.indexOf(this.activeMusic.get(i))).getMusicPlaying().play();
+            }
+        }
+    }
+
+
+
+    //Inner class for combination class, directory of sound/music and file of playing sound/music.
 
     private final class ActiveMusicCombination {
-        private final String fileName;
-        private final Music playing;
+        @Getter private final String fileName;
+        @Getter private final Music musicPlaying;
 
         private ActiveMusicCombination(String fileName, Music playing) {
             this.fileName = fileName;
-            this.playing = playing;
-        }
-
-        String getFileName() {
-            return fileName;
-        }
-
-        Music getMusicPlying() {
-            return playing;
+            this.musicPlaying = playing;
         }
     }
 
