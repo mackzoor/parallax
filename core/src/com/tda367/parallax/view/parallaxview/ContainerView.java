@@ -3,6 +3,8 @@ package com.tda367.parallax.view.parallaxview;
 import com.tda367.parallax.model.parallaxcore.powerups.Container;
 import com.tda367.parallax.view.util.Model;
 import com.tda367.parallax.view.Renderer3D;
+import com.tda367.parallax.view.util.Renderable3dObject;
+import com.tda367.parallax.view.util.ResourceLoader;
 
 /**
  * View class for {@link com.tda367.parallax.model.parallaxcore.powerups.Container}.
@@ -15,10 +17,10 @@ public class ContainerView implements View {
 
     ContainerView(Container container) {
         this.container = container;
-        renderable3dObject = new com.tda367.parallax.view.util.Renderable3dObject(
+        renderable3dObject = new Renderable3dObject(
                 container.getPos(),
                 container.getRot(),
-                new Model("3dModels/agelion/agelion.g3db"),
+                ResourceLoader.getInstance().getModel(model3dInternalPath),
                 1f
         );
     }

@@ -5,12 +5,10 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.g3d.Environment;
-import com.badlogic.gdx.graphics.g3d.Material;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
-import com.badlogic.gdx.graphics.g3d.attributes.BlendingAttribute;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
-import com.badlogic.gdx.math.Quaternion;
+import com.tda367.parallax.view.util.Renderable3dObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +21,7 @@ public class Renderer3D {
     private ModelBatch modelBatch;
     private Camera camera;
     private Environment environment;
-    private com.tda367.parallax.view.util.ResourceLoader rh;
+    private List<ModelInstance> modelsToRender = new ArrayList<ModelInstance>();
 
     //Singleton pattern
     private static Renderer3D renderer3D;
@@ -38,7 +36,6 @@ public class Renderer3D {
 
     private Renderer3D(Camera camera) {
         this.camera = camera;
-        rh = com.tda367.parallax.view.util.ResourceLoader.getInstance();
         modelBatch = new ModelBatch();
 
         camera.near = 0.1f;
@@ -60,39 +57,21 @@ public class Renderer3D {
         );
     }
 
-
-    private List<ModelInstance> modelsToRender = new ArrayList<ModelInstance>();
-    public void addObjectToFrame(com.tda367.parallax.view.util.Renderable renderObject) {
-        // You've seen all this before, just be sure to clear the GL_DEPTH_BUFFER_BIT when working in 3D
-        Gdx.gl.glEnable(GL20.GL_DEPTH_TEST);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
-
-        //Start rendering for the camera.
-        ModelInstance modelInstance = rh.getModel(renderObject.getModel().getModelName(), renderObject.getModel().getModelDirectory());
-
-        modelInstance.transform.setToTranslation(
-                renderObject.getPos().getX(),
-                renderObject.getPos().getZ(),
-                renderObject.getPos().getY() * -1
-        );
-
-        //Change opacity level
-        BlendingAttribute blendingAttribute = new BlendingAttribute();
-        blendingAttribute.opacity = renderObject.getOpacity();
-        Material material = modelInstance.materials.get(0);
-        material.set(blendingAttribute);
-
-        modelInstance.transform.rotate(
-                new Quaternion(
-                        renderObject.getRot().getX(),
-                        renderObject.getRot().getZ(),
-                        renderObject.getRot().getY() * -1,
-                        renderObject.getRot().getW()
-                )
-        );
-        modelsToRender.add(modelInstance);
+    /**
+     * Adds {@link Renderable3dObject} to be rendered in next frame.
+     * @param renderObject object to be rendered.
+     */
+    public void addObjectToFrame(Renderable3dObject renderObject) {
+        //Add objects to render queue for current frame
+        modelsToRender.add(renderObject.getModelInstance());
     }
 
+    /**
+     * Sets the render camera position in the format; X+ = Right, Y+ = forward, Z+ = up
+     * @param x x-value.
+     * @param y y-value.
+     * @param z z-value.
+     */
     public void setCameraPosition(float x, float y, float z){
         //Update camera position
         camera.position.set(
@@ -103,7 +82,12 @@ public class Renderer3D {
         camera.update();
     }
 
+    /**
+     * Renders frame.
+     */
     public void renderFrame(){
+        Gdx.gl.glEnable(GL20.GL_DEPTH_TEST);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
         modelBatch.begin(camera);
         for (ModelInstance modelInstance : modelsToRender) {
             modelBatch.render(modelInstance, environment);
@@ -112,10 +96,18 @@ public class Renderer3D {
         modelsToRender.clear();
     }
 
+    /**
+     * Sets render y-resolution.
+     * @param y new y-resolution.
+     */
     public void setHeight(int y) {
         camera.viewportHeight = y;
     }
 
+    /**
+     * Sets render x-resolution.
+     * @param x new x-resolution.
+     */
     public void setWidth(int x) {
         camera.viewportWidth = x;
     }
