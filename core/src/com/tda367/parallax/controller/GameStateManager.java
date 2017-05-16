@@ -1,11 +1,8 @@
 package com.tda367.parallax.controller;
 
 import com.badlogic.gdx.Game;
-import com.tda367.parallax.controller.gamescreens.CardboardMenuScreen;
+import com.tda367.parallax.controller.gamescreens.*;
 import com.tda367.parallax.controller.gamescreens.cardboardadapter.CardboardGame;
-import com.tda367.parallax.controller.gamescreens.CardboardGameScreen;
-import com.tda367.parallax.controller.gamescreens.GameScreen;
-import com.tda367.parallax.controller.gamescreens.MainMenuScreen;
 
 public final class GameStateManager {
 
@@ -15,6 +12,7 @@ public final class GameStateManager {
     private static GameScreen gameScreen;
     private static CardboardGameScreen cardboardGameScreen;
     private static CardboardMenuScreen cardboardMenuScreen;
+    private static GameOverScreen gameOverScreen;
 
     public static void setMainMenuScreen(Game game) {
         if (mainMenuScreen == null) {
@@ -42,5 +40,12 @@ public final class GameStateManager {
             cardboardMenuScreen = new CardboardMenuScreen(game);
         }
         game.setCardboardScreen(cardboardMenuScreen);
+    }
+
+    public static void setGameOverScreen(Game game){
+        if(gameOverScreen == null){
+            gameOverScreen = new GameOverScreen(game);
+        }
+        game.setScreen(gameOverScreen);
     }
 }
