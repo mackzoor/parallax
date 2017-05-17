@@ -50,7 +50,7 @@ public final class ResourceLoader {
     }
 
     public ModelInstance getModel(String modelName){
-        return loadModel(modelName,"");
+        return getModel(modelName,"");
     }
 
     public ModelInstance getModel(String modelName, String modelDirectory){

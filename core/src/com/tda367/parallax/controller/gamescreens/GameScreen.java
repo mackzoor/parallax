@@ -55,7 +55,7 @@ public class GameScreen implements Screen {
             collisionCalculator.run();
             parallaxView.render();
             DeviceManager.getDevice().update();
-            System.out.println(player.getSpaceCraft().getHealth());
+//            System.out.println(player.getSpaceCraft().getHealth());
         } else {
             dispose();
             GameStateManager.setGameOverScreen(game, player);

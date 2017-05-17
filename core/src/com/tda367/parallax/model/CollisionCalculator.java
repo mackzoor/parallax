@@ -104,7 +104,7 @@ public class CollisionCalculator implements ICollisionCalculator {
         CollisionManager collisionManager = CollisionManager.getInstance();
         List<Collidable> collidables = collisionManager.getCollidables();
         List<CollisionPair> pairs = new ArrayList<CollisionPair>();
-        System.out.println(collidables.size());
+//        System.out.println(collidables.size());
         for (int i = 0; i < collidables.size(); i++) {
             for (int j = i; j < collidables.size(); j++) {
                 if (i != j && hasCollided(collidables.get(i), collidables.get(j))) {
