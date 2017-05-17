@@ -99,6 +99,11 @@ public class DefaultCourseModule implements ICourseModule {
     @Override
     public void setActiveState(boolean state) {
         active = state;
+        if (!state){
+            for (Container container : containers) {
+                container.removeFromCollisionManager();
+            }
+        }
     }
     @Override
     public List<? extends Collidable> getBoxObstacles() {
