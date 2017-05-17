@@ -16,19 +16,23 @@ public class AgelionView implements View {
 
     public AgelionView(ISpaceCraft agelion) {
         this.agelion = agelion;
-        renderable3dObject = new Renderable3dObject(
-                agelion.getPos(),
-                agelion.getRot(),
-                ResourceLoader.getInstance().getModel(model3dInternalPath),
-                1f
-        );
+        if (!isObsolete()){
+            renderable3dObject = new Renderable3dObject(
+                    agelion.getPos(),
+                    agelion.getRot(),
+                    ResourceLoader.getInstance().getModel(model3dInternalPath),
+                    1f
+            );
+        }
     }
 
     @Override
     public void render() {
-        renderable3dObject.setPos(agelion.getPos());
-        renderable3dObject.setRot(agelion.getRot());
-        Renderer3D.getInstance().addObjectToFrame(renderable3dObject);
+        if (!isObsolete()){
+            renderable3dObject.setPos(agelion.getPos());
+            renderable3dObject.setRot(agelion.getRot());
+            Renderer3D.getInstance().addObjectToFrame(renderable3dObject);
+        }
     }
 
     @Override

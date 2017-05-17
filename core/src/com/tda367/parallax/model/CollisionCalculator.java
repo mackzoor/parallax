@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.bullet.*;
 import com.badlogic.gdx.physics.bullet.collision.*;
 import com.tda367.parallax.model.parallaxcore.collision.*;
+import org.lwjgl.Sys;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,44 +15,34 @@ import java.util.List;
 
 public class CollisionCalculator implements ICollisionCalculator {
 
-    private final btDefaultCollisionConfiguration collisionConfig;
-    private final btCollisionDispatcher dispatcher;
-    private final CollisionObjectWrapper co0;
-    private final CollisionObjectWrapper co1;
-    private final btCollisionAlgorithmConstructionInfo ci;
-    private final btSphereSphereCollisionAlgorithm algorithm;
-    private final btDispatcherInfo info;
-    private final btManifoldResult result;
+    private btSphereShape sphereShape;
+    private btDefaultCollisionConfiguration collisionConfig;
+    private btCollisionDispatcher dispatcher;
+    private CollisionObjectWrapper co0;
+    private CollisionObjectWrapper co1;
+    private btCollisionAlgorithmConstructionInfo ci;
+    private btSphereSphereCollisionAlgorithm algorithm;
+    private btDispatcherInfo info;
+    private btManifoldResult result;
     private btCollisionObject obj1;
     private btCollisionObject obj2;
 
     public CollisionCalculator() {
         Bullet.init();
 
-        btCollisionShape sphereShape = new btSphereShape(1f);
-        obj1 = new btCollisionObject();
-        obj1.setCollisionShape(sphereShape);
-
-
-        btCollisionShape sphereShape2 = new btSphereShape(1f);
-        obj2 = new btCollisionObject();
-        obj2.setCollisionShape(sphereShape2);
-
-        co0 = new CollisionObjectWrapper(obj1);
-        co1 = new CollisionObjectWrapper(obj2);
-
+        //These are needed
         collisionConfig = new btDefaultCollisionConfiguration();
         dispatcher = new btCollisionDispatcher(collisionConfig);
 
-        ci = new btCollisionAlgorithmConstructionInfo();
-        ci.setDispatcher1(dispatcher);
-        algorithm = new btSphereSphereCollisionAlgorithm(null,ci,co0.wrapper,co1.wrapper);
-        info = new btDispatcherInfo();
-        result = new btManifoldResult(co0.wrapper, co1.wrapper);
+        createCollisionObjects();
+        createResultPart();
+        createAlgorithm();
     }
 
     @Override
     public boolean hasCollided(Collidable first, Collidable second) {
+
+
         if (!first.collisionActivated() || !second.collisionActivated()){
             return false;
         }
@@ -62,21 +53,26 @@ public class CollisionCalculator implements ICollisionCalculator {
             return false;
         }
 
-        obj1.setWorldTransform(obj1.getWorldTransform().setTranslation(new Vector3(
+        //Translate collision shapes
+        obj1.setWorldTransform(obj1.getWorldTransform().setTranslation(
                 first.getPos().getX(),
                 first.getPos().getZ(),
                 first.getPos().getY()*-1
-        )));
+        ));
 
-        obj2.setWorldTransform(obj2.getWorldTransform().setTranslation(new Vector3(
+        obj2.setWorldTransform(obj2.getWorldTransform().setTranslation(
                 second.getPos().getX(),
                 second.getPos().getZ(),
                 second.getPos().getY()*-1
-        )));
+        ));
+
+
 
         algorithm.processCollision(co0.wrapper, co1.wrapper, info, result);
+        boolean res = result.getPersistentManifold().getNumContacts() > 0;
 
-        return result.getPersistentManifold().getNumContacts() > 0;
+
+        return res;
     }
 
     @Override
@@ -108,6 +104,7 @@ public class CollisionCalculator implements ICollisionCalculator {
         CollisionManager collisionManager = CollisionManager.getInstance();
         List<Collidable> collidables = collisionManager.getCollidables();
         List<CollisionPair> pairs = new ArrayList<CollisionPair>();
+        System.out.println(collidables.size());
         for (int i = 0; i < collidables.size(); i++) {
             for (int j = i; j < collidables.size(); j++) {
                 if (i != j && hasCollided(collidables.get(i), collidables.get(j))) {
@@ -125,18 +122,67 @@ public class CollisionCalculator implements ICollisionCalculator {
 
     }
 
-    //
-    // TODO, Make these methods not return at a later date.
-    private btCollisionObject collidableConverter(Collidable coll) {
-        btCollisionObject collisionObject = new btCollisionObject();
-
-        return null;
+    private void createResultPart(){
+        ci = new btCollisionAlgorithmConstructionInfo();
+        ci.setDispatcher1(dispatcher);
+        info = new btDispatcherInfo();
+        result = new btManifoldResult(co0.wrapper, co1.wrapper);
+    }
+    private void disposeResultPart(){
+        ci.dispose();
+        info.dispose();
+        result.dispose();
     }
 
-    private btCollisionShape getCollisionShape(Collidable coll) {
-
-        return null;
+    private void createAlgorithm(){
+        algorithm = new btSphereSphereCollisionAlgorithm(null,ci,co0.wrapper,co1.wrapper);
+    }
+    private void disposeAlgorithm(){
+        algorithm.dispose();
     }
 
+    private void createCollisionObjects(){
+        if (obj1 == null && obj2 == null){
+            //Create collision shapes
+            sphereShape = new btSphereShape(1f);
 
+            obj1 = new btCollisionObject();
+            obj1.setCollisionShape(sphereShape);
+
+            obj2 = new btCollisionObject();
+            obj2.setCollisionShape(sphereShape);
+
+            co0 = new CollisionObjectWrapper(obj1);
+            co1 = new CollisionObjectWrapper(obj2);
+        }
+    }
+    private void disposeCollisionObjects(){
+        sphereShape.dispose();
+
+        obj1.dispose();
+        obj2.dispose();
+
+        co0.dispose();
+        co1.dispose();
+
+
+        //Make em null
+        obj1 = null;
+        obj2 = null;
+
+        co0 = null;
+        co1 = null;
+
+        sphereShape = null;
+    }
+
+    public void dispose(){
+        //Dispose c++ objects, SUPER IMPORTANT. Will cause a memory leak if not done.
+        disposeResultPart();
+        disposeAlgorithm();
+        disposeCollisionObjects();
+
+        collisionConfig.dispose();
+        dispatcher.dispose();
+    }
 }

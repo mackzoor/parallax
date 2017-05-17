@@ -64,7 +64,7 @@ public class GameScreen implements Screen {
 //        System.out.println("Fps: " + 1/delta);
         //Updates Parallax game logic
         parallaxGame.update((int) (Gdx.graphics.getDeltaTime() * 1000));
-//        collisionCalculator.run();
+        collisionCalculator.run();
         parallaxView.render();
         DeviceManager.getDevice().update();
     }
