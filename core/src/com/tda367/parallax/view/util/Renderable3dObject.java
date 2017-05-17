@@ -16,12 +16,17 @@ public class Renderable3dObject {
     private Quat4f rot;
     private ModelInstance modelInstance;
     private float opacity;
+    private boolean highPriority;
 
     public Renderable3dObject(Vector3f pos, Quat4f rot, ModelInstance modelInstance, float opacity) {
+        this(pos, rot, modelInstance, opacity, false);
+    }
+    public Renderable3dObject(Vector3f pos, Quat4f rot, ModelInstance modelInstance, float opacity, boolean highPriority) {
         this.modelInstance = modelInstance;
         setPos(pos);
         setRot(rot);
         setOpacity(opacity);
+        this.highPriority = highPriority;
     }
 
     public void setPos(Vector3f pos){
@@ -65,6 +70,9 @@ public class Renderable3dObject {
     }
     public float getOpacity() {
         return opacity;
+    }
+    public boolean isHighPriority(){
+        return highPriority;
     }
     public ModelInstance getModelInstance() {
         return modelInstance;

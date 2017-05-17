@@ -29,7 +29,8 @@ public class CourseModelView implements View{
                 courseModule.getPos(),
                 courseModule.getRot(),
                 ResourceLoader.getInstance().getModel(model3dInternalPath),
-                1f
+                1f,
+                true
         );
 
         for (Collidable collidable : courseModule.getBoxObstacles()) {

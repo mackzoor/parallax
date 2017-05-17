@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
-import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.tda367.parallax.view.util.Renderable3dObject;
 
@@ -21,7 +20,7 @@ public class Renderer3D {
     private ModelBatch modelBatch;
     private Camera camera;
     private Environment environment;
-    private List<ModelInstance> modelsToRender = new ArrayList<ModelInstance>();
+    private List<Renderable3dObject> modelsToRender;
 
     //Singleton pattern
     private static Renderer3D renderer3D;
@@ -36,6 +35,7 @@ public class Renderer3D {
 
     private Renderer3D(Camera camera) {
         this.camera = camera;
+        modelsToRender = new ArrayList<Renderable3dObject>();
         modelBatch = new ModelBatch();
 
         camera.near = 0.1f;
@@ -63,7 +63,7 @@ public class Renderer3D {
      */
     public void addObjectToFrame(Renderable3dObject renderObject) {
         //Add objects to render queue for current frame
-        modelsToRender.add(renderObject.getModelInstance());
+        modelsToRender.add(renderObject);
     }
 
     /**
@@ -88,11 +88,28 @@ public class Renderer3D {
     public void renderFrame(){
         Gdx.gl.glEnable(GL20.GL_DEPTH_TEST);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
+
+        //Start rendering
         modelBatch.begin(camera);
-        for (ModelInstance modelInstance : modelsToRender) {
-            modelBatch.render(modelInstance, environment);
+
+        //Render high priority objects
+        for (Renderable3dObject renderable3dObject : modelsToRender) {
+            if (renderable3dObject.isHighPriority()){
+                modelBatch.render(renderable3dObject.getModelInstance(), environment);
+            }
         }
+
+        //Render low priority objects
+        for (Renderable3dObject renderable3dObject : modelsToRender) {
+            if (!renderable3dObject.isHighPriority()){
+                modelBatch.render(renderable3dObject.getModelInstance(), environment);
+            }
+        }
+
+        //End rendering
         modelBatch.end();
+
+        //Clear models to render.
         modelsToRender.clear();
     }
 
