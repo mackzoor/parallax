@@ -4,9 +4,7 @@ import com.tda367.parallax.controller.devicestates.Device;
 import com.tda367.parallax.controller.inputcontrollers.InputControlsListener;
 import com.tda367.parallax.model.gameover.GameOverModel;
 
-/**
- * Created by Rasmus on 2017-05-16.
- */
+
 public class GameOverController implements InputControlsListener {
 
     private GameOverModel model;

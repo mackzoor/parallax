@@ -61,8 +61,8 @@ public class Parallax implements Updatable {
 
         world.update(updateTime);
         camera.update(updateTime);
-
         calculatePlayerScore(milliSinceLastUpdate);
+
     }
 
     private void calculatePlayerScore(int milliSinceLastUpdate){

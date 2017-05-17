@@ -2,9 +2,7 @@ package com.tda367.parallax.model.gameover;
 
 import com.tda367.parallax.model.parallaxcore.Player;
 
-/**
- * Created by Rasmus on 2017-05-16.
- */
+
 public class GameOverModel {
     private Player player;
     private boolean exitGameOver;

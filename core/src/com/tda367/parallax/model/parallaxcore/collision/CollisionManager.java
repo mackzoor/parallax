@@ -12,7 +12,7 @@ import java.util.List;
 public final class CollisionManager {
     @Getter private List<Collidable> collidables;
     private List<ICollisionCalculator> calculators;
-    private List<CollisionObserver> observers;
+    @Getter private List<CollisionObserver> observers;
 
     private static CollisionManager instance;
     public static CollisionManager getInstance(){

@@ -32,14 +32,12 @@ public class GameScreen implements Screen {
     private CollisionCalculator collisionCalculator;
     private ParallaxView parallaxView;
 
-    public GameScreen(Game game,Player player) {
+    public GameScreen(Game game, Player player) {
         this.game = game;
 
         audioQueue = AudioQueue.getInstance();
-        collisionCalculator = new CollisionCalculator();
-
         // Initiate game with space craft "Agelion"
-        renderer3D = new Renderer3D(0,0,0);
+        renderer3D = new Renderer3D(0, 0, 0);
         this.player = player;
         sound = new Sound();
     }
@@ -50,7 +48,7 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        if(player.getSpaceCraft().getHealth() > 1) {
+        if (player.getSpaceCraft().getHealth() > 1) {
 //        System.out.println("Fps: " + 1/delta);
             //Updates Parallax game logic
             parallaxGame.update((int) (Gdx.graphics.getDeltaTime() * 1000));
@@ -58,9 +56,9 @@ public class GameScreen implements Screen {
             parallaxView.render();
             DeviceManager.getDevice().update();
             System.out.println(player.getSpaceCraft().getHealth());
-        }else{
+        } else {
             dispose();
-            GameStateManager.setGameOverScreen(game,player);
+            GameStateManager.setGameOverScreen(game, player);
         }
     }
 
@@ -87,16 +85,18 @@ public class GameScreen implements Screen {
         CollisionManager.getInstance().getCollidables().clear();
         Controllers.clearListeners();
         //TODO I think this below was important.
-//        parallaxGame.getRenderQueue().getRenderables().clear();
         audioQueue.clearAllActiveMusic();
+        collisionCalculator.dispose();
+        CollisionManager.getInstance().getObservers().clear();
     }
 
 
-    public void newGame(){
+    public void newGame() {
         player.addSpaceCraft(new Agelion(15));
         parallaxGame = new Parallax(player);
         parallaxView = new ParallaxView(parallaxGame);
-        controller = new GameController(parallaxGame,DeviceManager.getDevice());
+        collisionCalculator = new CollisionCalculator();
+        controller = new GameController(parallaxGame, DeviceManager.getDevice());
         renderer3D = Renderer3D.initialize(
                 new PerspectiveCamera(
                         parallaxGame.getCamera().getFov(),

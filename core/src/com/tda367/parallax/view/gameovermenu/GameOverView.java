@@ -6,9 +6,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.tda367.parallax.model.gameover.GameOverModel;
 
-/**
- * Created by Rasmus on 2017-05-16.
- */
+
 public class GameOverView {
 
     private SpriteBatch batch;
