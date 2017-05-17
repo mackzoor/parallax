@@ -11,7 +11,7 @@ import com.tda367.parallax.view.util.ResourceLoader;
  */
 public class ContainerView implements View {
 
-    private final String model3dInternalPath = "3dModels/agelion/agelion.g3db";
+    private final String model3dInternalPath = "3dModels/mysterycontainer/mysterycontainer.g3db";
     private final Container container;
     private com.tda367.parallax.view.util.Renderable3dObject renderable3dObject;
 
