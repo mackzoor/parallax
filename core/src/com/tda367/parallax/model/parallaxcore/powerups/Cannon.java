@@ -54,17 +54,28 @@ public class Cannon implements IPowerUp {
     //Launches the cannon round.
     @Override
     public void activate(Transformable transformable) {
+
+        //TODO Make lazer shoot in the direction that the transformable is rotated.
         //Offset cannon round rotation by 90 degrees due to rotated 3d model.
-        this.rot = new Quat4f(0,0,0.7071f,0.7071f);
+//        this.rot = new Quat4f(0,0,0.7071f,0.7071f);
 
         //Rotate the cannon round with the given rotation.
-        this.rot.mul(transformable.getRot());
+//        this.rot.mul(transformable.getRot());
 
         //Sets the cannon round starting position to the one given in the arguments.
-        this.pos = new Vector3f(transformable.getPos());
+//        this.pos = new Vector3f(transformable.getPos());
 
-        velocity = quatToDirection(transformable.getRot());
-        velocity.scale(20);
+//        velocity = quatToDirection(transformable.getRot());
+
+
+        //Placeholder
+        pos = new Vector3f(transformable.getPos());
+        pos.add(new Vector3f(0,4,0));
+        velocity = new Vector3f(0,1,0);
+
+
+
+        velocity.scale(30);
 
         isActive = true;
         isCollisionOn = true;
@@ -162,7 +173,7 @@ public class Cannon implements IPowerUp {
     }
     @Override
     public void handleCollision(Collidable collidable) {
-        if ( timeAlive > 250 ) {
+        if ( timeAlive > 250 && collidable.getCollidableType() == CollidableType.SPACECRAFT) {
             die();
         }
     }
