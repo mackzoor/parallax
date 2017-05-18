@@ -1,5 +1,6 @@
 package com.tda367.parallax.parallaxcore.course;
 
+import com.tda367.parallax.model.parallaxcore.spacecraft.SpaceCraftFactory;
 import com.tda367.parallax.model.parallaxcore.world.World;
 import com.tda367.parallax.model.parallaxcore.spacecraft.Agelion;
 import org.junit.Test;
@@ -9,15 +10,16 @@ import static org.junit.Assert.*;
 public class WorldTest {
 //    private RenderQueue renderQueue = RenderQueue.getInstance();
     private World world = new World();
-    private Agelion agelion1 = new Agelion();
-    private Agelion agelion2 = new Agelion();
-    private Agelion agelion3 = new Agelion();
+    
+    private Agelion agelion1 = SpaceCraftFactory.getAgelionInstance(20);
+    private Agelion agelion2 = SpaceCraftFactory.getAgelionInstance(20);
+    private Agelion agelion3 = SpaceCraftFactory.getAgelionInstance(20);
 
     @Test
     public void addSpaceCraft() throws Exception {
 //        int sizeOne = renderQueue.getRenderables().size();
-        world.addSpaceCraft(new Agelion());
-        world.addSpaceCraft(new Agelion());
+        world.addSpaceCraft(SpaceCraftFactory.getAgelionInstance(20));
+        world.addSpaceCraft(SpaceCraftFactory.getAgelionInstance(20));
 //        int sizeTwo = renderQueue.getRenderables().size();
         assertTrue(world.getSpaceCrafts().size() == 2);
 //        assertTrue(sizeOne + 2 == sizeTwo);

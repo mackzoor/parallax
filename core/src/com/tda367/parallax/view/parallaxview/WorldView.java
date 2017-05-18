@@ -17,7 +17,7 @@ public class WorldView implements View {
     private final World world;
 
     private HashMap<ICourseModule, CourseModelView> courseModuleHash;
-    private HashMap<ISpaceCraft, AgelionView> spaceCraftHash;
+    private HashMap<ISpaceCraft, SpaceCraftView> spaceCraftHash;
     private HashMap<IPowerUp, IPowerUpView> powerUpsHash;
 
 
@@ -25,7 +25,7 @@ public class WorldView implements View {
         this.world = world;
 
         courseModuleHash = new HashMap<ICourseModule, CourseModelView>();
-        spaceCraftHash = new HashMap<ISpaceCraft, AgelionView>();
+        spaceCraftHash = new HashMap<ISpaceCraft, SpaceCraftView>();
         powerUpsHash = new HashMap<IPowerUp, IPowerUpView>();
 
         updateSpaceCraftList();
@@ -83,7 +83,7 @@ public class WorldView implements View {
         List<ISpaceCraft> missingSpaceCraft = syncHash(spaceCraftHash,world.getSpaceCrafts());
 
         for (ISpaceCraft iSpaceCraft : missingSpaceCraft) {
-            spaceCraftHash.put(iSpaceCraft,new AgelionView(iSpaceCraft));
+            spaceCraftHash.put(iSpaceCraft,new SpaceCraftView(iSpaceCraft));
         }
 
     }

@@ -14,6 +14,7 @@ import com.tda367.parallax.model.CollisionCalculator;
 import com.tda367.parallax.model.parallaxcore.Parallax;
 import com.tda367.parallax.model.parallaxcore.Player;
 import com.tda367.parallax.model.parallaxcore.spacecraft.Agelion;
+import com.tda367.parallax.model.parallaxcore.spacecraft.SpaceCraftFactory;
 import com.tda367.parallax.view.Renderer3D;
 import com.tda367.parallax.view.Sound;
 
@@ -35,7 +36,7 @@ public class CardboardGameScreen extends CardboardScreenAdapter {
         Gdx.graphics.setTitle("Galactica space wars of justice, ultimate edition");
         // Initiate game with space craft "Agelion"
         this.player = new Player();
-        this.player.addSpaceCraft(new Agelion(10));
+        this.player.addSpaceCraft(SpaceCraftFactory.getAgelionInstance(10));
         this.parallaxGame = new Parallax(player);
         controller = new GameController(parallaxGame, DeviceManager.getGameModeState(game));
 

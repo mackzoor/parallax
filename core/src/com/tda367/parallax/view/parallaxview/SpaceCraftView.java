@@ -1,0 +1,53 @@
+package com.tda367.parallax.view.parallaxview;
+
+import com.tda367.parallax.model.parallaxcore.spacecraft.ISpaceCraft;
+import com.tda367.parallax.model.parallaxcore.spacecraft.SpaceCraftType;
+import com.tda367.parallax.view.Renderer3D;
+import com.tda367.parallax.view.util.Renderable3dObject;
+import com.tda367.parallax.view.util.ResourceLoader;
+
+/**
+ * View class for the spacecraft {@link com.tda367.parallax.model.parallaxcore.spacecraft.Agelion}
+ */
+public class SpaceCraftView implements View {
+
+    private final String model3dInternalPath;
+    private final ISpaceCraft iSpaceCraft;
+    private Renderable3dObject spaceCraftModel;
+
+    public SpaceCraftView(ISpaceCraft spaceCraft) {
+        this.iSpaceCraft = spaceCraft;
+        model3dInternalPath = getSpaceCraftModel(spaceCraft);
+        if (!isObsolete()){
+            spaceCraftModel = new Renderable3dObject(
+                    spaceCraft.getPos(),
+                    spaceCraft.getRot(),
+                    ResourceLoader.getInstance().getModel(model3dInternalPath),
+                    1f
+            );
+        }
+    }
+
+    @Override
+    public void render() {
+        if (!isObsolete()){
+            spaceCraftModel.setPos(iSpaceCraft.getPos());
+            spaceCraftModel.setRot(iSpaceCraft.getRot());
+            Renderer3D.getInstance().addObjectToFrame(spaceCraftModel);
+        }
+    }
+
+    @Override
+    public boolean isObsolete() {
+        return iSpaceCraft.getHealth() < 1;
+    }
+
+
+    private String getSpaceCraftModel(ISpaceCraft spaceCraft){
+        if (spaceCraft.getType() == SpaceCraftType.AGELION){
+            return "3dModels/agelion/agelion.g3db";
+        } else {
+            return "3dModels/agelion/agelion.g3db";
+        }
+    }
+}

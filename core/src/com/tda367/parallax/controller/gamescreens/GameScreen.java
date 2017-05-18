@@ -15,6 +15,7 @@ import com.tda367.parallax.model.parallaxcore.Parallax;
 import com.tda367.parallax.model.parallaxcore.Player;
 import com.tda367.parallax.model.parallaxcore.collision.CollisionManager;
 import com.tda367.parallax.model.parallaxcore.spacecraft.Agelion;
+import com.tda367.parallax.model.parallaxcore.spacecraft.SpaceCraftFactory;
 import com.tda367.parallax.view.Renderer3D;
 import com.tda367.parallax.view.Sound;
 import com.tda367.parallax.view.parallaxview.ParallaxView;
@@ -72,7 +73,7 @@ public class GameScreen extends ScreenAdapter {
     }
 
     public void newGame() {
-        player.addSpaceCraft(new Agelion(15));
+        player.addSpaceCraft(SpaceCraftFactory.getAgelionInstance(15));
         parallaxGame = new Parallax(player);
         parallaxView = new ParallaxView(parallaxGame);
         collisionCalculator = new CollisionCalculator();
