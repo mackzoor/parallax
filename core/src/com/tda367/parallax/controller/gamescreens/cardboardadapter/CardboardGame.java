@@ -7,9 +7,7 @@ import com.google.vrtoolkit.cardboard.Eye;
 import com.google.vrtoolkit.cardboard.HeadTransform;
 import com.google.vrtoolkit.cardboard.Viewport;
 
-/**
- * Created by Rasmus on 2017-05-10.
- */
+
 public abstract class CardboardGame extends Game implements CardBoardApplicationListener {
 
     protected CardboardScreen cardboardScreen;

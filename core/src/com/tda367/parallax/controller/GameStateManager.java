@@ -19,16 +19,16 @@ public final class GameStateManager {
         if (mainMenuScreen == null) {
             mainMenuScreen = new MainMenuScreen(game,player);
         }
-        game.setScreen(mainMenuScreen);
         mainMenuScreen.newMainMenu();
+        game.setScreen(mainMenuScreen);
     }
 
     public static void setGameScreen(Game game,Player player) {
         if (gameScreen == null) {
             gameScreen = new GameScreen(game,player);
         }
-        game.setScreen(gameScreen);
         gameScreen.newGame();
+        game.setScreen(gameScreen);
     }
 
     public static void setCardboardGameScreen(CardboardGame game){
@@ -49,7 +49,7 @@ public final class GameStateManager {
         if(gameOverScreen == null){
             gameOverScreen = new GameOverScreen(game,player);
         }
-        game.setScreen(gameOverScreen);
         gameOverScreen.newGameOver();
+        game.setScreen(gameOverScreen);
     }
 }
