@@ -9,11 +9,13 @@ import com.tda367.parallax.controller.inputcontrollers.InputControlsListener;
 
 import lombok.Getter;
 
-public class MainMenuController implements InputControlsListener {
+public class MainMenuController extends ControllerAdapter {
 
     private MainMenuModel mainMenuModel;
-    @Getter private boolean startButtonPressed;
-    @Getter private boolean exitButtonPressed;
+    @Getter
+    private boolean startButtonPressed;
+    @Getter
+    private boolean exitButtonPressed;
 
     public MainMenuController(MainMenuModel mainMenuModel, Device device) {
         this.mainMenuModel = mainMenuModel;
@@ -32,59 +34,16 @@ public class MainMenuController implements InputControlsListener {
     }
 
     @Override
-    public void secondaryActionButtonPressed() {
-
-    }
-
-    @Override
-    public void pauseButtonPressed() {
-
-    }
-
-    @Override
     public void upButtonDown() {
         mainMenuModel.iterateUp();
     }
 
-    @Override
-    public void upButtonUp() {
-
-    }
-
-    @Override
-    public void rightButtonDown() {
-
-    }
-
-    @Override
-    public void rightButtonUp() {
-
-    }
 
     @Override
     public void downButtonDown() {
         mainMenuModel.iterateDown();
     }
 
-    @Override
-    public void downButtonUp() {
-
-    }
-
-    @Override
-    public void leftButtonDown() {
-
-    }
-
-    @Override
-    public void leftButtonUp() {
-
-    }
-
-    @Override
-    public void xAxisJoystickMovement(float xValue) {
-
-    }
 
     @Override
     public void yAxisJoystickMovement(float yValue) {
