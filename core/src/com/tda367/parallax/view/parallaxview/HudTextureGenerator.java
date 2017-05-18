@@ -22,6 +22,7 @@ public class HudTextureGenerator {
 
     private int lives;
     private IPowerUp powerUp;
+    private int score;
 
     public HudTextureGenerator(int lives) {
         this.lives = lives;
@@ -29,6 +30,9 @@ public class HudTextureGenerator {
         generatedTexture = new Texture(render(Color.BLACK,Color.BLUE));
     }
 
+    void setScore(int score){
+       this.score = score;
+    }
     void setWeapon(IPowerUp powerUp) {
         this.powerUp = powerUp;
     }
@@ -37,7 +41,8 @@ public class HudTextureGenerator {
     }
 
     Texture generateTexture(){
-        Pixmap pm = render(Color.WHITE,new Color(0,0,0,0));
+        Pixmap pm = render(Color.WHITE,new Color(1f,1f,1f,0.25f));
+        pm = outLine(pm);
         generatedTexture.draw(pm,0,0);
         pm.dispose(); //Important!
 
@@ -65,8 +70,8 @@ public class HudTextureGenerator {
         //Draw text
         BitmapFont font = new BitmapFont(true);
         font.setColor(fg_color);
-        font.getData().setScale(10);
-        font.draw(spriteBatch, String.valueOf(counter),  0, 256);
+        font.getData().setScale(3);
+        font.draw(spriteBatch, "Score: " + score + "\n Lives: " + String.valueOf(lives),  0, 0);
         spriteBatch.end();//finish write to buffer
         Pixmap pm = ScreenUtils.getFrameBufferPixmap(0, 0, 512, 512);//write frame buffer to Pixmap
         frameBuffer.end();
@@ -78,6 +83,25 @@ public class HudTextureGenerator {
         frameBuffer = null;
         spriteBatch.dispose();
         spriteBatch = null;
+
+        return pm;
+    }
+    private Pixmap outLine(Pixmap pm){
+        pm.setColor(Color.WHITE);
+
+        int lineWidth = 3;
+
+        //Top line
+        pm.fillRectangle(0,0,pm.getWidth(),lineWidth);
+
+        //Right line
+        pm.fillRectangle(pm.getWidth()-lineWidth,0,pm.getWidth(),pm.getHeight());
+
+        //Bottom line
+        pm.fillRectangle(0,pm.getHeight()-lineWidth,pm.getWidth(),pm.getHeight());
+
+        //Left line
+        pm.fillRectangle(0,0,lineWidth,pm.getHeight());
 
         return pm;
     }

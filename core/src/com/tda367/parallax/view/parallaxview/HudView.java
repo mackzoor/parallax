@@ -55,6 +55,8 @@ public class HudView implements View{
             Stats about the spaceCraft,
             etc.
          */
+        htg.setLives(player.getSpaceCraft().getHealth());
+        htg.setScore(player.getScore());
         setHudPaneTexture(htg.generateTexture());
 
         Vector3f nextPos = new Vector3f(player.getSpaceCraft().getPos());
