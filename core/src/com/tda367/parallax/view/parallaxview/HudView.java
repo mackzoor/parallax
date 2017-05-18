@@ -16,8 +16,9 @@ public class HudView implements View{
 
     private static final String pathTo3dModel = "3dModels/hudpane/hudpane.g3db";
     private final Player player;
-    private final Texture texture;
     private Renderable3dObject hudPane;
+
+    private HudTextureGenerator htg;
 
     /**
      * Creates a HudView from a {@link Player}.
@@ -32,7 +33,11 @@ public class HudView implements View{
                 0.75f,
                 true
         );
-        texture = ResourceLoader.getInstance().getTexture("badlogic.jpg");
+
+        htg = new HudTextureGenerator(5);
+    }
+
+    private void setHudPaneTexture(Texture texture){
         Material material = hudPane.getModelInstance().materials.get(0);
         TextureAttribute textureAttribute = new TextureAttribute(TextureAttribute.Diffuse, texture);
         material.set(textureAttribute);
@@ -50,7 +55,7 @@ public class HudView implements View{
             Stats about the spaceCraft,
             etc.
          */
-
+        setHudPaneTexture(htg.generateTexture());
 
         Vector3f nextPos = new Vector3f(player.getSpaceCraft().getPos());
         nextPos.add(new Vector3f(0,0,1));
