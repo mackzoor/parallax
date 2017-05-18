@@ -1,13 +1,23 @@
 package com.tda367.parallax.view.parallaxview;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g3d.Material;
+import com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute;
 import com.tda367.parallax.model.parallaxcore.Player;
+import com.tda367.parallax.view.Renderer3D;
+import com.tda367.parallax.view.util.Renderable3dObject;
+import com.tda367.parallax.view.util.ResourceLoader;
+import javax.vecmath.Vector3f;
 
 /**
  * View class for rendering a {@link Player} hud.
  */
 public class HudView implements View{
 
+    private static final String pathTo3dModel = "3dModels/hudpane/hudpane.g3db";
     private final Player player;
+    private final Texture texture;
+    private Renderable3dObject hudPane;
 
     /**
      * Creates a HudView from a {@link Player}.
@@ -15,10 +25,38 @@ public class HudView implements View{
      */
     HudView(Player player) {
         this.player = player;
+        hudPane = new Renderable3dObject(
+                player.getSpaceCraft().getPos(),
+                player.getSpaceCraft().getRot(),
+                ResourceLoader.getInstance().getModel(pathTo3dModel),
+                0.75f,
+                true
+        );
+        texture = ResourceLoader.getInstance().getTestTexture();
+        Material material = hudPane.getModelInstance().materials.get(0);
+        TextureAttribute textureAttribute = new TextureAttribute(TextureAttribute.Diffuse, texture);
+        material.set(textureAttribute);
     }
 
     @Override
     public void render() {
+
+        //Get player spaceCraft
+
+        /*
+        The render should consist of:
+            How many lives are left,
+            What weapon is equipped,
+            Stats about the spaceCraft,
+            etc.
+         */
+
+
+        Vector3f nextPos = new Vector3f(player.getSpaceCraft().getPos());
+        nextPos.add(new Vector3f(0,0,1));
+        hudPane.setPos(nextPos);
+
+        Renderer3D.getInstance().addObjectToFrame(hudPane);
 
     }
     @Override
