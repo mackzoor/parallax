@@ -117,6 +117,7 @@ public class Renderer3D {
                 modelBatch.render(renderable3dObject.getModelInstance(), environment);
             }
         }
+        modelBatch.flush();
 
         //Render low priority objects
         for (Renderable3dObject renderable3dObject : modelsToRender) {

@@ -28,7 +28,8 @@ public class ISpaceCraftView implements View {
                     iSpaceCraft.getPos(),
                     iSpaceCraft.getRot(),
                     ResourceLoader.getInstance().getModel(model3dInternalPath),
-                    1f
+                    1f,
+                    true
             );
         }
 
