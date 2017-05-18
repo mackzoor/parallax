@@ -2,7 +2,6 @@ package com.tda367.parallax.controller.gamescreens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.android.CardboardCamera;
-import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.math.Matrix4;
 import com.google.vrtoolkit.cardboard.Eye;
 import com.google.vrtoolkit.cardboard.HeadTransform;
@@ -14,18 +13,14 @@ import com.tda367.parallax.controller.GameStateManager;
 import com.tda367.parallax.model.CollisionCalculator;
 import com.tda367.parallax.model.cardboardmenu.CardboardMainMenu;
 import com.tda367.parallax.model.cardboardmenu.CardboardMenuObserver;
-import com.tda367.parallax.model.parallaxcore.Player;
 import com.tda367.parallax.model.parallaxcore.collision.CollisionManager;
-import com.tda367.parallax.view.CardboardMenuRenderer;
 import com.tda367.parallax.view.Renderer3D;
 import com.tda367.parallax.view.Sound;
 import com.tda367.parallax.view.cardboardmenu.CardboardMainMenuView;
-import com.tda367.parallax.view.cardboardmenu.CardboardMenuWorldView;
 
 
 public class CardboardMenuScreen implements CardboardScreen, CardboardMenuObserver {
     private CardboardCamera camera;
-    private CardboardMenuRenderer renderer;
     private CardboardGame game;
     private CardboardMenuController controller;
     private static final float Z_NEAR = 0.1f;
@@ -44,7 +39,6 @@ public class CardboardMenuScreen implements CardboardScreen, CardboardMenuObserv
         camera.lookAt(0, 0, -1);
         camera.near = Z_NEAR;
         camera.far = Z_FAR;
-        renderer = new CardboardMenuRenderer(camera);
         sound = new Sound();
         controller = new CardboardMenuController(cardboardMainMenu, DeviceManager.getGameModeState(game));
         view = new CardboardMainMenuView(cardboardMainMenu);
