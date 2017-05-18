@@ -149,7 +149,8 @@ public class World implements Updatable, CollisionObserver {
         }
 
         for (Integer number : numbers) {
-                powerUps.remove(number);
+            int i = number;
+            powerUps.remove(i);
         }
         updateModuleRange();
     }
