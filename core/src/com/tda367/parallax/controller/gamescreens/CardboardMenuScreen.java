@@ -30,7 +30,6 @@ public class CardboardMenuScreen extends CardboardScreenAdapter implements Cardb
     private CardboardMainMenu cardboardMainMenu;
     private CollisionCalculator collisionCalculator;
     private CardboardMainMenuView view;
-    private Renderer3D renderer3D;
 
     public CardboardMenuScreen(CardboardGame game) {
         this.game = game;
@@ -43,7 +42,6 @@ public class CardboardMenuScreen extends CardboardScreenAdapter implements Cardb
         sound = new Sound();
         controller = new CardboardMenuController(cardboardMainMenu, DeviceManager.getGameModeState(game));
         view = new CardboardMainMenuView(cardboardMainMenu);
-        renderer3D = Renderer3D.initialize(camera);
 
         cardboardMainMenu.addObservers(this);
         collisionCalculator = new CollisionCalculator();

@@ -1,5 +1,7 @@
 package com.tda367.parallax.view.parallaxview;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.tda367.parallax.model.parallaxcore.Parallax;
 import com.tda367.parallax.view.Renderer3D;
 
@@ -16,10 +18,33 @@ public class ParallaxView implements View{
      * Creates a ParallaxView from a {@link Parallax}.
      * @param parallax to be used to create the ParallaxView.
      */
-    public ParallaxView(Parallax parallax){
+    public ParallaxView(Parallax parallax, boolean isVr){
+        //Initialize renderer.
+        Renderer3D.initialize(
+                        parallax.getCamera().getFov(),
+                        Gdx.graphics.getWidth(),
+                        Gdx.graphics.getHeight(),
+                        isVr
+        );
+
         this.parallax = parallax;
         playerHudView = new HudView(parallax.getPlayer());
         worldView = new WorldView(parallax.getWorld());
+    }
+
+    /**
+     * Sets render x-resolution.
+     * @param width new x-resolution.
+     */
+    public void setWidth(int width){
+        Renderer3D.getInstance().setWidth(width);
+    }
+    /**
+     * Sets render y-resolution.
+     * @param height new y-resolution.
+     */
+    public void setHeight(int height){
+        Renderer3D.getInstance().setHeight(height);
     }
 
     @Override

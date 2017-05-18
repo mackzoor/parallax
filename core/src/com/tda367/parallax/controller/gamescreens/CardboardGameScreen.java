@@ -17,6 +17,7 @@ import com.tda367.parallax.model.parallaxcore.spacecraft.Agelion;
 import com.tda367.parallax.model.parallaxcore.spacecraft.SpaceCraftFactory;
 import com.tda367.parallax.view.Renderer3D;
 import com.tda367.parallax.view.Sound;
+import com.tda367.parallax.view.parallaxview.ParallaxView;
 
 public class CardboardGameScreen extends CardboardScreenAdapter {
 
@@ -24,12 +25,12 @@ public class CardboardGameScreen extends CardboardScreenAdapter {
     private CardboardCamera camera;
     private Player player;
     private Parallax parallaxGame;
-    private Renderer3D renderer;
     private GameController controller;
     private static final float Z_NEAR = 0.1f;
     private static final float Z_FAR = 300.0f;
     private CollisionCalculator collisionCalculator;
     private Sound sound;
+    private ParallaxView parallaxView;
 
     public CardboardGameScreen(CardboardGame game){
         this.game = game;
@@ -40,18 +41,7 @@ public class CardboardGameScreen extends CardboardScreenAdapter {
         this.parallaxGame = new Parallax(player);
         controller = new GameController(parallaxGame, DeviceManager.getGameModeState(game));
 
-        // Setup of special camera for VR
-        camera = new CardboardCamera();
-        camera.position.set(
-                parallaxGame.getCamera().getPos().getX(),
-                parallaxGame.getCamera().getPos().getY(),
-                parallaxGame.getCamera().getPos().getZ()
-        );
-        camera.lookAt(0, 0, -1);
-        camera.near = Z_NEAR;
-        camera.far = Z_FAR;
-
-        renderer = Renderer3D.initialize(camera);
+        parallaxView = new ParallaxView(parallaxGame,true);
         sound = new Sound();
         collisionCalculator = new CollisionCalculator();
     }
@@ -72,7 +62,6 @@ public class CardboardGameScreen extends CardboardScreenAdapter {
 
     @Override
     public void onDrawEye(Eye eye) {
-
         // Apply the eye transformation to the camera.
         camera.setEyeViewAdjustMatrix(new Matrix4(eye.getEyeView()));
 
@@ -81,6 +70,6 @@ public class CardboardGameScreen extends CardboardScreenAdapter {
         camera.update();
 
         //Renders scene for current eye
-        renderer.renderFrame();
+        parallaxView.render();
     }
 }

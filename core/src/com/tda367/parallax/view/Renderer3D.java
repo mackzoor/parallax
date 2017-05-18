@@ -1,6 +1,7 @@
 package com.tda367.parallax.view;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.backends.android.CardboardCamera;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
@@ -24,8 +25,16 @@ public class Renderer3D {
 
     //Singleton pattern
     private static Renderer3D renderer3D;
-    public static Renderer3D initialize(Camera camera){
-        renderer3D = new Renderer3D(camera);
+    public static Renderer3D initialize(float fov, int width, int height, boolean isVr){
+        if (isVr){
+            // Setup of special camera for VR
+            Camera camera = new CardboardCamera();
+            camera.lookAt(0, 0, -1);
+            renderer3D = new Renderer3D(camera);
+        } else {
+            renderer3D = new Renderer3D(fov, width, height);
+        }
+
         return renderer3D;
     }
     public static Renderer3D getInstance(){
@@ -57,7 +66,7 @@ public class Renderer3D {
      * @param width Amount of pixels on the x axis to be rendered.
      * @param height Amount of pixels on the y axis to be rendered.
      */
-    public Renderer3D(float fov, int width, int height) {
+    private Renderer3D(float fov, int width, int height) {
         this(
                 new PerspectiveCamera(
                         fov,

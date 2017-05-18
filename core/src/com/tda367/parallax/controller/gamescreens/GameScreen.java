@@ -27,7 +27,6 @@ public class GameScreen extends ScreenAdapter {
     //Almost everything is copied straight of from PlayState. Should be split up in the future
     private Player player;
     private Parallax parallaxGame;
-    private Renderer3D renderer3D;
     private GameController controller;
     private Sound sound;
     private AudioQueue audioQueue;
@@ -39,7 +38,6 @@ public class GameScreen extends ScreenAdapter {
 
         audioQueue = AudioQueue.getInstance();
         // Initiate game with space craft "Agelion"
-        renderer3D = new Renderer3D(0, 0, 0);
         this.player = player;
         sound = new Sound();
     }
@@ -59,8 +57,8 @@ public class GameScreen extends ScreenAdapter {
 
     @Override
     public void resize(int width, int height) {
-        renderer3D.setWidth(width);
-        renderer3D.setHeight(height);
+        parallaxView.setWidth(width);
+        parallaxView.setHeight(height);
     }
 
     @Override
@@ -75,16 +73,9 @@ public class GameScreen extends ScreenAdapter {
     public void newGame() {
         player.addSpaceCraft(SpaceCraftFactory.getAgelionInstance(15));
         parallaxGame = new Parallax(player);
-        parallaxView = new ParallaxView(parallaxGame);
+        parallaxView = new ParallaxView(parallaxGame, false);
         collisionCalculator = new CollisionCalculator();
         controller = new GameController(parallaxGame, DeviceManager.getDevice());
-        renderer3D = Renderer3D.initialize(
-                new PerspectiveCamera(
-                        parallaxGame.getCamera().getFov(),
-                        Gdx.graphics.getWidth(),
-                        Gdx.graphics.getHeight()
-                )
-        );
     }
 
     public void gameOver(){
