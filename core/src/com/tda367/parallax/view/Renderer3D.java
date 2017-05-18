@@ -32,7 +32,10 @@ public class Renderer3D {
         return renderer3D;
     }
 
-
+    /**
+     * Creates a new Renderer3D from a {@link Camera}
+     * @param camera
+     */
     private Renderer3D(Camera camera) {
         this.camera = camera;
         modelsToRender = new ArrayList<Renderable3dObject>();
@@ -47,6 +50,13 @@ public class Renderer3D {
         //environment.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -1f, -0.8f, -0.2f));
 
     }
+
+    /**
+     * Creates a new Renderer3D.
+     * @param fov Field of view of the camera
+     * @param width Amount of pixels on the x axis to be rendered.
+     * @param height Amount of pixels on the y axis to be rendered.
+     */
     public Renderer3D(float fov, int width, int height) {
         this(
                 new PerspectiveCamera(

@@ -10,30 +10,31 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * View class for the world model class.
+ * View class for the {@link World}.
  */
 public class WorldView implements View {
 
     private final World world;
 
     private HashMap<ICourseModule, CourseModelView> courseModuleHash;
-    private HashMap<ISpaceCraft, SpaceCraftView> spaceCraftHash;
+    private HashMap<ISpaceCraft, ISpaceCraftView> spaceCraftHash;
     private HashMap<IPowerUp, IPowerUpView> powerUpsHash;
 
-
+    /**
+     * Creates a WorldView from a {@link World}.
+     * @param world to be used to create the WorldView.
+     */
     WorldView(World world) {
         this.world = world;
 
         courseModuleHash = new HashMap<ICourseModule, CourseModelView>();
-        spaceCraftHash = new HashMap<ISpaceCraft, SpaceCraftView>();
+        spaceCraftHash = new HashMap<ISpaceCraft, ISpaceCraftView>();
         powerUpsHash = new HashMap<IPowerUp, IPowerUpView>();
 
         updateSpaceCraftList();
         updateCourseModuleList();
         updatePowerupList();
     }
-
-    private int tickCounter = 0;
 
     @Override
     public void render() {
@@ -57,13 +58,15 @@ public class WorldView implements View {
             powerUpsHash.get(iPowerUp).render();
         }
     }
-
     @Override
     public boolean isObsolete() {
         return false;
     }
 
 
+    /**
+     * Updates the PowerUpList from the world object
+     */
     private void updatePowerupList() {
         List<IPowerUp> missingPowerUps = syncHash(powerUpsHash,world.getPowerUps());
 
@@ -71,6 +74,9 @@ public class WorldView implements View {
             powerUpsHash.put(missingPowerUp,new IPowerUpView(missingPowerUp));
         }
     }
+    /**
+     * Updates the CourseModuleList from the world object
+     */
     private void updateCourseModuleList(){
 
         List<ICourseModule> missingModules = syncHash(courseModuleHash,world.getModules());
@@ -79,11 +85,14 @@ public class WorldView implements View {
             courseModuleHash.put(missingModule,new CourseModelView(missingModule));
         }
     }
+    /**
+     * Updates the SpaceCraftList from the world object
+     */
     private void updateSpaceCraftList(){
         List<ISpaceCraft> missingSpaceCraft = syncHash(spaceCraftHash,world.getSpaceCrafts());
 
         for (ISpaceCraft iSpaceCraft : missingSpaceCraft) {
-            spaceCraftHash.put(iSpaceCraft,new SpaceCraftView(iSpaceCraft));
+            spaceCraftHash.put(iSpaceCraft,new ISpaceCraftView(iSpaceCraft));
         }
 
     }
@@ -93,7 +102,7 @@ public class WorldView implements View {
      * Removes obsolete views from hash and finds the missing keys from hash from the list.
      * @param hash hash to be worked on.
      * @param list reference list.
-     * @param <T> Object.
+     * @param <T> Object type.
      * @return Missing keys in hash from the list provided.
      */
     private <T> List<T> syncHash(HashMap<T,? extends View> hash, List<T> list){

@@ -24,7 +24,6 @@ public class BoxObstacleView implements View{
                 0.5f
         );
     }
-
     public BoxObstacleView(BoxObstacle obstacle) {
         this.obstacle = obstacle;
         renderable3dObject = new Renderable3dObject(
@@ -39,7 +38,6 @@ public class BoxObstacleView implements View{
     public void render() {
         Renderer3D.getInstance().addObjectToFrame(renderable3dObject);
     }
-
     @Override
     public boolean isObsolete() {
         return obstacle.collisionActivated();

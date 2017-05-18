@@ -9,7 +9,11 @@ public class HudView implements View{
 
     private final Player player;
 
-    public HudView(Player player) {
+    /**
+     * Creates a HudView from a {@link Player}.
+     * @param player to be used to create the PlayerView.
+     */
+    HudView(Player player) {
         this.player = player;
     }
 
@@ -17,7 +21,6 @@ public class HudView implements View{
     public void render() {
 
     }
-
     @Override
     public boolean isObsolete() {
         return false;

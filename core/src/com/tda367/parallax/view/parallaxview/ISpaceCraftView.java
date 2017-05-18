@@ -9,23 +9,29 @@ import com.tda367.parallax.view.util.ResourceLoader;
 /**
  * View class for the spacecraft {@link com.tda367.parallax.model.parallaxcore.spacecraft.Agelion}
  */
-public class SpaceCraftView implements View {
+public class ISpaceCraftView implements View {
 
     private final String model3dInternalPath;
     private final ISpaceCraft iSpaceCraft;
     private Renderable3dObject spaceCraftModel;
 
-    public SpaceCraftView(ISpaceCraft spaceCraft) {
-        this.iSpaceCraft = spaceCraft;
-        model3dInternalPath = getSpaceCraftModel(spaceCraft);
+    /**
+     * Creates a ISpaceCraftView from an {@link ISpaceCraft}.
+     * @param iSpaceCraft to be used to create the ContainerView.
+     */
+    public ISpaceCraftView(ISpaceCraft iSpaceCraft) {
+        this.iSpaceCraft = iSpaceCraft;
+        model3dInternalPath = getSpaceCraftModel(iSpaceCraft);
+
         if (!isObsolete()){
             spaceCraftModel = new Renderable3dObject(
-                    spaceCraft.getPos(),
-                    spaceCraft.getRot(),
+                    iSpaceCraft.getPos(),
+                    iSpaceCraft.getRot(),
                     ResourceLoader.getInstance().getModel(model3dInternalPath),
                     1f
             );
         }
+
     }
 
     @Override
@@ -36,13 +42,16 @@ public class SpaceCraftView implements View {
             Renderer3D.getInstance().addObjectToFrame(spaceCraftModel);
         }
     }
-
     @Override
     public boolean isObsolete() {
         return iSpaceCraft.getHealth() < 1;
     }
 
-
+    /**
+     * Returns the path to the spaceCraftModel from the {@link ISpaceCraft}'s spacecraft type.
+     * @param spaceCraft to be used to get model.
+     * @return Specific path to model if spaceCraft type is know, otherwise returns a path to a generic 3d model.
+     */
     private String getSpaceCraftModel(ISpaceCraft spaceCraft){
         if (spaceCraft.getType() == SpaceCraftType.AGELION){
             return "3dModels/agelion/agelion.g3db";

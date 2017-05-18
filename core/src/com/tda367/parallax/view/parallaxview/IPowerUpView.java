@@ -14,6 +14,10 @@ public class IPowerUpView implements View {
     private Renderable3dObject renderable3dObject;
 
 
+    /**
+     * Creates a IPowerUpView from a {@link IPowerUp}.
+     * @param powerUp to be used to create the IPowerUpView.
+     */
     public IPowerUpView(IPowerUp powerUp) {
         this.powerUp = powerUp;
         renderable3dObject = new Renderable3dObject(

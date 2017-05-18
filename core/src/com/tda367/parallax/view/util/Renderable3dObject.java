@@ -3,12 +3,13 @@ package com.tda367.parallax.view.util;
 import com.badlogic.gdx.graphics.g3d.Material;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.attributes.BlendingAttribute;
+import com.tda367.parallax.model.parallaxcore.world.World;
 
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
 
 /**
- * Class for 3d renderable objects.
+ * Class that holds an object that is able to be rendered.
  */
 public class Renderable3dObject {
 
@@ -18,9 +19,15 @@ public class Renderable3dObject {
     private float opacity;
     private boolean highPriority;
 
-    public Renderable3dObject(Vector3f pos, Quat4f rot, ModelInstance modelInstance, float opacity) {
-        this(pos, rot, modelInstance, opacity, false);
-    }
+    /**
+     * Creates a Renderable 3d Object.
+     *
+     * @param pos           position of the 3d object.
+     * @param rot           rotation of the 3d object.
+     * @param modelInstance The 3d model to be used to render the 3d model.
+     * @param opacity       Opacity of the rendered 3d model.
+     * @param highPriority  if true will render before 3d models that are set to false.
+     */
     public Renderable3dObject(Vector3f pos, Quat4f rot, ModelInstance modelInstance, float opacity, boolean highPriority) {
         this.modelInstance = modelInstance;
         setPos(pos);
@@ -29,24 +36,45 @@ public class Renderable3dObject {
         this.highPriority = highPriority;
     }
 
-    public void setPos(Vector3f pos){
+    public Renderable3dObject(Vector3f pos, Quat4f rot, ModelInstance modelInstance, float opacity) {
+        this(pos, rot, modelInstance, opacity, false);
+    }
+
+    /**
+     * Sets the position of the 3d model.
+     *
+     * @param pos the new position.
+     */
+    public void setPos(Vector3f pos) {
         this.pos = pos;
         modelInstance.transform.setTranslation(
                 pos.getX(),
                 pos.getZ(),
-                pos.getY() *-1
+                pos.getY() * -1
         );
     }
-    public void setRot(Quat4f rot){
+
+    /**
+     * Sets the rotation of the 3d model.
+     *
+     * @param rot the new rotation.
+     */
+    public void setRot(Quat4f rot) {
         this.rot = rot;
         modelInstance.transform.rotate(
                 rot.getX(),
                 rot.getZ(),
-                rot.getY() *-1 ,
+                rot.getY() * -1,
                 rot.getW()
         );
     }
-    public void setOpacity(float f){
+
+    /**
+     * Sets the opacity of the 3d model.
+     *
+     * @param f the new opacity.
+     */
+    public void setOpacity(float f) {
         opacity = f;
 
         //Change opacity level
@@ -57,23 +85,46 @@ public class Renderable3dObject {
 
     }
 
-    public void update(){
-        setPos(pos);
-        setRot(rot);
-    }
-
+    /**
+     * Returns the position.
+     *
+     * @return the position of the 3d model.
+     */
     public Vector3f getPos() {
         return pos;
     }
+
+    /**
+     * Returns the rotation.
+     *
+     * @return the rotation of the 3d model.
+     */
     public Quat4f getRot() {
         return rot;
     }
+
+    /**
+     * Returns the opacity.
+     *
+     * @return the opacity of the 3d model.
+     */
     public float getOpacity() {
         return opacity;
     }
-    public boolean isHighPriority(){
+
+    /**
+     * Returns the priority of the 3d model.
+     *
+     * @return true if high priority, false if low.
+     */
+    public boolean isHighPriority() {
         return highPriority;
     }
+
+    /**
+     * Returns the 3d model ({@link ModelInstance}).
+     * @return the 3d model.
+     */
     public ModelInstance getModelInstance() {
         return modelInstance;
     }
