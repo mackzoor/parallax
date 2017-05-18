@@ -2,7 +2,6 @@ package com.tda367.parallax.controller.gamescreens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.android.CardboardCamera;
-import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.math.Matrix4;
 import com.google.vrtoolkit.cardboard.Eye;
 import com.google.vrtoolkit.cardboard.HeadTransform;
@@ -15,13 +14,10 @@ import com.tda367.parallax.controller.gamescreens.cardboardadapter.CardboardScre
 import com.tda367.parallax.model.CollisionCalculator;
 import com.tda367.parallax.model.cardboardmenu.CardboardMainMenu;
 import com.tda367.parallax.model.cardboardmenu.CardboardMenuObserver;
-import com.tda367.parallax.model.parallaxcore.Player;
 import com.tda367.parallax.model.parallaxcore.collision.CollisionManager;
-import com.tda367.parallax.view.CardboardMenuRenderer;
 import com.tda367.parallax.view.Renderer3D;
 import com.tda367.parallax.view.Sound;
 import com.tda367.parallax.view.cardboardmenu.CardboardMainMenuView;
-import com.tda367.parallax.view.cardboardmenu.CardboardMenuWorldView;
 
 
 public class CardboardMenuScreen extends CardboardScreenAdapter implements CardboardMenuObserver {
