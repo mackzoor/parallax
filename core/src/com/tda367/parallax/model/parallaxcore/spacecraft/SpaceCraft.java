@@ -128,7 +128,7 @@ public abstract class SpaceCraft implements ISpaceCraft{
         if (isShipOutsideCourse()) {
             Vector2f tempVec = xzPos(getPos());
             tempVec.normalize();
-            tempVec.scale(courseCircumference);
+            tempVec.scale((49f/50f) * courseCircumference); //Too compensate for rounding of float
             getPos().set(new Vector3f(tempVec.getX(), getPos().getY(), tempVec.getY()));
         }
     }
