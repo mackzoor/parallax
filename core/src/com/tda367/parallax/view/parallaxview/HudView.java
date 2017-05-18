@@ -32,7 +32,7 @@ public class HudView implements View{
                 0.75f,
                 true
         );
-        texture = ResourceLoader.getInstance().getTestTexture();
+        texture = ResourceLoader.getInstance().getTexture("badlogic.jpg");
         Material material = hudPane.getModelInstance().materials.get(0);
         TextureAttribute textureAttribute = new TextureAttribute(TextureAttribute.Diffuse, texture);
         material.set(textureAttribute);

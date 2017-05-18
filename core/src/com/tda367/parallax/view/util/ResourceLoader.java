@@ -19,9 +19,10 @@ import java.util.Map;
 public final class ResourceLoader {
     private Map<String,Model> loadedModels;
     private Map<String,Sound> loadedSounds;
-    private Map<String, Music> loadedMusic;
+    private Map<String,Music> loadedMusic;
     private G3dModelLoader modelLoader;
     private static ResourceLoader instance;
+    private Map<String,Texture> loadedTextures;
 
     //Singleton pattern
     public static ResourceLoader getInstance(){
@@ -37,6 +38,7 @@ public final class ResourceLoader {
         loadedModels = new HashMap<String, Model>();
         loadedSounds = new HashMap<String, Sound>();
         loadedMusic = new HashMap<String, Music>();
+        loadedTextures = new HashMap<String, Texture>();
     }
 
     /**
@@ -160,8 +162,28 @@ public final class ResourceLoader {
         return music;
     }
 
-    //debug only
-    public Texture getTestTexture() {
-        return new Texture("badlogic.jpg");
+    /**
+     * Loads a texture from the filepath into memory and stores it in the loadedTextures Map.
+     * @param filePath path to the texture file. Has to be .png or .jpg file type.
+     * @return the loaded texture.
+     */
+    private Texture loadTexture(String filePath){
+        Texture texture = new Texture(filePath);
+
+        loadedTextures.put(filePath,texture);
+        return texture;
+    }
+    /**
+     * If the texture has already been loaded a reference to it is sent back.
+     * Otherwise it is loaded in and then sent back.
+     * @param filePath path to the texture file. Has to be .png or .jpg.
+     * @return the texture.
+     */
+    public Texture getTexture(String filePath){
+        Texture texture = loadedTextures.get(filePath);
+        if (texture == null){
+            texture = loadTexture(filePath);
+        }
+        return texture;
     }
 }
