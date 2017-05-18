@@ -17,8 +17,11 @@ import com.tda367.parallax.model.parallaxcore.powerups.IPowerUp;
  */
 public class HudTextureGenerator {
 
+    private final int witdh = 512;
+    private final int height = 256;
+
     private static Texture generatedTexture;
-    private Pixmap combined;
+
 
     private int lives;
     private IPowerUp powerUp;
@@ -26,8 +29,7 @@ public class HudTextureGenerator {
 
     public HudTextureGenerator(int lives) {
         this.lives = lives;
-        combined = new Pixmap(512,512, Pixmap.Format.RGBA8888);
-        generatedTexture = new Texture(render(Color.BLACK,Color.BLUE));
+        generatedTexture = new Texture(renderText(Color.BLACK));
     }
 
     void setScore(int score){
@@ -41,8 +43,9 @@ public class HudTextureGenerator {
     }
 
     Texture generateTexture(){
-        Pixmap pm = render(Color.WHITE,new Color(1f,1f,1f,0.25f));
-        pm = outLine(pm);
+        Pixmap pm = renderText(Color.WHITE);
+//        pm = outLine(pm);
+        renderBackground(pm);
         generatedTexture.draw(pm,0,0);
         pm.dispose(); //Important!
 
@@ -51,17 +54,38 @@ public class HudTextureGenerator {
     }
 
     private int counter = 0;
-    private Pixmap render(Color fg_color, Color bg_color) {
+
+    private Pixmap renderBackground(Pixmap pm){
+        int triangleOffset = 64;
+
+//        pm.setColor(Color.WHITE);
+        pm.setColor(new Color(0,0,1f,0.7f));
+
+        //Right rectangle
+//        pm.fillRectangle(triangleOffset,0,witdh-triangleOffset,height);
+
+        //Bottom rectangle
+//        pm.fillRectangle(0,triangleOffset,triangleOffset,height-triangleOffset);
+
+        //Top left triangle
+//        pm.fillTriangle(0,triangleOffset,triangleOffset,triangleOffset,triangleOffset,0);
+
+
+        pm.fillTriangle(0,triangleOffset,0,0,triangleOffset,0);
+
+        return pm;
+    }
+    private Pixmap renderText(Color fg_color) {
         counter++;
         SpriteBatch spriteBatch = new SpriteBatch();
 
-        FrameBuffer frameBuffer = new FrameBuffer(Pixmap.Format.RGBA8888, 512, 512, false);
+        FrameBuffer frameBuffer = new FrameBuffer(Pixmap.Format.RGBA8888, witdh, height, false);
         frameBuffer.begin();
 
-        Gdx.gl.glClearColor(bg_color.r, bg_color.g, bg_color.b, bg_color.a);
+        Gdx.gl.glClearColor(1,1,1,0.3f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        Matrix4 normalProjection = new Matrix4().setToOrtho2D(0, 0, 512,  512);
+        Matrix4 normalProjection = new Matrix4().setToOrtho2D(0, 0, witdh,  height);
         spriteBatch.setProjectionMatrix(normalProjection);
 
         spriteBatch.begin();
@@ -71,9 +95,10 @@ public class HudTextureGenerator {
         BitmapFont font = new BitmapFont(true);
         font.setColor(fg_color);
         font.getData().setScale(3);
-        font.draw(spriteBatch, "Score: " + score + "\n Lives: " + String.valueOf(lives),  0, 0);
+        font.draw(spriteBatch, "Score: " + score + "\n Lives: " + String.valueOf(lives),  48, 48);
+
         spriteBatch.end();//finish write to buffer
-        Pixmap pm = ScreenUtils.getFrameBufferPixmap(0, 0, 512, 512);//write frame buffer to Pixmap
+        Pixmap pm = ScreenUtils.getFrameBufferPixmap(0, 0, witdh, height); //write frame buffer to Pixmap
         frameBuffer.end();
 
         //Dispose of c++ objects.
@@ -107,6 +132,5 @@ public class HudTextureGenerator {
     }
 
     public void dispose(){
-        combined.dispose();
     }
 }

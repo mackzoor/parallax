@@ -60,7 +60,7 @@ public class HudView implements View{
         setHudPaneTexture(htg.generateTexture());
 
         Vector3f nextPos = new Vector3f(player.getSpaceCraft().getPos());
-        nextPos.add(new Vector3f(0,0,1));
+        nextPos.add(new Vector3f(1.5f,1,0.8f));
         hudPane.setPos(nextPos);
 
         Renderer3D.getInstance().addObjectToFrame(hudPane);
