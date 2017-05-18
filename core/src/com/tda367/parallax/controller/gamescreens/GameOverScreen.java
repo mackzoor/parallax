@@ -2,15 +2,17 @@ package com.tda367.parallax.controller.gamescreens;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.ScreenAdapter;
 import com.tda367.parallax.controller.GameStateManager;
 import com.tda367.parallax.controller.devicestates.DeviceManager;
 import com.tda367.parallax.controller.gamecontrollers.GameOverController;
 import com.tda367.parallax.model.gameover.GameOverModel;
 import com.tda367.parallax.model.parallaxcore.Player;
 import com.tda367.parallax.view.gameovermenu.GameOverView;
+import jdk.nashorn.internal.objects.annotations.Setter;
 
 
-public class GameOverScreen implements Screen {
+public class GameOverScreen extends ScreenAdapter {
     private GameOverModel model;
     private GameOverController controller;
     private GameOverView view;
@@ -22,11 +24,9 @@ public class GameOverScreen implements Screen {
         this.player = player;
     }
 
-    public void show() {
-    }
-
+    @Override
     public void render(float delta) {
-        if (this.model.restart()) {
+        if (model.restart()) {
             GameStateManager.setMainMenuScreen(this.game, this.player);
         } else {
             this.view.render();
@@ -34,18 +34,11 @@ public class GameOverScreen implements Screen {
 
     }
 
+    @Override
     public void resize(int width, int height) {
     }
 
-    public void pause() {
-    }
-
-    public void resume() {
-    }
-
-    public void hide() {
-    }
-
+    @Override
     public void dispose() {
         this.view.dispose();
     }

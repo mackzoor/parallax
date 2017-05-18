@@ -3,6 +3,7 @@ package com.tda367.parallax.controller.gamescreens;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.tda367.parallax.controller.GameStateManager;
@@ -18,7 +19,7 @@ import com.tda367.parallax.view.Renderer3D;
 import com.tda367.parallax.view.Sound;
 import com.tda367.parallax.view.parallaxview.ParallaxView;
 
-public class GameScreen implements Screen {
+public class GameScreen extends ScreenAdapter {
 
     private Game game;
 
@@ -43,22 +44,15 @@ public class GameScreen implements Screen {
     }
 
     @Override
-    public void show() {
-    }
-
-    @Override
     public void render(float delta) {
         if (player.getSpaceCraft().getHealth() > 1) {
-//        System.out.println("Fps: " + 1/delta);
-            //Updates Parallax game logic
             parallaxGame.update((int) (Gdx.graphics.getDeltaTime() * 1000));
             collisionCalculator.run();
             parallaxView.render();
             DeviceManager.getDevice().update();
 //            System.out.println(player.getSpaceCraft().getHealth());
         } else {
-            dispose();
-            GameStateManager.setGameOverScreen(game, player);
+            gameOver();
         }
     }
 
@@ -69,27 +63,13 @@ public class GameScreen implements Screen {
     }
 
     @Override
-    public void pause() {
-    }
-
-    @Override
-    public void resume() {
-    }
-
-    @Override
-    public void hide() {
-    }
-
-    @Override
     public void dispose() {
         CollisionManager.getInstance().getCollidables().clear();
         Controllers.clearListeners();
         //TODO I think this below was important.
         audioQueue.clearAllActiveMusic();
-        collisionCalculator.dispose();
         CollisionManager.getInstance().getObservers().clear();
     }
-
 
     public void newGame() {
         player.addSpaceCraft(new Agelion(15));
@@ -104,5 +84,10 @@ public class GameScreen implements Screen {
                         Gdx.graphics.getHeight()
                 )
         );
+    }
+
+    public void gameOver(){
+        dispose();
+        GameStateManager.setGameOverScreen(game, player);
     }
 }

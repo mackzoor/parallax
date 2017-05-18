@@ -9,6 +9,7 @@ import com.tda367.parallax.controller.gamecontrollers.GameController;
 import com.tda367.parallax.controller.gamescreens.cardboardadapter.CardboardGame;
 import com.tda367.parallax.controller.gamescreens.cardboardadapter.CardboardScreen;
 import com.tda367.parallax.controller.devicestates.DeviceManager;
+import com.tda367.parallax.controller.gamescreens.cardboardadapter.CardboardScreenAdapter;
 import com.tda367.parallax.model.CollisionCalculator;
 import com.tda367.parallax.model.parallaxcore.Parallax;
 import com.tda367.parallax.model.parallaxcore.Player;
@@ -16,7 +17,7 @@ import com.tda367.parallax.model.parallaxcore.spacecraft.Agelion;
 import com.tda367.parallax.view.Renderer3D;
 import com.tda367.parallax.view.Sound;
 
-public class CardboardGameScreen implements CardboardScreen {
+public class CardboardGameScreen extends CardboardScreenAdapter {
 
     private CardboardGame game;
     private CardboardCamera camera;
@@ -52,35 +53,6 @@ public class CardboardGameScreen implements CardboardScreen {
         renderer = Renderer3D.initialize(camera);
         sound = new Sound();
         collisionCalculator = new CollisionCalculator();
-    }
-
-    @Override
-    public void show() {
-
-    }
-
-    @Override
-    public void render(float delta) {
-
-    }
-
-    @Override
-    public void resize(int width, int height) {
-    }
-
-    @Override
-    public void pause() {
-
-    }
-
-    @Override
-    public void resume() {
-
-    }
-
-    @Override
-    public void hide() {
-
     }
 
     @Override

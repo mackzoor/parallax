@@ -3,6 +3,7 @@ package com.tda367.parallax.controller.gamescreens;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.ScreenAdapter;
 import com.tda367.parallax.controller.gamecontrollers.MainMenuController;
 import com.tda367.parallax.controller.devicestates.DeviceManager;
 import com.tda367.parallax.controller.GameStateManager;
@@ -10,7 +11,7 @@ import com.tda367.parallax.model.menu.MainMenuModel;
 import com.tda367.parallax.model.parallaxcore.Player;
 import com.tda367.parallax.view.menu.MainMenuView;
 
-public class MainMenuScreen implements Screen {
+public class MainMenuScreen extends ScreenAdapter {
 
     private Game game;
     private Player player;
@@ -22,11 +23,6 @@ public class MainMenuScreen implements Screen {
     public MainMenuScreen(final Game game, Player player) {
         this.player = player;
         this.game = game;
-    }
-
-    @Override
-    public void show() {
-
     }
 
     @Override
@@ -42,22 +38,7 @@ public class MainMenuScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-        //mainMenuModel.resize(width, height);
-    }
-
-    @Override
-    public void pause() {
-
-    }
-
-    @Override
-    public void resume() {
-
-    }
-
-    @Override
-    public void hide() {
-
+        mainMenuModel.resize(width, height);
     }
 
     @Override

@@ -11,6 +11,7 @@ import com.tda367.parallax.controller.gamescreens.cardboardadapter.CardboardGame
 import com.tda367.parallax.controller.gamescreens.cardboardadapter.CardboardScreen;
 import com.tda367.parallax.controller.devicestates.DeviceManager;
 import com.tda367.parallax.controller.GameStateManager;
+import com.tda367.parallax.controller.gamescreens.cardboardadapter.CardboardScreenAdapter;
 import com.tda367.parallax.model.CollisionCalculator;
 import com.tda367.parallax.model.cardboardmenu.CardboardMainMenu;
 import com.tda367.parallax.model.cardboardmenu.CardboardMenuObserver;
@@ -23,9 +24,8 @@ import com.tda367.parallax.view.cardboardmenu.CardboardMainMenuView;
 import com.tda367.parallax.view.cardboardmenu.CardboardMenuWorldView;
 
 
-public class CardboardMenuScreen implements CardboardScreen, CardboardMenuObserver {
+public class CardboardMenuScreen extends CardboardScreenAdapter implements CardboardMenuObserver {
     private CardboardCamera camera;
-    private CardboardMenuRenderer renderer;
     private CardboardGame game;
     private CardboardMenuController controller;
     private static final float Z_NEAR = 0.1f;
@@ -44,7 +44,6 @@ public class CardboardMenuScreen implements CardboardScreen, CardboardMenuObserv
         camera.lookAt(0, 0, -1);
         camera.near = Z_NEAR;
         camera.far = Z_FAR;
-        renderer = new CardboardMenuRenderer(camera);
         sound = new Sound();
         controller = new CardboardMenuController(cardboardMainMenu, DeviceManager.getGameModeState(game));
         view = new CardboardMainMenuView(cardboardMainMenu);
@@ -53,13 +52,13 @@ public class CardboardMenuScreen implements CardboardScreen, CardboardMenuObserv
         cardboardMainMenu.addObservers(this);
         collisionCalculator = new CollisionCalculator();
     }
+
     @Override
     public void onNewFrame(HeadTransform paramHeadTransform) {
         cardboardMainMenu.update((int) (Gdx.graphics.getDeltaTime() * 1000));
         camera.update();
         collisionCalculator.run();
     }
-
 
     @Override
     public void onDrawEye(Eye paramEye) {
@@ -72,37 +71,6 @@ public class CardboardMenuScreen implements CardboardScreen, CardboardMenuObserv
 
         //Renders scene for current eye
         view.render();
-    }
-
-
-    @Override
-    public void show() {
-
-    }
-
-    @Override
-    public void render(float delta) {
-
-    }
-
-    @Override
-    public void resize(int width, int height) {
-
-    }
-
-    @Override
-    public void pause() {
-
-    }
-
-    @Override
-    public void resume() {
-
-    }
-
-    @Override
-    public void hide() {
-
     }
 
     @Override
