@@ -1,31 +1,30 @@
-package com.tda367.parallax.model.parallaxcore.world;
+package com.tda367.parallax.model.parallaxcore.world.courseobstacles;
 
 import com.tda367.parallax.model.parallaxcore.collision.Collidable;
 import com.tda367.parallax.model.parallaxcore.collision.CollidableType;
 import com.tda367.parallax.model.parallaxcore.collision.CollisionManager;
+import com.tda367.parallax.model.parallaxcore.world.ICourseModule;
 
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
 
 /**
- * A cube that is renderable and collidable.
+ * Base class for all course obstacles in {@link ICourseModule}'s.
  */
+public abstract class CourseObstacleBase implements Collidable{
 
-public class BoxObstacle implements Collidable {
     private Vector3f pos;
     private Quat4f rot;
 
-    private String collisionModel;
-
     private boolean collisionEnabled;
 
-    public BoxObstacle(){
-        collisionModel = "3dModels/boxObstacle/boxObstacle.g3db";
-        pos = new Vector3f();
-        rot = new Quat4f();
+    CourseObstacleBase(Vector3f pos, Quat4f rot){
+        this.pos = pos;
+        this.rot = rot;
         collisionEnabled = true;
     }
 
+    //Transformable
     @Override
     public Vector3f getPos() {
         return pos;
@@ -35,6 +34,8 @@ public class BoxObstacle implements Collidable {
         return rot;
     }
 
+
+    //Collidable
     @Override
     public void enableCollision(){
         collisionEnabled = true;
@@ -48,10 +49,6 @@ public class BoxObstacle implements Collidable {
         return collisionEnabled;
     }
     @Override
-    public String getCollisionModelPath() {
-        return collisionModel;
-    }
-    @Override
     public void addToCollisionManager() {
         CollisionManager.getInstance().addCollisionCheck(this);
     }
@@ -60,14 +57,17 @@ public class BoxObstacle implements Collidable {
         CollisionManager.getInstance().removeCollisionCheck(this);
     }
     @Override
+    public abstract String getCollisionModelPath();
+    @Override
     public CollidableType getCollidableType() {
         return CollidableType.OBSTACLE;
     }
-
     @Override
     public void handleCollision(Collidable collidable) {
         if (collidable.getCollidableType() == CollidableType.SPACECRAFT){
             disableCollision();
         }
     }
+
+    public abstract ObstacleType getObstacleType();
 }

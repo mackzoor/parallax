@@ -4,6 +4,7 @@ import com.tda367.parallax.model.parallaxcore.collision.Collidable;
 import com.tda367.parallax.model.parallaxcore.powerups.Container;
 import com.tda367.parallax.model.parallaxcore.powerups.IPowerUp;
 import com.tda367.parallax.model.parallaxcore.util.Transformable;
+import com.tda367.parallax.model.parallaxcore.world.courseobstacles.CourseObstacleBase;
 
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
  */
 
 public interface ICourseModule extends Transformable{
-    List<? extends Collidable> getBoxObstacles();
+    List<? extends CourseObstacleBase> getCouseObstacles();
     float getLength();
     void add3dObjectsToCollisionManager();
     void remove3dObjectsFromCollisionManager();

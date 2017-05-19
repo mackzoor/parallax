@@ -4,6 +4,8 @@ import com.tda367.parallax.model.parallaxcore.collision.Collidable;
 import com.tda367.parallax.model.parallaxcore.powerups.Container;
 import com.tda367.parallax.model.parallaxcore.powerups.IPowerUp;
 import com.tda367.parallax.model.parallaxcore.powerups.Missile;
+import com.tda367.parallax.model.parallaxcore.world.courseobstacles.CourseObstacleBase;
+import com.tda367.parallax.model.parallaxcore.world.courseobstacles.ObstacleFactory;
 
 
 import javax.vecmath.Quat4f;
@@ -21,7 +23,7 @@ public class DefaultCourseModule implements ICourseModule {
     private Quat4f rot;
     private float length;
 
-    private List<BoxObstacle> boxObstacles;
+    private List<CourseObstacleBase> couseObstacles;
     private List<Collidable> usables;
     private List<IPowerUp> powerUps;
     private boolean active;
@@ -36,7 +38,7 @@ public class DefaultCourseModule implements ICourseModule {
         powerUps = new ArrayList<IPowerUp>();
         containers = new ArrayList<Container>();
         length = 64;
-        this.boxObstacles = new ArrayList<BoxObstacle>();
+        this.couseObstacles = new ArrayList<CourseObstacleBase>();
         usables = new ArrayList<Collidable>();
 
         addObstacles(obstacleAmmount);
@@ -49,22 +51,22 @@ public class DefaultCourseModule implements ICourseModule {
         this(pos,4, 1);
     }
 
-    private void addObstacles(int i){
-        for (int x = 0; x < i; x++){
-            BoxObstacle boxObstacleNew = new BoxObstacle();
 
+    public void addObstacles(int i) {
+        for (int x = 0; x < i; x++) {
             Random rand = new Random();
             Vector3f obstaclePos = new Vector3f(
-                    rand.nextFloat()*12-6,
-                    rand.nextFloat()*length-length/2+(this.pos.getY()),
-                    rand.nextFloat()*12-6
+                    0,
+                    rand.nextFloat() * length - length / 2 + (this.pos.getY()),
+                    0
             );
+            CourseObstacleBase obstacle = ObstacleFactory.getRandomWallInstance(obstaclePos);
 
-            boxObstacleNew.getPos().set(obstaclePos);
-
-            this.boxObstacles.add(boxObstacleNew);
+            obstacle.getPos().set(obstaclePos);
+            this.couseObstacles.add(obstacle);
         }
     }
+
 
     //ICourseModule
     @Override
@@ -75,13 +77,13 @@ public class DefaultCourseModule implements ICourseModule {
 
     @Override
     public void add3dObjectsToCollisionManager() {
-        for (BoxObstacle boxObstacle : boxObstacles) {
+        for (CourseObstacleBase boxObstacle : couseObstacles) {
             boxObstacle.addToCollisionManager();
         }
     }
     @Override
     public void remove3dObjectsFromCollisionManager() {
-        for (BoxObstacle boxObstacle : boxObstacles) {
+        for (CourseObstacleBase boxObstacle : couseObstacles) {
             boxObstacle.removeFromCollisionManager();
         }
 
@@ -106,8 +108,8 @@ public class DefaultCourseModule implements ICourseModule {
         }
     }
     @Override
-    public List<? extends Collidable> getBoxObstacles() {
-        return boxObstacles;
+    public List<? extends CourseObstacleBase> getCouseObstacles() {
+        return couseObstacles;
     }
     @Override
     public List<Container> getContainers() {

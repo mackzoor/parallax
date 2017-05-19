@@ -1,8 +1,8 @@
 package com.tda367.parallax.view.parallaxview;
 
-import com.tda367.parallax.model.parallaxcore.collision.Collidable;
 import com.tda367.parallax.model.parallaxcore.powerups.Container;
 import com.tda367.parallax.model.parallaxcore.world.ICourseModule;
+import com.tda367.parallax.model.parallaxcore.world.courseobstacles.CourseObstacleBase;
 import com.tda367.parallax.view.Renderer3D;
 import com.tda367.parallax.view.util.Renderable3dObject;
 import com.tda367.parallax.view.util.ResourceLoader;
@@ -17,7 +17,7 @@ public class CourseModelView implements View{
 
     private final String model3dInternalPath = "3dModels/defaultCourse/course.g3db";
     private final ICourseModule courseModule;
-    private List<BoxObstacleView> obstacleViews;
+    private List<CourseObstacleView> obstacleViews;
     private List<ContainerView> containerViews;
     private Renderable3dObject courseModule3dObject;
 
@@ -27,7 +27,7 @@ public class CourseModelView implements View{
      */
     CourseModelView(ICourseModule courseModule) {
         this.courseModule = courseModule;
-        this.obstacleViews = new ArrayList<BoxObstacleView>();
+        this.obstacleViews = new ArrayList<CourseObstacleView>();
         this.containerViews = new ArrayList<ContainerView>();
         courseModule3dObject = new Renderable3dObject(
                 courseModule.getPos(),
@@ -37,8 +37,8 @@ public class CourseModelView implements View{
                 true
         );
 
-        for (Collidable collidable : courseModule.getBoxObstacles()) {
-            obstacleViews.add(new BoxObstacleView(collidable));
+        for (CourseObstacleBase obstacle : courseModule.getCouseObstacles()) {
+            obstacleViews.add(new CourseObstacleView(obstacle));
         }
 
         for (Container container : courseModule.getContainers()) {
@@ -52,7 +52,7 @@ public class CourseModelView implements View{
         Renderer3D.getInstance().addObjectToFrame(courseModule3dObject);
 
         //Render obstacles
-        for (BoxObstacleView obstacle : obstacleViews) {
+        for (CourseObstacleView obstacle : obstacleViews) {
             obstacle.render();
         }
 
