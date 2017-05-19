@@ -67,6 +67,7 @@ public class GameScreen extends ScreenAdapter {
         Controllers.clearListeners();
         //TODO I think this below was important.
         audioQueue.clearAllActiveMusic();
+        collisionCalculator.dispose();
         CollisionManager.getInstance().getObservers().clear();
     }
 

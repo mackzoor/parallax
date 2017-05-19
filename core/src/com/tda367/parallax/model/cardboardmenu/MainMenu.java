@@ -9,6 +9,7 @@ import com.tda367.parallax.model.parallaxcore.powerups.IPowerUp;
 import com.tda367.parallax.model.parallaxcore.util.Updatable;
 import com.tda367.parallax.model.parallaxcore.Player;
 
+import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,30 +18,24 @@ import java.util.List;
 The Model class for the Cardboard main menu.
 Creates the objects in the world and handles logic.
  */
-public class CardboardMainMenu implements Updatable, CollisionObserver {
+public class MainMenu implements Updatable, CollisionObserver {
 
     //TODO make an abstract 3DButton class
 
     Player player;
-    private CardboardExitButton exitButton;
-    private CardboardStartButton startButton;
-    private CardboardWorld cardboardWorld;
+    private ExitButton3D exitButton;
+    private StartButton3D startButton;
     private List<CardboardMenuObserver> observers;
     private List<IPowerUp> powerUps;
     private Camera camera;
-    private CardboardWorld world;
 
-    public CardboardMainMenu() {
-        exitButton = new CardboardExitButton();
-        exitButton.setPos(new Vector3f(2, 20, 0));
-        startButton = new CardboardStartButton();
-        startButton.setPos(new Vector3f(-2, 20, 0));
-        cardboardWorld = new CardboardWorld();
+    public MainMenu() {
+        exitButton = new ExitButton3D(new Vector3f(2, 20, 0),new Quat4f());
+        startButton = new StartButton3D(new Vector3f(-2,20,0),new Quat4f());
         observers = new ArrayList<CardboardMenuObserver>();
         powerUps = new ArrayList<IPowerUp>();
         CollisionManager.getInstance().subscribeToCollisions(this);
         camera = new Camera();
-        world = new CardboardWorld();
 
     }
 
@@ -48,16 +43,12 @@ public class CardboardMainMenu implements Updatable, CollisionObserver {
 
 
 
-    public CardboardExitButton getExitButton() {
+    public ExitButton3D getExitButton() {
         return exitButton;
     }
 
-    public CardboardStartButton getStartButton() {
+    public StartButton3D getStartButton() {
         return startButton;
-    }
-
-    public CardboardWorld getCardboardWorld(){
-        return cardboardWorld;
     }
 
     public Camera getCamera(){

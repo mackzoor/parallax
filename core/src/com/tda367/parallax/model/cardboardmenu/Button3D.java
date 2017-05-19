@@ -8,23 +8,21 @@ import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
 
 
-public class CardboardStartButton implements Collidable {
+public abstract class Button3D implements Collidable {
 
-    private Vector3f pos;
-    private Quat4f rot;
-    private boolean isHit;
+    Vector3f pos;
+    Quat4f rot;
+    boolean isHit;
+    String collisionModel;
+    boolean collisionEnabled;
 
-    private String collisionModel;
-
-    private boolean collisionEnabled;
-
-    CardboardStartButton(){
-        pos = new Vector3f();
-        rot = new Quat4f();
-        collisionModel = "3dModels/boxObstacle/boxObstacle.g3db";
+    protected Button3D(Vector3f pos,Quat4f rot){
+        this.pos = pos;
+        this.rot = rot;
         collisionEnabled = true;
-    }
+        isHit = false;
 
+    }
 
     @Override
     public Vector3f getPos() {
@@ -34,11 +32,6 @@ public class CardboardStartButton implements Collidable {
     @Override
     public Quat4f getRot() {
         return rot;
-    }
-
-
-    public boolean isActive() {
-        return collisionEnabled;
     }
 
     @Override
@@ -82,9 +75,7 @@ public class CardboardStartButton implements Collidable {
             isHit = true;
         }
     }
-    public void setPos(Vector3f vector3f){
-        pos = vector3f;
-    }
+
     public boolean isCollided(){
         return isHit;
     }

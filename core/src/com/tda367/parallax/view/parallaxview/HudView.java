@@ -14,7 +14,7 @@ import javax.vecmath.Vector3f;
  */
 public class HudView implements View{
 
-    private static final String pathTo3dModel = "3dModels/hudpane/hudpane.g3db";
+    private static final String pathTo3dModel = "3dModels/hudpane/hudPane.g3db";
     private final Player player;
     private Renderable3dObject hudPane;
 

@@ -43,6 +43,7 @@ public class MainMenuScreen extends ScreenAdapter {
 
     @Override
     public void dispose() {
+        //mainMenuController = null;
         mainMenuView.dispose();
     }
 

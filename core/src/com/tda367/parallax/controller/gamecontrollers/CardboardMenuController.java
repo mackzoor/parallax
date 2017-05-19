@@ -1,22 +1,21 @@
 package com.tda367.parallax.controller.gamecontrollers;
 
 import com.tda367.parallax.controller.devicestates.Device;
-import com.tda367.parallax.controller.inputcontrollers.InputControlsListener;
-import com.tda367.parallax.model.cardboardmenu.CardboardMainMenu;
+import com.tda367.parallax.model.cardboardmenu.MainMenu;
 
 
 public class CardboardMenuController extends ControllerAdapter {
 
-    CardboardMainMenu cardboardMainMenu;
+    MainMenu mainMenu;
 
-    public CardboardMenuController(CardboardMainMenu mainMenu, Device device){
-        cardboardMainMenu = mainMenu;
+    public CardboardMenuController(MainMenu mainMenu, Device device){
+        this.mainMenu = mainMenu;
         device.addInputDevices(this);
     }
 
     @Override
     public void actionButtonPressed() {
-        cardboardMainMenu.action();
+        mainMenu.action();
     }
 
 }

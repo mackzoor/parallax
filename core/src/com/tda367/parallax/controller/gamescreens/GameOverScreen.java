@@ -27,6 +27,7 @@ public class GameOverScreen extends ScreenAdapter {
     @Override
     public void render(float delta) {
         if (model.restart()) {
+            dispose();
             GameStateManager.setMainMenuScreen(this.game, this.player);
         } else {
             this.view.render();

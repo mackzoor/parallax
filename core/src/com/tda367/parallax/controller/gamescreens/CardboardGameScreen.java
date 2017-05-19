@@ -22,12 +22,9 @@ import com.tda367.parallax.view.parallaxview.ParallaxView;
 public class CardboardGameScreen extends CardboardScreenAdapter {
 
     private CardboardGame game;
-    private CardboardCamera camera;
     private Player player;
     private Parallax parallaxGame;
     private GameController controller;
-    private static final float Z_NEAR = 0.1f;
-    private static final float Z_FAR = 300.0f;
     private CollisionCalculator collisionCalculator;
     private Sound sound;
     private ParallaxView parallaxView;
@@ -40,7 +37,6 @@ public class CardboardGameScreen extends CardboardScreenAdapter {
         this.player.addSpaceCraft(SpaceCraftFactory.getAgelionInstance(10));
         this.parallaxGame = new Parallax(player);
         controller = new GameController(parallaxGame, DeviceManager.getGameModeState(game));
-
         parallaxView = new ParallaxView(parallaxGame,true);
         sound = new Sound();
         collisionCalculator = new CollisionCalculator();
@@ -56,19 +52,13 @@ public class CardboardGameScreen extends CardboardScreenAdapter {
     public void onNewFrame(HeadTransform paramHeadTransform) {
         //Updates Parallax game logic
         parallaxGame.update((int)(Gdx.graphics.getDeltaTime() * 1000));
-
         collisionCalculator.run();
     }
 
     @Override
     public void onDrawEye(Eye eye) {
         // Apply the eye transformation to the camera.
-        camera.setEyeViewAdjustMatrix(new Matrix4(eye.getEyeView()));
-
-        float[] perspective = eye.getPerspective(Z_NEAR, Z_FAR);
-        camera.setEyeProjection(new Matrix4(perspective));
-        camera.update();
-
+        Renderer3D.getInstance().onDrawEye(eye);
         //Renders scene for current eye
         parallaxView.render();
     }
