@@ -7,7 +7,7 @@ import lombok.Setter;
 public class Player {
 
     @Getter @Setter private int score;
-    @Getter private String userName;
+    @Getter private String userName = "LingonBoy";
     @Getter private ISpaceCraft spaceCraft;
 
     public Player() {
