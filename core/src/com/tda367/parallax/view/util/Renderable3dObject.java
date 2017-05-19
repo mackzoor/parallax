@@ -3,7 +3,7 @@ package com.tda367.parallax.view.util;
 import com.badlogic.gdx.graphics.g3d.Material;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.attributes.BlendingAttribute;
-import com.tda367.parallax.model.parallaxcore.world.World;
+import com.badlogic.gdx.math.Quaternion;
 
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
@@ -62,10 +62,12 @@ public class Renderable3dObject {
     public void setRot(Quat4f rot) {
         this.rot = rot;
         modelInstance.transform.rotate(
-                rot.getX(),
-                rot.getZ(),
-                rot.getY() * -1,
-                rot.getW()
+                new Quaternion(
+                        rot.getX(),
+                        rot.getZ(),
+                        rot.getY() * -1,
+                        rot.getW()
+                )
         );
     }
 
