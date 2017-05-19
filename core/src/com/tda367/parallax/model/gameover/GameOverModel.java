@@ -1,19 +1,20 @@
 package com.tda367.parallax.model.gameover;
 
 import com.tda367.parallax.model.parallaxcore.Player;
+import com.tda367.parallax.model.score.ScoreAdapter;
+import lombok.Getter;
 
 
 public class GameOverModel {
-    private Player player;
+    @Getter private Player player;
     private boolean exitGameOver;
+    @Getter private ScoreAdapter scoreAdapter;
 
     public GameOverModel(Player player) {
         this.player = player;
         this.exitGameOver = false;
-    }
-
-    public Player getPlayer() {
-        return this.player;
+        scoreAdapter = new ScoreAdapter();
+        scoreAdapter.storeHighScore(player.getUserName(), player.getScore());
     }
 
     public void exit() {

@@ -25,6 +25,19 @@ public class GameOverView {
         batch.begin();
         font.draw(batch,"YOU DIED", Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
         font.draw(batch,"Score: " + model.getPlayer().getScore(),Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2);
+
+        StringBuilder highScoreBuilder = new StringBuilder();
+        highScoreBuilder.append("Top players: ");
+
+        for(int i = 0; i < model.getScoreAdapter().getHighScoreHolders().size(); i++){
+            highScoreBuilder.append("\n" + Integer.toString(i+1) + ". "
+                    + model.getScoreAdapter().getHighScoresHolders().get(i)
+                    + " med " +  model.getScoreAdapter().getHighScores().get(i) + "poäng");
+        }
+
+        String highScoreString = highScoreBuilder.toString();
+
+        font.draw(batch, highScoreString, Gdx.graphics.getWidth()/4,Gdx.graphics.getHeight()/2);
         batch.end();
     }
 
