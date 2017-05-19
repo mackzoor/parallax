@@ -1,6 +1,7 @@
 package com.tda367.parallax.model.parallaxcore;
 
 import com.tda367.parallax.model.coreabstraction.AudioQueue;
+import com.tda367.parallax.model.parallaxcore.spacecraft.SpaceCraftFactory;
 import com.tda367.parallax.model.parallaxcore.util.Updatable;
 import com.tda367.parallax.model.parallaxcore.world.World;
 import com.tda367.parallax.model.parallaxcore.enemies.HunterAI;
@@ -87,10 +88,10 @@ public class Parallax implements Updatable {
 
     //Debug only
     private void createTestEnemy() {
-        MinionEnemy minionEnemy = new MinionEnemy(new Agelion(
-                new Vector3f(1.5f, -2, 1),
-                new Quat4f(),
-                13
+        MinionEnemy minionEnemy = new MinionEnemy(SpaceCraftFactory.getAgelionInstance(
+            13,
+            new Vector3f(1.5f, -2, 1),
+            new Quat4f()
         ));
         minionEnemy.getSpaceCraft().setForwardAcceleration(-3f);
         world.addSpaceCraft(minionEnemy.getSpaceCraft());

@@ -5,7 +5,14 @@ package com.tda367.parallax.view.parallaxview;
  */
 public interface View {
 
+    /**
+     * Renders the view object.
+     */
     void render();
-    boolean isObsolete();
 
+    /**
+     * Checks if the Model object that the current View object has is dead.
+     * @return true if view is no longer needed.
+     */
+    boolean isObsolete();
 }

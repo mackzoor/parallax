@@ -1,21 +1,21 @@
 package com.tda367.parallax.view.cardboardmenu;
 
-import com.tda367.parallax.model.cardboardmenu.CardboardStartButton;
+import com.tda367.parallax.model.cardboardmenu.StartButton3D;
 import com.tda367.parallax.view.Renderer3D;
 import com.tda367.parallax.view.parallaxview.View;
 import com.tda367.parallax.view.util.Renderable3dObject;
 import com.tda367.parallax.view.util.ResourceLoader;
 
 
-public class CardboardMenuStartButtonView implements View {
+public class StartButton3DView implements View {
 
     private String internalPath;
-    private CardboardStartButton startButton;
+    private StartButton3D startButton;
     private Renderable3dObject renderable3dObject;
 
 
 
-    CardboardMenuStartButtonView(CardboardStartButton startButton) {
+    StartButton3DView(StartButton3D startButton) {
         internalPath = "3dModels/boxObstacle";
         this.startButton = startButton;
         renderable3dObject = new Renderable3dObject(

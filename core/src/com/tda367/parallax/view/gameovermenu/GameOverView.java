@@ -29,6 +29,7 @@ public class GameOverView {
     }
 
     public void dispose(){
-
+        batch.dispose();
+        font.dispose();
     }
 }

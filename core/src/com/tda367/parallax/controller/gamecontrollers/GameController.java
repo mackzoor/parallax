@@ -4,7 +4,7 @@ import com.tda367.parallax.model.parallaxcore.Parallax;
 import com.tda367.parallax.controller.inputcontrollers.InputControlsListener;
 import com.tda367.parallax.controller.devicestates.Device;
 
-public class GameController implements InputControlsListener {
+public class GameController extends ControllerAdapter {
 
     private float yValue = 0;
     private float xValue = 0;

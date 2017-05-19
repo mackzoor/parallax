@@ -5,7 +5,7 @@ import com.tda367.parallax.controller.inputcontrollers.InputControlsListener;
 import com.tda367.parallax.model.gameover.GameOverModel;
 
 
-public class GameOverController implements InputControlsListener {
+public class GameOverController extends ControllerAdapter {
 
     private GameOverModel model;
 
@@ -20,67 +20,7 @@ public class GameOverController implements InputControlsListener {
     }
 
     @Override
-    public void secondaryActionButtonPressed() {
-
-    }
-
-    @Override
-    public void pauseButtonPressed() {
-
-    }
-
-    @Override
-    public void upButtonDown() {
-
-    }
-
-    @Override
-    public void upButtonUp() {
-
-    }
-
-    @Override
-    public void rightButtonDown() {
-
-    }
-
-    @Override
-    public void rightButtonUp() {
-
-    }
-
-    @Override
-    public void downButtonDown() {
-
-    }
-
-    @Override
-    public void downButtonUp() {
-
-    }
-
-    @Override
-    public void leftButtonDown() {
-
-    }
-
-    @Override
-    public void leftButtonUp() {
-
-    }
-
-    @Override
-    public void xAxisJoystickMovement(float xValue) {
-
-    }
-
-    @Override
-    public void yAxisJoystickMovement(float yValue) {
-
-    }
-
-    @Override
     public void onScreenClick(int xValue, int yValue) {
-
+        model.exit();
     }
 }

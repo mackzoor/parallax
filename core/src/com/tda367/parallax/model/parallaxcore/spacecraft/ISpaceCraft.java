@@ -27,6 +27,7 @@ public interface ISpaceCraft extends Collidable, Updatable {
     void decHealth();
     int getHealth();
     void setHealth(int health);
+    SpaceCraftType getType();
 
     Vector2f getCurrentPanVelocity();
     void setCurrentPanVelocity(float x, float y);

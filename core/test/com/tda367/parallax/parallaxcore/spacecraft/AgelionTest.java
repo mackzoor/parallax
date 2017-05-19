@@ -1,6 +1,7 @@
 package com.tda367.parallax.parallaxcore.spacecraft;
 
 import com.tda367.parallax.model.parallaxcore.spacecraft.Agelion;
+import com.tda367.parallax.model.parallaxcore.spacecraft.SpaceCraftFactory;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,7 +18,7 @@ public class AgelionTest {
 
     @Before
     public void setUp() throws Exception {
-        agilion = new Agelion(5, 0, 0, new Vector3f(0,0,0), new Quat4f());
+        agilion = SpaceCraftFactory.getAgelionInstance(5, new Vector3f(0,0,0), new Quat4f());
     }
 
     //Test to make sure that the setForwardSpeedTarget() method does what it should (setting the speed to a float value) and is not being interfered with at a different location.

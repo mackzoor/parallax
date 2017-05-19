@@ -1,7 +1,6 @@
 package com.tda367.parallax.view.parallaxview;
 
 import com.tda367.parallax.model.parallaxcore.powerups.IPowerUp;
-import com.tda367.parallax.view.util.Model;
 import com.tda367.parallax.view.Renderer3D;
 import com.tda367.parallax.view.util.Renderable3dObject;
 import com.tda367.parallax.view.util.ResourceLoader;
@@ -15,6 +14,10 @@ public class IPowerUpView implements View {
     private Renderable3dObject renderable3dObject;
 
 
+    /**
+     * Creates a IPowerUpView from a {@link IPowerUp}.
+     * @param powerUp to be used to create the IPowerUpView.
+     */
     public IPowerUpView(IPowerUp powerUp) {
         this.powerUp = powerUp;
         renderable3dObject = new Renderable3dObject(

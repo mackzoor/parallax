@@ -1,7 +1,6 @@
 package com.tda367.parallax.view.parallaxview;
 
 import com.tda367.parallax.model.parallaxcore.powerups.Container;
-import com.tda367.parallax.view.util.Model;
 import com.tda367.parallax.view.Renderer3D;
 import com.tda367.parallax.view.util.Renderable3dObject;
 import com.tda367.parallax.view.util.ResourceLoader;
@@ -13,8 +12,12 @@ public class ContainerView implements View {
 
     private final String model3dInternalPath = "3dModels/mysterycontainer/mysterycontainer.g3db";
     private final Container container;
-    private com.tda367.parallax.view.util.Renderable3dObject renderable3dObject;
+    private Renderable3dObject renderable3dObject;
 
+    /**
+     * Creates a ContainerView from a {@link Container}.
+     * @param container to be used to create the ContainerView.
+     */
     ContainerView(Container container) {
         this.container = container;
         renderable3dObject = new Renderable3dObject(

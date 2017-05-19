@@ -1,31 +1,27 @@
 package com.tda367.parallax.model.cardboardmenu;
 
-import com.tda367.parallax.view.util.Model;
-import com.tda367.parallax.view.util.Renderable;
 import com.tda367.parallax.model.parallaxcore.collision.Collidable;
 import com.tda367.parallax.model.parallaxcore.collision.CollidableType;
 import com.tda367.parallax.model.parallaxcore.collision.CollisionManager;
-import com.tda367.parallax.view.Renderer3D;
 
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
 
 
-public class CardboardExitButton implements Collidable {
+public abstract class Button3D implements Collidable {
 
-    private Vector3f pos;
-    private Quat4f rot;
-    private boolean isHit;
+    Vector3f pos;
+    Quat4f rot;
+    boolean isHit;
+    String collisionModel;
+    boolean collisionEnabled;
 
-    private String collisionModel;
-
-    private boolean collisionEnabled;
-
-    public CardboardExitButton(){
-        pos = new Vector3f();
-        rot = new Quat4f();
-        collisionModel = "3dModels/boxObstacle/boxObstacle.g3db";
+    protected Button3D(Vector3f pos,Quat4f rot){
+        this.pos = pos;
+        this.rot = rot;
         collisionEnabled = true;
+        isHit = false;
+
     }
 
     @Override
@@ -38,13 +34,9 @@ public class CardboardExitButton implements Collidable {
         return rot;
     }
 
-    public boolean isActive() {
-        return collisionEnabled;
-    }
-
     @Override
     public boolean collisionActivated() {
-        return false;
+        return collisionEnabled;
     }
 
     @Override
@@ -74,7 +66,7 @@ public class CardboardExitButton implements Collidable {
 
     @Override
     public CollidableType getCollidableType() {
-        return CollidableType.CONTAINER;
+        return CollidableType.OBSTACLE;
     }
 
     @Override
@@ -82,10 +74,6 @@ public class CardboardExitButton implements Collidable {
         if(collidable.getCollidableType() == CollidableType.HARMFUL){
             isHit = true;
         }
-    }
-
-    public void setPos(Vector3f vector3f){
-        pos = vector3f;
     }
 
     public boolean isCollided(){
