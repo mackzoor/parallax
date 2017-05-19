@@ -1,5 +1,7 @@
 package com.tda367.parallax.model.parallaxcore;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.tda367.parallax.model.coreabstraction.AudioQueue;
 import com.tda367.parallax.model.parallaxcore.spacecraft.SpaceCraftFactory;
 import com.tda367.parallax.model.parallaxcore.util.Updatable;
@@ -13,6 +15,8 @@ import lombok.Setter;
 
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
+import java.io.*;
+import java.nio.Buffer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -42,10 +46,12 @@ public class Parallax implements Updatable {
 
         ais = new ArrayList<HunterAI>();
 
-//        createTestEnemy();
+        //createTestEnemy();
 
         startBackgroundMusic();
     }
+
+
 
     @Override
     public void update(int milliSinceLastUpdate) {
@@ -79,10 +85,20 @@ public class Parallax implements Updatable {
         Random rand = new Random();
         int randomSong = rand.nextInt(100 - 1 + 1) + 1;
 
-        if(randomSong == 50){
+        System.out.println(randomSong);
+
+        if(randomSong == 1){
             audioQueue.playMusic("secretTrack.mp3","sounds/music");
-        } else {
+        } else if(randomSong == 2){
             audioQueue.playMusic("track.mp3","sounds/music", 0.7f);
+        } else {
+            /*
+            Dj Smack's Youtube: http://www.youtube.com/Djsmack100
+            Dj Smack's Soundcloud: http://soundcloud.com/dj-smack-1
+            Dj Smack's Facebook: http://www.facebook.com/pages/Dj-Smac...
+             */
+
+            audioQueue.playMusic("track2.mp3","sounds/music", 0.5f);
         }
     }
 
