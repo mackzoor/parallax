@@ -43,7 +43,7 @@ public abstract class SpaceCraft implements ISpaceCraft{
     private SpaceCraftType type;
 
     //SpaceCraft movement limiter
-    private final float courseCircumference = 3; //Really shouldn't be handled by Agelion
+    private final float courseRadius = 3;
 
     SpaceCraft(int health, float forwardVelocity, float maxPanVelocity, Vector3f pos, Quat4f rot, String pathToCollisionModel, SpaceCraftType type) {
         this.collisionModel = pathToCollisionModel;
@@ -113,7 +113,7 @@ public abstract class SpaceCraft implements ISpaceCraft{
     }
     private boolean isShipOutsideCourse() {
         Vector2f vector2f = xzPos(getPos());
-        return (vector2f.length() > courseCircumference);
+        return (vector2f.length() > courseRadius);
     }
     private Vector2f rotateNinetyDeg(Vector2f vector2f) {
         return new Vector2f(-vector2f.getY(),vector2f.getX());
@@ -128,7 +128,7 @@ public abstract class SpaceCraft implements ISpaceCraft{
         if (isShipOutsideCourse()) {
             Vector2f tempVec = xzPos(getPos());
             tempVec.normalize();
-            tempVec.scale((49f/50f) * courseCircumference); //Too compensate for rounding of float
+            tempVec.scale((49f/50f) * courseRadius); //Too compensate for rounding of float
             getPos().set(new Vector3f(tempVec.getX(), getPos().getY(), tempVec.getY()));
         }
     }
@@ -186,7 +186,7 @@ public abstract class SpaceCraft implements ISpaceCraft{
         currentPanVelocity.y = y;
     }
     public void setCurrentPanVelocity(Vector2f currentPanVelocity) {
-        currentPanVelocity = currentPanVelocity;
+        this.currentPanVelocity = currentPanVelocity;
     }
 
 
