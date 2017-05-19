@@ -44,7 +44,7 @@ public class GameScreen extends ScreenAdapter {
 
     @Override
     public void render(float delta) {
-        if (player.getSpaceCraft().getHealth() > 1) {
+        if (player.getSpaceCraft().getHealth() > 0) {
             parallaxGame.update((int) (Gdx.graphics.getDeltaTime() * 1000));
             collisionCalculator.run();
             parallaxView.render();
