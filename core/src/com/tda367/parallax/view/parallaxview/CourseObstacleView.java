@@ -36,11 +36,11 @@ public class CourseObstacleView implements View{
 
     private String get3dModelPath(ObstacleType type){
         if (type == ObstacleType.BOX) {
-            return "3dModels/boxObstacle/boxObstacle.g3db";
+            return "3dModels/box/box.g3db";
         } else if (type == ObstacleType.WALL){
             return "3dModels/wall/wall.g3db";
         } else {
-            return "3dModels/boxObstacle/boxObstacle.g3db";
+            return "3dModels/box/box.g3db";
         }
 
     }
