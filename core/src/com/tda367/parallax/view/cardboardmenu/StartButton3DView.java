@@ -9,19 +9,18 @@ import com.tda367.parallax.view.util.ResourceLoader;
 
 public class StartButton3DView implements View {
 
-    private String internalPath;
+    private final static String INTERNAL_PATH = "3dModels/boxObstacle";
     private StartButton3D startButton;
     private Renderable3dObject renderable3dObject;
 
 
 
     StartButton3DView(StartButton3D startButton) {
-        internalPath = "3dModels/boxObstacle";
         this.startButton = startButton;
         renderable3dObject = new Renderable3dObject(
                 startButton.getPos(),
                 startButton.getRot(),
-                ResourceLoader.getInstance().getModel("3dModels/boxObstacle/boxObstacle.g3db"),
+                ResourceLoader.getInstance().getModel(INTERNAL_PATH),
                 0.5f
         );
     }
