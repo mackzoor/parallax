@@ -30,9 +30,9 @@ public class Renderer3D {
     public static Renderer3D initialize(float fov, int width, int height, boolean isVr){
         if (isVr){
             // Setup of special camera for VR
-            Camera camera = new CardboardCamera();
-            camera.lookAt(0, 0, -1);
-            renderer3D = new Renderer3D(camera);
+            Camera cardboardCamera = new CardboardCamera();
+            cardboardCamera.lookAt(0, 0, -1);
+            renderer3D = new Renderer3D(cardboardCamera);
         } else {
             renderer3D = new Renderer3D(fov, width, height);
         }
@@ -104,7 +104,6 @@ public class Renderer3D {
                 y * -1
         );
         camera.update();
-//        System.out.println(camera.toString());
     }
 
     /**
@@ -114,7 +113,6 @@ public class Renderer3D {
         Gdx.gl.glEnable(GL20.GL_DEPTH_TEST);
         Gdx.gl.glClearColor(0,1,0,0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
-//        System.out.println(camera.toString());
         //Start rendering
         modelBatch.begin(camera);
 
