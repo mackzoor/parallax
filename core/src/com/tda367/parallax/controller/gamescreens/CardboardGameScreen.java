@@ -11,6 +11,7 @@ import com.tda367.parallax.controller.gamescreens.cardboardadapter.CardboardScre
 import com.tda367.parallax.controller.devicestates.DeviceManager;
 import com.tda367.parallax.controller.gamescreens.cardboardadapter.CardboardScreenAdapter;
 import com.tda367.parallax.model.CollisionCalculator;
+import com.tda367.parallax.model.parallaxcore.GameOverException;
 import com.tda367.parallax.model.parallaxcore.Parallax;
 import com.tda367.parallax.model.parallaxcore.Player;
 import com.tda367.parallax.model.parallaxcore.spacecraft.Agelion;
@@ -31,7 +32,7 @@ public class CardboardGameScreen extends CardboardScreenAdapter {
 
     public CardboardGameScreen(CardboardGame game){
         this.game = game;
-        Gdx.graphics.setTitle("Galactica space wars of justice, ultimate edition");
+        //Gdx.graphics.setTitle("Galactica space wars of justice, ultimate edition");
         // Initiate game with space craft "Agelion"
         this.player = new Player();
         this.player.addSpaceCraft(SpaceCraftFactory.getAgelionInstance(10));
@@ -51,8 +52,13 @@ public class CardboardGameScreen extends CardboardScreenAdapter {
     @Override
     public void onNewFrame(HeadTransform paramHeadTransform) {
         //Updates Parallax game logic
-        parallaxGame.update((int)(Gdx.graphics.getDeltaTime() * 1000));
+        try {
+            parallaxGame.update((int)(Gdx.graphics.getDeltaTime() * 1000));
+        } catch (GameOverException gameOverException) {
+            System.out.println("You're dead to me");
+        }
         collisionCalculator.run();
+
     }
 
     @Override

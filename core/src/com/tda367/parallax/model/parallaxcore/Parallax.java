@@ -1,22 +1,16 @@
 package com.tda367.parallax.model.parallaxcore;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Preferences;
 import com.tda367.parallax.model.coreabstraction.AudioQueue;
 import com.tda367.parallax.model.parallaxcore.spacecraft.SpaceCraftFactory;
-import com.tda367.parallax.model.parallaxcore.util.Updatable;
 import com.tda367.parallax.model.parallaxcore.world.World;
 import com.tda367.parallax.model.parallaxcore.enemies.HunterAI;
 import com.tda367.parallax.model.parallaxcore.enemies.MinionEnemy;
-import com.tda367.parallax.model.parallaxcore.spacecraft.Agelion;
 import com.tda367.parallax.model.parallaxcore.spacecraft.ISpaceCraft;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
-import java.io.*;
-import java.nio.Buffer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -25,7 +19,7 @@ import java.util.Random;
  * The startup class for the game "Parallax".
  */
 
-public class Parallax implements Updatable {
+public class Parallax {
     private AudioQueue audioQueue;
     @Getter private World world;
     @Getter private Camera camera;
@@ -53,23 +47,24 @@ public class Parallax implements Updatable {
 
 
 
-    @Override
-    public void update(int milliSinceLastUpdate) {
+    public void update(int milliSinceLastUpdate) throws GameOverException {
+        if (player.getSpaceCraft().getHealth() > 0) {
+            int updateTime = milliSinceLastUpdate;
 
-        int updateTime = milliSinceLastUpdate;
+            if (milliSinceLastUpdate > 100){
+                updateTime = 100;
+            }
 
-        if (milliSinceLastUpdate > 100){
-            updateTime = 100;
+            for (HunterAI ai : ais){
+                ai.update(updateTime);
+            }
+
+            world.update(updateTime);
+            camera.update(updateTime);
+            calculatePlayerScore(milliSinceLastUpdate);
+        } else {
+            throw new GameOverException();
         }
-
-        for (HunterAI ai : ais){
-            ai.update(updateTime);
-        }
-
-        world.update(updateTime);
-        camera.update(updateTime);
-        calculatePlayerScore(milliSinceLastUpdate);
-
     }
 
     private void calculatePlayerScore(int milliSinceLastUpdate){
