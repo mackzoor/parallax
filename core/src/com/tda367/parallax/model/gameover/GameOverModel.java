@@ -2,26 +2,38 @@ package com.tda367.parallax.model.gameover;
 
 import com.tda367.parallax.model.parallaxcore.Player;
 import com.tda367.parallax.model.score.ScoreAdapter;
+
+import java.util.List;
+
 import lombok.Getter;
 
 
 public class GameOverModel {
     @Getter private Player player;
-    private boolean exitGameOver;
-    @Getter private ScoreAdapter scoreAdapter;
+    @Getter private boolean active;
+    @Getter List<Integer> highScores;
+    @Getter List<String> highScoreHolders;
+    @Getter int playerScore;
+    private float timeShowed;
+    private final float activeTime = 3f;
 
     public GameOverModel(Player player) {
         this.player = player;
-        this.exitGameOver = false;
-        scoreAdapter = new ScoreAdapter();
-        scoreAdapter.storeHighScore(player.getUserName(), player.getScore());
+        timeShowed = 0;
+        this.active = true;
+        ScoreAdapter scoreAdapter = new ScoreAdapter();
+        playerScore = player.getScore();
+        scoreAdapter.storeHighScore(player.getUserName(), playerScore);
+        highScores = scoreAdapter.getHighScores();
+        highScoreHolders = scoreAdapter.getHighScoresHolders();
     }
 
-    public void exit() {
-        this.exitGameOver = true;
-    }
 
-    public boolean restart() {
-        return this.exitGameOver;
+    public void update(float delta) {
+        if (timeShowed < activeTime) {
+            timeShowed += delta;
+        } else {
+            this.active = false;
+        }
     }
 }

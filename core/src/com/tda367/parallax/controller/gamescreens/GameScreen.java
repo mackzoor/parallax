@@ -74,7 +74,7 @@ public class GameScreen extends ScreenAdapter {
         controller = new GameController(parallaxGame, DeviceManager.getDevice());
     }
 
-    public void gameOver(){
+    private void gameOver(){
         dispose();
         GameStateManager.setGameOverScreen(game, player);
     }
