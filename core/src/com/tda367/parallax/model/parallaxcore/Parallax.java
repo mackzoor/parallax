@@ -83,8 +83,6 @@ public class Parallax {
         Random rand = new Random();
         int randomSong = rand.nextInt(100 - 1 + 1) + 1;
 
-        System.out.println(randomSong);
-
         if(randomSong == 1){
             audioQueue.playMusic("secretTrack.mp3","sounds/music");
         } else if(randomSong == 2){

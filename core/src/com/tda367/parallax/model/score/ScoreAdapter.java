@@ -127,10 +127,8 @@ public class ScoreAdapter {
                 removeName = s;
             }else{
                 if(preferences.getInteger(s) < lowestScore || removeName==null){
-                    System.out.println(Integer.toString(lowestScore) + "vs" + Integer.toString(preferences.getInteger(s)));
                     removeName = s;
                     lowestScore = preferences.getInteger(s);
-                    System.out.println("winner is " + removeName + " med " + Integer.toString(lowestScore));
                 }
             }
         }

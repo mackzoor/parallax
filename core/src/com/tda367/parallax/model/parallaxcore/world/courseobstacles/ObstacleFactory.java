@@ -7,7 +7,9 @@ import java.util.Random;
 /**
  * Factory for creating obstacles.
  */
-public class ObstacleFactory {
+public final class ObstacleFactory {
+
+    private ObstacleFactory() {}
 
     //Boxes
     public static BoxObstacle getBoxObstacleInstance(Vector3f pos, Quat4f rot){

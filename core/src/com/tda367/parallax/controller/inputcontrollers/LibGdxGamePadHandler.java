@@ -96,12 +96,12 @@ public final class LibGdxGamePadHandler implements ControllerListener {
 
         if (listener != null) {
             if (axisCode == gamePad.getXAxisJoystickCode()) {
-                listener.xAxisJoystickMovement(gamePad.xAxisValueConverter(value));
+                listener.xAxisJoystickMovement(gamePad.xAxisValueConverter(roundedValue));
                 return false;
             }
 
             if (axisCode == gamePad.getYAxisJoystickCode()) {
-                listener.yAxisJoystickMovement(gamePad.yAxisValueConverter(value));
+                listener.yAxisJoystickMovement(gamePad.yAxisValueConverter(roundedValue));
                 return false;
             }
         }

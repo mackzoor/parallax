@@ -14,7 +14,7 @@ import javax.vecmath.Vector3f;
  */
 public class HudView implements View{
 
-    private static final String pathTo3dModel = "3dModels/hudpane/hudPane.g3db";
+    private static final String PATH_TO_3D_MODEL = "3dModels/hudpane/hudPane.g3db";
     private final Player player;
     private Renderable3dObject hudPane;
 
@@ -29,7 +29,7 @@ public class HudView implements View{
         hudPane = new Renderable3dObject(
                 player.getSpaceCraft().getPos(),
                 player.getSpaceCraft().getRot(),
-                ResourceLoader.getInstance().getModel(pathTo3dModel),
+                ResourceLoader.getInstance().getModel(PATH_TO_3D_MODEL),
                 0.75f,
                 false
         );

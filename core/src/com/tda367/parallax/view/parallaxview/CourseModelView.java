@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class CourseModelView implements View{
 
-    private final String model3dInternalPath = "3dModels/defaultCourse/course.g3db";
+    private final static String MODEL_3D_INTERNAL_PATH = "3dModels/defaultCourse/course.g3db";
     private final ICourseModule courseModule;
     private List<CourseObstacleView> obstacleViews;
     private List<ContainerView> containerViews;
@@ -32,7 +32,7 @@ public class CourseModelView implements View{
         courseModule3dObject = new Renderable3dObject(
                 courseModule.getPos(),
                 courseModule.getRot(),
-                ResourceLoader.getInstance().getModel(model3dInternalPath),
+                ResourceLoader.getInstance().getModel(MODEL_3D_INTERNAL_PATH),
                 1f,
                 true
         );

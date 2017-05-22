@@ -8,7 +8,7 @@ import javax.vecmath.Vector3f;
  */
 class BoxObstacle extends CourseObstacleBase {
 
-    private final String collisionModelPath = "3dModels/boxObstacle/boxObstacle.g3db";
+    private final static String COLLISION_MODEL_PATH = "3dModels/boxObstacle/boxObstacle.g3db";
 
     BoxObstacle(Vector3f pos, Quat4f rot){
         super(pos, rot);
@@ -16,7 +16,7 @@ class BoxObstacle extends CourseObstacleBase {
 
     @Override
     public String getCollisionModelPath() {
-        return collisionModelPath;
+        return COLLISION_MODEL_PATH;
     }
     @Override
     public ObstacleType getObstacleType() {

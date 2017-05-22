@@ -23,15 +23,13 @@ public class ISpaceCraftView implements View {
         this.iSpaceCraft = iSpaceCraft;
         model3dInternalPath = getSpaceCraftModel(iSpaceCraft);
 
-        if (!isObsolete()){
-            spaceCraftModel = new Renderable3dObject(
-                    iSpaceCraft.getPos(),
-                    iSpaceCraft.getRot(),
-                    ResourceLoader.getInstance().getModel(model3dInternalPath),
-                    1f,
-                    true
-            );
-        }
+        spaceCraftModel = new Renderable3dObject(
+                iSpaceCraft.getPos(),
+                iSpaceCraft.getRot(),
+                ResourceLoader.getInstance().getModel(model3dInternalPath),
+                1f,
+                true
+        );
 
     }
 

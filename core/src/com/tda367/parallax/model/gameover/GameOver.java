@@ -22,8 +22,8 @@ public class GameOver {
     @Getter List<GameOverText> gameOverTexts;
     private float timeShowed;
 
-    private static final float activeTime = 3f;
-    private static final float distanceToText = 10f;
+    private static final float ACTIVE_TIME = 3f;
+    private static final float DISTANCE_TO_TEXT = 10f;
 
     public GameOver(Player player) {
         this.player = player;
@@ -36,16 +36,16 @@ public class GameOver {
     private void generateGameOverTexts(int playerScore, int highScore) {
         gameOverTexts = new ArrayList<GameOverText>();
         gameOverTexts.add(new GameOverText(
-                new Vector3f(distanceToText,0,0), playerScore, highScore)
+                new Vector3f(DISTANCE_TO_TEXT,0,0), playerScore, highScore)
         );
         gameOverTexts.add(new GameOverText(
-                new Vector3f(-distanceToText,0,0), playerScore, highScore)
+                new Vector3f(-DISTANCE_TO_TEXT,0,0), playerScore, highScore)
         );
         gameOverTexts.add(new GameOverText(
-                new Vector3f(0,distanceToText,0), playerScore, highScore)
+                new Vector3f(0, DISTANCE_TO_TEXT,0), playerScore, highScore)
         );
         gameOverTexts.add(new GameOverText(
-                new Vector3f(0,-distanceToText,0), playerScore, highScore)
+                new Vector3f(0,-DISTANCE_TO_TEXT,0), playerScore, highScore)
         );
     }
 
@@ -57,7 +57,7 @@ public class GameOver {
     }
 
     public void update(float delta) {
-        if (timeShowed < activeTime) {
+        if (timeShowed < ACTIVE_TIME) {
             timeShowed += delta;
         } else {
             this.obsolete = true;

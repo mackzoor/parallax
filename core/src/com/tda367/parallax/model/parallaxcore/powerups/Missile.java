@@ -53,19 +53,19 @@ public class Missile implements IPowerUp {
     */
 
     //Time to represent the falling phase, value compared to the timeStorage variable
-    private static final int fallTime = 500;
+    private static final int FALL_TIME = 500;
 
     //Time to represent the active phase, value compared to the timeStorage variable
-    private static final int activeTime = 5000;
+    private static final int ACTIVE_TIME = 5000;
 
     //Time that missile is tracking the ships movement, making sure that it doesn't go trough it.
-    private static final int timeTrackingTrans = 600;
+    private static final int TIME_TRACKING_TRANS = 600;
 
     //Multiplier to change the speed of missile
-    private static final float velocityMultiplierX = 10f;
-    private static final float velocityMultiplierY = 1f;
-    private static final float velocityMultiplierZ = 10f;
-    private static final float fallMultiplier = 2.5f;
+    private static final float VELOCITY_MULTIPLIER_X = 10f;
+    private static final float VELOCITY_MULTIPLIER_Y = 1f;
+    private static final float VELOCITY_MULTIPLIER_Z = 10f;
+    private static final float FALL_MULTIPLIER = 2.5f;
 
     //How fast the missile will accelerate
     private double acceleration = 0.8;
@@ -219,7 +219,7 @@ public class Missile implements IPowerUp {
 
         //System.out.println(pos.getX() + ", " + pos.getY() + ", " + pos.getZ());
 
-        if(timeStorage <= timeTrackingTrans){
+        if(timeStorage <= TIME_TRACKING_TRANS){
             if(transPosLastUpdate.getX() == 0 && transPosLastUpdate.getY() == 0 && transPosLastUpdate.getZ() == 0){
                 pos = new Vector3f(transformable.getPos());
                 transPosLastUpdate = new Vector3f(transformable.getPos());
@@ -234,7 +234,7 @@ public class Missile implements IPowerUp {
         //Two states of movement, decided based on the time spent active. Either falling or moving towards the target.
 
         //Check if the missile is in the falling phase, moving to target phase or if the missile should be removed.
-        if(timeStorage <= fallTime){
+        if(timeStorage <= FALL_TIME){
 
             //Move based on the velocity (Transformable object velocity)
             moveOnVelocity(milliSinceLastUpdate);
@@ -243,7 +243,7 @@ public class Missile implements IPowerUp {
             fall(milliSinceLastUpdate);
 
 
-        }else if(timeStorage <= activeTime){
+        }else if(timeStorage <= ACTIVE_TIME){
 
             //Add more velocity to the ship
             accelerateMissile(milliSinceLastUpdate);
@@ -253,7 +253,7 @@ public class Missile implements IPowerUp {
 
             //Additional moving and rotating to get the missile to the target location
             rotateShip(getEnemyTargetPosition());
-            if(timeStorage > timeTrackingTrans){
+            if(timeStorage > TIME_TRACKING_TRANS){
                 Vector3f directionalVector = generateDirectionVector(getEnemyTargetPosition());
                 moveOnDirectionVector(directionalVector, milliSinceLastUpdate);
             }
@@ -295,7 +295,7 @@ public class Missile implements IPowerUp {
 
     //Method for making the missile fall
     private void fall(int milliSinceLastUpdate){
-        pos.add(new Vector3f(0,0,-(((float)milliSinceLastUpdate)/1000)*fallMultiplier));
+        pos.add(new Vector3f(0,0,-(((float)milliSinceLastUpdate)/1000)* FALL_MULTIPLIER));
     }
 
     //Method for moving the missile according to the velocity
@@ -325,7 +325,7 @@ public class Missile implements IPowerUp {
 
     //Method for moving the ship based on the direction vector generated from method "generateDirectionalVector"
     private void moveOnDirectionVector(Vector3f directionalVector, int milliSinceLastUpdate){
-        getPos().add(new Vector3f((directionalVector.getX()*(float)milliSinceLastUpdate/1000)*velocityMultiplierX, (directionalVector.getY()*(float)milliSinceLastUpdate/1000)*velocityMultiplierY, (directionalVector.getZ()*(float)milliSinceLastUpdate/1000)*velocityMultiplierZ));
+        getPos().add(new Vector3f((directionalVector.getX()*(float)milliSinceLastUpdate/1000)* VELOCITY_MULTIPLIER_X, (directionalVector.getY()*(float)milliSinceLastUpdate/1000)* VELOCITY_MULTIPLIER_Y, (directionalVector.getZ()*(float)milliSinceLastUpdate/1000)* VELOCITY_MULTIPLIER_Z));
     }
 
 

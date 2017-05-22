@@ -9,7 +9,7 @@ import com.tda367.parallax.view.util.ResourceLoader;
  * View class for {@link com.tda367.parallax.model.parallaxcore.powerups.Missile}
  */
 public class IPowerUpView implements View {
-    private final String model3dInternalPath = "3dModels/missile/missile.g3db";
+    private final static String MODEL_3D_INTERNAL_PATH = "3dModels/missile/missile.g3db";
     private final IPowerUp powerUp;
     private Renderable3dObject renderable3dObject;
 
@@ -23,7 +23,7 @@ public class IPowerUpView implements View {
         renderable3dObject = new Renderable3dObject(
                 powerUp.getPos(),
                 powerUp.getRot(),
-                ResourceLoader.getInstance().getModel(model3dInternalPath),
+                ResourceLoader.getInstance().getModel(MODEL_3D_INTERNAL_PATH),
                 1
         );
     }

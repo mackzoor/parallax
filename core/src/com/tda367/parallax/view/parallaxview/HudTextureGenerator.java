@@ -17,8 +17,8 @@ import com.tda367.parallax.model.parallaxcore.powerups.IPowerUp;
  */
 public class HudTextureGenerator {
 
-    private final int witdh = 512;
-    private final int height = 256;
+    private final static int WITDH = 512;
+    private final static int HEIGHT = 256;
 
     private static Texture generatedTexture;
 
@@ -62,10 +62,10 @@ public class HudTextureGenerator {
         pm.setColor(new Color(0,0,1f,0.7f));
 
         //Right rectangle
-//        pm.fillRectangle(triangleOffset,0,witdh-triangleOffset,height);
+//        pm.fillRectangle(triangleOffset,0,WITDH-triangleOffset,HEIGHT);
 
         //Bottom rectangle
-//        pm.fillRectangle(0,triangleOffset,triangleOffset,height-triangleOffset);
+//        pm.fillRectangle(0,triangleOffset,triangleOffset,HEIGHT-triangleOffset);
 
         //Top left triangle
 //        pm.fillTriangle(0,triangleOffset,triangleOffset,triangleOffset,triangleOffset,0);
@@ -75,30 +75,30 @@ public class HudTextureGenerator {
 
         return pm;
     }
-    private Pixmap renderText(Color fg_color) {
+    private Pixmap renderText(Color fgColor) {
         counter++;
         SpriteBatch spriteBatch = new SpriteBatch();
 
-        FrameBuffer frameBuffer = new FrameBuffer(Pixmap.Format.RGBA8888, witdh, height, false);
+        FrameBuffer frameBuffer = new FrameBuffer(Pixmap.Format.RGBA8888, WITDH, HEIGHT, false);
         frameBuffer.begin();
 
         Gdx.gl.glClearColor(1,1,1,0.3f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        Matrix4 normalProjection = new Matrix4().setToOrtho2D(0, 0, witdh,  height);
+        Matrix4 normalProjection = new Matrix4().setToOrtho2D(0, 0, WITDH, HEIGHT);
         spriteBatch.setProjectionMatrix(normalProjection);
 
         spriteBatch.begin();
-        spriteBatch.setColor(fg_color);
+        spriteBatch.setColor(fgColor);
 
         //Draw text
         BitmapFont font = new BitmapFont(true);
-        font.setColor(fg_color);
+        font.setColor(fgColor);
         font.getData().setScale(3);
         font.draw(spriteBatch, "Score: " + score + "\n Lives: " + String.valueOf(lives),  48, 48);
 
         spriteBatch.end();//finish write to buffer
-        Pixmap pm = ScreenUtils.getFrameBufferPixmap(0, 0, witdh, height); //write frame buffer to Pixmap
+        Pixmap pm = ScreenUtils.getFrameBufferPixmap(0, 0, WITDH, HEIGHT); //write frame buffer to Pixmap
         frameBuffer.end();
 
         //Dispose of c++ objects.

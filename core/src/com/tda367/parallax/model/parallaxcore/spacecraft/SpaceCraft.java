@@ -43,7 +43,7 @@ public abstract class SpaceCraft implements ISpaceCraft{
     private SpaceCraftType type;
 
     //SpaceCraft movement limiter
-    private final float courseRadius = 3;
+    private final static float COURSE_RADIUS = 3;
 
     SpaceCraft(int health, float forwardVelocity, float maxPanVelocity, Vector3f pos, Quat4f rot, String pathToCollisionModel, SpaceCraftType type) {
         this.collisionModel = pathToCollisionModel;
@@ -113,7 +113,7 @@ public abstract class SpaceCraft implements ISpaceCraft{
     }
     private boolean isShipOutsideCourse() {
         Vector2f vector2f = xzPos(getPos());
-        return (vector2f.length() > courseRadius);
+        return (vector2f.length() > COURSE_RADIUS);
     }
     private Vector2f rotateNinetyDeg(Vector2f vector2f) {
         return new Vector2f(-vector2f.getY(),vector2f.getX());
@@ -128,7 +128,7 @@ public abstract class SpaceCraft implements ISpaceCraft{
         if (isShipOutsideCourse()) {
             Vector2f tempVec = xzPos(getPos());
             tempVec.normalize();
-            tempVec.scale((49f/50f) * courseRadius); //Too compensate for rounding of float
+            tempVec.scale((49f/50f) * COURSE_RADIUS); //Too compensate for rounding of float
             getPos().set(new Vector3f(tempVec.getX(), getPos().getY(), tempVec.getY()));
         }
     }
@@ -198,8 +198,6 @@ public abstract class SpaceCraft implements ISpaceCraft{
 
             activePowerUP.activate(this);
             pu.remove(pu.size()-1);
-        } else {
-            System.out.println("NO POWERUP");
         }
     }
     @Override
@@ -265,7 +263,6 @@ public abstract class SpaceCraft implements ISpaceCraft{
             decHealth();
         } else if (collidable.getCollidableType() == CollidableType.CONTAINER){
             //take powerup of collided with container
-            System.out.println("POWERUP COLLECTED");
             IContainer container = (IContainer) collidable;
             add(container.getPowerUp());
         }

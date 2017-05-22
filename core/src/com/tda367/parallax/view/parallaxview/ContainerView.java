@@ -10,7 +10,7 @@ import com.tda367.parallax.view.util.ResourceLoader;
  */
 public class ContainerView implements View {
 
-    private final String model3dInternalPath = "3dModels/mysterycontainer/mysterycontainer.g3db";
+    private final static String MODEL_3D_INTERNAL_PATH = "3dModels/mysterycontainer/mysterycontainer.g3db";
     private final Container container;
     private Renderable3dObject renderable3dObject;
 
@@ -23,7 +23,7 @@ public class ContainerView implements View {
         renderable3dObject = new Renderable3dObject(
                 container.getPos(),
                 container.getRot(),
-                ResourceLoader.getInstance().getModel(model3dInternalPath),
+                ResourceLoader.getInstance().getModel(MODEL_3D_INTERNAL_PATH),
                 1f
         );
     }

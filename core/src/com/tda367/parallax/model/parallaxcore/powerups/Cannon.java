@@ -27,7 +27,7 @@ public class Cannon implements IPowerUp {
     private boolean isDead;
 
     private int timeAlive;
-    private final int lifeLength = 4000;
+    private final static int LIFE_LENGTH = 4000;
 
     public Cannon(){
         timeAlive = 0;
@@ -105,7 +105,7 @@ public class Cannon implements IPowerUp {
             timeAlive += milliSinceLastUpdate;
             updatePosition(milliSinceLastUpdate);
         }
-        if (timeAlive > lifeLength){
+        if (timeAlive > LIFE_LENGTH){
             die();
         }
     }

@@ -20,7 +20,7 @@ public class World implements Updatable, CollisionObserver {
     //TODO, remove the power-up after used
     @Getter private List<IPowerUp> powerUps;
 
-    private final int powerUpSpawnTime = 200; //Measured in tickrate
+    private final static int POWER_UP_SPAWN_TIME = 200; //Measured in tickrate
     private int lastPowerUpSpawn; //Time since last powerup spawn
     private int powerupsToSpawn;
 
@@ -134,7 +134,7 @@ public class World implements Updatable, CollisionObserver {
             spaceCraft.update(milliSinceLastUpdate);
         }
 
-        if (lastPowerUpSpawn >= powerUpSpawnTime){
+        if (lastPowerUpSpawn >= POWER_UP_SPAWN_TIME){
             lastPowerUpSpawn = 0;
             powerupsToSpawn++;
         }

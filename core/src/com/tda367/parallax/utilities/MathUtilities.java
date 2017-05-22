@@ -13,6 +13,8 @@ import static java.lang.Math.sin;
  */
 public final class MathUtilities {
 
+    private MathUtilities() {}
+
     public static Quat4f eulerToQuaternion(double pitch, double roll, double yaw) {
         Quat4f q = new Quat4f();
 
@@ -85,8 +87,7 @@ public final class MathUtilities {
             xRotation *= -1;
         }
 
-        Quat4f totalRot = MathUtilities.eulerToQuaternion(0, xRotation, zRotation);
-        return totalRot;
+        return MathUtilities.eulerToQuaternion(0, xRotation, zRotation);
     }
 
 

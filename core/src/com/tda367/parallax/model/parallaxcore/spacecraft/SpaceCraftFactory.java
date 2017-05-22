@@ -6,7 +6,9 @@ import javax.vecmath.Vector3f;
 /**
  * Factory class for creating different types of {@link SpaceCraft}.
  */
-public class SpaceCraftFactory {
+public final class SpaceCraftFactory {
+
+    private SpaceCraftFactory() {}
 
     public static Agelion getAgelionInstance(float forwardSpeed,Vector3f pos, Quat4f rot){
         return new Agelion(forwardSpeed, pos, rot);

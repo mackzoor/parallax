@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * Class for rendering 3d objects.
  */
-public class Renderer3D {
+public final class Renderer3D {
 
     private ModelBatch modelBatch;
     private Camera camera;
