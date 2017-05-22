@@ -5,7 +5,6 @@ import com.badlogic.gdx.Preferences;
 import lombok.Getter;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -15,6 +14,7 @@ import java.util.List;
 public class ScoreAdapter {
 
     Preferences preferences;
+    private final static int LENGTH_OF_LIST = 10;
 
     //The top 10 highest scoring players, list not necessarily in order.
     private @Getter List<HighScoreHolder> highScoreHolders;
@@ -65,10 +65,9 @@ public class ScoreAdapter {
 
         for (int i = 0; i < highScoreHolders.size(); i++){
             for(int j= 0; j < highScoreHolders.size(); j++){
-                if(highScoreHolders.get(j).getScore() > currentHighestScore.getScore()) {
-                    if(!(sortedHighScores.contains(highScoreHolders.get(j)))){
-                        currentHighestScore = highScoreHolders.get(j);
-                    }
+                if(highScoreHolders.get(j).getScore() > currentHighestScore.getScore() &&
+                        !(sortedHighScores.contains(highScoreHolders.get(j)))) {
+                    currentHighestScore = highScoreHolders.get(j);
                 }
             }
             sortedHighScores.add(currentHighestScore);
@@ -82,7 +81,7 @@ public class ScoreAdapter {
     //Store a score if it is amongst the top 10 scores.
     public void storeHighScore(String name, int score){
         //Check if there is 10 power-ups
-        if(!(preferences.get().size() < 10)) {
+        if(!(preferences.get().size() < LENGTH_OF_LIST)) {
 
             //make a suitable name for storage
             String storeName = suitableName(name);
@@ -109,7 +108,7 @@ public class ScoreAdapter {
         boolean nameAvailable = false;
         while(!(nameAvailable)){
             nameAvailable = checkAvailability(returnName);
-            if(nameAvailable == false){
+            if(!nameAvailable){
                 StringBuilder sb = new StringBuilder(returnName);
                 sb.append("#");
                 returnName = sb.toString();
@@ -150,14 +149,14 @@ public class ScoreAdapter {
     public List<Integer> getHighScores() {
         ArrayList<Integer> highScore = new ArrayList<Integer>();
         for(HighScoreHolder holder: highScoreHolders){
-            highScore.add(new Integer(holder.getScore()));
+            highScore.add(holder.getScore());
         }
         return highScore;
     }
     public List<String> getHighScoresHolders(){
         ArrayList<String> highScoreName = new ArrayList<String>();
         for(HighScoreHolder holder: highScoreHolders){
-            highScoreName.add(new String(holder.getName()));
+            highScoreName.add(holder.getName());
         }
         return highScoreName;
     }
