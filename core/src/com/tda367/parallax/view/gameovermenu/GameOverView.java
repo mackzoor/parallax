@@ -4,16 +4,16 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.tda367.parallax.model.gameover.GameOverModel;
+import com.tda367.parallax.model.gameover.GameOver;
 
 
 public class GameOverView {
 
     private SpriteBatch batch;
-    private GameOverModel model;
+    private GameOver model;
     private BitmapFont font;
 
-    public GameOverView(GameOverModel model){
+    public GameOverView(GameOver model){
         this.model = model;
         batch = new SpriteBatch();
         font = new BitmapFont();

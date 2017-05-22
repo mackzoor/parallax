@@ -3,13 +3,13 @@ package com.tda367.parallax.controller.gamescreens;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.ScreenAdapter;
 import com.tda367.parallax.controller.GameStateManager;
-import com.tda367.parallax.model.gameover.GameOverModel;
+import com.tda367.parallax.model.gameover.GameOver;
 import com.tda367.parallax.model.parallaxcore.Player;
 import com.tda367.parallax.view.gameovermenu.GameOverView;
 
 
 public class GameOverScreen extends ScreenAdapter {
-    private GameOverModel model;
+    private GameOver model;
     private GameOverView view;
     private Game game;
     private Player player;
@@ -41,7 +41,7 @@ public class GameOverScreen extends ScreenAdapter {
     }
 
     public void newGameOver() {
-        this.model = new GameOverModel(this.player);
+        this.model = new GameOver(this.player);
         this.view = new GameOverView(this.model);
     }
 }
