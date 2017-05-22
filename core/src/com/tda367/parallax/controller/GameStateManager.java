@@ -10,10 +10,11 @@ public final class GameStateManager {
     private GameStateManager() {}
 
     private static MainMenuScreen mainMenuScreen;
+    private static CardboardMenuScreen cardboardMenuScreen;
     private static GameScreen gameScreen;
     private static CardboardGameScreen cardboardGameScreen;
-    private static CardboardMenuScreen cardboardMenuScreen;
     private static GameOverScreen gameOverScreen;
+    private static CardboardGameOverScreen cardboardGameOverScreen;
 
     public static void setMainMenuScreen(Game game,Player player) {
         if (mainMenuScreen == null) {
@@ -21,6 +22,13 @@ public final class GameStateManager {
         }
         mainMenuScreen.newMainMenu();
         game.setScreen(mainMenuScreen);
+    }
+
+    public static void setCardboardMenuScreen(CardboardGame game){
+        if(cardboardMenuScreen == null){
+            cardboardMenuScreen = new CardboardMenuScreen(game);
+        }
+        game.setCardboardScreen(cardboardMenuScreen);
     }
 
     public static void setGameScreen(Game game,Player player) {
@@ -38,18 +46,19 @@ public final class GameStateManager {
         game.setCardboardScreen(cardboardGameScreen);
     }
 
-    public static void setCardboardMenuScreen(CardboardGame game){
-        if(cardboardMenuScreen == null){
-            cardboardMenuScreen = new CardboardMenuScreen(game);
-        }
-        game.setCardboardScreen(cardboardMenuScreen);
-    }
-
     public static void setGameOverScreen(Game game,Player player){
         if(gameOverScreen == null){
             gameOverScreen = new GameOverScreen(game,player);
         }
         gameOverScreen.newGameOver();
         game.setScreen(gameOverScreen);
+    }
+
+    public static void setCardboardGameOverScreen(CardboardGame game, Player player) {
+        if (cardboardGameOverScreen == null) {
+            cardboardGameOverScreen = new CardboardGameOverScreen(game, player);
+        }
+        cardboardGameOverScreen.newGameOver();
+        game.setScreen(cardboardGameOverScreen);
     }
 }
