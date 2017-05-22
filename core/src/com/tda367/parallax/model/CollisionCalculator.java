@@ -1,12 +1,14 @@
 package com.tda367.parallax.model;
 
-import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.math.Matrix4;
+import com.badlogic.gdx.math.Quaternion;
 import com.badlogic.gdx.physics.bullet.*;
 import com.badlogic.gdx.physics.bullet.collision.*;
 import com.tda367.parallax.model.parallaxcore.collision.*;
-import org.lwjgl.Sys;
+import com.tda367.parallax.util.ResourceLoader;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -15,69 +17,180 @@ import java.util.List;
 
 public class CollisionCalculator implements ICollisionCalculator {
 
-    private btSphereShape sphereShape;
-    private btDefaultCollisionConfiguration collisionConfig;
-    private btCollisionDispatcher dispatcher;
-    private CollisionObjectWrapper co0;
-    private CollisionObjectWrapper co1;
     private btCollisionAlgorithmConstructionInfo ci;
-    private btSphereSphereCollisionAlgorithm algorithm;
     private btDispatcherInfo info;
     private btManifoldResult result;
-    private btCollisionObject obj1;
-    private btCollisionObject obj2;
+    private btDefaultCollisionConfiguration collisionConfig;
+    private btCollisionDispatcher dispatcher;
+
+
+    private List<btCollisionAlgorithm> algorithmList;
+    private HashMap<Collidable, CollisionObjectWrapper> loadedCollidables;
 
     public CollisionCalculator() {
         Bullet.init();
+        loadedCollidables = new HashMap<Collidable, CollisionObjectWrapper>();
+        algorithmList = new ArrayList<btCollisionAlgorithm>();
 
         //These are needed
         collisionConfig = new btDefaultCollisionConfiguration();
         dispatcher = new btCollisionDispatcher(collisionConfig);
 
-        createCollisionObjects();
-        createResultPart();
-        createAlgorithm();
+        ci = new btCollisionAlgorithmConstructionInfo();
+        info = new btDispatcherInfo();
+        ci.setDispatcher1(dispatcher);
+
+        result = new btManifoldResult();
     }
+
 
     @Override
     public boolean hasCollided(Collidable first, Collidable second) {
 
+        if (!collisionCheckNeeded(first,second)) {
+            return false;
+        }
 
+        if (loadedCollidables.size() > 100){
+            clearLoadedCollidables();
+        }
+
+        if (algorithmList.size() > 100) {
+            clearAlgorithmList();
+        }
+
+        CollisionObjectWrapper co0 = getCollisionWrapper(first);
+        CollisionObjectWrapper co1 = getCollisionWrapper(second);
+
+        result.setBody0Wrap(co0.wrapper);
+        result.setBody1Wrap(co1.wrapper);
+
+
+        algorithmList.add(dispatcher.findAlgorithm(co0.wrapper, co1.wrapper));
+        algorithmList.get(algorithmList.size()-1).processCollision(co0.wrapper, co1.wrapper, info, result);
+
+        dispatcher.freeCollisionAlgorithm(algorithmList.get(algorithmList.size()-1).getCPointer());
+        dispatcher.getInternalManifoldPool().dispose();
+
+        boolean r = result.getPersistentManifold().getNumContacts() > 0;
+        result.getPersistentManifold().dispose();
+
+        return r;
+    }
+
+    private void clearAlgorithmList() {
+        for (btCollisionAlgorithm btCollisionAlgorithm : algorithmList) {
+            btCollisionAlgorithm.dispose();
+        }
+        algorithmList.clear();
+    }
+
+    private CollisionObjectWrapper getCollisionWrapper(Collidable collidable){
+        CollisionObjectWrapper wrapper = loadedCollidables.get(collidable);
+
+        if (wrapper == null){
+            wrapper = loadCollidable(collidable);
+        }
+
+        updateCollisionObject(wrapper,collidable);
+
+        return wrapper;
+    }
+    private CollisionObjectWrapper loadCollidable(Collidable collidable) {
+
+        btCollisionShape shape = ResourceLoader.getInstance().getCollisionShape(collidable.getCollisionModelPath());
+
+        btCollisionObject collisionObject = new btCollisionObject();
+        collisionObject.setCollisionShape(shape);
+
+        CollisionObjectWrapper wrapper = new CollisionObjectWrapper(collisionObject);
+        updateCollisionObject(wrapper,collidable);
+        loadedCollidables.put(collidable,wrapper);
+
+        return wrapper;
+    }
+
+    private void updateCollisionObject(CollisionObjectWrapper collisionObject, Collidable collidable){
+        btCollisionObject collObject = collisionObject.wrapper.getCollisionObject();
+
+        //Translate
+        collObject.setWorldTransform(new Matrix4());
+        collObject.setWorldTransform(collObject.getWorldTransform().setTranslation(
+                collidable.getPos().getX(),
+                collidable.getPos().getZ(),
+                collidable.getPos().getY() * -1
+        ));
+
+        //Rotate
+        collObject.setWorldTransform(collObject.getWorldTransform().rotate(
+                new Quaternion(
+                        collidable.getRot().getX(),
+                        collidable.getRot().getZ(),
+                        collidable.getRot().getY() * -1,
+                        collidable.getRot().getW()
+                )
+        ));
+    }
+    private boolean collisionCheckNeeded(Collidable first, Collidable second){
+        //Return false if:
+
+        //Collision is disabled on one of the collidables
         if (!first.collisionActivated() || !second.collisionActivated()){
             return false;
         }
-        if (
-            first.getCollidableType() == CollidableType.OBSTACLE &&
-            second.getCollidableType() == CollidableType.OBSTACLE
+
+        //If both are containers
+        if (first.getCollidableType() == CollidableType.CONTAINER &&
+                first.getCollidableType() == second.getCollidableType()
             ) {
             return false;
         }
 
-        //Translate collision shapes
-        obj1.setWorldTransform(obj1.getWorldTransform().setTranslation(
-                first.getPos().getX(),
-                first.getPos().getZ(),
-                first.getPos().getY()*-1
-        ));
 
-        obj2.setWorldTransform(obj2.getWorldTransform().setTranslation(
-                second.getPos().getX(),
-                second.getPos().getZ(),
-                second.getPos().getY()*-1
-        ));
+        //If both are obstacles
+        if (
+                first.getCollidableType() == CollidableType.OBSTACLE &&
+                        second.getCollidableType() == CollidableType.OBSTACLE
+                ) {
+            return false;
+        }
 
-
-
-        algorithm.processCollision(co0.wrapper, co1.wrapper, info, result);
-        boolean res = result.getPersistentManifold().getNumContacts() > 0;
-
-
-        return res;
+        //If none of them are either a spaceCraft of a harmful type
+        if (
+                (first.getCollidableType() == CollidableType.SPACECRAFT || first.getCollidableType() == CollidableType.HARMFUL) ||
+                (second.getCollidableType() == CollidableType.SPACECRAFT || second.getCollidableType() == CollidableType.HARMFUL)
+            ) {
+            return true;
+        } else {
+            return false;
+        }
     }
+    private void clearLoadedCollidables(){
+        for (CollisionObjectWrapper collisionObjectWrapper : loadedCollidables.values()) {
+            collisionObjectWrapper.dispose();
+        }
+        loadedCollidables.clear();
+    }
+
 
     @Override
     public List<CollisionPair> getCollisions(List<? extends Collidable> collidables) {
-        return new ArrayList<CollisionPair>();
+
+        //Find collisions and save them into pairs.
+        List<CollisionPair> pairs = new ArrayList<CollisionPair>();
+        for (int i = 0; i < collidables.size(); i++) {
+            for (int j = i; j < collidables.size(); j++) {
+                if (i != j && hasCollided(collidables.get(i), collidables.get(j))) {
+                    pairs.add(
+                            new CollisionPair(collidables.get(i), collidables.get(j)
+                            )
+                    );
+                }
+            }
+        }
+
+        //Return all collision pairs.
+        return pairs;
     }
 
     @Override
@@ -101,88 +214,18 @@ public class CollisionCalculator implements ICollisionCalculator {
 
     @Override
     public void run() {
+        //Get collidables
         CollisionManager collisionManager = CollisionManager.getInstance();
         List<Collidable> collidables = collisionManager.getCollidables();
-        List<CollisionPair> pairs = new ArrayList<CollisionPair>();
-//        System.out.println(collidables.size());
-        for (int i = 0; i < collidables.size(); i++) {
-            for (int j = i; j < collidables.size(); j++) {
-                if (i != j && hasCollided(collidables.get(i), collidables.get(j))) {
-                    pairs.add(
-                            new CollisionPair(collidables.get(i), collidables.get(j)
-                            )
-                    );
-                }
-            }
-        }
 
+        //Find collisions
+        List<CollisionPair> pairs = getCollisions(collidables);
+
+        //Report collisions
         for (CollisionPair pair : pairs) {
             collisionManager.alertObservers(pair);
         }
-
     }
 
-    private void createResultPart(){
-        ci = new btCollisionAlgorithmConstructionInfo();
-        ci.setDispatcher1(dispatcher);
-        info = new btDispatcherInfo();
-        result = new btManifoldResult(co0.wrapper, co1.wrapper);
-    }
-    private void disposeResultPart(){
-        ci.dispose();
-        info.dispose();
-        result.dispose();
-    }
-
-    private void createAlgorithm(){
-        algorithm = new btSphereSphereCollisionAlgorithm(null,ci,co0.wrapper,co1.wrapper);
-    }
-    private void disposeAlgorithm(){
-        algorithm.dispose();
-    }
-
-    private void createCollisionObjects(){
-        if (obj1 == null && obj2 == null){
-            //Create collision shapes
-            sphereShape = new btSphereShape(1f);
-
-            obj1 = new btCollisionObject();
-            obj1.setCollisionShape(sphereShape);
-
-            obj2 = new btCollisionObject();
-            obj2.setCollisionShape(sphereShape);
-
-            co0 = new CollisionObjectWrapper(obj1);
-            co1 = new CollisionObjectWrapper(obj2);
-        }
-    }
-    private void disposeCollisionObjects(){
-        sphereShape.dispose();
-
-        obj1.dispose();
-        obj2.dispose();
-
-        co0.dispose();
-        co1.dispose();
-
-
-        //Make em null
-        obj1 = null;
-        obj2 = null;
-
-        co0 = null;
-        co1 = null;
-
-        sphereShape = null;
-    }
-
-    public void dispose(){
-        //Dispose c++ objects, SUPER IMPORTANT. Will cause a memory leak if not done.
-        disposeResultPart();
-        disposeAlgorithm();
-        disposeCollisionObjects();
-
-        collisionConfig.dispose();
-        dispatcher.dispose();
-    }
+    public void dispose(){}
 }

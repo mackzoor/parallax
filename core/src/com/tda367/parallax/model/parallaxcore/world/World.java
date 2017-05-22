@@ -20,13 +20,7 @@ public class World implements Updatable, CollisionObserver {
     //TODO, remove the power-up after used
     @Getter private List<IPowerUp> powerUps;
 
-    private final static int POWER_UP_SPAWN_TIME = 200; //Measured in tickrate
-    private int lastPowerUpSpawn; //Time since last powerup spawn
-    private int powerupsToSpawn;
-
     public World(){
-        lastPowerUpSpawn = 0;
-        powerupsToSpawn = 0;
         CollisionManager.getInstance().subscribeToCollisions(this);
         modules = new ArrayList<ICourseModule>();
         spaceCrafts = new ArrayList<ISpaceCraft>();
@@ -88,7 +82,7 @@ public class World implements Updatable, CollisionObserver {
             addModules(modulesToAdd);
             removeModules(modulesToRemove);
         } else {
-            ICourseModule defModule = new DefaultCourseModule(new Vector3f(0,-32,0),5,2);
+            ICourseModule defModule = new DefaultCourseModule(new Vector3f(0,32,0),0,0);
             modules.add(defModule);
             for (IPowerUp iPowerUp : defModule.getPowerups()) {
                 powerUps.add(iPowerUp);
@@ -105,10 +99,9 @@ public class World implements Updatable, CollisionObserver {
                     endOfLastModulePos+modules.get(modules.size()-1).getLength(),
                     0),
                     5,
-                    powerupsToSpawn
+                    1
 
             );
-            powerupsToSpawn = 0;
             modules.add(tempModule);
             tempModule.add3dObjectsToCollisionManager();
 
@@ -129,14 +122,8 @@ public class World implements Updatable, CollisionObserver {
 
     @Override
     public void update(int milliSinceLastUpdate) {
-        lastPowerUpSpawn++;
         for (ISpaceCraft spaceCraft : spaceCrafts) {
             spaceCraft.update(milliSinceLastUpdate);
-        }
-
-        if (lastPowerUpSpawn >= POWER_UP_SPAWN_TIME){
-            lastPowerUpSpawn = 0;
-            powerupsToSpawn++;
         }
 
         List<Integer> numbers = new ArrayList<Integer>();

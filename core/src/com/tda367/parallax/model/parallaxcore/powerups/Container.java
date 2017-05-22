@@ -11,7 +11,7 @@ import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
 
 /**
- * Container that holds a usable/Powerup.
+ * Container that holds a {@link IPowerUp}.
  */
 public class Container implements Collidable, Updatable, IContainer {
 
@@ -31,7 +31,7 @@ public class Container implements Collidable, Updatable, IContainer {
         pos = new Vector3f();
         rot = new Quat4f();
 
-        collisionModelPath = "3dModels/agelion/agelion.g3db";
+        collisionModelPath = "3dModels/box/hitbox.obj";
 
         collisionEnabled = true;
         isCollected = false;

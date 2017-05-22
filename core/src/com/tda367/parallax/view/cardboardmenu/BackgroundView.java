@@ -3,7 +3,7 @@ package com.tda367.parallax.view.cardboardmenu;
 import com.tda367.parallax.view.Renderer3D;
 import com.tda367.parallax.view.parallaxview.View;
 import com.tda367.parallax.view.util.Renderable3dObject;
-import com.tda367.parallax.view.util.ResourceLoader;
+import com.tda367.parallax.util.ResourceLoader;
 
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;

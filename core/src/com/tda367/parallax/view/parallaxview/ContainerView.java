@@ -3,7 +3,7 @@ package com.tda367.parallax.view.parallaxview;
 import com.tda367.parallax.model.parallaxcore.powerups.Container;
 import com.tda367.parallax.view.Renderer3D;
 import com.tda367.parallax.view.util.Renderable3dObject;
-import com.tda367.parallax.view.util.ResourceLoader;
+import com.tda367.parallax.util.ResourceLoader;
 
 /**
  * View class for {@link com.tda367.parallax.model.parallaxcore.powerups.Container}.

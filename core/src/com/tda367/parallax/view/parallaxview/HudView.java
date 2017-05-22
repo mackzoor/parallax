@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute;
 import com.tda367.parallax.model.parallaxcore.Player;
 import com.tda367.parallax.view.Renderer3D;
 import com.tda367.parallax.view.util.Renderable3dObject;
-import com.tda367.parallax.view.util.ResourceLoader;
+import com.tda367.parallax.util.ResourceLoader;
 import javax.vecmath.Vector3f;
 
 /**

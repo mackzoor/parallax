@@ -7,7 +7,7 @@ import javax.vecmath.*;
  */
 public class Agelion extends SpaceCraft{
 
-    private final static String COLLISION_MODEL = "3dModels/agelion/agelion.g3db";
+    private final static String COLLISION_MODEL = "3dModels/agelion/hitbox.obj";
     private final static float MAX_PAN_VELOCITY = 8f;
     private final static int HEALTH = 5;
     private final static SpaceCraftType TYPE = SpaceCraftType.AGELION;

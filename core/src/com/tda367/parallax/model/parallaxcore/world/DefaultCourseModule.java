@@ -53,11 +53,14 @@ public class DefaultCourseModule implements ICourseModule {
 
 
     public void addObstacles(int i) {
+
+
+        float distanceBetween = length / (float) i;
         for (int x = 0; x < i; x++) {
             Random rand = new Random();
             Vector3f obstaclePos = new Vector3f(
                     0,
-                    rand.nextFloat() * length - length / 2 + (this.pos.getY()),
+                    (this.pos.getY()) - length/2 + x*distanceBetween,
                     0
             );
             CourseObstacleBase obstacle = ObstacleFactory.getRandomWallInstance(obstaclePos);

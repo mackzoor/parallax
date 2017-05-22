@@ -78,7 +78,7 @@ public class Missile implements IPowerUp {
     public Missile(){
         this.pos = new Vector3f();
         this.rot = new Quat4f();
-        this.collisionModel ="3dModels/missile/missile.g3db";
+        this.collisionModel ="3dModels/box/box.obj";
         this.isCollisionOn = false;
         this.enemyTargetPosition = new Vector3f();
         this.transPosLastUpdate = new Vector3f();

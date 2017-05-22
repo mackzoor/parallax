@@ -3,6 +3,7 @@ package com.tda367.parallax.view;
 import com.badlogic.gdx.audio.Music;
 import com.tda367.parallax.model.coreabstraction.AudioObserver;
 import com.tda367.parallax.model.coreabstraction.AudioQueue;
+import com.tda367.parallax.util.ResourceLoader;
 import lombok.Getter;
 
 import java.util.ArrayList;
@@ -10,12 +11,12 @@ import java.util.List;
 
 public class Sound implements AudioObserver {
 
-    private com.tda367.parallax.view.util.ResourceLoader resources;
+    private ResourceLoader resources;
 
     private List<ActiveMusicCombination> activeMusic = new ArrayList<ActiveMusicCombination>();
 
     public Sound(){
-        this.resources = com.tda367.parallax.view.util.ResourceLoader.getInstance();
+        this.resources = ResourceLoader.getInstance();
         AudioQueue.getInstance().addListener(this);
     }
 

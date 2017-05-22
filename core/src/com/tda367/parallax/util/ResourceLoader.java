@@ -1,28 +1,35 @@
-package com.tda367.parallax.view.util;
+package com.tda367.parallax.util;
 
 import com.badlogic.gdx.Files;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.*;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.loader.G3dModelLoader;
+import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.physics.bullet.collision.btCollisionShape;
+import com.badlogic.gdx.physics.bullet.collision.btConvexHullShape;
 import com.badlogic.gdx.utils.UBJsonReader;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
  * A class for loading libgdx compatible file types from harddrive into memory.
  */
 public final class ResourceLoader {
+    private static ResourceLoader instance;
+    private G3dModelLoader modelLoader;
     private Map<String,Model> loadedModels;
     private Map<String,Sound> loadedSounds;
     private Map<String,Music> loadedMusic;
-    private G3dModelLoader modelLoader;
-    private static ResourceLoader instance;
     private Map<String,Texture> loadedTextures;
+    private Map<String, btCollisionShape> loadedCollisionShapes;
 
     //Singleton pattern
     public static ResourceLoader getInstance(){
@@ -39,6 +46,7 @@ public final class ResourceLoader {
         loadedSounds = new HashMap<String, Sound>();
         loadedMusic = new HashMap<String, Music>();
         loadedTextures = new HashMap<String, Texture>();
+        loadedCollisionShapes = new HashMap<String, btCollisionShape>();
     }
 
     /**
@@ -162,8 +170,9 @@ public final class ResourceLoader {
         return music;
     }
 
+
     /**
-     * Loads a texture from the filepath into memory and stores it in the loadedTextures Map.
+     * Loads a {@link Texture} from the filepath into memory and stores it in the loadedTextures Map.
      * @param filePath path to the texture file. Has to be .png or .jpg file type.
      * @return the loaded texture.
      */
@@ -186,4 +195,75 @@ public final class ResourceLoader {
         }
         return texture;
     }
+
+    /**
+     * Loads a {@link btCollisionShape} from the filepath into memory and stores it in the loadedTextures Map.
+     * @param pathToObjFile path to the .obj file. Has to be .obj file type.
+     * @return the loaded collision shape.
+     */
+    private btCollisionShape loadCollisionShape(String pathToObjFile){
+        btConvexHullShape collisionShape = new btConvexHullShape();
+
+        List<Vector3> vertices = get3dModelVertices(pathToObjFile);
+
+        for (Vector3 vertex : vertices) {
+            collisionShape.addPoint(vertex);
+        }
+
+        loadedCollisionShapes.put(pathToObjFile,collisionShape);
+        return collisionShape;
+    }
+    /**
+     * Creates a set of {@link Vector3}'s from an .obj files vectors. Only works with .obj file type.
+     * @param pathToFile path to .obj file.
+     * @return list of vectors.
+     */
+    private List<Vector3> get3dModelVertices(String pathToFile){
+        FileHandle file = Gdx.files.internal(pathToFile);
+        String fullString = file.readString();
+
+        String[] lines = fullString.split("\n");
+
+        List<Vector3> vectors = new ArrayList<Vector3>();
+        for (String line : lines) {
+            if (line.length() > 0 && line.substring(0,2).contains("v ")){
+                vectors.add(stringToVector3(line));
+            }
+        }
+
+        return vectors;
+    }
+    /**
+     * Converts a string from a vertex line in an .obj 3d file. Has to be a line that starts with a "v".
+     * @param str line to create vector with.
+     * @return Created vector.
+     */
+    private Vector3 stringToVector3(String str){
+        String[] splitted = str.split("\\s+");
+
+        Vector3 vector = new Vector3(
+                Float.valueOf(splitted[1]),
+                Float.valueOf(splitted[2]),
+                Float.valueOf(splitted[3])
+        );
+
+        return vector;
+    }
+
+    /**
+     * Creates a {@link btCollisionShape} from the specified .obj file.
+     * @param pathToObjFile path to .obj file.
+     * @return the created collision shape
+     */
+    public btCollisionShape getCollisionShape(String pathToObjFile){
+        btCollisionShape shape = loadedCollisionShapes.get(pathToObjFile);
+
+        if (shape == null) {
+            shape = loadCollisionShape(pathToObjFile);
+        }
+
+        return shape;
+    }
+
+
 }
