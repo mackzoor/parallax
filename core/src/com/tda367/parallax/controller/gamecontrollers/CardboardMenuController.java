@@ -1,10 +1,11 @@
 package com.tda367.parallax.controller.gamecontrollers;
 
 import com.tda367.parallax.controller.devicestates.Device;
+import com.tda367.parallax.controller.inputcontrollers.InputControlsAdapter;
 import com.tda367.parallax.model.cardboardmenu.MainMenu;
 
 
-public class CardboardMenuController extends ControllerAdapter {
+public class CardboardMenuController extends InputControlsAdapter {
 
     MainMenu mainMenu;
 

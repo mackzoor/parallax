@@ -1,7 +1,6 @@
 package com.tda367.parallax.controller.gamescreens;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.ScreenAdapter;
 import com.tda367.parallax.controller.GameStateManager;
 import com.tda367.parallax.controller.devicestates.DeviceManager;
@@ -9,7 +8,6 @@ import com.tda367.parallax.controller.gamecontrollers.GameOverController;
 import com.tda367.parallax.model.gameover.GameOverModel;
 import com.tda367.parallax.model.parallaxcore.Player;
 import com.tda367.parallax.view.gameovermenu.GameOverView;
-import jdk.nashorn.internal.objects.annotations.Setter;
 
 
 public class GameOverScreen extends ScreenAdapter {

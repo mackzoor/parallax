@@ -1,8 +1,6 @@
 package com.tda367.parallax.controller.gamescreens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.backends.android.CardboardCamera;
-import com.badlogic.gdx.math.Matrix4;
 import com.google.vrtoolkit.cardboard.Eye;
 import com.google.vrtoolkit.cardboard.HeadTransform;
 import com.tda367.parallax.controller.gamecontrollers.CardboardMenuController;

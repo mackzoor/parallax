@@ -1,20 +1,16 @@
 package com.tda367.parallax.controller.gamescreens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.backends.android.CardboardCamera;
-import com.badlogic.gdx.math.Matrix4;
 import com.google.vrtoolkit.cardboard.Eye;
 import com.google.vrtoolkit.cardboard.HeadTransform;
 import com.tda367.parallax.controller.gamecontrollers.GameController;
 import com.tda367.parallax.controller.gamescreens.cardboardadapter.CardboardGame;
-import com.tda367.parallax.controller.gamescreens.cardboardadapter.CardboardScreen;
 import com.tda367.parallax.controller.devicestates.DeviceManager;
 import com.tda367.parallax.controller.gamescreens.cardboardadapter.CardboardScreenAdapter;
 import com.tda367.parallax.model.CollisionCalculator;
 import com.tda367.parallax.model.parallaxcore.GameOverException;
 import com.tda367.parallax.model.parallaxcore.Parallax;
 import com.tda367.parallax.model.parallaxcore.Player;
-import com.tda367.parallax.model.parallaxcore.spacecraft.Agelion;
 import com.tda367.parallax.model.parallaxcore.spacecraft.SpaceCraftFactory;
 import com.tda367.parallax.view.Renderer3D;
 import com.tda367.parallax.view.Sound;

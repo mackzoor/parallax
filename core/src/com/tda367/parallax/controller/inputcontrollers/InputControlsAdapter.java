@@ -1,9 +1,6 @@
-package com.tda367.parallax.controller.gamecontrollers;
+package com.tda367.parallax.controller.inputcontrollers;
 
-import com.tda367.parallax.controller.inputcontrollers.InputControlsListener;
-
-
-public class ControllerAdapter implements InputControlsListener {
+public abstract class InputControlsAdapter implements InputControlsListener {
 
     @Override
     public void actionButtonPressed() {

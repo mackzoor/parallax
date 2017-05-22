@@ -1,16 +1,15 @@
 package com.tda367.parallax.controller.gamecontrollers;
 
-import com.badlogic.gdx.Gdx;
+import com.tda367.parallax.controller.inputcontrollers.InputControlsAdapter;
 import com.tda367.parallax.model.menu.buttons.Button;
 import com.tda367.parallax.model.menu.buttons.ExitButton;
 import com.tda367.parallax.model.menu.buttons.StartButton;
 import com.tda367.parallax.model.menu.MainMenuModel;
 import com.tda367.parallax.controller.devicestates.Device;
-import com.tda367.parallax.controller.inputcontrollers.InputControlsListener;
 
 import lombok.Getter;
 
-public class MainMenuController extends ControllerAdapter {
+public class MainMenuController extends InputControlsAdapter {
 
     private MainMenuModel mainMenuModel;
     @Getter
