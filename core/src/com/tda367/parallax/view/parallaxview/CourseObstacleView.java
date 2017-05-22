@@ -4,7 +4,7 @@ import com.tda367.parallax.model.parallaxcore.world.courseobstacles.CourseObstac
 import com.tda367.parallax.model.parallaxcore.world.courseobstacles.ObstacleType;
 import com.tda367.parallax.view.Renderer3D;
 import com.tda367.parallax.view.util.Renderable3dObject;
-import com.tda367.parallax.view.util.ResourceLoader;
+import com.tda367.parallax.util.ResourceLoader;
 
 /**
  * View class for {@link CourseObstacleBase}.

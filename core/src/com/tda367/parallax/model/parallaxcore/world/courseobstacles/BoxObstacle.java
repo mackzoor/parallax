@@ -8,7 +8,7 @@ import javax.vecmath.Vector3f;
  */
 class BoxObstacle extends CourseObstacleBase {
 
-    private final String collisionModelPath = "3dModels/boxObstacle/boxObstacle.g3db";
+    private final String collisionModelPath = "3dModels/box/hitbox.obj";
 
     BoxObstacle(Vector3f pos, Quat4f rot){
         super(pos, rot);

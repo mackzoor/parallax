@@ -5,7 +5,7 @@ import com.tda367.parallax.model.parallaxcore.world.ICourseModule;
 import com.tda367.parallax.model.parallaxcore.world.courseobstacles.CourseObstacleBase;
 import com.tda367.parallax.view.Renderer3D;
 import com.tda367.parallax.view.util.Renderable3dObject;
-import com.tda367.parallax.view.util.ResourceLoader;
+import com.tda367.parallax.util.ResourceLoader;
 
 import java.util.ArrayList;
 import java.util.List;

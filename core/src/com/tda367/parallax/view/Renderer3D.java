@@ -58,7 +58,7 @@ public class Renderer3D {
 
         environment = new Environment();
         environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 1f, 1f, 1f, 1.f));
-        environment.set(new ColorAttribute(ColorAttribute.Fog, 0f, 0f, 0f, -1f));
+        environment.set(new ColorAttribute(ColorAttribute.Fog, 0f, 0f, 0f,1f));
         //environment.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -1f, -0.8f, -0.2f));
 
     }
@@ -111,7 +111,7 @@ public class Renderer3D {
      */
     public void renderFrame() {
         Gdx.gl.glEnable(GL20.GL_DEPTH_TEST);
-        Gdx.gl.glClearColor(0,1,0,0);
+        Gdx.gl.glClearColor(0,0,0,0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
         //Start rendering
         modelBatch.begin(camera);

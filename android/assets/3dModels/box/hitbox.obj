@@ -1,6 +1,5 @@
 # Blender v2.78 (sub 0) OBJ File: 'boxObstacle.blend'
 # www.blender.org
-mtllib box.mtl
 o Cube.001_Cube.005
 v -1.000000 -1.000000 1.000000
 v -1.000000 1.000000 1.000000
