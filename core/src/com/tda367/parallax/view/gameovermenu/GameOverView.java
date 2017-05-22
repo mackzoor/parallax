@@ -24,20 +24,13 @@ public class GameOverView {
         Gdx.gl.glClearColor(0,0,0,1);
         batch.begin();
         font.draw(batch,"YOU DIED", Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
-        font.draw(batch,"Score: " + model.getPlayerScore(),Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2);
-
-        StringBuilder highScoreBuilder = new StringBuilder();
-        highScoreBuilder.append("Top players: ");
-
-        for(int i = 0; i < model.getHighScores().size(); i++){
-            highScoreBuilder.append("\n" + Integer.toString(i+1) + ". "
-                    + model.getHighScoreHolders().get(i)
-                    + " med " +  model.getHighScores().get(i) + "poäng");
+        if (model.getPlayerScore() < model.getHighScore()) {
+            font.draw(batch,"Your score: " + model.getPlayerScore(),Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2);
+            font.draw(batch,"High score: " + model.getHighScore(), Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2.5f);
+        } else {
+            font.draw(batch,"New high score: " + model.getPlayerScore(),Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2);
         }
 
-        String highScoreString = highScoreBuilder.toString();
-
-        font.draw(batch, highScoreString, Gdx.graphics.getWidth()/4,Gdx.graphics.getHeight()/2);
         batch.end();
     }
 
