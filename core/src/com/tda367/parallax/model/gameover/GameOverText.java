@@ -6,6 +6,7 @@ import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
 
 import lombok.Getter;
+import lombok.Setter;
 
 /**
  * Created by Markus on 2017-05-22.
@@ -16,11 +17,13 @@ public class GameOverText {
     @Getter private final Quat4f direction;
     @Getter private final int playerScore;
     @Getter private final int highScore;
+    @Getter @Setter private boolean obsolete;
 
     GameOverText(Vector3f position, int playerScore, int highScore) {
         this.position = position;
         this.playerScore = playerScore;
         this.highScore = highScore;
+        this.obsolete = false;
         Vector3f tmpVec = new Vector3f(position);
         tmpVec.negate();
         direction = MathUtilities.vectorToQuat(tmpVec);

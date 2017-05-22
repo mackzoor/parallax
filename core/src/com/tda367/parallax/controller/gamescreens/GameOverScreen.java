@@ -22,7 +22,7 @@ public class GameOverScreen extends ScreenAdapter {
     @Override
     public void render(float delta) {
         model.update(delta);
-        if (model.isActive()) {
+        if (!model.isObsolete()) {
             this.view.render();
         } else {
             dispose();

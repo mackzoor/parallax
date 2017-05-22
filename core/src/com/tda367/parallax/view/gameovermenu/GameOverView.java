@@ -5,37 +5,41 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.tda367.parallax.model.gameover.GameOver;
+import com.tda367.parallax.model.gameover.GameOverText;
+import com.tda367.parallax.view.Renderer3D;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class GameOverView {
 
-    private SpriteBatch batch;
     private GameOver model;
-    private BitmapFont font;
+
+    private List<GameOverTextView> gameOverTextViews;
 
     public GameOverView(GameOver model){
         this.model = model;
-        batch = new SpriteBatch();
-        font = new BitmapFont();
+        Renderer3D.getInstance().setCameraPosition(0, 0, 0);
+        generateGameOverTextViews();
+    }
+
+    private void generateGameOverTextViews() {
+        List<GameOverText> gameOverTexts = model.getGameOverTexts();
+        gameOverTextViews = new ArrayList<GameOverTextView>();
+        for (GameOverText gameOverText : gameOverTexts) {
+            gameOverTextViews.add(new GameOverTextView(gameOverText));
+        }
     }
 
     public void render(){
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        Gdx.gl.glClearColor(0,0,0,1);
-        batch.begin();
-        font.draw(batch,"YOU DIED", Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
-        if (model.getPlayerScore() < model.getHighScore()) {
-            font.draw(batch,"Your score: " + model.getPlayerScore(),Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2);
-            font.draw(batch,"High score: " + model.getHighScore(), Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2.5f);
-        } else {
-            font.draw(batch,"New high score: " + model.getPlayerScore(),Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2);
+        for (GameOverTextView gameOverTextView : gameOverTextViews) {
+            gameOverTextView.render();
         }
-
-        batch.end();
+        Renderer3D.getInstance().renderFrame();
     }
 
     public void dispose(){
-        batch.dispose();
-        font.dispose();
+
     }
 }

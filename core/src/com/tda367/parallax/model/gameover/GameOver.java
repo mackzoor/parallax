@@ -13,19 +13,19 @@ import lombok.Getter;
 
 public class GameOver {
     @Getter private Player player;
-    @Getter private boolean active;
+    @Getter private boolean obsolete;
     @Getter int highScore;
     @Getter int playerScore;
     @Getter List<GameOverText> gameOverTexts;
     private float timeShowed;
 
     private static final float activeTime = 3f;
-    private static final float distanceToText = 5f;
+    private static final float distanceToText = 10f;
 
     public GameOver(Player player) {
         this.player = player;
         timeShowed = 0;
-        this.active = true;
+        this.obsolete = false;
         ScoreAdapter scoreAdapter = new ScoreAdapter();
         scoreAdapter.storeHighScore(player.getUserName(), player.getScore());
         playerScore = player.getScore();
@@ -53,7 +53,10 @@ public class GameOver {
         if (timeShowed < activeTime) {
             timeShowed += delta;
         } else {
-            this.active = false;
+            this.obsolete = true;
+            for(GameOverText gameOverText : gameOverTexts) {
+                gameOverText.setObsolete(true);
+            }
         }
     }
 }
