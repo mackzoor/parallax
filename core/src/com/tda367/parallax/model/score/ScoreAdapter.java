@@ -165,5 +165,6 @@ public class ScoreAdapter {
     }
     public void removeAllStoredHighScores(){
         preferences.clear();
+        preferences.flush();
     }
 }
