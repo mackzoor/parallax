@@ -1,15 +1,15 @@
 package com.tda367.parallax.view.gameovermenu;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.tda367.parallax.model.gameover.GameOver;
 import com.tda367.parallax.model.gameover.GameOverText;
 import com.tda367.parallax.view.Renderer3D;
 
 import java.util.ArrayList;
 import java.util.List;
+
+/**
+ * Class responsible for creating and rendering all {@link GameOverTextView} from {@link GameOver}
+ */
 
 
 public class GameOverView {

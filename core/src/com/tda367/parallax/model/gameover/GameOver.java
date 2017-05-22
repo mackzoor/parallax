@@ -10,6 +10,9 @@ import javax.vecmath.Vector3f;
 
 import lombok.Getter;
 
+/**
+ * Class responsible for creating and holding four {@link GameOverText} surrounding the camera.
+ */
 
 public class GameOver {
     @Getter private Player player;

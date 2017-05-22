@@ -12,7 +12,7 @@ import com.tda367.parallax.view.Renderer3D;
 import com.tda367.parallax.view.gameovermenu.GameOverView;
 
 /**
- * Created by Markus on 2017-05-22.
+ * Class handling the "game over" screen for Cardboard. Shows player's score and high score
  */
 
 public class CardboardGameOverScreen extends CardboardScreenAdapter {

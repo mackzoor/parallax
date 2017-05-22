@@ -9,7 +9,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * Created by Markus on 2017-05-22.
+ * Holds the data for the panels surrounding the camera in {@link GameOver}.
+ * Makes sure that the panels are facing the camera.
  */
 
 public class GameOverText {

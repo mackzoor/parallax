@@ -7,6 +7,10 @@ import com.tda367.parallax.model.gameover.GameOver;
 import com.tda367.parallax.model.parallaxcore.Player;
 import com.tda367.parallax.view.gameovermenu.GameOverView;
 
+/**
+ * Class handling the "game over" screen for Desktop and Android.
+ * Shows player's score and high score
+ */
 
 public class GameOverScreen extends ScreenAdapter {
     private GameOver model;

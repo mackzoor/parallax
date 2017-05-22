@@ -7,7 +7,8 @@ import com.tda367.parallax.view.util.Renderable3dObject;
 import com.tda367.parallax.view.util.ResourceLoader;
 
 /**
- * Created by Markus on 2017-05-22.
+ * Class responsible for drawing a panel of text containing player's score and
+ * high score for {@link GameOverView}
  */
 
 public class GameOverTextView implements View {
