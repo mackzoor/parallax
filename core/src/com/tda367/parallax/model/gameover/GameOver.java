@@ -26,10 +26,7 @@ public class GameOver {
         this.player = player;
         timeShowed = 0;
         this.obsolete = false;
-        ScoreAdapter scoreAdapter = new ScoreAdapter();
-        scoreAdapter.storeHighScore(player.getUserName(), player.getScore());
-        playerScore = player.getScore();
-        highScore = scoreAdapter.getHighScores().get(0);
+        handleScore();
         generateGameOverTexts(playerScore, highScore);
     }
 
@@ -47,6 +44,13 @@ public class GameOver {
         gameOverTexts.add(new GameOverText(
                 new Vector3f(0,-distanceToText,0), playerScore, highScore)
         );
+    }
+
+    private void handleScore() {
+        ScoreAdapter scoreAdapter = new ScoreAdapter();
+        scoreAdapter.storeHighScore(player.getUserName(), player.getScore());
+        playerScore = player.getScore();
+        highScore = scoreAdapter.getHighScores().get(0);
     }
 
     public void update(float delta) {
