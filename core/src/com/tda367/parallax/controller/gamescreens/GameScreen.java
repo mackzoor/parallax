@@ -9,7 +9,6 @@ import com.tda367.parallax.controller.gamecontrollers.GameController;
 import com.tda367.parallax.controller.devicestates.DeviceManager;
 import com.tda367.parallax.model.CollisionCalculator;
 import com.tda367.parallax.model.coreabstraction.AudioQueue;
-import com.tda367.parallax.model.parallaxcore.GameOverException;
 import com.tda367.parallax.model.parallaxcore.Parallax;
 import com.tda367.parallax.model.parallaxcore.Player;
 import com.tda367.parallax.model.parallaxcore.collision.CollisionManager;
@@ -41,12 +40,12 @@ public class GameScreen extends ScreenAdapter {
 
     @Override
     public void render(float delta) {
-        try {
+        if (!parallaxGame.isGameOver()){
             parallaxGame.update((int) (Gdx.graphics.getDeltaTime() * 1000));
             collisionCalculator.run();
             parallaxView.render();
             DeviceManager.getDevice().update();
-        } catch (GameOverException gameOverException){
+        } else {
             gameOver();
         }
     }

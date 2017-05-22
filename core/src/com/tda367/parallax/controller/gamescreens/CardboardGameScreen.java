@@ -8,7 +8,6 @@ import com.tda367.parallax.controller.gamescreens.cardboardadapter.CardboardGame
 import com.tda367.parallax.controller.devicestates.DeviceManager;
 import com.tda367.parallax.controller.gamescreens.cardboardadapter.CardboardScreenAdapter;
 import com.tda367.parallax.model.CollisionCalculator;
-import com.tda367.parallax.model.parallaxcore.GameOverException;
 import com.tda367.parallax.model.parallaxcore.Parallax;
 import com.tda367.parallax.model.parallaxcore.Player;
 import com.tda367.parallax.model.parallaxcore.spacecraft.SpaceCraftFactory;
@@ -48,11 +47,7 @@ public class CardboardGameScreen extends CardboardScreenAdapter {
     @Override
     public void onNewFrame(HeadTransform paramHeadTransform) {
         //Updates Parallax game logic
-        try {
-            parallaxGame.update((int)(Gdx.graphics.getDeltaTime() * 1000));
-        } catch (GameOverException gameOverException) {
-            System.out.println("You're dead to me");
-        }
+        parallaxGame.update((int)(Gdx.graphics.getDeltaTime() * 1000));
         collisionCalculator.run();
 
     }

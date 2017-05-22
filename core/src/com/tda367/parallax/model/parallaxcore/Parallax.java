@@ -21,6 +21,7 @@ import java.util.Random;
 
 public class Parallax {
     private AudioQueue audioQueue;
+    @Getter private boolean gameOver;
     @Getter private World world;
     @Getter private Camera camera;
     @Getter private Player player;
@@ -30,6 +31,8 @@ public class Parallax {
 
     public Parallax(Player player){
         audioQueue = AudioQueue.getInstance();
+
+        this.gameOver = false;
 
         world = new World();
         world.addSpaceCraft(player.getSpaceCraft());
@@ -47,7 +50,7 @@ public class Parallax {
 
 
 
-    public void update(int milliSinceLastUpdate) throws GameOverException {
+    public void update(int milliSinceLastUpdate) {
         if (player.getSpaceCraft().getHealth() > 0) {
             int updateTime = milliSinceLastUpdate;
 
@@ -63,7 +66,7 @@ public class Parallax {
             camera.update(updateTime);
             calculatePlayerScore(milliSinceLastUpdate);
         } else {
-            throw new GameOverException();
+            gameOver = true;
         }
     }
 
