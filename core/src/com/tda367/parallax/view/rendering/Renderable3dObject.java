@@ -61,6 +61,11 @@ public class Renderable3dObject {
      */
     public void setRot(Quat4f rot) {
         this.rot = rot;
+
+        //Reset transform matrix
+        modelInstance.transform.idt();
+
+        //Rotate to rotation
         modelInstance.transform.rotate(
                 new Quaternion(
                         rot.getX(),
@@ -69,6 +74,9 @@ public class Renderable3dObject {
                         rot.getW()
                 )
         );
+
+        //Reset position.
+        setPos(this.pos);
     }
 
     /**
