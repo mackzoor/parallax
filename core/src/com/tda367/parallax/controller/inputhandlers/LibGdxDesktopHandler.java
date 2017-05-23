@@ -2,9 +2,15 @@ package com.tda367.parallax.controller.inputhandlers;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.InputAdapter;
 
-public final class LibGdxDesktopHandler implements InputProcessor {
+/**
+ * Class that checks inputs for a Desktop computer. It checks for mouse/touch inputs on the screen,
+ * compares key presses with a keyCode and notifies its observer, an
+ * {@link InputControlsListener}, about the user action.
+ */
+
+public final class LibGdxDesktopHandler extends InputAdapter {
 
     private InputControlsListener listener;
 
@@ -18,41 +24,16 @@ public final class LibGdxDesktopHandler implements InputProcessor {
 
     @Override
     public boolean keyDown(int keycode) {
+
         if (listener != null) {
             if (keycode == Input.Keys.SPACE || keycode == Input.Keys.Z) {
                 listener.actionButtonPressed();
-                return false;
-            }
-
-            if (keycode == Input.Keys.X) {
+            } else if (keycode == Input.Keys.X) {
                 listener.secondaryActionButtonPressed();
-                return false;
-            }
-
-            if (keycode == Input.Keys.A || keycode == Input.Keys.LEFT) {
-                listener.leftButtonDown();
-                return false;
-            }
-
-            if (keycode == Input.Keys.W || keycode == Input.Keys.UP) {
-                listener.upButtonDown();
-                return false;
-            }
-
-            if (keycode == Input.Keys.D || keycode == Input.Keys.RIGHT) {
-                listener.rightButtonDown();
-                return false;
-            }
-
-            if (keycode == Input.Keys.S || keycode == Input.Keys.DOWN) {
-                listener.downButtonDown();
-                return false;
-            }
-
-            if (keycode == Input.Keys.ESCAPE) {
+            } else if (keycode == Input.Keys.ESCAPE) {
                 listener.pauseButtonPressed();
-                return false;
             }
+            checkDirectionbuttons(keycode);
         }
 
         return false;
@@ -75,33 +56,22 @@ public final class LibGdxDesktopHandler implements InputProcessor {
     }
 
     @Override
-    public boolean keyTyped(char character) {
-        return false;
-    }
-
-    @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         listener.onScreenClick(screenX, Gdx.graphics.getHeight() - screenY);
         return false;
     }
 
-    @Override
-    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        return false;
-    }
+    private void checkDirectionbuttons(int keycode) {
 
-    @Override
-    public boolean touchDragged(int screenX, int screenY, int pointer) {
-        return false;
-    }
+        if (keycode == Input.Keys.A || keycode == Input.Keys.LEFT) {
+            listener.leftButtonDown();
+        } else if (keycode == Input.Keys.W || keycode == Input.Keys.UP) {
+            listener.upButtonDown();
+        } else if (keycode == Input.Keys.D || keycode == Input.Keys.RIGHT) {
+            listener.rightButtonDown();
+        } else if (keycode == Input.Keys.S || keycode == Input.Keys.DOWN) {
+            listener.downButtonDown();
+        }
 
-    @Override
-    public boolean mouseMoved(int screenX, int screenY) {
-        return false;
-    }
-
-    @Override
-    public boolean scrolled(int amount) {
-        return false;
     }
 }

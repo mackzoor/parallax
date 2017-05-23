@@ -1,73 +1,64 @@
 package com.tda367.parallax.controller.inputhandlers.gamepads;
 
+/**
+ * Class that bestow the button codes for a Playstation 3 controller
+ */
+
 public final class Playstation3GamePad implements GamePad {
-    /*
-    All of the key codes are listed below:
-    BUTTON_X = 14
-    BUTTON_CIRCLE = 13
-    BUTTON_TRIANGLE = 12
-    BUTTON_SQUARE = 15
-    BUTTON_L1 = 10
-    BUTTON_L2 = 8
-    BUTTON_L3 = 1
-    BUTTON_R1 = 11
-    BUTTON_R2 = 9
-    BUTTON_R3 = 2
-    BUTTON_PAD_DOWN = 6
-    BUTTON_PAD_RIGHT = 5
-    BUTTON_PAD_UP = 4
-    BUTTON_PAD_LEFT = 7
-    BUTTON_SELECT = 0
-    BUTTON_START = 3
-    BUTTON_PS = 16
-    AXIS_LEFT_X = 0
-    AXIS_LEFT_Y = 1
-    AXIS_RIGHT_X = 2
-    AXIS_RIGHT_Y = 3
-     */
+
+    private static final int X_BUTTON = 14;
+    private static final int CIRCLE_BUTTON = 13;
+    private static final int START_BUTTON = 3;
+    private static final int DPAD_UP = 4;
+    private static final int DPAD_RIGHT = 5;
+    private static final int DPAD_DOWN = 6;
+    private static final int DPAD_LEFT = 7;
+    private static final int LEFT_JOYSTICK_X = 0;
+    private static final int LEFT_JOYSTICK_Y = 1;
 
     @Override
     public int getActionButtonCode() {
-        return 14;
+        return X_BUTTON;
     }
 
+    @Override
     public int getSecondaryActionButtonCode() {
-        return 13;
+        return CIRCLE_BUTTON;
     }
 
     @Override
     public int getPauseButtonCode() {
-        return 3;
+        return START_BUTTON;
     }
 
     @Override
     public int getUpButtonCode() {
-        return 4;
+        return DPAD_UP;
     }
 
     @Override
     public int getRightButtonCode() {
-        return 5;
+        return DPAD_RIGHT;
     }
 
     @Override
     public int getDownButtonCode() {
-        return 6;
+        return DPAD_DOWN;
     }
 
     @Override
     public int getLeftButtonCode() {
-        return 7;
+        return DPAD_LEFT;
     }
 
     @Override
     public int getXAxisJoystickCode() {
-        return 0;
+        return LEFT_JOYSTICK_X;
     }
 
     @Override
     public int getYAxisJoystickCode() {
-        return 1;
+        return LEFT_JOYSTICK_Y;
     }
 
     @Override

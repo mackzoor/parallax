@@ -1,53 +1,64 @@
 package com.tda367.parallax.controller.inputhandlers.gamepads;
 
+/**
+ * Class that bestow the button codes for an Android controller
+ */
+
 public final class AndroidGamePad implements GamePad {
 
-    //Button codes can be found at:
-    //https://developer.android.com/training/game-controllers/controller-input.html
+    private static final int A_BUTTON = 96;
+    private static final int B_BUTTON = 97;
+    private static final int START_BUTTON = 108;
+    private static final int DPAD_UP = 19;
+    private static final int DPAD_RIGHT = 22;
+    private static final int DPAD_DOWN = 20;
+    private static final int DPAD_LEFT = 21;
+    private static final int LEFT_JOYSTICK_X = 0;
+    private static final int LEFT_JOYSTICK_Y = 1;
 
     @Override
     public int getActionButtonCode() {
-        return 96;
+        return A_BUTTON;
     }
 
     @Override
     public int getSecondaryActionButtonCode() {
-        return 97;
+        return B_BUTTON;
     }
 
     @Override
     public int getPauseButtonCode() {
-        return 108;
+        return START_BUTTON;
     }
 
     @Override
     public int getUpButtonCode() {
-        return 19;
+        return DPAD_UP;
     }
 
     @Override
     public int getRightButtonCode() {
-        return 22;
+        return DPAD_RIGHT;
     }
 
     @Override
     public int getDownButtonCode() {
-        return 20;
+        return DPAD_DOWN;
     }
 
     @Override
     public int getLeftButtonCode() {
-        return 21;
+        return DPAD_LEFT;
     }
 
     @Override
     public int getXAxisJoystickCode() {
-        return 0;
+        return LEFT_JOYSTICK_X;
     }
 
     @Override
     public int getYAxisJoystickCode() {
-        return 1;
+        return LEFT_JOYSTICK_Y;
     }
 
     @Override

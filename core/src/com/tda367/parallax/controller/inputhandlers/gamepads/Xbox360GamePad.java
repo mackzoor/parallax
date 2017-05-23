@@ -1,73 +1,64 @@
 package com.tda367.parallax.controller.inputhandlers.gamepads;
 
+/**
+ * Class that bestow the button codes for a Xbox 360 controller
+ */
+
 public final class Xbox360GamePad implements GamePad {
-    /*
-    All of the key codes are listed below:
-    BUTTON_X = 2
-    BUTTON_Y = 3
-    BUTTON_A = 0
-    BUTTON_B = 1
-    BUTTON_BACK = 6
-    BUTTON_START = 7
-    BUTTON_DPAD_UP = PovDirection.north
-    BUTTON_DPAD_DOWN = PovDirection.south
-    BUTTON_DPAD_RIGHT = PovDirection.east
-    BUTTON_DPAD_LEFT = PovDirection.west
-    BUTTON_LB = 4
-    BUTTON_L3 = 8
-    BUTTON_RB = 5
-    BUTTON_R3 = 9
-    AXIS_LEFT_X = 1
-    AXIS_LEFT_Y = 0
-    AXIS_LEFT_TRIGGER = 4
-    AXIS_RIGHT_X = 3
-    AXIS_RIGHT_Y = 2
-    AXIS_RIGHT_TRIGGER = 4
-    */
+
+    private static final int A_BUTTON = 0;
+    private static final int B_BUTTON = 1;
+    private static final int START_BUTTON = 7;
+    private static final int DPAD_UP = 999; //Unknown
+    private static final int DPAD_RIGHT = 999; //Unknown
+    private static final int DPAD_DOWN = 999; //Unknown
+    private static final int DPAD_LEFT = 999; //Unknown
+    private static final int LEFT_JOYSTICK_X = 1;
+    private static final int LEFT_JOYSTICK_Y = 0;
 
     @Override
     public int getActionButtonCode() {
-        return 0;
+        return A_BUTTON;
     }
 
     @Override
     public int getSecondaryActionButtonCode() {
-        return 1;
+        return B_BUTTON;
     }
 
     @Override
     public int getPauseButtonCode() {
-        return 7;
+        return START_BUTTON;
     }
 
     @Override
     public int getUpButtonCode() {
-        return 99;
-    } //Unknown atm
+        return DPAD_UP;
+    }
 
     @Override
     public int getRightButtonCode() {
-        return 99;
-    } //Unknown atm
+        return DPAD_RIGHT;
+    }
 
     @Override
     public int getDownButtonCode() {
-        return 99;
-    } //Unknown atm
+        return DPAD_DOWN;
+    }
 
     @Override
     public int getLeftButtonCode() {
-        return 99;
-    } //Unknown atm
+        return DPAD_LEFT;
+    }
 
     @Override
     public int getXAxisJoystickCode() {
-        return 1;
+        return LEFT_JOYSTICK_X;
     }
 
     @Override
     public int getYAxisJoystickCode() {
-        return 0;
+        return LEFT_JOYSTICK_Y;
     }
 
     @Override

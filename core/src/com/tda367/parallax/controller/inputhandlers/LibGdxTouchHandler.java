@@ -2,11 +2,17 @@ package com.tda367.parallax.controller.inputhandlers;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.InputAdapter;
 
 import lombok.Setter;
 
-public final class LibGdxTouchHandler implements InputProcessor {
+/**
+ * Class that checks inputs for a touch device. It checks for touch inputs on the screen,
+ * compares button presses with a buttonCode and notifies its observer, an
+ * {@link InputControlsListener}, about the user action.
+ */
+
+public final class LibGdxTouchHandler extends InputAdapter {
 
     @Setter
     private InputControlsListener listener;
@@ -24,38 +30,8 @@ public final class LibGdxTouchHandler implements InputProcessor {
     }
 
     @Override
-    public boolean keyUp(int keycode) {
-        return false;
-    }
-
-    @Override
-    public boolean keyTyped(char character) {
-        return false;
-    }
-
-    @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         listener.onScreenClick(screenX, Gdx.graphics.getHeight() - screenY);
-        return false;
-    }
-
-    @Override
-    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        return false;
-    }
-
-    @Override
-    public boolean touchDragged(int screenX, int screenY, int pointer) {
-        return false;
-    }
-
-    @Override
-    public boolean mouseMoved(int screenX, int screenY) {
-        return false;
-    }
-
-    @Override
-    public boolean scrolled(int amount) {
         return false;
     }
 }
