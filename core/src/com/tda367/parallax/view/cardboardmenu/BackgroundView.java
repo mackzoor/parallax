@@ -12,15 +12,14 @@ import javax.vecmath.Vector3f;
 public class BackgroundView implements View {
 
 
-    private String internalPath;
+    private String internalPath = "3dModels/defaultCourse/course.g3db";
     private Renderable3dObject renderable3dObject;
 
     BackgroundView(){
-        internalPath = "/3dModels/defaultCourse/course.g3db";
         renderable3dObject = new Renderable3dObject(
                 new Vector3f(),
                 new Quat4f(),
-                ResourceLoader.getInstance().getModel("3dModels/defaultCourse/course.g3db")
+                ResourceLoader.getInstance().getModel(internalPath)
                 ,1f);
     }
 

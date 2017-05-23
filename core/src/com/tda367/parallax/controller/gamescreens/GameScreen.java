@@ -60,7 +60,6 @@ public class GameScreen extends ScreenAdapter {
     public void dispose() {
         CollisionManager.getInstance().getCollidables().clear();
         Controllers.clearListeners();
-        //TODO I think this below was important.
         audioQueue.clearAllActiveMusic();
         collisionCalculator.dispose();
         CollisionManager.getInstance().getObservers().clear();

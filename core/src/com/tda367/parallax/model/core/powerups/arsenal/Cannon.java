@@ -4,6 +4,8 @@ import com.tda367.parallax.model.coreabstraction.AudioQueue;
 import com.tda367.parallax.model.core.collision.Collidable;
 import com.tda367.parallax.model.core.collision.CollidableType;
 import com.tda367.parallax.model.core.util.Transformable;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
@@ -13,9 +15,15 @@ import java.util.Random;
  * The cannon PowerUp fires a cannon shot towards the direction it is pointed at.
  */
 public class Cannon extends PowerUpBase {
-    private Vector3f velocity;
+    @Setter @Getter private Vector3f velocity;
 
-    private final static String COLLISION_MODEL = "";
+    @Getter @Setter private Vector3f enemyTargetPosition;
+
+    private static final float VELOCITY_MULTIPLIER_X = 10f;
+    private static final float VELOCITY_MULTIPLIER_Y = 1f;
+    private static final float VELOCITY_MULTIPLIER_Z = 10f;
+
+    private final static String COLLISION_MODEL = "3dModels/box/hitbox.obj";
 
     private int timeAlive;
     private final static int LIFE_LENGTH = 4000;
@@ -24,6 +32,7 @@ public class Cannon extends PowerUpBase {
         super();
         timeAlive = 0;
         this.velocity = new Vector3f();
+        enemyTargetPosition = new Vector3f();
     }
 
     private Vector3f quatToDirection(Quat4f q){
@@ -59,8 +68,8 @@ public class Cannon extends PowerUpBase {
 
         //Placeholder
         super.setPos(new Vector3f(transformable.getPos()));
-        super.getPos().add(new Vector3f(0,4,0));
-        velocity = new Vector3f(0,1,0);
+        super.getPos().add(new Vector3f(0,1,0));
+        velocity = new Vector3f(0,0.5f,0);
 
 
 
@@ -97,6 +106,8 @@ public class Cannon extends PowerUpBase {
                 velocity.getY() * ((float) milliSinceLastUpdate/1000),
                 velocity.getZ() * ((float) milliSinceLastUpdate/1000)
         ));
+        Vector3f directionalVector = generateDirectionVector(getEnemyTargetPosition());
+        moveOnDirectionVector(directionalVector, milliSinceLastUpdate);
     }
     private void playCannonSound(){
         Random rand = new Random();
@@ -121,9 +132,27 @@ public class Cannon extends PowerUpBase {
     }
     @Override
     public void handleCollision(Collidable collidable) {
-        if (timeAlive > 250) {
+        if (timeAlive > 250 && CollidableType.OBSTACLE == collidable.getCollidableType()) {
+            System.out.println("cannon");
             die();
         }
+    }
+
+    private Vector3f generateDirectionVector(Vector3f target){
+        //Generate a direction vector based on the target position subtracted with the position of the ship.
+        Vector3f returnVector = new Vector3f(target.getX()-getPos().getX(), target.getY()-getPos().getY(), target.getZ()-getPos().getZ());
+
+        //Normalize the directional vector before sending it away.
+        returnVector.normalize();
+
+        //Return a new vector with the current direction vector
+        return returnVector;
+    }
+
+    private void moveOnDirectionVector(Vector3f directionalVector, int milliSinceLastUpdate){
+        getPos().add(new Vector3f((directionalVector.getX()*(float)milliSinceLastUpdate/1000)* VELOCITY_MULTIPLIER_X,
+                (directionalVector.getY()*(float)milliSinceLastUpdate/1000)* VELOCITY_MULTIPLIER_Y,
+                (directionalVector.getZ()*(float)milliSinceLastUpdate/1000)* VELOCITY_MULTIPLIER_Z));
     }
 }
 

@@ -10,7 +10,7 @@ import com.tda367.parallax.utilities.ResourceLoader;
 public class ExitButton3DView implements View {
 
     ExitButton3D exitButton;
-    private final static String INTERNAL_PATH = "3dModels/boxObstacle/boxObstacle.g3db";
+    private final static String INTERNAL_PATH = "3dModels/box/box.g3db";
     private Renderable3dObject renderable3dObject;
 
 

@@ -5,6 +5,7 @@ import com.tda367.parallax.controller.inputhandlers.ControllerMode;
 import com.tda367.parallax.controller.inputhandlers.InputControlsAdapter;
 import com.tda367.parallax.model.cardboardmenu.MainMenu;
 
+import javax.vecmath.Vector3f;
 /**
  * Controller class used for user input in the menu for Cardboard.
  */
@@ -21,7 +22,7 @@ public class CardboardMenuController extends InputControlsAdapter {
 
     @Override
     public void actionButtonPressed() {
-        mainMenu.action();
+        mainMenu.action(new Vector3f());
     }
 
     @Override

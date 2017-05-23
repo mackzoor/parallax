@@ -71,7 +71,7 @@ public class Missile extends PowerUpBase {
     //Constructor for missile, deceleration for most variables.
     Missile(){
         super();
-        this.collisionModel ="3dModels/box/box.obj";
+        this.collisionModel ="3dModels/box/hitbox.obj";
         this.enemyTargetPosition = new Vector3f();
         this.transPosLastUpdate = new Vector3f();
     }

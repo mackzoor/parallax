@@ -9,6 +9,7 @@ import com.tda367.parallax.model.core.powerups.arsenal.IPowerUp;
 import com.tda367.parallax.model.core.powerups.arsenal.PowerUpFactory;
 import com.tda367.parallax.model.core.util.Updatable;
 import com.tda367.parallax.model.core.Player;
+import lombok.Getter;
 
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
@@ -27,12 +28,12 @@ public class MainMenu implements Updatable, CollisionObserver {
     private ExitButton3D exitButton;
     private StartButton3D startButton;
     private List<CardboardMenuObserver> observers;
-    private List<IPowerUp> powerUps;
+    @Getter private List<IPowerUp> powerUps;
     private Camera camera;
 
     public MainMenu() {
-        exitButton = new ExitButton3D(new Vector3f(2, 20, 0),new Quat4f());
-        startButton = new StartButton3D(new Vector3f(-2,20,0),new Quat4f());
+        exitButton = new ExitButton3D(new Vector3f(2, 5, 1),new Quat4f());
+        startButton = new StartButton3D(new Vector3f(-2,5,1),new Quat4f());
         observers = new ArrayList<CardboardMenuObserver>();
         powerUps = new ArrayList<IPowerUp>();
         CollisionManager.getInstance().subscribeToCollisions(this);
@@ -57,10 +58,13 @@ public class MainMenu implements Updatable, CollisionObserver {
     }
 
 
-    public void action(){
+    public void action(Vector3f vector3f){
         Cannon cannon = PowerUpFactory.createCannon();
         powerUps.add(cannon);
         cannon.activate(camera);
+        cannon.setVelocity(new Vector3f(1f,5f,0));
+        cannon.setEnemyTargetPosition(vector3f);
+        //cannon.getEnemyTargetPosition().add(vector3f);
     }
 
 
@@ -69,6 +73,7 @@ public class MainMenu implements Updatable, CollisionObserver {
     public void update(int milliSinceLastUpdate) {
         if(startButton.isCollided()){
             for (CardboardMenuObserver observer : observers) {
+                System.out.println("collide");
                 observer.cardboardStartButtonAction();
             }
         }else if(exitButton.isCollided()){

@@ -9,7 +9,7 @@ import com.tda367.parallax.utilities.ResourceLoader;
 
 public class StartButton3DView implements View {
 
-    private final static String INTERNAL_PATH = "3dModels/boxObstacle";
+    private final static String INTERNAL_PATH = "3dModels/box/box.g3db";
     private StartButton3D startButton;
     private Renderable3dObject renderable3dObject;
 

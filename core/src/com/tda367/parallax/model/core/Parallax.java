@@ -37,6 +37,7 @@ public class Parallax {
 
         world = new World();
         world.addSpaceCraft(player.getSpaceCraft());
+        player.getSpaceCraft().getPos().set(0,-50,0);
 
         camera = new com.tda367.parallax.model.core.Camera();
         camera.trackTo(player.getSpaceCraft());
