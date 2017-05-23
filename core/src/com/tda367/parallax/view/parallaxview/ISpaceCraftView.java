@@ -1,13 +1,14 @@
 package com.tda367.parallax.view.parallaxview;
 
-import com.tda367.parallax.model.parallaxcore.spacecraft.ISpaceCraft;
-import com.tda367.parallax.model.parallaxcore.spacecraft.SpaceCraftType;
+import com.tda367.parallax.model.core.spacecraft.Agelion;
+import com.tda367.parallax.model.core.spacecraft.ISpaceCraft;
+import com.tda367.parallax.model.core.spacecraft.SpaceCraftType;
 import com.tda367.parallax.view.Renderer3D;
 import com.tda367.parallax.view.util.Renderable3dObject;
-import com.tda367.parallax.util.ResourceLoader;
+import com.tda367.parallax.utilities.ResourceLoader;
 
 /**
- * View class for the spacecraft {@link com.tda367.parallax.model.parallaxcore.spacecraft.Agelion}
+ * View class for the spacecraft {@link Agelion}
  */
 public class ISpaceCraftView implements View {
 

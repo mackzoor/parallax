@@ -3,7 +3,7 @@ package com.tda367.parallax.view;
 import com.badlogic.gdx.audio.Music;
 import com.tda367.parallax.model.coreabstraction.AudioObserver;
 import com.tda367.parallax.model.coreabstraction.AudioQueue;
-import com.tda367.parallax.util.ResourceLoader;
+import com.tda367.parallax.utilities.ResourceLoader;
 import lombok.Getter;
 
 import java.util.ArrayList;

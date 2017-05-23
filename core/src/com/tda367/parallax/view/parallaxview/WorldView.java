@@ -1,10 +1,10 @@
 package com.tda367.parallax.view.parallaxview;
 
 
-import com.tda367.parallax.model.parallaxcore.powerups.IPowerUp;
-import com.tda367.parallax.model.parallaxcore.spacecraft.ISpaceCraft;
-import com.tda367.parallax.model.parallaxcore.world.ICourseModule;
-import com.tda367.parallax.model.parallaxcore.world.World;
+import com.tda367.parallax.model.core.powerups.IPowerUp;
+import com.tda367.parallax.model.core.spacecraft.ISpaceCraft;
+import com.tda367.parallax.model.core.world.ICourseModule;
+import com.tda367.parallax.model.core.world.World;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

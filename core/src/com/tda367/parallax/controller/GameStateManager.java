@@ -3,7 +3,7 @@ package com.tda367.parallax.controller;
 import com.badlogic.gdx.Game;
 import com.tda367.parallax.controller.gamescreens.*;
 import com.tda367.parallax.controller.gamescreens.cardboardadapter.CardboardGame;
-import com.tda367.parallax.model.parallaxcore.Player;
+import com.tda367.parallax.model.core.Player;
 
 public final class GameStateManager {
 

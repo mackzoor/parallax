@@ -4,7 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.tda367.parallax.controller.GameStateManager;
 import com.tda367.parallax.controller.devicestates.DeviceManager;
-import com.tda367.parallax.model.parallaxcore.Player;
+import com.tda367.parallax.model.core.Player;
 
 public class Main extends Game {
 

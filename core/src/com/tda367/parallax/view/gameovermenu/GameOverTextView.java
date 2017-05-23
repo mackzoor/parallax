@@ -4,7 +4,7 @@ import com.tda367.parallax.model.gameover.GameOverText;
 import com.tda367.parallax.view.Renderer3D;
 import com.tda367.parallax.view.parallaxview.View;
 import com.tda367.parallax.view.util.Renderable3dObject;
-import com.tda367.parallax.util.ResourceLoader;
+import com.tda367.parallax.utilities.ResourceLoader;
 
 /**
  * Class responsible for drawing a panel of text containing player's score and

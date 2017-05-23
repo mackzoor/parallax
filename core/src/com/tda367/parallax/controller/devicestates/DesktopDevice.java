@@ -1,9 +1,9 @@
 package com.tda367.parallax.controller.devicestates;
 
 
-import com.tda367.parallax.controller.inputcontrollers.InputControlsListener;
-import com.tda367.parallax.controller.inputcontrollers.LibGdxDesktopHandler;
-import com.tda367.parallax.controller.inputcontrollers.LibGdxGamePadHandler;
+import com.tda367.parallax.controller.inputhandlers.InputControlsListener;
+import com.tda367.parallax.controller.inputhandlers.LibGdxDesktopHandler;
+import com.tda367.parallax.controller.inputhandlers.LibGdxGamePadHandler;
 
 class DesktopDevice implements Device {
 

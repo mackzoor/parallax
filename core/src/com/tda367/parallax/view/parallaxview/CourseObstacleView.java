@@ -1,10 +1,10 @@
 package com.tda367.parallax.view.parallaxview;
 
-import com.tda367.parallax.model.parallaxcore.world.courseobstacles.CourseObstacleBase;
-import com.tda367.parallax.model.parallaxcore.world.courseobstacles.ObstacleType;
+import com.tda367.parallax.model.core.world.courseobstacles.CourseObstacleBase;
+import com.tda367.parallax.model.core.world.courseobstacles.ObstacleType;
 import com.tda367.parallax.view.Renderer3D;
 import com.tda367.parallax.view.util.Renderable3dObject;
-import com.tda367.parallax.util.ResourceLoader;
+import com.tda367.parallax.utilities.ResourceLoader;
 
 /**
  * View class for {@link CourseObstacleBase}.

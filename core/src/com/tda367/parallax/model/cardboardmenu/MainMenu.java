@@ -1,13 +1,13 @@
 package com.tda367.parallax.model.cardboardmenu;
 
-import com.tda367.parallax.model.parallaxcore.Camera;
-import com.tda367.parallax.model.parallaxcore.collision.CollisionManager;
-import com.tda367.parallax.model.parallaxcore.collision.CollisionObserver;
-import com.tda367.parallax.model.parallaxcore.collision.CollisionPair;
-import com.tda367.parallax.model.parallaxcore.powerups.Cannon;
-import com.tda367.parallax.model.parallaxcore.powerups.IPowerUp;
-import com.tda367.parallax.model.parallaxcore.util.Updatable;
-import com.tda367.parallax.model.parallaxcore.Player;
+import com.tda367.parallax.model.core.Camera;
+import com.tda367.parallax.model.core.collision.CollisionManager;
+import com.tda367.parallax.model.core.collision.CollisionObserver;
+import com.tda367.parallax.model.core.collision.CollisionPair;
+import com.tda367.parallax.model.core.powerups.Cannon;
+import com.tda367.parallax.model.core.powerups.IPowerUp;
+import com.tda367.parallax.model.core.util.Updatable;
+import com.tda367.parallax.model.core.Player;
 
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;

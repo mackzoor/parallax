@@ -1,12 +1,13 @@
 package com.tda367.parallax.view.parallaxview;
 
-import com.tda367.parallax.model.parallaxcore.powerups.IPowerUp;
+import com.tda367.parallax.model.core.powerups.IPowerUp;
+import com.tda367.parallax.model.core.powerups.Missile;
 import com.tda367.parallax.view.Renderer3D;
 import com.tda367.parallax.view.util.Renderable3dObject;
-import com.tda367.parallax.util.ResourceLoader;
+import com.tda367.parallax.utilities.ResourceLoader;
 
 /**
- * View class for {@link com.tda367.parallax.model.parallaxcore.powerups.Missile}
+ * View class for {@link Missile}
  */
 public class IPowerUpView implements View {
     private final static String MODEL_3D_INTERNAL_PATH = "3dModels/missile/missile.g3db";
