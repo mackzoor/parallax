@@ -71,7 +71,7 @@ public class GameScreen extends ScreenAdapter {
         parallaxGame = new Parallax(player);
         parallaxView = new ParallaxView(parallaxGame, false);
         collisionCalculator = new CollisionCalculator();
-        controller = new GameController(parallaxGame, DeviceManager.getDevice());
+        controller = new GameController(parallaxGame, parallaxView, DeviceManager.getDevice());
     }
 
     private void gameOver(){

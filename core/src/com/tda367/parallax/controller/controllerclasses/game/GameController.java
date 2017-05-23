@@ -3,16 +3,19 @@ package com.tda367.parallax.controller.controllerclasses.game;
 import com.tda367.parallax.controller.inputhandlers.InputControlsAdapter;
 import com.tda367.parallax.model.core.Parallax;
 import com.tda367.parallax.controller.devicestates.Device;
+import com.tda367.parallax.view.parallaxview.ParallaxView;
 
 public class GameController extends InputControlsAdapter {
 
     private AgelionController agelionController;
 
     private Parallax parallax;
+    private ParallaxView parallaxView;
 
-    public GameController(Parallax parallax, Device device) {
+    public GameController(Parallax parallax, ParallaxView parallaxView, Device device) {
         device.addInputDevices(this);
         this.parallax = parallax;
+        this.parallaxView = parallaxView;
         agelionController = new AgelionController(parallax);
     }
 
@@ -23,12 +26,13 @@ public class GameController extends InputControlsAdapter {
 
     @Override
     public void secondaryActionButtonPressed() {
-
+        parallaxView.setHudViewActive(!parallaxView.isHudViewActive());
     }
 
     @Override
     public void pauseButtonPressed() {
         parallax.setPaused(!parallax.isPaused());
+        //TODO Add a "pause screen" to parallaxView
     }
 
     @Override
@@ -79,10 +83,5 @@ public class GameController extends InputControlsAdapter {
     @Override
     public void yAxisJoystickMovement(float yValue) {
         agelionController.yAxisJoystickMovement(yValue);
-    }
-
-    @Override
-    public void onScreenClick(int xValue, int yValue) {
-
     }
 }

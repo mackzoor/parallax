@@ -32,8 +32,8 @@ public class CardboardGameScreen extends CardboardScreenAdapter {
         this.player = new Player();
         this.player.addSpaceCraft(SpaceCraftFactory.getAgelionInstance(10));
         this.parallaxGame = new Parallax(player);
-        controller = new GameController(parallaxGame, DeviceManager.getGameModeState(game));
         parallaxView = new ParallaxView(parallaxGame,true);
+        controller = new GameController(parallaxGame, parallaxView, DeviceManager.getGameModeState(game));
         sound = new Sound();
         collisionCalculator = new CollisionCalculator();
     }

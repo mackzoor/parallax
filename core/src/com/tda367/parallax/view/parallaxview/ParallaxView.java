@@ -4,6 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.tda367.parallax.model.core.Parallax;
 import com.tda367.parallax.view.Renderer3D;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * View class for {@link Parallax}.
  */
@@ -12,6 +15,7 @@ public class ParallaxView implements View{
     private final Parallax parallax;
     private WorldView worldView;
     private HudView playerHudView;
+    @Getter @Setter private boolean hudViewActive;
 
     /**
      * Creates a ParallaxView from a {@link Parallax}.
@@ -29,6 +33,7 @@ public class ParallaxView implements View{
         this.parallax = parallax;
         playerHudView = new HudView(parallax.getPlayer());
         worldView = new WorldView(parallax.getWorld());
+        this.hudViewActive = false;
     }
 
     /**
@@ -54,7 +59,9 @@ public class ParallaxView implements View{
                 parallax.getCamera().getPos().getZ()
         );
         worldView.render();
-        playerHudView.render();
+        if (hudViewActive) {
+            playerHudView.render();
+        }
         Renderer3D.getInstance().renderFrame();
     }
     @Override
