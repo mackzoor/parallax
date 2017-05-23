@@ -11,7 +11,7 @@ import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.tda367.parallax.model.core.Parallax;
-import com.tda367.parallax.model.core.powerups.IPowerUp;
+import com.tda367.parallax.model.core.powerups.arsenal.IPowerUp;
 
 /**
  * Generates a dynamic texture for the player hud in the game {@link Parallax}

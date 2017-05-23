@@ -1,20 +1,19 @@
-package com.tda367.parallax.model.core.powerups;
+package com.tda367.parallax.model.core.powerups.arsenal;
 
+
+import com.tda367.parallax.model.core.collision.Collidable;
+import com.tda367.parallax.model.core.collision.CollidableType;
+
+import com.tda367.parallax.model.core.util.Transformable;
 import com.tda367.parallax.model.coreabstraction.AudioQueue;
 
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
 
-public class Missile implements IPowerUp {
-
-    //Missile variables
-    private Vector3f pos;
-    private Quat4f rot;
-
-    //Ships velocity at the start of the acceleration phase
+public class Missile extends PowerUpBase {
+    //Ships velocity at the start of the ACCELERATION phase
     private float startVelocity;
 
     //Velocity that the missile is moving in.
@@ -26,14 +25,9 @@ public class Missile implements IPowerUp {
     //Path to 3D model for  missile collision
     private String collisionModel;
 
-    //Flags for if the ship should collide, move and a general variable for its lifecycle
-    private boolean isCollisionOn;
-    private boolean isActive;
-    private boolean isDead;
-
     //Saving variables for the transformable object the missile has its origin from
     private Vector3f transformableEarlierPosition;
-    private com.tda367.parallax.model.core.util.Transformable transformable;
+    private Transformable transformable;
     //Storing the position of the transformable object since last update, making it possible to track its movement
     private Vector3f transPosLastUpdate;
 
@@ -64,109 +58,64 @@ public class Missile implements IPowerUp {
     private static final float VELOCITY_MULTIPLIER_Z = 10f;
     private static final float FALL_MULTIPLIER = 2.5f;
 
+    //Internal path to 3d collision model
+    private static final String COLLISION_MODEL = "";
+
     //How fast the missile will accelerate
-    private double acceleration = 0.8;
+    private static final double ACCELERATION = 0.8;
 
     //Maximum velocity that the missile can reach.
-    private float forwardTargetVelocity = 80;
+    private static final float MAXIMUM_VELOCITY = 80;
 
 
     //Constructor for missile, deceleration for most variables.
-    public Missile(){
-        this.pos = new Vector3f();
-        this.rot = new Quat4f();
+    Missile(){
+        super();
         this.collisionModel ="3dModels/box/box.obj";
-        this.isCollisionOn = false;
         this.enemyTargetPosition = new Vector3f();
         this.transPosLastUpdate = new Vector3f();
-
-        isActive = false;
-        isDead = false;
     }
 
     //IPowerUp
     @Override
-    public void activate(com.tda367.parallax.model.core.util.Transformable transformable){
+    public void activate(Transformable transformable){
         //Initialize the ships position and rotation based on the position of the transformable object.
-        pos = new Vector3f(transformable.getPos());
-        rot = new Quat4f(transformable.getRot());
+        super.activate(transformable);
+        
+        //Add the missile to the world and make it collidable
+        addToCollisionManager();
 
         //Store the transformable object for later use
         this.transformable = transformable;
 
-        //Add the missile to the world and make it collidable
-        addToCollisionManager();
-
         //Allow the update method to move the missile
-        isActive = true;
-
+        super.setActive(true);
 
         //TODO, Temporary initialization for the enemy, will be controlled elsewhere later.
-        enemyTargetPosition.set(new Vector3f(pos));
+        enemyTargetPosition.set(new Vector3f(super.getPos()));
         enemyTargetPosition.add(new Vector3f(0,100,20));
 
         //Plays the missile sound.
         playMissileSound();
     }
     @Override
-    public boolean isActive() {
-        return isActive;
-    }
-    @Override
-    public boolean isDead() {
-        return isDead;
-    }
-
-    //Collision
-    @Override
-    public boolean collisionActivated() {
-        return isCollisionOn;
-    }
-    @Override
-    public void disableCollision() {
-        isCollisionOn = false;
-    }
-    @Override
-    public void enableCollision() {
-        isCollisionOn = true;
-    }
-    @Override
     public String getCollisionModelPath() {
-        return null;
+        return COLLISION_MODEL;
     }
     @Override
-    public final void addToCollisionManager() {
-        com.tda367.parallax.model.core.collision.CollisionManager.getInstance().addCollisionCheck(this);
+    public CollidableType getCollidableType() {
+        return CollidableType.HARMFUL;
     }
     @Override
-    public final void removeFromCollisionManager() {
-        com.tda367.parallax.model.core.collision.CollisionManager.getInstance().removeCollisionCheck(this);
-    }
-    @Override
-    public com.tda367.parallax.model.core.collision.CollidableType getCollidableType() {
-        return com.tda367.parallax.model.core.collision.CollidableType.HARMFUL;
-    }
-    @Override
-    public void handleCollision(com.tda367.parallax.model.core.collision.Collidable collidable) {
+    public void handleCollision(Collidable collidable) {
         //Todo Create explosion
-        if (collidable.getCollidableType() == com.tda367.parallax.model.core.collision.CollidableType.SPACECRAFT && timeStorage > 250){
-            isActive = false;
-            isDead = true;
+        if (collidable.getCollidableType() == CollidableType.SPACECRAFT && timeStorage > 250){
+            super.setActive(false);
+            super.setDead(true);
             removeFromCollisionManager();
         }
     }
-
-
-    //--->  Transformable
-    @Override
-    public Vector3f getPos() {
-        return pos;
-    }
-    @Override
-    public Quat4f getRot() {
-        return rot;
-    }
-
+    
 
     //Usable
     @Override
@@ -180,9 +129,9 @@ public class Missile implements IPowerUp {
     @Override
     public void update(int milliSinceLastUpdate){
         //Check that the missile is not dead before updating
-        if(!isDead) {
+        if(!super.isDead()) {
            //Check if the missile is going to move
-           if (isActive) {
+           if (super.isActive()) {
                //Adds to the total time the missile has been activated.
                timeStorage = timeStorage + milliSinceLastUpdate;
 
@@ -191,7 +140,7 @@ public class Missile implements IPowerUp {
                if (transformableEarlierPosition == null) {
                    transformableEarlierPosition = new Vector3f(transformable.getPos());
                    //Make sure that the missile has the same position as the ship after one cycle.
-                   pos.set(transformable.getPos());
+                   super.getPos().set(transformable.getPos());
                } else if (velocity == 0) {
                    //Generate velocity for the missile, based on the velocity of the transformable object
                    generateVelocity(transformableEarlierPosition, transformable, milliSinceLastUpdate);
@@ -207,7 +156,7 @@ public class Missile implements IPowerUp {
     //Methods for movement
 
     //Method for generating the velocity for the missile, gets the missile velocity based on the velocity of the transformable object.
-    private void generateVelocity(Vector3f transformableEarlierPostion, com.tda367.parallax.model.core.util.Transformable transformable, int milliSinceLastUpdate){
+    private void generateVelocity(Vector3f transformableEarlierPostion, Transformable transformable, int milliSinceLastUpdate){
         setVelocity((transformable.getPos().getY() - transformableEarlierPostion.getY())/((float)milliSinceLastUpdate)*1000);
     }
 
@@ -218,11 +167,11 @@ public class Missile implements IPowerUp {
 
         if(timeStorage <= TIME_TRACKING_TRANS){
             if(transPosLastUpdate.getX() == 0 && transPosLastUpdate.getY() == 0 && transPosLastUpdate.getZ() == 0){
-                pos = new Vector3f(transformable.getPos());
+                super.setPos(new Vector3f(transformable.getPos()));
                 transPosLastUpdate = new Vector3f(transformable.getPos());
             }else{
                 if(transPosLastUpdate.getZ() > transformable.getPos().getZ()){
-                    pos.add(new Vector3f(0,0, transformable.getPos().getZ() - transPosLastUpdate.getZ()));
+                    super.getPos().add(new Vector3f(0,0, transformable.getPos().getZ() - transPosLastUpdate.getZ()));
                 }
             }
             transPosLastUpdate = new Vector3f(transformable.getPos());
@@ -269,36 +218,37 @@ public class Missile implements IPowerUp {
             startVelocity = velocity;
         }
 
-        //Check to see that the forwardTargetVelocity has not been reached, if it has, make the velocity the forwardTargetVelocity
-        if (velocity < forwardTargetVelocity) {
+        //Check to see that the MAXIMUM_VELOCITY has not been reached, if it has, make the velocity the MAXIMUM_VELOCITY
+        if (velocity < MAXIMUM_VELOCITY) {
             /*Calculate the velocity based on this formula: x(t) = x0 × (1 + r)^t
             x(t) is the value at time t.
             x0 is the initial value at time t=0.
             r is the growth rate when r>0 or decay rate when r<0, in percent.
             t is the time in discrete intervals and selected time units.
              */
-            velocity = startVelocity * ((float) Math.pow((1 + acceleration), (((double) accelerationTime) / 1000)));
+            velocity = startVelocity * ((float) Math.pow((1 + ACCELERATION), (((double) accelerationTime) / 1000)));
         }else{
-            //Makes the forwardTargetVelocity the current velocity, if reached overflow velocity
-            velocity = forwardTargetVelocity;
+            //Makes the MAXIMUM_VELOCITY the current velocity, if reached overflow velocity
+            velocity = MAXIMUM_VELOCITY;
         }
     }
 
     //Method for calling methods removing the missile
     public void removeMissile(){
         removeFromCollisionManager();
-        isDead = true;
+        super.setDead(true);
+        super.setActive(false);
     }
 
     //Method for making the missile fall
     private void fall(int milliSinceLastUpdate){
-        pos.add(new Vector3f(0,0,-(((float)milliSinceLastUpdate)/1000)* FALL_MULTIPLIER));
+        super.getPos().add(new Vector3f(0,0,-(((float)milliSinceLastUpdate)/1000)* FALL_MULTIPLIER));
     }
 
     //Method for moving the missile according to the velocity
     public void moveOnVelocity(int milliSinceLastUpdate){
         float posYAdded = velocity * ((float)milliSinceLastUpdate/1000);
-        pos.add(new Vector3f(0, posYAdded, 0));
+        super.getPos().add(new Vector3f(0, posYAdded, 0));
     }
 
     //Method for ship rotation, rotating to an input target.

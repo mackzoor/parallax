@@ -1,5 +1,10 @@
-package com.tda367.parallax.model.core.powerups;
+package com.tda367.parallax.model.core.powerups.container;
 
+
+import com.tda367.parallax.model.core.collision.Collidable;
+import com.tda367.parallax.model.core.collision.CollidableType;
+import com.tda367.parallax.model.core.collision.CollisionManager;
+import com.tda367.parallax.model.core.powerups.arsenal.IPowerUp;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,7 +14,7 @@ import javax.vecmath.Vector3f;
 /**
  * Container that holds a {@link IPowerUp}.
  */
-public class Container implements com.tda367.parallax.model.core.collision.Collidable, com.tda367.parallax.model.core.util.Updatable, IContainer {
+public class Container implements IContainer {
 
     @Setter @Getter private Vector3f pos;
     @Setter @Getter private Quat4f rot;
@@ -17,12 +22,12 @@ public class Container implements com.tda367.parallax.model.core.collision.Colli
     @Setter @Getter private String collisionModelPath;
     private boolean collisionEnabled;
 
-    private IPowerUp usable;
+    private IPowerUp powerUp;
 
     @Getter private boolean isCollected;
 
     public Container(IPowerUp pu){
-        this.usable = pu;
+        this.powerUp = pu;
 
         pos = new Vector3f();
         rot = new Quat4f();
@@ -53,21 +58,20 @@ public class Container implements com.tda367.parallax.model.core.collision.Colli
 
     @Override
     public void addToCollisionManager() {
-        com.tda367.parallax.model.core.collision.CollisionManager.getInstance().addCollisionCheck(this);
+        CollisionManager.getInstance().addCollisionCheck(this);
     }
     @Override
     public void removeFromCollisionManager() {
-        com.tda367.parallax.model.core.collision.CollisionManager.getInstance().removeCollisionCheck(this);
+        CollisionManager.getInstance().removeCollisionCheck(this);
     }
 
     @Override
-    public com.tda367.parallax.model.core.collision.CollidableType getCollidableType() {
-        return com.tda367.parallax.model.core.collision.CollidableType.CONTAINER;
+    public CollidableType getCollidableType() {
+        return CollidableType.CONTAINER;
     }
-
     @Override
-    public void handleCollision(com.tda367.parallax.model.core.collision.Collidable collidable) {
-        if (collidable.getCollidableType() == com.tda367.parallax.model.core.collision.CollidableType.SPACECRAFT) {
+    public void handleCollision(Collidable collidable) {
+        if (collidable.getCollidableType() == CollidableType.SPACECRAFT) {
             isCollected = true;
             removeFromCollisionManager();
         }
@@ -75,6 +79,6 @@ public class Container implements com.tda367.parallax.model.core.collision.Colli
 
     @Override
     public IPowerUp getPowerUp() {
-        return usable;
+        return powerUp;
     }
 }

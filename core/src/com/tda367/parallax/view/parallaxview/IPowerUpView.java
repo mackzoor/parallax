@@ -1,7 +1,7 @@
 package com.tda367.parallax.view.parallaxview;
 
-import com.tda367.parallax.model.core.powerups.IPowerUp;
-import com.tda367.parallax.model.core.powerups.Missile;
+import com.tda367.parallax.model.core.powerups.arsenal.IPowerUp;
+import com.tda367.parallax.model.core.powerups.arsenal.Missile;
 import com.tda367.parallax.view.rendering.Renderer3D;
 import com.tda367.parallax.view.rendering.Renderable3dObject;
 import com.tda367.parallax.utilities.ResourceLoader;

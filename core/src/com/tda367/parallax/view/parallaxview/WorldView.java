@@ -1,7 +1,7 @@
 package com.tda367.parallax.view.parallaxview;
 
 
-import com.tda367.parallax.model.core.powerups.IPowerUp;
+import com.tda367.parallax.model.core.powerups.arsenal.IPowerUp;
 import com.tda367.parallax.model.core.spacecraft.ISpaceCraft;
 import com.tda367.parallax.model.core.world.ICourseModule;
 import com.tda367.parallax.model.core.world.World;

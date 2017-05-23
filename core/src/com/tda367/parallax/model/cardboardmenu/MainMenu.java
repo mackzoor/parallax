@@ -4,8 +4,9 @@ import com.tda367.parallax.model.core.Camera;
 import com.tda367.parallax.model.core.collision.CollisionManager;
 import com.tda367.parallax.model.core.collision.CollisionObserver;
 import com.tda367.parallax.model.core.collision.CollisionPair;
-import com.tda367.parallax.model.core.powerups.Cannon;
-import com.tda367.parallax.model.core.powerups.IPowerUp;
+import com.tda367.parallax.model.core.powerups.arsenal.Cannon;
+import com.tda367.parallax.model.core.powerups.arsenal.IPowerUp;
+import com.tda367.parallax.model.core.powerups.arsenal.PowerUpFactory;
 import com.tda367.parallax.model.core.util.Updatable;
 import com.tda367.parallax.model.core.Player;
 
@@ -57,7 +58,7 @@ public class MainMenu implements Updatable, CollisionObserver {
 
 
     public void action(){
-        Cannon cannon = new Cannon();
+        Cannon cannon = PowerUpFactory.createCannon();
         powerUps.add(cannon);
         cannon.activate(camera);
     }

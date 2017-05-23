@@ -1,8 +1,8 @@
 package com.tda367.parallax.model.core.world;
 
-import com.tda367.parallax.model.core.powerups.Container;
-import com.tda367.parallax.model.core.powerups.IPowerUp;
-import com.tda367.parallax.model.core.powerups.Missile;
+import com.tda367.parallax.model.core.powerups.container.Container;
+import com.tda367.parallax.model.core.powerups.arsenal.IPowerUp;
+import com.tda367.parallax.model.core.powerups.arsenal.PowerUpFactory;
 import com.tda367.parallax.model.core.world.courseobstacles.CourseObstacleBase;
 
 
@@ -118,7 +118,7 @@ public class DefaultCourseModule implements ICourseModule {
     }
 
     private void spawnPowerUp() {
-        IPowerUp pu = new Missile();
+        IPowerUp pu = PowerUpFactory.createMissile();
         powerUps.add(pu);
         Container container = new Container(pu);
         Random rand = new Random();

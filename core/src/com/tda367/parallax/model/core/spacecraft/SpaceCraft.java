@@ -2,8 +2,8 @@ package com.tda367.parallax.model.core.spacecraft;
 
 import com.tda367.parallax.model.coreabstraction.AudioQueue;
 import com.tda367.parallax.model.core.collision.Collidable;
-import com.tda367.parallax.model.core.powerups.IContainer;
-import com.tda367.parallax.model.core.powerups.IPowerUp;
+import com.tda367.parallax.model.core.powerups.container.IContainer;
+import com.tda367.parallax.model.core.powerups.arsenal.IPowerUp;
 
 import lombok.Getter;
 import lombok.Setter;

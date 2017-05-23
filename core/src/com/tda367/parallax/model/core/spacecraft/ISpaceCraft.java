@@ -1,6 +1,6 @@
 package com.tda367.parallax.model.core.spacecraft;
 
-import com.tda367.parallax.model.core.powerups.IPowerUp;
+import com.tda367.parallax.model.core.powerups.arsenal.IPowerUp;
 
 import javax.vecmath.Vector2f;
 import java.util.List;

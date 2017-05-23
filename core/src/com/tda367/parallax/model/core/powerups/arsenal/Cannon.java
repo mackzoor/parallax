@@ -1,9 +1,8 @@
-package com.tda367.parallax.model.core.powerups;
+package com.tda367.parallax.model.core.powerups.arsenal;
 
 import com.tda367.parallax.model.coreabstraction.AudioQueue;
 import com.tda367.parallax.model.core.collision.Collidable;
 import com.tda367.parallax.model.core.collision.CollidableType;
-import com.tda367.parallax.model.core.collision.CollisionManager;
 import com.tda367.parallax.model.core.util.Transformable;
 
 import javax.vecmath.Quat4f;
@@ -13,31 +12,18 @@ import java.util.Random;
 /**
  * The cannon PowerUp fires a cannon shot towards the direction it is pointed at.
  */
-
-public class Cannon implements IPowerUp {
-
-    private Vector3f pos;
-    private Quat4f rot;
+public class Cannon extends PowerUpBase {
     private Vector3f velocity;
 
-    private String collisionModel;
-    private boolean isCollisionOn;
-
-    private boolean isActive;
-    private boolean isDead;
+    private final static String COLLISION_MODEL = "";
 
     private int timeAlive;
     private final static int LIFE_LENGTH = 4000;
 
-    public Cannon(){
+    Cannon(){
+        super();
         timeAlive = 0;
-        this.pos = new Vector3f();
-        this.rot = new Quat4f();
         this.velocity = new Vector3f();
-        this.isCollisionOn = false;
-
-        isActive = false;
-        isDead = false;
     }
 
     private Vector3f quatToDirection(Quat4f q){
@@ -54,6 +40,9 @@ public class Cannon implements IPowerUp {
     //Launches the cannon round.
     @Override
     public void activate(Transformable transformable) {
+        super.activate(transformable);
+        super.addToCollisionManager();
+        super.enableCollision();
 
         //TODO Make lazer shoot in the direction that the transformable is rotated.
         //Offset cannon round rotation by 90 degrees due to rotated 3d model.
@@ -69,39 +58,26 @@ public class Cannon implements IPowerUp {
 
 
         //Placeholder
-        pos = new Vector3f(transformable.getPos());
-        pos.add(new Vector3f(0,4,0));
+        super.setPos(new Vector3f(transformable.getPos()));
+        super.getPos().add(new Vector3f(0,4,0));
         velocity = new Vector3f(0,1,0);
 
 
 
         velocity.scale(30);
 
-        isActive = true;
-        isCollisionOn = true;
-
         playCannonSound();
-        addToCollisionManager();
     }
-
-    @Override
-    public boolean isActive() {
-        return isActive;
-    }
-
     @Override
     public void use() {
+        //I can't remember what this was for....
     }
 
-    @Override
-    public boolean isDead() {
-        return isDead;
-    }
 
     //Updates the cannon.
     @Override
     public void update(int milliSinceLastUpdate){
-        if (isActive){
+        if (super.isActive()){
             timeAlive += milliSinceLastUpdate;
             updatePosition(milliSinceLastUpdate);
         }
@@ -110,13 +86,17 @@ public class Cannon implements IPowerUp {
         }
     }
     private void die() {
-        removeFromCollisionManager();
-        disableCollision();
-        isActive = false;
-        isDead = true;
+        super.disableCollision();
+        super.removeFromCollisionManager();
+        super.setActive(false);
+        super.setDead(true);
     }
     private void updatePosition(int milliSinceLastUpdate){
-        pos.add(new Vector3f(velocity.getX() * ((float) milliSinceLastUpdate/1000),(velocity.getY() * ((float) milliSinceLastUpdate/1000)),(velocity.getZ() * ((float)milliSinceLastUpdate/1000))));
+        super.getPos().add(new Vector3f(
+                velocity.getX() * ((float) milliSinceLastUpdate/1000),
+                velocity.getY() * ((float) milliSinceLastUpdate/1000),
+                velocity.getZ() * ((float) milliSinceLastUpdate/1000)
+        ));
     }
     private void playCannonSound(){
         Random rand = new Random();
@@ -130,42 +110,10 @@ public class Cannon implements IPowerUp {
         }
     }
 
-
-    //Transformable
-    @Override
-    public Vector3f getPos() {
-        return pos;
-    }
-    @Override
-    public Quat4f getRot() {
-        return rot;
-    }
-
-
     //Collision
     @Override
-    public boolean collisionActivated() {
-        return isCollisionOn;
-    }
-    @Override
-    public void disableCollision() {
-        isCollisionOn = false;
-    }
-    @Override
-    public void enableCollision() {
-        isCollisionOn = true;
-    }
-    @Override
     public String getCollisionModelPath() {
-        return collisionModel;
-    }
-    @Override
-    public void addToCollisionManager() {
-        CollisionManager.getInstance().addCollisionCheck(this);
-    }
-    @Override
-    public void removeFromCollisionManager() {
-        CollisionManager.getInstance().removeCollisionCheck(this);
+        return COLLISION_MODEL;
     }
     @Override
     public CollidableType getCollidableType() {
@@ -173,7 +121,7 @@ public class Cannon implements IPowerUp {
     }
     @Override
     public void handleCollision(Collidable collidable) {
-        if ( timeAlive > 250 && collidable.getCollidableType() == CollidableType.SPACECRAFT) {
+        if (timeAlive > 250) {
             die();
         }
     }

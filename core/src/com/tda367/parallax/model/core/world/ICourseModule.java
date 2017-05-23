@@ -1,7 +1,7 @@
 package com.tda367.parallax.model.core.world;
 
-import com.tda367.parallax.model.core.powerups.Container;
-import com.tda367.parallax.model.core.powerups.IPowerUp;
+import com.tda367.parallax.model.core.powerups.container.Container;
+import com.tda367.parallax.model.core.powerups.arsenal.IPowerUp;
 import com.tda367.parallax.model.core.util.Transformable;
 import com.tda367.parallax.model.core.world.courseobstacles.CourseObstacleBase;
 

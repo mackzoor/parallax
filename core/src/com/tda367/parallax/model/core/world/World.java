@@ -1,5 +1,6 @@
 package com.tda367.parallax.model.core.world;
 
+import com.tda367.parallax.model.core.powerups.arsenal.IPowerUp;
 import lombok.Getter;
 
 import javax.vecmath.Vector3f;
@@ -14,13 +15,13 @@ public class World implements com.tda367.parallax.model.core.util.Updatable, com
     @Getter private List<ICourseModule> modules;
     @Getter private List<com.tda367.parallax.model.core.spacecraft.ISpaceCraft> spaceCrafts;
     //TODO, remove the power-up after used
-    @Getter private List<com.tda367.parallax.model.core.powerups.IPowerUp> powerUps;
+    @Getter private List<IPowerUp> powerUps;
 
     public World(){
         com.tda367.parallax.model.core.collision.CollisionManager.getInstance().subscribeToCollisions(this);
         modules = new ArrayList<ICourseModule>();
         spaceCrafts = new ArrayList<com.tda367.parallax.model.core.spacecraft.ISpaceCraft>();
-        powerUps = new ArrayList<com.tda367.parallax.model.core.powerups.IPowerUp>();
+        powerUps = new ArrayList<IPowerUp>();
 
         updateModuleRange();
     }
@@ -80,7 +81,7 @@ public class World implements com.tda367.parallax.model.core.util.Updatable, com
         } else {
             ICourseModule defModule = new DefaultCourseModule(new Vector3f(0,32,0),0,0);
             modules.add(defModule);
-            for (com.tda367.parallax.model.core.powerups.IPowerUp iPowerUp : defModule.getPowerups()) {
+            for (IPowerUp iPowerUp : defModule.getPowerups()) {
                 powerUps.add(iPowerUp);
             }
             updateModuleRange();
@@ -102,7 +103,7 @@ public class World implements com.tda367.parallax.model.core.util.Updatable, com
             tempModule.add3dObjectsToCollisionManager();
 
             //Add powerups from course module to world so they'll be updated.
-            for (com.tda367.parallax.model.core.powerups.IPowerUp iPowerUp : tempModule.getPowerups()) {
+            for (IPowerUp iPowerUp : tempModule.getPowerups()) {
                 powerUps.add(iPowerUp);
             }
         }
