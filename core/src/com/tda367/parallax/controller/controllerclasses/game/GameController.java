@@ -1,9 +1,14 @@
 package com.tda367.parallax.controller.controllerclasses.game;
 
+import com.tda367.parallax.controller.inputhandlers.ControllerMode;
 import com.tda367.parallax.controller.inputhandlers.InputControlsAdapter;
 import com.tda367.parallax.model.core.Parallax;
 import com.tda367.parallax.controller.devicestates.Device;
 import com.tda367.parallax.view.parallaxview.ParallaxView;
+
+/**
+ * Controller class used for user input during game play.
+ */
 
 public class GameController extends InputControlsAdapter {
 
@@ -16,7 +21,7 @@ public class GameController extends InputControlsAdapter {
         device.addInputDevices(this);
         this.parallax = parallax;
         this.parallaxView = parallaxView;
-        agelionController = new AgelionController(parallax);
+        agelionController = new AgelionController(parallax.getPlayer().getSpaceCraft());
     }
 
     @Override
@@ -83,5 +88,10 @@ public class GameController extends InputControlsAdapter {
     @Override
     public void yAxisJoystickMovement(float yValue) {
         agelionController.yAxisJoystickMovement(yValue);
+    }
+
+    @Override
+    public ControllerMode getControllerMode() {
+        return ControllerMode.GAMEMODE;
     }
 }

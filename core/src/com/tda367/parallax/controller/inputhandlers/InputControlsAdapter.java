@@ -71,4 +71,9 @@ public abstract class InputControlsAdapter implements InputControlsListener {
     public void onScreenClick(int xValue, int yValue) {
 
     }
+
+    @Override
+    public ControllerMode getControllerMode() {
+        return null;
+    }
 }

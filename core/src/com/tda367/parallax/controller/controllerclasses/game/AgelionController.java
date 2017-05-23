@@ -1,89 +1,77 @@
 package com.tda367.parallax.controller.controllerclasses.game;
 
-import com.tda367.parallax.controller.inputhandlers.InputControlsAdapter;
-import com.tda367.parallax.model.core.Parallax;
+import com.tda367.parallax.model.core.spacecraft.ISpaceCraft;
 
 /**
- * Created by Markus on 2017-05-22.
+ * Controller class used for controlling Agelion.
  */
 
-class AgelionController extends InputControlsAdapter {
+class AgelionController {
 
     private float yValue = 0;
     private float xValue = 0;
 
-    private Parallax parallax;
+    private ISpaceCraft agelion;
 
-    AgelionController(Parallax parallax) {
-        this.parallax = parallax;
+    AgelionController(ISpaceCraft agelion) {
+        this.agelion = agelion;
     }
 
-    @Override
-    public void actionButtonPressed() {
-        parallax.getPlayer().getSpaceCraft().action();
+    void actionButtonPressed() {
+        agelion.action();
     }
 
-    @Override
-    public void upButtonDown() {
+    void upButtonDown() {
         yValue += 1;
         updateControls();
     }
 
-    @Override
-    public void upButtonUp() {
+    void upButtonUp() {
         yValue -= 1;
         updateControls();
     }
 
-    @Override
-    public void rightButtonDown() {
+    void rightButtonDown() {
         xValue += 1;
         updateControls();
     }
 
-    @Override
-    public void rightButtonUp() {
+    void rightButtonUp() {
         xValue -= 1;
         updateControls();
     }
 
-    @Override
-    public void downButtonDown() {
+    void downButtonDown() {
         yValue -= 1;
         updateControls();
     }
 
-    @Override
-    public void downButtonUp() {
+    void downButtonUp() {
         yValue += 1;
         updateControls();
     }
 
-    @Override
-    public void leftButtonDown() {
+    void leftButtonDown() {
         xValue -= 1;
         updateControls();
     }
 
-    @Override
-    public void leftButtonUp() {
+    void leftButtonUp() {
         xValue += 1;
         updateControls();
     }
 
-    @Override
-    public void xAxisJoystickMovement(float xValue) {
+    void xAxisJoystickMovement(float xValue) {
         this.xValue = xValue;
         updateControls();
     }
 
-    @Override
-    public void yAxisJoystickMovement(float yValue) {
+    void yAxisJoystickMovement(float yValue) {
         this.yValue = yValue;
         updateControls();
     }
 
     private synchronized void updateControls(){
-        parallax.getPlayer().getSpaceCraft().setDesiredPanVelocity(xValue, yValue);
+        agelion.setDesiredPanVelocity(xValue, yValue);
     }
 }
