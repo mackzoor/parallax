@@ -9,7 +9,7 @@ public class ExitButton3D extends Button3D {
 
     public ExitButton3D(Vector3f pos, Quat4f rot) {
         super(pos, rot);
-        collisionModel = "3dModels/box/hitbox.obj";
+        collisionModel = "3dModels/quittext/quithitbox.obj";
         addToCollisionManager();
     }
 

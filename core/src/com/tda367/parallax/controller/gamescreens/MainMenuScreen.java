@@ -37,15 +37,18 @@ public class MainMenuScreen extends ScreenAdapter {
 
     @Override
     public void render(float delta) {
-        if(model.getStartButton().isCollided()){
+        if (model.getStartButton().isCollided()) {
             dispose();
             GameStateManager.setGameScreen(player);
+        } else if (model.getExitButton().isCollided()) {
+            dispose();
+            Gdx.app.exit();
         }
         model.update((int) (Gdx.graphics.getDeltaTime() * 1000));
         view.render();
         collisionCalculator.run();
     }
-    
+
 
     @Override
     public void resize(int width, int height) {
