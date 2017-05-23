@@ -4,7 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.ScreenAdapter;
 import com.tda367.parallax.controller.GameStateManager;
 import com.tda367.parallax.model.gameover.GameOver;
-import com.tda367.parallax.model.parallaxcore.Player;
+import com.tda367.parallax.model.core.Player;
 import com.tda367.parallax.view.gameovermenu.GameOverView;
 
 /**

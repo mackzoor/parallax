@@ -3,10 +3,10 @@ package com.tda367.parallax.view.parallaxview;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g3d.Material;
 import com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute;
-import com.tda367.parallax.model.parallaxcore.Player;
+import com.tda367.parallax.model.core.Player;
 import com.tda367.parallax.view.Renderer3D;
 import com.tda367.parallax.view.util.Renderable3dObject;
-import com.tda367.parallax.util.ResourceLoader;
+import com.tda367.parallax.utilities.ResourceLoader;
 import javax.vecmath.Vector3f;
 
 /**

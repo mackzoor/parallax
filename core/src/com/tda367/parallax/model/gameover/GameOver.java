@@ -1,6 +1,6 @@
 package com.tda367.parallax.model.gameover;
 
-import com.tda367.parallax.model.parallaxcore.Player;
+import com.tda367.parallax.model.core.Player;
 import com.tda367.parallax.model.score.ScoreAdapter;
 
 import java.util.ArrayList;

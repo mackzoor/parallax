@@ -1,9 +1,5 @@
 package com.tda367.parallax.model.cardboardmenu;
 
-import com.tda367.parallax.model.parallaxcore.collision.Collidable;
-import com.tda367.parallax.model.parallaxcore.collision.CollidableType;
-import com.tda367.parallax.model.parallaxcore.collision.CollisionManager;
-
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
 

@@ -1,7 +1,7 @@
 package com.tda367.parallax.view.parallaxview;
 
 import com.badlogic.gdx.Gdx;
-import com.tda367.parallax.model.parallaxcore.Parallax;
+import com.tda367.parallax.model.core.Parallax;
 import com.tda367.parallax.view.Renderer3D;
 
 /**

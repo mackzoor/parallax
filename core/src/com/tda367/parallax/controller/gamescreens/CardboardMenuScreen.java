@@ -3,7 +3,7 @@ package com.tda367.parallax.controller.gamescreens;
 import com.badlogic.gdx.Gdx;
 import com.google.vrtoolkit.cardboard.Eye;
 import com.google.vrtoolkit.cardboard.HeadTransform;
-import com.tda367.parallax.controller.gamecontrollers.CardboardMenuController;
+import com.tda367.parallax.controller.controllerclasses.CardboardMenuController;
 import com.tda367.parallax.controller.gamescreens.cardboardadapter.CardboardGame;
 import com.tda367.parallax.controller.devicestates.DeviceManager;
 import com.tda367.parallax.controller.GameStateManager;
@@ -11,7 +11,7 @@ import com.tda367.parallax.controller.gamescreens.cardboardadapter.CardboardScre
 import com.tda367.parallax.model.CollisionCalculator;
 import com.tda367.parallax.model.cardboardmenu.MainMenu;
 import com.tda367.parallax.model.cardboardmenu.CardboardMenuObserver;
-import com.tda367.parallax.model.parallaxcore.collision.CollisionManager;
+import com.tda367.parallax.model.core.collision.CollisionManager;
 import com.tda367.parallax.view.Renderer3D;
 import com.tda367.parallax.view.Sound;
 import com.tda367.parallax.view.cardboardmenu.CardboardMainMenuView;

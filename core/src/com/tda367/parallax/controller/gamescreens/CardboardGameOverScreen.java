@@ -7,7 +7,7 @@ import com.tda367.parallax.controller.GameStateManager;
 import com.tda367.parallax.controller.gamescreens.cardboardadapter.CardboardGame;
 import com.tda367.parallax.controller.gamescreens.cardboardadapter.CardboardScreenAdapter;
 import com.tda367.parallax.model.gameover.GameOver;
-import com.tda367.parallax.model.parallaxcore.Player;
+import com.tda367.parallax.model.core.Player;
 import com.tda367.parallax.view.Renderer3D;
 import com.tda367.parallax.view.gameovermenu.GameOverView;
 

@@ -4,18 +4,17 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Quaternion;
 import com.badlogic.gdx.physics.bullet.*;
 import com.badlogic.gdx.physics.bullet.collision.*;
-import com.tda367.parallax.model.parallaxcore.collision.*;
-import com.tda367.parallax.util.ResourceLoader;
+import com.tda367.parallax.utilities.ResourceLoader;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 /**
- * Class that calculates collisions of {@link Collidable}with the use of bullet physics.
+ * Class that calculates collisions of {@link com.tda367.parallax.model.core.collision.Collidable}with the use of bullet physics.
  */
 
-public class CollisionCalculator implements ICollisionCalculator {
+public class CollisionCalculator implements com.tda367.parallax.model.core.collision.ICollisionCalculator {
 
     private btCollisionAlgorithmConstructionInfo ci;
     private btDispatcherInfo info;
@@ -25,11 +24,11 @@ public class CollisionCalculator implements ICollisionCalculator {
 
 
     private List<btCollisionAlgorithm> algorithmList;
-    private HashMap<Collidable, CollisionObjectWrapper> loadedCollidables;
+    private HashMap<com.tda367.parallax.model.core.collision.Collidable, CollisionObjectWrapper> loadedCollidables;
 
     public CollisionCalculator() {
         Bullet.init();
-        loadedCollidables = new HashMap<Collidable, CollisionObjectWrapper>();
+        loadedCollidables = new HashMap<com.tda367.parallax.model.core.collision.Collidable, CollisionObjectWrapper>();
         algorithmList = new ArrayList<btCollisionAlgorithm>();
 
         //These are needed
@@ -45,7 +44,7 @@ public class CollisionCalculator implements ICollisionCalculator {
 
 
     @Override
-    public boolean hasCollided(Collidable first, Collidable second) {
+    public boolean hasCollided(com.tda367.parallax.model.core.collision.Collidable first, com.tda367.parallax.model.core.collision.Collidable second) {
 
         if (!collisionCheckNeeded(first,second)) {
             return false;
@@ -85,7 +84,7 @@ public class CollisionCalculator implements ICollisionCalculator {
         algorithmList.clear();
     }
 
-    private CollisionObjectWrapper getCollisionWrapper(Collidable collidable){
+    private CollisionObjectWrapper getCollisionWrapper(com.tda367.parallax.model.core.collision.Collidable collidable){
         CollisionObjectWrapper wrapper = loadedCollidables.get(collidable);
 
         if (wrapper == null){
@@ -96,7 +95,7 @@ public class CollisionCalculator implements ICollisionCalculator {
 
         return wrapper;
     }
-    private CollisionObjectWrapper loadCollidable(Collidable collidable) {
+    private CollisionObjectWrapper loadCollidable(com.tda367.parallax.model.core.collision.Collidable collidable) {
 
         btCollisionShape shape = ResourceLoader.getInstance().getCollisionShape(collidable.getCollisionModelPath());
 
@@ -110,7 +109,7 @@ public class CollisionCalculator implements ICollisionCalculator {
         return wrapper;
     }
 
-    private void updateCollisionObject(CollisionObjectWrapper collisionObject, Collidable collidable){
+    private void updateCollisionObject(CollisionObjectWrapper collisionObject, com.tda367.parallax.model.core.collision.Collidable collidable){
         btCollisionObject collObject = collisionObject.wrapper.getCollisionObject();
 
         //Translate
@@ -131,7 +130,7 @@ public class CollisionCalculator implements ICollisionCalculator {
                 )
         ));
     }
-    private boolean collisionCheckNeeded(Collidable first, Collidable second){
+    private boolean collisionCheckNeeded(com.tda367.parallax.model.core.collision.Collidable first, com.tda367.parallax.model.core.collision.Collidable second){
         //Return false if:
 
         //Collision is disabled on one of the collidables
@@ -140,7 +139,7 @@ public class CollisionCalculator implements ICollisionCalculator {
         }
 
         //If both are containers
-        if (first.getCollidableType() == CollidableType.CONTAINER &&
+        if (first.getCollidableType() == com.tda367.parallax.model.core.collision.CollidableType.CONTAINER &&
                 first.getCollidableType() == second.getCollidableType()
             ) {
             return false;
@@ -149,16 +148,16 @@ public class CollisionCalculator implements ICollisionCalculator {
 
         //If both are obstacles
         if (
-                first.getCollidableType() == CollidableType.OBSTACLE &&
-                        second.getCollidableType() == CollidableType.OBSTACLE
+                first.getCollidableType() == com.tda367.parallax.model.core.collision.CollidableType.OBSTACLE &&
+                        second.getCollidableType() == com.tda367.parallax.model.core.collision.CollidableType.OBSTACLE
                 ) {
             return false;
         }
 
         //If none of them are either a spaceCraft of a harmful type
         if (
-                (first.getCollidableType() == CollidableType.SPACECRAFT || first.getCollidableType() == CollidableType.HARMFUL) ||
-                (second.getCollidableType() == CollidableType.SPACECRAFT || second.getCollidableType() == CollidableType.HARMFUL)
+                (first.getCollidableType() == com.tda367.parallax.model.core.collision.CollidableType.SPACECRAFT || first.getCollidableType() == com.tda367.parallax.model.core.collision.CollidableType.HARMFUL) ||
+                (second.getCollidableType() == com.tda367.parallax.model.core.collision.CollidableType.SPACECRAFT || second.getCollidableType() == com.tda367.parallax.model.core.collision.CollidableType.HARMFUL)
             ) {
             return true;
         } else {
@@ -174,15 +173,15 @@ public class CollisionCalculator implements ICollisionCalculator {
 
 
     @Override
-    public List<CollisionPair> getCollisions(List<? extends Collidable> collidables) {
+    public List<com.tda367.parallax.model.core.collision.CollisionPair> getCollisions(List<? extends com.tda367.parallax.model.core.collision.Collidable> collidables) {
 
         //Find collisions and save them into pairs.
-        List<CollisionPair> pairs = new ArrayList<CollisionPair>();
+        List<com.tda367.parallax.model.core.collision.CollisionPair> pairs = new ArrayList<com.tda367.parallax.model.core.collision.CollisionPair>();
         for (int i = 0; i < collidables.size(); i++) {
             for (int j = i; j < collidables.size(); j++) {
                 if (i != j && hasCollided(collidables.get(i), collidables.get(j))) {
                     pairs.add(
-                            new CollisionPair(collidables.get(i), collidables.get(j)
+                            new com.tda367.parallax.model.core.collision.CollisionPair(collidables.get(i), collidables.get(j)
                             )
                     );
                 }
@@ -194,14 +193,14 @@ public class CollisionCalculator implements ICollisionCalculator {
     }
 
     @Override
-    public List<CollisionPair> getCollisions(List<? extends Collidable> firstGroup,
-                                              List<? extends Collidable> secondGroup) {
-        List<CollisionPair> collisionPairs = new ArrayList<CollisionPair>();
+    public List<com.tda367.parallax.model.core.collision.CollisionPair> getCollisions(List<? extends com.tda367.parallax.model.core.collision.Collidable> firstGroup,
+                                                                                      List<? extends com.tda367.parallax.model.core.collision.Collidable> secondGroup) {
+        List<com.tda367.parallax.model.core.collision.CollisionPair> collisionPairs = new ArrayList<com.tda367.parallax.model.core.collision.CollisionPair>();
 
         for (int i = 0; i < firstGroup.size(); i++){
             for (int j = 0; j < secondGroup.size(); j++){
                 if (hasCollided(firstGroup.get(i),secondGroup.get(j))){
-                    collisionPairs.add(new CollisionPair(
+                    collisionPairs.add(new com.tda367.parallax.model.core.collision.CollisionPair(
                             firstGroup.get(i),
                             secondGroup.get(j)
                     ));
@@ -215,14 +214,14 @@ public class CollisionCalculator implements ICollisionCalculator {
     @Override
     public void run() {
         //Get collidables
-        CollisionManager collisionManager = CollisionManager.getInstance();
-        List<Collidable> collidables = collisionManager.getCollidables();
+        com.tda367.parallax.model.core.collision.CollisionManager collisionManager = com.tda367.parallax.model.core.collision.CollisionManager.getInstance();
+        List<com.tda367.parallax.model.core.collision.Collidable> collidables = collisionManager.getCollidables();
 
         //Find collisions
-        List<CollisionPair> pairs = getCollisions(collidables);
+        List<com.tda367.parallax.model.core.collision.CollisionPair> pairs = getCollisions(collidables);
 
         //Report collisions
-        for (CollisionPair pair : pairs) {
+        for (com.tda367.parallax.model.core.collision.CollisionPair pair : pairs) {
             collisionManager.alertObservers(pair);
         }
     }
