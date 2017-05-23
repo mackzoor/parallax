@@ -11,7 +11,7 @@ import com.tda367.parallax.model.CollisionCalculator;
 import com.tda367.parallax.model.core.Parallax;
 import com.tda367.parallax.model.core.Player;
 import com.tda367.parallax.model.core.spacecraft.SpaceCraftFactory;
-import com.tda367.parallax.view.Renderer3D;
+import com.tda367.parallax.view.rendering.Renderer3D;
 import com.tda367.parallax.view.Sound;
 import com.tda367.parallax.view.parallaxview.ParallaxView;
 

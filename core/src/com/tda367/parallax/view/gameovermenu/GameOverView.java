@@ -2,7 +2,7 @@ package com.tda367.parallax.view.gameovermenu;
 
 import com.tda367.parallax.model.gameover.GameOver;
 import com.tda367.parallax.model.gameover.GameOverText;
-import com.tda367.parallax.view.Renderer3D;
+import com.tda367.parallax.view.rendering.Renderer3D;
 
 import java.util.ArrayList;
 import java.util.List;

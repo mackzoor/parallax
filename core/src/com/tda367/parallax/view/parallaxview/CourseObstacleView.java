@@ -2,8 +2,8 @@ package com.tda367.parallax.view.parallaxview;
 
 import com.tda367.parallax.model.core.world.courseobstacles.CourseObstacleBase;
 import com.tda367.parallax.model.core.world.courseobstacles.ObstacleType;
-import com.tda367.parallax.view.Renderer3D;
-import com.tda367.parallax.view.util.Renderable3dObject;
+import com.tda367.parallax.view.rendering.Renderer3D;
+import com.tda367.parallax.view.rendering.Renderable3dObject;
 import com.tda367.parallax.utilities.ResourceLoader;
 
 /**
@@ -11,7 +11,7 @@ import com.tda367.parallax.utilities.ResourceLoader;
  */
 public class CourseObstacleView implements View{
     private final CourseObstacleBase obstacle;
-    private com.tda367.parallax.view.util.Renderable3dObject renderable3dObject;
+    private Renderable3dObject renderable3dObject;
 
     public CourseObstacleView(CourseObstacleBase obstacle){
         this.obstacle = null;

@@ -2,9 +2,8 @@ package com.tda367.parallax.view.cardboardmenu;
 
 
 import com.badlogic.gdx.Gdx;
-import com.google.vrtoolkit.cardboard.Eye;
 import com.tda367.parallax.model.cardboardmenu.MainMenu;
-import com.tda367.parallax.view.Renderer3D;
+import com.tda367.parallax.view.rendering.Renderer3D;
 
 
 

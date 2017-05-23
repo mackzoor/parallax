@@ -12,7 +12,7 @@ import com.tda367.parallax.model.CollisionCalculator;
 import com.tda367.parallax.model.cardboardmenu.MainMenu;
 import com.tda367.parallax.model.cardboardmenu.CardboardMenuObserver;
 import com.tda367.parallax.model.core.collision.CollisionManager;
-import com.tda367.parallax.view.Renderer3D;
+import com.tda367.parallax.view.rendering.Renderer3D;
 import com.tda367.parallax.view.Sound;
 import com.tda367.parallax.view.cardboardmenu.CardboardMainMenuView;
 

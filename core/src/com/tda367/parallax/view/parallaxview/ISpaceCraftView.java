@@ -3,8 +3,8 @@ package com.tda367.parallax.view.parallaxview;
 import com.tda367.parallax.model.core.spacecraft.Agelion;
 import com.tda367.parallax.model.core.spacecraft.ISpaceCraft;
 import com.tda367.parallax.model.core.spacecraft.SpaceCraftType;
-import com.tda367.parallax.view.Renderer3D;
-import com.tda367.parallax.view.util.Renderable3dObject;
+import com.tda367.parallax.view.rendering.Renderer3D;
+import com.tda367.parallax.view.rendering.Renderable3dObject;
 import com.tda367.parallax.utilities.ResourceLoader;
 
 /**

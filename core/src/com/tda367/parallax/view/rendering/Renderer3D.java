@@ -1,4 +1,4 @@
-package com.tda367.parallax.view;
+package com.tda367.parallax.view.rendering;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.android.CardboardCamera;
@@ -10,7 +10,6 @@ import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.math.Matrix4;
 import com.google.vrtoolkit.cardboard.Eye;
-import com.tda367.parallax.view.util.Renderable3dObject;
 
 import java.util.ArrayList;
 import java.util.List;

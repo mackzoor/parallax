@@ -1,9 +1,9 @@
 package com.tda367.parallax.view.gameovermenu;
 
 import com.tda367.parallax.model.gameover.GameOverText;
-import com.tda367.parallax.view.Renderer3D;
+import com.tda367.parallax.view.rendering.Renderer3D;
 import com.tda367.parallax.view.parallaxview.View;
-import com.tda367.parallax.view.util.Renderable3dObject;
+import com.tda367.parallax.view.rendering.Renderable3dObject;
 import com.tda367.parallax.utilities.ResourceLoader;
 
 /**

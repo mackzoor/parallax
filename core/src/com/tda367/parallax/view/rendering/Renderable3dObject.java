@@ -1,4 +1,4 @@
-package com.tda367.parallax.view.util;
+package com.tda367.parallax.view.rendering;
 
 import com.badlogic.gdx.graphics.g3d.Material;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
