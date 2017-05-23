@@ -11,7 +11,7 @@ import java.util.List;
  * Class that acts like a layer between LibGDX preferences and classes using stored score
  */
 
-public class ScoreAdapter {
+public class ScoreHandler {
 
     Preferences preferences;
     private final static int LENGTH_OF_LIST = 10;
@@ -20,7 +20,7 @@ public class ScoreAdapter {
     private @Getter List<HighScoreHolder> highScoreHolders;
 
 
-    public ScoreAdapter(){
+    public ScoreHandler(){
         highScoreHolders = new ArrayList<HighScoreHolder>();
         preferences = Gdx.app.getPreferences("My Preferences");
         updateHighScoreHolders();
