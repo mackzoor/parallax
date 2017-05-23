@@ -12,7 +12,7 @@ import com.tda367.parallax.view.parallaxview.ParallaxView;
 
 public class GameController extends InputControlsAdapter {
 
-    private AgelionController agelionController;
+    private SpaceCraftController spaceCraftController;
 
     private Parallax parallax;
     private ParallaxView parallaxView;
@@ -21,12 +21,12 @@ public class GameController extends InputControlsAdapter {
         device.addInputDevices(this);
         this.parallax = parallax;
         this.parallaxView = parallaxView;
-        agelionController = new AgelionController(parallax.getPlayer().getSpaceCraft());
+        spaceCraftController = new SpaceCraftController(parallax.getPlayer().getSpaceCraft());
     }
 
     @Override
     public void actionButtonPressed() {
-        agelionController.actionButtonPressed();
+        spaceCraftController.actionButtonPressed();
     }
 
     @Override
@@ -42,52 +42,52 @@ public class GameController extends InputControlsAdapter {
 
     @Override
     public void upButtonDown() {
-        agelionController.upButtonDown();
+        spaceCraftController.upButtonDown();
     }
 
     @Override
     public void upButtonUp() {
-        agelionController.upButtonUp();
+        spaceCraftController.upButtonUp();
     }
 
     @Override
     public void rightButtonDown() {
-        agelionController.rightButtonDown();
+        spaceCraftController.rightButtonDown();
     }
 
     @Override
     public void rightButtonUp() {
-        agelionController.rightButtonUp();
+        spaceCraftController.rightButtonUp();
     }
 
     @Override
     public void downButtonDown() {
-        agelionController.downButtonDown();
+        spaceCraftController.downButtonDown();
     }
 
     @Override
     public void downButtonUp() {
-        agelionController.downButtonUp();
+        spaceCraftController.downButtonUp();
     }
 
     @Override
     public void leftButtonDown() {
-        agelionController.leftButtonDown();
+        spaceCraftController.leftButtonDown();
     }
 
     @Override
     public void leftButtonUp() {
-        agelionController.leftButtonUp();
+        spaceCraftController.leftButtonUp();
     }
 
     @Override
     public void xAxisJoystickMovement(float xValue) {
-        agelionController.xAxisJoystickMovement(xValue);
+        spaceCraftController.xAxisJoystickMovement(xValue);
     }
 
     @Override
     public void yAxisJoystickMovement(float yValue) {
-        agelionController.yAxisJoystickMovement(yValue);
+        spaceCraftController.yAxisJoystickMovement(yValue);
     }
 
     @Override

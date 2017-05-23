@@ -3,22 +3,22 @@ package com.tda367.parallax.controller.controllerclasses.game;
 import com.tda367.parallax.model.core.spacecraft.ISpaceCraft;
 
 /**
- * Controller class used for controlling Agelion.
+ * Controller class used for controlling {@link ISpaceCraft}.
  */
 
-class AgelionController {
+class SpaceCraftController {
 
     private float yValue = 0;
     private float xValue = 0;
 
-    private ISpaceCraft agelion;
+    private ISpaceCraft spaceCraft;
 
-    AgelionController(ISpaceCraft agelion) {
-        this.agelion = agelion;
+    SpaceCraftController(ISpaceCraft spaceCraft) {
+        this.spaceCraft = spaceCraft;
     }
 
     void actionButtonPressed() {
-        agelion.action();
+        spaceCraft.action();
     }
 
     void upButtonDown() {
@@ -72,6 +72,6 @@ class AgelionController {
     }
 
     private synchronized void updateControls(){
-        agelion.setDesiredPanVelocity(xValue, yValue);
+        spaceCraft.setDesiredPanVelocity(xValue, yValue);
     }
 }
