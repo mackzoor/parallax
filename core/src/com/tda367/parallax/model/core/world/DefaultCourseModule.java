@@ -4,6 +4,7 @@ import com.tda367.parallax.model.core.powerups.container.Container;
 import com.tda367.parallax.model.core.powerups.arsenal.IPowerUp;
 import com.tda367.parallax.model.core.powerups.arsenal.PowerUpFactory;
 import com.tda367.parallax.model.core.world.courseobstacles.CourseObstacleBase;
+import com.tda367.parallax.model.core.world.courseobstacles.ObstacleFactory;
 
 
 import javax.vecmath.Quat4f;
@@ -22,7 +23,6 @@ public class DefaultCourseModule implements ICourseModule {
     private float length;
 
     private List<CourseObstacleBase> couseObstacles;
-    private List<com.tda367.parallax.model.core.collision.Collidable> usables;
     private List<IPowerUp> powerUps;
     private boolean active;
     private List<Container> containers;
@@ -37,7 +37,6 @@ public class DefaultCourseModule implements ICourseModule {
         containers = new ArrayList<Container>();
         length = 64;
         this.couseObstacles = new ArrayList<CourseObstacleBase>();
-        usables = new ArrayList<com.tda367.parallax.model.core.collision.Collidable>();
 
         addObstacles(obstacleAmmount);
 
@@ -61,7 +60,7 @@ public class DefaultCourseModule implements ICourseModule {
                     (this.pos.getY()) - length/2 + x*distanceBetween,
                     0
             );
-            CourseObstacleBase obstacle = com.tda367.parallax.model.core.world.courseobstacles.ObstacleFactory.getRandomWallInstance(obstaclePos);
+            CourseObstacleBase obstacle = ObstacleFactory.getRandomWallInstance(obstaclePos);
 
             obstacle.getPos().set(obstaclePos);
             this.couseObstacles.add(obstacle);
