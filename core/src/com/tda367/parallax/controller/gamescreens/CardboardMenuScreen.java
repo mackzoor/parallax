@@ -14,7 +14,7 @@ import com.tda367.parallax.model.cardboardmenu.CardboardMenuObserver;
 import com.tda367.parallax.model.core.collision.CollisionManager;
 import com.tda367.parallax.view.rendering.Renderer3D;
 import com.tda367.parallax.view.Sound;
-import com.tda367.parallax.view.cardboardmenu.CardboardMainMenuView;
+import com.tda367.parallax.view.cardboardmenu.MainMenuView;
 
 
 public class CardboardMenuScreen extends CardboardScreenAdapter implements CardboardMenuObserver {
@@ -23,14 +23,14 @@ public class CardboardMenuScreen extends CardboardScreenAdapter implements Cardb
     private Sound sound;
     private MainMenu mainMenu;
     private CollisionCalculator collisionCalculator;
-    private CardboardMainMenuView view;
+    private MainMenuView view;
 
     public CardboardMenuScreen(CardboardGame game) {
         this.game = game;
         mainMenu = new MainMenu();
         sound = new Sound();
         controller = new CardboardMenuController(mainMenu, DeviceManager.getGameModeState(game));
-        view = new CardboardMainMenuView(mainMenu,true);
+        view = new MainMenuView(mainMenu,true);
 
         mainMenu.addObservers(this);
         collisionCalculator = new CollisionCalculator();

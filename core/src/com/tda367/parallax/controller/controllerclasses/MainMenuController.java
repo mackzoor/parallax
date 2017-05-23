@@ -1,6 +1,7 @@
 package com.tda367.parallax.controller.controllerclasses;
 
 import com.tda367.parallax.controller.inputhandlers.InputControlsAdapter;
+import com.tda367.parallax.model.cardboardmenu.MainMenu;
 import com.tda367.parallax.model.menu.buttons.Button;
 import com.tda367.parallax.model.menu.buttons.ExitButton;
 import com.tda367.parallax.model.menu.buttons.StartButton;
@@ -11,14 +12,14 @@ import lombok.Getter;
 
 public class MainMenuController extends InputControlsAdapter {
 
-    private MainMenuModel mainMenuModel;
+    private MainMenu mainMenu;
     @Getter
     private boolean startButtonPressed;
     @Getter
     private boolean exitButtonPressed;
 
-    public MainMenuController(MainMenuModel mainMenuModel, Device device) {
-        this.mainMenuModel = mainMenuModel;
+    public MainMenuController(MainMenu mainMenu, Device device) {
+        this.mainMenu = mainMenu;
         startButtonPressed = false;
         exitButtonPressed = false;
         device.addInputDevices(this);
@@ -26,24 +27,8 @@ public class MainMenuController extends InputControlsAdapter {
 
     @Override
     public void actionButtonPressed() {
-        if (mainMenuModel.getStartButton().isMarked()) {
-            startButtonPressed = true;
-        } else if (mainMenuModel.getExitButton().isMarked()) {
-            exitButtonPressed = true;
-        }
+        mainMenu.action();
     }
-
-    @Override
-    public void upButtonDown() {
-        mainMenuModel.iterateUp();
-    }
-
-
-    @Override
-    public void downButtonDown() {
-        mainMenuModel.iterateDown();
-    }
-
 
     @Override
     public void yAxisJoystickMovement(float yValue) {
@@ -57,12 +42,5 @@ public class MainMenuController extends InputControlsAdapter {
     @Override
     public void onScreenClick(int xValue, int yValue) {
 
-        Button pressedButton = mainMenuModel.buttonPressed(xValue, yValue);
-
-        if (pressedButton instanceof StartButton) {
-            startButtonPressed = true;
-        } else if (pressedButton instanceof ExitButton) {
-            exitButtonPressed = true;
-        }
     }
 }
