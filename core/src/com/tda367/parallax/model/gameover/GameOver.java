@@ -1,11 +1,11 @@
 package com.tda367.parallax.model.gameover;
 
-import com.tda367.parallax.model.core.Player;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.vecmath.Vector3f;
 
+import com.tda367.parallax.model.core.Player;
 import com.tda367.parallax.model.score.ScoreHandler;
 import lombok.Getter;
 
