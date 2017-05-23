@@ -1,13 +1,12 @@
 package com.tda367.parallax.model.gameover;
 
 import com.tda367.parallax.model.core.Player;
-import com.tda367.parallax.model.score.ScoreAdapter;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.vecmath.Vector3f;
 
+import com.tda367.parallax.model.score.ScoreHandler;
 import lombok.Getter;
 
 /**
@@ -50,7 +49,7 @@ public class GameOver {
     }
 
     private void handleScore() {
-        ScoreAdapter scoreAdapter = new ScoreAdapter();
+        ScoreHandler scoreAdapter = new ScoreHandler();
         scoreAdapter.storeHighScore(player.getUserName(), player.getScore());
         playerScore = player.getScore();
         highScore = scoreAdapter.getHighScores().get(0);
