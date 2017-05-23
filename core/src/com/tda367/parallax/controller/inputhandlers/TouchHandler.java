@@ -12,12 +12,12 @@ import lombok.Setter;
  * {@link InputControlsListener}, about the user action.
  */
 
-public final class LibGdxTouchHandler extends InputAdapter {
+public final class TouchHandler extends InputAdapter {
 
     @Setter
     private InputControlsListener listener;
 
-    public LibGdxTouchHandler() {
+    public TouchHandler() {
         Gdx.input.setInputProcessor(this);
     }
 

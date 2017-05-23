@@ -2,22 +2,22 @@ package com.tda367.parallax.controller.devicestates;
 
 import com.tda367.parallax.controller.controllerclasses.game.GameController;
 import com.tda367.parallax.controller.inputhandlers.InputControlsListener;
-import com.tda367.parallax.controller.inputhandlers.LibGdxGamePadHandler;
-import com.tda367.parallax.controller.inputhandlers.LibGdxTouchHandler;
-import com.tda367.parallax.controller.inputhandlers.LibGdxTouchPadHandler;
+import com.tda367.parallax.controller.inputhandlers.GamePadHandler;
+import com.tda367.parallax.controller.inputhandlers.TouchHandler;
+import com.tda367.parallax.controller.inputhandlers.TouchPadHandler;
 import com.tda367.parallax.view.TouchPadView;
 
 class AndroidDevice implements Device {
 
     //TODO Should we have gamepad support in android
 
-    private LibGdxTouchPadHandler touchPadHandler;
-    private LibGdxTouchHandler touchHandler;
+    private TouchPadHandler touchPadHandler;
+    private TouchHandler touchHandler;
     private TouchPadView touchPadView;
-    private LibGdxGamePadHandler gamePadHandler;
+    private GamePadHandler gamePadHandler;
 
     AndroidDevice() {
-        this.gamePadHandler = new LibGdxGamePadHandler();
+        this.gamePadHandler = new GamePadHandler();
     }
 
     @Override
@@ -36,14 +36,14 @@ class AndroidDevice implements Device {
 
     private void initiateGameController(InputControlsListener listener){
         this.touchPadView = new TouchPadView();
-        this.touchPadHandler = new LibGdxTouchPadHandler(touchPadView);
-        this.gamePadHandler = new LibGdxGamePadHandler();
+        this.touchPadHandler = new TouchPadHandler(touchPadView);
+        this.gamePadHandler = new GamePadHandler();
         touchPadHandler.setListener(listener);
         gamePadHandler.setListener(listener);
     }
 
     public void initiateTouchController(InputControlsListener listener){
-        this.touchHandler = new LibGdxTouchHandler();
+        this.touchHandler = new TouchHandler();
         touchHandler.setListener(listener);
         gamePadHandler.setListener(listener);
     }

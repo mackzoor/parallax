@@ -10,11 +10,11 @@ import com.badlogic.gdx.InputAdapter;
  * {@link InputControlsListener}, about the user action.
  */
 
-public final class LibGdxDesktopHandler extends InputAdapter {
+public final class DesktopHandler extends InputAdapter {
 
     private InputControlsListener listener;
 
-    public LibGdxDesktopHandler() {
+    public DesktopHandler() {
         Gdx.input.setInputProcessor(this);
     }
 

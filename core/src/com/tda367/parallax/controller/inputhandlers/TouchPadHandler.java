@@ -9,12 +9,12 @@ import lombok.Setter;
  *
  */
 
-public final class LibGdxTouchPadHandler implements EventListener {
+public final class TouchPadHandler implements EventListener {
 
     private TouchPadView view;
     @Setter private InputControlsListener listener;
 
-    public LibGdxTouchPadHandler(TouchPadView view) {
+    public TouchPadHandler(TouchPadView view) {
         this.view = view;
         view.addListener(this);
     }

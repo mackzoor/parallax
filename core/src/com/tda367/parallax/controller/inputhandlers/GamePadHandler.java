@@ -7,7 +7,7 @@ import com.tda367.parallax.controller.inputhandlers.gamepads.GamePad;
 import com.tda367.parallax.controller.inputhandlers.gamepads.GamePadFactory;
 import lombok.Setter;
 
-public final class LibGdxGamePadHandler extends ControllerAdapter {
+public final class GamePadHandler extends ControllerAdapter {
 
     /**
      * Class that checks inputs from a game pad, compares it with a buttonCode and notifies its
@@ -17,7 +17,7 @@ public final class LibGdxGamePadHandler extends ControllerAdapter {
     @Setter private InputControlsListener listener;
     private GamePad gamePad;
 
-    public LibGdxGamePadHandler() {
+    public GamePadHandler() {
         Controllers.addListener(this);
         for (Controller controller : Controllers.getControllers()) {
             controller.addListener(this);
