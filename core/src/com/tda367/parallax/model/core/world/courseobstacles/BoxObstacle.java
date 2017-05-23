@@ -19,7 +19,7 @@ class BoxObstacle extends CourseObstacleBase {
         return COLLISION_MODEL_PATH;
     }
     @Override
-    public com.tda367.parallax.model.core.world.courseobstacles.ObstacleType getObstacleType() {
-        return com.tda367.parallax.model.core.world.courseobstacles.ObstacleType.BOX;
+    public ObstacleType getObstacleType() {
+        return ObstacleType.BOX;
     }
 }

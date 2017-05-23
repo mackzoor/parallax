@@ -1,5 +1,6 @@
 package com.tda367.parallax.controller.controllerclasses;
 
+import com.tda367.parallax.controller.inputhandlers.ControllerMode;
 import com.tda367.parallax.controller.inputhandlers.InputControlsAdapter;
 import com.tda367.parallax.model.cardboardmenu.MainMenu;
 import com.tda367.parallax.model.menu.buttons.Button;
@@ -9,6 +10,10 @@ import com.tda367.parallax.model.menu.MainMenuModel;
 import com.tda367.parallax.controller.devicestates.Device;
 
 import lombok.Getter;
+
+/**
+ * Controller class used for user input in the menu for Desktop and Android.
+ */
 
 public class MainMenuController extends InputControlsAdapter {
 
@@ -42,5 +47,10 @@ public class MainMenuController extends InputControlsAdapter {
     @Override
     public void onScreenClick(int xValue, int yValue) {
 
+    }
+
+    @Override
+    public ControllerMode getControllerMode() {
+        return ControllerMode.MENUMODE;
     }
 }

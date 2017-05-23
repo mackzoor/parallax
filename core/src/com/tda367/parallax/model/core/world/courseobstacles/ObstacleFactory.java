@@ -19,20 +19,28 @@ public final class ObstacleFactory {
         return new BoxObstacle(pos, new Quat4f(0,0,0,1));
     }
 
+    public static MovingBoxObstacle getMovingBoxInstance(Vector3f pos, boolean random){
+        return new MovingBoxObstacle(
+                pos,
+                new Quat4f(0,0,0,1),
+                true
+        );
+    }
+
     //Walls
-    public static com.tda367.parallax.model.core.world.courseobstacles.WallObstacle getTopWallInstance(Vector3f pos){
-        return new com.tda367.parallax.model.core.world.courseobstacles.WallObstacle(pos, new Quat4f(0,0.7071f,0,0.7071f));
+    public static WallObstacle getTopWallInstance(Vector3f pos){
+        return new WallObstacle(pos, new Quat4f(0,0.7071f,0,0.7071f));
     }
-    public static com.tda367.parallax.model.core.world.courseobstacles.WallObstacle getRightWallInstance(Vector3f pos){
-        return new com.tda367.parallax.model.core.world.courseobstacles.WallObstacle(pos, new Quat4f(0,1,0,0));
+    public static WallObstacle getRightWallInstance(Vector3f pos){
+        return new WallObstacle(pos, new Quat4f(0,1,0,0));
     }
-    public static com.tda367.parallax.model.core.world.courseobstacles.WallObstacle getBottomWallInstance(Vector3f pos){
-        return new com.tda367.parallax.model.core.world.courseobstacles.WallObstacle(pos, new Quat4f(0,-0.7071f,0,0.7071f));
+    public static WallObstacle getBottomWallInstance(Vector3f pos){
+        return new WallObstacle(pos, new Quat4f(0,-0.7071f,0,0.7071f));
     }
-    public static com.tda367.parallax.model.core.world.courseobstacles.WallObstacle getLeftWallInstance(Vector3f pos){
-        return new com.tda367.parallax.model.core.world.courseobstacles.WallObstacle(pos, new Quat4f(0,0,0,1));
+    public static WallObstacle getLeftWallInstance(Vector3f pos){
+        return new WallObstacle(pos, new Quat4f(0,0,0,1));
     }
-    public static com.tda367.parallax.model.core.world.courseobstacles.WallObstacle getRandomWallInstance(Vector3f pos){
+    public static WallObstacle getRandomWallInstance(Vector3f pos){
         Random rand = new Random();
 
         int randomInt = (int) (rand.nextFloat() * 4);

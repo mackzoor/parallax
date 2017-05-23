@@ -14,7 +14,7 @@ public class CourseObstacleView implements View{
     private Renderable3dObject renderable3dObject;
 
     public CourseObstacleView(CourseObstacleBase obstacle){
-        this.obstacle = null;
+        this.obstacle = obstacle;
         renderable3dObject = new Renderable3dObject(
                 obstacle.getPos(),
                 obstacle.getRot(),
@@ -27,6 +27,8 @@ public class CourseObstacleView implements View{
 
     @Override
     public void render() {
+        renderable3dObject.setPos(obstacle.getPos());
+        renderable3dObject.setRot(obstacle.getRot());
         Renderer3D.getInstance().addObjectToFrame(renderable3dObject);
     }
     @Override

@@ -1,6 +1,13 @@
 package com.tda367.parallax.model.core.world;
 
+import com.tda367.parallax.model.core.collision.Collidable;
+import com.tda367.parallax.model.core.collision.CollisionManager;
+import com.tda367.parallax.model.core.collision.CollisionObserver;
+import com.tda367.parallax.model.core.collision.CollisionPair;
 import com.tda367.parallax.model.core.powerups.arsenal.IPowerUp;
+import com.tda367.parallax.model.core.spacecraft.ISpaceCraft;
+import com.tda367.parallax.model.core.util.Updatable;
+import com.tda367.parallax.model.core.world.courseobstacles.CourseObstacleBase;
 import lombok.Getter;
 
 import javax.vecmath.Vector3f;
@@ -8,29 +15,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A course that handles the visual representation and updating of {@link com.tda367.parallax.model.core.spacecraft.ISpaceCraft} and {@link com.tda367.parallax.model.core.collision.Collidable}.
+ * A course that handles the visual representation and updating of {@link ISpaceCraft} and {@link Collidable}.
  */
 
-public class World implements com.tda367.parallax.model.core.util.Updatable, com.tda367.parallax.model.core.collision.CollisionObserver {
+public class World implements Updatable, CollisionObserver {
     @Getter private List<ICourseModule> modules;
-    @Getter private List<com.tda367.parallax.model.core.spacecraft.ISpaceCraft> spaceCrafts;
+    @Getter private List<ISpaceCraft> spaceCrafts;
     //TODO, remove the power-up after used
     @Getter private List<IPowerUp> powerUps;
 
     public World(){
-        com.tda367.parallax.model.core.collision.CollisionManager.getInstance().subscribeToCollisions(this);
+        CollisionManager.getInstance().subscribeToCollisions(this);
         modules = new ArrayList<ICourseModule>();
-        spaceCrafts = new ArrayList<com.tda367.parallax.model.core.spacecraft.ISpaceCraft>();
+        spaceCrafts = new ArrayList<ISpaceCraft>();
         powerUps = new ArrayList<IPowerUp>();
 
         updateModuleRange();
     }
 
-    public void addSpaceCraft(com.tda367.parallax.model.core.spacecraft.ISpaceCraft spaceCraft) {
+    public void addSpaceCraft(ISpaceCraft spaceCraft) {
         spaceCrafts.add(spaceCraft);
         spaceCraft.addToCollisionManager();
     }
-    public void removeSpaceCraft(com.tda367.parallax.model.core.spacecraft.ISpaceCraft spaceCraft) {
+    public void removeSpaceCraft(ISpaceCraft spaceCraft) {
         spaceCrafts.remove(spaceCraft);
         spaceCraft.addToCollisionManager();
     }
@@ -119,12 +126,21 @@ public class World implements com.tda367.parallax.model.core.util.Updatable, com
 
     @Override
     public void update(int milliSinceLastUpdate) {
-        for (com.tda367.parallax.model.core.spacecraft.ISpaceCraft spaceCraft : spaceCrafts) {
+        //Update spacecraft
+        for (ISpaceCraft spaceCraft : spaceCrafts) {
             spaceCraft.update(milliSinceLastUpdate);
         }
 
-        List<Integer> numbers = new ArrayList<Integer>();
+        //Update obstacles in each module.
+        for (ICourseModule module : modules) {
+            for (CourseObstacleBase courseObstacleBase : module.getCouseObstacles()) {
+                courseObstacleBase.update(milliSinceLastUpdate);
+            }
+        }
 
+
+        List<Integer> numbers = new ArrayList<Integer>();
+        //Update powerups and find dead ones.
         for (int i = 0; i < powerUps.size(); i++) {
             powerUps.get(i).update(milliSinceLastUpdate);
             if (powerUps.get(i).isDead()){
@@ -132,16 +148,19 @@ public class World implements com.tda367.parallax.model.core.util.Updatable, com
             }
         }
 
+        //remove dead powerups.
         for (Integer number : numbers) {
             int i = number;
             powerUps.remove(i);
         }
+
+        //Update module range
         updateModuleRange();
     }
     @Override
-    public void respondToCollision(com.tda367.parallax.model.core.collision.CollisionPair collisionPair) {
-        com.tda367.parallax.model.core.collision.Collidable first = collisionPair.getFirstCollidable();
-        com.tda367.parallax.model.core.collision.Collidable second = collisionPair.getSecondCollidable();
+    public void respondToCollision(CollisionPair collisionPair) {
+        Collidable first = collisionPair.getFirstCollidable();
+        Collidable second = collisionPair.getSecondCollidable();
 
         first.handleCollision(second);
         second.handleCollision(first);

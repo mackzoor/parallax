@@ -1,6 +1,6 @@
 package com.tda367.parallax.controller.devicestates;
 
-import com.tda367.parallax.controller.controllerclasses.game.GameController;
+import com.tda367.parallax.controller.inputhandlers.ControllerMode;
 import com.tda367.parallax.controller.inputhandlers.InputControlsListener;
 import com.tda367.parallax.controller.inputhandlers.GamePadHandler;
 import com.tda367.parallax.controller.inputhandlers.TouchHandler;
@@ -8,8 +8,6 @@ import com.tda367.parallax.controller.inputhandlers.TouchPadHandler;
 import com.tda367.parallax.view.TouchPadView;
 
 class AndroidDevice implements Device {
-
-    //TODO Should we have gamepad support in android
 
     private TouchPadHandler touchPadHandler;
     private TouchHandler touchHandler;
@@ -22,9 +20,9 @@ class AndroidDevice implements Device {
 
     @Override
     public void addInputDevices(InputControlsListener listener) {
-        if(listener instanceof GameController) {
+        if(listener.getControllerMode() == ControllerMode.GAMEMODE) {
             initiateGameController(listener);
-        }else{
+        } else {
             initiateTouchController(listener);
         }
     }
@@ -42,7 +40,7 @@ class AndroidDevice implements Device {
         gamePadHandler.setListener(listener);
     }
 
-    public void initiateTouchController(InputControlsListener listener){
+    private void initiateTouchController(InputControlsListener listener){
         this.touchHandler = new TouchHandler();
         touchHandler.setListener(listener);
         gamePadHandler.setListener(listener);
