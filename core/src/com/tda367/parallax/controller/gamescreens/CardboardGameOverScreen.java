@@ -21,7 +21,7 @@ public class CardboardGameOverScreen extends CardboardScreenAdapter {
     private CardboardGame game;
     private Player player;
 
-    public CardboardGameOverScreen(CardboardGame game, Player player) {
+    public CardboardGameOverScreen(Player player) {
         this.game = game;
         this.player = player;
     }
@@ -31,7 +31,7 @@ public class CardboardGameOverScreen extends CardboardScreenAdapter {
         model.update(Gdx.graphics.getDeltaTime());
         if (model.isObsolete()) {
             dispose();
-            GameStateManager.setCardboardMenuScreen(this.game);
+            GameStateManager.setCardboardMenuScreen(player);
         }
     }
 

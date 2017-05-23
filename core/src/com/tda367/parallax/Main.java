@@ -13,7 +13,8 @@ public class Main extends Game {
         Gdx.input.setCatchBackKey(true);
         Player player = new Player();
         DeviceManager.setDevice(this);
-        GameStateManager.setMainMenuScreen(this,player);
+        GameStateManager.setGame(this);
+        GameStateManager.setMainMenuScreen(player);
     }
 
     @Override

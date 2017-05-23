@@ -18,7 +18,6 @@ import com.tda367.parallax.view.cardboardmenu.MainMenuView;
 
 public class MainMenuScreen extends ScreenAdapter {
 
-    private Game game;
     private Player player;
     private MainMenu model;
     private MainMenuController controller;
@@ -28,17 +27,19 @@ public class MainMenuScreen extends ScreenAdapter {
     private AudioQueue audioQueue;
 
 
-    public MainMenuScreen(final Game game, Player player) {
+    public MainMenuScreen(Player player) {
         this.player = player;
-        this.game = game;
         sound = new Sound();
         audioQueue = AudioQueue.getInstance();
+        collisionCalculator = new CollisionCalculator();
+
     }
 
     @Override
     public void render(float delta) {
         if(model.getStartButton().isCollided()){
-            GameStateManager.setGameScreen(game,player);
+            dispose();
+            GameStateManager.setGameScreen(player);
         }
         model.update((int) (Gdx.graphics.getDeltaTime() * 1000));
         view.render();
@@ -56,13 +57,12 @@ public class MainMenuScreen extends ScreenAdapter {
     public void dispose() {
         CollisionManager.getInstance().getCollidables().clear();
         Controllers.clearListeners();
-        collisionCalculator.dispose();
+        collisionCalculator.clear();
         CollisionManager.getInstance().getObservers().clear();
     }
 
     public void newMainMenu() {
         this.model = new MainMenu();
-        collisionCalculator = new CollisionCalculator();
         this.controller = new MainMenuController(model, DeviceManager.getDevice());
         this.view = new MainMenuView(model, false);
     }

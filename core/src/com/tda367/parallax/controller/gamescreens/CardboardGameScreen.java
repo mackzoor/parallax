@@ -3,6 +3,7 @@ package com.tda367.parallax.controller.gamescreens;
 import com.badlogic.gdx.Gdx;
 import com.google.vrtoolkit.cardboard.Eye;
 import com.google.vrtoolkit.cardboard.HeadTransform;
+import com.tda367.parallax.controller.GameStateManager;
 import com.tda367.parallax.controller.controllerclasses.game.GameController;
 import com.tda367.parallax.controller.gamescreens.cardboardadapter.CardboardGame;
 import com.tda367.parallax.controller.devicestates.DeviceManager;
@@ -17,7 +18,6 @@ import com.tda367.parallax.view.parallaxview.ParallaxView;
 
 public class CardboardGameScreen extends CardboardScreenAdapter {
 
-    private CardboardGame game;
     private Player player;
     private Parallax parallaxGame;
     private GameController controller;
@@ -25,15 +25,14 @@ public class CardboardGameScreen extends CardboardScreenAdapter {
     private Sound sound;
     private ParallaxView parallaxView;
 
-    public CardboardGameScreen(CardboardGame game){
-        this.game = game;
+    public CardboardGameScreen(Player player){
         //Gdx.graphics.setTitle("Galactica space wars of justice, ultimate edition");
         // Initiate game with space craft "Agelion"
         this.player = new Player();
         this.player.addSpaceCraft(SpaceCraftFactory.getAgelionInstance(10));
         this.parallaxGame = new Parallax(player);
         parallaxView = new ParallaxView(parallaxGame,true);
-        controller = new GameController(parallaxGame, parallaxView, DeviceManager.getGameModeState(game));
+        controller = new GameController(parallaxGame, parallaxView, DeviceManager.getDevice());
         sound = new Sound();
         collisionCalculator = new CollisionCalculator();
     }

@@ -11,6 +11,7 @@ import com.tda367.parallax.controller.gamescreens.cardboardadapter.CardboardScre
 import com.tda367.parallax.model.CollisionCalculator;
 import com.tda367.parallax.model.cardboardmenu.MainMenu;
 import com.tda367.parallax.model.cardboardmenu.CardboardMenuObserver;
+import com.tda367.parallax.model.core.Player;
 import com.tda367.parallax.model.core.collision.CollisionManager;
 import com.tda367.parallax.view.rendering.Renderer3D;
 import com.tda367.parallax.view.Sound;
@@ -18,18 +19,18 @@ import com.tda367.parallax.view.cardboardmenu.MainMenuView;
 
 
 public class CardboardMenuScreen extends CardboardScreenAdapter implements CardboardMenuObserver {
-    private CardboardGame game;
     private CardboardMenuController controller;
     private Sound sound;
     private MainMenu mainMenu;
     private CollisionCalculator collisionCalculator;
     private MainMenuView view;
+    private Player player;
 
-    public CardboardMenuScreen(CardboardGame game) {
-        this.game = game;
+    public CardboardMenuScreen(Player player) {
+        this.player = player;
         mainMenu = new MainMenu();
         sound = new Sound();
-        controller = new CardboardMenuController(mainMenu, DeviceManager.getGameModeState(game));
+        controller = new CardboardMenuController(mainMenu, DeviceManager.getDevice());
         view = new MainMenuView(mainMenu,true);
 
         mainMenu.addObservers(this);
@@ -63,7 +64,7 @@ public class CardboardMenuScreen extends CardboardScreenAdapter implements Cardb
     @Override
     public void cardboardStartButtonAction() {
         dispose();
-        GameStateManager.setCardboardGameScreen(game);
+        GameStateManager.setCardboardGameScreen(player);
     }
 
     @Override

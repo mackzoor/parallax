@@ -18,7 +18,7 @@ public class GameOverScreen extends ScreenAdapter {
     private Game game;
     private Player player;
 
-    public GameOverScreen(Game game, Player player) {
+    public GameOverScreen(Player player) {
         this.game = game;
         this.player = player;
     }
@@ -30,7 +30,7 @@ public class GameOverScreen extends ScreenAdapter {
             this.view.render();
         } else {
             dispose();
-            GameStateManager.setMainMenuScreen(this.game, this.player);
+            GameStateManager.setMainMenuScreen(this.player);
         }
 
     }

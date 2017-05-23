@@ -5,14 +5,17 @@ import com.google.vrtoolkit.cardboard.HeadTransform;
 import com.tda367.parallax.controller.GameStateManager;
 import com.tda367.parallax.controller.devicestates.DeviceManager;
 import com.tda367.parallax.controller.gamescreens.cardboardadapter.CardboardGame;
+import com.tda367.parallax.model.core.Player;
 
 
 public class CardboardMain extends CardboardGame {
 
     @Override
     public void create(){
+        Player player = new Player();
         DeviceManager.setDevice(this);
-        GameStateManager.setCardboardGameScreen(this);
+        GameStateManager.setCardboardGame(this);
+        GameStateManager.setCardboardMenuScreen(player);
 
     }
 

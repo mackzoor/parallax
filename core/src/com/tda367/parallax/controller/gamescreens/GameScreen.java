@@ -29,13 +29,13 @@ public class GameScreen extends ScreenAdapter {
     private CollisionCalculator collisionCalculator;
     private ParallaxView parallaxView;
 
-    public GameScreen(Game game, Player player) {
-        this.game = game;
+    public GameScreen(Player player) {
 
         audioQueue = AudioQueue.getInstance();
         // Initiate game with space craft "Agelion"
         this.player = player;
         sound = new Sound();
+        collisionCalculator = new CollisionCalculator();
     }
 
     @Override
@@ -61,7 +61,7 @@ public class GameScreen extends ScreenAdapter {
         CollisionManager.getInstance().getCollidables().clear();
         Controllers.clearListeners();
         audioQueue.clearAllActiveMusic();
-        collisionCalculator.dispose();
+        collisionCalculator.clear();
         CollisionManager.getInstance().getObservers().clear();
     }
 
@@ -69,12 +69,11 @@ public class GameScreen extends ScreenAdapter {
         player.addSpaceCraft(SpaceCraftFactory.getAgelionInstance(15));
         parallaxGame = new Parallax(player);
         parallaxView = new ParallaxView(parallaxGame, false);
-        collisionCalculator = new CollisionCalculator();
         controller = new GameController(parallaxGame, parallaxView, DeviceManager.getDevice());
     }
 
     private void gameOver(){
         dispose();
-        GameStateManager.setGameOverScreen(game, player);
+        GameStateManager.setGameOverScreen(player);
     }
 }

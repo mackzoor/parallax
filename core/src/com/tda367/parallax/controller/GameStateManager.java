@@ -4,11 +4,15 @@ import com.badlogic.gdx.Game;
 import com.tda367.parallax.controller.gamescreens.*;
 import com.tda367.parallax.controller.gamescreens.cardboardadapter.CardboardGame;
 import com.tda367.parallax.model.core.Player;
+import lombok.Getter;
 
 public final class GameStateManager {
 
-    private GameStateManager() {}
+    private GameStateManager() {
+    }
 
+    @Getter private static Game GAME;
+    @Getter private static CardboardGame CARDBOARDGAME;
     private static MainMenuScreen mainMenuScreen;
     private static CardboardMenuScreen cardboardMenuScreen;
     private static GameScreen gameScreen;
@@ -16,49 +20,61 @@ public final class GameStateManager {
     private static GameOverScreen gameOverScreen;
     private static CardboardGameOverScreen cardboardGameOverScreen;
 
-    public static void setMainMenuScreen(Game game,Player player) {
+    public static void setGame(Game game) {
+        if (GAME == null) {
+            GAME = game;
+        }
+    }
+
+    public static void setCardboardGame(CardboardGame game) {
+        if (CARDBOARDGAME == null) {
+            CARDBOARDGAME = game;
+        }
+    }
+
+    public static void setMainMenuScreen(Player player) {
         if (mainMenuScreen == null) {
-            mainMenuScreen = new MainMenuScreen(game,player);
+            mainMenuScreen = new MainMenuScreen(player);
         }
         mainMenuScreen.newMainMenu();
-        game.setScreen(mainMenuScreen);
+        GAME.setScreen(mainMenuScreen);
     }
 
-    public static void setCardboardMenuScreen(CardboardGame game){
-        if(cardboardMenuScreen == null){
-            cardboardMenuScreen = new CardboardMenuScreen(game);
+    public static void setCardboardMenuScreen(Player player) {
+        if (cardboardMenuScreen == null) {
+            cardboardMenuScreen = new CardboardMenuScreen(player);
         }
-        game.setCardboardScreen(cardboardMenuScreen);
+        CARDBOARDGAME.setCardboardScreen(cardboardMenuScreen);
     }
 
-    public static void setGameScreen(Game game,Player player) {
+    public static void setGameScreen(Player player) {
         if (gameScreen == null) {
-            gameScreen = new GameScreen(game,player);
+            gameScreen = new GameScreen(player);
         }
         gameScreen.newGame();
-        game.setScreen(gameScreen);
+        GAME.setScreen(gameScreen);
     }
 
-    public static void setCardboardGameScreen(CardboardGame game){
-        if(cardboardGameScreen == null){
-            cardboardGameScreen = new CardboardGameScreen(game);
+    public static void setCardboardGameScreen(Player player) {
+        if (cardboardGameScreen == null) {
+            cardboardGameScreen = new CardboardGameScreen(player);
         }
-        game.setCardboardScreen(cardboardGameScreen);
+        CARDBOARDGAME.setCardboardScreen(cardboardGameScreen);
     }
 
-    public static void setGameOverScreen(Game game,Player player){
-        if(gameOverScreen == null){
-            gameOverScreen = new GameOverScreen(game,player);
+    public static void setGameOverScreen(Player player) {
+        if (gameOverScreen == null) {
+            gameOverScreen = new GameOverScreen(player);
         }
         gameOverScreen.newGameOver();
-        game.setScreen(gameOverScreen);
+        GAME.setScreen(gameOverScreen);
     }
 
-    public static void setCardboardGameOverScreen(CardboardGame game, Player player) {
+    public static void setCardboardGameOverScreen(Player player) {
         if (cardboardGameOverScreen == null) {
-            cardboardGameOverScreen = new CardboardGameOverScreen(game, player);
+            cardboardGameOverScreen = new CardboardGameOverScreen(player);
         }
         cardboardGameOverScreen.newGameOver();
-        game.setScreen(cardboardGameOverScreen);
+        CARDBOARDGAME.setScreen(cardboardGameOverScreen);
     }
 }
