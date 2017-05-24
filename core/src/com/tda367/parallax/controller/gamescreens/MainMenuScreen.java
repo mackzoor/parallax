@@ -11,7 +11,6 @@ import com.tda367.parallax.model.CollisionCalculator;
 import com.tda367.parallax.model.cardboardmenu.MainMenu;
 import com.tda367.parallax.model.core.collision.CollisionManager;
 import com.tda367.parallax.model.coreabstraction.AudioQueue;
-import com.tda367.parallax.model.menu.MainMenuModel;
 import com.tda367.parallax.model.core.Player;
 import com.tda367.parallax.view.Sound;
 import com.tda367.parallax.view.cardboardmenu.MainMenuView;

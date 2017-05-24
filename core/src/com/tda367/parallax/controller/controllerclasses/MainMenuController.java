@@ -4,10 +4,6 @@ import com.tda367.parallax.controller.inputhandlers.ControllerMode;
 import com.badlogic.gdx.Gdx;
 import com.tda367.parallax.controller.inputhandlers.InputControlsAdapter;
 import com.tda367.parallax.model.cardboardmenu.MainMenu;
-import com.tda367.parallax.model.menu.buttons.Button;
-import com.tda367.parallax.model.menu.buttons.ExitButton;
-import com.tda367.parallax.model.menu.buttons.StartButton;
-import com.tda367.parallax.model.menu.MainMenuModel;
 import com.tda367.parallax.controller.devicestates.Device;
 
 import lombok.Getter;
