@@ -4,6 +4,7 @@ import com.tda367.parallax.model.coreabstraction.AudioQueue;
 import com.tda367.parallax.model.core.collision.Collidable;
 import com.tda367.parallax.model.core.powerups.container.IContainer;
 import com.tda367.parallax.model.core.powerups.arsenal.IPowerUp;
+import com.tda367.parallax.utilities.MathUtilities;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -34,6 +35,8 @@ public abstract class SpaceCraft implements ISpaceCraft {
     @Setter @Getter private Vector2f currentPanVelocity;
     @Getter private Vector2f panAbsoluteTarget;
 
+    @Setter private boolean independentRotation;
+
     @Getter private Vector3f pos;
     @Getter private Quat4f rot;
 
@@ -44,7 +47,7 @@ public abstract class SpaceCraft implements ISpaceCraft {
     //SpaceCraft movement limiter
     private final static float COURSE_RADIUS = 3;
 
-    SpaceCraft(int health, float forwardVelocity, float maxPanVelocity, Vector3f pos, Quat4f rot, String pathToCollisionModel, com.tda367.parallax.model.core.spacecraft.SpaceCraftType type) {
+    SpaceCraft(int health, float forwardVelocity, float maxPanVelocity, Vector3f pos, Quat4f rot, String pathToCollisionModel, SpaceCraftType type, boolean independentRotation) {
         this.collisionModel = pathToCollisionModel;
         this.health = health;
         this.type = type;
@@ -55,6 +58,7 @@ public abstract class SpaceCraft implements ISpaceCraft {
         this.panAcceleration = new Vector2f();
         this.desiredPanVelocity = new Vector2f();
         this.pu = new ArrayList<IPowerUp>();
+        this.independentRotation = independentRotation;
 
         panAbsoluteTarget = new Vector2f();
         currentPanVelocity = new Vector2f();
@@ -94,6 +98,9 @@ public abstract class SpaceCraft implements ISpaceCraft {
         panRelativeMode(milliSinceLastUpdate);
         advanceCraft(milliSinceLastUpdate);
         outOfBoundsCheck();
+        if (!independentRotation) {
+            rotateInCraftDirection();
+        }
     }
 
 
@@ -265,5 +272,14 @@ public abstract class SpaceCraft implements ISpaceCraft {
             IContainer container = (IContainer) collidable;
             add(container.getPowerUp());
         }
+    }
+
+    private void rotateInCraftDirection() {
+        Vector3f rotationDirection = new Vector3f(
+                currentPanVelocity.getX()/2f,
+                forwardVelocity,
+                currentPanVelocity.getY()/2f
+        );
+        this.rot = (MathUtilities.vectorToQuat(rotationDirection));
     }
 }

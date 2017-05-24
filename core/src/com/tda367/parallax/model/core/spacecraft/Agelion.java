@@ -14,7 +14,7 @@ public class Agelion extends SpaceCraft{
 
     //Constructors
     Agelion(float forwardVelocity, Vector3f pos, Quat4f rot) {
-        super(HEALTH, forwardVelocity, MAX_PAN_VELOCITY, pos, rot, COLLISION_MODEL, TYPE);
+        super(HEALTH, forwardVelocity, MAX_PAN_VELOCITY, pos, rot, COLLISION_MODEL, TYPE, false);
     }
     Agelion(float forwardVelocity){
         this(forwardVelocity, new Vector3f(), new Quat4f());
