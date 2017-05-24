@@ -25,7 +25,9 @@ public class Parallax {
     @Getter private com.tda367.parallax.model.core.Camera camera;
     @Getter private Player player;
     @Getter @Setter private int totalPlayingTime;
-    @Getter @Setter private boolean paused;
+    @Getter private boolean paused;
+    String backgroundMusic;
+    String pauseMusic;
 
     private List<com.tda367.parallax.model.core.enemies.HunterAI> ais;
 
@@ -50,7 +52,30 @@ public class Parallax {
         startBackgroundMusic();
     }
 
+    public void setPaused(Boolean paused) {
+        this.paused = paused;
 
+        if (paused) {
+            AudioQueue.getInstance().pauseActiveMusic(backgroundMusic);
+
+            Random rand = new Random();
+            int randomSong = rand.nextInt(100 - 1 + 1) + 1;
+
+            if(randomSong == 1) {
+                pauseMusic = "sounds/music/spanishFlea.mp3";
+                AudioQueue.getInstance().playMusic("spanishFlea.mp3", "sounds/music", 0.7f);
+            }
+            else{
+                pauseMusic = "sounds/music/spaceInTime.mp3";
+                AudioQueue.getInstance().playMusic("spaceInTime.mp3", "sounds/music", 0.7f);
+            }
+        }
+        else{
+            AudioQueue.getInstance().unPauseActiveMusic(backgroundMusic);
+
+            AudioQueue.getInstance().stopActiveMusic(pauseMusic);
+        }
+    }
 
     public void update(int milliSinceLastUpdate) {
         if (player.getSpaceCraft().getHealth() > 0) {
@@ -89,8 +114,10 @@ public class Parallax {
 
         if(randomSong == 1){
             audioQueue.playMusic("secretTrack.mp3","sounds/music");
+            backgroundMusic = "sounds/music/secretTrack.mp3";
         } else if(randomSong == 2){
-            audioQueue.playMusic("track.mp3","sounds/music", 0.7f);
+            audioQueue.playMusic("trippingBalls.mp3","sounds/music", 0.7f);
+            backgroundMusic = "sounds/music/trippingBalls.mp3";
         } else {
             /*
             Dj Smack's Youtube: http://www.youtube.com/Djsmack100
@@ -98,7 +125,8 @@ public class Parallax {
             Dj Smack's Facebook: http://www.facebook.com/pages/Dj-Smac...
              */
 
-            audioQueue.playMusic("track2.mp3","sounds/music", 0.5f);
+            audioQueue.playMusic("soundsGreat.mp3","sounds/music", 0.5f);
+            backgroundMusic = "sounds/music/soundsGreat.mp3";
         }
     }
 
