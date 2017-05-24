@@ -6,6 +6,7 @@ import com.tda367.parallax.model.core.collision.CollidableType;
 
 import com.tda367.parallax.model.core.util.Transformable;
 import com.tda367.parallax.model.coreabstraction.AudioQueue;
+import com.tda367.parallax.utilities.MathUtilities;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -273,6 +274,7 @@ public class Missile extends PowerUpBase {
     //Method for moving the ship based on the direction vector generated from method "generateDirectionalVector"
     private void moveOnDirectionVector(Vector3f directionalVector, int milliSinceLastUpdate){
         getPos().add(new Vector3f((directionalVector.getX()*(float)milliSinceLastUpdate/1000)* VELOCITY_MULTIPLIER_X, (directionalVector.getY()*(float)milliSinceLastUpdate/1000)* VELOCITY_MULTIPLIER_Y, (directionalVector.getZ()*(float)milliSinceLastUpdate/1000)* VELOCITY_MULTIPLIER_Z));
+        this.setRot(MathUtilities.vectorToQuat(directionalVector));
     }
 
 

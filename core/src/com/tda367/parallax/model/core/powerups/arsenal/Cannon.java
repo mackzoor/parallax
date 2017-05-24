@@ -4,6 +4,8 @@ import com.tda367.parallax.model.coreabstraction.AudioQueue;
 import com.tda367.parallax.model.core.collision.Collidable;
 import com.tda367.parallax.model.core.collision.CollidableType;
 import com.tda367.parallax.model.core.util.Transformable;
+import com.tda367.parallax.utilities.MathUtilities;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -108,6 +110,7 @@ public class Cannon extends PowerUpBase {
         ));
         Vector3f directionalVector = generateDirectionVector(getEnemyTargetPosition());
         moveOnDirectionVector(directionalVector, milliSinceLastUpdate);
+        this.setRot(MathUtilities.vectorToQuat(directionalVector));
     }
     private void playCannonSound(){
         Random rand = new Random();
