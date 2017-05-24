@@ -11,7 +11,9 @@ import com.tda367.parallax.controller.gamescreens.cardboardadapter.CardboardScre
 import com.tda367.parallax.model.CollisionCalculator;
 import com.tda367.parallax.model.core.Parallax;
 import com.tda367.parallax.model.core.Player;
+import com.tda367.parallax.model.core.collision.CollisionManager;
 import com.tda367.parallax.model.core.spacecraft.SpaceCraftFactory;
+import com.tda367.parallax.model.coreabstraction.AudioQueue;
 import com.tda367.parallax.view.rendering.Renderer3D;
 import com.tda367.parallax.view.Sound;
 import com.tda367.parallax.view.parallaxview.ParallaxView;
@@ -28,7 +30,8 @@ public class CardboardGameScreen extends CardboardScreenAdapter {
     public CardboardGameScreen(Player player){
         //Gdx.graphics.setTitle("Galactica space wars of justice, ultimate edition");
         // Initiate game with space craft "Agelion"
-        this.player = new Player();
+
+        this.player = player;
         this.player.addSpaceCraft(SpaceCraftFactory.getAgelionInstance(10));
         this.parallaxGame = new Parallax(player);
         parallaxView = new ParallaxView(parallaxGame,true);
@@ -39,8 +42,10 @@ public class CardboardGameScreen extends CardboardScreenAdapter {
 
     @Override
     public void dispose() {
-        //TODO Fix to work with new render structure
-//        RenderQueue.getInstance().getRenderables().clear();
+        CollisionManager.getInstance().getCollidables().clear();
+        CollisionManager.getInstance().getObservers().clear();
+        collisionCalculator.clear();
+        sound.clearAllActiveMusic();
     }
 
     @Override
@@ -58,4 +63,5 @@ public class CardboardGameScreen extends CardboardScreenAdapter {
         //Renders scene for current eye
         parallaxView.render();
     }
+
 }

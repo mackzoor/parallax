@@ -61,8 +61,8 @@ public class CardboardMenuScreen extends CardboardScreenAdapter {
     @Override
     public void dispose() {
         CollisionManager.getInstance().getCollidables().clear();
-        //TODO Fix to work with new render structure
-//        RenderQueue.getInstance().getRenderables().clear();
+        CollisionManager.getInstance().getObservers().clear();
+        collisionCalculator.clear();
         sound.clearAllActiveMusic();
     }
 
