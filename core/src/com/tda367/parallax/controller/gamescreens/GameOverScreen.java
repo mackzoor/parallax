@@ -15,11 +15,9 @@ import com.tda367.parallax.view.gameover.GameOverView;
 public class GameOverScreen extends ScreenAdapter {
     private GameOver model;
     private GameOverView view;
-    private Game game;
     private Player player;
 
     public GameOverScreen(Player player) {
-        this.game = game;
         this.player = player;
     }
 

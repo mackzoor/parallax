@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.google.vrtoolkit.cardboard.Eye;
 import com.google.vrtoolkit.cardboard.HeadTransform;
 import com.tda367.parallax.controller.controllerclasses.CardboardMenuController;
+import com.tda367.parallax.controller.devicestates.Device;
 import com.tda367.parallax.controller.devicestates.DeviceManager;
 import com.tda367.parallax.controller.GameStateManager;
 import com.tda367.parallax.controller.gamescreens.cardboardadapter.CardboardScreenAdapter;
@@ -29,10 +30,7 @@ public class CardboardMenuScreen extends CardboardScreenAdapter {
 
     public CardboardMenuScreen(Player player) {
         this.player = player;
-        mainMenu = new MainMenu();
         sound = new Sound();
-        controller = new CardboardMenuController(mainMenu, DeviceManager.getDevice());
-        view = new MainMenuView(mainMenu,true);
         collisionCalculator = new CollisionCalculator();
     }
 
@@ -73,6 +71,12 @@ public class CardboardMenuScreen extends CardboardScreenAdapter {
 
     private void exitButtonHit() {
         Gdx.app.exit();
+    }
+
+    public void newMainMenu(){
+        mainMenu = new MainMenu();
+        view = new MainMenuView(mainMenu,true);
+        controller = new CardboardMenuController(mainMenu, DeviceManager.getDevice());
     }
 
     private Vector3f getLookDirection(HeadTransform paramHeadTransForm) {

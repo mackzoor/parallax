@@ -29,13 +29,7 @@ public class CardboardGameScreen extends CardboardScreenAdapter {
 
     public CardboardGameScreen(Player player){
         //Gdx.graphics.setTitle("Galactica space wars of justice, ultimate edition");
-        // Initiate game with space craft "Agelion"
-
         this.player = player;
-        this.player.addSpaceCraft(SpaceCraftFactory.getAgelionInstance(10));
-        this.parallaxGame = new Parallax(player);
-        parallaxView = new ParallaxView(parallaxGame,true);
-        controller = new GameController(parallaxGame, parallaxView, DeviceManager.getDevice());
         sound = new Sound();
         collisionCalculator = new CollisionCalculator();
     }
@@ -62,6 +56,13 @@ public class CardboardGameScreen extends CardboardScreenAdapter {
         Renderer3D.getInstance().onDrawEye(eye);
         //Renders scene for current eye
         parallaxView.render();
+    }
+
+    public void newGame(){
+        this.player.addSpaceCraft(SpaceCraftFactory.getAgelionInstance(15));
+        this.parallaxGame = new Parallax(player);
+        this.parallaxView = new ParallaxView(parallaxGame, false);
+        this.controller = new GameController(parallaxGame, parallaxView, DeviceManager.getDevice());
     }
 
 }

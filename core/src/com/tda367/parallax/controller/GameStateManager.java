@@ -44,6 +44,7 @@ public final class GameStateManager {
         if (cardboardMenuScreen == null) {
             cardboardMenuScreen = new CardboardMenuScreen(player);
         }
+        cardboardMenuScreen.newMainMenu();
         CARDBOARDGAME.setCardboardScreen(cardboardMenuScreen);
     }
 
@@ -59,6 +60,7 @@ public final class GameStateManager {
         if (cardboardGameScreen == null) {
             cardboardGameScreen = new CardboardGameScreen(player);
         }
+        cardboardGameScreen.newGame();
         CARDBOARDGAME.setCardboardScreen(cardboardGameScreen);
     }
 
