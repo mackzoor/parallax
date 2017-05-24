@@ -9,7 +9,7 @@ import com.tda367.parallax.controller.gamescreens.cardboardadapter.CardboardScre
 import com.tda367.parallax.model.gameover.GameOver;
 import com.tda367.parallax.model.core.Player;
 import com.tda367.parallax.view.rendering.Renderer3D;
-import com.tda367.parallax.view.gameovermenu.GameOverView;
+import com.tda367.parallax.view.gameover.GameOverView;
 
 /**
  * Class handling the "game over" screen for Cardboard. Shows player's score and high score

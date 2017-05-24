@@ -1,4 +1,4 @@
-package com.tda367.parallax.view.gameovermenu;
+package com.tda367.parallax.view.gameover;
 
 import com.tda367.parallax.model.gameover.GameOverText;
 import com.tda367.parallax.view.rendering.Renderer3D;
