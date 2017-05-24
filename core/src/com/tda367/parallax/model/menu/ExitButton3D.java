@@ -1,4 +1,4 @@
-package com.tda367.parallax.model.cardboardmenu;
+package com.tda367.parallax.model.menu;
 
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;

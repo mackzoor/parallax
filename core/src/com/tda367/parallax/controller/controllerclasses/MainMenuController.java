@@ -3,10 +3,8 @@ package com.tda367.parallax.controller.controllerclasses;
 import com.tda367.parallax.controller.inputhandlers.ControllerMode;
 import com.badlogic.gdx.Gdx;
 import com.tda367.parallax.controller.inputhandlers.InputControlsAdapter;
-import com.tda367.parallax.model.cardboardmenu.MainMenu;
+import com.tda367.parallax.model.menu.MainMenu;
 import com.tda367.parallax.controller.devicestates.Device;
-
-import lombok.Getter;
 
 /**
  * Controller class used for user input in the menu for Desktop and Android.

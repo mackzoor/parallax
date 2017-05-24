@@ -3,9 +3,8 @@ package com.tda367.parallax.controller.controllerclasses;
 import com.tda367.parallax.controller.devicestates.Device;
 import com.tda367.parallax.controller.inputhandlers.ControllerMode;
 import com.tda367.parallax.controller.inputhandlers.InputControlsAdapter;
-import com.tda367.parallax.model.cardboardmenu.MainMenu;
+import com.tda367.parallax.model.menu.MainMenu;
 
-import javax.vecmath.Vector3f;
 /**
  * Controller class used for user input in the menu for Cardboard.
  */

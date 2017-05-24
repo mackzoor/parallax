@@ -1,8 +1,8 @@
-package com.tda367.parallax.view.cardboardmenu;
+package com.tda367.parallax.view.menu;
 
 
 import com.badlogic.gdx.Gdx;
-import com.tda367.parallax.model.cardboardmenu.MainMenu;
+import com.tda367.parallax.model.menu.MainMenu;
 import com.tda367.parallax.model.core.powerups.arsenal.IPowerUp;
 import com.tda367.parallax.view.parallaxview.IPowerUpView;
 import com.tda367.parallax.view.parallaxview.View;
@@ -17,7 +17,7 @@ public class MainMenuView {
 
     private final MainMenu mainMenu;
     private BackgroundView world;
-    private ExitButton3DView exitButton;
+    private com.tda367.parallax.view.menu.ExitButton3DView exitButton;
     private StartButton3DView startButton;
     private HashMap<IPowerUp, IPowerUpView> powerUpsHash;
 
@@ -25,7 +25,7 @@ public class MainMenuView {
     public MainMenuView(MainMenu mainMenu, boolean isVr) {
         this.mainMenu = mainMenu;
         world = new BackgroundView();
-        exitButton = new ExitButton3DView(mainMenu.getExitButton());
+        exitButton = new com.tda367.parallax.view.menu.ExitButton3DView(mainMenu.getExitButton());
         startButton = new StartButton3DView(mainMenu.getStartButton());
         powerUpsHash = new HashMap<IPowerUp, IPowerUpView>();
         Renderer3D.initialize(mainMenu.getCamera().getFov(), Gdx.graphics.getWidth(),

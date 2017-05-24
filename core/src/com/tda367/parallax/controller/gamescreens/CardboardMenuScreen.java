@@ -8,13 +8,13 @@ import com.tda367.parallax.controller.devicestates.DeviceManager;
 import com.tda367.parallax.controller.GameStateManager;
 import com.tda367.parallax.controller.gamescreens.cardboardadapter.CardboardScreenAdapter;
 import com.tda367.parallax.model.CollisionCalculator;
-import com.tda367.parallax.model.cardboardmenu.MainMenu;
+import com.tda367.parallax.model.menu.MainMenu;
 import com.tda367.parallax.model.core.Player;
 import com.tda367.parallax.model.core.collision.CollisionManager;
 import com.tda367.parallax.utilities.MathUtilities;
 import com.tda367.parallax.view.rendering.Renderer3D;
 import com.tda367.parallax.view.Sound;
-import com.tda367.parallax.view.cardboardmenu.MainMenuView;
+import com.tda367.parallax.view.menu.MainMenuView;
 
 import javax.vecmath.Vector3f;
 

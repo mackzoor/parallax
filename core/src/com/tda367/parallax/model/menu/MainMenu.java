@@ -1,4 +1,4 @@
-package com.tda367.parallax.model.cardboardmenu;
+package com.tda367.parallax.model.menu;
 
 import com.tda367.parallax.model.core.Camera;
 import com.tda367.parallax.model.core.collision.CollisionManager;
