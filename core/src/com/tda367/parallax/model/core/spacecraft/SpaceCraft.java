@@ -1,5 +1,7 @@
 package com.tda367.parallax.model.core.spacecraft;
 
+import com.tda367.parallax.model.core.collision.CollidableType;
+import com.tda367.parallax.model.core.collision.CollisionManager;
 import com.tda367.parallax.model.coreabstraction.AudioQueue;
 import com.tda367.parallax.model.core.collision.Collidable;
 import com.tda367.parallax.model.core.powerups.container.IContainer;
@@ -42,7 +44,7 @@ public abstract class SpaceCraft implements ISpaceCraft {
 
     private String collisionModel;
     private boolean collisionEnabled;
-    private com.tda367.parallax.model.core.spacecraft.SpaceCraftType type;
+    private SpaceCraftType type;
 
     //SpaceCraft movement limiter
     private final static float COURSE_RADIUS = 3;
@@ -191,10 +193,6 @@ public abstract class SpaceCraft implements ISpaceCraft {
         currentPanVelocity.x = x;
         currentPanVelocity.y = y;
     }
-    public void setCurrentPanVelocity(Vector2f currentPanVelocity) {
-        this.currentPanVelocity = currentPanVelocity;
-    }
-
 
     //ISpaceCraft
     @Override
@@ -231,7 +229,7 @@ public abstract class SpaceCraft implements ISpaceCraft {
     @Override
     public void decHealth() { health--; }
     @Override
-    public com.tda367.parallax.model.core.spacecraft.SpaceCraftType getType(){
+    public SpaceCraftType getType(){
         return type;
     }
 
@@ -251,19 +249,19 @@ public abstract class SpaceCraft implements ISpaceCraft {
     }
     @Override
     public void addToCollisionManager() {
-        com.tda367.parallax.model.core.collision.CollisionManager.getInstance().addCollisionCheck(this);
+        CollisionManager.getInstance().addCollisionCheck(this);
     }
     @Override
     public void removeFromCollisionManager() {
-        com.tda367.parallax.model.core.collision.CollisionManager.getInstance().addCollisionCheck(this);
+        CollisionManager.getInstance().addCollisionCheck(this);
     }
     @Override
-    public com.tda367.parallax.model.core.collision.CollidableType getCollidableType() {
-        return com.tda367.parallax.model.core.collision.CollidableType.SPACECRAFT;
+    public CollidableType getCollidableType() {
+        return CollidableType.SPACECRAFT;
     }
     @Override
     public void handleCollision(Collidable collidable) {
-        if (collidable.getCollidableType() == com.tda367.parallax.model.core.collision.CollidableType.OBSTACLE || collidable.getCollidableType() == com.tda367.parallax.model.core.collision.CollidableType.HARMFUL){
+        if (collidable.getCollidableType() == CollidableType.OBSTACLE || collidable.getCollidableType() == CollidableType.HARMFUL){
             //Take damage if collided with obstacle or harmful
             AudioQueue.getInstance().playSound("flashBang.mp3","sounds/effects", 0.2f);
             decHealth();
