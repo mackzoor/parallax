@@ -43,15 +43,11 @@ public class MainMenuController extends InputControlsAdapter {
 
     @Override
     public void onScreenClick(int xValue, int yValue) {
-        if(xValue < Gdx.graphics.getWidth()/2){
-            xValue = xValue - Gdx.graphics.getWidth()/2;
-        }else {
-            xValue = xValue - Gdx.graphics.getWidth()/2;
-        }
-        if(yValue < Gdx.graphics.getWidth()/2){
-            yValue = yValue - Gdx.graphics.getWidth()/2;
-        }
-        mainMenu.action(new Vector3f(xValue, yValue,-2));
+        xValue = xValue - Gdx.graphics.getWidth() / 2;
+        yValue = yValue - Gdx.graphics.getHeight()/2;
+
+
+        mainMenu.action(new Vector3f(xValue, 500, yValue));
     }
 
     @Override

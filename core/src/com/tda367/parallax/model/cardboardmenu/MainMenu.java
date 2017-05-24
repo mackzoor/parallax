@@ -32,8 +32,8 @@ public class MainMenu implements Updatable, CollisionObserver {
     private Camera camera;
 
     public MainMenu() {
-        exitButton = new ExitButton3D(new Vector3f(2, 5, 1),new Quat4f());
-        startButton = new StartButton3D(new Vector3f(-2,5,1),new Quat4f());
+        exitButton = new ExitButton3D(new Vector3f(2, 10, 1),new Quat4f());
+        startButton = new StartButton3D(new Vector3f(-2,10,1),new Quat4f());
         observers = new ArrayList<CardboardMenuObserver>();
         powerUps = new ArrayList<IPowerUp>();
         CollisionManager.getInstance().subscribeToCollisions(this);
@@ -62,7 +62,7 @@ public class MainMenu implements Updatable, CollisionObserver {
         Cannon cannon = PowerUpFactory.createCannon();
         powerUps.add(cannon);
         cannon.activate(camera);
-        cannon.setVelocity(new Vector3f(1f,5f,0));
+        cannon.setVelocity(new Vector3f(0,10f,0));
         cannon.setEnemyTargetPosition(vector3f);
         //cannon.getEnemyTargetPosition().add(vector3f);
     }
