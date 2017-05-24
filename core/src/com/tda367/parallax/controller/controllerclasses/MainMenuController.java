@@ -46,8 +46,8 @@ public class MainMenuController extends InputControlsAdapter {
         xValue = xValue - Gdx.graphics.getWidth() / 2;
         yValue = yValue - Gdx.graphics.getHeight()/2;
 
-
-        mainMenu.action(new Vector3f(xValue, 500, yValue));
+        mainMenu.setAimDirection(new Vector3f(xValue, 500, yValue));
+        mainMenu.action();
     }
 
     @Override

@@ -22,7 +22,7 @@ public class CardboardMenuController extends InputControlsAdapter {
 
     @Override
     public void actionButtonPressed() {
-        mainMenu.action(new Vector3f());
+        mainMenu.action();
     }
 
     @Override
