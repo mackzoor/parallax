@@ -23,7 +23,6 @@ public class MainMenu implements CollisionObserver {
 
     @Getter private ExitButton3D exitButton;
     @Getter private StartButton3D startButton;
-    private List<CardboardMenuObserver> observers;
     @Getter private List<IPowerUp> powerUps;
     @Getter private Camera camera;
     @Getter @Setter private Vector3f aimDirection;
@@ -36,7 +35,6 @@ public class MainMenu implements CollisionObserver {
     public MainMenu() {
         exitButton = new ExitButton3D(EXIT_BUTTON_POS, EXIT_BUTTON_ROT);
         startButton = new StartButton3D(START_BUTTON_POS, START_BUTTON_ROT);
-        observers = new ArrayList<CardboardMenuObserver>();
         powerUps = new ArrayList<IPowerUp>();
         CollisionManager.getInstance().subscribeToCollisions(this);
         camera = new Camera();
