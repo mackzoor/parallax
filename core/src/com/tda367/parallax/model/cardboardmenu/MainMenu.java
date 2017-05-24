@@ -3,7 +3,7 @@ package com.tda367.parallax.model.cardboardmenu;
 import com.tda367.parallax.model.core.Camera;
 import com.tda367.parallax.model.core.collision.CollisionManager;
 import com.tda367.parallax.model.core.collision.CollisionObserver;
-import com.tda367.parallax.model.core.collision.CollisionPair;
+import com.tda367.parallax.model.core.collision.CollisionResult;
 import com.tda367.parallax.model.core.powerups.arsenal.Cannon;
 import com.tda367.parallax.model.core.powerups.arsenal.IPowerUp;
 import com.tda367.parallax.model.core.powerups.arsenal.PowerUpFactory;
@@ -98,10 +98,10 @@ public class MainMenu implements Updatable, CollisionObserver {
     }
 
     @Override
-    public void respondToCollision(CollisionPair collisionPair) {
+    public void respondToCollision(CollisionResult collisionResult) {
         System.out.println("collision");
-        collisionPair.getFirstCollidable().handleCollision(collisionPair.getSecondCollidable());
-        collisionPair.getSecondCollidable().handleCollision(collisionPair.getFirstCollidable());
+        collisionResult.getFirst().handleCollision(collisionResult.getSecond());
+        collisionResult.getSecond().handleCollision(collisionResult.getFirst());
     }
 
     public void addObservers(CardboardMenuObserver observer){

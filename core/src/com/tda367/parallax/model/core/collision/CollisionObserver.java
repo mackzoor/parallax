@@ -5,5 +5,5 @@ package com.tda367.parallax.model.core.collision;
  */
 
 public interface CollisionObserver {
-    void respondToCollision(CollisionPair collisionPair);
+    void respondToCollision(CollisionResult collisionResult);
 }

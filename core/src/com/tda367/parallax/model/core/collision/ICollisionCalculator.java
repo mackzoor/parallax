@@ -8,9 +8,8 @@ import java.util.List;
 
 public interface ICollisionCalculator {
 
-    boolean hasCollided(Collidable first, Collidable second);
-    List<CollisionPair> getCollisions(List<? extends Collidable> collidables);
-    List<CollisionPair> getCollisions(List<? extends Collidable> firstGroup,List<? extends Collidable> secondGroup);
+    CollisionResult checkCollision(Collidable first, Collidable second);
+    List<CollisionResult> getAllCollisions(List<? extends Collidable> collidables);
 
     void run();
 }

@@ -1,9 +1,6 @@
 package com.tda367.parallax.model.core.world;
 
-import com.tda367.parallax.model.core.collision.Collidable;
-import com.tda367.parallax.model.core.collision.CollisionManager;
-import com.tda367.parallax.model.core.collision.CollisionObserver;
-import com.tda367.parallax.model.core.collision.CollisionPair;
+import com.tda367.parallax.model.core.collision.*;
 import com.tda367.parallax.model.core.powerups.arsenal.IPowerUp;
 import com.tda367.parallax.model.core.spacecraft.ISpaceCraft;
 import com.tda367.parallax.model.core.util.Updatable;
@@ -158,9 +155,9 @@ public class World implements Updatable, CollisionObserver {
         updateModuleRange();
     }
     @Override
-    public void respondToCollision(CollisionPair collisionPair) {
-        Collidable first = collisionPair.getFirstCollidable();
-        Collidable second = collisionPair.getSecondCollidable();
+    public void respondToCollision(CollisionResult collisionResult) {
+        Collidable first = collisionResult.getFirst();
+        Collidable second = collisionResult.getSecond();
 
         first.handleCollision(second);
         second.handleCollision(first);
