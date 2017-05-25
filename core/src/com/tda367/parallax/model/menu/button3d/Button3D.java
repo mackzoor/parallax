@@ -1,4 +1,4 @@
-package com.tda367.parallax.model.menu;
+package com.tda367.parallax.model.menu.button3d;
 
 import com.tda367.parallax.model.core.collision.Collidable;
 import com.tda367.parallax.model.core.collision.CollidableType;

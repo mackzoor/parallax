@@ -7,6 +7,9 @@ import com.tda367.parallax.model.core.collision.CollisionResult;
 import com.tda367.parallax.model.core.powerups.arsenal.Cannon;
 import com.tda367.parallax.model.core.powerups.arsenal.IPowerUp;
 import com.tda367.parallax.model.core.powerups.arsenal.PowerUpFactory;
+import com.tda367.parallax.model.menu.button3d.ExitButton3D;
+import com.tda367.parallax.model.menu.button3d.StartButton3D;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,8 +24,8 @@ import java.util.List;
 
 public class MainMenu implements CollisionObserver {
 
-    @Getter private ExitButton3D exitButton;
-    @Getter private StartButton3D startButton;
+    @Getter private com.tda367.parallax.model.menu.button3d.ExitButton3D exitButton;
+    @Getter private com.tda367.parallax.model.menu.button3d.StartButton3D startButton;
     @Getter private List<IPowerUp> powerUps;
     @Getter private Camera camera;
     @Getter @Setter private Vector3f aimDirection;

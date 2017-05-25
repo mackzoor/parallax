@@ -1,6 +1,6 @@
 package com.tda367.parallax.view.menu;
 
-import com.tda367.parallax.model.menu.StartButton3D;
+import com.tda367.parallax.model.menu.button3d.StartButton3D;
 import com.tda367.parallax.view.rendering.Renderer3D;
 import com.tda367.parallax.view.parallaxview.View;
 import com.tda367.parallax.view.rendering.Renderable3dObject;
