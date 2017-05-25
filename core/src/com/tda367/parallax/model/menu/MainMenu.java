@@ -45,7 +45,9 @@ public class MainMenu implements CollisionObserver {
         Cannon cannon = PowerUpFactory.createCannon();
         powerUps.add(cannon);
         cannon.activate(camera);
-        cannon.setEnemyTargetPosition(aimDirection);
+        aimDirection.normalize();
+        aimDirection.scale(30);
+        cannon.setVelocity(aimDirection);
     }
 
     public void update(int milliSinceLastUpdate) {
