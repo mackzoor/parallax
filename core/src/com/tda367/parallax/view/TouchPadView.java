@@ -31,7 +31,7 @@ public class TouchPadView {
         gamePadSkin.add("knob", new Texture("touchpad/knob.png"));
         gamePadSkin.add("actionButton", new Texture("touchpad/actionButton.png"));
 
-        stage = new Stage();
+        this.stage = new Stage();
 
         int screenWidth = Gdx.graphics.getWidth();
         int screenHeight = Gdx.graphics.getHeight();
@@ -39,16 +39,16 @@ public class TouchPadView {
         initButton(gamePadSkin, screenWidth, screenHeight);
         initTouchPad(gamePadSkin, screenWidth, screenHeight);
 
-        Gdx.input.setInputProcessor(stage);
+        Gdx.input.setInputProcessor(this.stage);
     }
 
     public void addListener(EventListener listener) {
-        touchpad.addListener(listener);
-        actionButton.addListener(listener);
+        this.touchpad.addListener(listener);
+        this.actionButton.addListener(listener);
     }
 
     public void drawTouchPad(){
-        stage.draw();
+        this.stage.draw();
     }
 
     private void initButton(Skin gamePadSkin, int screenWidth, int screenHeight) {
@@ -62,13 +62,13 @@ public class TouchPadView {
         actionButtonBackground.setMinWidth(buttonDiameter);
         actionButtonBackground.setMinHeight(buttonDiameter);
 
-        actionButton = new ImageButton(actionButtonBackground);
-        actionButton.setBounds(
+        this.actionButton = new ImageButton(actionButtonBackground);
+        this.actionButton.setBounds(
                 buttonXPos - buttonDiameter, buttonYpos,
                 buttonDiameter, buttonDiameter
         );
 
-        stage.addActor(actionButton);
+        this.stage.addActor(this.actionButton);
     }
 
     private void initTouchPad(Skin gamePadSkin, int screenWidth, int screenHeight) {
@@ -85,9 +85,9 @@ public class TouchPadView {
         touchKnob.setMinWidth(touchPadDiameter / 2f);
         touchKnob.setMinHeight(touchPadDiameter / 2f);
 
-        touchpad = new Touchpad(10, touchpadStyle);
-        touchpad.setBounds(touchPadXYPos, touchPadXYPos, touchPadDiameter, touchPadDiameter);
+        this.touchpad = new Touchpad(10, touchpadStyle);
+        this.touchpad.setBounds(touchPadXYPos, touchPadXYPos, touchPadDiameter, touchPadDiameter);
 
-        stage.addActor(touchpad);
+        this.stage.addActor(this.touchpad);
     }
 }

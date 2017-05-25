@@ -9,6 +9,7 @@ import java.util.List;
 public interface ICollisionCalculator {
 
     CollisionResult checkCollision(Collidable first, Collidable second);
+
     List<CollisionResult> getAllCollisions(List<? extends Collidable> collidables);
 
     void run();

@@ -11,10 +11,9 @@ import com.tda367.parallax.model.core.Parallax;
 import com.tda367.parallax.model.core.Player;
 import com.tda367.parallax.model.core.collision.CollisionManager;
 import com.tda367.parallax.model.core.spacecraft.SpaceCraftFactory;
-import com.tda367.parallax.model.coreabstraction.AudioQueue;
-import com.tda367.parallax.view.rendering.Renderer3D;
 import com.tda367.parallax.view.Sound;
 import com.tda367.parallax.view.parallaxview.ParallaxView;
+import com.tda367.parallax.view.rendering.Renderer3D;
 
 public class CardboardGameScreen extends CardboardScreenAdapter {
 
@@ -25,26 +24,26 @@ public class CardboardGameScreen extends CardboardScreenAdapter {
     private Sound sound;
     private ParallaxView parallaxView;
 
-    public CardboardGameScreen(Player player){
+    public CardboardGameScreen(Player player) {
         //Gdx.graphics.setTitle("Galactica space wars of justice, ultimate edition");
         this.player = player;
-        sound = new Sound();
-        collisionCalculator = new CollisionCalculator();
+        this.sound = new Sound();
+        this.collisionCalculator = new CollisionCalculator();
     }
 
     @Override
     public void dispose() {
         CollisionManager.getInstance().getCollidables().clear();
         CollisionManager.getInstance().getObservers().clear();
-        collisionCalculator.clear();
-        sound.clearAllActiveMusic();
+        this.collisionCalculator.clear();
+        this.sound.clearAllActiveMusic();
     }
 
     @Override
     public void onNewFrame(HeadTransform paramHeadTransform) {
         //Updates Parallax game logic
-        parallaxGame.update((int)(Gdx.graphics.getDeltaTime() * 1000));
-        collisionCalculator.run();
+        this.parallaxGame.update((int) (Gdx.graphics.getDeltaTime() * 1000));
+        this.collisionCalculator.run();
 
     }
 
@@ -53,14 +52,14 @@ public class CardboardGameScreen extends CardboardScreenAdapter {
         // Apply the eye transformation to the camera.
         Renderer3D.getInstance().onDrawEye(eye);
         //Renders scene for current eye
-        parallaxView.render();
+        this.parallaxView.render();
     }
 
-    public void newGame(){
+    public void newGame() {
         this.player.addSpaceCraft(SpaceCraftFactory.getAgelionInstance(15));
-        this.parallaxGame = new Parallax(player);
-        this.parallaxView = new ParallaxView(parallaxGame, false);
-        this.controller = new GameController(parallaxGame, parallaxView, DeviceManager.getDevice());
+        this.parallaxGame = new Parallax(this.player);
+        this.parallaxView = new ParallaxView(this.parallaxGame, false);
+        this.controller = new GameController(this.parallaxGame, this.parallaxView, DeviceManager.getDevice());
     }
 
 }

@@ -10,40 +10,45 @@ import java.util.List;
  */
 
 public final class CollisionManager {
-    @Getter private List<Collidable> collidables;
+    @Getter
+    private List<Collidable> collidables;
     private List<ICollisionCalculator> calculators;
-    @Getter private List<CollisionObserver> observers;
+    @Getter
+    private List<CollisionObserver> observers;
 
     private static CollisionManager instance;
-    public static CollisionManager getInstance(){
+
+    public static CollisionManager getInstance() {
         if (instance == null) {
             instance = new CollisionManager();
         }
         return instance;
     }
 
-    private CollisionManager(){
-        collidables = new ArrayList<Collidable>();
-        calculators = new ArrayList<ICollisionCalculator>();
-        observers = new ArrayList<CollisionObserver>();
+    private CollisionManager() {
+        this.collidables = new ArrayList<Collidable>();
+        this.calculators = new ArrayList<ICollisionCalculator>();
+        this.observers = new ArrayList<CollisionObserver>();
     }
 
-    public void addCollisionCheck(Collidable collidable){
-        collidables.add(collidable);
-    }
-    public void removeCollisionCheck(Collidable collidable){
-        collidables.remove(collidable);
+    public void addCollisionCheck(Collidable collidable) {
+        this.collidables.add(collidable);
     }
 
-    public void subscribeToCollisions(CollisionObserver observer){
-        observers.add(observer);
+    public void removeCollisionCheck(Collidable collidable) {
+        this.collidables.remove(collidable);
     }
-    public void unnubscribeToCollisions(CollisionObserver observer){
-        observers.remove(observer);
+
+    public void subscribeToCollisions(CollisionObserver observer) {
+        this.observers.add(observer);
+    }
+
+    public void unnubscribeToCollisions(CollisionObserver observer) {
+        this.observers.remove(observer);
     }
 
     public void alertObservers(CollisionResult collisionResult) {
-        for (CollisionObserver observer : observers) {
+        for (CollisionObserver observer : this.observers) {
             observer.respondToCollision(collisionResult);
         }
     }

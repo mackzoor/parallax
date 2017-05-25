@@ -8,6 +8,7 @@ import com.google.vrtoolkit.cardboard.HeadTransform;
 public interface CardboardScreen extends Screen {
 
     void onNewFrame(HeadTransform headTransform);
+
     void onDrawEye(Eye eye);
 }
 

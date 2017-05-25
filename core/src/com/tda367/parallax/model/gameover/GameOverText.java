@@ -1,12 +1,11 @@
 package com.tda367.parallax.model.gameover;
 
 import com.tda367.parallax.utilities.MathUtilities;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
-
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * Holds the data for the panels surrounding the camera in {@link GameOver}.
@@ -14,11 +13,17 @@ import lombok.Setter;
  */
 
 public class GameOverText {
-    @Getter private final Vector3f position;
-    @Getter private final Quat4f direction;
-    @Getter private final int playerScore;
-    @Getter private final int highScore;
-    @Getter @Setter private boolean obsolete;
+    @Getter
+    private final Vector3f position;
+    @Getter
+    private final Quat4f direction;
+    @Getter
+    private final int playerScore;
+    @Getter
+    private final int highScore;
+    @Getter
+    @Setter
+    private boolean obsolete;
 
     GameOverText(Vector3f position, int playerScore, int highScore) {
         this.position = position;
@@ -27,10 +32,10 @@ public class GameOverText {
         this.obsolete = false;
         Vector3f tmpVec = new Vector3f(position);
         tmpVec.negate();
-        direction = MathUtilities.vectorToQuat(tmpVec);
+        this.direction = MathUtilities.vectorToQuat(tmpVec);
     }
 
     public boolean isNewHighScore() {
-        return playerScore >= highScore;
+        return this.playerScore >= this.highScore;
     }
 }

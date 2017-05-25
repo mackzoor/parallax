@@ -1,7 +1,7 @@
 package com.tda367.parallax.controller.devicestates;
 
-import com.tda367.parallax.controller.inputhandlers.InputControlsListener;
 import com.tda367.parallax.controller.inputhandlers.GamePadHandler;
+import com.tda367.parallax.controller.inputhandlers.InputControlsListener;
 
 class CardboardDevice implements Device {
 
@@ -13,7 +13,7 @@ class CardboardDevice implements Device {
 
     @Override
     public void addInputDevices(InputControlsListener listener) {
-        gamePadHandler.setListener(listener);
+        this.gamePadHandler.setListener(listener);
     }
 
     @Override

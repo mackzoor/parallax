@@ -9,5 +9,6 @@ import javax.vecmath.Vector3f;
 
 public interface Transformable {
     Vector3f getPos();
+
     Quat4f getRot();
 }

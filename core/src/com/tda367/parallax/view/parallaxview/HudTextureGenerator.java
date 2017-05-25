@@ -28,39 +28,39 @@ public class HudTextureGenerator {
     private IPowerUp powerUp;
     private int score;
 
-    public HudTextureGenerator(int lives) {
+    HudTextureGenerator(int lives) {
         this.lives = lives;
         generatedTexture = new Texture(renderText(Color.BLACK));
     }
 
-    void setScore(int score){
-       this.score = score;
+    void setScore(int score) {
+        this.score = score;
     }
+
     void setWeapon(IPowerUp powerUp) {
         this.powerUp = powerUp;
     }
-    void setLives(int lives){
+
+    void setLives(int lives) {
         this.lives = lives;
     }
 
-    Texture generateTexture(){
+    Texture generateTexture() {
         Pixmap pm = renderText(Color.WHITE);
 //        pm = outLine(pm);
         renderBackground(pm);
-        generatedTexture.draw(pm,0,0);
+        generatedTexture.draw(pm, 0, 0);
         pm.dispose(); //Important!
 
 
         return generatedTexture;
     }
 
-    private int counter = 0;
-
-    private Pixmap renderBackground(Pixmap pm){
+    private Pixmap renderBackground(Pixmap pm) {
         int triangleOffset = 64;
 
 //        pm.setColor(Color.WHITE);
-        pm.setColor(new Color(0,0,1f,0.7f));
+        pm.setColor(new Color(0, 0, 1f, 0.7f));
 
         //Right rectangle
 //        pm.fillRectangle(triangleOffset,0,WITDH-triangleOffset,HEIGHT);
@@ -72,18 +72,18 @@ public class HudTextureGenerator {
 //        pm.fillTriangle(0,triangleOffset,triangleOffset,triangleOffset,triangleOffset,0);
 
 
-        pm.fillTriangle(0,triangleOffset,0,0,triangleOffset,0);
+        pm.fillTriangle(0, triangleOffset, 0, 0, triangleOffset, 0);
 
         return pm;
     }
+
     private Pixmap renderText(Color fgColor) {
-        counter++;
         SpriteBatch spriteBatch = new SpriteBatch();
 
         FrameBuffer frameBuffer = new FrameBuffer(Pixmap.Format.RGBA8888, WITDH, HEIGHT, false);
         frameBuffer.begin();
 
-        Gdx.gl.glClearColor(1,1,1,0.3f);
+        Gdx.gl.glClearColor(1, 1, 1, 0.3f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         Matrix4 normalProjection = new Matrix4().setToOrtho2D(0, 0, WITDH, HEIGHT);
@@ -96,7 +96,7 @@ public class HudTextureGenerator {
         BitmapFont font = new BitmapFont(true);
         font.setColor(fgColor);
         font.getData().setScale(3);
-        font.draw(spriteBatch, "Score: " + score + "\n Lives: " + String.valueOf(lives),  48, 48);
+        font.draw(spriteBatch, "Score: " + this.score + "\n Lives: " + this.lives, 48, 48);
 
         spriteBatch.end();//finish write to buffer
         Pixmap pm = ScreenUtils.getFrameBufferPixmap(0, 0, WITDH, HEIGHT); //write frame buffer to Pixmap
@@ -112,26 +112,27 @@ public class HudTextureGenerator {
 
         return pm;
     }
-    private Pixmap outLine(Pixmap pm){
+
+    private Pixmap outLine(Pixmap pm) {
         pm.setColor(Color.WHITE);
 
         int lineWidth = 3;
 
         //Top line
-        pm.fillRectangle(0,0,pm.getWidth(),lineWidth);
+        pm.fillRectangle(0, 0, pm.getWidth(), lineWidth);
 
         //Right line
-        pm.fillRectangle(pm.getWidth()-lineWidth,0,pm.getWidth(),pm.getHeight());
+        pm.fillRectangle(pm.getWidth() - lineWidth, 0, pm.getWidth(), pm.getHeight());
 
         //Bottom line
-        pm.fillRectangle(0,pm.getHeight()-lineWidth,pm.getWidth(),pm.getHeight());
+        pm.fillRectangle(0, pm.getHeight() - lineWidth, pm.getWidth(), pm.getHeight());
 
         //Left line
-        pm.fillRectangle(0,0,lineWidth,pm.getHeight());
+        pm.fillRectangle(0, 0, lineWidth, pm.getHeight());
 
         return pm;
     }
 
-    public void dispose(){
+    public void dispose() {
     }
 }

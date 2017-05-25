@@ -1,5 +1,7 @@
 package com.tda367.parallax.model.core.powerups.usables;
 
+import lombok.Setter;
+
 /**
  * ExtraLife PowerUp increments the life of the Agelion ship
  */
@@ -7,7 +9,12 @@ package com.tda367.parallax.model.core.powerups.usables;
 public class ExtraLife implements com.tda367.parallax.model.core.powerups.usables.Usable {
 
 
-    private boolean isDead = false;
+    @Setter
+    private boolean dead;
+
+    ExtraLife() {
+        this.dead = false;
+    }
 
     @Override
     public void use() {
@@ -16,11 +23,10 @@ public class ExtraLife implements com.tda367.parallax.model.core.powerups.usable
 
     @Override
     public boolean isDead() {
-        return isDead;
+        return this.dead;
     }
 
     @Override
     public void update(int milliSinceLastUpdate) {
-
     }
 }

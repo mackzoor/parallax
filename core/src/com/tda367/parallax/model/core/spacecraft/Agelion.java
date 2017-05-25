@@ -1,11 +1,13 @@
 package com.tda367.parallax.model.core.spacecraft;
 
-import javax.vecmath.*;
+
+import javax.vecmath.Quat4f;
+import javax.vecmath.Vector3f;
 
 /**
  * The spacecraft "Agelion" in the game "Parallax".
  */
-public class Agelion extends SpaceCraft{
+public class Agelion extends SpaceCraft {
 
     private final static String COLLISION_MODEL = "3dModels/agelion/hitbox.obj";
     private final static float MAX_PAN_VELOCITY = 16f;
@@ -16,10 +18,12 @@ public class Agelion extends SpaceCraft{
     Agelion(float forwardVelocity, Vector3f pos, Quat4f rot) {
         super(HEALTH, forwardVelocity, MAX_PAN_VELOCITY, pos, rot, COLLISION_MODEL, TYPE, false);
     }
-    Agelion(float forwardVelocity){
+
+    Agelion(float forwardVelocity) {
         this(forwardVelocity, new Vector3f(), new Quat4f());
     }
-    Agelion(){
+
+    Agelion() {
         this(20);
     }
 

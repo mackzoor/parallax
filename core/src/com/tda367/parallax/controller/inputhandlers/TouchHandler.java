@@ -3,7 +3,6 @@ package com.tda367.parallax.controller.inputhandlers;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
-
 import lombok.Setter;
 
 /**
@@ -23,15 +22,15 @@ public final class TouchHandler extends InputAdapter {
 
     @Override
     public boolean keyDown(int keycode) {
-        if (listener != null && (keycode == Input.Keys.BACK || keycode == Input.Keys.MENU)) {
-            listener.pauseButtonPressed();
+        if (this.listener != null && (keycode == Input.Keys.BACK || keycode == Input.Keys.MENU)) {
+            this.listener.pauseButtonPressed();
         }
         return false;
     }
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        listener.onScreenClick(screenX, Gdx.graphics.getHeight() - screenY);
+        this.listener.onScreenClick(screenX, Gdx.graphics.getHeight() - screenY);
         return false;
     }
 }

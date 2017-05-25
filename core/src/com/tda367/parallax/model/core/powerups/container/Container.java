@@ -16,26 +16,33 @@ import javax.vecmath.Vector3f;
  */
 public class Container implements IContainer {
 
-    @Setter @Getter private Vector3f pos;
-    @Setter @Getter private Quat4f rot;
+    @Setter
+    @Getter
+    private Vector3f pos;
+    @Setter
+    @Getter
+    private Quat4f rot;
 
-    @Setter @Getter private String collisionModelPath;
+    @Setter
+    @Getter
+    private String collisionModelPath;
     private boolean collisionEnabled;
 
     private IPowerUp powerUp;
 
-    @Getter private boolean isCollected;
+    @Getter
+    private boolean isCollected;
 
-    public Container(IPowerUp pu){
+    public Container(IPowerUp pu) {
         this.powerUp = pu;
 
-        pos = new Vector3f();
-        rot = new Quat4f();
+        this.pos = new Vector3f();
+        this.rot = new Quat4f();
 
-        collisionModelPath = "3dModels/box/hitbox.obj";
+        this.collisionModelPath = "3dModels/box/hitbox.obj";
 
-        collisionEnabled = true;
-        isCollected = false;
+        this.collisionEnabled = true;
+        this.isCollected = false;
     }
 
     @Override
@@ -45,21 +52,24 @@ public class Container implements IContainer {
 
     @Override
     public boolean collisionActivated() {
-        return collisionEnabled;
+        return this.collisionEnabled;
     }
+
     @Override
     public void disableCollision() {
-        collisionEnabled = false;
+        this.collisionEnabled = false;
     }
+
     @Override
     public void enableCollision() {
-        collisionEnabled = true;
+        this.collisionEnabled = true;
     }
 
     @Override
     public void addToCollisionManager() {
         CollisionManager.getInstance().addCollisionCheck(this);
     }
+
     @Override
     public void removeFromCollisionManager() {
         CollisionManager.getInstance().removeCollisionCheck(this);
@@ -69,16 +79,17 @@ public class Container implements IContainer {
     public CollidableType getCollidableType() {
         return CollidableType.CONTAINER;
     }
+
     @Override
     public void handleCollision(Collidable collidable) {
         if (collidable.getCollidableType() == CollidableType.SPACECRAFT) {
-            isCollected = true;
-            removeFromCollisionManager();
+            this.isCollected = true;
+            this.removeFromCollisionManager();
         }
     }
 
     @Override
     public IPowerUp getPowerUp() {
-        return powerUp;
+        return this.powerUp;
     }
 }

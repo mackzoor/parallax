@@ -3,14 +3,14 @@ package com.tda367.parallax.controller.gamescreens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.controllers.Controllers;
+import com.tda367.parallax.controller.GameStateManager;
 import com.tda367.parallax.controller.controllerclasses.MainMenuController;
 import com.tda367.parallax.controller.devicestates.DeviceManager;
-import com.tda367.parallax.controller.GameStateManager;
 import com.tda367.parallax.model.CollisionCalculator;
-import com.tda367.parallax.model.menu.MainMenu;
+import com.tda367.parallax.model.core.Player;
 import com.tda367.parallax.model.core.collision.CollisionManager;
 import com.tda367.parallax.model.coreabstraction.AudioQueue;
-import com.tda367.parallax.model.core.Player;
+import com.tda367.parallax.model.menu.MainMenu;
 import com.tda367.parallax.view.Sound;
 import com.tda367.parallax.view.menu.MainMenuView;
 
@@ -27,44 +27,44 @@ public class MainMenuScreen extends ScreenAdapter {
 
     public MainMenuScreen(Player player) {
         this.player = player;
-        sound = new Sound();
-        audioQueue = AudioQueue.getInstance();
-        collisionCalculator = new CollisionCalculator();
+        this.sound = new Sound();
+        this.audioQueue = AudioQueue.getInstance();
+        this.collisionCalculator = new CollisionCalculator();
 
     }
 
     @Override
     public void render(float delta) {
-        if (model.getStartButton().isCollided()) {
+        if (this.model.getStartButton().isCollided()) {
             dispose();
-            GameStateManager.setGameScreen(player);
-        } else if (model.getExitButton().isCollided()) {
+            GameStateManager.setGameScreen(this.player);
+        } else if (this.model.getExitButton().isCollided()) {
             dispose();
             Gdx.app.exit();
         }
-        model.update((int) (Gdx.graphics.getDeltaTime() * 1000));
-        view.render();
-        collisionCalculator.run();
+        this.model.update((int) (Gdx.graphics.getDeltaTime() * 1000));
+        this.view.render();
+        this.collisionCalculator.run();
     }
 
 
     @Override
     public void resize(int width, int height) {
-        view.setWidth(width);
-        view.setHeight(height);
+        this.view.setWidth(width);
+        this.view.setHeight(height);
     }
 
     @Override
     public void dispose() {
         CollisionManager.getInstance().getCollidables().clear();
         Controllers.clearListeners();
-        collisionCalculator.clear();
+        this.collisionCalculator.clear();
         CollisionManager.getInstance().getObservers().clear();
     }
 
     public void newMainMenu() {
         this.model = new MainMenu();
-        this.controller = new MainMenuController(model, DeviceManager.getDevice());
-        this.view = new MainMenuView(model, false);
+        this.controller = new MainMenuController(this.model, DeviceManager.getDevice());
+        this.view = new MainMenuView(this.model, false);
     }
 }

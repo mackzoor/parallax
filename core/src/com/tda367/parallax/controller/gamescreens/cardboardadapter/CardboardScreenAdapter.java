@@ -7,7 +7,6 @@ import com.google.vrtoolkit.cardboard.HeadTransform;
 public abstract class CardboardScreenAdapter implements CardboardScreen {
 
 
-
     @Override
     public void onNewFrame(HeadTransform headTransform) {
 

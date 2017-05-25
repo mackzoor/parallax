@@ -24,33 +24,39 @@ import java.util.List;
 
 public class MainMenu implements CollisionObserver {
 
-    @Getter private com.tda367.parallax.model.menu.button3d.ExitButton3D exitButton;
-    @Getter private com.tda367.parallax.model.menu.button3d.StartButton3D startButton;
-    @Getter private List<IPowerUp> powerUps;
-    @Getter private Camera camera;
-    @Getter @Setter private Vector3f aimDirection;
+    @Getter
+    private ExitButton3D exitButton;
+    @Getter
+    private StartButton3D startButton;
+    @Getter
+    private List<IPowerUp> powerUps;
+    @Getter
+    private Camera camera;
+    @Getter
+    @Setter
+    private Vector3f aimDirection;
 
     private static final Vector3f EXIT_BUTTON_POS = new Vector3f(2, 10, 1);
     private static final Quat4f EXIT_BUTTON_ROT = new Quat4f();
-    private static final Vector3f START_BUTTON_POS = new Vector3f(-2,10,1);
+    private static final Vector3f START_BUTTON_POS = new Vector3f(-2, 10, 1);
     private static final Quat4f START_BUTTON_ROT = new Quat4f();
 
     public MainMenu() {
-        exitButton = new ExitButton3D(EXIT_BUTTON_POS, EXIT_BUTTON_ROT);
-        startButton = new StartButton3D(START_BUTTON_POS, START_BUTTON_ROT);
-        powerUps = new ArrayList<IPowerUp>();
+        this.exitButton = new ExitButton3D(EXIT_BUTTON_POS, EXIT_BUTTON_ROT);
+        this.startButton = new StartButton3D(START_BUTTON_POS, START_BUTTON_ROT);
+        this.powerUps = new ArrayList<IPowerUp>();
         CollisionManager.getInstance().subscribeToCollisions(this);
-        camera = new Camera();
-        aimDirection = new Vector3f();
+        this.camera = new Camera();
+        this.aimDirection = new Vector3f();
     }
 
-    public void action(){
+    public void action() {
         Cannon cannon = PowerUpFactory.createCannon();
-        powerUps.add(cannon);
-        cannon.activate(camera);
+        this.powerUps.add(cannon);
+        cannon.activate(this.camera);
         aimDirection.normalize();
         aimDirection.scale(30);
-        cannon.setVelocity(aimDirection);
+        cannon.setVelocity(this.aimDirection);
     }
 
     public void update(int milliSinceLastUpdate) {

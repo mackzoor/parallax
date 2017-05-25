@@ -2,8 +2,8 @@ package com.tda367.parallax.view.menu;
 
 
 import com.badlogic.gdx.Gdx;
-import com.tda367.parallax.model.menu.MainMenu;
 import com.tda367.parallax.model.core.powerups.arsenal.IPowerUp;
+import com.tda367.parallax.model.menu.MainMenu;
 import com.tda367.parallax.view.parallaxview.IPowerUpView;
 import com.tda367.parallax.view.parallaxview.View;
 import com.tda367.parallax.view.rendering.Renderer3D;
@@ -11,6 +11,7 @@ import com.tda367.parallax.view.rendering.Renderer3D;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class MainMenuView {
@@ -19,15 +20,15 @@ public class MainMenuView {
     private BackgroundView world;
     private com.tda367.parallax.view.menu.ExitButton3DView exitButton;
     private StartButton3DView startButton;
-    private HashMap<IPowerUp, IPowerUpView> powerUpsHash;
+    private Map<IPowerUp, IPowerUpView> powerUpsHash;
 
 
     public MainMenuView(MainMenu mainMenu, boolean isVr) {
         this.mainMenu = mainMenu;
-        world = new BackgroundView();
-        exitButton = new com.tda367.parallax.view.menu.ExitButton3DView(mainMenu.getExitButton());
-        startButton = new StartButton3DView(mainMenu.getStartButton());
-        powerUpsHash = new HashMap<IPowerUp, IPowerUpView>();
+        this.world = new BackgroundView();
+        this.exitButton = new com.tda367.parallax.view.menu.ExitButton3DView(mainMenu.getExitButton());
+        this.startButton = new StartButton3DView(mainMenu.getStartButton());
+        this.powerUpsHash = new HashMap<IPowerUp, IPowerUpView>();
         Renderer3D.initialize(mainMenu.getCamera().getFov(), Gdx.graphics.getWidth(),
                 Gdx.graphics.getHeight(), isVr);
         updatePowerupList();
@@ -36,15 +37,15 @@ public class MainMenuView {
     public void render() {
         updatePowerupList();
         Renderer3D.getInstance().setCameraPosition(
-                mainMenu.getCamera().getPos().getX(),
-                mainMenu.getCamera().getPos().getY(),
-                mainMenu.getCamera().getPos().getZ()
+                this.mainMenu.getCamera().getPos().getX(),
+                this.mainMenu.getCamera().getPos().getY(),
+                this.mainMenu.getCamera().getPos().getZ()
         );
-        world.render();
-        exitButton.render();
-        startButton.render();
-        for (IPowerUp iPowerUp : powerUpsHash.keySet()) {
-            powerUpsHash.get(iPowerUp).render();
+        this.world.render();
+        this.exitButton.render();
+        this.startButton.render();
+        for (IPowerUpView iPowerUpView : this.powerUpsHash.values()) {
+            iPowerUpView.render();
         }
         Renderer3D.getInstance().renderFrame();
     }
@@ -71,10 +72,10 @@ public class MainMenuView {
      * Updates the PowerUpList from the world object
      */
     private void updatePowerupList() {
-        List<IPowerUp> missingPowerUps = syncHash(powerUpsHash, mainMenu.getPowerUps());
+        List<IPowerUp> missingPowerUps = syncHash(this.powerUpsHash, this.mainMenu.getPowerUps());
 
         for (IPowerUp missingPowerUp : missingPowerUps) {
-            powerUpsHash.put(missingPowerUp, new IPowerUpView(missingPowerUp));
+            this.powerUpsHash.put(missingPowerUp, new IPowerUpView(missingPowerUp));
         }
     }
 
@@ -86,7 +87,7 @@ public class MainMenuView {
      * @param <T>  Object type.
      * @return Missing keys in hash from the list provided.
      */
-    private <T> List<T> syncHash(HashMap<T, ? extends View> hash, List<T> list) {
+    private <T> List<T> syncHash(Map<T, ? extends View> hash, List<T> list) {
         //Find obsolete
         ArrayList<T> obsolete = new ArrayList<T>();
         for (T t : hash.keySet()) {

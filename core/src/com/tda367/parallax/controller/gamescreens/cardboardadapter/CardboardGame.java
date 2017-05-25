@@ -67,7 +67,7 @@ public abstract class CardboardGame extends Game implements CardBoardApplication
 
     }
 
-    public void setCardboardScreen(CardboardScreen screen){
+    public void setCardboardScreen(CardboardScreen screen) {
         if (this.cardboardScreen != null) {
             this.cardboardScreen.hide();
         }

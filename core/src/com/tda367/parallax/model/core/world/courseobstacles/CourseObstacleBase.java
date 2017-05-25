@@ -78,7 +78,7 @@ public abstract class CourseObstacleBase implements Collidable, Updatable {
     public void handleCollision(Collidable collidable) {
         if (collidable.getCollidableType() == CollidableType.SPACECRAFT) {
             disableCollision();
-        }else if(collidable.getCollidableType() == CollidableType.HARMFUL){
+        } else if (collidable.getCollidableType() == CollidableType.HARMFUL) {
             disableCollision();
             destroyed = true;
         }

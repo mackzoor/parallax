@@ -2,12 +2,18 @@ package com.tda367.parallax.model.score;
 
 import lombok.Getter;
 
-public class HighScoreHolder {
+/*
+ * Storing a combination of name and score, class for simplified usage of data storage in real time.
+*/
 
-    @Getter private String name;
-    @Getter private int score;
+class HighScoreHolder {
 
-    HighScoreHolder(String name, int score){
+    @Getter
+    private String name;
+    @Getter
+    private int score;
+
+    HighScoreHolder(String name, int score) {
         this.name = name;
         this.score = score;
     }

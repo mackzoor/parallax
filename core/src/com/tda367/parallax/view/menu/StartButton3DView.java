@@ -1,11 +1,10 @@
 package com.tda367.parallax.view.menu;
 
 import com.tda367.parallax.model.menu.button3d.StartButton3D;
-import com.tda367.parallax.view.rendering.Renderer3D;
+import com.tda367.parallax.utilities.ResourceLoader;
 import com.tda367.parallax.view.parallaxview.View;
 import com.tda367.parallax.view.rendering.Renderable3dObject;
-import com.tda367.parallax.utilities.ResourceLoader;
-
+import com.tda367.parallax.view.rendering.Renderer3D;
 
 public class StartButton3DView implements View {
 
@@ -14,10 +13,9 @@ public class StartButton3DView implements View {
     private Renderable3dObject renderable3dObject;
 
 
-
     StartButton3DView(StartButton3D startButton) {
         this.startButton = startButton;
-        renderable3dObject = new Renderable3dObject(
+        this.renderable3dObject = new Renderable3dObject(
                 startButton.getPos(),
                 startButton.getRot(),
                 ResourceLoader.getInstance().getModel(INTERNAL_PATH),
@@ -28,11 +26,11 @@ public class StartButton3DView implements View {
 
     @Override
     public void render() {
-        Renderer3D.getInstance().addObjectToFrame(renderable3dObject);
+        Renderer3D.getInstance().addObjectToFrame(this.renderable3dObject);
     }
 
     @Override
     public boolean isObsolete() {
-        return startButton.collisionActivated();
+        return this.startButton.collisionActivated();
     }
 }

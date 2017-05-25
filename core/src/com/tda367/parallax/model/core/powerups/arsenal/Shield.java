@@ -12,7 +12,7 @@ public class Shield extends PowerUpBase {
     private static final CollidableType COLLIDABLE_TYPE = CollidableType.OBSTACLE;
     private static final String COLLISION_MODEL = "";
 
-    Shield(){
+    Shield() {
         super();
     }
 

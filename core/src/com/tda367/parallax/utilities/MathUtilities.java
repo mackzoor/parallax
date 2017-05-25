@@ -1,12 +1,10 @@
 package com.tda367.parallax.utilities;
 
 import javax.vecmath.Matrix3f;
-import javax.vecmath.Matrix4f;
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
 
 import static java.lang.Math.cos;
-import static java.lang.Math.floor;
 import static java.lang.Math.sin;
 
 /**
@@ -14,7 +12,8 @@ import static java.lang.Math.sin;
  */
 public final class MathUtilities {
 
-    private MathUtilities() {}
+    private MathUtilities() {
+    }
 
     public static Quat4f eulerToQuaternion(double pitch, double roll, double yaw) {
         Quat4f q = new Quat4f();
@@ -39,7 +38,7 @@ public final class MathUtilities {
         float y = (float) (-sin(yaw) * sin(pitch) * sin(roll)+cos(yaw) * cos(roll));
         float z = (float) (cos(pitch) * sin(roll));
 
-        return new Vector3f(x,y,z);
+        return new Vector3f(x, y, z);
     }
 
     public static Quat4f vectorToQuat(Vector3f v) {

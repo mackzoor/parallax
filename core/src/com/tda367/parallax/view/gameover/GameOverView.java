@@ -18,28 +18,28 @@ public class GameOverView {
 
     private List<GameOverTextView> gameOverTextViews;
 
-    public GameOverView(GameOver model){
+    public GameOverView(GameOver model) {
         this.model = model;
         Renderer3D.getInstance().setCameraPosition(0, 0, 0);
         generateGameOverTextViews();
     }
 
     private void generateGameOverTextViews() {
-        List<GameOverText> gameOverTexts = model.getGameOverTexts();
-        gameOverTextViews = new ArrayList<GameOverTextView>();
+        List<GameOverText> gameOverTexts = this.model.getGameOverTexts();
+        this.gameOverTextViews = new ArrayList<GameOverTextView>();
         for (GameOverText gameOverText : gameOverTexts) {
-            gameOverTextViews.add(new GameOverTextView(gameOverText));
+            this.gameOverTextViews.add(new GameOverTextView(gameOverText));
         }
     }
 
-    public void render(){
-        for (GameOverTextView gameOverTextView : gameOverTextViews) {
+    public void render() {
+        for (GameOverTextView gameOverTextView : this.gameOverTextViews) {
             gameOverTextView.render();
         }
         Renderer3D.getInstance().renderFrame();
     }
 
-    public void dispose(){
+    public void dispose() {
 
     }
 }

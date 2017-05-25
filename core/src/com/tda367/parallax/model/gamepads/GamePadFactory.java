@@ -11,9 +11,10 @@ import com.badlogic.gdx.Gdx;
 
 public final class GamePadFactory {
 
-    private GamePadFactory() {}
+    private GamePadFactory() {
+    }
 
-    public static GamePad getGamePad(String gamePadName){
+    public static GamePad getGamePad(String gamePadName) {
         String lowerCaseName = gamePadName.toLowerCase();
         if (Gdx.app.getType() == Application.ApplicationType.Android) {
             return new com.tda367.parallax.model.gamepads.AndroidGamePad();

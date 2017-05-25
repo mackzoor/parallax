@@ -8,11 +8,11 @@ import com.tda367.parallax.controller.GameStateManager;
 import com.tda367.parallax.controller.controllerclasses.game.GameController;
 import com.tda367.parallax.controller.devicestates.DeviceManager;
 import com.tda367.parallax.model.CollisionCalculator;
-import com.tda367.parallax.model.coreabstraction.AudioQueue;
 import com.tda367.parallax.model.core.Parallax;
 import com.tda367.parallax.model.core.Player;
 import com.tda367.parallax.model.core.collision.CollisionManager;
 import com.tda367.parallax.model.core.spacecraft.SpaceCraftFactory;
+import com.tda367.parallax.model.coreabstraction.AudioQueue;
 import com.tda367.parallax.view.Sound;
 import com.tda367.parallax.view.parallaxview.ParallaxView;
 
@@ -31,19 +31,19 @@ public class GameScreen extends ScreenAdapter {
 
     public GameScreen(Player player) {
 
-        audioQueue = AudioQueue.getInstance();
+        this.audioQueue = AudioQueue.getInstance();
         // Initiate game with space craft "Agelion"
         this.player = player;
-        sound = new Sound();
-        collisionCalculator = new CollisionCalculator();
+        this.sound = new Sound();
+        this.collisionCalculator = new CollisionCalculator();
     }
 
     @Override
     public void render(float delta) {
-        if (!parallaxGame.isGameOver()){
-            parallaxGame.update((int) (Gdx.graphics.getDeltaTime() * 1000));
-            collisionCalculator.run();
-            parallaxView.render();
+        if (!this.parallaxGame.isGameOver()) {
+            this.parallaxGame.update((int) (Gdx.graphics.getDeltaTime() * 1000));
+            this.collisionCalculator.run();
+            this.parallaxView.render();
             DeviceManager.getDevice().update();
         } else {
             gameOver();
@@ -52,28 +52,28 @@ public class GameScreen extends ScreenAdapter {
 
     @Override
     public void resize(int width, int height) {
-        parallaxView.setWidth(width);
-        parallaxView.setHeight(height);
+        this.parallaxView.setWidth(width);
+        this.parallaxView.setHeight(height);
     }
 
     @Override
     public void dispose() {
         CollisionManager.getInstance().getCollidables().clear();
         Controllers.clearListeners();
-        audioQueue.clearAllActiveMusic();
-        collisionCalculator.clear();
+        this.audioQueue.clearAllActiveMusic();
+        this.collisionCalculator.clear();
         CollisionManager.getInstance().getObservers().clear();
     }
 
     public void newGame() {
-        player.addSpaceCraft(SpaceCraftFactory.getAgelionInstance(15));
-        parallaxGame = new Parallax(player);
-        parallaxView = new ParallaxView(parallaxGame, false);
-        controller = new GameController(parallaxGame, parallaxView, DeviceManager.getDevice());
+        this.player.addSpaceCraft(SpaceCraftFactory.getAgelionInstance(15));
+        this.parallaxGame = new Parallax(this.player);
+        this.parallaxView = new ParallaxView(this.parallaxGame, false);
+        this.controller = new GameController(this.parallaxGame, this.parallaxView, DeviceManager.getDevice());
     }
 
-    private void gameOver(){
-        dispose();
-        GameStateManager.setGameOverScreen(player);
+    private void gameOver() {
+        this.dispose();
+        GameStateManager.setGameOverScreen(this.player);
     }
 }

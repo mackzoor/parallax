@@ -14,14 +14,14 @@ public class CardboardMenuController extends InputControlsAdapter {
 
     private MainMenu mainMenu;
 
-    public CardboardMenuController(MainMenu mainMenu, Device device){
+    public CardboardMenuController(MainMenu mainMenu, Device device) {
         this.mainMenu = mainMenu;
         device.addInputDevices(this);
     }
 
     @Override
     public void actionButtonPressed() {
-        mainMenu.action();
+        this.mainMenu.action();
     }
 
     @Override

@@ -1,10 +1,6 @@
 package com.tda367.parallax.controller.devicestates;
 
-import com.tda367.parallax.controller.inputhandlers.ControllerMode;
-import com.tda367.parallax.controller.inputhandlers.InputControlsListener;
-import com.tda367.parallax.controller.inputhandlers.GamePadHandler;
-import com.tda367.parallax.controller.inputhandlers.TouchHandler;
-import com.tda367.parallax.controller.inputhandlers.TouchPadHandler;
+import com.tda367.parallax.controller.inputhandlers.*;
 import com.tda367.parallax.view.TouchPadView;
 
 class AndroidDevice implements Device {
@@ -20,7 +16,7 @@ class AndroidDevice implements Device {
 
     @Override
     public void addInputDevices(InputControlsListener listener) {
-        if(listener.getControllerMode() == ControllerMode.GAMEMODE) {
+        if (listener.getControllerMode() == ControllerMode.GAMEMODE) {
             initiateGameController(listener);
         } else {
             initiateTouchController(listener);
@@ -29,20 +25,20 @@ class AndroidDevice implements Device {
 
     @Override
     public void update() {
-        touchPadView.drawTouchPad();
+        this.touchPadView.drawTouchPad();
     }
 
-    private void initiateGameController(InputControlsListener listener){
+    private void initiateGameController(InputControlsListener listener) {
         this.touchPadView = new TouchPadView();
-        this.touchPadHandler = new TouchPadHandler(touchPadView);
+        this.touchPadHandler = new TouchPadHandler(this.touchPadView);
         this.gamePadHandler = new GamePadHandler();
-        touchPadHandler.setListener(listener);
-        gamePadHandler.setListener(listener);
+        this.touchPadHandler.setListener(listener);
+        this.gamePadHandler.setListener(listener);
     }
 
-    private void initiateTouchController(InputControlsListener listener){
+    private void initiateTouchController(InputControlsListener listener) {
         this.touchHandler = new TouchHandler();
-        touchHandler.setListener(listener);
-        gamePadHandler.setListener(listener);
+        this.touchHandler.setListener(listener);
+        this.gamePadHandler.setListener(listener);
     }
 }

@@ -1,9 +1,9 @@
 package com.tda367.parallax.controller.controllerclasses.game;
 
+import com.tda367.parallax.controller.devicestates.Device;
 import com.tda367.parallax.controller.inputhandlers.ControllerMode;
 import com.tda367.parallax.controller.inputhandlers.InputControlsAdapter;
 import com.tda367.parallax.model.core.Parallax;
-import com.tda367.parallax.controller.devicestates.Device;
 import com.tda367.parallax.view.parallaxview.ParallaxView;
 
 /**
@@ -21,73 +21,73 @@ public class GameController extends InputControlsAdapter {
         device.addInputDevices(this);
         this.parallax = parallax;
         this.parallaxView = parallaxView;
-        spaceCraftController = new SpaceCraftController(parallax.getPlayer().getSpaceCraft());
+        this.spaceCraftController = new SpaceCraftController(parallax.getPlayer().getSpaceCraft());
     }
 
     @Override
     public void actionButtonPressed() {
-        spaceCraftController.actionButtonPressed();
+        this.spaceCraftController.actionButtonPressed();
     }
 
     @Override
     public void secondaryActionButtonPressed() {
-        parallaxView.setHudViewActive(!parallaxView.isHudViewActive());
+        this.parallaxView.setHudViewActive(!this.parallaxView.isHudViewActive());
     }
 
     @Override
     public void pauseButtonPressed() {
-        parallax.setPaused(!parallax.isPaused());
+        this.parallax.setPaused(!this.parallax.isPaused());
         //TODO Add a "pause screen" to parallaxView
     }
 
     @Override
     public void upButtonDown() {
-        spaceCraftController.upButtonDown();
+        this.spaceCraftController.upButtonDown();
     }
 
     @Override
     public void upButtonUp() {
-        spaceCraftController.upButtonUp();
+        this.spaceCraftController.upButtonUp();
     }
 
     @Override
     public void rightButtonDown() {
-        spaceCraftController.rightButtonDown();
+        this.spaceCraftController.rightButtonDown();
     }
 
     @Override
     public void rightButtonUp() {
-        spaceCraftController.rightButtonUp();
+        this.spaceCraftController.rightButtonUp();
     }
 
     @Override
     public void downButtonDown() {
-        spaceCraftController.downButtonDown();
+        this.spaceCraftController.downButtonDown();
     }
 
     @Override
     public void downButtonUp() {
-        spaceCraftController.downButtonUp();
+        this.spaceCraftController.downButtonUp();
     }
 
     @Override
     public void leftButtonDown() {
-        spaceCraftController.leftButtonDown();
+        this.spaceCraftController.leftButtonDown();
     }
 
     @Override
     public void leftButtonUp() {
-        spaceCraftController.leftButtonUp();
+        this.spaceCraftController.leftButtonUp();
     }
 
     @Override
     public void xAxisJoystickMovement(float xValue) {
-        spaceCraftController.xAxisJoystickMovement(xValue);
+        this.spaceCraftController.xAxisJoystickMovement(xValue);
     }
 
     @Override
     public void yAxisJoystickMovement(float yValue) {
-        spaceCraftController.yAxisJoystickMovement(yValue);
+        this.spaceCraftController.yAxisJoystickMovement(yValue);
     }
 
     @Override

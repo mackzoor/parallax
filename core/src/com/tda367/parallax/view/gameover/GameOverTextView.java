@@ -1,10 +1,10 @@
 package com.tda367.parallax.view.gameover;
 
 import com.tda367.parallax.model.gameover.GameOverText;
-import com.tda367.parallax.view.rendering.Renderer3D;
+import com.tda367.parallax.utilities.ResourceLoader;
 import com.tda367.parallax.view.parallaxview.View;
 import com.tda367.parallax.view.rendering.Renderable3dObject;
-import com.tda367.parallax.utilities.ResourceLoader;
+import com.tda367.parallax.view.rendering.Renderer3D;
 
 /**
  * Class responsible for drawing a panel of text containing player's score and
@@ -19,7 +19,7 @@ public class GameOverTextView implements View {
 
     GameOverTextView(GameOverText gameOverText) {
         this.gameOverText = gameOverText;
-        renderable3dObject = new Renderable3dObject(
+        this.renderable3dObject = new Renderable3dObject(
                 gameOverText.getPosition(),
                 gameOverText.getDirection(),
                 ResourceLoader.getInstance().getModel(INTERNAL_PATH),
@@ -29,11 +29,11 @@ public class GameOverTextView implements View {
 
     @Override
     public void render() {
-        Renderer3D.getInstance().addObjectToFrame(renderable3dObject);
+        Renderer3D.getInstance().addObjectToFrame(this.renderable3dObject);
     }
 
     @Override
     public boolean isObsolete() {
-        return gameOverText.isObsolete();
+        return this.gameOverText.isObsolete();
     }
 }

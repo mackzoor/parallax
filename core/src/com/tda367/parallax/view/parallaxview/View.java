@@ -12,6 +12,7 @@ public interface View {
 
     /**
      * Checks if the Model object that the current View object has is dead.
+     *
      * @return true if view is no longer needed.
      */
     boolean isObsolete();

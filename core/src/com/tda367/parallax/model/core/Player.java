@@ -6,15 +6,19 @@ import lombok.Setter;
 
 public class Player {
 
-    @Getter @Setter private int score;
-    @Getter private String userName = "LingonBoy";
-    @Getter private ISpaceCraft spaceCraft;
+    @Getter
+    @Setter
+    private int score;
+    @Getter
+    private String userName = "LingonBoy";
+    @Getter
+    private ISpaceCraft spaceCraft;
 
     public Player() {
         this.score = 0;
     }
 
-    public void addSpaceCraft(ISpaceCraft spaceCraft){
+    public void addSpaceCraft(ISpaceCraft spaceCraft) {
         this.spaceCraft = spaceCraft;
     }
 }

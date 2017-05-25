@@ -4,15 +4,16 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g3d.Material;
 import com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute;
 import com.tda367.parallax.model.core.Player;
-import com.tda367.parallax.view.rendering.Renderer3D;
-import com.tda367.parallax.view.rendering.Renderable3dObject;
 import com.tda367.parallax.utilities.ResourceLoader;
+import com.tda367.parallax.view.rendering.Renderable3dObject;
+import com.tda367.parallax.view.rendering.Renderer3D;
+
 import javax.vecmath.Vector3f;
 
 /**
  * View class for rendering a {@link Player} hud.
  */
-public class HudView implements View{
+public class HudView implements View {
 
     private static final String PATH_TO_3D_MODEL = "3dModels/hudpane/hudPane.g3db";
     private final Player player;
@@ -22,11 +23,12 @@ public class HudView implements View{
 
     /**
      * Creates a HudView from a {@link Player}.
+     *
      * @param player to be used to create the PlayerView.
      */
     HudView(Player player) {
         this.player = player;
-        hudPane = new Renderable3dObject(
+        this.hudPane = new Renderable3dObject(
                 player.getSpaceCraft().getPos(),
                 player.getSpaceCraft().getRot(),
                 ResourceLoader.getInstance().getModel(PATH_TO_3D_MODEL),
@@ -34,11 +36,11 @@ public class HudView implements View{
                 false
         );
 
-        htg = new HudTextureGenerator(5);
+        this.htg = new HudTextureGenerator(5);
     }
 
-    private void setHudPaneTexture(Texture texture){
-        Material material = hudPane.getModelInstance().materials.get(0);
+    private void setHudPaneTexture(Texture texture) {
+        Material material = this.hudPane.getModelInstance().materials.get(0);
         TextureAttribute textureAttribute = new TextureAttribute(TextureAttribute.Diffuse, texture);
         material.set(textureAttribute);
     }
@@ -55,17 +57,18 @@ public class HudView implements View{
             Stats about the spaceCraft,
             etc.
          */
-        htg.setLives(player.getSpaceCraft().getHealth());
-        htg.setScore(player.getScore());
-        setHudPaneTexture(htg.generateTexture());
+        this.htg.setLives(this.player.getSpaceCraft().getHealth());
+        this.htg.setScore(this.player.getScore());
+        this.setHudPaneTexture(this.htg.generateTexture());
 
-        Vector3f nextPos = new Vector3f(player.getSpaceCraft().getPos());
-        nextPos.add(new Vector3f(1.5f,1,0.8f));
-        hudPane.setPos(nextPos);
+        Vector3f nextPos = new Vector3f(this.player.getSpaceCraft().getPos());
+        nextPos.add(new Vector3f(1.5f, 1, 0.8f));
+        this.hudPane.setPos(nextPos);
 
-        Renderer3D.getInstance().addObjectToFrame(hudPane);
+        Renderer3D.getInstance().addObjectToFrame(this.hudPane);
 
     }
+
     @Override
     public boolean isObsolete() {
         return false;

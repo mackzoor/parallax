@@ -6,10 +6,10 @@ import com.google.vrtoolkit.cardboard.HeadTransform;
 import com.tda367.parallax.controller.CardboardGameStateManager;
 import com.tda367.parallax.controller.gamescreens.cardboardadapter.CardboardGame;
 import com.tda367.parallax.controller.gamescreens.cardboardadapter.CardboardScreenAdapter;
-import com.tda367.parallax.model.gameover.GameOver;
 import com.tda367.parallax.model.core.Player;
-import com.tda367.parallax.view.rendering.Renderer3D;
+import com.tda367.parallax.model.gameover.GameOver;
 import com.tda367.parallax.view.gameover.GameOverView;
+import com.tda367.parallax.view.rendering.Renderer3D;
 
 /**
  * Class handling the "game over" screen for Cardboard. Shows player's score and high score
@@ -27,10 +27,10 @@ public class CardboardGameOverScreen extends CardboardScreenAdapter {
 
     @Override
     public void onNewFrame(HeadTransform headTransform) {
-        model.update(Gdx.graphics.getDeltaTime());
-        if (model.isObsolete()) {
+        this.model.update(Gdx.graphics.getDeltaTime());
+        if (this.model.isObsolete()) {
             dispose();
-            CardboardGameStateManager.setCardboardMenuScreen(player);
+            CardboardGameStateManager.setCardboardMenuScreen(this.player);
         }
     }
 

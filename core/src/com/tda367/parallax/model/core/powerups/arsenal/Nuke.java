@@ -22,16 +22,21 @@ public class Nuke extends PowerUpBase {
     @Override
     public void use() {
     }
+
     @Override
-    public void update(int milliSinceLastUpdate) {}
+    public void update(int milliSinceLastUpdate) {
+    }
+
     @Override
     public String getCollisionModelPath() {
         return COLLISION_MODEL;
     }
+
     @Override
     public CollidableType getCollidableType() {
         return CollidableType.HARMFUL;
     }
+
     @Override
     public void handleCollision(Collidable collidable) {
         //Do nothing

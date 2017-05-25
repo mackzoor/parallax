@@ -1,11 +1,10 @@
 package com.tda367.parallax.model.core.world;
 
-import com.tda367.parallax.model.core.powerups.container.Container;
 import com.tda367.parallax.model.core.powerups.arsenal.IPowerUp;
 import com.tda367.parallax.model.core.powerups.arsenal.PowerUpFactory;
+import com.tda367.parallax.model.core.powerups.container.Container;
 import com.tda367.parallax.model.core.world.courseobstacles.CourseObstacleBase;
 import com.tda367.parallax.model.core.world.courseobstacles.ObstacleFactory;
-
 
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
@@ -28,14 +27,14 @@ public class DefaultCourseModule implements ICourseModule {
     private List<Container> containers;
 
 
-    DefaultCourseModule(Vector3f pos,int obstacleAmmount, int powerupsToSpawn){
+    DefaultCourseModule(Vector3f pos, int obstacleAmmount, int powerupsToSpawn) {
         this.pos = pos;
         this.pos.setY(pos.getY());
         this.rot = new Quat4f();
-        active = true;
-        powerUps = new ArrayList<IPowerUp>();
-        containers = new ArrayList<Container>();
-        length = 64;
+        this.active = true;
+        this.powerUps = new ArrayList<IPowerUp>();
+        this.containers = new ArrayList<Container>();
+        this.length = 64;
         this.couseObstacles = new ArrayList<CourseObstacleBase>();
 
         addObstacles(obstacleAmmount);
@@ -44,20 +43,21 @@ public class DefaultCourseModule implements ICourseModule {
             spawnPowerUp();
         }
     }
-    public DefaultCourseModule(Vector3f pos){
-        this(pos,4, 1);
+
+    public DefaultCourseModule(Vector3f pos) {
+        this(pos, 4, 1);
     }
 
 
-    public void addObstacles(int i) {
+    private void addObstacles(int i) {
 
 
-        float distanceBetween = length / (float) i;
+        float distanceBetween = this.length / (float) i;
         for (int x = 0; x < i; x++) {
             Random rand = new Random();
             Vector3f obstaclePos = new Vector3f(
                     0,
-                    (this.pos.getY()) - length/2 + x*distanceBetween,
+                    (this.pos.getY()) - this.length / 2 + x * distanceBetween,
                     0
             );
             CourseObstacleBase obstacle = ObstacleFactory.getRandomWallInstance(obstaclePos);
@@ -70,20 +70,21 @@ public class DefaultCourseModule implements ICourseModule {
 
     //ICourseModule
     @Override
-    public float getLength(){
-        return length;
+    public float getLength() {
+        return this.length;
     }
 
 
     @Override
     public void add3dObjectsToCollisionManager() {
-        for (CourseObstacleBase boxObstacle : couseObstacles) {
+        for (CourseObstacleBase boxObstacle : this.couseObstacles) {
             boxObstacle.addToCollisionManager();
         }
     }
+
     @Override
     public void remove3dObjectsFromCollisionManager() {
-        for (CourseObstacleBase boxObstacle : couseObstacles) {
+        for (CourseObstacleBase boxObstacle : this.couseObstacles) {
             boxObstacle.removeFromCollisionManager();
         }
 
@@ -92,47 +93,52 @@ public class DefaultCourseModule implements ICourseModule {
 
     @Override
     public List<IPowerUp> getPowerups() {
-        return powerUps;
+        return this.powerUps;
     }
+
     @Override
     public boolean isActive() {
-        return active;
+        return this.active;
     }
+
     @Override
     public void setActiveState(boolean state) {
-        active = state;
-        if (!state){
-            for (Container container : containers) {
+        this.active = state;
+        if (!state) {
+            for (Container container : this.containers) {
                 container.removeFromCollisionManager();
             }
         }
     }
+
     @Override
     public List<? extends CourseObstacleBase> getCouseObstacles() {
-        return couseObstacles;
+        return this.couseObstacles;
     }
+
     @Override
     public List<Container> getContainers() {
-        return containers;
+        return this.containers;
     }
 
     private void spawnPowerUp() {
         IPowerUp pu = PowerUpFactory.createMissile();
-        powerUps.add(pu);
+        this.powerUps.add(pu);
         Container container = new Container(pu);
         Random rand = new Random();
-        container.setPos(new Vector3f(0,getPos().getY()+rand.nextFloat()*getLength(),0));
+        container.setPos(new Vector3f(0, getPos().getY() + rand.nextFloat() * this.getLength(), 0));
         container.addToCollisionManager();
-        containers.add(container);
+        this.containers.add(container);
     }
 
     //Transformable
     @Override
     public Vector3f getPos() {
-        return pos;
+        return this.pos;
     }
+
     @Override
     public Quat4f getRot() {
-        return rot;
+        return this.rot;
     }
 }

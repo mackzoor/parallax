@@ -14,7 +14,8 @@ public final class GamePadHandler extends ControllerAdapter {
      * observer, an {@link InputControlsListener}, about it.
      */
 
-    @Setter private InputControlsListener listener;
+    @Setter
+    private InputControlsListener listener;
     private GamePad gamePad;
 
     public GamePadHandler() {
@@ -27,19 +28,19 @@ public final class GamePadHandler extends ControllerAdapter {
 
     @Override
     public void connected(Controller controller) {
-        gamePad = GamePadFactory.getGamePad(controller.getName());
+        this.gamePad = GamePadFactory.getGamePad(controller.getName());
     }
 
     @Override
     public boolean buttonDown(Controller controller, int buttonCode) {
 
-        if (listener != null) {
-            if (buttonCode == gamePad.getActionButtonCode()) {
-                listener.actionButtonPressed();
-            } else if (buttonCode == gamePad.getSecondaryActionButtonCode()) {
-                listener.secondaryActionButtonPressed();
-            } else if (buttonCode == gamePad.getPauseButtonCode()) {
-                listener.pauseButtonPressed();
+        if (this.listener != null) {
+            if (buttonCode == this.gamePad.getActionButtonCode()) {
+                this.listener.actionButtonPressed();
+            } else if (buttonCode == this.gamePad.getSecondaryActionButtonCode()) {
+                this.listener.secondaryActionButtonPressed();
+            } else if (buttonCode == this.gamePad.getPauseButtonCode()) {
+                this.listener.pauseButtonPressed();
             }
             checkDirectionButtons(buttonCode);
         }
@@ -50,15 +51,15 @@ public final class GamePadHandler extends ControllerAdapter {
     @Override
     public boolean buttonUp(Controller controller, int buttonCode) {
 
-        if (listener != null) {
-            if (buttonCode == gamePad.getLeftButtonCode()) {
-                listener.leftButtonUp();
-            } else if (buttonCode == gamePad.getUpButtonCode()) {
-                listener.upButtonUp();
-            } else if (buttonCode == gamePad.getRightButtonCode()) {
-                listener.rightButtonUp();
-            } else if (buttonCode == gamePad.getDownButtonCode()) {
-                listener.downButtonUp();
+        if (this.listener != null) {
+            if (buttonCode == this.gamePad.getLeftButtonCode()) {
+                this.listener.leftButtonUp();
+            } else if (buttonCode == this.gamePad.getUpButtonCode()) {
+                this.listener.upButtonUp();
+            } else if (buttonCode == this.gamePad.getRightButtonCode()) {
+                this.listener.rightButtonUp();
+            } else if (buttonCode == this.gamePad.getDownButtonCode()) {
+                this.listener.downButtonUp();
             }
         }
 
@@ -70,18 +71,18 @@ public final class GamePadHandler extends ControllerAdapter {
 
         Float roundedValue = value;
 
-        if (value * value < 0.02f){
+        if (value * value < 0.02f) {
             roundedValue = 0f;
         }
 
-        if (listener != null) {
-            if (axisCode == gamePad.getXAxisJoystickCode()) {
-                listener.xAxisJoystickMovement(gamePad.xAxisValueConverter(roundedValue));
+        if (this.listener != null) {
+            if (axisCode == this.gamePad.getXAxisJoystickCode()) {
+                this.listener.xAxisJoystickMovement(this.gamePad.xAxisValueConverter(roundedValue));
                 return false;
             }
 
-            if (axisCode == gamePad.getYAxisJoystickCode()) {
-                listener.yAxisJoystickMovement(gamePad.yAxisValueConverter(roundedValue));
+            if (axisCode == this.gamePad.getYAxisJoystickCode()) {
+                this.listener.yAxisJoystickMovement(this.gamePad.yAxisValueConverter(roundedValue));
                 return false;
             }
         }
@@ -90,14 +91,14 @@ public final class GamePadHandler extends ControllerAdapter {
     }
 
     private void checkDirectionButtons(int buttonCode) {
-        if (buttonCode == gamePad.getLeftButtonCode()) {
-            listener.leftButtonDown();
-        } else if (buttonCode == gamePad.getUpButtonCode()) {
-            listener.upButtonDown();
-        } else if (buttonCode == gamePad.getRightButtonCode()) {
-            listener.rightButtonDown();
-        } else if (buttonCode == gamePad.getDownButtonCode()) {
-            listener.downButtonDown();
+        if (buttonCode == this.gamePad.getLeftButtonCode()) {
+            this.listener.leftButtonDown();
+        } else if (buttonCode == this.gamePad.getUpButtonCode()) {
+            this.listener.upButtonDown();
+        } else if (buttonCode == this.gamePad.getRightButtonCode()) {
+            this.listener.rightButtonDown();
+        } else if (buttonCode == this.gamePad.getDownButtonCode()) {
+            this.listener.downButtonDown();
         }
     }
 }

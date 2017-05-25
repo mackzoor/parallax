@@ -8,9 +8,9 @@ import javax.vecmath.Vector3f;
  */
 public class WallObstacle extends CourseObstacleBase {
 
-    private final String COLLISION_MODEL_PATH = "3dModels/wall/hitbox.obj";
+    private final static String COLLISION_MODEL_PATH = "3dModels/wall/hitbox.obj";
 
-    WallObstacle(Vector3f pos, Quat4f rot){
+    WallObstacle(Vector3f pos, Quat4f rot) {
         super(pos, rot);
     }
 
@@ -18,6 +18,7 @@ public class WallObstacle extends CourseObstacleBase {
     public String getCollisionModelPath() {
         return COLLISION_MODEL_PATH;
     }
+
     @Override
     public ObstacleType getObstacleType() {
         return ObstacleType.WALL;

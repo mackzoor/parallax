@@ -2,7 +2,7 @@ package com.tda367.parallax.utilities;
 
 import com.badlogic.gdx.Files;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.*;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
@@ -25,106 +25,113 @@ import java.util.Map;
 public final class ResourceLoader {
     private static ResourceLoader instance;
     private G3dModelLoader modelLoader;
-    private Map<String,Model> loadedModels;
-    private Map<String,Sound> loadedSounds;
-    private Map<String,Music> loadedMusic;
-    private Map<String,Texture> loadedTextures;
+    private Map<String, Model> loadedModels;
+    private Map<String, Sound> loadedSounds;
+    private Map<String, Music> loadedMusic;
+    private Map<String, Texture> loadedTextures;
     private Map<String, btCollisionShape> loadedCollisionShapes;
 
     //Singleton pattern
-    public static ResourceLoader getInstance(){
-        if (instance == null){
+    public static ResourceLoader getInstance() {
+        if (instance == null) {
             instance = new ResourceLoader();
         }
         return instance;
     }
-    private ResourceLoader(){
-        UBJsonReader jsonReader = new UBJsonReader();
-        modelLoader = new G3dModelLoader(jsonReader);
 
-        loadedModels = new HashMap<String, Model>();
-        loadedSounds = new HashMap<String, Sound>();
-        loadedMusic = new HashMap<String, Music>();
-        loadedTextures = new HashMap<String, Texture>();
-        loadedCollisionShapes = new HashMap<String, btCollisionShape>();
+    private ResourceLoader() {
+        UBJsonReader jsonReader = new UBJsonReader();
+        this.modelLoader = new G3dModelLoader(jsonReader);
+
+        this.loadedModels = new HashMap<String, Model>();
+        this.loadedSounds = new HashMap<String, Sound>();
+        this.loadedMusic = new HashMap<String, Music>();
+        this.loadedTextures = new HashMap<String, Texture>();
+        this.loadedCollisionShapes = new HashMap<String, btCollisionShape>();
     }
 
     /**
      * Loads a new {@link Model} into memory and puts it into the hash map; loadedModels.
-     * @param modelName Name of the 3d model. Has to be a .g3db file type.
+     *
+     * @param modelName      Name of the 3d model. Has to be a .g3db file type.
      * @param modelDirectory Relative path to directory of the model.
      * @return {@link ModelInstance} of the loaded Model.
      */
-    private ModelInstance loadModel(String modelName, String modelDirectory){
+    private ModelInstance loadModel(String modelName, String modelDirectory) {
         Model modelNew;
 
-        if (modelDirectory.length() > 0){
-            modelNew = modelLoader.loadModel(Gdx.files.getFileHandle(modelDirectory+"/"+modelName, Files.FileType.Internal));
+        if (modelDirectory.length() > 0) {
+            modelNew = this.modelLoader.loadModel(Gdx.files.getFileHandle(modelDirectory + "/" + modelName, Files.FileType.Internal));
         } else {
-            modelNew = modelLoader.loadModel(Gdx.files.getFileHandle(modelName, Files.FileType.Internal));
+            modelNew = this.modelLoader.loadModel(Gdx.files.getFileHandle(modelName, Files.FileType.Internal));
         }
 
-        loadedModels.put(modelName,modelNew);
+        this.loadedModels.put(modelName, modelNew);
         return new ModelInstance(modelNew);
     }
 
     /**
      * Sends back a {@link ModelInstance} from the specified model name.
      * If the 3d model is not found in hash map then it will be loaded into it from the hard drive.
-     * @param modelName Name of the 3d model.
+     *
+     * @param modelName      Name of the 3d model.
      * @param modelDirectory Relative path of the directory containing the 3d model.
      * @return {@link ModelInstance} of the {@link Model}.
      */
-    public ModelInstance getModel(String modelName, String modelDirectory){
-        Model entry = loadedModels.get(modelName);
+    public ModelInstance getModel(String modelName, String modelDirectory) {
+        Model entry = this.loadedModels.get(modelName);
         ModelInstance modelInstance;
-        if (entry == null){
-            modelInstance = loadModel(modelName,modelDirectory);
+        if (entry == null) {
+            modelInstance = this.loadModel(modelName, modelDirectory);
         } else {
             modelInstance = new ModelInstance(entry);
         }
         return modelInstance;
     }
-    public ModelInstance getModel(String modelName){
-        return getModel(modelName,"");
+
+    public ModelInstance getModel(String modelName) {
+        return this.getModel(modelName, "");
     }
 
     /**
      * Loads a {@link Sound} into the memory from the specified file.
-     * @param soundName Name of the file to be loaded. Has to be .mp3 file type.
+     *
+     * @param soundName      Name of the file to be loaded. Has to be .mp3 file type.
      * @param soundDirectory Relative path to the directory containing the sound file.
      * @return The sound object.
      */
-    private Sound loadSound(String soundName, String soundDirectory){
+    private Sound loadSound(String soundName, String soundDirectory) {
         Sound newSound;
 
-        if (soundDirectory.length() > 0){
-            newSound = Gdx.audio.newSound(Gdx.files.internal((soundDirectory+"/"+soundName)));
+        if (soundDirectory.length() > 0) {
+            newSound = Gdx.audio.newSound(Gdx.files.internal((soundDirectory + "/" + soundName)));
         } else {
             newSound = Gdx.audio.newSound(Gdx.files.internal((soundName)));
         }
 
-        loadedSounds.put(soundName,newSound);
+        this.loadedSounds.put(soundName, newSound);
         return newSound;
     }
 
     /**
      * Returns the {@link Sound} from the specified file if already in hash, otherwise loads in from harddrive.
-     * @param soundName Name of the sound file. Has to .mp3 file type.
+     *
+     * @param soundName      Name of the sound file. Has to .mp3 file type.
      * @param soundDirectory Relative path to the directory containing the sound file.
      * @return The Sound object.
      */
-    public Sound getSound(String soundName, String soundDirectory){
-        Sound sound = loadedSounds.get(soundName);
-        if (sound == null){
-            sound = loadSound(soundName, soundDirectory);
+    public Sound getSound(String soundName, String soundDirectory) {
+        Sound sound = this.loadedSounds.get(soundName);
+        if (sound == null) {
+            sound = this.loadSound(soundName, soundDirectory);
         }
         return sound;
     }
+
     public Sound getSound(String soundName) {
-        Sound sound = loadedSounds.get(soundName);
+        Sound sound = this.loadedSounds.get(soundName);
         if (sound == null) {
-            sound = loadSound(soundName, "");
+            sound = this.loadSound(soundName, "");
         }
         return sound;
     }
@@ -132,40 +139,43 @@ public final class ResourceLoader {
 
     /**
      * Loads a {@link Music} into the memory from the specified file.
-     * @param musicName Name of the file to be loaded. Has to be .mp3 file type.
+     *
+     * @param musicName      Name of the file to be loaded. Has to be .mp3 file type.
      * @param musicDirectory Relative path to the directory containing the sound file.
      * @return The sound object.
      */
-    private Music loadMusic(String musicName, String musicDirectory){
+    private Music loadMusic(String musicName, String musicDirectory) {
         Music newMusic;
 
-        if (musicDirectory.length() > 0){
-            newMusic = Gdx.audio.newMusic(Gdx.files.internal((musicDirectory+"/"+musicName)));
+        if (musicDirectory.length() > 0) {
+            newMusic = Gdx.audio.newMusic(Gdx.files.internal((musicDirectory + "/" + musicName)));
         } else {
             newMusic = Gdx.audio.newMusic(Gdx.files.internal((musicName)));
         }
 
-        loadedMusic.put(musicName,newMusic);
+        this.loadedMusic.put(musicName, newMusic);
         return newMusic;
     }
 
     /**
      * Returns the {@link Music} from the specified file if already in hash, otherwise loads in from harddrive.
-     * @param musicName Name of the sound file. Has to .mp3 file type.
+     *
+     * @param musicName      Name of the sound file. Has to .mp3 file type.
      * @param musicDirectory Relative path to the directory containing the sound file.
      * @return the {@link Music} object.
      */
-    public Music getMusic(String musicName, String musicDirectory){
-        Music music = loadedMusic.get(musicName);
-        if (music == null){
-            music = loadMusic(musicName, musicDirectory);
+    public Music getMusic(String musicName, String musicDirectory) {
+        Music music = this.loadedMusic.get(musicName);
+        if (music == null) {
+            music = this.loadMusic(musicName, musicDirectory);
         }
         return music;
     }
-    public Music getMusic(String musicName){
-        Music music = loadedMusic.get(musicName);
-        if (music == null){
-            music = loadMusic(musicName, "");
+
+    public Music getMusic(String musicName) {
+        Music music = this.loadedMusic.get(musicName);
+        if (music == null) {
+            music = this.loadMusic(musicName, "");
         }
         return music;
     }
@@ -173,35 +183,39 @@ public final class ResourceLoader {
 
     /**
      * Loads a {@link Texture} from the filepath into memory and stores it in the loadedTextures Map.
+     *
      * @param filePath path to the texture file. Has to be .png or .jpg file type.
      * @return the loaded texture.
      */
-    private Texture loadTexture(String filePath){
+    private Texture loadTexture(String filePath) {
         Texture texture = new Texture(filePath);
 
-        loadedTextures.put(filePath,texture);
+        this.loadedTextures.put(filePath, texture);
         return texture;
     }
+
     /**
      * If the texture has already been loaded a reference to it is sent back.
      * Otherwise it is loaded in and then sent back.
+     *
      * @param filePath path to the texture file. Has to be .png or .jpg.
      * @return the texture.
      */
-    public Texture getTexture(String filePath){
-        Texture texture = loadedTextures.get(filePath);
-        if (texture == null){
-            texture = loadTexture(filePath);
+    public Texture getTexture(String filePath) {
+        Texture texture = this.loadedTextures.get(filePath);
+        if (texture == null) {
+            texture = this.loadTexture(filePath);
         }
         return texture;
     }
 
     /**
      * Loads a {@link btCollisionShape} from the filepath into memory and stores it in the loadedTextures Map.
+     *
      * @param pathToObjFile path to the .obj file. Has to be .obj file type.
      * @return the loaded collision shape.
      */
-    private btCollisionShape loadCollisionShape(String pathToObjFile){
+    private btCollisionShape loadCollisionShape(String pathToObjFile) {
         btConvexHullShape collisionShape = new btConvexHullShape();
 
         List<Vector3> vertices = get3dModelVertices(pathToObjFile);
@@ -210,15 +224,17 @@ public final class ResourceLoader {
             collisionShape.addPoint(vertex);
         }
 
-        loadedCollisionShapes.put(pathToObjFile,collisionShape);
+        this.loadedCollisionShapes.put(pathToObjFile, collisionShape);
         return collisionShape;
     }
+
     /**
      * Creates a set of {@link Vector3}'s from an .obj files vectors. Only works with .obj file type.
+     *
      * @param pathToFile path to .obj file.
      * @return list of vectors.
      */
-    private List<Vector3> get3dModelVertices(String pathToFile){
+    private List<Vector3> get3dModelVertices(String pathToFile) {
         FileHandle file = Gdx.files.internal(pathToFile);
         String fullString = file.readString();
 
@@ -226,40 +242,41 @@ public final class ResourceLoader {
 
         List<Vector3> vectors = new ArrayList<Vector3>();
         for (String line : lines) {
-            if (line.length() > 0 && line.substring(0,2).contains("v ")){
+            if (line.length() > 0 && line.substring(0, 2).contains("v ")) {
                 vectors.add(stringToVector3(line));
             }
         }
 
         return vectors;
     }
+
     /**
      * Converts a string from a vertex line in an .obj 3d file. Has to be a line that starts with a "v".
+     *
      * @param str line to create vector with.
      * @return Created vector.
      */
-    private Vector3 stringToVector3(String str){
+    private Vector3 stringToVector3(String str) {
         String[] splitted = str.split("\\s+");
 
-        Vector3 vector = new Vector3(
+        return new Vector3(
                 Float.valueOf(splitted[1]),
                 Float.valueOf(splitted[2]),
                 Float.valueOf(splitted[3])
         );
-
-        return vector;
     }
 
     /**
      * Creates a {@link btCollisionShape} from the specified .obj file.
+     *
      * @param pathToObjFile path to .obj file.
      * @return the created collision shape
      */
-    public btCollisionShape getCollisionShape(String pathToObjFile){
-        btCollisionShape shape = loadedCollisionShapes.get(pathToObjFile);
+    public btCollisionShape getCollisionShape(String pathToObjFile) {
+        btCollisionShape shape = this.loadedCollisionShapes.get(pathToObjFile);
 
         if (shape == null) {
-            shape = loadCollisionShape(pathToObjFile);
+            shape = this.loadCollisionShape(pathToObjFile);
         }
 
         return shape;

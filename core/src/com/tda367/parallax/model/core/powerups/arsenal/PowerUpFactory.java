@@ -7,25 +7,29 @@ import java.util.Random;
  */
 public class PowerUpFactory {
 
-    public static Cannon createCannon(){
+    private final static Random random = new Random();
+
+    public static Cannon createCannon() {
         return new Cannon();
     }
 
-    public static com.tda367.parallax.model.core.powerups.arsenal.Missile createMissile(){
-        return new com.tda367.parallax.model.core.powerups.arsenal.Missile();
+    public static Missile createMissile() {
+        return new Missile();
     }
 
     /**
-     *
      * @return a random powerUp.
      */
-    public static com.tda367.parallax.model.core.powerups.arsenal.IPowerUp createRandom() {
-        int random = (int) new Random().nextFloat()*2;
+    public static IPowerUp createRandom() {
+        int rand = (int) random.nextFloat() * 2;
 
-        switch (random) {
-            case 0: return createCannon();
-            case 1: return createMissile();
-            default: return createCannon();
+        switch (rand) {
+            case 0:
+                return createCannon();
+            case 1:
+                return createMissile();
+            default:
+                return createCannon();
         }
 
     }

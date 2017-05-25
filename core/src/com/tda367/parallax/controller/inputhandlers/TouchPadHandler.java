@@ -12,7 +12,8 @@ import lombok.Setter;
 public final class TouchPadHandler implements EventListener {
 
     private TouchPadView view;
-    @Setter private InputControlsListener listener;
+    @Setter
+    private InputControlsListener listener;
 
     public TouchPadHandler(TouchPadView view) {
         this.view = view;
@@ -21,12 +22,12 @@ public final class TouchPadHandler implements EventListener {
 
     @Override
     public boolean handle(Event event) {
-        if(listener != null){
-            if(event.getListenerActor() == view.getTouchpad()) {
-                listener.xAxisJoystickMovement(view.getTouchpad().getKnobPercentX());
-                listener.yAxisJoystickMovement(view.getTouchpad().getKnobPercentY());
-            } else if (event.getListenerActor() == view.getActionButton()) {
-                listener.actionButtonPressed();
+        if (this.listener != null) {
+            if (event.getListenerActor() == this.view.getTouchpad()) {
+                this.listener.xAxisJoystickMovement(this.view.getTouchpad().getKnobPercentX());
+                this.listener.yAxisJoystickMovement(this.view.getTouchpad().getKnobPercentY());
+            } else if (event.getListenerActor() == this.view.getActionButton()) {
+                this.listener.actionButtonPressed();
             }
         }
         return false;

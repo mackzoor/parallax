@@ -6,7 +6,7 @@ import javax.vecmath.Vector3f;
  * Object to store relevant data from a collision.
  */
 
-public class CollisionResult{
+public class CollisionResult {
 
     private final Collidable first;
     private final Collidable second;
@@ -32,22 +32,26 @@ public class CollisionResult{
 
 
     public Collidable getFirst() {
-        return first;
+        return this.first;
     }
+
     public Collidable getSecond() {
-        return second;
+        return this.second;
     }
+
     public boolean isCollided() {
-        return collided;
+        return this.collided;
     }
 
     public Vector3f getContactPoint() {
-        return contactPoint;
+        return this.contactPoint;
     }
+
     public Vector3f getFirstResultingImpulse() {
-        return firstResultingImpulse;
+        return this.firstResultingImpulse;
     }
+
     public Vector3f getSecondResultingImpulse() {
-        return secondResultingImpulse;
+        return this.secondResultingImpulse;
     }
 }

@@ -3,9 +3,9 @@ package com.tda367.parallax.view.parallaxview;
 import com.tda367.parallax.model.core.powerups.container.Container;
 import com.tda367.parallax.model.core.world.ICourseModule;
 import com.tda367.parallax.model.core.world.courseobstacles.CourseObstacleBase;
-import com.tda367.parallax.view.rendering.Renderer3D;
-import com.tda367.parallax.view.rendering.Renderable3dObject;
 import com.tda367.parallax.utilities.ResourceLoader;
+import com.tda367.parallax.view.rendering.Renderable3dObject;
+import com.tda367.parallax.view.rendering.Renderer3D;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * View class for {@link ICourseModule}.
  */
-public class CourseModelView implements View{
+public class CourseModelView implements View {
 
     private final static String MODEL_3D_INTERNAL_PATH = "3dModels/defaultCourse/course.g3db";
     private final ICourseModule courseModule;
@@ -23,13 +23,14 @@ public class CourseModelView implements View{
 
     /**
      * Creates a CourseModelView from an {@link ICourseModule}.
+     *
      * @param courseModule to be used to create the CourseModelView.
      */
     CourseModelView(ICourseModule courseModule) {
         this.courseModule = courseModule;
         this.obstacleViews = new ArrayList<CourseObstacleView>();
         this.containerViews = new ArrayList<ContainerView>();
-        courseModule3dObject = new Renderable3dObject(
+        this.courseModule3dObject = new Renderable3dObject(
                 courseModule.getPos(),
                 courseModule.getRot(),
                 ResourceLoader.getInstance().getModel(MODEL_3D_INTERNAL_PATH),
@@ -38,32 +39,33 @@ public class CourseModelView implements View{
         );
 
         for (CourseObstacleBase obstacle : courseModule.getCouseObstacles()) {
-            obstacleViews.add(new CourseObstacleView(obstacle));
+            this.obstacleViews.add(new CourseObstacleView(obstacle));
         }
 
         for (Container container : courseModule.getContainers()) {
-            containerViews.add(new ContainerView(container));
+            this.containerViews.add(new ContainerView(container));
         }
     }
 
     @Override
     public void render() {
         //Render course module.
-        Renderer3D.getInstance().addObjectToFrame(courseModule3dObject);
+        Renderer3D.getInstance().addObjectToFrame(this.courseModule3dObject);
 
         //Render obstacles
-        for (CourseObstacleView obstacle : obstacleViews) {
+        for (CourseObstacleView obstacle : this.obstacleViews) {
             obstacle.render();
         }
 
         //Render containers
-        for (ContainerView container : containerViews) {
+        for (ContainerView container : this.containerViews) {
             container.render();
         }
 
     }
+
     @Override
     public boolean isObsolete() {
-        return !courseModule.isActive();
+        return !this.courseModule.isActive();
     }
 }

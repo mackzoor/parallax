@@ -15,41 +15,44 @@ public class Camera implements com.tda367.parallax.model.core.util.Updatable, co
 
     private Vector3f pos;
     private Quat4f rot;
-    @Getter private float fov;
+    @Getter
+    private float fov;
 
     private com.tda367.parallax.model.core.util.Transformable trackingTarget;
 
-    public Camera(Vector3f pos, Quat4f rot, float fov){
+    public Camera(Vector3f pos, Quat4f rot, float fov) {
         this.pos = pos;
         this.rot = rot;
         this.fov = fov;
     }
 
-    public Camera(){
-        this(new Vector3f(0,0,1), new Quat4f(), 90);
+    public Camera() {
+        this(new Vector3f(0, 0, 1), new Quat4f(), 90);
     }
 
 
-    public void trackTo(com.tda367.parallax.model.core.util.Transformable transformable){
-        trackingTarget = transformable;
+    void trackTo(com.tda367.parallax.model.core.util.Transformable transformable) {
+        this.trackingTarget = transformable;
     }
-    public void updatePosition(){
-        this.pos.set(trackingTarget.getPos().getX()/ 2,(trackingTarget.getPos().getY()) - 4, trackingTarget.getPos().getZ()/ 2 + 1);
+
+    private void updatePosition() {
+        this.pos.set(this.trackingTarget.getPos().getX() / 2, (this.trackingTarget.getPos().getY()) - 4, this.trackingTarget.getPos().getZ() / 2 + 1);
     }
 
 
     @Override
     public Vector3f getPos() {
-        return pos;
+        return this.pos;
     }
+
     @Override
     public Quat4f getRot() {
-        return rot;
+        return this.rot;
     }
 
 
     @Override
     public void update(int milliSinceLastUpdate) {
-        updatePosition();
+        this.updatePosition();
     }
 }

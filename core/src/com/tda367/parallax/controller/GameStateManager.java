@@ -1,9 +1,8 @@
 package com.tda367.parallax.controller;
 
 import com.badlogic.gdx.Game;
-import com.tda367.parallax.controller.gamescreens.GameOverScreen;
-import com.tda367.parallax.controller.gamescreens.GameScreen;
-import com.tda367.parallax.controller.gamescreens.MainMenuScreen;
+import com.tda367.parallax.controller.gamescreens.*;
+import com.tda367.parallax.controller.gamescreens.cardboardadapter.CardboardGame;
 import com.tda367.parallax.model.core.Player;
 import lombok.Getter;
 
@@ -15,7 +14,10 @@ public final class GameStateManager {
 
     private GameStateManager() {}
 
-    @Getter private static Game GAME;
+    @Getter
+    private static Game GAME;
+    @Getter
+    private static CardboardGame CARDBOARDGAME;
     private static MainMenuScreen mainMenuScreen;
     private static GameScreen gameScreen;
     private static GameOverScreen gameOverScreen;

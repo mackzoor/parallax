@@ -25,13 +25,13 @@ public final class DesktopHandler extends InputAdapter {
     @Override
     public boolean keyDown(int keycode) {
 
-        if (listener != null) {
+        if (this.listener != null) {
             if (keycode == Input.Keys.SPACE || keycode == Input.Keys.Z) {
-                listener.actionButtonPressed();
+                this.listener.actionButtonPressed();
             } else if (keycode == Input.Keys.X) {
-                listener.secondaryActionButtonPressed();
+                this.listener.secondaryActionButtonPressed();
             } else if (keycode == Input.Keys.ESCAPE) {
-                listener.pauseButtonPressed();
+                this.listener.pauseButtonPressed();
             }
             checkDirectionbuttons(keycode);
         }
@@ -43,13 +43,13 @@ public final class DesktopHandler extends InputAdapter {
     public boolean keyUp(int keycode) {
 
         if (keycode == Input.Keys.A || keycode == Input.Keys.LEFT) {
-            listener.leftButtonUp();
+            this.listener.leftButtonUp();
         } else if (keycode == Input.Keys.W || keycode == Input.Keys.UP) {
-            listener.upButtonUp();
+            this.listener.upButtonUp();
         } else if (keycode == Input.Keys.D || keycode == Input.Keys.RIGHT) {
-            listener.rightButtonUp();
+            this.listener.rightButtonUp();
         } else if (keycode == Input.Keys.S || keycode == Input.Keys.DOWN) {
-            listener.downButtonUp();
+            this.listener.downButtonUp();
         }
 
         return false;
@@ -57,20 +57,20 @@ public final class DesktopHandler extends InputAdapter {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        listener.onScreenClick(screenX, Gdx.graphics.getHeight() - screenY);
+        this.listener.onScreenClick(screenX, Gdx.graphics.getHeight() - screenY);
         return false;
     }
 
     private void checkDirectionbuttons(int keycode) {
 
         if (keycode == Input.Keys.A || keycode == Input.Keys.LEFT) {
-            listener.leftButtonDown();
+            this.listener.leftButtonDown();
         } else if (keycode == Input.Keys.W || keycode == Input.Keys.UP) {
-            listener.upButtonDown();
+            this.listener.upButtonDown();
         } else if (keycode == Input.Keys.D || keycode == Input.Keys.RIGHT) {
-            listener.rightButtonDown();
+            this.listener.rightButtonDown();
         } else if (keycode == Input.Keys.S || keycode == Input.Keys.DOWN) {
-            listener.downButtonDown();
+            this.listener.downButtonDown();
         }
 
     }

@@ -15,58 +15,76 @@ import javax.vecmath.Vector3f;
  */
 public abstract class PowerUpBase implements IPowerUp {
 
-    @Getter @Setter private Vector3f pos;
-    @Getter @Setter private Quat4f rot;
+    @Getter
+    @Setter
+    private Vector3f pos;
+    @Getter
+    @Setter
+    private Quat4f rot;
 
     //Flags for if the ship should collide, move and a general variable for its lifecycle
-    @Getter @Setter private boolean collisionEnabled;
-    @Getter @Setter private boolean isDead;
-    @Getter @Setter private boolean isActive;
+    @Getter
+    @Setter
+    private boolean collisionEnabled;
+    @Getter
+    @Setter
+    private boolean isDead;
+    @Getter
+    @Setter
+    private boolean isActive;
 
-    PowerUpBase(){
-        pos = new Vector3f();
-        rot = new Quat4f();
+    PowerUpBase() {
+        this.pos = new Vector3f();
+        this.rot = new Quat4f();
 
-        isDead = false;
-        collisionEnabled = false;
-        isActive = false;
+        this.isDead = false;
+        this.collisionEnabled = false;
+        this.isActive = false;
     }
 
     @Override
     public abstract void update(int milliSinceLastUpdate);
+
     @Override
     public void activate(Transformable transformable) {
-        pos = new Vector3f(transformable.getPos());
-        rot = new Quat4f(transformable.getRot());
-        isActive = true;
+        this.pos = new Vector3f(transformable.getPos());
+        this.rot = new Quat4f(transformable.getRot());
+        this.isActive = true;
     }
+
     @Override
     public abstract void use();
 
     @Override
     public abstract CollidableType getCollidableType();
+
     @Override
     public abstract void handleCollision(Collidable collidable);
+
     @Override
     public abstract String getCollisionModelPath();
 
 
     @Override
     public boolean collisionActivated() {
-        return collisionEnabled;
+        return this.collisionEnabled;
     }
+
     @Override
     public void disableCollision() {
-        collisionEnabled = false;
+        this.collisionEnabled = false;
     }
+
     @Override
     public void enableCollision() {
-        collisionEnabled = true;
+        this.collisionEnabled = true;
     }
+
     @Override
     public void addToCollisionManager() {
         CollisionManager.getInstance().addCollisionCheck(this);
     }
+
     @Override
     public void removeFromCollisionManager() {
         CollisionManager.getInstance().removeCollisionCheck(this);

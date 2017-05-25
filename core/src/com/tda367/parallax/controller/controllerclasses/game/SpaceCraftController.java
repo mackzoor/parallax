@@ -8,21 +8,23 @@ import com.tda367.parallax.model.core.spacecraft.ISpaceCraft;
 
 class SpaceCraftController {
 
-    private float yValue = 0;
-    private float xValue = 0;
+    private float yValue;
+    private float xValue;
 
     private ISpaceCraft spaceCraft;
 
     SpaceCraftController(ISpaceCraft spaceCraft) {
+        this.yValue = 0;
+        this.xValue = 0;
         this.spaceCraft = spaceCraft;
     }
 
     void actionButtonPressed() {
-        spaceCraft.action();
+        this.spaceCraft.action();
     }
 
     void upButtonDown() {
-        yValue += 1;
+        this.yValue += 1;
         updateControls();
     }
 
@@ -32,27 +34,27 @@ class SpaceCraftController {
     }
 
     void rightButtonDown() {
-        xValue += 1;
+        this.xValue += 1;
         updateControls();
     }
 
     void rightButtonUp() {
-        xValue -= 1;
+        this.xValue -= 1;
         updateControls();
     }
 
     void downButtonDown() {
-        yValue -= 1;
+        this.yValue -= 1;
         updateControls();
     }
 
     void downButtonUp() {
-        yValue += 1;
+        this.yValue += 1;
         updateControls();
     }
 
     void leftButtonDown() {
-        xValue -= 1;
+        this.xValue -= 1;
         updateControls();
     }
 
@@ -71,7 +73,7 @@ class SpaceCraftController {
         updateControls();
     }
 
-    private synchronized void updateControls(){
-        spaceCraft.setDesiredPanVelocity(xValue, yValue);
+    private synchronized void updateControls() {
+        this.spaceCraft.setDesiredPanVelocity(this.xValue, this.yValue);
     }
 }

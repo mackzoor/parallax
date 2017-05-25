@@ -47,7 +47,7 @@ public class Renderable3dObject {
      */
     public void setPos(Vector3f pos) {
         this.pos = pos;
-        modelInstance.transform.setTranslation(
+        this.modelInstance.transform.setTranslation(
                 pos.getX(),
                 pos.getZ(),
                 pos.getY() * -1
@@ -63,10 +63,10 @@ public class Renderable3dObject {
         this.rot = rot;
 
         //Reset transform matrix
-        modelInstance.transform.idt();
+        this.modelInstance.transform.idt();
 
         //Rotate to rotation
-        modelInstance.transform.rotate(
+        this.modelInstance.transform.rotate(
                 new Quaternion(
                         rot.getX(),
                         rot.getZ(),
@@ -76,7 +76,7 @@ public class Renderable3dObject {
         );
 
         //Reset position.
-        setPos(this.pos);
+        this.setPos(this.pos);
     }
 
     /**
@@ -85,12 +85,12 @@ public class Renderable3dObject {
      * @param f the new opacity.
      */
     public void setOpacity(float f) {
-        opacity = f;
+        this.opacity = f;
 
         //Change opacity level
         BlendingAttribute blendingAttribute = new BlendingAttribute();
-        blendingAttribute.opacity = opacity;
-        Material material = modelInstance.materials.get(0);
+        blendingAttribute.opacity = this.opacity;
+        Material material = this.modelInstance.materials.get(0);
         material.set(blendingAttribute);
 
     }
@@ -101,7 +101,7 @@ public class Renderable3dObject {
      * @return the position of the 3d model.
      */
     public Vector3f getPos() {
-        return pos;
+        return this.pos;
     }
 
     /**
@@ -110,7 +110,7 @@ public class Renderable3dObject {
      * @return the rotation of the 3d model.
      */
     public Quat4f getRot() {
-        return rot;
+        return this.rot;
     }
 
     /**
@@ -119,7 +119,7 @@ public class Renderable3dObject {
      * @return the opacity of the 3d model.
      */
     public float getOpacity() {
-        return opacity;
+        return this.opacity;
     }
 
     /**
@@ -127,15 +127,16 @@ public class Renderable3dObject {
      *
      * @return true if high priority, false if low.
      */
-    public boolean isHighPriority() {
-        return highPriority;
+    boolean isHighPriority() {
+        return this.highPriority;
     }
 
     /**
      * Returns the 3d model ({@link ModelInstance}).
+     *
      * @return the 3d model.
      */
     public ModelInstance getModelInstance() {
-        return modelInstance;
+        return this.modelInstance;
     }
 }

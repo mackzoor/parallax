@@ -1,16 +1,16 @@
 package com.tda367.parallax.controller.controllerclasses;
 
-import com.tda367.parallax.controller.inputhandlers.ControllerMode;
 import com.badlogic.gdx.Gdx;
+import com.tda367.parallax.controller.devicestates.Device;
+import com.tda367.parallax.controller.inputhandlers.ControllerMode;
 import com.tda367.parallax.controller.inputhandlers.InputControlsAdapter;
 import com.tda367.parallax.model.menu.MainMenu;
-import com.tda367.parallax.controller.devicestates.Device;
-
-/**
- * Controller class used for user input in the menu for Desktop and Android.
- */
 
 import javax.vecmath.Vector3f;
+
+/*
+ * Controller class used for user input in the menu for Desktop and Android.
+ */
 
 public class MainMenuController extends InputControlsAdapter {
 
@@ -38,10 +38,10 @@ public class MainMenuController extends InputControlsAdapter {
     @Override
     public void onScreenClick(int xValue, int yValue) {
         xValue = xValue - Gdx.graphics.getWidth() / 2;
-        yValue = yValue - Gdx.graphics.getHeight()/2;
+        yValue = yValue - Gdx.graphics.getHeight() / 2;
 
-        mainMenu.setAimDirection(new Vector3f(xValue, 500, yValue));
-        mainMenu.action();
+        this.mainMenu.setAimDirection(new Vector3f(xValue, 500, yValue));
+        this.mainMenu.action();
     }
 
     @Override

@@ -8,13 +8,14 @@ import lombok.Getter;
  */
 
 public class MinionEnemy extends HunterAI {
-    @Getter private ISpaceCraft spaceCraft;
+    @Getter
+    private ISpaceCraft spaceCraft;
 
-    public MinionEnemy(ISpaceCraft spaceCraft){
+    public MinionEnemy(ISpaceCraft spaceCraft) {
         this.spaceCraft = spaceCraft;
     }
 
-    private void operate(){
+    private void operate() {
         //TODO implement minion operate method. (Remove commented lines)
         /* spaceCraft.setAccelerateTarget(1);
 
@@ -42,13 +43,13 @@ public class MinionEnemy extends HunterAI {
         */
 
         //If pointing at target
-            //Shoot
+        //Shoot
         //else
-            //Do nothing
+        //Do nothing
     }
 
     @Override
     public void update(int milliSinceLastUpdate) {
-        operate();
+        this.operate();
     }
 }

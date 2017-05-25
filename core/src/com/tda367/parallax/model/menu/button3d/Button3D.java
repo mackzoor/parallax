@@ -10,48 +10,48 @@ import javax.vecmath.Vector3f;
 
 public abstract class Button3D implements Collidable {
 
-    Vector3f pos;
-    Quat4f rot;
-    boolean isHit;
+    private Vector3f pos;
+    private Quat4f rot;
+    private boolean isHit;
     String collisionModel;
-    boolean collisionEnabled;
+    private boolean collisionEnabled;
 
-    protected Button3D(Vector3f pos,Quat4f rot){
+    Button3D(Vector3f pos, Quat4f rot) {
         this.pos = pos;
         this.rot = rot;
-        collisionEnabled = true;
-        isHit = false;
+        this.collisionEnabled = true;
+        this.isHit = false;
 
     }
 
     @Override
     public Vector3f getPos() {
-        return pos;
+        return this.pos;
     }
 
     @Override
     public Quat4f getRot() {
-        return rot;
+        return this.rot;
     }
 
     @Override
     public boolean collisionActivated() {
-        return collisionEnabled;
+        return this.collisionEnabled;
     }
 
     @Override
     public void disableCollision() {
-        collisionEnabled = false;
+        this.collisionEnabled = false;
     }
 
     @Override
     public void enableCollision() {
-        collisionEnabled = true;
+        this.collisionEnabled = true;
     }
 
     @Override
     public String getCollisionModelPath() {
-        return collisionModel;
+        return this.collisionModel;
     }
 
     @Override
@@ -71,12 +71,12 @@ public abstract class Button3D implements Collidable {
 
     @Override
     public void handleCollision(Collidable collidable) {
-        if(collidable.getCollidableType() == CollidableType.HARMFUL){
-            isHit = true;
+        if (collidable.getCollidableType() == CollidableType.HARMFUL) {
+            this.isHit = true;
         }
     }
 
-    public boolean isCollided(){
-        return isHit;
+    public boolean isCollided() {
+        return this.isHit;
     }
 }
