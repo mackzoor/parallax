@@ -34,41 +34,12 @@ public final class MathUtilities {
         return q;
     }
 
-    private static Vector3f quatToDirection(Quat4f q){
-        float div = (float) Math.sqrt(q.x * q.x + q.y * q.y + q.z * q.z);
-        float x = q.x / div;
-        float y = q.y / div;
-        float z = q.z / div;
-
-        Vector3f vec = new Vector3f(-z, x,-y);
-        vec.normalize();
-        return vec;
-    }
-
     public static Vector3f eulerToVector(float pitch, float roll, float yaw){
         float x = (float) (-cos(yaw) * sin(pitch) * sin(roll) -sin(yaw) * cos(roll));
         float y = (float) (-sin(yaw) * sin(pitch) * sin(roll)+cos(yaw) * cos(roll));
         float z = (float) (cos(pitch) * sin(roll));
 
         return new Vector3f(x,y,z);
-    }
-
-    public static Vector3f quatToVector(Quat4f q) {
-        /*float div = (float) Math.sqrt(q.x * q.x + q.y * q.y + q.z * q.z);
-        float x = q.x / div;
-        float y = q.y / div;
-        float z = q.z / div;
-
-        return eulerToVector(0,y,z);*/
-        Matrix4f m4 = new Matrix4f();
-        m4.set(q);
-
-        Matrix3f m3 = new Matrix3f();
-        m4.get(m3);
-        Vector3f direction = new Vector3f();
-        m3.getColumn(2, direction);
-
-        return direction;
     }
 
     public static Quat4f vectorToQuat(Vector3f v) {
