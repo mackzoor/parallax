@@ -1,4 +1,4 @@
-package com.tda367.parallax.controller;
+package com.tda367.parallax.controller.gamescreens;
 
 import com.tda367.parallax.model.core.Player;
 

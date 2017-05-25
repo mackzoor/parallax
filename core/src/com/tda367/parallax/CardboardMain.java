@@ -3,7 +3,7 @@ package com.tda367.parallax;
 import com.google.vrtoolkit.cardboard.Eye;
 import com.google.vrtoolkit.cardboard.HeadTransform;
 import com.tda367.parallax.controller.CardboardGameStateManager;
-import com.tda367.parallax.controller.GameState;
+import com.tda367.parallax.controller.gamescreens.GameState;
 import com.tda367.parallax.controller.devicestates.DeviceManager;
 import com.tda367.parallax.controller.gamescreens.cardboardadapter.CardboardGame;
 import com.tda367.parallax.model.core.Player;
