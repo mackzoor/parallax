@@ -6,6 +6,7 @@ import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
 
 import static java.lang.Math.cos;
+import static java.lang.Math.floor;
 import static java.lang.Math.sin;
 
 /**
@@ -90,5 +91,29 @@ public final class MathUtilities {
         return MathUtilities.eulerToQuaternion(0, xRotation, zRotation);
     }
 
+    public static Vector3f rotateVectorByQuat(Vector3f vector, Quat4f quat) {
 
+        Matrix3f rotationMatrix = new Matrix3f();
+
+        float q0 = quat.getW();
+        float q1 = quat.getX();
+        float q2 = quat.getY();
+        float q3 = quat.getZ();
+
+        rotationMatrix.m00 = (2f * q2 * q2 + 2f * q3 * q3 - 1f);
+        rotationMatrix.m01 = (-2f * (q1 * q2 + q0 * q3));
+        rotationMatrix.m02 = (-2f * (q1 * q3 - q0 * q2));
+
+        rotationMatrix.m10 = (2f * (q1 * q2 - q0 * q3));
+        rotationMatrix.m11 = (1f - 2f * q1 * q1 - 2f * q3 * q3);
+        rotationMatrix.m12 = (2f * (q2 * q3 + q0 * q1));
+
+        rotationMatrix.m20 = (-2f * (q1 * q3 + q0 * q2));
+        rotationMatrix.m21 = (-2f * (q2 * q3 - q0 * q1));
+        rotationMatrix.m22 = (2f * q1 * q1 + 2f * q2 * q2 - 1f);
+
+        rotationMatrix.transform(vector);
+
+        return vector;
+    }
 }

@@ -51,6 +51,7 @@ public class Cannon extends PowerUpBase {
     //Launches the cannon round.
     @Override
     public void activate(Transformable transformable) {
+        Vector3f aimTarget = MathUtilities.rotateVectorByQuat(new Vector3f(0,1,0), transformable.getRot());
         super.activate(transformable);
         super.addToCollisionManager();
         super.enableCollision();
@@ -71,7 +72,7 @@ public class Cannon extends PowerUpBase {
         //Placeholder
         super.setPos(new Vector3f(transformable.getPos()));
         super.getPos().add(new Vector3f(0,1,0));
-        velocity = new Vector3f(0,0.5f,0);
+        velocity = MathUtilities.rotateVectorByQuat(new Vector3f(0,1,0), transformable.getRot());
 
 
 
