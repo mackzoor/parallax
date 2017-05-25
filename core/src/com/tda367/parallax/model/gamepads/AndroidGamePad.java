@@ -1,20 +1,20 @@
-package com.tda367.parallax.controller.inputhandlers.gamepads;
+package com.tda367.parallax.model.gamepads;
 
 /**
- * Class that bestow the button codes for a Xbox 360 controller
+ * Class that bestow the button codes for an Android controller
  */
 
-public final class Xbox360GamePad implements GamePad {
+public final class AndroidGamePad implements GamePad {
 
-    private static final int A_BUTTON = 0;
-    private static final int B_BUTTON = 1;
-    private static final int START_BUTTON = 7;
-    private static final int DPAD_UP = 999; //Unknown
-    private static final int DPAD_RIGHT = 999; //Unknown
-    private static final int DPAD_DOWN = 999; //Unknown
-    private static final int DPAD_LEFT = 999; //Unknown
-    private static final int LEFT_JOYSTICK_X = 1;
-    private static final int LEFT_JOYSTICK_Y = 0;
+    private static final int A_BUTTON = 96;
+    private static final int B_BUTTON = 97;
+    private static final int START_BUTTON = 108;
+    private static final int DPAD_UP = 19;
+    private static final int DPAD_RIGHT = 22;
+    private static final int DPAD_DOWN = 20;
+    private static final int DPAD_LEFT = 21;
+    private static final int LEFT_JOYSTICK_X = 0;
+    private static final int LEFT_JOYSTICK_Y = 1;
 
     @Override
     public int getActionButtonCode() {
@@ -68,6 +68,6 @@ public final class Xbox360GamePad implements GamePad {
 
     @Override
     public float yAxisValueConverter(float value) {
-        return -value;
+        return -1f * value;
     }
 }

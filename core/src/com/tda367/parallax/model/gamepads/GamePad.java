@@ -1,4 +1,4 @@
-package com.tda367.parallax.controller.inputhandlers.gamepads;
+package com.tda367.parallax.model.gamepads;
 
 public interface GamePad {
     int getActionButtonCode();
