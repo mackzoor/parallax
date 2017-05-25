@@ -45,10 +45,6 @@ public class SpaceCraftTest {
     }
 
     @Test
-    public void add1() throws Exception {
-    }
-
-    @Test
     public void incHealth() throws Exception {
     }
 
