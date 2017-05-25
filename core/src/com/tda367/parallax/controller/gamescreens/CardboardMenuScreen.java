@@ -3,10 +3,10 @@ package com.tda367.parallax.controller.gamescreens;
 import com.badlogic.gdx.Gdx;
 import com.google.vrtoolkit.cardboard.Eye;
 import com.google.vrtoolkit.cardboard.HeadTransform;
+import com.tda367.parallax.controller.CardboardGameStateManager;
 import com.tda367.parallax.controller.controllerclasses.CardboardMenuController;
 import com.tda367.parallax.controller.devicestates.Device;
 import com.tda367.parallax.controller.devicestates.DeviceManager;
-import com.tda367.parallax.controller.GameStateManager;
 import com.tda367.parallax.controller.gamescreens.cardboardadapter.CardboardScreenAdapter;
 import com.tda367.parallax.model.CollisionCalculator;
 import com.tda367.parallax.model.menu.MainMenu;
@@ -66,7 +66,7 @@ public class CardboardMenuScreen extends CardboardScreenAdapter {
 
     private void startButtonHit() {
         dispose();
-        GameStateManager.setCardboardGameScreen(player);
+        CardboardGameStateManager.setCardboardGameScreen(player);
     }
 
     private void exitButtonHit() {

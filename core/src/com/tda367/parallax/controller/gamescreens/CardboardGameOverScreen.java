@@ -3,7 +3,7 @@ package com.tda367.parallax.controller.gamescreens;
 import com.badlogic.gdx.Gdx;
 import com.google.vrtoolkit.cardboard.Eye;
 import com.google.vrtoolkit.cardboard.HeadTransform;
-import com.tda367.parallax.controller.GameStateManager;
+import com.tda367.parallax.controller.CardboardGameStateManager;
 import com.tda367.parallax.controller.gamescreens.cardboardadapter.CardboardGame;
 import com.tda367.parallax.controller.gamescreens.cardboardadapter.CardboardScreenAdapter;
 import com.tda367.parallax.model.gameover.GameOver;
@@ -22,7 +22,6 @@ public class CardboardGameOverScreen extends CardboardScreenAdapter {
     private Player player;
 
     public CardboardGameOverScreen(Player player) {
-        this.game = game;
         this.player = player;
     }
 
@@ -31,7 +30,7 @@ public class CardboardGameOverScreen extends CardboardScreenAdapter {
         model.update(Gdx.graphics.getDeltaTime());
         if (model.isObsolete()) {
             dispose();
-            GameStateManager.setCardboardMenuScreen(player);
+            CardboardGameStateManager.setCardboardMenuScreen(player);
         }
     }
 
