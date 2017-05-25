@@ -27,13 +27,15 @@ public class CourseObstacleView implements View{
 
     @Override
     public void render() {
-        renderable3dObject.setPos(obstacle.getPos());
-        renderable3dObject.setRot(obstacle.getRot());
-        Renderer3D.getInstance().addObjectToFrame(renderable3dObject);
+        if(!obstacle.isDestroyed()) {
+            renderable3dObject.setPos(obstacle.getPos());
+            renderable3dObject.setRot(obstacle.getRot());
+            Renderer3D.getInstance().addObjectToFrame(renderable3dObject);
+        }
     }
     @Override
     public boolean isObsolete() {
-        return obstacle.collisionActivated();
+        return obstacle.isDestroyed();
     }
 
     private String get3dModelPath(ObstacleType type){

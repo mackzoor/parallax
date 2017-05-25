@@ -5,6 +5,7 @@ import com.tda367.parallax.model.core.collision.CollidableType;
 import com.tda367.parallax.model.core.collision.CollisionManager;
 import com.tda367.parallax.model.core.util.Updatable;
 import com.tda367.parallax.model.core.world.ICourseModule;
+import lombok.Getter;
 
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
@@ -18,11 +19,13 @@ public abstract class CourseObstacleBase implements Collidable, Updatable {
     private Quat4f rot;
 
     private boolean collisionEnabled;
+    @Getter private boolean destroyed;
 
     CourseObstacleBase(Vector3f pos, Quat4f rot) {
         this.pos = pos;
         this.rot = rot;
         collisionEnabled = true;
+        destroyed = false;
     }
 
     //Transformable
@@ -77,6 +80,7 @@ public abstract class CourseObstacleBase implements Collidable, Updatable {
             disableCollision();
         }else if(collidable.getCollidableType() == CollidableType.HARMFUL){
             disableCollision();
+            destroyed = true;
         }
     }
 
