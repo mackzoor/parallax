@@ -1,7 +1,10 @@
 package com.tda367.parallax.controller;
 
-import com.tda367.parallax.controller.gamescreens.*;
+import com.tda367.parallax.controller.gamescreens.CardboardGameOverScreen;
+import com.tda367.parallax.controller.gamescreens.CardboardGameScreen;
+import com.tda367.parallax.controller.gamescreens.CardboardMenuScreen;
 import com.tda367.parallax.controller.gamescreens.GameState;
+import com.tda367.parallax.controller.gamescreens.GameStateChangeListener;
 import com.tda367.parallax.controller.gamescreens.cardboardadapter.CardboardGame;
 import com.tda367.parallax.model.core.Player;
 
@@ -9,7 +12,7 @@ import com.tda367.parallax.model.core.Player;
  * Manages Screens for the Cardboard application
  */
 
-public class CardboardGameStateManager implements com.tda367.parallax.controller.gamescreens.GameStateChangeListener {
+public class CardboardGameStateManager implements GameStateChangeListener {
 
     private CardboardGameStateManager() {}
 
@@ -26,7 +29,7 @@ public class CardboardGameStateManager implements com.tda367.parallax.controller
 
     private static void setCardboardMenuScreen(Player player) {
         if (cardboardMenuScreen == null) {
-            cardboardMenuScreen = new CardboardMenuScreen(player, new CardboardGameStateManager());
+            cardboardMenuScreen = new CardboardMenuScreen(player, GameStateManagerSingleton.INSTANCE);
         }
         cardboardMenuScreen.newMainMenu();
         cardboardGame.setCardboardScreen(cardboardMenuScreen);
@@ -34,7 +37,7 @@ public class CardboardGameStateManager implements com.tda367.parallax.controller
 
     private static void setCardboardGameScreen(Player player) {
         if (cardboardGameScreen == null) {
-            cardboardGameScreen = new CardboardGameScreen(player, new CardboardGameStateManager());
+            cardboardGameScreen = new CardboardGameScreen(player, GameStateManagerSingleton.INSTANCE);
         }
         cardboardGameScreen.newGame();
         cardboardGame.setCardboardScreen(cardboardGameScreen);
@@ -42,18 +45,18 @@ public class CardboardGameStateManager implements com.tda367.parallax.controller
 
     private static void setCardboardGameOverScreen(Player player) {
         if (cardboardGameOverScreen == null) {
-            cardboardGameOverScreen = new CardboardGameOverScreen(player, new CardboardGameStateManager());
+            cardboardGameOverScreen = new CardboardGameOverScreen(player, GameStateManagerSingleton.INSTANCE);
         }
         cardboardGameOverScreen.newGameOver();
         cardboardGame.setScreen(cardboardGameOverScreen);
     }
 
-    public static void setGameState(com.tda367.parallax.controller.gamescreens.GameState nextState, Player player) {
-        if (nextState == com.tda367.parallax.controller.gamescreens.GameState.MAIN_MENU_STATE) {
+    public static void setGameState(GameState nextState, Player player) {
+        if (nextState == GameState.MAIN_MENU_STATE) {
             setCardboardMenuScreen(player);
-        } else if (nextState == com.tda367.parallax.controller.gamescreens.GameState.GAME_STATE) {
+        } else if (nextState == GameState.GAME_STATE) {
             setCardboardGameScreen(player);
-        } else if (nextState == com.tda367.parallax.controller.gamescreens.GameState.GAME_OVER_STATE) {
+        } else if (nextState == GameState.GAME_OVER_STATE) {
             setCardboardGameOverScreen(player);
         }
     }
@@ -61,5 +64,9 @@ public class CardboardGameStateManager implements com.tda367.parallax.controller
     @Override
     public void gameStateChanged(GameState nextState, Player player) {
         setGameState(nextState, player);
+    }
+
+    private static class GameStateManagerSingleton {
+        private static final GameStateChangeListener INSTANCE = new CardboardGameStateManager();
     }
 }

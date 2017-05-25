@@ -2,6 +2,8 @@ package com.tda367.parallax.controller;
 
 import com.badlogic.gdx.Game;
 import com.tda367.parallax.controller.gamescreens.*;
+import com.tda367.parallax.controller.gamescreens.GameStateChangeListener;
+import com.tda367.parallax.controller.gamescreens.GameState;
 import com.tda367.parallax.model.core.Player;
 
 /**
@@ -12,39 +14,39 @@ public final class GameStateManager implements GameStateChangeListener {
 
     private GameStateManager() {}
 
-    private static Game GAME;
+    private static Game game;
     private static MainMenuScreen mainMenuScreen;
     private static GameScreen gameScreen;
     private static GameOverScreen gameOverScreen;
 
     public static void setGame(Game game) {
-        if (GAME == null) {
-            GAME = game;
+        if (GameStateManager.game == null) {
+            GameStateManager.game = game;
         }
     }
 
     private static void setMainMenuScreen(Player player) {
         if (mainMenuScreen == null) {
-            mainMenuScreen = new MainMenuScreen(player, new GameStateManager());
+            mainMenuScreen = new MainMenuScreen(player, GameStateManagerSingleton.INSTANCE);
         }
         mainMenuScreen.newMainMenu();
-        GAME.setScreen(mainMenuScreen);
+        game.setScreen(mainMenuScreen);
     }
 
     private static void setGameScreen(Player player) {
         if (gameScreen == null) {
-            gameScreen = new GameScreen(player, new GameStateManager());
+            gameScreen = new GameScreen(player, GameStateManagerSingleton.INSTANCE);
         }
         gameScreen.newGame();
-        GAME.setScreen(gameScreen);
+        game.setScreen(gameScreen);
     }
 
     private static void setGameOverScreen(Player player) {
         if (gameOverScreen == null) {
-            gameOverScreen = new GameOverScreen(player, new GameStateManager());
+            gameOverScreen = new GameOverScreen(player, GameStateManagerSingleton.INSTANCE);
         }
         gameOverScreen.newGameOver();
-        GAME.setScreen(gameOverScreen);
+        game.setScreen(gameOverScreen);
     }
 
     public static void setGameState(GameState nextState, Player player) {
@@ -60,5 +62,9 @@ public final class GameStateManager implements GameStateChangeListener {
     @Override
     public void gameStateChanged(GameState nextState, Player player) {
         setGameState(nextState, player);
+    }
+
+    private static class GameStateManagerSingleton {
+        private static final GameStateChangeListener INSTANCE = new GameStateManager();
     }
 }
