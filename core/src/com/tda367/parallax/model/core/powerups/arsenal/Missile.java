@@ -79,7 +79,6 @@ public class Missile extends PowerUpBase {
         //Initialize the ships position and rotation based on the position of the transformable object.
         super.activate(transformable);
         super.addToCollisionManager();
-        super.enableCollision();
         //Add the missile to the world and make it collidable
 
         //Store the transformable object for later use
@@ -190,6 +189,8 @@ public class Missile extends PowerUpBase {
 
 
         }else if(timeStorage <= ACTIVE_TIME){
+            super.enableCollision();
+
             //Add more velocity to the ship
             accelerateMissile(milliSinceLastUpdate);
 
