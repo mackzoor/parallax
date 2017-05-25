@@ -1,12 +1,10 @@
 package com.tda367.parallax.controller.gamescreens;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.controllers.Controllers;
 import com.tda367.parallax.controller.GameState;
 import com.tda367.parallax.controller.GameStateChangeListener;
-import com.tda367.parallax.controller.GameStateManager;
 import com.tda367.parallax.controller.controllerclasses.game.GameController;
 import com.tda367.parallax.controller.devicestates.DeviceManager;
 import com.tda367.parallax.model.CollisionCalculator;
@@ -20,9 +18,6 @@ import com.tda367.parallax.view.parallaxview.ParallaxView;
 
 public class GameScreen extends ScreenAdapter {
 
-    private Game game;
-
-    //Almost everything is copied straight of from PlayState. Should be split up in the future
     private Player player;
     private Parallax parallaxGame;
     private GameController controller;
