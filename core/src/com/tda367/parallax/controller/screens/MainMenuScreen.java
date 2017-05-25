@@ -1,4 +1,4 @@
-package com.tda367.parallax.controller.gamescreens;
+package com.tda367.parallax.controller.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
@@ -13,6 +13,8 @@ import com.tda367.parallax.model.menu.MainMenu;
 import com.tda367.parallax.view.Sound;
 import com.tda367.parallax.view.menu.MainMenuView;
 
+import static com.tda367.parallax.controller.screens.ScreenState.GAME;
+
 public class MainMenuScreen extends ScreenAdapter {
 
     private Player player;
@@ -22,11 +24,11 @@ public class MainMenuScreen extends ScreenAdapter {
     private Sound sound;
     private CollisionCalculator collisionCalculator;
     private AudioQueue audioQueue;
-    private GameStateChangeListener gameStateChangeListener;
+    private ScreenChanger screenChanger;
 
-    public MainMenuScreen(Player player, GameStateChangeListener gameStateChangeListener) {
+    public MainMenuScreen(Player player, ScreenChanger screenChanger) {
         this.player = player;
-        this.gameStateChangeListener = gameStateChangeListener;
+        this.screenChanger = screenChanger;
         this.sound = new Sound();
         this.audioQueue = AudioQueue.getInstance();
         this.collisionCalculator = new CollisionCalculator();
@@ -36,7 +38,7 @@ public class MainMenuScreen extends ScreenAdapter {
     public void render(float delta) {
         if (this.model.getStartButton().isCollided()) {
             dispose();
-            gameStateChangeListener.gameStateChanged(GameState.GAME_STATE, this.player);
+            screenChanger.requestScreenChange(GAME, this.player);
         } else if (this.model.getExitButton().isCollided()) {
             dispose();
             Gdx.app.exit();

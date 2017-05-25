@@ -1,11 +1,10 @@
-package com.tda367.parallax.controller.gamescreens;
+package com.tda367.parallax.controller.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.google.vrtoolkit.cardboard.Eye;
 import com.google.vrtoolkit.cardboard.HeadTransform;
 import com.tda367.parallax.controller.controllerclasses.CardboardMenuController;
 import com.tda367.parallax.controller.devicestates.DeviceManager;
-import com.tda367.parallax.controller.gamescreens.cardboardadapter.CardboardScreenAdapter;
 import com.tda367.parallax.model.CollisionCalculator;
 import com.tda367.parallax.model.core.Player;
 import com.tda367.parallax.model.core.collision.CollisionManager;
@@ -17,19 +16,21 @@ import com.tda367.parallax.view.rendering.Renderer3D;
 
 import javax.vecmath.Vector3f;
 
+import static com.tda367.parallax.controller.screens.ScreenState.GAME;
 
-public class CardboardMenuScreen extends CardboardScreenAdapter {
+
+public class CardboardMenuScreen extends com.tda367.parallax.controller.screens.cardboardadapter.CardboardScreenAdapter {
     private CardboardMenuController controller;
     private Sound sound;
     private MainMenu mainMenu;
     private CollisionCalculator collisionCalculator;
     private MainMenuView view;
     private Player player;
-    private GameStateChangeListener gameStateChangeListener;
+    private ScreenChanger screenChanger;
 
-    public CardboardMenuScreen(Player player, GameStateChangeListener gameStateChangeListener) {
+    public CardboardMenuScreen(Player player, ScreenChanger screenChanger) {
         this.player = player;
-        this.gameStateChangeListener = gameStateChangeListener;
+        this.screenChanger = screenChanger;
         this.sound = new Sound();
         this.collisionCalculator = new CollisionCalculator();
     }
@@ -66,7 +67,7 @@ public class CardboardMenuScreen extends CardboardScreenAdapter {
 
     private void startButtonHit() {
         dispose();
-        gameStateChangeListener.gameStateChanged(GameState.GAME_STATE, this.player);
+        screenChanger.requestScreenChange(GAME, this.player);
     }
 
     private void exitButtonHit() {

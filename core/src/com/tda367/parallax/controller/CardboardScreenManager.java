@@ -1,20 +1,24 @@
 package com.tda367.parallax.controller;
 
-import com.tda367.parallax.controller.gamescreens.CardboardGameOverScreen;
-import com.tda367.parallax.controller.gamescreens.CardboardGameScreen;
-import com.tda367.parallax.controller.gamescreens.CardboardMenuScreen;
-import com.tda367.parallax.controller.gamescreens.GameState;
-import com.tda367.parallax.controller.gamescreens.GameStateChangeListener;
-import com.tda367.parallax.controller.gamescreens.cardboardadapter.CardboardGame;
+import com.tda367.parallax.controller.screens.CardboardGameOverScreen;
+import com.tda367.parallax.controller.screens.CardboardGameScreen;
+import com.tda367.parallax.controller.screens.CardboardMenuScreen;
+import com.tda367.parallax.controller.screens.ScreenState;
+import com.tda367.parallax.controller.screens.ScreenChanger;
+import com.tda367.parallax.controller.screens.cardboardadapter.CardboardGame;
 import com.tda367.parallax.model.core.Player;
+
+import static com.tda367.parallax.controller.screens.ScreenState.GAME;
+import static com.tda367.parallax.controller.screens.ScreenState.GAME_OVER;
+import static com.tda367.parallax.controller.screens.ScreenState.MAIN_MENU;
 
 /**
  * Manages Screens for the Cardboard application
  */
 
-public class CardboardGameStateManager implements GameStateChangeListener {
+public class CardboardScreenManager implements ScreenChanger {
 
-    private CardboardGameStateManager() {}
+    private CardboardScreenManager() {}
 
     private static CardboardGame cardboardGame;
     private static CardboardMenuScreen cardboardMenuScreen;
@@ -29,7 +33,7 @@ public class CardboardGameStateManager implements GameStateChangeListener {
 
     private static void setCardboardMenuScreen(Player player) {
         if (cardboardMenuScreen == null) {
-            cardboardMenuScreen = new CardboardMenuScreen(player, GameStateManagerSingleton.INSTANCE);
+            cardboardMenuScreen = new CardboardMenuScreen(player, ScreenChangerSingleton.INSTANCE);
         }
         cardboardMenuScreen.newMainMenu();
         cardboardGame.setCardboardScreen(cardboardMenuScreen);
@@ -37,7 +41,7 @@ public class CardboardGameStateManager implements GameStateChangeListener {
 
     private static void setCardboardGameScreen(Player player) {
         if (cardboardGameScreen == null) {
-            cardboardGameScreen = new CardboardGameScreen(player, GameStateManagerSingleton.INSTANCE);
+            cardboardGameScreen = new CardboardGameScreen(player, ScreenChangerSingleton.INSTANCE);
         }
         cardboardGameScreen.newGame();
         cardboardGame.setCardboardScreen(cardboardGameScreen);
@@ -45,28 +49,28 @@ public class CardboardGameStateManager implements GameStateChangeListener {
 
     private static void setCardboardGameOverScreen(Player player) {
         if (cardboardGameOverScreen == null) {
-            cardboardGameOverScreen = new CardboardGameOverScreen(player, GameStateManagerSingleton.INSTANCE);
+            cardboardGameOverScreen = new CardboardGameOverScreen(player, ScreenChangerSingleton.INSTANCE);
         }
         cardboardGameOverScreen.newGameOver();
         cardboardGame.setScreen(cardboardGameOverScreen);
     }
 
-    public static void setGameState(GameState nextState, Player player) {
-        if (nextState == GameState.MAIN_MENU_STATE) {
+    public static void setGameState(ScreenState nextState, Player player) {
+        if (nextState == MAIN_MENU) {
             setCardboardMenuScreen(player);
-        } else if (nextState == GameState.GAME_STATE) {
+        } else if (nextState == GAME) {
             setCardboardGameScreen(player);
-        } else if (nextState == GameState.GAME_OVER_STATE) {
+        } else if (nextState == GAME_OVER) {
             setCardboardGameOverScreen(player);
         }
     }
 
     @Override
-    public void gameStateChanged(GameState nextState, Player player) {
+    public void requestScreenChange(ScreenState nextState, Player player) {
         setGameState(nextState, player);
     }
 
-    private static class GameStateManagerSingleton {
-        private static final GameStateChangeListener INSTANCE = new CardboardGameStateManager();
+    private static class ScreenChangerSingleton {
+        private static final ScreenChanger INSTANCE = new CardboardScreenManager();
     }
 }

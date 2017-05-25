@@ -2,10 +2,10 @@ package com.tda367.parallax;
 
 import com.google.vrtoolkit.cardboard.Eye;
 import com.google.vrtoolkit.cardboard.HeadTransform;
-import com.tda367.parallax.controller.CardboardGameStateManager;
-import com.tda367.parallax.controller.gamescreens.GameState;
+import com.tda367.parallax.controller.CardboardScreenManager;
+import com.tda367.parallax.controller.screens.ScreenState;
 import com.tda367.parallax.controller.devicestates.DeviceManager;
-import com.tda367.parallax.controller.gamescreens.cardboardadapter.CardboardGame;
+import com.tda367.parallax.controller.screens.cardboardadapter.CardboardGame;
 import com.tda367.parallax.model.core.Player;
 
 
@@ -15,8 +15,8 @@ public class CardboardMain extends CardboardGame {
     public void create(){
         Player player = new Player();
         DeviceManager.setDevice(this);
-        CardboardGameStateManager.setCardboardGame(this);
-        CardboardGameStateManager.setGameState(GameState.MAIN_MENU_STATE, player);
+        CardboardScreenManager.setCardboardGame(this);
+        CardboardScreenManager.setGameState(ScreenState.MAIN_MENU, player);
     }
 
     @Override
