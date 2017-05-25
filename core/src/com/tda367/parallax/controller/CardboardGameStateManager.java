@@ -9,10 +9,12 @@ import com.tda367.parallax.model.core.Player;
 import lombok.Getter;
 
 /**
- * Created by Markus on 2017-05-25.
+ * Manages Screens for the Cardboard application
  */
 
 public class CardboardGameStateManager {
+
+    private CardboardGameStateManager() {}
 
     @Getter private static CardboardGame CARDBOARDGAME;
     private static CardboardMenuScreen cardboardMenuScreen;

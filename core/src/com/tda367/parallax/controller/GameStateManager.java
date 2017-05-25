@@ -7,6 +7,10 @@ import com.tda367.parallax.controller.gamescreens.MainMenuScreen;
 import com.tda367.parallax.model.core.Player;
 import lombok.Getter;
 
+/**
+ * Manages Screens for the desktop and Android application
+ */
+
 public final class GameStateManager {
 
     private GameStateManager() {}
