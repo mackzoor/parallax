@@ -14,7 +14,7 @@ public class MathUtilitiesTest {
     public void eulerToQuaternion() throws Exception {
         Quat4f quat4f;
         quat4f = MathUtilities.eulerToQuaternion(0,0,Math.PI);
-        assertTrue(quat4f.getZ() == 1);
+        assertTrue(quat4f.getX() == 0 && quat4f.getY() == 0 && quat4f.getZ() == 1);
 
     }
 
