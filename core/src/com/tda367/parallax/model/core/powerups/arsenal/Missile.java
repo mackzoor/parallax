@@ -23,9 +23,6 @@ public class Missile extends PowerUpBase {
     //Time that the missile has accelerated
     private int accelerationTime;
 
-    //Path to 3D model for  missile collision
-    private String collisionModel;
-
     //Saving variables for the transformable object the missile has its origin from
     private Vector3f transformableEarlierPosition;
     private Transformable transformable;
@@ -51,7 +48,7 @@ public class Missile extends PowerUpBase {
     private static final int ACTIVE_TIME = 5000;
 
     //Time that missile is tracking the ships movement, making sure that it doesn't go trough it.
-    private static final int TIME_TRACKING_TRANS = 600;
+    private static final int TIME_TRACKING_TRANS = 900;
 
     //Multiplier to change the speed of missile
     private static final float VELOCITY_MULTIPLIER_X = 10f;
@@ -60,7 +57,7 @@ public class Missile extends PowerUpBase {
     private static final float FALL_MULTIPLIER = 2.5f;
 
     //Internal path to 3d collision model
-    private static final String COLLISION_MODEL = "";
+    private static final String COLLISION_MODEL = "3dModels/box/hitbox.obj";
 
     //How fast the missile will accelerate
     private static final double ACCELERATION = 0.8;
@@ -72,7 +69,6 @@ public class Missile extends PowerUpBase {
     //Constructor for missile, deceleration for most variables.
     Missile(){
         super();
-        this.collisionModel ="3dModels/box/hitbox.obj";
         this.enemyTargetPosition = new Vector3f();
         this.transPosLastUpdate = new Vector3f();
     }
@@ -82,20 +78,18 @@ public class Missile extends PowerUpBase {
     public void activate(Transformable transformable){
         //Initialize the ships position and rotation based on the position of the transformable object.
         super.activate(transformable);
-        
+        super.addToCollisionManager();
+        super.enableCollision();
         //Add the missile to the world and make it collidable
-        addToCollisionManager();
 
         //Store the transformable object for later use
         this.transformable = transformable;
 
         //Allow the update method to move the missile
-        super.setActive(true);
 
         //TODO, Temporary initialization for the enemy, will be controlled elsewhere later.
         enemyTargetPosition.set(new Vector3f(super.getPos()));
         enemyTargetPosition.add(new Vector3f(0,100,20));
-
         //Plays the missile sound.
         playMissileSound();
     }
@@ -105,15 +99,20 @@ public class Missile extends PowerUpBase {
     }
     @Override
     public CollidableType getCollidableType() {
-        return CollidableType.HARMFUL;
+        if(timeStorage > TIME_TRACKING_TRANS) {
+            return CollidableType.HARMFUL;
+        }else{
+            return CollidableType.NEUTRAL;
+        }
     }
     @Override
     public void handleCollision(Collidable collidable) {
         //Todo Create explosion
-        if (collidable.getCollidableType() == CollidableType.SPACECRAFT && timeStorage > 250){
-            super.setActive(false);
-            super.setDead(true);
-            removeFromCollisionManager();
+        if (collidable.getCollidableType() == CollidableType.SPACECRAFT && timeStorage > TIME_TRACKING_TRANS){
+            removeMissile();
+        }
+        if (collidable.getCollidableType() == CollidableType.OBSTACLE && timeStorage > 250){
+            removeMissile();
         }
     }
     
@@ -191,7 +190,6 @@ public class Missile extends PowerUpBase {
 
 
         }else if(timeStorage <= ACTIVE_TIME){
-
             //Add more velocity to the ship
             accelerateMissile(milliSinceLastUpdate);
 

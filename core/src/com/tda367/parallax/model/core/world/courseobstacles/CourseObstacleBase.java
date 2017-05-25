@@ -19,7 +19,7 @@ public abstract class CourseObstacleBase implements Collidable, Updatable {
 
     private boolean collisionEnabled;
 
-    CourseObstacleBase(Vector3f pos, Quat4f rot){
+    CourseObstacleBase(Vector3f pos, Quat4f rot) {
         this.pos = pos;
         this.rot = rot;
         collisionEnabled = true;
@@ -30,6 +30,7 @@ public abstract class CourseObstacleBase implements Collidable, Updatable {
     public Vector3f getPos() {
         return pos;
     }
+
     @Override
     public Quat4f getRot() {
         return rot;
@@ -38,34 +39,43 @@ public abstract class CourseObstacleBase implements Collidable, Updatable {
 
     //Collidable
     @Override
-    public void enableCollision(){
+    public void enableCollision() {
         collisionEnabled = true;
     }
+
     @Override
-    public void disableCollision(){
+    public void disableCollision() {
         collisionEnabled = false;
     }
+
     @Override
     public boolean collisionActivated() {
         return collisionEnabled;
     }
+
     @Override
     public void addToCollisionManager() {
         CollisionManager.getInstance().addCollisionCheck(this);
     }
+
     @Override
     public void removeFromCollisionManager() {
         CollisionManager.getInstance().removeCollisionCheck(this);
     }
+
     @Override
     public abstract String getCollisionModelPath();
+
     @Override
     public CollidableType getCollidableType() {
         return CollidableType.OBSTACLE;
     }
+
     @Override
     public void handleCollision(Collidable collidable) {
-        if (collidable.getCollidableType() == CollidableType.SPACECRAFT){
+        if (collidable.getCollidableType() == CollidableType.SPACECRAFT) {
+            disableCollision();
+        }else if(collidable.getCollidableType() == CollidableType.HARMFUL){
             disableCollision();
         }
     }

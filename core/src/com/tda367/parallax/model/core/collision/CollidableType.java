@@ -7,5 +7,6 @@ public enum CollidableType {
     SPACECRAFT,
     OBSTACLE,
     CONTAINER,
-    HARMFUL
+    HARMFUL,
+    NEUTRAL
 }
