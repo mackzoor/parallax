@@ -8,6 +8,7 @@ import com.tda367.parallax.utilities.MathUtilities;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
 import java.util.Random;
 
@@ -46,7 +47,12 @@ public class Cannon extends PowerUpBase {
         super.setPos(new Vector3f(transformable.getPos()));
         super.getPos().add(new Vector3f(0, 1, 0));
 
-        this.velocity = MathUtilities.rotateVectorByQuat(new Vector3f(0, 1, 0), transformable.getRot());
+        this.velocity = MathUtilities.rotateVectorByQuat(new Vector3f(0,1,0),
+                new Quat4f(-1*transformable.getRot().x
+                        ,transformable.getRot().y
+                        ,-1*transformable.getRot().z
+                        ,transformable.getRot().w));
+        System.out.println(transformable.getRot());
         this.velocity.scale(30);
 
         playCannonSound();

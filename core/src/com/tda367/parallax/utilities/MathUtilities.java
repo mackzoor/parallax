@@ -29,6 +29,7 @@ public final class MathUtilities {
         q.setX(t0 * t3 * t4 - t1 * t2 * t5);
         q.setY(t0 * t2 * t5 + t1 * t3 * t4);
         q.setZ(t1 * t2 * t4 - t0 * t3 * t5);
+
         q.normalize();
         return q;
     }
@@ -70,17 +71,17 @@ public final class MathUtilities {
         float q2 = quat.getY();
         float q3 = quat.getZ();
 
-        rotationMatrix.m00 = (2f * q2 * q2 + 2f * q3 * q3 - 1f);
-        rotationMatrix.m01 = (-2f * (q1 * q2 + q0 * q3));
-        rotationMatrix.m02 = (-2f * (q1 * q3 - q0 * q2));
+        rotationMatrix.m00 = -1*(2f * q2 * q2 + 2f * q3 * q3 - 1f);
+        rotationMatrix.m01 = -1*(-2f * (q1 * q2 + q0 * q3));
+        rotationMatrix.m02 = -1*(-2f * (q1 * q3 - q0 * q2));
 
         rotationMatrix.m10 = (2f * (q1 * q2 - q0 * q3));
         rotationMatrix.m11 = (1f - 2f * q1 * q1 - 2f * q3 * q3);
         rotationMatrix.m12 = (2f * (q2 * q3 + q0 * q1));
 
-        rotationMatrix.m20 = (-2f * (q1 * q3 + q0 * q2));
-        rotationMatrix.m21 = (-2f * (q2 * q3 - q0 * q1));
-        rotationMatrix.m22 = (2f * q1 * q1 + 2f * q2 * q2 - 1f);
+        rotationMatrix.m20 = -1*(-2f * (q1 * q3 + q0 * q2));
+        rotationMatrix.m21 = -1*(-2f * (q2 * q3 - q0 * q1));
+        rotationMatrix.m22 = -1*(2f * q1 * q1 + 2f * q2 * q2 - 1f);
 
         rotationMatrix.transform(vector);
 
