@@ -1,4 +1,4 @@
-package com.tda367.parallax.core.course;
+package com.tda367.parallax.model.core.world;
 
 import com.tda367.parallax.model.core.spacecraft.SpaceCraftFactory;
 import com.tda367.parallax.model.core.world.World;

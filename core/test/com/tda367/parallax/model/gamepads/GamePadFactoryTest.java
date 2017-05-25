@@ -1,10 +1,4 @@
-package com.tda367.parallax.platform.gamepads;
-
-import com.tda367.parallax.model.gamepads.AndroidGamePad;
-import com.tda367.parallax.model.gamepads.GamePad;
-import com.tda367.parallax.model.gamepads.GamePadFactory;
-import com.tda367.parallax.model.gamepads.Playstation3GamePad;
-import com.tda367.parallax.model.gamepads.Xbox360GamePad;
+package com.tda367.parallax.model.gamepads;
 
 import org.junit.Test;
 import static org.junit.Assert.*;

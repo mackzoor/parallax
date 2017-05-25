@@ -1,4 +1,4 @@
-package com.tda367.parallax.core.powerUps;
+package com.tda367.parallax.model.core.powerups.arsenal;
 
 import org.junit.Test;
 

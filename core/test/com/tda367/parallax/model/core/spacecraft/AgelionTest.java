@@ -1,4 +1,4 @@
-package com.tda367.parallax.core.spaceCraft;
+package com.tda367.parallax.model.core.spacecraft;
 
 import com.tda367.parallax.model.core.spacecraft.Agelion;
 import com.tda367.parallax.model.core.spacecraft.SpaceCraftFactory;
