@@ -1,6 +1,8 @@
 package com.tda367.parallax.controller.gamescreens;
 
 import com.badlogic.gdx.ScreenAdapter;
+import com.tda367.parallax.controller.GameState;
+import com.tda367.parallax.controller.GameStateChangeListener;
 import com.tda367.parallax.controller.GameStateManager;
 import com.tda367.parallax.model.core.Player;
 import com.tda367.parallax.model.gameover.GameOver;
@@ -15,9 +17,11 @@ public class GameOverScreen extends ScreenAdapter {
     private GameOver model;
     private GameOverView view;
     private Player player;
+    private GameStateChangeListener gameStateChangeListener;
 
-    public GameOverScreen(Player player) {
+    public GameOverScreen(Player player, GameStateChangeListener gameStateChangeListener) {
         this.player = player;
+        this.gameStateChangeListener = gameStateChangeListener;
     }
 
     @Override
@@ -27,7 +31,7 @@ public class GameOverScreen extends ScreenAdapter {
             this.view.render();
         } else {
             dispose();
-            GameStateManager.setMainMenuScreen(this.player);
+            gameStateChangeListener.gameStateChanged(GameState.MAIN_MENU_STATE, this.player);
         }
 
     }

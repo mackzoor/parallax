@@ -4,6 +4,8 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.controllers.Controllers;
+import com.tda367.parallax.controller.GameState;
+import com.tda367.parallax.controller.GameStateChangeListener;
 import com.tda367.parallax.controller.GameStateManager;
 import com.tda367.parallax.controller.controllerclasses.game.GameController;
 import com.tda367.parallax.controller.devicestates.DeviceManager;
@@ -28,12 +30,14 @@ public class GameScreen extends ScreenAdapter {
     private AudioQueue audioQueue;
     private CollisionCalculator collisionCalculator;
     private ParallaxView parallaxView;
+    private GameStateChangeListener gameStateChangeListener;
 
-    public GameScreen(Player player) {
+    public GameScreen(Player player, GameStateChangeListener gameStateChangeListener) {
 
         this.audioQueue = AudioQueue.getInstance();
         // Initiate game with space craft "Agelion"
         this.player = player;
+        this.gameStateChangeListener = gameStateChangeListener;
         this.sound = new Sound();
         this.collisionCalculator = new CollisionCalculator();
     }
@@ -74,6 +78,6 @@ public class GameScreen extends ScreenAdapter {
 
     private void gameOver() {
         this.dispose();
-        GameStateManager.setGameOverScreen(this.player);
+        gameStateChangeListener.gameStateChanged(GameState.GAME_OVER_STATE, this.player);
     }
 }

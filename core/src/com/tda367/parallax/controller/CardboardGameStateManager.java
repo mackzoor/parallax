@@ -6,48 +6,61 @@ import com.tda367.parallax.controller.gamescreens.CardboardMenuScreen;
 import com.tda367.parallax.controller.gamescreens.cardboardadapter.CardboardGame;
 import com.tda367.parallax.model.core.Player;
 
-import lombok.Getter;
-
 /**
  * Manages Screens for the Cardboard application
  */
 
-public class CardboardGameStateManager {
+public class CardboardGameStateManager implements GameStateChangeListener {
 
     private CardboardGameStateManager() {}
 
-    @Getter private static CardboardGame CARDBOARDGAME;
+    private static CardboardGame cardboardGame;
     private static CardboardMenuScreen cardboardMenuScreen;
     private static CardboardGameScreen cardboardGameScreen;
     private static CardboardGameOverScreen cardboardGameOverScreen;
 
     public static void setCardboardGame(CardboardGame game) {
-        if (CARDBOARDGAME == null) {
-            CARDBOARDGAME = game;
+        if (cardboardGame == null) {
+            cardboardGame = game;
         }
     }
 
-    public static void setCardboardMenuScreen(Player player) {
+    private static void setCardboardMenuScreen(Player player) {
         if (cardboardMenuScreen == null) {
-            cardboardMenuScreen = new CardboardMenuScreen(player);
+            cardboardMenuScreen = new CardboardMenuScreen(player, new CardboardGameStateManager());
         }
         cardboardMenuScreen.newMainMenu();
-        CARDBOARDGAME.setCardboardScreen(cardboardMenuScreen);
+        cardboardGame.setCardboardScreen(cardboardMenuScreen);
     }
 
-    public static void setCardboardGameScreen(Player player) {
+    private static void setCardboardGameScreen(Player player) {
         if (cardboardGameScreen == null) {
-            cardboardGameScreen = new CardboardGameScreen(player);
+            cardboardGameScreen = new CardboardGameScreen(player, new CardboardGameStateManager());
         }
         cardboardGameScreen.newGame();
-        CARDBOARDGAME.setCardboardScreen(cardboardGameScreen);
+        cardboardGame.setCardboardScreen(cardboardGameScreen);
     }
 
-    public static void setCardboardGameOverScreen(Player player) {
+    private static void setCardboardGameOverScreen(Player player) {
         if (cardboardGameOverScreen == null) {
-            cardboardGameOverScreen = new CardboardGameOverScreen(player);
+            cardboardGameOverScreen = new CardboardGameOverScreen(player, new CardboardGameStateManager());
         }
         cardboardGameOverScreen.newGameOver();
-        CARDBOARDGAME.setScreen(cardboardGameOverScreen);
+        cardboardGame.setScreen(cardboardGameOverScreen);
+    }
+
+    public static void setGameState(GameState nextState, Player player) {
+        if (nextState == GameState.MAIN_MENU_STATE) {
+            setCardboardMenuScreen(player);
+        } else if (nextState == GameState.GAME_STATE) {
+            setCardboardGameScreen(player);
+        } else if (nextState == GameState.GAME_OVER_STATE) {
+            setCardboardGameOverScreen(player);
+        }
+    }
+
+    @Override
+    public void gameStateChanged(GameState nextState, Player player) {
+        setGameState(nextState, player);
     }
 }
