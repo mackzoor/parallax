@@ -39,6 +39,8 @@ public interface ISpaceCraft extends Collidable, Updatable {
     Vector2f getCurrentPanVelocity();
 
     void setCurrentPanVelocity(float x, float y);
+
+    void enableIndipendantRotation(boolean value);
 }
 
 

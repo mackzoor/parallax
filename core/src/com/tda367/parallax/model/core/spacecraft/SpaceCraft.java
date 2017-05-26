@@ -103,6 +103,10 @@ public abstract class SpaceCraft implements ISpaceCraft {
         this.forwardRelativeVelocityMode = true;
     }
 
+    @Override
+    public void enableIndipendantRotation(boolean value) {
+        independentRotation = value;
+    }
 
     //Update
     @Override
