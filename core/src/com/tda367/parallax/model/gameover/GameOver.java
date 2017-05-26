@@ -1,5 +1,7 @@
 package com.tda367.parallax.model.gameover;
 
+
+import com.tda367.parallax.model.core.Camera;
 import com.tda367.parallax.model.core.Player;
 import com.tda367.parallax.model.score.ScoreHandler;
 import lombok.Getter;
@@ -27,12 +29,15 @@ public class GameOver {
     private Player player;
     @Getter
     private boolean obsolete;
+    @Getter
+    private Camera camera;
     private float timeShowed;
 
     public GameOver(Player player) {
         this.player = player;
         this.timeShowed = 0;
         this.obsolete = false;
+        this.camera = new Camera();
         handleScore();
         generateGameOverTexts(this.playerScore, this.highScore);
     }

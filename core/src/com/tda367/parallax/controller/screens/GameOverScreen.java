@@ -46,7 +46,7 @@ public class GameOverScreen extends ScreenAdapter {
 
     public void newGameOver() {
         this.model = new GameOver(this.player);
-        this.view = new GameOverView(this.model);
+        this.view = new GameOverView(this.model, false);
     }
 }
 

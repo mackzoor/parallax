@@ -1,5 +1,6 @@
 package com.tda367.parallax.view.gameover;
 
+import com.badlogic.gdx.Gdx;
 import com.tda367.parallax.model.gameover.GameOver;
 import com.tda367.parallax.model.gameover.GameOverText;
 import com.tda367.parallax.view.rendering.Renderer3D;
@@ -18,9 +19,10 @@ public class GameOverView {
 
     private List<GameOverTextView> gameOverTextViews;
 
-    public GameOverView(GameOver model) {
+    public GameOverView(GameOver model, boolean isVr) {
         this.model = model;
-        Renderer3D.getInstance().setCameraPosition(0, 0, 0);
+        Renderer3D.initialize(model.getCamera().getFov(), Gdx.graphics.getWidth(),
+                Gdx.graphics.getHeight(), isVr);
         generateGameOverTextViews();
     }
 

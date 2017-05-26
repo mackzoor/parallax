@@ -3,6 +3,7 @@ package com.tda367.parallax.controller.screens;
 import com.badlogic.gdx.Gdx;
 import com.google.vrtoolkit.cardboard.Eye;
 import com.google.vrtoolkit.cardboard.HeadTransform;
+import com.tda367.parallax.controller.screens.cardboardadapter.CardboardScreenAdapter;
 import com.tda367.parallax.model.core.Player;
 import com.tda367.parallax.model.gameover.GameOver;
 import com.tda367.parallax.view.gameover.GameOverView;
@@ -14,7 +15,7 @@ import static com.tda367.parallax.controller.screens.ScreenState.MAIN_MENU;
  * Class handling the "game over" screen for Cardboard. Shows player's score and high score
  */
 
-public class CardboardGameOverScreen extends com.tda367.parallax.controller.screens.cardboardadapter.CardboardScreenAdapter {
+public class CardboardGameOverScreen extends CardboardScreenAdapter {
     private GameOver model;
     private GameOverView view;
     private Player player;
@@ -47,6 +48,6 @@ public class CardboardGameOverScreen extends com.tda367.parallax.controller.scre
 
     public void newGameOver() {
         this.model = new GameOver(this.player);
-        this.view = new GameOverView(this.model);
+        this.view = new GameOverView(this.model, true);
     }
 }

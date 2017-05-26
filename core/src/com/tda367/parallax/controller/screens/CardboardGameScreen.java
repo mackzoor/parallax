@@ -14,6 +14,8 @@ import com.tda367.parallax.view.Sound;
 import com.tda367.parallax.view.parallaxview.ParallaxView;
 import com.tda367.parallax.view.rendering.Renderer3D;
 
+import static com.tda367.parallax.controller.screens.ScreenState.GAME_OVER;
+
 public class CardboardGameScreen extends com.tda367.parallax.controller.screens.cardboardadapter.CardboardScreenAdapter {
 
     private Player player;
@@ -42,10 +44,12 @@ public class CardboardGameScreen extends com.tda367.parallax.controller.screens.
 
     @Override
     public void onNewFrame(HeadTransform paramHeadTransform) {
-        //Updates Parallax game logic
-        this.parallaxGame.update((int) (Gdx.graphics.getDeltaTime() * 1000));
-        this.collisionCalculator.run();
-
+        if (!this.parallaxGame.isGameOver()) {
+            this.parallaxGame.update((int) (Gdx.graphics.getDeltaTime() * 1000));
+            this.collisionCalculator.run();
+        } else {
+            gameOver();
+        }
     }
 
     @Override
@@ -59,10 +63,13 @@ public class CardboardGameScreen extends com.tda367.parallax.controller.screens.
     public void newGame() {
         this.player.addSpaceCraft(SpaceCraftFactory.getAgelionInstance(15));
         this.parallaxGame = new Parallax(this.player);
-        this.parallaxView = new ParallaxView(this.parallaxGame, false);
-        this.controller = new GameController(this.parallaxGame,
-                                             this.parallaxView,
-                                             DeviceManager.getDevice());
+        this.parallaxView = new ParallaxView(this.parallaxGame, true);
+        this.controller = new GameController(this.parallaxGame, this.parallaxView, DeviceManager.getDevice());
+    }
+
+    private void gameOver() {
+        this.dispose();
+        this.screenChanger.requestScreenChange(GAME_OVER, this.player);
     }
 
 }

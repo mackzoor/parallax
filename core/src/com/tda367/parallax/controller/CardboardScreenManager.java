@@ -16,7 +16,7 @@ import static com.tda367.parallax.controller.screens.ScreenState.MAIN_MENU;
  * Manages Screens for the Cardboard application
  */
 
-public class CardboardScreenManager implements ScreenChanger {
+public final class CardboardScreenManager implements ScreenChanger {
 
     private CardboardScreenManager() {}
 
@@ -33,7 +33,10 @@ public class CardboardScreenManager implements ScreenChanger {
 
     private static void setCardboardMenuScreen(Player player) {
         if (cardboardMenuScreen == null) {
-            cardboardMenuScreen = new CardboardMenuScreen(player, ScreenChangerSingleton.INSTANCE);
+            cardboardMenuScreen = new CardboardMenuScreen(
+                    player,
+                    ScreenChangerSingleton.INSTANCE
+            );
         }
         cardboardMenuScreen.newMainMenu();
         cardboardGame.setCardboardScreen(cardboardMenuScreen);
@@ -41,7 +44,10 @@ public class CardboardScreenManager implements ScreenChanger {
 
     private static void setCardboardGameScreen(Player player) {
         if (cardboardGameScreen == null) {
-            cardboardGameScreen = new CardboardGameScreen(player, ScreenChangerSingleton.INSTANCE);
+            cardboardGameScreen = new CardboardGameScreen(
+                    player,
+                    ScreenChangerSingleton.INSTANCE
+            );
         }
         cardboardGameScreen.newGame();
         cardboardGame.setCardboardScreen(cardboardGameScreen);
@@ -49,10 +55,13 @@ public class CardboardScreenManager implements ScreenChanger {
 
     private static void setCardboardGameOverScreen(Player player) {
         if (cardboardGameOverScreen == null) {
-            cardboardGameOverScreen = new CardboardGameOverScreen(player, ScreenChangerSingleton.INSTANCE);
+            cardboardGameOverScreen = new CardboardGameOverScreen(
+                    player,
+                    ScreenChangerSingleton.INSTANCE
+            );
         }
         cardboardGameOverScreen.newGameOver();
-        cardboardGame.setScreen(cardboardGameOverScreen);
+        cardboardGame.setCardboardScreen(cardboardGameOverScreen);
     }
 
     public static void setGameState(ScreenState nextState, Player player) {

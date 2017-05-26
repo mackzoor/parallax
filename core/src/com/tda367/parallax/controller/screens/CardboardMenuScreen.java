@@ -66,8 +66,8 @@ public class CardboardMenuScreen extends com.tda367.parallax.controller.screens.
     }
 
     private void startButtonHit() {
-        dispose();
-        screenChanger.requestScreenChange(GAME, this.player);
+        this.dispose();
+        this.screenChanger.requestScreenChange(GAME, this.player);
     }
 
     private void exitButtonHit() {
