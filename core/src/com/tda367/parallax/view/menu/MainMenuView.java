@@ -73,14 +73,13 @@ public class MainMenuView {
      */
     private void updatePowerupList() {
 
-        //TODO FIX
-/*        final List<IPowerUp> missingPowerUps = syncHash(this.powerUpsHash,
+        final List<IPowerUp> missingPowerUps = syncHash(this.powerUpsHash,
                                                         this.mainMenu.getPowerUps());
 
         for (final IPowerUp missingPowerUp : missingPowerUps) {
             this.powerUpsHash.put(missingPowerUp,
                                   new PowerUpViewAutomaticTransform(missingPowerUp));
-        }*/
+        }
     }
 
     /**

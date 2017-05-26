@@ -12,6 +12,8 @@ public final class ObstacleFactory {
     private ObstacleFactory() {
     }
 
+    private static Random random = new Random();
+
     //Boxes
     public static BoxObstacle getBoxObstacleInstance(Vector3f pos, Quat4f rot) {
         return new BoxObstacle(pos, rot);
@@ -34,6 +36,10 @@ public final class ObstacleFactory {
         return new WallObstacle(pos, new Quat4f(0, 0.7071f, 0, 0.7071f));
     }
 
+    private static WallObstacle crazyWall(Vector3f pos) {
+        return new WallObstacle(pos, new Quat4f(0, random.nextFloat(), 0, random.nextFloat()));
+    }
+
     private static WallObstacle getRightWallInstance(Vector3f pos) {
         return new WallObstacle(pos, new Quat4f(0, 1, 0, 0));
     }
@@ -46,10 +52,14 @@ public final class ObstacleFactory {
         return new WallObstacle(pos, new Quat4f(0, 0, 0, 1));
     }
 
+    private static MovingWallObstacle getMovingWallObstacle(Vector3f pos) {
+        return new MovingWallObstacle(pos, new Quat4f(0,0,0,1));
+    }
+
     public static WallObstacle getRandomWallInstance(Vector3f pos) {
         final Random rand = new Random();
 
-        final int randomInt = (int) (rand.nextFloat() * 4);
+        /*int randomInt = (int) (rand.nextFloat() * 5);
 
 
         if (randomInt == 0) {
@@ -58,8 +68,13 @@ public final class ObstacleFactory {
             return getRightWallInstance(pos);
         } else if (randomInt == 2) {
             return getBottomWallInstance(pos);
-        } else {
+        } else if(randomInt == 3) {
             return getLeftWallInstance(pos);
-        }
+        }else{
+            return crazyWall(pos);
+            */
+        return getMovingWallObstacle(pos);
+
     }
 }
+
