@@ -71,7 +71,7 @@ public class Missile extends PowerUpBase {
     public void activate(Transformable transformable) {
         super.activate(transformable);
         super.addToCollisionManager();
-        super.enableCollision();
+        //Add the missile to the world and make it collidable
 
         this.transformable = transformable;
 
@@ -167,7 +167,8 @@ public class Missile extends PowerUpBase {
             fall(milliSinceLastUpdate);
 
 
-        } else if (timeStorage <= ACTIVE_TIME) {
+        }else if(timeStorage <= ACTIVE_TIME){
+            super.enableCollision();
             accelerateMissile(milliSinceLastUpdate);
             moveOnVelocity(milliSinceLastUpdate);
             rotateMissile(getEnemyTargetPosition());

@@ -203,8 +203,8 @@ public class CollisionCalculator implements ICollisionCalculator {
             this.result.getPersistentManifold().getContactPoint(0).getPositionWorldOnA(btContactPoint);
             contactPoint = new Vector3f(
                     btContactPoint.x,
-                    btContactPoint.z,
-                    btContactPoint.y * -1
+                    btContactPoint.z * -1,
+                    btContactPoint.y
             );
         } else {
             contactPoint = new Vector3f();

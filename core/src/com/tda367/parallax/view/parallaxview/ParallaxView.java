@@ -14,6 +14,8 @@ public class ParallaxView implements View {
     private final Parallax parallax;
     private WorldView worldView;
     private HudView playerHudView;
+    private CollisionEffect collisionEffect;
+    @Getter @Setter private boolean hudViewActive;
     @Getter
     @Setter
     private boolean hudViewActive;
@@ -36,24 +38,7 @@ public class ParallaxView implements View {
         this.playerHudView = new HudView(parallax.getPlayer());
         this.worldView = new WorldView(parallax.getWorld());
         this.hudViewActive = false;
-    }
-
-    /**
-     * Sets render x-resolution.
-     *
-     * @param width new x-resolution.
-     */
-    public void setWidth(int width) {
-        Renderer3D.getInstance().setWidth(width);
-    }
-
-    /**
-     * Sets render y-resolution.
-     *
-     * @param height new y-resolution.
-     */
-    public void setHeight(int height) {
-        Renderer3D.getInstance().setHeight(height);
+        this.collisionEffect = new CollisionEffect();
     }
 
     @Override
@@ -67,11 +52,20 @@ public class ParallaxView implements View {
         if (this.hudViewActive) {
             this.playerHudView.render();
         }
+
+        collisionEffect.render();
         Renderer3D.getInstance().renderFrame();
     }
 
     @Override
     public boolean isObsolete() {
         return false;
+    }
+
+    public void setWidth(int width){
+        Renderer3D.getInstance().setWidth(width);
+    }
+    public void setHeight(int height){
+        Renderer3D.getInstance().setHeight(height);
     }
 }

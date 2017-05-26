@@ -2,18 +2,30 @@ package com.tda367.parallax.view.parallaxview;
 
 import com.tda367.parallax.model.core.powerups.arsenal.IPowerUp;
 import com.tda367.parallax.model.core.powerups.arsenal.Missile;
+import com.tda367.parallax.view.rendering.ParticleEffectType;
+import com.tda367.parallax.view.rendering.RenderableParticleEffect;
 import com.tda367.parallax.utilities.ResourceLoader;
 import com.tda367.parallax.view.rendering.Renderable3dObject;
 import com.tda367.parallax.view.rendering.Renderer3D;
+
+import javax.vecmath.Vector3f;
 
 /**
  * View class for {@link Missile}
  */
 public class IPowerUpView implements View {
-    private final static String MODEL_3D_INTERNAL_PATH = "3dModels/missile/missile.g3db";
     private final IPowerUp powerUp;
-    private Renderable3dObject renderable3dObject;
 
+
+    private final static String MODEL_3D_INTERNAL_PATH = "3dModels/missile/missile.g3db";
+    private final static ParticleEffectType ROCKET_TRAIL = ParticleEffectType.ROCKET_TRAIL;
+    private final static ParticleEffectType EXPLOSION = ParticleEffectType.EXPLOSION;
+
+    private Renderable3dObject renderable3dObject;
+    private RenderableParticleEffect rocketTrail;
+    private RenderableParticleEffect explosion;
+
+    private int deathTime;
 
     /**
      * Creates a IPowerUpView from a {@link IPowerUp}.
@@ -28,19 +40,39 @@ public class IPowerUpView implements View {
                 ResourceLoader.getInstance().getModel(MODEL_3D_INTERNAL_PATH),
                 1
         );
+
+        rocketTrail = new RenderableParticleEffect(ROCKET_TRAIL);
+        rocketTrail.start();
+        explosion = new RenderableParticleEffect(EXPLOSION);
+        deathTime = 0;
     }
 
     @Override
     public void render() {
-        if (this.powerUp.isActive()) {
-            this.renderable3dObject.setPos(this.powerUp.getPos());
-            this.renderable3dObject.setRot(this.powerUp.getRot());
-            Renderer3D.getInstance().addObjectToFrame(this.renderable3dObject);
+        if (powerUp.isActive()){
+            renderable3dObject.setPos(powerUp.getPos());
+            renderable3dObject.setRot(powerUp.getRot());
+
+            Vector3f particleOffset = new Vector3f(powerUp.getPos());
+            particleOffset.add(new Vector3f(0,-0.5f,0));
+            rocketTrail.setPosition(particleOffset);
+
+            Renderer3D.getInstance().addObjectToFrame(renderable3dObject);
+            Renderer3D.getInstance().addParticleEffectToFrame(rocketTrail);
+        } else if (powerUp.isDead()){
+                explosion.setPosition(powerUp.getPos());
+                explosion.start();
+                rocketTrail.kill();
+            }
+            Renderer3D.getInstance().addParticleEffectToFrame(rocketTrail);
+            deathTime++;
+            if (deathTime == 0){
         }
+        Renderer3D.getInstance().addParticleEffectToFrame(explosion);
     }
 
     @Override
     public boolean isObsolete() {
-        return this.powerUp.isDead();
+        return powerUp.isDead() && deathTime > 300;
     }
 }
