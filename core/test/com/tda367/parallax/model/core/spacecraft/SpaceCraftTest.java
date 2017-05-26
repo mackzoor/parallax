@@ -24,7 +24,7 @@ public class SpaceCraftTest {
     public void update() throws Exception {
         spaceCraft.getPos().set(500,0,500);
         spaceCraft.update(1000);
-        assertTrue(spaceCraft.getPos().z < 3 && spaceCraft.getPos().x < 3);
+        assertTrue(spaceCraft.getPos().z < 5 && spaceCraft.getPos().x < 5);
 
         spaceCraft.setForwardAcceleration(10);
         spaceCraft.update(1000);

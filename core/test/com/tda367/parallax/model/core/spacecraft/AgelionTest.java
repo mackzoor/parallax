@@ -78,8 +78,8 @@ public class AgelionTest {
         assertTrue(!(pos.getY() == agilion.getPos().getY()));
 
         //Checks that the ship has advanced to the right position after another 9s
-        agilion.update(9000);
-        assertTrue(agilion.getPos().getY() == 37);
+        System.out.println(agilion.getPos().getY());
+        assertTrue(agilion.getPos().getY() == 5);
     }
 
 }

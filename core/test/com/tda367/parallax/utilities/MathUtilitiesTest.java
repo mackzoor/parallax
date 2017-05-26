@@ -31,8 +31,12 @@ public class MathUtilitiesTest {
     public void vectorToQuat() throws Exception {
         Vector3f vector3f = new Vector3f(0,0,1);
         Quat4f quat4f = MathUtilities.vectorToQuat(vector3f);
-        System.out.println(quat4f);
-
+        assertTrue(
+                quat4f.getX() == 0 &&
+                quat4f.getY() == 0 &&
+                quat4f.getZ() == 0 &&
+                quat4f.getW() == 0
+        );
     }
 
     @Test

@@ -23,7 +23,7 @@ public class CannonTest {
     public void activate() throws Exception {
         cannon.activate(agelion);
         assertTrue(cannon.isActive());
-        assertTrue(cannon.isCollisionEnabled());
+        assertFalse(cannon.isCollisionEnabled());
         assertTrue(cannon.getVelocity().y != 0);
     }
 
