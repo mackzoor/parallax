@@ -4,8 +4,8 @@ package com.tda367.parallax.view.menu;
 import com.badlogic.gdx.Gdx;
 import com.tda367.parallax.model.core.powerups.arsenal.IPowerUp;
 import com.tda367.parallax.model.menu.MainMenu;
-import com.tda367.parallax.view.parallaxview.IPowerUpView;
-import com.tda367.parallax.view.parallaxview.View;
+import com.tda367.parallax.view.parallaxview.parallaxviewcomponents.powerupviews.PowerUpViewAutomaticTransform;
+import com.tda367.parallax.view.parallaxview.parallaxviewcomponents.View;
 import com.tda367.parallax.view.rendering.Renderer3D;
 
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ public class MainMenuView {
     private BackgroundView world;
     private com.tda367.parallax.view.menu.ExitButton3DView exitButton;
     private StartButton3DView startButton;
-    private Map<IPowerUp, IPowerUpView> powerUpsHash;
+    private Map<IPowerUp, PowerUpViewAutomaticTransform> powerUpsHash;
 
 
     public MainMenuView(MainMenu mainMenu, boolean isVr) {
@@ -28,7 +28,7 @@ public class MainMenuView {
         this.world = new BackgroundView();
         this.exitButton = new ExitButton3DView(mainMenu.getExitButton());
         this.startButton = new StartButton3DView(mainMenu.getStartButton());
-        this.powerUpsHash = new HashMap<IPowerUp, IPowerUpView>();
+        this.powerUpsHash = new HashMap<IPowerUp, PowerUpViewAutomaticTransform>();
         Renderer3D.initialize(mainMenu.getCamera().getFov(), Gdx.graphics.getWidth(),
                 Gdx.graphics.getHeight(), isVr);
         updatePowerupList();
@@ -44,8 +44,8 @@ public class MainMenuView {
         this.world.render();
         this.exitButton.render();
         this.startButton.render();
-        for (final IPowerUpView iPowerUpView : this.powerUpsHash.values()) {
-            iPowerUpView.render();
+        for (final PowerUpViewAutomaticTransform powerUpViewAutomaticTransform : this.powerUpsHash.values()) {
+            powerUpViewAutomaticTransform.render();
         }
         Renderer3D.getInstance().renderFrame();
     }
@@ -72,13 +72,15 @@ public class MainMenuView {
      * Updates the PowerUpList from the world object
      */
     private void updatePowerupList() {
-        final List<IPowerUp> missingPowerUps = syncHash(this.powerUpsHash,
+
+        //TODO FIX
+/*        final List<IPowerUp> missingPowerUps = syncHash(this.powerUpsHash,
                                                         this.mainMenu.getPowerUps());
 
         for (final IPowerUp missingPowerUp : missingPowerUps) {
             this.powerUpsHash.put(missingPowerUp,
-                                  new IPowerUpView(missingPowerUp));
-        }
+                                  new PowerUpViewAutomaticTransform(missingPowerUp));
+        }*/
     }
 
     /**

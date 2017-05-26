@@ -33,6 +33,11 @@ public class Nuke extends PowerUpBase {
     }
 
     @Override
+    public PowerUpType getPowerUpType() {
+        return null;
+    }
+
+    @Override
     public CollidableType getCollidableType() {
         return CollidableType.HARMFUL;
     }

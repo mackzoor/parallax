@@ -1,4 +1,4 @@
-package com.tda367.parallax.view.parallaxview;
+package com.tda367.parallax.view.parallaxview.parallaxviewcomponents;
 
 /**
  * Interface for view classes in package.

@@ -88,6 +88,11 @@ public class Missile extends PowerUpBase {
     }
 
     @Override
+    public PowerUpType getPowerUpType() {
+        return PowerUpType.MISSILE;
+    }
+
+    @Override
     public CollidableType getCollidableType() {
         if (timeStorage > TIME_TRACKING_TRANS) {
             return CollidableType.HARMFUL;

@@ -1,9 +1,11 @@
-package com.tda367.parallax.view.parallaxview;
+package com.tda367.parallax.view.parallaxview.parallaxviewcomponents.worldview.courseviews;
 
 import com.tda367.parallax.model.core.powerups.container.Container;
 import com.tda367.parallax.model.core.world.ICourseModule;
 import com.tda367.parallax.model.core.world.courseobstacles.CourseObstacleBase;
 import com.tda367.parallax.utilities.ResourceLoader;
+import com.tda367.parallax.view.parallaxview.parallaxviewcomponents.View;
+import com.tda367.parallax.view.parallaxview.parallaxviewcomponents.worldview.courseviews.obstacleview.CourseObstacleView;
 import com.tda367.parallax.view.rendering.Renderable3dObject;
 import com.tda367.parallax.view.rendering.Renderer3D;
 
@@ -13,7 +15,7 @@ import java.util.List;
 /**
  * View class for {@link ICourseModule}.
  */
-public class CourseModelView implements View {
+public class CourseModelView implements View{
 
     private static final String MODEL_3D_INTERNAL_PATH = "3dModels/defaultCourse/course.g3db";
     private final ICourseModule courseModule;
@@ -26,7 +28,7 @@ public class CourseModelView implements View {
      *
      * @param courseModule to be used to create the CourseModelView.
      */
-    CourseModelView(ICourseModule courseModule) {
+    public CourseModelView(ICourseModule courseModule) {
         this.courseModule = courseModule;
         this.obstacleViews = new ArrayList<CourseObstacleView>();
         this.containerViews = new ArrayList<ContainerView>();
@@ -47,7 +49,6 @@ public class CourseModelView implements View {
         }
     }
 
-    @Override
     public void render() {
         //Render course module.
         Renderer3D.getInstance().addObjectToFrame(this.courseModule3dObject);
@@ -64,7 +65,6 @@ public class CourseModelView implements View {
 
     }
 
-    @Override
     public boolean isObsolete() {
         return !this.courseModule.isActive();
     }

@@ -1,4 +1,4 @@
-package com.tda367.parallax.view.parallaxview;
+package com.tda367.parallax.view.parallaxview.parallaxviewcomponents.extraviews;
 
 
 import com.tda367.parallax.model.core.collision.*;
@@ -25,7 +25,7 @@ public class CollisionEffect implements CollisionObserver {
     private CollisionManager collisionManager;
     @Setter @Getter private boolean enabled;
 
-    CollisionEffect() {
+    public CollisionEffect() {
         activeEffects = new ArrayList<RenderableParticleEffect>();
         enabled = true;
         collisionManager = CollisionManager.getInstance();

@@ -40,4 +40,9 @@ public class Shield extends PowerUpBase {
     public String getCollisionModelPath() {
         return COLLISION_MODEL;
     }
+
+    @Override
+    public PowerUpType getPowerUpType() {
+        return PowerUpType.SHIELD;
+    }
 }

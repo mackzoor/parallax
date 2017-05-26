@@ -7,5 +7,6 @@ import com.tda367.parallax.model.core.util.Transformable;
 public interface IPowerUp extends Usable, Collidable {
     void activate(Transformable transformable);
 
+    PowerUpType getPowerUpType();
     boolean isActive();
 }

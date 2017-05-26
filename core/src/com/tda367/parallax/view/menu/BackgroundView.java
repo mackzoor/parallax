@@ -1,7 +1,7 @@
 package com.tda367.parallax.view.menu;
 
 import com.tda367.parallax.utilities.ResourceLoader;
-import com.tda367.parallax.view.parallaxview.View;
+import com.tda367.parallax.view.parallaxview.parallaxviewcomponents.View;
 import com.tda367.parallax.view.rendering.Renderable3dObject;
 import com.tda367.parallax.view.rendering.Renderer3D;
 

@@ -1,7 +1,8 @@
-package com.tda367.parallax.view.parallaxview;
+package com.tda367.parallax.view.parallaxview.parallaxviewcomponents.worldview.courseviews;
 
 import com.tda367.parallax.model.core.powerups.container.Container;
 import com.tda367.parallax.utilities.ResourceLoader;
+import com.tda367.parallax.view.parallaxview.parallaxviewcomponents.powerupviews.PowerUpViewManualTransform;
 import com.tda367.parallax.view.rendering.Renderable3dObject;
 import com.tda367.parallax.view.rendering.Renderer3D;
 
@@ -10,16 +11,15 @@ import javax.vecmath.Quat4f;
 /**
  * View class for {@link Container}.
  */
-public class ContainerView implements View {
+public class ContainerView {
 
     private static final String MODEL_3D_INTERNAL_PATH = "3dModels/containerround/containerround.g3db";
 
-    //TODO Change path to the particular powerup.
-    private static final String MODEL_3D_INTERNAL_PATH_MISSILE = "3dModels/missile/missile.g3db";
     private final Container container;
     private Renderable3dObject container3dObject;
-    private Renderable3dObject powerUp3dObject;
     private Quat4f powerUpRotation;
+
+    private PowerUpViewManualTransform internalPowerUp;
 
     /**
      * Creates a ContainerView from a {@link Container}.
@@ -36,20 +36,15 @@ public class ContainerView implements View {
                 1f
         );
 
-        this.powerUp3dObject = new Renderable3dObject(
-                container.getPos(),
-                this.powerUpRotation,
-                ResourceLoader.getInstance().getModel(MODEL_3D_INTERNAL_PATH_MISSILE),
-                1f,
-                true
-        );
+        internalPowerUp = new PowerUpViewManualTransform(container.getPowerUp().getPowerUpType());
+        internalPowerUp.setPosition(this.container.getPos());
+        internalPowerUp.effectsEnabled(false);
     }
 
-    @Override
     public void render() {
         if (!this.container.isCollected()) {
             updatePowerUpRotation();
-            Renderer3D.getInstance().addObjectToFrame(this.powerUp3dObject);
+            internalPowerUp.render();
             Renderer3D.getInstance().addObjectToFrame(this.container3dObject);
         }
     }
@@ -60,12 +55,10 @@ public class ContainerView implements View {
         rotation.normalize();
         this.powerUpRotation.mul(rotation);
         this.powerUpRotation.normalize();
-        this.powerUp3dObject.setRot(this.powerUpRotation);
+        internalPowerUp.setRotation(this.powerUpRotation);
     }
 
-    @Override
-    public boolean isObsolete() {
+    public boolean isCollected() {
         return !this.container.isCollected();
     }
-
 }

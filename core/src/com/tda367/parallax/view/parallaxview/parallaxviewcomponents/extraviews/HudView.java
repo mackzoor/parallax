@@ -1,4 +1,4 @@
-package com.tda367.parallax.view.parallaxview;
+package com.tda367.parallax.view.parallaxview.parallaxviewcomponents.extraviews;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g3d.Material;
@@ -13,7 +13,7 @@ import javax.vecmath.Vector3f;
 /**
  * View class for rendering a {@link Player} hud.
  */
-public class HudView implements View {
+public class HudView {
 
     private static final String PATH_TO_3D_MODEL = "3dModels/hudpane/hudPane.g3db";
     private final Player player;
@@ -26,7 +26,7 @@ public class HudView implements View {
      *
      * @param player to be used to create the PlayerView.
      */
-    HudView(Player player) {
+    public HudView(Player player) {
         this.player = player;
         this.hudPane = new Renderable3dObject(
                 player.getSpaceCraft().getPos(),
@@ -45,7 +45,6 @@ public class HudView implements View {
         material.set(textureAttribute);
     }
 
-    @Override
     public void render() {
 
         //Get player spaceCraft
@@ -66,11 +65,6 @@ public class HudView implements View {
         this.hudPane.setPos(nextPos);
 
         Renderer3D.getInstance().addObjectToFrame(this.hudPane);
-
     }
 
-    @Override
-    public boolean isObsolete() {
-        return false;
-    }
 }

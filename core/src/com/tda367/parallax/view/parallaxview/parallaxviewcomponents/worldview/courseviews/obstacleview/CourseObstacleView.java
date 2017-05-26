@@ -1,4 +1,4 @@
-package com.tda367.parallax.view.parallaxview;
+package com.tda367.parallax.view.parallaxview.parallaxviewcomponents.worldview.courseviews.obstacleview;
 
 import com.tda367.parallax.model.core.world.courseobstacles.CourseObstacleBase;
 import com.tda367.parallax.model.core.world.courseobstacles.ObstacleType;
@@ -9,11 +9,11 @@ import com.tda367.parallax.view.rendering.Renderer3D;
 /**
  * View class for {@link CourseObstacleBase}.
  */
-public class CourseObstacleView implements View {
+public class CourseObstacleView {
     private final CourseObstacleBase obstacle;
     private Renderable3dObject renderable3dObject;
 
-    CourseObstacleView(CourseObstacleBase obstacle) {
+    public CourseObstacleView(CourseObstacleBase obstacle) {
         this.obstacle = obstacle;
         this.renderable3dObject = new Renderable3dObject(
                 obstacle.getPos(),
@@ -24,8 +24,6 @@ public class CourseObstacleView implements View {
         );
     }
 
-
-    @Override
     public void render() {
         if (!obstacle.isDestroyed()) {
             this.renderable3dObject.setPos(obstacle.getPos());
@@ -34,8 +32,7 @@ public class CourseObstacleView implements View {
         }
     }
 
-    @Override
-    public boolean isObsolete() {
+    public boolean isDestroyed() {
         return this.obstacle.isDestroyed();
     }
 

@@ -108,6 +108,11 @@ public class Cannon extends PowerUpBase {
     }
 
     @Override
+    public PowerUpType getPowerUpType() {
+        return PowerUpType.LAZER;
+    }
+
+    @Override
     public CollidableType getCollidableType() {
         return CollidableType.HARMFUL;
     }

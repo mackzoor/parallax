@@ -2,6 +2,9 @@ package com.tda367.parallax.view.parallaxview;
 
 import com.badlogic.gdx.Gdx;
 import com.tda367.parallax.model.core.Parallax;
+import com.tda367.parallax.view.parallaxview.parallaxviewcomponents.extraviews.CollisionEffect;
+import com.tda367.parallax.view.parallaxview.parallaxviewcomponents.extraviews.HudView;
+import com.tda367.parallax.view.parallaxview.parallaxviewcomponents.worldview.WorldView;
 import com.tda367.parallax.view.rendering.Renderer3D;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,7 +12,7 @@ import lombok.Setter;
 /**
  * View class for {@link Parallax}.
  */
-public class ParallaxView implements View {
+public class ParallaxView {
 
     private final Parallax parallax;
     private WorldView worldView;
@@ -37,8 +40,7 @@ public class ParallaxView implements View {
         this.hudViewActive = false;
         this.collisionEffect = new CollisionEffect();
     }
-
-    @Override
+    
     public void render() {
         Renderer3D.getInstance().setCameraPosition(
                 this.parallax.getCamera().getPos().getX(),
@@ -54,12 +56,7 @@ public class ParallaxView implements View {
         Renderer3D.getInstance().renderFrame();
     }
 
-    @Override
-    public boolean isObsolete() {
-        return false;
-    }
-
-    public void setWidth(int width) {
+    public void setWidth(int width){
         Renderer3D.getInstance().setWidth(width);
     }
     public void setHeight(int height) {

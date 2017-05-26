@@ -25,16 +25,14 @@ public class PowerUpFactory {
      * @return a random powerUp.
      */
     public static IPowerUp createRandom() {
-        final int rand = (int) random.nextFloat() * 2;
+        final int rand = (int) (random.nextFloat() * 2);
 
-        switch (rand) {
-            case 0:
-                return createCannon();
-            case 1:
-                return createMissile();
-            default:
-                return createCannon();
+        if (rand == 0) {
+            return createCannon();
+        } else if (rand == 1){
+            return createMissile();
+        } else {
+            return createMissile();
         }
-
     }
 }

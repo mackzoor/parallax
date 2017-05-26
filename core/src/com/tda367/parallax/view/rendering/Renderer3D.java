@@ -153,6 +153,7 @@ public final class Renderer3D {
 
         for (final RenderableParticleEffect renderableParticleEffect : particleEffectsToRender) {
             particleSystem.add(renderableParticleEffect.getParticleEffect());
+            renderableParticleEffect.getParticleEffect().setBatch(particleSystem.getBatches());
         }
         particleSystem.update();
 

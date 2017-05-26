@@ -120,7 +120,7 @@ public class DefaultCourseModule implements ICourseModule {
     }
 
     private void spawnPowerUp() {
-        final IPowerUp pu = PowerUpFactory.createMissile();
+        final IPowerUp pu = PowerUpFactory.createRandom();
         this.powerUps.add(pu);
         final Container container = new Container(pu);
         final Random rand = new Random();

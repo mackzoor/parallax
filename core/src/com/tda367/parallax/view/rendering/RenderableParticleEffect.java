@@ -29,7 +29,6 @@ public class RenderableParticleEffect {
         rotation = new Quat4f(0,0,0,1);
 
         particleEffect = ResourceLoader.getInstance().getParticleEffect(type.getFilePath());
-        particleEffect.setBatch(Renderer3D.getInstance().getParticleSystem().getBatches());
         particleEffect.init();
     }
 

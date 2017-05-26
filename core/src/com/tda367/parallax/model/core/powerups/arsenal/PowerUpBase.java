@@ -64,6 +64,8 @@ public abstract class PowerUpBase implements IPowerUp {
     @Override
     public abstract String getCollisionModelPath();
 
+    @Override
+    public abstract PowerUpType getPowerUpType();
 
     @Override
     public boolean collisionActivated() {
