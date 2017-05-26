@@ -17,11 +17,13 @@ public class PowerUpFactory {
         return new Missile();
     }
 
+    private PowerUpFactory(){}
+
     /**
      * @return a random powerUp.
      */
     public static IPowerUp createRandom() {
-        int rand = (int) random.nextFloat() * 2;
+        final int rand = (int) random.nextFloat() * 2;
 
         switch (rand) {
             case 0:

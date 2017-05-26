@@ -34,9 +34,9 @@ public class ScoreHandler {
 
     //Creates a new list highest scores based on the preferences. Easier to handle.
     private void updateHighScoreHolders() {
-        List<HighScoreHolder> tempList = new ArrayList<HighScoreHolder>();
+        final List<HighScoreHolder> tempList = new ArrayList<HighScoreHolder>();
 
-        for (String s : this.preferences.get().keySet()) {
+        for (final String s : this.preferences.get().keySet()) {
             this.temporaryString = s;
             Boolean check = false;
             while (!(check)) {
@@ -50,7 +50,7 @@ public class ScoreHandler {
 
     private boolean removeNameDivider() {
         if (this.temporaryString.endsWith("#")) {
-            StringBuilder sb = new StringBuilder(this.temporaryString);
+            final StringBuilder sb = new StringBuilder(this.temporaryString);
 
             sb.deleteCharAt(sb.length() - 1);
 
@@ -65,7 +65,7 @@ public class ScoreHandler {
     //Sort the updateHighScoreHolder list. Making it be in order of highest score, to the 10th highest score.
     private void sortHighScoreHolders() {
 
-        ArrayList sortedHighScores = new ArrayList<HighScoreHolder>();
+        final ArrayList sortedHighScores = new ArrayList<HighScoreHolder>();
         HighScoreHolder currentHighestScore = new HighScoreHolder("No highest scorers", -1);
 
         for (int i = 0; i < this.highScoreHolders.size(); i++) {
@@ -87,7 +87,7 @@ public class ScoreHandler {
     public void storeHighScore(String name, int score) {
         if (!(this.preferences.get().size() < LENGTH_OF_LIST)) {
 
-            String storeName = suitableName(name);
+            final String storeName = suitableName(name);
 
             this.preferences.putInteger(storeName, score);
 
@@ -96,7 +96,7 @@ public class ScoreHandler {
             removeLowestHighScore();
 
         } else {
-            String storeName = suitableName(name);
+            final String storeName = suitableName(name);
 
             this.preferences.putInteger(storeName, score);
         }
@@ -111,7 +111,7 @@ public class ScoreHandler {
         while (!(nameAvailable)) {
             nameAvailable = checkAvailability(returnName);
             if (!nameAvailable) {
-                StringBuilder sb = new StringBuilder(returnName);
+                final StringBuilder sb = new StringBuilder(returnName);
                 sb.append("#");
                 returnName = sb.toString();
             }
@@ -122,7 +122,7 @@ public class ScoreHandler {
     private void removeLowestHighScore() {
         String removeName = null;
         int lowestScore = -1;
-        for (String s : this.preferences.get().keySet()) {
+        for (final String s : this.preferences.get().keySet()) {
             if (lowestScore == -1) {
                 lowestScore = this.preferences.getInteger(s);
                 removeName = s;
@@ -139,7 +139,7 @@ public class ScoreHandler {
     }
 
     private boolean checkAvailability(String name) {
-        for (String s : this.preferences.get().keySet()) {
+        for (final String s : this.preferences.get().keySet()) {
             if (s.equals(name)) {
                 return false;
             }
@@ -150,16 +150,16 @@ public class ScoreHandler {
 
     //Get highest scores in list, in two different ways
     public List<Integer> getHighScores() {
-        ArrayList<Integer> highScore = new ArrayList<Integer>();
-        for (HighScoreHolder holder : this.highScoreHolders) {
+        final ArrayList<Integer> highScore = new ArrayList<Integer>();
+        for (final HighScoreHolder holder : this.highScoreHolders) {
             highScore.add(holder.getScore());
         }
         return highScore;
     }
 
     public List<String> getHighScoresHolders() {
-        ArrayList<String> highScoreName = new ArrayList<String>();
-        for (HighScoreHolder holder : this.highScoreHolders) {
+        final ArrayList<String> highScoreName = new ArrayList<String>();
+        for (final HighScoreHolder holder : this.highScoreHolders) {
             highScoreName.add(holder.getName());
         }
         return highScoreName;

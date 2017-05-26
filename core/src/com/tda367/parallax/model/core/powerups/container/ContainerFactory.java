@@ -8,13 +8,15 @@ import com.tda367.parallax.model.core.powerups.arsenal.PowerUpFactory;
  */
 class ContainerFactory {
 
+    private ContainerFactory(){}
+
+
     /**
      * Creates a {@link Container} with the specified {@link IPowerUp}.
-     *
      * @param powerUp used to create Container.
      * @return created Container containing the specified powerUp.
      */
-    public static com.tda367.parallax.model.core.powerups.container.IContainer createContainer(IPowerUp powerUp) {
+    public static IContainer createContainer(IPowerUp powerUp) {
         return new Container(powerUp);
     }
 
@@ -23,8 +25,8 @@ class ContainerFactory {
      *
      * @return the created Container with random powerUp.
      */
-    public static com.tda367.parallax.model.core.powerups.container.IContainer createRandomContainer() {
-        IPowerUp powerUp = PowerUpFactory.createRandom();
+    public static IContainer createRandomContainer() {
+        final IPowerUp powerUp = PowerUpFactory.createRandom();
         return createContainer(powerUp);
     }
 

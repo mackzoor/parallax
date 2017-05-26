@@ -46,12 +46,12 @@ public class CollisionCalculator implements ICollisionCalculator {
 
     @Override
     public void run() {
-        CollisionManager collisionManager = CollisionManager.getInstance();
-        List<Collidable> collidables = collisionManager.getCollidables();
+        final CollisionManager collisionManager = CollisionManager.getInstance();
+        final List<Collidable> collidables = collisionManager.getCollidables();
 
-        List<CollisionResult> results = getAllCollisions(collidables);
+        final List<CollisionResult> results = getAllCollisions(collidables);
 
-        for (CollisionResult result : results) {
+        for (final CollisionResult result : results) {
             collisionManager.alertObservers(result);
         }
     }
@@ -59,10 +59,10 @@ public class CollisionCalculator implements ICollisionCalculator {
     @Override
     public List<CollisionResult> getAllCollisions(List<? extends Collidable> collidables) {
         //Find collisions.
-        List<CollisionResult> collisions = new ArrayList<CollisionResult>();
+        final List<CollisionResult> collisions = new ArrayList<CollisionResult>();
         for (int i = 0; i < collidables.size(); i++) {
             for (int j = i + 1; j < collidables.size(); j++) {
-                CollisionResult result = checkCollision(collidables.get(i), collidables.get(j));
+                final CollisionResult result = checkCollision(collidables.get(i), collidables.get(j));
                 if (result.isCollided()) {
                     collisions.add(result);
                 }
@@ -81,9 +81,9 @@ public class CollisionCalculator implements ICollisionCalculator {
 
         clearLists();
 
-        btPersistentManifold contactResult = processCollision(first, second);
+        final btPersistentManifold contactResult = processCollision(first, second);
 
-        CollisionResult collisionResult = createResult(contactResult, first, second);
+        final CollisionResult collisionResult = createResult(contactResult, first, second);
         contactResult.dispose();
 
         return collisionResult;
@@ -120,8 +120,8 @@ public class CollisionCalculator implements ICollisionCalculator {
     }
 
     private btPersistentManifold processCollision(Collidable first, Collidable second) {
-        CollisionObjectWrapper co0 = getCollisionWrapper(first);
-        CollisionObjectWrapper co1 = getCollisionWrapper(second);
+        final CollisionObjectWrapper co0 = getCollisionWrapper(first);
+        final CollisionObjectWrapper co1 = getCollisionWrapper(second);
 
         this.result.setBody0Wrap(co0.wrapper);
         this.result.setBody1Wrap(co1.wrapper);
@@ -136,7 +136,7 @@ public class CollisionCalculator implements ICollisionCalculator {
     }
 
     private void updateCollisionObject(CollisionObjectWrapper collisionObject, Collidable collidable) {
-        btCollisionObject collObject = collisionObject.wrapper.getCollisionObject();
+        final btCollisionObject collObject = collisionObject.wrapper.getCollisionObject();
 
         //Translate
         collObject.setWorldTransform(new Matrix4());
@@ -171,12 +171,12 @@ public class CollisionCalculator implements ICollisionCalculator {
 
     private CollisionObjectWrapper loadCollidable(Collidable collidable) {
 
-        btCollisionShape shape = ResourceLoader.getInstance().getCollisionShape(collidable.getCollisionModelPath());
+        final btCollisionShape shape = ResourceLoader.getInstance().getCollisionShape(collidable.getCollisionModelPath());
 
-        btCollisionObject collisionObject = new btCollisionObject();
+        final btCollisionObject collisionObject = new btCollisionObject();
         collisionObject.setCollisionShape(shape);
 
-        CollisionObjectWrapper wrapper = new CollisionObjectWrapper(collisionObject);
+        final CollisionObjectWrapper wrapper = new CollisionObjectWrapper(collisionObject);
         this.updateCollisionObject(wrapper, collidable);
         this.loadedCollidables.put(collidable, wrapper);
 
@@ -195,11 +195,11 @@ public class CollisionCalculator implements ICollisionCalculator {
     }
 
     private CollisionResult createResult(btPersistentManifold manifold, Collidable first, Collidable second) {
-        boolean collision = manifold.getNumContacts() > 0;
+        final boolean collision = manifold.getNumContacts() > 0;
 
         Vector3f contactPoint;
         if (collision) {
-            Vector3 btContactPoint = new Vector3();
+            final Vector3 btContactPoint = new Vector3();
             this.result.getPersistentManifold().getContactPoint(0).getPositionWorldOnA(btContactPoint);
             contactPoint = new Vector3f(
                     btContactPoint.x,
@@ -233,14 +233,14 @@ public class CollisionCalculator implements ICollisionCalculator {
     }
 
     private void clearAlgorithmList() {
-        for (btCollisionAlgorithm btCollisionAlgorithm : this.algorithmList) {
+        for (final btCollisionAlgorithm btCollisionAlgorithm : this.algorithmList) {
             btCollisionAlgorithm.dispose();
         }
         this.algorithmList.clear();
     }
 
     private void clearLoadedCollidables() {
-        for (CollisionObjectWrapper collisionObjectWrapper : this.loadedCollidables.values()) {
+        for (final CollisionObjectWrapper collisionObjectWrapper : this.loadedCollidables.values()) {
             collisionObjectWrapper.dispose();
         }
         this.loadedCollidables.clear();

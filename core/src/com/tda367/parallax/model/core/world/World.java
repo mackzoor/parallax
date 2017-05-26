@@ -50,7 +50,7 @@ public class World implements Updatable, CollisionObserver {
         if (this.spaceCrafts.size() > 0) {
             float yPosition = this.spaceCrafts.get(0).getPos().getY();
             for (int i = 1; i < this.spaceCrafts.size(); i++) {
-                float tempYPosition = this.spaceCrafts.get(i).getPos().getY();
+                final float tempYPosition = this.spaceCrafts.get(i).getPos().getY();
                 if (tempYPosition > yPosition) {
                     yPosition = tempYPosition;
                 }
@@ -65,7 +65,7 @@ public class World implements Updatable, CollisionObserver {
         if (this.spaceCrafts.size() > 0) {
             float yPosition = this.spaceCrafts.get(0).getPos().getY();
             for (int i = 1; i < this.spaceCrafts.size(); i++) {
-                float tempYPosition = this.spaceCrafts.get(i).getPos().getY();
+                final float tempYPosition = this.spaceCrafts.get(i).getPos().getY();
                 if (tempYPosition < yPosition) {
                     yPosition = tempYPosition;
                 }
@@ -79,20 +79,20 @@ public class World implements Updatable, CollisionObserver {
     private void updateModuleRange() {
 
         if (this.modules.size() > 0) {
-            float firstCraft = this.getFirstSpaceCraftYPosition();
-            float lastCraft = this.getLastSpaceCraftYPosition();
+            final float firstCraft = this.getFirstSpaceCraftYPosition();
+            final float lastCraft = this.getLastSpaceCraftYPosition();
 
-            float firstModule = this.modules.get(this.modules.size() - 1).getPos().getY() + this.modules.get(this.modules.size() - 1).getLength();
-            float lastModule = this.modules.get(0).getPos().getY();
+            final float firstModule = this.modules.get(this.modules.size() - 1).getPos().getY() + this.modules.get(this.modules.size() - 1).getLength();
+            final float lastModule = this.modules.get(0).getPos().getY();
 
-            int modulesToAdd = (int) ((firstCraft + 256 - firstModule) / 64);
-            int modulesToRemove = (int) ((lastCraft - lastModule) / 128);
+            final int modulesToAdd = (int) ((firstCraft + 256 - firstModule) / 64);
+            final int modulesToRemove = (int) ((lastCraft - lastModule) / 128);
 
 
             addModules(modulesToAdd);
             removeModules(modulesToRemove);
         } else {
-            ICourseModule defModule = new DefaultCourseModule(new Vector3f(0, 32, 0), 0, 0);
+            final ICourseModule defModule = new DefaultCourseModule(new Vector3f(0, 32, 0), 0, 0);
             this.modules.add(defModule);
 
             this.powerUps.addAll(defModule.getPowerups());
@@ -104,8 +104,8 @@ public class World implements Updatable, CollisionObserver {
 
     private void addModules(int i) {
         for (int x = 0; x < i; x++) {
-            float endOfLastModulePos = this.modules.get(this.modules.size() - 1).getPos().getY();
-            ICourseModule tempModule = new DefaultCourseModule(new Vector3f(
+            final float endOfLastModulePos = this.modules.get(this.modules.size() - 1).getPos().getY();
+            final ICourseModule tempModule = new DefaultCourseModule(new Vector3f(
                     0,
                     endOfLastModulePos + this.modules.get(this.modules.size() - 1).getLength(),
                     0),
@@ -123,7 +123,7 @@ public class World implements Updatable, CollisionObserver {
 
     private void removeModules(int i) {
         for (int x = 0; x < i; x++) {
-            ICourseModule module = this.modules.get(0);
+            final ICourseModule module = this.modules.get(0);
             this.modules.remove(module);
             module.remove3dObjectsFromCollisionManager();
             module.setActiveState(false);
@@ -133,19 +133,19 @@ public class World implements Updatable, CollisionObserver {
     @Override
     public void update(int milliSinceLastUpdate) {
         //Update spacecraft
-        for (ISpaceCraft spaceCraft : this.spaceCrafts) {
+        for (final ISpaceCraft spaceCraft : this.spaceCrafts) {
             spaceCraft.update(milliSinceLastUpdate);
         }
 
         //Update obstacles in each module.
-        for (ICourseModule module : this.modules) {
-            for (CourseObstacleBase courseObstacleBase : module.getCouseObstacles()) {
+        for (final ICourseModule module : this.modules) {
+            for (final CourseObstacleBase courseObstacleBase : module.getCouseObstacles()) {
                 courseObstacleBase.update(milliSinceLastUpdate);
             }
         }
 
 
-        List<Integer> numbers = new ArrayList<Integer>();
+        final List<Integer> numbers = new ArrayList<Integer>();
         //Update powerups and find dead ones.
         for (int i = 0; i < this.powerUps.size(); i++) {
             this.powerUps.get(i).update(milliSinceLastUpdate);
@@ -155,8 +155,8 @@ public class World implements Updatable, CollisionObserver {
         }
 
         //remove dead powerups.
-        for (Integer number : numbers) {
-            int i = number;
+        for (final Integer number : numbers) {
+            final int i = number;
             this.powerUps.remove(i);
         }
 
@@ -166,8 +166,8 @@ public class World implements Updatable, CollisionObserver {
 
     @Override
     public void respondToCollision(CollisionResult collisionResult) {
-        Collidable first = collisionResult.getFirst();
-        Collidable second = collisionResult.getSecond();
+        final Collidable first = collisionResult.getFirst();
+        final Collidable second = collisionResult.getSecond();
 
         first.handleCollision(second);
         second.handleCollision(first);

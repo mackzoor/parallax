@@ -88,9 +88,9 @@ public class Renderable3dObject {
         this.opacity = f;
 
         //Change opacity level
-        BlendingAttribute blendingAttribute = new BlendingAttribute();
+        final BlendingAttribute blendingAttribute = new BlendingAttribute();
         blendingAttribute.opacity = this.opacity;
-        Material material = this.modelInstance.materials.get(0);
+        final Material material = this.modelInstance.materials.get(0);
         material.set(blendingAttribute);
 
     }

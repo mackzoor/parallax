@@ -30,6 +30,8 @@ public class Cannon extends PowerUpBase {
     private int timeAlive;
     private final static int LIFE_LENGTH = 4000;
 
+    Random rand = new Random();
+
     Cannon() {
         super();
         this.timeAlive = 0;
@@ -90,8 +92,7 @@ public class Cannon extends PowerUpBase {
     }
 
     private void playCannonSound() {
-        Random rand = new Random();
-        int randomSong = rand.nextInt(200 - 1 + 1) + 1;
+        final int randomSong = rand.nextInt(200 - 1 + 1) + 1;
 
         //Plays a funny sound every 200 shots
         if (randomSong > 199) {

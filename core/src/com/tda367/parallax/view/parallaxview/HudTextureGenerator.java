@@ -21,8 +21,7 @@ public class HudTextureGenerator {
     private final static int WITDH = 512;
     private final static int HEIGHT = 256;
 
-    private static Texture generatedTexture;
-
+    private Texture generatedTexture;
 
     private int lives;
     private IPowerUp powerUp;
@@ -46,7 +45,7 @@ public class HudTextureGenerator {
     }
 
     Texture generateTexture() {
-        Pixmap pm = renderText(Color.WHITE);
+        final Pixmap pm = renderText(Color.WHITE);
 //        pm = outLine(pm);
         renderBackground(pm);
         generatedTexture.draw(pm, 0, 0);
@@ -57,7 +56,7 @@ public class HudTextureGenerator {
     }
 
     private Pixmap renderBackground(Pixmap pm) {
-        int triangleOffset = 64;
+        final int triangleOffset = 64;
 
 //        pm.setColor(Color.WHITE);
         pm.setColor(new Color(0, 0, 1f, 0.7f));
@@ -86,7 +85,7 @@ public class HudTextureGenerator {
         Gdx.gl.glClearColor(1, 1, 1, 0.3f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        Matrix4 normalProjection = new Matrix4().setToOrtho2D(0, 0, WITDH, HEIGHT);
+        final Matrix4 normalProjection = new Matrix4().setToOrtho2D(0, 0, WITDH, HEIGHT);
         spriteBatch.setProjectionMatrix(normalProjection);
 
         spriteBatch.begin();
@@ -99,7 +98,7 @@ public class HudTextureGenerator {
         font.draw(spriteBatch, "Score: " + this.score + "\n Lives: " + this.lives, 48, 48);
 
         spriteBatch.end();//finish write to buffer
-        Pixmap pm = ScreenUtils.getFrameBufferPixmap(0, 0, WITDH, HEIGHT); //write frame buffer to Pixmap
+        final Pixmap pm = ScreenUtils.getFrameBufferPixmap(0, 0, WITDH, HEIGHT); //write frame buffer to Pixmap
         frameBuffer.end();
 
         //Dispose of c++ objects.
@@ -116,7 +115,7 @@ public class HudTextureGenerator {
     private Pixmap outLine(Pixmap pm) {
         pm.setColor(Color.WHITE);
 
-        int lineWidth = 3;
+        final int lineWidth = 3;
 
         //Top line
         pm.fillRectangle(0, 0, pm.getWidth(), lineWidth);

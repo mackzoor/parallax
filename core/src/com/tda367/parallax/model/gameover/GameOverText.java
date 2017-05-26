@@ -30,7 +30,7 @@ public class GameOverText {
         this.playerScore = playerScore;
         this.highScore = highScore;
         this.obsolete = false;
-        Vector3f tmpVec = new Vector3f(position);
+        final Vector3f tmpVec = new Vector3f(position);
         tmpVec.negate();
         this.direction = MathUtilities.vectorToQuat(tmpVec);
     }

@@ -34,38 +34,38 @@ public class AudioQueue {
 
     //Methods connected with the audioObserver class. Methods connected or calling upon listeners
     public void stopActiveMusic(String fileNameAndDirectory) {
-        for (AudioObserver sl : this.listeners) {
+        for (final AudioObserver sl : this.listeners) {
             sl.stopActiveMusic(fileNameAndDirectory);
         }
     }
 
     public void pauseActiveMusic(String fileNameAndDirectory) {
-        for (AudioObserver sl : this.listeners) {
+        for (final AudioObserver sl : this.listeners) {
             sl.pauseActiveMusic(fileNameAndDirectory);
         }
     }
 
     public void unPauseActiveMusic(String fileNameAndDirectory) {
-        for (AudioObserver sl : this.listeners) {
+        for (final AudioObserver sl : this.listeners) {
             sl.unPauseActiveMusic(fileNameAndDirectory);
         }
     }
 
     public void clearAllActiveMusic() {
-        for (AudioObserver sl : this.listeners) {
+        for (final AudioObserver sl : this.listeners) {
             sl.clearAllActiveMusic();
         }
     }
 
     private void playQueuedSoundAndMusic() {
-        for (SoundCombiantion soundQueued : this.soundQueue) {
+        for (final SoundCombiantion soundQueued : this.soundQueue) {
             if (soundQueued.getVolume() == 1f) {
                 playSound(soundQueued.getFileName());
             } else {
                 playSound(soundQueued.getFileName(), soundQueued.getVolume());
             }
         }
-        for (SoundCombiantion musicQueued : this.musicQueue) {
+        for (final SoundCombiantion musicQueued : this.musicQueue) {
             if (musicQueued.getVolume() == 1f) {
                 playMusic(musicQueued.getFileName());
             } else {
@@ -81,7 +81,7 @@ public class AudioQueue {
             this.soundQueue.add(new SoundCombiantion(soundLocation, 1f));
         }
 
-        for (AudioObserver sl : this.listeners) {
+        for (final AudioObserver sl : this.listeners) {
             sl.playSound(soundLocation);
         }
     }
@@ -91,7 +91,7 @@ public class AudioQueue {
             this.soundQueue.add(new SoundCombiantion(soundLocation, volume));
         }
 
-        for (AudioObserver sl : this.listeners) {
+        for (final AudioObserver sl : this.listeners) {
             sl.playSound(soundLocation, volume);
         }
     }
@@ -110,7 +110,7 @@ public class AudioQueue {
         if (this.listeners.size() < 1) {
             this.musicQueue.add(new SoundCombiantion(musicLocation, 1f));
         }
-        for (AudioObserver sl : this.listeners) {
+        for (final AudioObserver sl : this.listeners) {
             sl.playMusic(musicLocation);
         }
     }
@@ -119,7 +119,7 @@ public class AudioQueue {
         if (this.listeners.size() < 1) {
             this.musicQueue.add(new SoundCombiantion(music, volume));
         }
-        for (AudioObserver sl : this.listeners) {
+        for (final AudioObserver sl : this.listeners) {
             sl.playMusic(music, volume);
         }
     }

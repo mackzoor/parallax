@@ -51,8 +51,8 @@ public final class ResourceLoader {
     }
 
     private ResourceLoader() {
-        UBJsonReader jsonReader = new UBJsonReader();
-        modelLoader = new G3dModelLoader(jsonReader);
+        final UBJsonReader jsonReader = new UBJsonReader();
+        this.modelLoader = new G3dModelLoader(jsonReader);
         assetManager = new AssetManager(new InternalFileHandleResolver());
         particleEffectLoader = new ParticleEffectLoader(new InternalFileHandleResolver());
 
@@ -93,7 +93,7 @@ public final class ResourceLoader {
      * @return {@link ModelInstance} of the {@link Model}.
      */
     public ModelInstance getModel(String modelName, String modelDirectory) {
-        Model entry = this.loadedModels.get(modelName);
+        final Model entry = this.loadedModels.get(modelName);
         ModelInstance modelInstance;
         if (entry == null) {
             modelInstance = this.loadModel(modelName, modelDirectory);
@@ -202,7 +202,7 @@ public final class ResourceLoader {
      * @return the loaded texture.
      */
     private Texture loadTexture(String filePath) {
-        Texture texture = new Texture(filePath);
+        final Texture texture = new Texture(filePath);
 
         this.loadedTextures.put(filePath, texture);
         return texture;
@@ -230,11 +230,11 @@ public final class ResourceLoader {
      * @return the loaded collision shape.
      */
     private btCollisionShape loadCollisionShape(String pathToObjFile) {
-        btConvexHullShape collisionShape = new btConvexHullShape();
+        final btConvexHullShape collisionShape = new btConvexHullShape();
 
-        List<Vector3> vertices = get3dModelVertices(pathToObjFile);
+        final List<Vector3> vertices = get3dModelVertices(pathToObjFile);
 
-        for (Vector3 vertex : vertices) {
+        for (final Vector3 vertex : vertices) {
             collisionShape.addPoint(vertex);
         }
 
@@ -249,13 +249,13 @@ public final class ResourceLoader {
      * @return list of vectors.
      */
     private List<Vector3> get3dModelVertices(String pathToFile) {
-        FileHandle file = Gdx.files.internal(pathToFile);
-        String fullString = file.readString();
+        final FileHandle file = Gdx.files.internal(pathToFile);
+        final String fullString = file.readString();
 
-        String[] lines = fullString.split("\n");
+        final String[] lines = fullString.split("\n");
 
-        List<Vector3> vectors = new ArrayList<Vector3>();
-        for (String line : lines) {
+        final List<Vector3> vectors = new ArrayList<Vector3>();
+        for (final String line : lines) {
             if (line.length() > 0 && line.substring(0, 2).contains("v ")) {
                 vectors.add(stringToVector3(line));
             }
@@ -271,7 +271,7 @@ public final class ResourceLoader {
      * @return Created vector.
      */
     private Vector3 stringToVector3(String str) {
-        String[] splitted = str.split("\\s+");
+        final String[] splitted = str.split("\\s+");
 
         return new Vector3(
                 Float.valueOf(splitted[1]),

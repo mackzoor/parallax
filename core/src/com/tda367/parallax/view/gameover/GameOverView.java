@@ -25,15 +25,15 @@ public class GameOverView {
     }
 
     private void generateGameOverTextViews() {
-        List<GameOverText> gameOverTexts = this.model.getGameOverTexts();
+        final List<GameOverText> gameOverTexts = this.model.getGameOverTexts();
         this.gameOverTextViews = new ArrayList<GameOverTextView>();
-        for (GameOverText gameOverText : gameOverTexts) {
+        for (final GameOverText gameOverText : gameOverTexts) {
             this.gameOverTextViews.add(new GameOverTextView(gameOverText));
         }
     }
 
     public void render() {
-        for (GameOverTextView gameOverTextView : this.gameOverTextViews) {
+        for (final GameOverTextView gameOverTextView : this.gameOverTextViews) {
             gameOverTextView.render();
         }
         Renderer3D.getInstance().renderFrame();

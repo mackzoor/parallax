@@ -47,9 +47,9 @@ public final class ObstacleFactory {
     }
 
     public static WallObstacle getRandomWallInstance(Vector3f pos) {
-        Random rand = new Random();
+        final Random rand = new Random();
 
-        int randomInt = (int) (rand.nextFloat() * 4);
+        final int randomInt = (int) (rand.nextFloat() * 4);
 
 
         if (randomInt == 0) {

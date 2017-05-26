@@ -26,15 +26,15 @@ public class TouchPadView {
     private Stage stage;
 
     public TouchPadView() {
-        Skin gamePadSkin = new Skin();
+        final Skin gamePadSkin = new Skin();
         gamePadSkin.add("background", new Texture("touchpad/background.png"));
         gamePadSkin.add("knob", new Texture("touchpad/knob.png"));
         gamePadSkin.add("actionButton", new Texture("touchpad/actionButton.png"));
 
         this.stage = new Stage();
 
-        int screenWidth = Gdx.graphics.getWidth();
-        int screenHeight = Gdx.graphics.getHeight();
+        final int screenWidth = Gdx.graphics.getWidth();
+        final int screenHeight = Gdx.graphics.getHeight();
 
         initButton(gamePadSkin, screenWidth, screenHeight);
         initTouchPad(gamePadSkin, screenWidth, screenHeight);
@@ -53,11 +53,11 @@ public class TouchPadView {
 
     private void initButton(Skin gamePadSkin, int screenWidth, int screenHeight) {
 
-        Drawable actionButtonBackground = gamePadSkin.getDrawable("actionButton");
+        final Drawable actionButtonBackground = gamePadSkin.getDrawable("actionButton");
 
-        float buttonDiameter = screenWidth/BUTTON_DIAMETER_DIVISOR;
-        float buttonYpos = screenHeight/BUTTON_POSITON_DIVISOR;
-        float buttonXPos = screenWidth - buttonYpos;
+        final float buttonDiameter = screenWidth/BUTTON_DIAMETER_DIVISOR;
+        final float buttonYpos = screenHeight/BUTTON_POSITON_DIVISOR;
+        final float buttonXPos = screenWidth - buttonYpos;
 
         actionButtonBackground.setMinWidth(buttonDiameter);
         actionButtonBackground.setMinHeight(buttonDiameter);
@@ -73,14 +73,14 @@ public class TouchPadView {
 
     private void initTouchPad(Skin gamePadSkin, int screenWidth, int screenHeight) {
 
-        Touchpad.TouchpadStyle touchpadStyle = new Touchpad.TouchpadStyle();
-        Drawable touchBackground = gamePadSkin.getDrawable("background");
-        Drawable touchKnob = gamePadSkin.getDrawable("knob");
+        final Touchpad.TouchpadStyle touchpadStyle = new Touchpad.TouchpadStyle();
+        final Drawable touchBackground = gamePadSkin.getDrawable("background");
+        final Drawable touchKnob = gamePadSkin.getDrawable("knob");
         touchpadStyle.background = touchBackground;
         touchpadStyle.knob = touchKnob;
 
-        float touchPadDiameter = screenWidth/TOUCH_PAD_DIAMETER_DIVISOR;
-        float touchPadXYPos = screenHeight/TOUCH_PAD_POSITON_DIVISOR;
+        final float touchPadDiameter = screenWidth/TOUCH_PAD_DIAMETER_DIVISOR;
+        final float touchPadXYPos = screenHeight/TOUCH_PAD_POSITON_DIVISOR;
 
         touchKnob.setMinWidth(touchPadDiameter / 2f);
         touchKnob.setMinHeight(touchPadDiameter / 2f);

@@ -48,7 +48,7 @@ public class GameOver {
     }
 
     private void handleScore() {
-        ScoreHandler scoreAdapter = new ScoreHandler();
+        final ScoreHandler scoreAdapter = new ScoreHandler();
         scoreAdapter.storeHighScore(this.player.getUserName(), this.player.getScore());
         this.playerScore = this.player.getScore();
         this.highScore = scoreAdapter.getHighScores().get(0);
@@ -59,7 +59,7 @@ public class GameOver {
             this.timeShowed += delta;
         } else {
             this.obsolete = true;
-            for (GameOverText gameOverText : this.gameOverTexts) {
+            for (final GameOverText gameOverText : this.gameOverTexts) {
                 gameOverText.setObsolete(true);
             }
         }

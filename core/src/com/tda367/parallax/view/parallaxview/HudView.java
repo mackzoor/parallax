@@ -40,8 +40,8 @@ public class HudView implements View {
     }
 
     private void setHudPaneTexture(Texture texture) {
-        Material material = this.hudPane.getModelInstance().materials.get(0);
-        TextureAttribute textureAttribute = new TextureAttribute(TextureAttribute.Diffuse, texture);
+        final Material material = this.hudPane.getModelInstance().materials.get(0);
+        final TextureAttribute textureAttribute = new TextureAttribute(TextureAttribute.Diffuse, texture);
         material.set(textureAttribute);
     }
 
@@ -61,7 +61,7 @@ public class HudView implements View {
         this.htg.setScore(this.player.getScore());
         this.setHudPaneTexture(this.htg.generateTexture());
 
-        Vector3f nextPos = new Vector3f(this.player.getSpaceCraft().getPos());
+        final Vector3f nextPos = new Vector3f(this.player.getSpaceCraft().getPos());
         nextPos.add(new Vector3f(1.5f, 1, 0.8f));
         this.hudPane.setPos(nextPos);
 

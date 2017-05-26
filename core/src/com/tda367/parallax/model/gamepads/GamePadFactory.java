@@ -15,7 +15,7 @@ public final class GamePadFactory {
     }
 
     public static GamePad getGamePad(String gamePadName) {
-        String lowerCaseName = gamePadName.toLowerCase();
+        final String lowerCaseName = gamePadName.toLowerCase();
         if (Gdx.app.getType() == Application.ApplicationType.Android) {
             return new com.tda367.parallax.model.gamepads.AndroidGamePad();
         } else if (lowerCaseName.contains("playstation") && lowerCaseName.contains("3")) {

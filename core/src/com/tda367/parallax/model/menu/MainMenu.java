@@ -51,7 +51,7 @@ public class MainMenu implements CollisionObserver {
     }
 
     public void action() {
-        Cannon cannon = PowerUpFactory.createCannon();
+        final Cannon cannon = PowerUpFactory.createCannon();
         this.powerUps.add(cannon);
         cannon.activate(this.camera);
         aimDirection.normalize();
@@ -60,7 +60,7 @@ public class MainMenu implements CollisionObserver {
     }
 
     public void update(int milliSinceLastUpdate) {
-        for (IPowerUp powerUp : powerUps) {
+        for (final IPowerUp powerUp : powerUps) {
             powerUp.update(milliSinceLastUpdate);
         }
     }

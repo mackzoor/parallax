@@ -44,7 +44,7 @@ public class MainMenuView {
         this.world.render();
         this.exitButton.render();
         this.startButton.render();
-        for (IPowerUpView iPowerUpView : this.powerUpsHash.values()) {
+        for (final IPowerUpView iPowerUpView : this.powerUpsHash.values()) {
             iPowerUpView.render();
         }
         Renderer3D.getInstance().renderFrame();
@@ -72,9 +72,9 @@ public class MainMenuView {
      * Updates the PowerUpList from the world object
      */
     private void updatePowerupList() {
-        List<IPowerUp> missingPowerUps = syncHash(this.powerUpsHash, this.mainMenu.getPowerUps());
+        final List<IPowerUp> missingPowerUps = syncHash(this.powerUpsHash, this.mainMenu.getPowerUps());
 
-        for (IPowerUp missingPowerUp : missingPowerUps) {
+        for (final IPowerUp missingPowerUp : missingPowerUps) {
             this.powerUpsHash.put(missingPowerUp, new IPowerUpView(missingPowerUp));
         }
     }
@@ -89,21 +89,21 @@ public class MainMenuView {
      */
     private <T> List<T> syncHash(Map<T, ? extends View> hash, List<T> list) {
         //Find obsolete
-        ArrayList<T> obsolete = new ArrayList<T>();
-        for (T t : hash.keySet()) {
+        final ArrayList<T> obsolete = new ArrayList<T>();
+        for (final T t : hash.keySet()) {
             if (hash.get(t).isObsolete()) {
                 obsolete.add(t);
             }
         }
 
         //Remove obsolete
-        for (T t : obsolete) {
+        for (final T t : obsolete) {
             hash.remove(t);
         }
 
         //Finds missing
-        ArrayList<T> missing = new ArrayList<T>();
-        for (T t : list) {
+        final ArrayList<T> missing = new ArrayList<T>();
+        for (final T t : list) {
             if (!hash.containsKey(t)) {
                 missing.add(t);
             }

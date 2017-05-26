@@ -120,21 +120,21 @@ public abstract class SpaceCraft implements ISpaceCraft {
         return new Vector2f(vector3f.getX(), vector3f.getZ());
     }
     private boolean isShipOutsideCourse() {
-        Vector2f vector2f = this.xzPos(getPos());
+        final Vector2f vector2f = this.xzPos(getPos());
         return (vector2f.length() > COURSE_RADIUS);
     }
     private Vector2f rotateNinetyDeg(Vector2f vector2f) {
         return new Vector2f(-vector2f.getY(),vector2f.getX());
     }
     private Vector2f onWallSteering(Vector2f desiredPanVelocity) {
-        Vector2f alongWallVec = this.rotateNinetyDeg(this.xzPos(getPos()));
-        float scalar = desiredPanVelocity.dot(alongWallVec)/alongWallVec.lengthSquared();
+        final Vector2f alongWallVec = this.rotateNinetyDeg(this.xzPos(getPos()));
+        final float scalar = desiredPanVelocity.dot(alongWallVec)/alongWallVec.lengthSquared();
         desiredPanVelocity.scale(scalar, alongWallVec);
         return desiredPanVelocity;
     }
     private void outOfBoundsCheck() {
         if (this.isShipOutsideCourse()) {
-            Vector2f tempVec = this.xzPos(getPos());
+            final Vector2f tempVec = this.xzPos(getPos());
             tempVec.normalize();
             tempVec.scale((49f/50f) * COURSE_RADIUS); //Too compensate for rounding of float
             getPos().set(new Vector3f(tempVec.getX(), getPos().getY(), tempVec.getY()));
@@ -143,7 +143,7 @@ public abstract class SpaceCraft implements ISpaceCraft {
 
     //Movement related methods
     private void updatePanAcceleration(){
-        Vector2f truePanVector = new Vector2f(this.desiredPanVelocity);
+        final Vector2f truePanVector = new Vector2f(this.desiredPanVelocity);
         truePanVector.scale(this.maxPanVelocity);
 
         truePanVector.sub( this.currentPanVelocity);
@@ -152,15 +152,15 @@ public abstract class SpaceCraft implements ISpaceCraft {
         this.panAcceleration = new Vector2f(truePanVector);
     }
     private void panRelativeMode(int timeMilli){
-        Vector2f addedVelocity = new Vector2f(this.panAcceleration);
+        final Vector2f addedVelocity = new Vector2f(this.panAcceleration);
         addedVelocity.scale((float)timeMilli/1000);
 
         this.currentPanVelocity.add(addedVelocity);
         this.currentPanVelocity.clamp(-this.maxPanVelocity,this.maxPanVelocity);
 
 
-        float addedXPos = distanceCalc(this.currentPanVelocity.getX(),timeMilli);
-        float addedZPos = distanceCalc(this.currentPanVelocity.getY(),timeMilli);
+        final float addedXPos = distanceCalc(this.currentPanVelocity.getX(),timeMilli);
+        final float addedZPos = distanceCalc(this.currentPanVelocity.getY(),timeMilli);
 
         this.pos.add(new Vector3f(addedXPos,0,addedZPos));
     }
@@ -172,7 +172,7 @@ public abstract class SpaceCraft implements ISpaceCraft {
             this.forwardVelocity = this.forwardVelocity + this.forwardAcceleration * ((float)timeMilli/1000);
         } else {
             if (this.forwardVelocity < this.forwardTargetSpeed){
-                float speedIncrease = this.forwardVelocity + this.forwardAcceleration * ((float)timeMilli/1000);
+                final float speedIncrease = this.forwardVelocity + this.forwardAcceleration * ((float)timeMilli/1000);
 
                 if (this.forwardTargetSpeed < speedIncrease+ this.forwardVelocity){
                     this.forwardVelocity = this.forwardTargetSpeed;
@@ -184,7 +184,7 @@ public abstract class SpaceCraft implements ISpaceCraft {
         }
     }
     private void advanceCraft(int timeMilli){
-        float posYAdded = this.forwardVelocity * ((float)timeMilli/1000);
+        final float posYAdded = this.forwardVelocity * ((float)timeMilli/1000);
         this.pos.add(new Vector3f(0, posYAdded, 0));
     }
 
@@ -198,7 +198,7 @@ public abstract class SpaceCraft implements ISpaceCraft {
     @Override
     public void action(){
         if (!this.pu.isEmpty()){
-            IPowerUp activePowerUP = this.pu.get(this.pu.size()-1);
+            final IPowerUp activePowerUP = this.pu.get(this.pu.size()-1);
 
             activePowerUP.activate(this);
             this.pu.remove(this.pu.size()-1);
@@ -218,7 +218,7 @@ public abstract class SpaceCraft implements ISpaceCraft {
     }
     @Override
     public void add(List<IPowerUp> listOfPowerUps){
-        for (IPowerUp pu : listOfPowerUps){
+        for (final IPowerUp pu : listOfPowerUps){
             this.add(pu);
         }
     }
@@ -267,13 +267,13 @@ public abstract class SpaceCraft implements ISpaceCraft {
             this.decHealth();
         } else if (collidable.getCollidableType() == com.tda367.parallax.model.core.collision.CollidableType.CONTAINER){
             //take powerup of collided with container
-            IContainer container = (IContainer) collidable;
+            final IContainer container = (IContainer) collidable;
             this.add(container.getPowerUp());
         }
     }
 
     private void rotateInCraftDirection() {
-        Vector3f rotationDirection = new Vector3f(
+        final Vector3f rotationDirection = new Vector3f(
                 this.currentPanVelocity.getX()/2f,
                 this.forwardVelocity,
                 this.currentPanVelocity.getY()/2f

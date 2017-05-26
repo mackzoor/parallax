@@ -48,7 +48,7 @@ public final class CollisionManager {
     }
 
     public void alertObservers(CollisionResult collisionResult) {
-        for (CollisionObserver observer : this.observers) {
+        for (final CollisionObserver observer : this.observers) {
             observer.respondToCollision(collisionResult);
         }
     }

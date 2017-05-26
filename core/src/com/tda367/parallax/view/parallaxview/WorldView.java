@@ -47,17 +47,17 @@ public class WorldView implements View {
 
 
         //Render Course modules
-        for (ICourseModule iCourseModule : this.courseModuleHash.keySet()) {
+        for (final ICourseModule iCourseModule : this.courseModuleHash.keySet()) {
             this.courseModuleHash.get(iCourseModule).render();
         }
 
         //Render SpaceCraft
-        for (ISpaceCraft iSpaceCraft : this.spaceCraftHash.keySet()) {
+        for (final ISpaceCraft iSpaceCraft : this.spaceCraftHash.keySet()) {
             this.spaceCraftHash.get(iSpaceCraft).render();
         }
 
         //Render Powerups
-        for (IPowerUp iPowerUp : this.powerUpsHash.keySet()) {
+        for (final IPowerUp iPowerUp : this.powerUpsHash.keySet()) {
             this.powerUpsHash.get(iPowerUp).render();
         }
     }
@@ -72,9 +72,9 @@ public class WorldView implements View {
      * Updates the PowerUpList from the world object
      */
     private void updatePowerupList() {
-        List<IPowerUp> missingPowerUps = syncHash(this.powerUpsHash, this.world.getPowerUps());
+        final List<IPowerUp> missingPowerUps = syncHash(this.powerUpsHash, this.world.getPowerUps());
 
-        for (IPowerUp missingPowerUp : missingPowerUps) {
+        for (final IPowerUp missingPowerUp : missingPowerUps) {
             this.powerUpsHash.put(missingPowerUp, new IPowerUpView(missingPowerUp));
         }
     }
@@ -84,9 +84,9 @@ public class WorldView implements View {
      */
     private void updateCourseModuleList() {
 
-        List<ICourseModule> missingModules = syncHash(this.courseModuleHash, this.world.getModules());
+        final List<ICourseModule> missingModules = syncHash(this.courseModuleHash, this.world.getModules());
 
-        for (ICourseModule missingModule : missingModules) {
+        for (final ICourseModule missingModule : missingModules) {
             this.courseModuleHash.put(missingModule, new CourseModelView(missingModule));
         }
     }
@@ -95,9 +95,9 @@ public class WorldView implements View {
      * Updates the SpaceCraftList from the world object
      */
     private void updateSpaceCraftList() {
-        List<ISpaceCraft> missingSpaceCraft = syncHash(this.spaceCraftHash, this.world.getSpaceCrafts());
+        final List<ISpaceCraft> missingSpaceCraft = syncHash(this.spaceCraftHash, this.world.getSpaceCrafts());
 
-        for (ISpaceCraft iSpaceCraft : missingSpaceCraft) {
+        for (final ISpaceCraft iSpaceCraft : missingSpaceCraft) {
             this.spaceCraftHash.put(iSpaceCraft, new ISpaceCraftView(iSpaceCraft));
         }
 
@@ -114,21 +114,21 @@ public class WorldView implements View {
      */
     private <T> List<T> syncHash(Map<T, ? extends View> hash, List<T> list) {
         //Find obsolete
-        ArrayList<T> obsolete = new ArrayList<T>();
-        for (T t : hash.keySet()) {
+        final ArrayList<T> obsolete = new ArrayList<T>();
+        for (final T t : hash.keySet()) {
             if (hash.get(t).isObsolete()) {
                 obsolete.add(t);
             }
         }
 
         //Remove obsolete
-        for (T t : obsolete) {
+        for (final T t : obsolete) {
             hash.remove(t);
         }
 
         //Finds missing
-        ArrayList<T> missing = new ArrayList<T>();
-        for (T t : list) {
+        final ArrayList<T> missing = new ArrayList<T>();
+        for (final T t : list) {
             if (!hash.containsKey(t)) {
                 missing.add(t);
             }

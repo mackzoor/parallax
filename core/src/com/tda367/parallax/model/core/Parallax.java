@@ -37,6 +37,7 @@ public class Parallax {
     private String backgroundMusic;
     private String pauseMusic;
     private final static String musicDirectory = "sounds/music";
+    private static final Random rand = new Random();
 
     private List<HunterAI> ais;
 
@@ -67,8 +68,7 @@ public class Parallax {
         if (paused) {
             AudioQueue.getInstance().pauseActiveMusic(this.backgroundMusic);
 
-            Random rand = new Random();
-            int randomSong = rand.nextInt(100 - 1 + 1) + 1;
+            final int randomSong = rand.nextInt(100 - 1 + 1) + 1;
 
             if (randomSong == 1) {
                 this.pauseMusic = "sounds/music/spanishFlea.mp3";
@@ -93,7 +93,7 @@ public class Parallax {
                     updateTime = 100;
                 }
 
-                for (HunterAI ai : this.ais) {
+                for (final HunterAI ai : this.ais) {
                     ai.update(updateTime);
                 }
 
@@ -116,8 +116,7 @@ public class Parallax {
     }
 
     private void startBackgroundMusic() {
-        Random rand = new Random();
-        int randomSong = rand.nextInt(100 - 1 + 1) + 1;
+        final int randomSong = rand.nextInt(100 - 1 + 1) + 1;
 
         if (randomSong == 1) {
             this.audioQueue.playMusic("secretTrack.mp3", musicDirectory);
@@ -139,7 +138,7 @@ public class Parallax {
 
     //Debug only
     private void createTestEnemy() {
-        MinionEnemy minionEnemy = new MinionEnemy(SpaceCraftFactory.getAgelionInstance(
+        final MinionEnemy minionEnemy = new MinionEnemy(SpaceCraftFactory.getAgelionInstance(
                 13,
                 new Vector3f(1.5f, -2, 1),
                 new Quat4f()

@@ -35,7 +35,7 @@ public class Sound implements AudioObserver {
     }
     @Override
     public void playMusic(String musicLocation) {
-        Music playing = this.resources.getMusic(musicLocation);
+        final Music playing = this.resources.getMusic(musicLocation);
         playing.play();
         this.activeMusic.add(new ActiveMusicCombination(musicLocation, playing));
     }
@@ -45,7 +45,7 @@ public class Sound implements AudioObserver {
     }
     @Override
     public void playMusic(String musicLocation, float volume) {
-        Music playing = this.resources.getMusic(musicLocation);
+        final Music playing = this.resources.getMusic(musicLocation);
         playing.setVolume(volume);
         playing.setLooping(true);
         playing.play();

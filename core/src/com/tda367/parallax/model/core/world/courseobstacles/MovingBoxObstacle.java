@@ -26,7 +26,7 @@ public class MovingBoxObstacle extends BoxObstacle {
         super(pos, rot);
 
         if (random) {
-            Random r = new Random();
+            final Random r = new Random();
             this.velocity = new Vector3f(
                     r.nextFloat() * 2 - 1,
                     r.nextFloat() * 2 - 1,

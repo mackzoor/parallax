@@ -174,7 +174,7 @@ public class Missile extends PowerUpBase {
             rotateMissile(getEnemyTargetPosition());
 
             if (timeStorage > TIME_TRACKING_TRANS) {
-                Vector3f directionalVector = generateDirectionVector(getEnemyTargetPosition());
+                final Vector3f directionalVector = generateDirectionVector(getEnemyTargetPosition());
                 moveOnDirectionVector(directionalVector, milliSinceLastUpdate);
             }
 
@@ -217,7 +217,7 @@ public class Missile extends PowerUpBase {
     private void moveOnVelocity(int milliSinceLastUpdate) {
         //Method for moving the missile according to the velocity
 
-        float posYAdded = velocity * ((float) milliSinceLastUpdate / 1000);
+        final float posYAdded = velocity * ((float) milliSinceLastUpdate / 1000);
         super.getPos().add(new Vector3f(0, posYAdded, 0));
     }
 
@@ -227,7 +227,7 @@ public class Missile extends PowerUpBase {
 
     //Method to generate a direction vector (normalized) for the ship's movement.
     private Vector3f generateDirectionVector(Vector3f target) {
-        Vector3f directionalVector = new Vector3f(target.getX() - getPos().getX(), target.getY() - getPos().getY(), target.getZ() - getPos().getZ());
+        final Vector3f directionalVector = new Vector3f(target.getX() - getPos().getX(), target.getY() - getPos().getY(), target.getZ() - getPos().getZ());
 
         directionalVector.normalize();
 

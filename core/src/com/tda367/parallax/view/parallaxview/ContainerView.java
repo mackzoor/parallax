@@ -56,7 +56,7 @@ public class ContainerView implements View {
 
     private void updatePowerUpRotation() {
         //Set rotation of 2 degrees per update.
-        Quat4f rotation = new Quat4f(0, 0, 0.035f, 0.999f);
+        final Quat4f rotation = new Quat4f(0, 0, 0.035f, 0.999f);
         rotation.normalize();
         this.powerUpRotation.mul(rotation);
         this.powerUpRotation.normalize();

@@ -40,7 +40,7 @@ public final class Renderer3D {
     public static Renderer3D initialize(float fov, int width, int height, boolean isVr) {
         if (isVr) {
             // Setup of special camera for VR
-            Camera cardboardCamera = new CardboardCamera();
+            final Camera cardboardCamera = new CardboardCamera();
             cardboardCamera.lookAt(0, 0, -1);
             renderer3D = new Renderer3D(cardboardCamera);
         } else {
@@ -131,7 +131,7 @@ public final class Renderer3D {
 
     private void renderOpaque3dModels(ModelBatch modelBatch, List<Renderable3dObject> modelsToRender){
         //Render high priority objects
-        for (Renderable3dObject renderable3dObject : this.modelsToRender) {
+        for (final Renderable3dObject renderable3dObject : this.modelsToRender) {
             if (renderable3dObject.isHighPriority()) {
                 this.modelBatch.render(renderable3dObject.getModelInstance(), this.environment);
             }
@@ -141,7 +141,7 @@ public final class Renderer3D {
     }
     private void renderTransparent3dModels(ModelBatch modelBatch, List<Renderable3dObject> modelsToRender){
         //Render low priority objects
-        for (Renderable3dObject renderable3dObject : this.modelsToRender) {
+        for (final Renderable3dObject renderable3dObject : this.modelsToRender) {
             if (!renderable3dObject.isHighPriority()) {
                 this.modelBatch.render(renderable3dObject.getModelInstance(), this.environment);
             }
@@ -171,7 +171,7 @@ public final class Renderer3D {
     public void onDrawEye(Eye eye) {
         ((CardboardCamera) this.camera).setEyeViewAdjustMatrix(new Matrix4(eye.getEyeView()));
 
-        float[] perspective = eye.getPerspective(this.camera.near, this.camera.far);
+        final float[] perspective = eye.getPerspective(this.camera.near, this.camera.far);
         ((CardboardCamera) this.camera).setEyeProjection(new Matrix4(perspective));
         this.camera.update();
 

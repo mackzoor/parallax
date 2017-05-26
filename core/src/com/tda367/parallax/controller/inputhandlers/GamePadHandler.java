@@ -20,7 +20,7 @@ public final class GamePadHandler extends ControllerAdapter {
 
     public GamePadHandler() {
         Controllers.addListener(this);
-        for (Controller controller : Controllers.getControllers()) {
+        for (final Controller controller : Controllers.getControllers()) {
             controller.addListener(this);
             connected(controller);
         }

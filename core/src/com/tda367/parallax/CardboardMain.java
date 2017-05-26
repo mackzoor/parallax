@@ -13,7 +13,7 @@ public class CardboardMain extends CardboardGame {
 
     @Override
     public void create(){
-        Player player = new Player();
+        final Player player = new Player();
         DeviceManager.setDevice(this);
         CardboardScreenManager.setCardboardGame(this);
         CardboardScreenManager.setGameState(ScreenState.MAIN_MENU, player);

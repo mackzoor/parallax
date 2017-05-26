@@ -51,16 +51,14 @@ public class DefaultCourseModule implements ICourseModule {
 
     private void addObstacles(int i) {
 
-
-        float distanceBetween = this.length / (float) i;
+        final float distanceBetween = this.length / (float) i;
         for (int x = 0; x < i; x++) {
-            Random rand = new Random();
-            Vector3f obstaclePos = new Vector3f(
+            final Vector3f obstaclePos = new Vector3f(
                     0,
                     (this.pos.getY()) - this.length / 2 + x * distanceBetween,
                     0
             );
-            CourseObstacleBase obstacle = ObstacleFactory.getRandomWallInstance(obstaclePos);
+            final  CourseObstacleBase obstacle = ObstacleFactory.getRandomWallInstance(obstaclePos);
 
             obstacle.getPos().set(obstaclePos);
             this.couseObstacles.add(obstacle);
@@ -77,14 +75,14 @@ public class DefaultCourseModule implements ICourseModule {
 
     @Override
     public void add3dObjectsToCollisionManager() {
-        for (CourseObstacleBase boxObstacle : this.couseObstacles) {
+        for (final CourseObstacleBase boxObstacle : this.couseObstacles) {
             boxObstacle.addToCollisionManager();
         }
     }
 
     @Override
     public void remove3dObjectsFromCollisionManager() {
-        for (CourseObstacleBase boxObstacle : this.couseObstacles) {
+        for (final CourseObstacleBase boxObstacle : this.couseObstacles) {
             boxObstacle.removeFromCollisionManager();
         }
 
@@ -105,7 +103,7 @@ public class DefaultCourseModule implements ICourseModule {
     public void setActiveState(boolean state) {
         this.active = state;
         if (!state) {
-            for (Container container : this.containers) {
+            for (final Container container : this.containers) {
                 container.removeFromCollisionManager();
             }
         }
@@ -122,10 +120,10 @@ public class DefaultCourseModule implements ICourseModule {
     }
 
     private void spawnPowerUp() {
-        IPowerUp pu = PowerUpFactory.createMissile();
+        final IPowerUp pu = PowerUpFactory.createMissile();
         this.powerUps.add(pu);
-        Container container = new Container(pu);
-        Random rand = new Random();
+        final Container container = new Container(pu);
+        final Random rand = new Random();
         container.setPos(new Vector3f(0, getPos().getY() + rand.nextFloat() * this.getLength(), 0));
         container.addToCollisionManager();
         this.containers.add(container);

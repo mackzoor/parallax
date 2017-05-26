@@ -38,11 +38,11 @@ public class CourseModelView implements View {
                 true
         );
 
-        for (CourseObstacleBase obstacle : courseModule.getCouseObstacles()) {
+        for (final CourseObstacleBase obstacle : courseModule.getCouseObstacles()) {
             this.obstacleViews.add(new CourseObstacleView(obstacle));
         }
 
-        for (Container container : courseModule.getContainers()) {
+        for (final Container container : courseModule.getContainers()) {
             this.containerViews.add(new ContainerView(container));
         }
     }
@@ -53,12 +53,12 @@ public class CourseModelView implements View {
         Renderer3D.getInstance().addObjectToFrame(this.courseModule3dObject);
 
         //Render obstacles
-        for (CourseObstacleView obstacle : this.obstacleViews) {
+        for (final CourseObstacleView obstacle : this.obstacleViews) {
             obstacle.render();
         }
 
         //Render containers
-        for (ContainerView container : this.containerViews) {
+        for (final ContainerView container : this.containerViews) {
             container.render();
         }
 
