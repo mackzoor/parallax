@@ -11,14 +11,13 @@ public class MovingWallObstacle extends WallObstacle {
 
     MovingWallObstacle(Vector3f pos, Quat4f rot) {
         super(pos, rot);
+        ROTATION.normalize();
     }
 
 
     @Override
     public void update(int milliSinceLastUpdate){
         super.update(milliSinceLastUpdate);
-        ROTATION.normalize();
         super.getRot().mul(ROTATION);
-        System.out.println(super.getRot());
     }
 }
