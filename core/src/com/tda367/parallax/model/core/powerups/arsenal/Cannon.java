@@ -48,11 +48,11 @@ public class Cannon extends PowerUpBase {
         super.setPos(new Vector3f(transformable.getPos()));
         super.getPos().add(new Vector3f(0, 1, 0));
 
-        this.velocity = MathUtilities.rotateVectorByQuat(new Vector3f(0,1,0),
+        this.velocity = MathUtilities.rotateVectorByQuat(new Vector3f(0, 1, 0),
                 new Quat4f(-1 * transformable.getRot().x
-                        ,transformable.getRot().y
-                        ,-1 * transformable.getRot().z
-                        ,transformable.getRot().w));
+                        , transformable.getRot().y
+                        , -1 * transformable.getRot().z
+                        , transformable.getRot().w));
         this.velocity.scale(30);
 
         playCannonSound();
@@ -67,7 +67,7 @@ public class Cannon extends PowerUpBase {
     public void update(int milliSinceLastUpdate) {
         if (super.isActive()) {
 
-            if (timeAlive > 150) {
+            if (this.timeAlive > 150) {
                 super.enableCollision();
             }
             this.timeAlive += milliSinceLastUpdate;
@@ -95,7 +95,7 @@ public class Cannon extends PowerUpBase {
     }
 
     private void playCannonSound() {
-        final int randomSong = rand.nextInt(200 - 1 + 1) + 1;
+        final int randomSong = this.rand.nextInt(200 - 1 + 1) + 1;
 
         //Plays a funny sound every 200 shots
         if (randomSong > 199) {
@@ -123,7 +123,7 @@ public class Cannon extends PowerUpBase {
     @Override
     public void handleCollision(Collidable collidable) {
         if (this.timeAlive > 250 && CollidableType.OBSTACLE == collidable.getCollidableType()) {
-            die();
+            this.die();
         }
     }
 }

@@ -22,8 +22,8 @@ public final class TouchHandler extends InputAdapter {
 
     @Override
     public boolean keyDown(int keycode) {
-        if (this.listener != null && (keycode == Input.Keys.BACK ||
-                                      keycode == Input.Keys.MENU)) {
+        if (this.listener != null && (keycode == Input.Keys.BACK
+                || keycode == Input.Keys.MENU)) {
             this.listener.pauseButtonPressed();
         }
         return false;

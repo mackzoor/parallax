@@ -18,8 +18,8 @@ import static com.tda367.parallax.controller.screens.ScreenState.MAIN_MENU;
 public class CardboardGameOverScreen extends CardboardScreenAdapter {
     private GameOver model;
     private GameOverView view;
-    private Player player;
-    private ScreenChanger screenChanger;
+    private final Player player;
+    private final ScreenChanger screenChanger;
 
     public CardboardGameOverScreen(Player player, ScreenChanger screenChanger) {
         this.player = player;
@@ -31,7 +31,7 @@ public class CardboardGameOverScreen extends CardboardScreenAdapter {
         this.model.update((int) (Gdx.graphics.getDeltaTime() * 1000));
         if (this.model.isObsolete()) {
             dispose();
-            screenChanger.requestScreenChange(MAIN_MENU, this.player);
+            this.screenChanger.requestScreenChange(MAIN_MENU, this.player);
         }
     }
 

@@ -11,7 +11,7 @@ class SpaceCraftController {
     private float yValue;
     private float xValue;
 
-    private ISpaceCraft spaceCraft;
+    private final ISpaceCraft spaceCraft;
 
     SpaceCraftController(ISpaceCraft spaceCraft) {
         this.yValue = 0;
@@ -29,7 +29,7 @@ class SpaceCraftController {
     }
 
     void upButtonUp() {
-        yValue -= 1;
+        this.yValue -= 1;
         updateControls();
     }
 
@@ -59,7 +59,7 @@ class SpaceCraftController {
     }
 
     void leftButtonUp() {
-        xValue += 1;
+        this.xValue += 1;
         updateControls();
     }
 

@@ -7,26 +7,26 @@ import com.tda367.parallax.view.parallaxview.parallaxviewcomponents.View;
 /**
  * View class for {@link IPowerUp}
  */
-public class PowerUpViewAutomaticTransform implements View{
+public class PowerUpViewAutomaticTransform implements View {
 
-    private IPowerUp powerUp;
-    private RenderablePowerUp renderablePowerUp;
+    private final IPowerUp powerUp;
+    private final RenderablePowerUp renderablePowerUp;
 
-    public PowerUpViewAutomaticTransform(IPowerUp powerUp){
+    public PowerUpViewAutomaticTransform(IPowerUp powerUp) {
         this.powerUp = powerUp;
         this.renderablePowerUp = getRenderablePowerUp(powerUp);
     }
 
     @Override
-    public void render(){
-        renderablePowerUp.setPosition(powerUp.getPos());
-        renderablePowerUp.setRotation(powerUp.getRot());
+    public void render() {
+        this.renderablePowerUp.setPosition(this.powerUp.getPos());
+        this.renderablePowerUp.setRotation(this.powerUp.getRot());
 
 
-        if (powerUp.isActive()){
-            renderablePowerUp.render();
-        }else if (powerUp.isDead()){
-            renderablePowerUp.kill();
+        if (this.powerUp.isActive()) {
+            this.renderablePowerUp.render();
+        } else if (this.powerUp.isDead()) {
+            this.renderablePowerUp.kill();
         }
     }
 
@@ -36,11 +36,11 @@ public class PowerUpViewAutomaticTransform implements View{
 
     @Override
     public boolean isObsolete() {
-        return powerUp.isDead() && renderablePowerUp.isDead();
+        return this.powerUp.isDead() && this.renderablePowerUp.isDead();
     }
 
 
-    private RenderablePowerUp getRenderablePowerUp(IPowerUp powerUp){
+    private RenderablePowerUp getRenderablePowerUp(IPowerUp powerUp) {
         if (powerUp.getPowerUpType() == PowerUpType.LAZER) {
             return new LazerView();
         } else if (powerUp.getPowerUpType() == PowerUpType.MISSILE) {

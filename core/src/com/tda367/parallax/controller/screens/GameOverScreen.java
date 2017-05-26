@@ -15,8 +15,8 @@ import static com.tda367.parallax.controller.screens.ScreenState.MAIN_MENU;
 public class GameOverScreen extends ScreenAdapter {
     private GameOver model;
     private GameOverView view;
-    private Player player;
-    private ScreenChanger screenChanger;
+    private final Player player;
+    private final ScreenChanger screenChanger;
 
     public GameOverScreen(Player player, ScreenChanger screenChanger) {
         this.player = player;
@@ -30,7 +30,7 @@ public class GameOverScreen extends ScreenAdapter {
             this.view.render();
         } else {
             dispose();
-            screenChanger.requestScreenChange(MAIN_MENU, this.player);
+            this.screenChanger.requestScreenChange(MAIN_MENU, this.player);
         }
 
     }

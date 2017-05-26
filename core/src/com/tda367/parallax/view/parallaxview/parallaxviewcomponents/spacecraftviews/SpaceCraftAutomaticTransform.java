@@ -6,35 +6,35 @@ import com.tda367.parallax.view.parallaxview.parallaxviewcomponents.View;
 
 public class SpaceCraftAutomaticTransform implements View {
 
-    private ISpaceCraft spaceCraft;
-    private RenderableSpaceCraft renderableSpaceCraft;
+    private final ISpaceCraft spaceCraft;
+    private final RenderableSpaceCraft renderableSpaceCraft;
 
-    public SpaceCraftAutomaticTransform(ISpaceCraft spaceCraft){
+    public SpaceCraftAutomaticTransform(ISpaceCraft spaceCraft) {
         this.spaceCraft = spaceCraft;
         this.renderableSpaceCraft = getRenderableSpaceCraft(spaceCraft);
     }
 
     @Override
-    public void render(){
-        renderableSpaceCraft.setPosition(spaceCraft.getPos());
-        renderableSpaceCraft.setRotation(spaceCraft.getRot());
+    public void render() {
+        this.renderableSpaceCraft.setPosition(this.spaceCraft.getPos());
+        this.renderableSpaceCraft.setRotation(this.spaceCraft.getRot());
 
 
-        if (spaceCraft.getHealth() > 1){
-            renderableSpaceCraft.setCriticalDamage(false);
+        if (this.spaceCraft.getHealth() > 1) {
+            this.renderableSpaceCraft.setCriticalDamage(false);
         } else {
-            renderableSpaceCraft.setCriticalDamage(true);
+            this.renderableSpaceCraft.setCriticalDamage(true);
         }
-        renderableSpaceCraft.render();
+        this.renderableSpaceCraft.render();
     }
 
     @Override
     public boolean isObsolete() {
-        return spaceCraft.getHealth() < 1;
+        return this.spaceCraft.getHealth() < 1;
     }
 
 
-    private RenderableSpaceCraft getRenderableSpaceCraft(ISpaceCraft spaceCraft){
+    private RenderableSpaceCraft getRenderableSpaceCraft(ISpaceCraft spaceCraft) {
         if (spaceCraft.getType() == SpaceCraftType.AGELION) {
             return new AgelionView();
         } else {

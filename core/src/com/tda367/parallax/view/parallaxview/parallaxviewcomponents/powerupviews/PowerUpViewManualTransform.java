@@ -11,29 +11,29 @@ public class PowerUpViewManualTransform implements View {
 
     private final RenderablePowerUp renderablePowerUp;
 
-    public PowerUpViewManualTransform(PowerUpType type){
+    public PowerUpViewManualTransform(PowerUpType type) {
         this.renderablePowerUp = getRenderablePowerUp(type);
     }
 
     @Override
     public void render() {
-        renderablePowerUp.render();
+        this.renderablePowerUp.render();
     }
 
     public void setPosition(Vector3f pos) {
-        renderablePowerUp.setPosition(pos);
+        this.renderablePowerUp.setPosition(pos);
     }
 
     public void setRotation(Quat4f rot) {
-        renderablePowerUp.setRotation(rot);
+        this.renderablePowerUp.setRotation(rot);
     }
 
-    public void kill(){
-        renderablePowerUp.kill();
+    public void kill() {
+        this.renderablePowerUp.kill();
     }
 
-    public void effectsEnabled(boolean value){
-        renderablePowerUp.enableEffects(value);
+    public void effectsEnabled(boolean value) {
+        this.renderablePowerUp.enableEffects(value);
     }
 
     @Override
@@ -41,7 +41,7 @@ public class PowerUpViewManualTransform implements View {
         return false;
     }
 
-    private RenderablePowerUp getRenderablePowerUp(PowerUpType powerUp){
+    private RenderablePowerUp getRenderablePowerUp(PowerUpType powerUp) {
         if (powerUp == PowerUpType.LAZER) {
             return new LazerView();
         } else if (powerUp == PowerUpType.MISSILE) {

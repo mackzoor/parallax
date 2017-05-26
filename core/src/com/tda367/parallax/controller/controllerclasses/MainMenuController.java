@@ -14,7 +14,7 @@ import javax.vecmath.Vector3f;
 
 public class MainMenuController extends InputControlsAdapter {
 
-    private MainMenu mainMenu;
+    private final MainMenu mainMenu;
 
     public MainMenuController(MainMenu mainMenu, Device device) {
         this.mainMenu = mainMenu;

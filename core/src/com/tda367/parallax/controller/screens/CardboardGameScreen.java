@@ -18,13 +18,13 @@ import static com.tda367.parallax.controller.screens.ScreenState.GAME_OVER;
 
 public class CardboardGameScreen extends com.tda367.parallax.controller.screens.cardboardadapter.CardboardScreenAdapter {
 
-    private Player player;
+    private final Player player;
     private Parallax parallaxGame;
     private GameController controller;
-    private CollisionCalculator collisionCalculator;
-    private Sound sound;
+    private final CollisionCalculator collisionCalculator;
+    private final Sound sound;
     private ParallaxView parallaxView;
-    private ScreenChanger screenChanger;
+    private final ScreenChanger screenChanger;
 
     public CardboardGameScreen(Player player, ScreenChanger screenChanger) {
         //Gdx.graphics.setTitle("Galactica space wars of justice, ultimate edition");

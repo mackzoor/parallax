@@ -7,7 +7,7 @@ import java.util.Random;
  */
 public class PowerUpFactory {
 
-    private static final Random random = new Random();
+    private static final Random RAND = new Random();
 
     private PowerUpFactory() {
 
@@ -25,11 +25,11 @@ public class PowerUpFactory {
      * @return a random powerUp.
      */
     public static IPowerUp createRandom() {
-        final int rand = (int) (random.nextFloat() * 2);
+        final int randomNumber = (int) (RAND.nextFloat() * 2);
 
-        if (rand == 0) {
+        if (randomNumber == 0) {
             return createCannon();
-        } else if (rand == 1){
+        } else if (randomNumber == 1) {
             return createMissile();
         } else {
             return createMissile();

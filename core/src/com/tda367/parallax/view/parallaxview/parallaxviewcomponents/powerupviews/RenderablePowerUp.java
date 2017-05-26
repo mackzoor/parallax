@@ -5,11 +5,14 @@ import javax.vecmath.Vector3f;
 
 interface RenderablePowerUp {
     void render();
+
     void kill();
+
     boolean isDead();
 
     void enableEffects(boolean value);
 
     void setPosition(Vector3f pos);
+
     void setRotation(Quat4f rot);
 }

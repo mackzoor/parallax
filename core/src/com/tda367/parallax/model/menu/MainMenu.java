@@ -30,13 +30,13 @@ public class MainMenu implements CollisionObserver {
     private static final Quat4f START_BUTTON_ROT = new Quat4f();
 
     @Getter
-    private ExitButton3D exitButton;
+    private final ExitButton3D exitButton;
     @Getter
-    private StartButton3D startButton;
+    private final StartButton3D startButton;
     @Getter
-    private List<IPowerUp> powerUps;
+    private final List<IPowerUp> powerUps;
     @Getter
-    private Camera camera;
+    private final Camera camera;
     @Getter
     @Setter
     private Vector3f aimDirection;
@@ -55,13 +55,13 @@ public class MainMenu implements CollisionObserver {
         final Cannon cannon = PowerUpFactory.createCannon();
         this.powerUps.add(cannon);
         cannon.activate(this.camera);
-        aimDirection.normalize();
-        aimDirection.scale(30);
+        this.aimDirection.normalize();
+        this.aimDirection.scale(30);
         cannon.setVelocity(this.aimDirection);
     }
 
     public void update(int milliSinceLastUpdate) {
-        for (final IPowerUp powerUp : powerUps) {
+        for (final IPowerUp powerUp : this.powerUps) {
             powerUp.update(milliSinceLastUpdate);
         }
     }

@@ -11,7 +11,8 @@ import lombok.Getter;
 
 public abstract class CardboardGame extends Game implements CardBoardApplicationListener {
 
-    @Getter private CardboardScreen cardboardScreen;
+    @Getter
+    private CardboardScreen cardboardScreen;
 
     @Override
     public void onNewFrame(HeadTransform paramHeadTransform) {

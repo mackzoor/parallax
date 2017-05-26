@@ -21,7 +21,7 @@ public class HudTextureGenerator {
     private static final int WITDH = 512;
     private static final int HEIGHT = 256;
 
-    private Texture generatedTexture;
+    private final Texture generatedTexture;
 
     private int lives;
     private IPowerUp powerUp;
@@ -29,7 +29,7 @@ public class HudTextureGenerator {
 
     HudTextureGenerator(int lives) {
         this.lives = lives;
-        generatedTexture = new Texture(renderText(Color.BLACK));
+        this.generatedTexture = new Texture(renderText(Color.BLACK));
     }
 
     void setScore(int score) {
@@ -48,11 +48,12 @@ public class HudTextureGenerator {
         final Pixmap pMap = renderText(Color.WHITE);
 //        pMap = outLine(pMap);
         renderBackground(pMap);
-        generatedTexture.draw(pMap, 0, 0);
-        pMap.dispose(); //Important!
+        this.generatedTexture.draw(pMap, 0, 0);
+        //Important!
+        pMap.dispose();
 
 
-        return generatedTexture;
+        return this.generatedTexture;
     }
 
     private Pixmap renderBackground(Pixmap pMap) {

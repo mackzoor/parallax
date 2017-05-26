@@ -4,7 +4,7 @@ import com.badlogic.gdx.Files;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
-import com.badlogic.gdx.audio.*;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
@@ -13,11 +13,9 @@ import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.loader.G3dModelLoader;
 import com.badlogic.gdx.graphics.g3d.particles.ParticleEffect;
 import com.badlogic.gdx.graphics.g3d.particles.ParticleEffectLoader;
-import com.badlogic.gdx.graphics.g3d.particles.batches.ParticleBatch;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.bullet.collision.btCollisionShape;
 import com.badlogic.gdx.physics.bullet.collision.btConvexHullShape;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.UBJsonReader;
 
 import java.util.ArrayList;
@@ -30,33 +28,33 @@ import java.util.Map;
  */
 public final class ResourceLoader {
     private static ResourceLoader instance;
-    private G3dModelLoader modelLoader;
+    private final G3dModelLoader modelLoader;
 
-    private AssetManager assetManager;
+    private final AssetManager assetManager;
 
-    private Map<String,Model> loadedModels;
-    private Map<String,Sound> loadedSounds;
-    private Map<String,Music> loadedMusic;
-    private Map<String,Texture> loadedTextures;
-    private Map<String, btCollisionShape> loadedCollisionShapes;
-    private Map<String, ParticleEffect> loadedParticleEffects;
+    private final Map<String, Model> loadedModels;
+    private final Map<String, Sound> loadedSounds;
+    private final Map<String, Music> loadedMusic;
+    private final Map<String, Texture> loadedTextures;
+    private final Map<String, btCollisionShape> loadedCollisionShapes;
+    private final Map<String, ParticleEffect> loadedParticleEffects;
 
 
     private ResourceLoader() {
         final UBJsonReader jsonReader = new UBJsonReader();
         this.modelLoader = new G3dModelLoader(jsonReader);
-        assetManager = new AssetManager(new InternalFileHandleResolver());
+        this.assetManager = new AssetManager(new InternalFileHandleResolver());
 
-        loadedModels = new HashMap<String, Model>();
-        loadedSounds = new HashMap<String, Sound>();
-        loadedMusic = new HashMap<String, Music>();
-        loadedTextures = new HashMap<String, Texture>();
-        loadedCollisionShapes = new HashMap<String, btCollisionShape>();
-        loadedParticleEffects = new HashMap<String, ParticleEffect>();
+        this.loadedModels = new HashMap<String, Model>();
+        this.loadedSounds = new HashMap<String, Sound>();
+        this.loadedMusic = new HashMap<String, Music>();
+        this.loadedTextures = new HashMap<String, Texture>();
+        this.loadedCollisionShapes = new HashMap<String, btCollisionShape>();
+        this.loadedParticleEffects = new HashMap<String, ParticleEffect>();
     }
 
     //Singleton pattern
-    public static ResourceLoader getInstance() {
+    public static synchronized ResourceLoader getInstance() {
         if (instance == null) {
             instance = new ResourceLoader();
         }
@@ -76,10 +74,10 @@ public final class ResourceLoader {
 
         if (modelDirectory.length() > 0) {
             modelNew = this.modelLoader.loadModel(Gdx.files.getFileHandle(modelDirectory + "/" + modelName,
-                                                                           Files.FileType.Internal));
+                    Files.FileType.Internal));
         } else {
             modelNew = this.modelLoader.loadModel(Gdx.files.getFileHandle(modelName,
-                                                  Files.FileType.Internal));
+                    Files.FileType.Internal));
         }
 
         this.loadedModels.put(modelName, modelNew);
@@ -301,22 +299,22 @@ public final class ResourceLoader {
     private ParticleEffect loadParticleEffect(String filePath) {
         ParticleEffect effect;
 
-        assetManager.setLoader(ParticleEffect.class,new ParticleEffectLoader(new InternalFileHandleResolver()));
-        assetManager.load(filePath,ParticleEffect.class);
+        this.assetManager.setLoader(ParticleEffect.class, new ParticleEffectLoader(new InternalFileHandleResolver()));
+        this.assetManager.load(filePath, ParticleEffect.class);
 
-        assetManager.finishLoading();
+        this.assetManager.finishLoading();
 
-        effect = assetManager.get(filePath, ParticleEffect.class);
+        effect = this.assetManager.get(filePath, ParticleEffect.class);
 
 
         return effect;
     }
 
     public ParticleEffect getParticleEffect(String filePath) {
-        ParticleEffect effect = loadedParticleEffects.get(filePath);
+        ParticleEffect effect = this.loadedParticleEffects.get(filePath);
 
         if (effect == null) {
-            effect = loadParticleEffect(filePath);
+            effect = this.loadParticleEffect(filePath);
         }
 
         return effect.copy();

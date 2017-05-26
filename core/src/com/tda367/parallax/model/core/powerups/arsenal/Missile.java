@@ -57,7 +57,7 @@ public class Missile extends PowerUpBase {
     private int timeStorage;
 
     @Getter
-    private Vector3f enemyTargetPosition;
+    private final Vector3f enemyTargetPosition;
 
     Missile() {
         super();
@@ -77,8 +77,8 @@ public class Missile extends PowerUpBase {
 
 
         //TODO, Temporary initialization for the enemy, will be controlled elsewhere later.
-        enemyTargetPosition.set(new Vector3f(super.getPos()));
-        enemyTargetPosition.add(new Vector3f(0, 100, 20));
+        this.enemyTargetPosition.set(new Vector3f(super.getPos()));
+        this.enemyTargetPosition.add(new Vector3f(0, 100, 20));
         playMissileSound();
     }
 
@@ -94,7 +94,7 @@ public class Missile extends PowerUpBase {
 
     @Override
     public CollidableType getCollidableType() {
-        if (timeStorage > TIME_TRACKING_TRANS) {
+        if (this.timeStorage > TIME_TRACKING_TRANS) {
             return CollidableType.HARMFUL;
         } else {
             return CollidableType.NEUTRAL;
@@ -104,10 +104,10 @@ public class Missile extends PowerUpBase {
     @Override
     public void handleCollision(Collidable collidable) {
         //Todo Create explosion
-        if (collidable.getCollidableType() == CollidableType.SPACECRAFT && timeStorage > TIME_TRACKING_TRANS) {
+        if (collidable.getCollidableType() == CollidableType.SPACECRAFT && this.timeStorage > TIME_TRACKING_TRANS) {
             removeMissile();
         }
-        if (collidable.getCollidableType() == CollidableType.OBSTACLE && timeStorage > 250) {
+        if (collidable.getCollidableType() == CollidableType.OBSTACLE && this.timeStorage > 250) {
             removeMissile();
         }
     }
@@ -126,23 +126,23 @@ public class Missile extends PowerUpBase {
     public void update(int milliSinceLastUpdate) {
         if (!super.isDead()) {
             if (super.isActive()) {
-                timeStorage = timeStorage + milliSinceLastUpdate;
+                this.timeStorage = this.timeStorage + milliSinceLastUpdate;
 
                 //Checks to see that the missile has gotten a velocity before moving
                 //Before testing velocity, check that velocity generation is allowed,
                 //by using previous and current position.
-                if (transformableEarlierPosition == null) {
-                    transformableEarlierPosition = new Vector3f(transformable.getPos());
+                if (this.transformableEarlierPosition == null) {
+                    this.transformableEarlierPosition = new Vector3f(this.transformable.getPos());
                     //Make sure that the missile has the same position as the ship after one cycle.
-                    super.getPos().set(transformable.getPos());
-                } else if (velocity == 0) {
+                    super.getPos().set(this.transformable.getPos());
+                } else if (this.velocity == 0) {
                     //Generate velocity for the missile, based on the velocity of the transformable object
-                    generateVelocity(transformableEarlierPosition,
-                                     transformable,
-                                     milliSinceLastUpdate);
+                    generateVelocity(this.transformableEarlierPosition,
+                            this.transformable,
+                            milliSinceLastUpdate);
                 } else {
                     moveTheMissile(milliSinceLastUpdate,
-                                   timeStorage);
+                            this.timeStorage);
                 }
             }
         }
@@ -159,20 +159,20 @@ public class Missile extends PowerUpBase {
         //Method for general missile movement, separated from update for nicer looking code.
 
         if (timeStorage <= TIME_TRACKING_TRANS) {
-            if (    transPosLastUpdate.getX() == 0
-                    && transPosLastUpdate.getY() == 0
-                    && transPosLastUpdate.getZ() == 0) {
+            if (this.transPosLastUpdate.getX() == 0
+                    && this.transPosLastUpdate.getY() == 0
+                    && this.transPosLastUpdate.getZ() == 0) {
 
-                super.setPos(new Vector3f(transformable.getPos()));
-                transPosLastUpdate = new Vector3f(transformable.getPos());
+                super.setPos(new Vector3f(this.transformable.getPos()));
+                this.transPosLastUpdate = new Vector3f(this.transformable.getPos());
             } else {
-                if (transPosLastUpdate.getZ() > transformable.getPos().getZ()) {
+                if (this.transPosLastUpdate.getZ() > this.transformable.getPos().getZ()) {
                     super.getPos().add(new Vector3f(0,
-                                                    0,
-                                                    transformable.getPos().getZ() - transPosLastUpdate.getZ()));
+                            0,
+                            this.transformable.getPos().getZ() - this.transPosLastUpdate.getZ()));
                 }
             }
-            transPosLastUpdate = new Vector3f(transformable.getPos());
+            this.transPosLastUpdate = new Vector3f(this.transformable.getPos());
         }
 
         //Check if the missile is in the falling phase, moving to target phase or if the missile should be removed.
@@ -199,22 +199,22 @@ public class Missile extends PowerUpBase {
 
     private void accelerateMissile(int milliSinceLastUpdate) {
 
-        timeAccelerated = timeAccelerated + milliSinceLastUpdate;
+        this.timeAccelerated = this.timeAccelerated + milliSinceLastUpdate;
 
-        if (startVelocity == 0) {
-            startVelocity = velocity;
+        if (this.startVelocity == 0) {
+            this.startVelocity = this.velocity;
         }
 
-        if (velocity < MAXIMUM_VELOCITY) {
+        if (this.velocity < MAXIMUM_VELOCITY) {
             /*Calculate the velocity based on this formula: x(t) = x0 × (1 + r)^t
             x(t) is the value at time t.
             x0 is the initial value at time t=0.
             r is the growth rate when r>0 or decay rate when r<0, in percent.
             t is the time in discrete intervals and selected time units.
              */
-            velocity = startVelocity * ((float) Math.pow(1 + ACCELERATION, ((double) timeAccelerated) / 1000));
+            this.velocity = this.startVelocity * ((float) Math.pow(1 + ACCELERATION, ((double) this.timeAccelerated) / 1000));
         } else {
-            velocity = MAXIMUM_VELOCITY;
+            this.velocity = MAXIMUM_VELOCITY;
         }
     }
 
@@ -232,7 +232,7 @@ public class Missile extends PowerUpBase {
     private void moveOnVelocity(int milliSinceLastUpdate) {
         //Method for moving the missile according to the velocity
 
-        final float posYAdded = velocity * ((float) milliSinceLastUpdate / 1000);
+        final float posYAdded = this.velocity * ((float) milliSinceLastUpdate / 1000);
         super.getPos().add(new Vector3f(0, posYAdded, 0));
     }
 
@@ -243,8 +243,8 @@ public class Missile extends PowerUpBase {
     //Method to generate a direction vector (normalized) for the ship's movement.
     private Vector3f generateDirectionVector(Vector3f target) {
         final Vector3f directionalVector = new Vector3f(target.getX() - getPos().getX(),
-                                                        target.getY() - getPos().getY(),
-                                                        target.getZ() - getPos().getZ());
+                target.getY() - getPos().getY(),
+                target.getZ() - getPos().getZ());
 
         directionalVector.normalize();
 
@@ -254,8 +254,8 @@ public class Missile extends PowerUpBase {
     //Method for moving the ship based on the direction vector generated from method "generateDirectionalVector"
     private void moveOnDirectionVector(Vector3f directionalVector, int milliSinceLastUpdate) {
         getPos().add(new Vector3f((directionalVector.getX() * (float) milliSinceLastUpdate / 1000) * VELOCITY_MULTIPLIER_X,
-                                  (directionalVector.getY() * (float) milliSinceLastUpdate / 1000) * VELOCITY_MULTIPLIER_Y,
-                                  (directionalVector.getZ() * (float) milliSinceLastUpdate / 1000) * VELOCITY_MULTIPLIER_Z));
+                (directionalVector.getY() * (float) milliSinceLastUpdate / 1000) * VELOCITY_MULTIPLIER_Y,
+                (directionalVector.getZ() * (float) milliSinceLastUpdate / 1000) * VELOCITY_MULTIPLIER_Z));
         this.setRot(MathUtilities.vectorToQuat(directionalVector));
     }
 

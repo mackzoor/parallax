@@ -22,7 +22,7 @@ import java.util.List;
 public abstract class SpaceCraft implements ISpaceCraft {
 
     //SpaceCraft movement limiter
-    static private final float COURSE_RADIUS = 5;
+    private static final float COURSE_RADIUS = 5;
 
     @Getter
     private List<IPowerUp> pu = new ArrayList<IPowerUp>();
@@ -39,24 +39,24 @@ public abstract class SpaceCraft implements ISpaceCraft {
     private boolean forwardRelativeVelocityMode;
 
     private float maxPanVelocity;
-    private Vector2f desiredPanVelocity;
+    private final Vector2f desiredPanVelocity;
     private Vector2f panAcceleration;
     @Setter
     @Getter
     private Vector2f currentPanVelocity;
     @Getter
-    private Vector2f panAbsoluteTarget;
+    private final Vector2f panAbsoluteTarget;
 
     @Setter
     private boolean independentRotation;
 
     @Getter
-    private Vector3f pos;
+    private final Vector3f pos;
     @Getter
     private Quat4f rot;
 
     private boolean collisionEnabled;
-    private SpaceCraftType type;
+    private final SpaceCraftType type;
 
     SpaceCraft(SpaceCraftMobility mobility, int health, SpaceCraftType type) {
 
@@ -139,7 +139,7 @@ public abstract class SpaceCraft implements ISpaceCraft {
 
     private Vector2f rotateNinetyDeg(Vector2f vector2f) {
         return new Vector2f(-vector2f.getY(),
-                            vector2f.getX());
+                vector2f.getX());
     }
 
     private Vector2f onWallSteering(Vector2f desiredPanVelocity) {
@@ -153,7 +153,8 @@ public abstract class SpaceCraft implements ISpaceCraft {
         if (this.isShipOutsideCourse()) {
             final Vector2f tempVec = this.xzPos(getPos());
             tempVec.normalize();
-            tempVec.scale((49f / 50f) * COURSE_RADIUS); //Too compensate for rounding of float
+            //Too compensate for rounding of float
+            tempVec.scale((49f / 50f) * COURSE_RADIUS);
             getPos().set(new Vector3f(tempVec.getX(), getPos().getY(), tempVec.getY()));
         }
     }

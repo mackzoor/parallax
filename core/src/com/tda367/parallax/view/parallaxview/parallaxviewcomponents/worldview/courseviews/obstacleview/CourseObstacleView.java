@@ -11,7 +11,7 @@ import com.tda367.parallax.view.rendering.Renderer3D;
  */
 public class CourseObstacleView {
     private final CourseObstacleBase obstacle;
-    private Renderable3dObject renderable3dObject;
+    private final Renderable3dObject renderable3dObject;
 
     public CourseObstacleView(CourseObstacleBase obstacle) {
         this.obstacle = obstacle;
@@ -25,10 +25,10 @@ public class CourseObstacleView {
     }
 
     public void render() {
-        if (!obstacle.isDestroyed()) {
-            this.renderable3dObject.setPos(obstacle.getPos());
-            this.renderable3dObject.setRot(obstacle.getRot());
-            Renderer3D.getInstance().addObjectToFrame(renderable3dObject);
+        if (!this.obstacle.isDestroyed()) {
+            this.renderable3dObject.setPos(this.obstacle.getPos());
+            this.renderable3dObject.setRot(this.obstacle.getRot());
+            Renderer3D.getInstance().addObjectToFrame(this.renderable3dObject);
         }
     }
 

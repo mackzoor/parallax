@@ -5,7 +5,7 @@ import com.tda367.parallax.controller.inputhandlers.InputControlsListener;
 
 class CardboardDevice implements Device {
 
-    private GamePadHandler gamePadHandler;
+    private final GamePadHandler gamePadHandler;
 
     CardboardDevice() {
         this.gamePadHandler = new GamePadHandler();

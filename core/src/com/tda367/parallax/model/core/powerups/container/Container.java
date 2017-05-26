@@ -28,7 +28,7 @@ public class Container implements IContainer {
     private String collisionModelPath;
     private boolean collisionEnabled;
 
-    private IPowerUp powerUp;
+    private final IPowerUp powerUp;
 
     @Getter
     private boolean isCollected;

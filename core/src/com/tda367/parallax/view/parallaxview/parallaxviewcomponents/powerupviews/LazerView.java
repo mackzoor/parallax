@@ -11,68 +11,68 @@ import javax.vecmath.Vector3f;
 
 
 public class LazerView implements RenderablePowerUp {
-    private final static String LAZER_3D_MODEL = "3dModels/laser/laser.g3db";
-    private final static ParticleEffectType EXPLOSION = ParticleEffectType.EXPLOSION;
+    private static final String LAZER_3D_MODEL = "3dModels/laser/laser.g3db";
+    private static final ParticleEffectType EXPLOSION = ParticleEffectType.EXPLOSION;
 
     private Vector3f pos;
     private Quat4f rot;
 
-    private Renderable3dObject renderable3dObject;
-    private RenderableParticleEffect explosion;
+    private final Renderable3dObject renderable3dObject;
+    private final RenderableParticleEffect explosion;
 
     private int deathTime;
     private boolean effectsEnabled;
 
 
     LazerView() {
-        pos = new Vector3f();
-        rot = new Quat4f();
+        this.pos = new Vector3f();
+        this.rot = new Quat4f();
 
         this.renderable3dObject = new Renderable3dObject(
-                pos,
-                rot,
+                this.pos,
+                this.rot,
                 ResourceLoader.getInstance().getModel(LAZER_3D_MODEL),
                 1,
                 true
         );
 
-        explosion = new RenderableParticleEffect(EXPLOSION);
-        deathTime = 0;
-        effectsEnabled = true;
+        this.explosion = new RenderableParticleEffect(EXPLOSION);
+        this.deathTime = 0;
+        this.effectsEnabled = true;
     }
 
     private void updateTransformation() {
-        this.renderable3dObject.setPos(pos);
-        this.renderable3dObject.setRot(rot);
+        this.renderable3dObject.setPos(this.pos);
+        this.renderable3dObject.setRot(this.rot);
 
-        this.explosion.setPosition(pos);
+        this.explosion.setPosition(this.pos);
     }
 
     @Override
     public void render() {
-        updateTransformation();
+        this.updateTransformation();
 
-        if (deathTime == 0) {
-            Renderer3D.getInstance().addObjectToFrame(renderable3dObject);
+        if (this.deathTime == 0) {
+            Renderer3D.getInstance().addObjectToFrame(this.renderable3dObject);
         } else {
-            if (effectsEnabled) {
-                Renderer3D.getInstance().addParticleEffectToFrame(explosion);
+            if (this.effectsEnabled) {
+                Renderer3D.getInstance().addParticleEffectToFrame(this.explosion);
             }
-            deathTime++;
+            this.deathTime++;
         }
     }
 
     @Override
     public void kill() {
-        if (deathTime == 0){
-            explosion.setPosition(pos);
-            explosion.start();
+        if (this.deathTime == 0) {
+            this.explosion.setPosition(this.pos);
+            this.explosion.start();
         }
     }
 
     @Override
     public boolean isDead() {
-        return deathTime > 120;
+        return this.deathTime > 120;
     }
 
     @Override

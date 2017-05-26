@@ -26,11 +26,11 @@ public class GameOver {
     @Getter
     private int playerScore;
     @Getter
-    private Player player;
+    private final Player player;
     @Getter
     private boolean obsolete;
     @Getter
-    private Camera camera;
+    private final Camera camera;
     private float timeShowed;
 
     public GameOver(Player player) {

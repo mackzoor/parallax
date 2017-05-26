@@ -22,18 +22,18 @@ import java.util.Random;
 public class Parallax {
 
     private static Random rand = new Random();
-    private static final String musicDirectory = "sounds/music";
+    private static final String MUSIC_DIRECTORY = "sounds/music";
 
 
-    private AudioQueue audioQueue;
+    private final AudioQueue audioQueue;
     @Getter
     private boolean gameOver;
     @Getter
-    private World world;
+    private final World world;
     @Getter
-    private Camera camera;
+    private final Camera camera;
     @Getter
-    private Player player;
+    private final Player player;
     @Getter
     @Setter
     private int totalPlayingTime;
@@ -42,7 +42,7 @@ public class Parallax {
     private String backgroundMusic;
     private String pauseMusic;
 
-    private List<HunterAI> ais;
+    private final List<HunterAI> ais;
 
     public Parallax(Player player) {
         this.audioQueue = AudioQueue.getInstance();
@@ -75,10 +75,10 @@ public class Parallax {
 
             if (randomSong == 1) {
                 this.pauseMusic = "sounds/music/spanishFlea.mp3";
-                AudioQueue.getInstance().playMusic("spanishFlea.mp3", musicDirectory, 0.7f);
+                AudioQueue.getInstance().playMusic("spanishFlea.mp3", MUSIC_DIRECTORY, 0.7f);
             } else {
                 this.pauseMusic = "sounds/music/spaceInTime.mp3";
-                AudioQueue.getInstance().playMusic("spaceInTime.mp3", musicDirectory, 0.7f);
+                AudioQueue.getInstance().playMusic("spaceInTime.mp3", MUSIC_DIRECTORY, 0.7f);
             }
         } else {
             AudioQueue.getInstance().unPauseActiveMusic(this.backgroundMusic);
@@ -122,10 +122,10 @@ public class Parallax {
         final int randomSong = rand.nextInt(100 - 1 + 1) + 1;
 
         if (randomSong == 1) {
-            this.audioQueue.playMusic("secretTrack.mp3", musicDirectory);
+            this.audioQueue.playMusic("secretTrack.mp3", MUSIC_DIRECTORY);
             this.backgroundMusic = "sounds/music/secretTrack.mp3";
         } else if (randomSong == 2) {
-            this.audioQueue.playMusic("trippingBalls.mp3", musicDirectory, 0.7f);
+            this.audioQueue.playMusic("trippingBalls.mp3", MUSIC_DIRECTORY, 0.7f);
             this.backgroundMusic = "sounds/music/trippingBalls.mp3";
         } else {
             /*
@@ -134,7 +134,7 @@ public class Parallax {
             Dj Smack's Facebook: http://www.facebook.com/pages/Dj-Smac...
              */
 
-            this.audioQueue.playMusic("soundsGreat.mp3", musicDirectory, 0.5f);
+            this.audioQueue.playMusic("soundsGreat.mp3", MUSIC_DIRECTORY, 0.5f);
             this.backgroundMusic = "sounds/music/soundsGreat.mp3";
         }
     }

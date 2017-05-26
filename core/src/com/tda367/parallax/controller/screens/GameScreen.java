@@ -18,14 +18,14 @@ import static com.tda367.parallax.controller.screens.ScreenState.GAME_OVER;
 
 public class GameScreen extends ScreenAdapter {
 
-    private Player player;
+    private final Player player;
     private Parallax parallaxGame;
     private GameController controller;
-    private Sound sound;
-    private AudioQueue audioQueue;
-    private CollisionCalculator collisionCalculator;
+    private final Sound sound;
+    private final AudioQueue audioQueue;
+    private final CollisionCalculator collisionCalculator;
     private ParallaxView parallaxView;
-    private ScreenChanger screenChanger;
+    private final ScreenChanger screenChanger;
 
     public GameScreen(Player player, ScreenChanger screenChanger) {
 
@@ -69,12 +69,12 @@ public class GameScreen extends ScreenAdapter {
         this.parallaxGame = new Parallax(this.player);
         this.parallaxView = new ParallaxView(this.parallaxGame, false);
         this.controller = new GameController(this.parallaxGame,
-                                             this.parallaxView,
-                                             DeviceManager.getDevice());
+                this.parallaxView,
+                DeviceManager.getDevice());
     }
 
     private void gameOver() {
         this.dispose();
-        screenChanger.requestScreenChange(GAME_OVER, this.player);
+        this.screenChanger.requestScreenChange(GAME_OVER, this.player);
     }
 }

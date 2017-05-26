@@ -19,6 +19,10 @@ public class AudioQueue {
     private final List<SoundCombiantion> soundQueue = new ArrayList<SoundCombiantion>();
     private final List<SoundCombiantion> musicQueue = new ArrayList<SoundCombiantion>();
 
+    AudioQueue() {
+
+    }
+
     public static synchronized AudioQueue getInstance() {
         if (instance == null) {
             instance = new AudioQueue();

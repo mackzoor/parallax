@@ -14,10 +14,10 @@ public final class CollisionManager {
     private static CollisionManager instance;
 
     @Getter
-    private List<Collidable> collidables;
-    private List<ICollisionCalculator> calculators;
+    private final List<Collidable> collidables;
+    private final List<ICollisionCalculator> calculators;
     @Getter
-    private List<CollisionObserver> observers;
+    private final List<CollisionObserver> observers;
 
     private CollisionManager() {
         this.collidables = new ArrayList<Collidable>();
@@ -25,7 +25,7 @@ public final class CollisionManager {
         this.observers = new ArrayList<CollisionObserver>();
     }
 
-    public static CollisionManager getInstance() {
+    public static synchronized CollisionManager getInstance() {
         if (instance == null) {
             instance = new CollisionManager();
         }

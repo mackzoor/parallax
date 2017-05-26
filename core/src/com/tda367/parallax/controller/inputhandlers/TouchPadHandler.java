@@ -11,7 +11,7 @@ import lombok.Setter;
 
 public final class TouchPadHandler implements EventListener {
 
-    private TouchPadView view;
+    private final TouchPadView view;
     @Setter
     private InputControlsListener listener;
 

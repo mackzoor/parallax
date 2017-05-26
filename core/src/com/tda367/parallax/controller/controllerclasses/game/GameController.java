@@ -12,10 +12,10 @@ import com.tda367.parallax.view.parallaxview.ParallaxView;
 
 public class GameController extends InputControlsAdapter {
 
-    private SpaceCraftController spaceCraftController;
+    private final SpaceCraftController spaceCraftController;
 
-    private Parallax parallax;
-    private ParallaxView parallaxView;
+    private final Parallax parallax;
+    private final ParallaxView parallaxView;
 
     public GameController(Parallax parallax, ParallaxView parallaxView, Device device) {
         device.addInputDevices(this);

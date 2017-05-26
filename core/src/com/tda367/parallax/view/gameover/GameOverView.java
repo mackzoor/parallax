@@ -15,7 +15,7 @@ import java.util.List;
 
 public class GameOverView {
 
-    private GameOver model;
+    private final GameOver model;
 
     private List<GameOverTextView> gameOverTextViews;
 

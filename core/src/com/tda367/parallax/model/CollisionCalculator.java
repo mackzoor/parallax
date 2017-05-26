@@ -19,14 +19,14 @@ import java.util.Map;
  */
 public class CollisionCalculator implements ICollisionCalculator {
 
-    private btCollisionAlgorithmConstructionInfo constructionInfo;
-    private btDispatcherInfo info;
-    private btManifoldResult result;
-    private btDefaultCollisionConfiguration collisionConfig;
-    private btCollisionDispatcher dispatcher;
+    private final btCollisionAlgorithmConstructionInfo constructionInfo;
+    private final btDispatcherInfo info;
+    private final btManifoldResult result;
+    private final btDefaultCollisionConfiguration collisionConfig;
+    private final btCollisionDispatcher dispatcher;
 
-    private List<btCollisionAlgorithm> algorithmList;
-    private Map<Collidable, CollisionObjectWrapper> loadedCollidables;
+    private final List<btCollisionAlgorithm> algorithmList;
+    private final Map<Collidable, CollisionObjectWrapper> loadedCollidables;
 
     public CollisionCalculator() {
         Bullet.init();
@@ -98,23 +98,23 @@ public class CollisionCalculator implements ICollisionCalculator {
         }
 
         //If both are containers
-        if (first.getCollidableType() == CollidableType.CONTAINER &&
-                first.getCollidableType() == second.getCollidableType()) {
+        if (first.getCollidableType() == CollidableType.CONTAINER
+                && first.getCollidableType() == second.getCollidableType()) {
             return false;
         }
 
 
         //If both are obstacles
-        if (first.getCollidableType() == CollidableType.OBSTACLE &&
-                second.getCollidableType() == CollidableType.OBSTACLE) {
+        if (first.getCollidableType() == CollidableType.OBSTACLE
+                && second.getCollidableType() == CollidableType.OBSTACLE) {
             return false;
         }
 
         //If none of them are either a spaceCraft of a harmful type
-        if (   first.getCollidableType() == CollidableType.SPACECRAFT ||
-                first.getCollidableType() == CollidableType.HARMFUL ||
-                        second.getCollidableType() == CollidableType.SPACECRAFT ||
-                        second.getCollidableType() == CollidableType.HARMFUL) {
+        if (first.getCollidableType() == CollidableType.SPACECRAFT
+                || first.getCollidableType() == CollidableType.HARMFUL
+                || second.getCollidableType() == CollidableType.SPACECRAFT
+                || second.getCollidableType() == CollidableType.HARMFUL) {
             return true;
         } else {
             return false;
@@ -130,8 +130,8 @@ public class CollisionCalculator implements ICollisionCalculator {
 
         this.algorithmList.add(this.dispatcher.findAlgorithm(co0.wrapper, co1.wrapper));
         this.algorithmList.get(this.algorithmList.size() - 1).processCollision(co0.wrapper,
-                               co1.wrapper,
-                               this.info, this.result);
+                co1.wrapper,
+                this.info, this.result);
 
         this.dispatcher.freeCollisionAlgorithm(this.algorithmList.get(this.algorithmList.size() - 1).getCPointer());
         this.dispatcher.getInternalManifoldPool().dispose();

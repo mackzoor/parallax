@@ -4,8 +4,8 @@ package com.tda367.parallax.view.menu;
 import com.badlogic.gdx.Gdx;
 import com.tda367.parallax.model.core.powerups.arsenal.IPowerUp;
 import com.tda367.parallax.model.menu.MainMenu;
-import com.tda367.parallax.view.parallaxview.parallaxviewcomponents.powerupviews.PowerUpViewAutomaticTransform;
 import com.tda367.parallax.view.parallaxview.parallaxviewcomponents.View;
+import com.tda367.parallax.view.parallaxview.parallaxviewcomponents.powerupviews.PowerUpViewAutomaticTransform;
 import com.tda367.parallax.view.rendering.Renderer3D;
 
 import java.util.ArrayList;
@@ -17,10 +17,10 @@ import java.util.Map;
 public class MainMenuView {
 
     private final MainMenu mainMenu;
-    private BackgroundView world;
-    private com.tda367.parallax.view.menu.ExitButton3DView exitButton;
-    private StartButton3DView startButton;
-    private Map<IPowerUp, PowerUpViewAutomaticTransform> powerUpsHash;
+    private final BackgroundView world;
+    private final ExitButton3DView exitButton;
+    private final StartButton3DView startButton;
+    private final Map<IPowerUp, PowerUpViewAutomaticTransform> powerUpsHash;
 
 
     public MainMenuView(MainMenu mainMenu, boolean isVr) {

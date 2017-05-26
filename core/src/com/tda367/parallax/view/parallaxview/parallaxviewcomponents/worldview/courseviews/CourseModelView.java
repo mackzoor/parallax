@@ -15,13 +15,13 @@ import java.util.List;
 /**
  * View class for {@link ICourseModule}.
  */
-public class CourseModelView implements View{
+public class CourseModelView implements View {
 
     private static final String MODEL_3D_INTERNAL_PATH = "3dModels/defaultCourse/course.g3db";
     private final ICourseModule courseModule;
-    private List<CourseObstacleView> obstacleViews;
-    private List<ContainerView> containerViews;
-    private Renderable3dObject courseModule3dObject;
+    private final List<CourseObstacleView> obstacleViews;
+    private final List<ContainerView> containerViews;
+    private final Renderable3dObject courseModule3dObject;
 
     /**
      * Creates a CourseModelView from an {@link ICourseModule}.

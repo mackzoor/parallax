@@ -24,9 +24,10 @@ import java.util.List;
 public final class Renderer3D {
 
     //Singleton pattern
-    private static Renderer3D renderer3D;
+    private static Renderer3D rend3D;
 
-    @Getter private ParticleSystem particleSystem;
+    @Getter
+    private ParticleSystem particleSystem;
 
 
     private BillboardParticleBatch spriteBatch;
@@ -36,19 +37,6 @@ public final class Renderer3D {
 
     private List<Renderable3dObject> modelsToRender;
     private List<RenderableParticleEffect> particleEffectsToRender;
-
-    public static Renderer3D initialize(float fov, int width, int height, boolean isVr) {
-        if (isVr) {
-            // Setup of special camera for VR
-            final Camera cardboardCamera = new CardboardCamera();
-            cardboardCamera.lookAt(0, 0, -1);
-            renderer3D = new Renderer3D(cardboardCamera);
-        } else {
-            renderer3D = new Renderer3D(fov, width, height);
-        }
-
-        return renderer3D;
-    }
 
     /**
      * Creates a new Renderer3D from a {@link Camera}
@@ -76,6 +64,7 @@ public final class Renderer3D {
         this.environment.set(new ColorAttribute(ColorAttribute.Fog, 0f, 0f, 0f, 1f));
         //environment.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -1f, -0.8f, -0.2f));
     }
+
     /**
      * Creates a new Renderer3D.
      *
@@ -93,8 +82,21 @@ public final class Renderer3D {
         );
     }
 
+    public static Renderer3D initialize(float fov, int width, int height, boolean isVr) {
+        if (isVr) {
+            // Setup of special camera for VR
+            final Camera cardboardCamera = new CardboardCamera();
+            cardboardCamera.lookAt(0, 0, -1);
+            rend3D = new Renderer3D(cardboardCamera);
+        } else {
+            rend3D = new Renderer3D(fov, width, height);
+        }
+
+        return rend3D;
+    }
+
     public static Renderer3D getInstance() {
-        return renderer3D;
+        return rend3D;
     }
 
     /**
@@ -106,8 +108,9 @@ public final class Renderer3D {
         //Add objects to render queue for current frame
         this.modelsToRender.add(renderObject);
     }
+
     public void addParticleEffectToFrame(RenderableParticleEffect particleEffect) {
-        particleEffectsToRender.add(particleEffect);
+        this.particleEffectsToRender.add(particleEffect);
     }
 
     public void renderFrame() {
@@ -116,17 +119,17 @@ public final class Renderer3D {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 
 
-        modelBatch.begin(camera);
+        this.modelBatch.begin(this.camera);
 
-        renderOpaque3dModels(modelBatch, modelsToRender);
-        renderTransparent3dModels(modelBatch, modelsToRender);
-        renderParticles(modelBatch, particleEffectsToRender);
+        renderOpaque3dModels(this.modelBatch, this.modelsToRender);
+        renderTransparent3dModels(this.modelBatch, this.modelsToRender);
+        renderParticles(this.modelBatch, this.particleEffectsToRender);
 
-        modelBatch.end();
+        this.modelBatch.end();
 
 
-        modelsToRender.clear();
-        particleEffectsToRender.clear();
+        this.modelsToRender.clear();
+        this.particleEffectsToRender.clear();
     }
 
     private void renderOpaque3dModels(ModelBatch modelBatch, List<Renderable3dObject> modelsToRender) {
@@ -139,6 +142,7 @@ public final class Renderer3D {
 
         modelBatch.flush();
     }
+
     private void renderTransparent3dModels(ModelBatch modelBatch, List<Renderable3dObject> modelsToRender) {
         //Render low priority objects
         for (final Renderable3dObject renderable3dObject : this.modelsToRender) {
@@ -149,21 +153,22 @@ public final class Renderer3D {
 
         modelBatch.flush();
     }
+
     private void renderParticles(ModelBatch modelBatch, List<RenderableParticleEffect> particleEffectsToRender) {
 
         for (final RenderableParticleEffect renderableParticleEffect : particleEffectsToRender) {
-            particleSystem.add(renderableParticleEffect.getParticleEffect());
-            renderableParticleEffect.getParticleEffect().setBatch(particleSystem.getBatches());
+            this.particleSystem.add(renderableParticleEffect.getParticleEffect());
+            renderableParticleEffect.getParticleEffect().setBatch(this.particleSystem.getBatches());
         }
-        particleSystem.update();
+        this.particleSystem.update();
 
-        particleSystem.begin();
-        particleSystem.draw();
-        particleSystem.end();
+        this.particleSystem.begin();
+        this.particleSystem.draw();
+        this.particleSystem.end();
 
-        modelBatch.render(particleSystem);
+        modelBatch.render(this.particleSystem);
         modelBatch.flush();
-        particleSystem.removeAll();
+        this.particleSystem.removeAll();
     }
 
     /**
@@ -180,18 +185,20 @@ public final class Renderer3D {
 
     public void setCameraPosition(float x, float y, float z) {
         //Update camera position
-        camera.position.set(
+        this.camera.position.set(
                 x,
                 z,
                 y * -1
         );
-        camera.update();
+        this.camera.update();
     }
+
     public void setHeight(int y) {
         this.camera.viewportHeight = y;
     }
+
     public void setWidth(int x) {
-        camera.viewportWidth = x;
+        this.camera.viewportWidth = x;
     }
 
 }

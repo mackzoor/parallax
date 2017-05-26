@@ -10,5 +10,6 @@ interface RenderableSpaceCraft {
     void setCriticalDamage(boolean enabled);
 
     void setPosition(Vector3f pos);
+
     void setRotation(Quat4f rot);
 }

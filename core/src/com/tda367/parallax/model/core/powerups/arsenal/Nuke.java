@@ -12,6 +12,10 @@ public class Nuke extends PowerUpBase {
 
     private static final String COLLISION_MODEL = "";
 
+    Nuke() {
+
+    }
+
     @Override
     public void activate(Transformable transformable) {
         super.activate(transformable);

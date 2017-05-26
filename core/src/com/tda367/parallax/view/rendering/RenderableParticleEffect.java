@@ -18,47 +18,53 @@ import javax.vecmath.Vector3f;
  */
 public class RenderableParticleEffect {
 
-    private ParticleEffect particleEffect;
-    @Getter private boolean dead;
+    private final ParticleEffect particleEffect;
+    @Getter
+    private boolean dead;
     private boolean enabled;
-    @Getter @Setter private Vector3f position;
-    @Getter @Setter private Quat4f rotation;
+    @Getter
+    @Setter
+    private Vector3f position;
+    @Getter
+    @Setter
+    private Quat4f rotation;
 
     public RenderableParticleEffect(ParticleEffectType type) {
-        position = new Vector3f();
-        rotation = new Quat4f(0,0,0,1);
+        this.position = new Vector3f();
+        this.rotation = new Quat4f(0, 0,  0, 1);
 
-        particleEffect = ResourceLoader.getInstance().getParticleEffect(type.getFilePath());
-        particleEffect.init();
+        this.particleEffect = ResourceLoader.getInstance().getParticleEffect(type.getFilePath());
+        this.particleEffect.init();
     }
 
     private void updateEffectTransform() {
-        particleEffect.setTransform(new Matrix4());
+        this.particleEffect.setTransform(new Matrix4());
 
-        particleEffect.translate( new Vector3(
-                position.getX(),
-                position.getZ(),
-                position.getY() * -1
+        this.particleEffect.translate(new Vector3(
+                this.position.getX(),
+                this.position.getZ(),
+                this.position.getY() * -1
         ));
 
-        particleEffect.rotate(new Quaternion(
-                rotation.getX(),
-                rotation.getZ(),
-                rotation.getY() * -1,
-                rotation.getW()
+        this.particleEffect.rotate(new Quaternion(
+                this.rotation.getX(),
+                this.rotation.getZ(),
+                this.rotation.getY() * -1,
+                this.rotation.getW()
         ));
     }
 
     public void start() {
-        if (!dead && !enabled) {
-            enabled = true;
+        if (!this.dead && !this.enabled) {
+            this.enabled = true;
             this.particleEffect.start();
         }
     }
+
     public void kill() {
         this.dead = true;
 
-        final Emitter emitter = particleEffect.getControllers().first().emitter;
+        final Emitter emitter = this.particleEffect.getControllers().first().emitter;
         if (emitter instanceof RegularEmitter) {
             final RegularEmitter reg = (RegularEmitter) emitter;
             reg.setEmissionMode(RegularEmitter.EmissionMode.EnabledUntilCycleEnd);
@@ -70,7 +76,7 @@ public class RenderableParticleEffect {
     }
 
     public ParticleEffect getParticleEffect() {
-        updateEffectTransform();
-        return particleEffect;
+        this.updateEffectTransform();
+        return this.particleEffect;
     }
 }

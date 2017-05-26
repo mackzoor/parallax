@@ -8,5 +8,6 @@ public interface IPowerUp extends Usable, Collidable {
     void activate(Transformable transformable);
 
     PowerUpType getPowerUpType();
+
     boolean isActive();
 }

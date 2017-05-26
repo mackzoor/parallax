@@ -22,12 +22,12 @@ import static com.tda367.parallax.controller.screens.ScreenState.GAME;
 
 public class CardboardMenuScreen extends CardboardScreenAdapter {
     private CardboardMenuController controller;
-    private Sound sound;
+    private final Sound sound;
     private MainMenu mainMenu;
-    private CollisionCalculator collisionCalculator;
+    private final CollisionCalculator collisionCalculator;
     private MainMenuView view;
-    private Player player;
-    private ScreenChanger screenChanger;
+    private final Player player;
+    private final ScreenChanger screenChanger;
 
     public CardboardMenuScreen(Player player, ScreenChanger screenChanger) {
         this.player = player;
@@ -85,8 +85,8 @@ public class CardboardMenuScreen extends CardboardScreenAdapter {
         final float[] eulerAngles = new float[3];
         paramHeadTransForm.getEulerAngles(eulerAngles, 0);
         final Vector3f returnVector = MathUtilities.eulerToVector(eulerAngles[0],
-                                                                  eulerAngles[2],
-                                                                  eulerAngles[1]);
+                eulerAngles[2],
+                eulerAngles[1]);
         returnVector.normalize();
         return returnVector;
     }

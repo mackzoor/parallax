@@ -16,6 +16,10 @@ public final class AndroidGamePad implements GamePad {
     private static final int LEFT_JOYSTICK_X = 0;
     private static final int LEFT_JOYSTICK_Y = 1;
 
+    AndroidGamePad() {
+
+    }
+
     @Override
     public int getActionButtonCode() {
         return A_BUTTON;

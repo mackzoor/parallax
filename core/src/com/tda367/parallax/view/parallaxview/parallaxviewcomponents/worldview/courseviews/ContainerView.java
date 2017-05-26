@@ -16,10 +16,10 @@ public class ContainerView {
     private static final String MODEL_3D_INTERNAL_PATH = "3dModels/containerround/containerround.g3db";
 
     private final Container container;
-    private Renderable3dObject container3dObject;
-    private Quat4f powerUpRotation;
+    private final Renderable3dObject container3dObject;
+    private final Quat4f powerUpRotation;
 
-    private PowerUpViewManualTransform internalPowerUp;
+    private final PowerUpViewManualTransform internalPowerUp;
 
     /**
      * Creates a ContainerView from a {@link Container}.
@@ -36,15 +36,15 @@ public class ContainerView {
                 1f
         );
 
-        internalPowerUp = new PowerUpViewManualTransform(container.getPowerUp().getPowerUpType());
-        internalPowerUp.setPosition(this.container.getPos());
-        internalPowerUp.effectsEnabled(false);
+        this.internalPowerUp = new PowerUpViewManualTransform(container.getPowerUp().getPowerUpType());
+        this.internalPowerUp.setPosition(this.container.getPos());
+        this.internalPowerUp.effectsEnabled(false);
     }
 
     public void render() {
         if (!this.container.isCollected()) {
             updatePowerUpRotation();
-            internalPowerUp.render();
+            this.internalPowerUp.render();
             Renderer3D.getInstance().addObjectToFrame(this.container3dObject);
         }
     }
@@ -55,7 +55,7 @@ public class ContainerView {
         rotation.normalize();
         this.powerUpRotation.mul(rotation);
         this.powerUpRotation.normalize();
-        internalPowerUp.setRotation(this.powerUpRotation);
+        this.internalPowerUp.setRotation(this.powerUpRotation);
     }
 
     public boolean isCollected() {

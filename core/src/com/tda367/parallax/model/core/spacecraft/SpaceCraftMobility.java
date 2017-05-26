@@ -7,18 +7,18 @@ import javax.vecmath.Vector3f;
 
 public class SpaceCraftMobility {
     @Getter
-    private float forwardVelocity;
+    private final float forwardVelocity;
     @Getter
-    private float maxPanVelocity;
+    private final float maxPanVelocity;
     @Getter
-    private Vector3f pos;
+    private final Vector3f pos;
     @Getter
-    private Quat4f rot;
+    private final Quat4f rot;
     @Getter
-    private boolean independentRotation;
+    private final boolean independentRotation;
 
 
-    SpaceCraftMobility( Vector3f pos, Quat4f rot, float forwardVelocity, float maxPanVelocity, boolean independentRotation){
+    SpaceCraftMobility(Vector3f pos, Quat4f rot, float forwardVelocity, float maxPanVelocity, boolean independentRotation) {
         this.pos = pos;
         this.rot = rot;
         this.forwardVelocity = forwardVelocity;

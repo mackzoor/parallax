@@ -16,10 +16,11 @@ public class ScoreHandler {
     private static final int LENGTH_OF_LIST = 10;
 
     //Storage file connected to LibGDX storage.
-    private Preferences preferences;
+    private final Preferences preferences;
 
     //The top 10 highest scoring players, list not necessarily in order.
-    @Getter private List<HighScoreHolder> highScoreHolders;
+    @Getter
+    private List<HighScoreHolder> highScoreHolders;
 
     private String temporaryString;
 
@@ -68,8 +69,8 @@ public class ScoreHandler {
 
         for (int i = 0; i < this.highScoreHolders.size(); i++) {
             for (int j = 0; j < this.highScoreHolders.size(); j++) {
-                if (this.highScoreHolders.get(j).getScore() > currentHighestScore.getScore() &&
-                        !(sortedHighScores.contains(this.highScoreHolders.get(j)))) {
+                if (this.highScoreHolders.get(j).getScore() > currentHighestScore.getScore()
+                        && !(sortedHighScores.contains(this.highScoreHolders.get(j)))) {
                     currentHighestScore = this.highScoreHolders.get(j);
                 }
             }

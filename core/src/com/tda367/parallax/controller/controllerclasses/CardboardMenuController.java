@@ -12,7 +12,7 @@ import com.tda367.parallax.model.menu.MainMenu;
 
 public class CardboardMenuController extends InputControlsAdapter {
 
-    private MainMenu mainMenu;
+    private final MainMenu mainMenu;
 
     public CardboardMenuController(MainMenu mainMenu, Device device) {
         this.mainMenu = mainMenu;

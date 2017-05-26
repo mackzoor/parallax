@@ -22,9 +22,9 @@ public class WorldView {
 
     private final World world;
 
-    private Map<ICourseModule, CourseModelView> courseModuleHash;
-    private Map<ISpaceCraft, SpaceCraftAutomaticTransform> spaceCraftHash;
-    private Map<IPowerUp, PowerUpViewAutomaticTransform> powerUpsHash;
+    private final Map<ICourseModule, CourseModelView> courseModuleHash;
+    private final Map<ISpaceCraft, SpaceCraftAutomaticTransform> spaceCraftHash;
+    private final Map<IPowerUp, PowerUpViewAutomaticTransform> powerUpsHash;
 
     /**
      * Creates a WorldView from a {@link World}.
@@ -50,17 +50,17 @@ public class WorldView {
 
 
         //Render Course modules
-        for (ICourseModule iCourseModule : this.courseModuleHash.keySet()) {
+        for (final ICourseModule iCourseModule : this.courseModuleHash.keySet()) {
             this.courseModuleHash.get(iCourseModule).render();
         }
 
         //Render SpaceCraft
-        for (ISpaceCraft iSpaceCraft : this.spaceCraftHash.keySet()) {
+        for (final ISpaceCraft iSpaceCraft : this.spaceCraftHash.keySet()) {
             this.spaceCraftHash.get(iSpaceCraft).render();
         }
 
         //Render Powerups
-        for (IPowerUp iPowerUp : this.powerUpsHash.keySet()) {
+        for (final IPowerUp iPowerUp : this.powerUpsHash.keySet()) {
             this.powerUpsHash.get(iPowerUp).render();
         }
     }

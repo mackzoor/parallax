@@ -15,8 +15,8 @@ import javax.vecmath.Vector3f;
  */
 public abstract class CourseObstacleBase implements Collidable, Updatable {
 
-    private Vector3f pos;
-    private Quat4f rot;
+    private final Vector3f pos;
+    private final Quat4f rot;
 
     private boolean collisionEnabled;
     @Getter
@@ -25,36 +25,36 @@ public abstract class CourseObstacleBase implements Collidable, Updatable {
     CourseObstacleBase(Vector3f pos, Quat4f rot) {
         this.pos = pos;
         this.rot = rot;
-        collisionEnabled = true;
-        destroyed = false;
+        this.collisionEnabled = true;
+        this.destroyed = false;
     }
 
     //Transformable
     @Override
     public Vector3f getPos() {
-        return pos;
+        return this.pos;
     }
 
     @Override
     public Quat4f getRot() {
-        return rot;
+        return this.rot;
     }
 
 
     //Collidable
     @Override
     public void enableCollision() {
-        collisionEnabled = true;
+        this.collisionEnabled = true;
     }
 
     @Override
     public void disableCollision() {
-        collisionEnabled = false;
+        this.collisionEnabled = false;
     }
 
     @Override
     public boolean collisionActivated() {
-        return collisionEnabled;
+        return this.collisionEnabled;
     }
 
     @Override
@@ -78,10 +78,10 @@ public abstract class CourseObstacleBase implements Collidable, Updatable {
     @Override
     public void handleCollision(Collidable collidable) {
         if (collidable.getCollidableType() == CollidableType.SPACECRAFT) {
-            disableCollision();
+            this.disableCollision();
         } else if (collidable.getCollidableType() == CollidableType.HARMFUL) {
-            disableCollision();
-            destroyed = true;
+            this.disableCollision();
+            this.destroyed = true;
         }
     }
 

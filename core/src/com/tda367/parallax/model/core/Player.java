@@ -10,7 +10,7 @@ public class Player {
     @Setter
     private int score;
     @Getter
-    private String userName = "LingonBoy";
+    private final String userName = "LingonBoy";
     @Getter
     private ISpaceCraft spaceCraft;
 

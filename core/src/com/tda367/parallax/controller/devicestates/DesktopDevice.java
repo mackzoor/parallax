@@ -7,8 +7,8 @@ import com.tda367.parallax.controller.inputhandlers.InputControlsListener;
 
 class DesktopDevice implements Device {
 
-    private GamePadHandler gamePadHandler;
-    private DesktopHandler keyboardHandler;
+    private final GamePadHandler gamePadHandler;
+    private final DesktopHandler keyboardHandler;
 
     DesktopDevice() {
         this.gamePadHandler = new GamePadHandler();

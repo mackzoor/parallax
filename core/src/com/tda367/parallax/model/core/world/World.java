@@ -20,12 +20,12 @@ import java.util.List;
 
 public class World implements Updatable, CollisionObserver {
     @Getter
-    private List<ICourseModule> modules;
+    private final List<ICourseModule> modules;
     @Getter
-    private List<ISpaceCraft> spaceCrafts;
+    private final List<ISpaceCraft> spaceCrafts;
     //TODO, remove the power-up after used
     @Getter
-    private List<IPowerUp> powerUps;
+    private final List<IPowerUp> powerUps;
 
     public World() {
         CollisionManager.getInstance().subscribeToCollisions(this);
@@ -83,7 +83,7 @@ public class World implements Updatable, CollisionObserver {
             final float lastCraft = this.getLastSpaceCraftYPosition();
 
             final float firstModule = this.modules.get(this.modules.size() - 1).getPos().getY()
-                                                        + this.modules.get(this.modules.size() - 1).getLength();
+                    + this.modules.get(this.modules.size() - 1).getLength();
             final float lastModule = this.modules.get(0).getPos().getY();
 
             final int modulesToAdd = (int) ((firstCraft + 256 - firstModule) / 64);
@@ -94,8 +94,8 @@ public class World implements Updatable, CollisionObserver {
             removeModules(modulesToRemove);
         } else {
             final ICourseModule defModule = new DefaultCourseModule(new Vector3f(0, 32, 0),
-                                                                                0,
-                                                                                0);
+                    0,
+                    0);
             this.modules.add(defModule);
 
             this.powerUps.addAll(defModule.getPowerups());

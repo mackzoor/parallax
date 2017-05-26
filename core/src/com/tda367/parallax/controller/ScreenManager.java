@@ -1,7 +1,7 @@
 package com.tda367.parallax.controller;
 
 import com.badlogic.gdx.Game;
-import com.tda367.parallax.controller.screens.*;
+import com.tda367.parallax.controller.screens.ScreenChanger;
 import com.tda367.parallax.controller.screens.ScreenState;
 import com.tda367.parallax.model.core.Player;
 
@@ -11,12 +11,13 @@ import com.tda367.parallax.model.core.Player;
 
 public final class ScreenManager implements ScreenChanger {
 
-    private ScreenManager() { }
-
     private static Game game;
     private static com.tda367.parallax.controller.screens.MainMenuScreen mainMenuScreen;
     private static com.tda367.parallax.controller.screens.GameScreen gameScreen;
     private static com.tda367.parallax.controller.screens.GameOverScreen gameOverScreen;
+
+    private ScreenManager() {
+    }
 
     public static void setGame(Game game) {
         if (ScreenManager.game == null) {
@@ -24,7 +25,7 @@ public final class ScreenManager implements ScreenChanger {
         }
     }
 
-    private static void setMainMenuScreen(Player player) {
+    private static synchronized void setMainMenuScreen(Player player) {
         if (mainMenuScreen == null) {
             mainMenuScreen = new com.tda367.parallax.controller.screens.MainMenuScreen(player, GameStateManagerSingleton.INSTANCE);
         }
@@ -32,7 +33,7 @@ public final class ScreenManager implements ScreenChanger {
         game.setScreen(mainMenuScreen);
     }
 
-    private static void setGameScreen(Player player) {
+    private static synchronized void setGameScreen(Player player) {
         if (gameScreen == null) {
             gameScreen = new com.tda367.parallax.controller.screens.GameScreen(player, GameStateManagerSingleton.INSTANCE);
         }
@@ -40,7 +41,7 @@ public final class ScreenManager implements ScreenChanger {
         game.setScreen(gameScreen);
     }
 
-    private static void setGameOverScreen(Player player) {
+    private static synchronized void setGameOverScreen(Player player) {
         if (gameOverScreen == null) {
             gameOverScreen = new com.tda367.parallax.controller.screens.GameOverScreen(player, GameStateManagerSingleton.INSTANCE);
         }
@@ -64,6 +65,11 @@ public final class ScreenManager implements ScreenChanger {
     }
 
     private static class GameStateManagerSingleton {
+
+        GameStateManagerSingleton() {
+
+        }
+
         private static final ScreenChanger INSTANCE = new ScreenManager();
     }
 }

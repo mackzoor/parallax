@@ -9,9 +9,9 @@ import lombok.Getter;
 class HighScoreHolder {
 
     @Getter
-    private String name;
+    private final String name;
     @Getter
-    private int score;
+    private final int score;
 
     HighScoreHolder(String name, int score) {
         this.name = name;

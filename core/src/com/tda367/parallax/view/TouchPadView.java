@@ -26,7 +26,7 @@ public class TouchPadView {
     @Getter
     private ImageButton actionButton;
 
-    private Stage stage;
+    private final Stage stage;
 
     public TouchPadView() {
         final Skin gamePadSkin = new Skin();

@@ -16,9 +16,9 @@ import java.util.List;
 
 public class Sound implements AudioObserver {
 
-    private ResourceLoader resources;
+    private final ResourceLoader resources;
 
-    private List<ActiveMusicCombination> activeMusic = new ArrayList<ActiveMusicCombination>();
+    private final List<ActiveMusicCombination> activeMusic = new ArrayList<ActiveMusicCombination>();
 
     public Sound() {
         this.resources = ResourceLoader.getInstance();
@@ -43,7 +43,7 @@ public class Sound implements AudioObserver {
 
     @Override
     public void playSound(String soundLocation, float volume) {
-        resources.getSound(soundLocation).play(volume);
+        this.resources.getSound(soundLocation).play(volume);
     }
 
     @Override

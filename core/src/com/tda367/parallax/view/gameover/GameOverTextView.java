@@ -15,8 +15,8 @@ public class GameOverTextView implements View {
 
     private static final String INTERNAL_PATH = "3dModels/boxObstacle/boxObstacle.g3db";
 
-    private GameOverText gameOverText;
-    private Renderable3dObject renderable3dObject;
+    private final GameOverText gameOverText;
+    private final Renderable3dObject renderable3dObject;
 
     GameOverTextView(GameOverText gameOverText) {
         this.gameOverText = gameOverText;

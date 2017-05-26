@@ -15,10 +15,12 @@ import lombok.Setter;
 public class ParallaxView {
 
     private final Parallax parallax;
-    private WorldView worldView;
-    private HudView playerHudView;
-    private CollisionEffect collisionEffect;
-    @Getter @Setter private boolean hudViewActive;
+    private final WorldView worldView;
+    private final HudView playerHudView;
+    private final CollisionEffect collisionEffect;
+    @Getter
+    @Setter
+    private boolean hudViewActive;
 
     /**
      * Creates a ParallaxView from a {@link Parallax}.
@@ -40,7 +42,7 @@ public class ParallaxView {
         this.hudViewActive = false;
         this.collisionEffect = new CollisionEffect();
     }
-    
+
     public void render() {
         Renderer3D.getInstance().setCameraPosition(
                 this.parallax.getCamera().getPos().getX(),
@@ -52,13 +54,14 @@ public class ParallaxView {
             this.playerHudView.render();
         }
 
-        collisionEffect.render();
+        this.collisionEffect.render();
         Renderer3D.getInstance().renderFrame();
     }
 
-    public void setWidth(int width){
+    public void setWidth(int width) {
         Renderer3D.getInstance().setWidth(width);
     }
+
     public void setHeight(int height) {
         Renderer3D.getInstance().setHeight(height);
     }

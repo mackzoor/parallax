@@ -17,14 +17,14 @@ import static com.tda367.parallax.controller.screens.ScreenState.GAME;
 
 public class MainMenuScreen extends ScreenAdapter {
 
-    private Player player;
+    private final Player player;
     private MainMenu model;
     private MainMenuController controller;
     private MainMenuView view;
-    private Sound sound;
-    private CollisionCalculator collisionCalculator;
-    private AudioQueue audioQueue;
-    private ScreenChanger screenChanger;
+    private final Sound sound;
+    private final CollisionCalculator collisionCalculator;
+    private final AudioQueue audioQueue;
+    private final ScreenChanger screenChanger;
 
     public MainMenuScreen(Player player, ScreenChanger screenChanger) {
         this.player = player;
@@ -38,7 +38,7 @@ public class MainMenuScreen extends ScreenAdapter {
     public void render(float delta) {
         if (this.model.getStartButton().isCollided()) {
             dispose();
-            screenChanger.requestScreenChange(GAME, this.player);
+            this.screenChanger.requestScreenChange(GAME, this.player);
         } else if (this.model.getExitButton().isCollided()) {
             dispose();
             Gdx.app.exit();

@@ -9,7 +9,7 @@ import lombok.Getter;
 
 public class MinionEnemy extends HunterAI {
     @Getter
-    private ISpaceCraft spaceCraft;
+    private final ISpaceCraft spaceCraft;
 
     public MinionEnemy(ISpaceCraft spaceCraft) {
         this.spaceCraft = spaceCraft;

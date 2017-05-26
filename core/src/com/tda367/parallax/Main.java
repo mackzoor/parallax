@@ -2,12 +2,16 @@ package com.tda367.parallax;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.tda367.parallax.controller.screens.ScreenState;
 import com.tda367.parallax.controller.ScreenManager;
 import com.tda367.parallax.controller.devicestates.DeviceManager;
+import com.tda367.parallax.controller.screens.ScreenState;
 import com.tda367.parallax.model.core.Player;
 
 public class Main extends Game {
+
+    public Main() {
+
+    }
 
     @Override
     public void create() {

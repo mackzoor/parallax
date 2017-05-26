@@ -124,7 +124,7 @@ public class DefaultCourseModule implements ICourseModule {
         this.powerUps.add(pu);
         final Container container = new Container(pu);
         final Random rand = new Random();
-        container.setPos(new Vector3f(0, getPos().getY() + rand.nextFloat() * length, 0));
+        container.setPos(new Vector3f(0, getPos().getY() + rand.nextFloat() * this.length, 0));
         container.addToCollisionManager();
         this.containers.add(container);
     }

@@ -1,16 +1,10 @@
 package com.tda367.parallax.controller;
 
-import com.tda367.parallax.controller.screens.CardboardGameOverScreen;
-import com.tda367.parallax.controller.screens.CardboardGameScreen;
-import com.tda367.parallax.controller.screens.CardboardMenuScreen;
-import com.tda367.parallax.controller.screens.ScreenState;
-import com.tda367.parallax.controller.screens.ScreenChanger;
+import com.tda367.parallax.controller.screens.*;
 import com.tda367.parallax.controller.screens.cardboardadapter.CardboardGame;
 import com.tda367.parallax.model.core.Player;
 
-import static com.tda367.parallax.controller.screens.ScreenState.GAME;
-import static com.tda367.parallax.controller.screens.ScreenState.GAME_OVER;
-import static com.tda367.parallax.controller.screens.ScreenState.MAIN_MENU;
+import static com.tda367.parallax.controller.screens.ScreenState.*;
 
 /**
  * Manages Screens for the Cardboard application
@@ -18,20 +12,21 @@ import static com.tda367.parallax.controller.screens.ScreenState.MAIN_MENU;
 
 public final class CardboardScreenManager implements ScreenChanger {
 
-    private CardboardScreenManager() { }
-
     private static CardboardGame cardboardGame;
     private static CardboardMenuScreen cardboardMenuScreen;
     private static CardboardGameScreen cardboardGameScreen;
     private static CardboardGameOverScreen cardboardGameOverScreen;
 
-    public static void setCardboardGame(CardboardGame game) {
+    private CardboardScreenManager() {
+    }
+
+    public static synchronized void setCardboardGame(CardboardGame game) {
         if (cardboardGame == null) {
             cardboardGame = game;
         }
     }
 
-    private static void setCardboardMenuScreen(Player player) {
+    private static synchronized void setCardboardMenuScreen(Player player) {
         if (cardboardMenuScreen == null) {
             cardboardMenuScreen = new CardboardMenuScreen(
                     player,
@@ -42,7 +37,7 @@ public final class CardboardScreenManager implements ScreenChanger {
         cardboardGame.setCardboardScreen(cardboardMenuScreen);
     }
 
-    private static void setCardboardGameScreen(Player player) {
+    private static synchronized void setCardboardGameScreen(Player player) {
         if (cardboardGameScreen == null) {
             cardboardGameScreen = new CardboardGameScreen(
                     player,
@@ -53,7 +48,7 @@ public final class CardboardScreenManager implements ScreenChanger {
         cardboardGame.setCardboardScreen(cardboardGameScreen);
     }
 
-    private static void setCardboardGameOverScreen(Player player) {
+    private static synchronized void setCardboardGameOverScreen(Player player) {
         if (cardboardGameOverScreen == null) {
             cardboardGameOverScreen = new CardboardGameOverScreen(
                     player,
@@ -80,6 +75,11 @@ public final class CardboardScreenManager implements ScreenChanger {
     }
 
     private static class ScreenChangerSingleton {
+
+        ScreenChangerSingleton() {
+
+        }
+
         private static final ScreenChanger INSTANCE = new CardboardScreenManager();
     }
 }

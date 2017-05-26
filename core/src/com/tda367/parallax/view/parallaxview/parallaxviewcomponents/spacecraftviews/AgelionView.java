@@ -20,9 +20,9 @@ public class AgelionView implements RenderableSpaceCraft {
     private Vector3f pos;
 
 
-    private Renderable3dObject spaceCraftModel;
-    private RenderableParticleEffect trail;
-    private RenderableParticleEffect damaged;
+    private final Renderable3dObject spaceCraftModel;
+    private final RenderableParticleEffect trail;
+    private final RenderableParticleEffect damaged;
 
     private boolean criticalDamage;
 
@@ -31,48 +31,48 @@ public class AgelionView implements RenderableSpaceCraft {
         this.rot = new Quat4f();
 
         this.spaceCraftModel = new Renderable3dObject(
-                pos,
-                rot,
-                ResourceLoader.getInstance().getModel(AGELION_3D_MODEL),
+                this.pos,
+                this.rot,
+                ResourceLoader.getInstance().getModel(this.AGELION_3D_MODEL),
                 1f,
                 true
         );
 
-        criticalDamage = false;
+        this.criticalDamage = false;
 
-        trail = new RenderableParticleEffect(BOOST_TRAIL);
-        damaged = new RenderableParticleEffect(FIRE_EFFECT);
+        this.trail = new RenderableParticleEffect(this.BOOST_TRAIL);
+        this.damaged = new RenderableParticleEffect(this.FIRE_EFFECT);
     }
 
     private void updateTransformation() {
-        spaceCraftModel.setPos(pos);
-        spaceCraftModel.setRot(rot);
+        this.spaceCraftModel.setPos(this.pos);
+        this.spaceCraftModel.setRot(this.rot);
     }
 
     @Override
     public void render() {
-        updateTransformation();
+        this.updateTransformation();
 
 
-        Vector3f particleOffset = new Vector3f(pos);
+        final Vector3f particleOffset = new Vector3f(this.pos);
         particleOffset.add(new Vector3f(0, -1f, 0.15f));
-        trail.setPosition(particleOffset);
+        this.trail.setPosition(particleOffset);
 
-        Renderer3D.getInstance().addObjectToFrame(spaceCraftModel);
-        Renderer3D.getInstance().addParticleEffectToFrame(trail);
+        Renderer3D.getInstance().addObjectToFrame(this.spaceCraftModel);
+        Renderer3D.getInstance().addParticleEffectToFrame(this.trail);
 
-        if (criticalDamage) {
-            Vector3f fireOffset = new Vector3f(pos);
+        if (this.criticalDamage) {
+            final Vector3f fireOffset = new Vector3f(this.pos);
             fireOffset.add(new Vector3f(0, 0, 0.25f));
-            damaged.setPosition(fireOffset);
+            this.damaged.setPosition(fireOffset);
 
-            Renderer3D.getInstance().addParticleEffectToFrame(damaged);
+            Renderer3D.getInstance().addParticleEffectToFrame(this.damaged);
         }
     }
 
     @Override
     public void setCriticalDamage(boolean value) {
-        criticalDamage = value;
+        this.criticalDamage = value;
     }
 
     @Override

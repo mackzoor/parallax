@@ -17,9 +17,9 @@ public class HudView {
 
     private static final String PATH_TO_3D_MODEL = "3dModels/hudpane/hudPane.g3db";
     private final Player player;
-    private Renderable3dObject hudPane;
+    private final Renderable3dObject hudPane;
 
-    private HudTextureGenerator htg;
+    private final HudTextureGenerator htg;
 
     /**
      * Creates a HudView from a {@link Player}.

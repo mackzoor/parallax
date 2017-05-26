@@ -11,8 +11,8 @@ public class ExitButton3DView implements View {
 
     private static final String INTERNAL_PATH = "3dModels/quittext/quit.g3db";
 
-    private ExitButton3D exitButton;
-    private Renderable3dObject renderable3dObject;
+    private final ExitButton3D exitButton;
+    private final Renderable3dObject renderable3dObject;
 
 
     ExitButton3DView(ExitButton3D exitButton) {
