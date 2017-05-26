@@ -42,13 +42,6 @@ public final class ResourceLoader {
     private Map<String, btCollisionShape> loadedCollisionShapes;
     private Map<String, ParticleEffect> loadedParticleEffects;
 
-    //Singleton pattern
-    public static ResourceLoader getInstance() {
-        if (instance == null) {
-            instance = new ResourceLoader();
-        }
-        return instance;
-    }
 
     private ResourceLoader() {
         final UBJsonReader jsonReader = new UBJsonReader();
@@ -64,6 +57,15 @@ public final class ResourceLoader {
         loadedParticleEffects = new HashMap<String, ParticleEffect>();
     }
 
+    //Singleton pattern
+    public static ResourceLoader getInstance() {
+        if (instance == null) {
+            instance = new ResourceLoader();
+        }
+        return instance;
+    }
+
+
     /**
      * Loads a new {@link Model} into memory and puts it into the hash map; loadedModels.
      *
@@ -75,9 +77,11 @@ public final class ResourceLoader {
         Model modelNew;
 
         if (modelDirectory.length() > 0) {
-            modelNew = this.modelLoader.loadModel(Gdx.files.getFileHandle(modelDirectory + "/" + modelName, Files.FileType.Internal));
+            modelNew = this.modelLoader.loadModel(Gdx.files.getFileHandle(modelDirectory + "/" + modelName,
+                                                                           Files.FileType.Internal));
         } else {
-            modelNew = this.modelLoader.loadModel(Gdx.files.getFileHandle(modelName, Files.FileType.Internal));
+            modelNew = this.modelLoader.loadModel(Gdx.files.getFileHandle(modelName,
+                                                  Files.FileType.Internal));
         }
 
         this.loadedModels.put(modelName, modelNew);
@@ -118,9 +122,9 @@ public final class ResourceLoader {
         Sound newSound;
 
         if (soundDirectory.length() > 0) {
-            newSound = Gdx.audio.newSound(Gdx.files.internal((soundDirectory + "/" + soundName)));
+            newSound = Gdx.audio.newSound(Gdx.files.internal(soundDirectory + "/" + soundName));
         } else {
-            newSound = Gdx.audio.newSound(Gdx.files.internal((soundName)));
+            newSound = Gdx.audio.newSound(Gdx.files.internal(soundName));
         }
 
         this.loadedSounds.put(soundName, newSound);
@@ -162,9 +166,9 @@ public final class ResourceLoader {
         Music newMusic;
 
         if (musicDirectory.length() > 0) {
-            newMusic = Gdx.audio.newMusic(Gdx.files.internal((musicDirectory + "/" + musicName)));
+            newMusic = Gdx.audio.newMusic(Gdx.files.internal(musicDirectory + "/" + musicName));
         } else {
-            newMusic = Gdx.audio.newMusic(Gdx.files.internal((musicName)));
+            newMusic = Gdx.audio.newMusic(Gdx.files.internal(musicName));
         }
 
         this.loadedMusic.put(musicName, newMusic);

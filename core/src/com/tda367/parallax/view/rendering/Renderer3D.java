@@ -23,6 +23,9 @@ import java.util.List;
  */
 public final class Renderer3D {
 
+    //Singleton pattern
+    private static Renderer3D renderer3D;
+
     @Getter private ParticleSystem particleSystem;
 
 
@@ -34,9 +37,6 @@ public final class Renderer3D {
     private List<Renderable3dObject> modelsToRender;
     private List<RenderableParticleEffect> particleEffectsToRender;
 
-    //Singleton pattern
-    private static Renderer3D renderer3D;
-
     public static Renderer3D initialize(float fov, int width, int height, boolean isVr) {
         if (isVr) {
             // Setup of special camera for VR
@@ -47,10 +47,6 @@ public final class Renderer3D {
             renderer3D = new Renderer3D(fov, width, height);
         }
 
-        return renderer3D;
-    }
-
-    public static Renderer3D getInstance() {
         return renderer3D;
     }
 
@@ -95,6 +91,10 @@ public final class Renderer3D {
                         height
                 )
         );
+    }
+
+    public static Renderer3D getInstance() {
+        return renderer3D;
     }
 
     /**

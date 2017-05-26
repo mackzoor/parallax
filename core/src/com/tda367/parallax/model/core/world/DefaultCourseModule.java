@@ -49,16 +49,16 @@ public class DefaultCourseModule implements ICourseModule {
     }
 
 
-    private void addObstacles(int i) {
+    private void addObstacles(int amount) {
 
-        final float distanceBetween = this.length / (float) i;
-        for (int x = 0; x < i; x++) {
+        final float distanceBetween = this.length / (float) amount;
+        for (int x = 0; x < amount; x++) {
             final Vector3f obstaclePos = new Vector3f(
                     0,
                     (this.pos.getY()) - this.length / 2 + x * distanceBetween,
                     0
             );
-            final  CourseObstacleBase obstacle = ObstacleFactory.getRandomWallInstance(obstaclePos);
+            final CourseObstacleBase obstacle = ObstacleFactory.getRandomWallInstance(obstaclePos);
 
             obstacle.getPos().set(obstaclePos);
             this.couseObstacles.add(obstacle);

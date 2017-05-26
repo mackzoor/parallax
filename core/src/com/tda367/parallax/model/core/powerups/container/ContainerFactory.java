@@ -8,11 +8,13 @@ import com.tda367.parallax.model.core.powerups.arsenal.PowerUpFactory;
  */
 class ContainerFactory {
 
-    private ContainerFactory(){}
+    private ContainerFactory() {
+    }
 
 
     /**
      * Creates a {@link Container} with the specified {@link IPowerUp}.
+     *
      * @param powerUp used to create Container.
      * @return created Container containing the specified powerUp.
      */

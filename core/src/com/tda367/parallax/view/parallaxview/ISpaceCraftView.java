@@ -78,7 +78,8 @@ public class ISpaceCraftView implements View {
      * Returns the path to the spaceCraftModel from the {@link ISpaceCraft}'s spacecraft type.
      *
      * @param spaceCraft to be used to get model.
-     * @return Specific path to model if spaceCraft type is know, otherwise returns a path to a generic 3d model.
+     * @return Specific path to model if spaceCraft type is know,
+     * otherwise returns a path to a generic 3d model.
      */
     private String getSpaceCraftModel(ISpaceCraft spaceCraft) {
         if (spaceCraft.getType() == SpaceCraftType.AGELION) {

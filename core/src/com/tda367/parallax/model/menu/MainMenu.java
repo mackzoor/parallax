@@ -9,7 +9,6 @@ import com.tda367.parallax.model.core.powerups.arsenal.IPowerUp;
 import com.tda367.parallax.model.core.powerups.arsenal.PowerUpFactory;
 import com.tda367.parallax.model.menu.button3d.ExitButton3D;
 import com.tda367.parallax.model.menu.button3d.StartButton3D;
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,10 +18,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The Model class for the Cardboard main menu. Creates the objects in the world and handles logic.
+ * The Model class for the Cardboard main menu.
+ * Creates the objects in the world and handles logic.
  */
 
 public class MainMenu implements CollisionObserver {
+
+    private static final Vector3f EXIT_BUTTON_POS = new Vector3f(2, 10, 1);
+    private static final Quat4f EXIT_BUTTON_ROT = new Quat4f();
+    private static final Vector3f START_BUTTON_POS = new Vector3f(-2, 10, 1);
+    private static final Quat4f START_BUTTON_ROT = new Quat4f();
 
     @Getter
     private ExitButton3D exitButton;
@@ -36,10 +41,6 @@ public class MainMenu implements CollisionObserver {
     @Setter
     private Vector3f aimDirection;
 
-    private static final Vector3f EXIT_BUTTON_POS = new Vector3f(2, 10, 1);
-    private static final Quat4f EXIT_BUTTON_ROT = new Quat4f();
-    private static final Vector3f START_BUTTON_POS = new Vector3f(-2, 10, 1);
-    private static final Quat4f START_BUTTON_ROT = new Quat4f();
 
     public MainMenu() {
         this.exitButton = new ExitButton3D(EXIT_BUTTON_POS, EXIT_BUTTON_ROT);
@@ -67,7 +68,6 @@ public class MainMenu implements CollisionObserver {
 
     @Override
     public void respondToCollision(CollisionResult collisionResult) {
-        System.out.println("collision");
         collisionResult.getFirst().handleCollision(collisionResult.getSecond());
         collisionResult.getSecond().handleCollision(collisionResult.getFirst());
     }

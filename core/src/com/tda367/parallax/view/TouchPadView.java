@@ -16,12 +16,15 @@ import lombok.Getter;
 
 public class TouchPadView {
 
-    @Getter private Touchpad touchpad;
-    @Getter private ImageButton actionButton;
     private static float BUTTON_DIAMETER_DIVISOR = 9.6f;
     private static float BUTTON_POSITON_DIVISOR = 10f;
     private static float TOUCH_PAD_DIAMETER_DIVISOR = 4.8f;
     private static float TOUCH_PAD_POSITON_DIVISOR = 24f;
+
+    @Getter
+    private Touchpad touchpad;
+    @Getter
+    private ImageButton actionButton;
 
     private Stage stage;
 
@@ -47,7 +50,7 @@ public class TouchPadView {
         this.actionButton.addListener(listener);
     }
 
-    public void drawTouchPad(){
+    public void drawTouchPad() {
         this.stage.draw();
     }
 
@@ -55,8 +58,8 @@ public class TouchPadView {
 
         final Drawable actionButtonBackground = gamePadSkin.getDrawable("actionButton");
 
-        final float buttonDiameter = screenWidth/BUTTON_DIAMETER_DIVISOR;
-        final float buttonYpos = screenHeight/BUTTON_POSITON_DIVISOR;
+        final float buttonDiameter = screenWidth / BUTTON_DIAMETER_DIVISOR;
+        final float buttonYpos = screenHeight / BUTTON_POSITON_DIVISOR;
         final float buttonXPos = screenWidth - buttonYpos;
 
         actionButtonBackground.setMinWidth(buttonDiameter);
@@ -79,8 +82,8 @@ public class TouchPadView {
         touchpadStyle.background = touchBackground;
         touchpadStyle.knob = touchKnob;
 
-        final float touchPadDiameter = screenWidth/TOUCH_PAD_DIAMETER_DIVISOR;
-        final float touchPadXYPos = screenHeight/TOUCH_PAD_POSITON_DIVISOR;
+        final float touchPadDiameter = screenWidth / TOUCH_PAD_DIAMETER_DIVISOR;
+        final float touchPadXYPos = screenHeight / TOUCH_PAD_POSITON_DIVISOR;
 
         touchKnob.setMinWidth(touchPadDiameter / 2f);
         touchKnob.setMinHeight(touchPadDiameter / 2f);

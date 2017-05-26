@@ -82,7 +82,8 @@ public class World implements Updatable, CollisionObserver {
             final float firstCraft = this.getFirstSpaceCraftYPosition();
             final float lastCraft = this.getLastSpaceCraftYPosition();
 
-            final float firstModule = this.modules.get(this.modules.size() - 1).getPos().getY() + this.modules.get(this.modules.size() - 1).getLength();
+            final float firstModule = this.modules.get(this.modules.size() - 1).getPos().getY()
+                                                        + this.modules.get(this.modules.size() - 1).getLength();
             final float lastModule = this.modules.get(0).getPos().getY();
 
             final int modulesToAdd = (int) ((firstCraft + 256 - firstModule) / 64);
@@ -92,7 +93,9 @@ public class World implements Updatable, CollisionObserver {
             addModules(modulesToAdd);
             removeModules(modulesToRemove);
         } else {
-            final ICourseModule defModule = new DefaultCourseModule(new Vector3f(0, 32, 0), 0, 0);
+            final ICourseModule defModule = new DefaultCourseModule(new Vector3f(0, 32, 0),
+                                                                                0,
+                                                                                0);
             this.modules.add(defModule);
 
             this.powerUps.addAll(defModule.getPowerups());
@@ -102,8 +105,8 @@ public class World implements Updatable, CollisionObserver {
 
     }
 
-    private void addModules(int i) {
-        for (int x = 0; x < i; x++) {
+    private void addModules(int amount) {
+        for (int x = 0; x < amount; x++) {
             final float endOfLastModulePos = this.modules.get(this.modules.size() - 1).getPos().getY();
             final ICourseModule tempModule = new DefaultCourseModule(new Vector3f(
                     0,
@@ -121,8 +124,8 @@ public class World implements Updatable, CollisionObserver {
         }
     }
 
-    private void removeModules(int i) {
-        for (int x = 0; x < i; x++) {
+    private void removeModules(int amount) {
+        for (int x = 0; x < amount; x++) {
             final ICourseModule module = this.modules.get(0);
             this.modules.remove(module);
             module.remove3dObjectsFromCollisionManager();
@@ -156,8 +159,7 @@ public class World implements Updatable, CollisionObserver {
 
         //remove dead powerups.
         for (final Integer number : numbers) {
-            final int i = number;
-            this.powerUps.remove(i);
+            this.powerUps.remove(number.intValue());
         }
 
         //Update module range

@@ -26,7 +26,7 @@ public class MainMenuView {
     public MainMenuView(MainMenu mainMenu, boolean isVr) {
         this.mainMenu = mainMenu;
         this.world = new BackgroundView();
-        this.exitButton = new com.tda367.parallax.view.menu.ExitButton3DView(mainMenu.getExitButton());
+        this.exitButton = new ExitButton3DView(mainMenu.getExitButton());
         this.startButton = new StartButton3DView(mainMenu.getStartButton());
         this.powerUpsHash = new HashMap<IPowerUp, IPowerUpView>();
         Renderer3D.initialize(mainMenu.getCamera().getFov(), Gdx.graphics.getWidth(),
@@ -72,10 +72,12 @@ public class MainMenuView {
      * Updates the PowerUpList from the world object
      */
     private void updatePowerupList() {
-        final List<IPowerUp> missingPowerUps = syncHash(this.powerUpsHash, this.mainMenu.getPowerUps());
+        final List<IPowerUp> missingPowerUps = syncHash(this.powerUpsHash,
+                                                        this.mainMenu.getPowerUps());
 
         for (final IPowerUp missingPowerUp : missingPowerUps) {
-            this.powerUpsHash.put(missingPowerUp, new IPowerUpView(missingPowerUp));
+            this.powerUpsHash.put(missingPowerUp,
+                                  new IPowerUpView(missingPowerUp));
         }
     }
 

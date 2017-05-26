@@ -12,10 +12,10 @@ import javax.vecmath.Quat4f;
  */
 public class ContainerView implements View {
 
-    private final static String MODEL_3D_INTERNAL_PATH = "3dModels/containerround/containerround.g3db";
+    private static final String MODEL_3D_INTERNAL_PATH = "3dModels/containerround/containerround.g3db";
 
     //TODO Change path to the particular powerup.
-    private final static String MODEL_3D_INTERNAL_PATH_MISSILE = "3dModels/missile/missile.g3db";
+    private static final String MODEL_3D_INTERNAL_PATH_MISSILE = "3dModels/missile/missile.g3db";
     private final Container container;
     private Renderable3dObject container3dObject;
     private Renderable3dObject powerUp3dObject;

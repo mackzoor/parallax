@@ -9,10 +9,10 @@ import javax.vecmath.Vector3f;
  */
 public class Agelion extends SpaceCraft {
 
-    private final static String COLLISION_MODEL = "3dModels/agelion/hitbox.obj";
-    private final static float MAX_PAN_VELOCITY = 16f;
-    private final static int HEALTH = 5;
-    private final static SpaceCraftType TYPE = SpaceCraftType.AGELION;
+    private static final String COLLISION_MODEL = "3dModels/agelion/hitbox.obj";
+    private static final float MAX_PAN_VELOCITY = 16f;
+    private static final int HEALTH = 5;
+    private static final SpaceCraftType TYPE = SpaceCraftType.AGELION;
 
     //Constructors
     Agelion(float forwardVelocity, Vector3f pos, Quat4f rot) {

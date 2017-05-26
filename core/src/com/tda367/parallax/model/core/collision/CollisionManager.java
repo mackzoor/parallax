@@ -10,25 +10,26 @@ import java.util.List;
  */
 
 public final class CollisionManager {
+
+    private static CollisionManager instance;
+
     @Getter
     private List<Collidable> collidables;
     private List<ICollisionCalculator> calculators;
     @Getter
     private List<CollisionObserver> observers;
 
-    private static CollisionManager instance;
+    private CollisionManager() {
+        this.collidables = new ArrayList<Collidable>();
+        this.calculators = new ArrayList<ICollisionCalculator>();
+        this.observers = new ArrayList<CollisionObserver>();
+    }
 
     public static CollisionManager getInstance() {
         if (instance == null) {
             instance = new CollisionManager();
         }
         return instance;
-    }
-
-    private CollisionManager() {
-        this.collidables = new ArrayList<Collidable>();
-        this.calculators = new ArrayList<ICollisionCalculator>();
-        this.observers = new ArrayList<CollisionObserver>();
     }
 
     public void addCollisionCheck(Collidable collidable) {

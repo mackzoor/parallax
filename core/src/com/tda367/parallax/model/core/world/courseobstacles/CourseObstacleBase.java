@@ -19,7 +19,8 @@ public abstract class CourseObstacleBase implements Collidable, Updatable {
     private Quat4f rot;
 
     private boolean collisionEnabled;
-    @Getter private boolean destroyed;
+    @Getter
+    private boolean destroyed;
 
     CourseObstacleBase(Vector3f pos, Quat4f rot) {
         this.pos = pos;

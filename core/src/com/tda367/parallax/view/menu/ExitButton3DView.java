@@ -9,8 +9,9 @@ import com.tda367.parallax.view.rendering.Renderer3D;
 
 public class ExitButton3DView implements View {
 
+    private static final String INTERNAL_PATH = "3dModels/quittext/quit.g3db";
+
     private ExitButton3D exitButton;
-    private final static String INTERNAL_PATH = "3dModels/quittext/quit.g3db";
     private Renderable3dObject renderable3dObject;
 
 

@@ -34,9 +34,9 @@ public final class MathUtilities {
         return q;
     }
 
-    public static Vector3f eulerToVector(float pitch, float roll, float yaw){
-        final float x = (float) (-cos(yaw) * sin(pitch) * sin(roll) -sin(yaw) * cos(roll));
-        final float y = (float) (-sin(yaw) * sin(pitch) * sin(roll)+cos(yaw) * cos(roll));
+    public static Vector3f eulerToVector(float pitch, float roll, float yaw) {
+        final float x = (float) (-cos(yaw) * sin(pitch) * sin(roll) - sin(yaw) * cos(roll));
+        final float y = (float) (-sin(yaw) * sin(pitch) * sin(roll) + cos(yaw) * cos(roll));
         final float z = (float) (cos(pitch) * sin(roll));
 
         return new Vector3f(x, y, z);

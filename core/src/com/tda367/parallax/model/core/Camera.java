@@ -1,5 +1,7 @@
 package com.tda367.parallax.model.core;
 
+import com.tda367.parallax.model.core.util.Transformable;
+import com.tda367.parallax.model.core.util.Updatable;
 import lombok.Getter;
 
 import javax.vecmath.Quat4f;
@@ -8,10 +10,11 @@ import javax.vecmath.Vector3f;
 //TODO implement different tracking modes.
 
 /**
- * A virtual camera with capabilities to track {@link com.tda367.parallax.model.core.util.Transformable}
+ * A virtual camera with capabilities to track
+ * {@link com.tda367.parallax.model.core.util.Transformable}
  */
 
-public class Camera implements com.tda367.parallax.model.core.util.Updatable, com.tda367.parallax.model.core.util.Transformable {
+public class Camera implements Updatable, Transformable {
 
     private Vector3f pos;
     private Quat4f rot;
@@ -36,7 +39,9 @@ public class Camera implements com.tda367.parallax.model.core.util.Updatable, co
     }
 
     private void updatePosition() {
-        this.pos.set(this.trackingTarget.getPos().getX() / 2, (this.trackingTarget.getPos().getY()) - 4, this.trackingTarget.getPos().getZ() / 2 + 1);
+        this.pos.set(this.trackingTarget.getPos().getX() / 2,
+                     (this.trackingTarget.getPos().getY()) - 4,
+                     this.trackingTarget.getPos().getZ() / 2 + 1);
     }
 
 

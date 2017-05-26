@@ -27,7 +27,7 @@ public class CourseObstacleView implements View {
 
     @Override
     public void render() {
-        if(!obstacle.isDestroyed()) {
+        if (!obstacle.isDestroyed()) {
             this.renderable3dObject.setPos(obstacle.getPos());
             this.renderable3dObject.setRot(obstacle.getRot());
             Renderer3D.getInstance().addObjectToFrame(renderable3dObject);

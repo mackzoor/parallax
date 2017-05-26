@@ -12,27 +12,8 @@ import lombok.Setter;
 import javax.vecmath.Vector3f;
 
 public class Missile extends PowerUpBase {
-    private float startVelocity;
 
-    //Velocity that the missile is moving in.
-    @Setter
-    private float velocity;
-    private int timeAccelerated;
-
-    //Saving variables for the transformable object the missile has its origin from
-    private Vector3f transformableEarlierPosition;
-    private Transformable transformable;
-    //Storing the position of the transformable object since last update, making it possible to track its movement
-    private Vector3f transPosLastUpdate;
-
-    private int timeStorage;
-
-    @Getter
-    private Vector3f enemyTargetPosition;
-
-
-
-    /*
+     /*
         Variables for toggling the missile movement
     */
 
@@ -59,6 +40,24 @@ public class Missile extends PowerUpBase {
     //Maximum velocity that the missile can reach.
     private static final float MAXIMUM_VELOCITY = 80;
 
+
+    private float startVelocity;
+
+    //Velocity that the missile is moving in.
+    @Setter
+    private float velocity;
+    private int timeAccelerated;
+
+    //Saving variables for the transformable object the missile has its origin from
+    private Vector3f transformableEarlierPosition;
+    private Transformable transformable;
+    //Storing the position of the transformable object since last update, making it possible to track its movement
+    private Vector3f transPosLastUpdate;
+
+    private int timeStorage;
+
+    @Getter
+    private Vector3f enemyTargetPosition;
 
     Missile() {
         super();
@@ -124,16 +123,20 @@ public class Missile extends PowerUpBase {
                 timeStorage = timeStorage + milliSinceLastUpdate;
 
                 //Checks to see that the missile has gotten a velocity before moving
-                //Before testing velocity, check that velocity generation is allowed, by using previous and current position.
+                //Before testing velocity, check that velocity generation is allowed,
+                //by using previous and current position.
                 if (transformableEarlierPosition == null) {
                     transformableEarlierPosition = new Vector3f(transformable.getPos());
                     //Make sure that the missile has the same position as the ship after one cycle.
                     super.getPos().set(transformable.getPos());
                 } else if (velocity == 0) {
                     //Generate velocity for the missile, based on the velocity of the transformable object
-                    generateVelocity(transformableEarlierPosition, transformable, milliSinceLastUpdate);
+                    generateVelocity(transformableEarlierPosition,
+                                     transformable,
+                                     milliSinceLastUpdate);
                 } else {
-                    moveTheMissile(milliSinceLastUpdate, timeStorage);
+                    moveTheMissile(milliSinceLastUpdate,
+                                   timeStorage);
                 }
             }
         }
@@ -150,12 +153,17 @@ public class Missile extends PowerUpBase {
         //Method for general missile movement, separated from update for nicer looking code.
 
         if (timeStorage <= TIME_TRACKING_TRANS) {
-            if (transPosLastUpdate.getX() == 0 && transPosLastUpdate.getY() == 0 && transPosLastUpdate.getZ() == 0) {
+            if (    transPosLastUpdate.getX() == 0
+                    && transPosLastUpdate.getY() == 0
+                    && transPosLastUpdate.getZ() == 0) {
+
                 super.setPos(new Vector3f(transformable.getPos()));
                 transPosLastUpdate = new Vector3f(transformable.getPos());
             } else {
                 if (transPosLastUpdate.getZ() > transformable.getPos().getZ()) {
-                    super.getPos().add(new Vector3f(0, 0, transformable.getPos().getZ() - transPosLastUpdate.getZ()));
+                    super.getPos().add(new Vector3f(0,
+                                                    0,
+                                                    transformable.getPos().getZ() - transPosLastUpdate.getZ()));
                 }
             }
             transPosLastUpdate = new Vector3f(transformable.getPos());
@@ -227,7 +235,9 @@ public class Missile extends PowerUpBase {
 
     //Method to generate a direction vector (normalized) for the ship's movement.
     private Vector3f generateDirectionVector(Vector3f target) {
-        final Vector3f directionalVector = new Vector3f(target.getX() - getPos().getX(), target.getY() - getPos().getY(), target.getZ() - getPos().getZ());
+        final Vector3f directionalVector = new Vector3f(target.getX() - getPos().getX(),
+                                                        target.getY() - getPos().getY(),
+                                                        target.getZ() - getPos().getZ());
 
         directionalVector.normalize();
 
@@ -236,7 +246,9 @@ public class Missile extends PowerUpBase {
 
     //Method for moving the ship based on the direction vector generated from method "generateDirectionalVector"
     private void moveOnDirectionVector(Vector3f directionalVector, int milliSinceLastUpdate) {
-        getPos().add(new Vector3f((directionalVector.getX() * (float) milliSinceLastUpdate / 1000) * VELOCITY_MULTIPLIER_X, (directionalVector.getY() * (float) milliSinceLastUpdate / 1000) * VELOCITY_MULTIPLIER_Y, (directionalVector.getZ() * (float) milliSinceLastUpdate / 1000) * VELOCITY_MULTIPLIER_Z));
+        getPos().add(new Vector3f((directionalVector.getX() * (float) milliSinceLastUpdate / 1000) * VELOCITY_MULTIPLIER_X,
+                                  (directionalVector.getY() * (float) milliSinceLastUpdate / 1000) * VELOCITY_MULTIPLIER_Y,
+                                  (directionalVector.getZ() * (float) milliSinceLastUpdate / 1000) * VELOCITY_MULTIPLIER_Z));
         this.setRot(MathUtilities.vectorToQuat(directionalVector));
     }
 

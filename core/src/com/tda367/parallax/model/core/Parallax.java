@@ -20,6 +20,11 @@ import java.util.Random;
  */
 
 public class Parallax {
+
+    private static Random rand = new Random();
+    private static final String musicDirectory = "sounds/music/";
+
+
     private AudioQueue audioQueue;
     @Getter
     private boolean gameOver;
@@ -36,8 +41,6 @@ public class Parallax {
     private boolean paused;
     private String backgroundMusic;
     private String pauseMusic;
-    private final static String musicDirectory = "sounds/music";
-    private static final Random rand = new Random();
 
     private List<HunterAI> ais;
 

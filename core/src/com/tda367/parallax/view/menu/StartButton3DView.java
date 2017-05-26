@@ -8,7 +8,7 @@ import com.tda367.parallax.view.rendering.Renderer3D;
 
 public class StartButton3DView implements View {
 
-    private final static String INTERNAL_PATH = "3dModels/playtext/play.g3db";
+    private static final String INTERNAL_PATH = "3dModels/playtext/play.g3db";
     private StartButton3D startButton;
     private Renderable3dObject renderable3dObject;
 

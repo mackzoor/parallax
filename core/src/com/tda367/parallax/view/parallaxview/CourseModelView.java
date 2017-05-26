@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class CourseModelView implements View {
 
-    private final static String MODEL_3D_INTERNAL_PATH = "3dModels/defaultCourse/course.g3db";
+    private static final String MODEL_3D_INTERNAL_PATH = "3dModels/defaultCourse/course.g3db";
     private final ICourseModule courseModule;
     private List<CourseObstacleView> obstacleViews;
     private List<ContainerView> containerViews;

@@ -11,13 +11,13 @@ import java.util.List;
 
 public class AudioQueue {
 
+    private static AudioQueue instance;
+
     private List<AudioObserver> listeners = new ArrayList<AudioObserver>();
 
     //Sound and music stored to be played when a listener is added.
     private List<SoundCombiantion> soundQueue = new ArrayList<SoundCombiantion>();
     private List<SoundCombiantion> musicQueue = new ArrayList<SoundCombiantion>();
-
-    private static AudioQueue instance;
 
     public static AudioQueue getInstance() {
         if (instance == null) {
@@ -34,26 +34,26 @@ public class AudioQueue {
 
     //Methods connected with the audioObserver class. Methods connected or calling upon listeners
     public void stopActiveMusic(String fileNameAndDirectory) {
-        for (final AudioObserver sl : this.listeners) {
-            sl.stopActiveMusic(fileNameAndDirectory);
+        for (final AudioObserver soundLis : this.listeners) {
+            soundLis.stopActiveMusic(fileNameAndDirectory);
         }
     }
 
     public void pauseActiveMusic(String fileNameAndDirectory) {
-        for (final AudioObserver sl : this.listeners) {
-            sl.pauseActiveMusic(fileNameAndDirectory);
+        for (final AudioObserver soundLis : this.listeners) {
+            soundLis.pauseActiveMusic(fileNameAndDirectory);
         }
     }
 
     public void unPauseActiveMusic(String fileNameAndDirectory) {
-        for (final AudioObserver sl : this.listeners) {
-            sl.unPauseActiveMusic(fileNameAndDirectory);
+        for (final AudioObserver soundLis : this.listeners) {
+            soundLis.unPauseActiveMusic(fileNameAndDirectory);
         }
     }
 
     public void clearAllActiveMusic() {
-        for (final AudioObserver sl : this.listeners) {
-            sl.clearAllActiveMusic();
+        for (final AudioObserver soundLis : this.listeners) {
+            soundLis.clearAllActiveMusic();
         }
     }
 
@@ -75,14 +75,15 @@ public class AudioQueue {
     }
 
     private void playSound(String soundLocation) {
-        //Methods to call upon AudioObservers to play the desired sound, with the right volume. Chained with methods below.
+        //Methods to call upon AudioObservers to play the desired sound,
+        //Using the right volume. Chained with methods below.
 
         if (this.listeners.size() < 1) {
             this.soundQueue.add(new SoundCombiantion(soundLocation, 1f));
         }
 
-        for (final AudioObserver sl : this.listeners) {
-            sl.playSound(soundLocation);
+        for (final AudioObserver soundLis : this.listeners) {
+            soundLis.playSound(soundLocation);
         }
     }
 
@@ -91,8 +92,8 @@ public class AudioQueue {
             this.soundQueue.add(new SoundCombiantion(soundLocation, volume));
         }
 
-        for (final AudioObserver sl : this.listeners) {
-            sl.playSound(soundLocation, volume);
+        for (final AudioObserver soundLis : this.listeners) {
+            soundLis.playSound(soundLocation, volume);
         }
     }
 
@@ -105,13 +106,14 @@ public class AudioQueue {
     }
 
     private void playMusic(String musicLocation) {
-        //Methods to call upon AudioObservers to play the desired music, with the right volume. Chained with methods below
+        //Methods to call upon AudioObservers to play the desired music, with the right volume.
+        // Chained with methods below
 
         if (this.listeners.size() < 1) {
             this.musicQueue.add(new SoundCombiantion(musicLocation, 1f));
         }
-        for (final AudioObserver sl : this.listeners) {
-            sl.playMusic(musicLocation);
+        for (final AudioObserver soundLis : this.listeners) {
+            soundLis.playMusic(musicLocation);
         }
     }
 
@@ -119,8 +121,8 @@ public class AudioQueue {
         if (this.listeners.size() < 1) {
             this.musicQueue.add(new SoundCombiantion(music, volume));
         }
-        for (final AudioObserver sl : this.listeners) {
-            sl.playMusic(music, volume);
+        for (final AudioObserver soundLis : this.listeners) {
+            soundLis.playMusic(music, volume);
         }
     }
 

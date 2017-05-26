@@ -68,7 +68,9 @@ public class GameScreen extends ScreenAdapter {
         this.player.addSpaceCraft(SpaceCraftFactory.getAgelionInstance(15));
         this.parallaxGame = new Parallax(this.player);
         this.parallaxView = new ParallaxView(this.parallaxGame, false);
-        this.controller = new GameController(this.parallaxGame, this.parallaxView, DeviceManager.getDevice());
+        this.controller = new GameController(this.parallaxGame,
+                                             this.parallaxView,
+                                             DeviceManager.getDevice());
     }
 
     private void gameOver() {

@@ -14,12 +14,11 @@ import javax.vecmath.Vector3f;
  * View class for {@link Missile}
  */
 public class IPowerUpView implements View {
-    private final IPowerUp powerUp;
-
-
     private final static String MODEL_3D_INTERNAL_PATH = "3dModels/missile/missile.g3db";
     private final static ParticleEffectType ROCKET_TRAIL = ParticleEffectType.ROCKET_TRAIL;
     private final static ParticleEffectType EXPLOSION = ParticleEffectType.EXPLOSION;
+
+    private final IPowerUp powerUp;
 
     private Renderable3dObject renderable3dObject;
     private RenderableParticleEffect rocketTrail;

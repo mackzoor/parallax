@@ -28,7 +28,12 @@ public class Renderable3dObject {
      * @param opacity       Opacity of the rendered 3d model.
      * @param highPriority  if true will render before 3d models that are set to false.
      */
-    public Renderable3dObject(Vector3f pos, Quat4f rot, ModelInstance modelInstance, float opacity, boolean highPriority) {
+    public Renderable3dObject(Vector3f pos,
+                              Quat4f rot,
+                              ModelInstance modelInstance,
+                              float opacity,
+                              boolean highPriority) {
+
         this.modelInstance = modelInstance;
         setPos(pos);
         setRot(rot);
@@ -82,10 +87,10 @@ public class Renderable3dObject {
     /**
      * Sets the opacity of the 3d model.
      *
-     * @param f the new opacity.
+     * @param opacity the new opacity.
      */
-    public void setOpacity(float f) {
-        this.opacity = f;
+    public void setOpacity(float opacity) {
+        this.opacity = opacity;
 
         //Change opacity level
         final BlendingAttribute blendingAttribute = new BlendingAttribute();

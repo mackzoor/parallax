@@ -12,7 +12,8 @@ import com.tda367.parallax.model.core.Player;
 public class CardboardMain extends CardboardGame {
 
     @Override
-    public void create(){
+    public void create() {
+
         final Player player = new Player();
         DeviceManager.setDevice(this);
         CardboardScreenManager.setCardboardGame(this);
@@ -20,12 +21,14 @@ public class CardboardMain extends CardboardGame {
     }
 
     @Override
-    public void onDrawEye(Eye paramEye){
+    public void onDrawEye(Eye paramEye) {
+
         cardboardScreen.onDrawEye(paramEye);
     }
 
     @Override
-    public void onNewFrame(HeadTransform headTransform){
+    public void onNewFrame(HeadTransform headTransform) {
+
         cardboardScreen.onNewFrame(headTransform);
     }
 }

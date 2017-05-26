@@ -10,7 +10,7 @@ import com.tda367.parallax.model.core.Player;
 public class Main extends Game {
 
     @Override
-    public void create(){
+    public void create() {
         Gdx.input.setCatchBackKey(true);
         final Player player = new Player();
         DeviceManager.setDevice(this);
@@ -19,7 +19,7 @@ public class Main extends Game {
     }
 
     @Override
-    public void render(){
+    public void render() {
         screen.render(Gdx.graphics.getDeltaTime());
     }
 }

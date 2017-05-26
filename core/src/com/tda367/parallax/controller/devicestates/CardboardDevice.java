@@ -18,5 +18,6 @@ class CardboardDevice implements Device {
 
     @Override
     public void update() {
+
     }
 }

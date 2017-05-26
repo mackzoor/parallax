@@ -13,8 +13,9 @@ import com.tda367.parallax.view.rendering.Renderer3D;
 
 public class GameOverTextView implements View {
 
+    private static final String INTERNAL_PATH = "3dModels/boxObstacle/boxObstacle.g3db";
+
     private GameOverText gameOverText;
-    private final static String INTERNAL_PATH = "3dModels/boxObstacle/boxObstacle.g3db";
     private Renderable3dObject renderable3dObject;
 
     GameOverTextView(GameOverText gameOverText) {

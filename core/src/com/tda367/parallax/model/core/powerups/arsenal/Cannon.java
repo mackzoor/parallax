@@ -17,6 +17,11 @@ import java.util.Random;
  */
 
 public class Cannon extends PowerUpBase {
+    private static final String COLLISION_MODEL = "3dModels/box/hitbox.obj";
+    private static final int LIFE_LENGTH = 4000;
+
+    Random rand = new Random();
+
     @Setter
     @Getter
     private Vector3f velocity;
@@ -25,12 +30,7 @@ public class Cannon extends PowerUpBase {
     @Setter
     private Vector3f enemyTargetPosition;
 
-    private final static String COLLISION_MODEL = "3dModels/box/hitbox.obj";
-
     private int timeAlive;
-    private final static int LIFE_LENGTH = 4000;
-
-    Random rand = new Random();
 
     Cannon() {
         super();

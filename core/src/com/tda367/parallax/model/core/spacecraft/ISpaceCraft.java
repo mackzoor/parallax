@@ -1,6 +1,8 @@
 package com.tda367.parallax.model.core.spacecraft;
 
+import com.tda367.parallax.model.core.collision.Collidable;
 import com.tda367.parallax.model.core.powerups.arsenal.IPowerUp;
+import com.tda367.parallax.model.core.util.Updatable;
 
 import javax.vecmath.Vector2f;
 import java.util.List;
@@ -9,7 +11,7 @@ import java.util.List;
  * Interface for all spaceCraft in the game.
  */
 
-public interface ISpaceCraft extends com.tda367.parallax.model.core.collision.Collidable, com.tda367.parallax.model.core.util.Updatable {
+public interface ISpaceCraft extends Collidable, Updatable {
     void setForwardSpeedTarget(float speed);
 
     void setForwardAcceleration(float acceleration);

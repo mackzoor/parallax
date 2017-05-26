@@ -13,17 +13,15 @@ import java.util.List;
 
 public class ScoreHandler {
 
-    private final static int LENGTH_OF_LIST = 10;
+    private static final int LENGTH_OF_LIST = 10;
 
     //Storage file connected to LibGDX storage.
     private Preferences preferences;
 
     //The top 10 highest scoring players, list not necessarily in order.
-    private @Getter
-    List<HighScoreHolder> highScoreHolders;
+    @Getter private List<HighScoreHolder> highScoreHolders;
 
     private String temporaryString;
-
 
 
     public ScoreHandler() {
@@ -36,13 +34,13 @@ public class ScoreHandler {
     private void updateHighScoreHolders() {
         final List<HighScoreHolder> tempList = new ArrayList<HighScoreHolder>();
 
-        for (final String s : this.preferences.get().keySet()) {
-            this.temporaryString = s;
+        for (final String preferenceName : this.preferences.get().keySet()) {
+            this.temporaryString = preferenceName;
             Boolean check = false;
-            while (!(check)) {
+            while (!check) {
                 check = removeNameDivider();
             }
-            tempList.add(new HighScoreHolder(this.temporaryString, this.preferences.getInteger(s)));
+            tempList.add(new HighScoreHolder(this.temporaryString, this.preferences.getInteger(preferenceName)));
         }
         this.highScoreHolders = tempList;
         sortHighScoreHolders();
@@ -50,11 +48,11 @@ public class ScoreHandler {
 
     private boolean removeNameDivider() {
         if (this.temporaryString.endsWith("#")) {
-            final StringBuilder sb = new StringBuilder(this.temporaryString);
+            final StringBuilder builder = new StringBuilder(this.temporaryString);
 
-            sb.deleteCharAt(sb.length() - 1);
+            builder.deleteCharAt(builder.length() - 1);
 
-            this.temporaryString = sb.toString();
+            this.temporaryString = builder.toString();
             return false;
         } else {
             return true;
@@ -108,12 +106,12 @@ public class ScoreHandler {
         //Method that adds an # if the name already exists amongst the top 10 score holders.
         String returnName = name;
         boolean nameAvailable = false;
-        while (!(nameAvailable)) {
+        while (!nameAvailable) {
             nameAvailable = checkAvailability(returnName);
             if (!nameAvailable) {
-                final StringBuilder sb = new StringBuilder(returnName);
-                sb.append("#");
-                returnName = sb.toString();
+                final StringBuilder builder = new StringBuilder(returnName);
+                builder.append("#");
+                returnName = builder.toString();
             }
         }
         return returnName;
@@ -122,14 +120,14 @@ public class ScoreHandler {
     private void removeLowestHighScore() {
         String removeName = null;
         int lowestScore = -1;
-        for (final String s : this.preferences.get().keySet()) {
+        for (final String preferenceName : this.preferences.get().keySet()) {
             if (lowestScore == -1) {
-                lowestScore = this.preferences.getInteger(s);
-                removeName = s;
+                lowestScore = this.preferences.getInteger(preferenceName);
+                removeName = preferenceName;
             } else {
-                if (this.preferences.getInteger(s) < lowestScore || removeName == null) {
-                    removeName = s;
-                    lowestScore = this.preferences.getInteger(s);
+                if (this.preferences.getInteger(preferenceName) < lowestScore || removeName == null) {
+                    removeName = preferenceName;
+                    lowestScore = this.preferences.getInteger(preferenceName);
                 }
             }
         }
@@ -139,8 +137,8 @@ public class ScoreHandler {
     }
 
     private boolean checkAvailability(String name) {
-        for (final String s : this.preferences.get().keySet()) {
-            if (s.equals(name)) {
+        for (final String preferenceName : this.preferences.get().keySet()) {
+            if (preferenceName.equals(name)) {
                 return false;
             }
         }

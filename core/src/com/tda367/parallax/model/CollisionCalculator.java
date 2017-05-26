@@ -19,7 +19,7 @@ import java.util.Map;
  */
 public class CollisionCalculator implements ICollisionCalculator {
 
-    private btCollisionAlgorithmConstructionInfo ci;
+    private btCollisionAlgorithmConstructionInfo constructionInfo;
     private btDispatcherInfo info;
     private btManifoldResult result;
     private btDefaultCollisionConfiguration collisionConfig;
@@ -36,9 +36,9 @@ public class CollisionCalculator implements ICollisionCalculator {
         this.collisionConfig = new btDefaultCollisionConfiguration();
         this.dispatcher = new btCollisionDispatcher(this.collisionConfig);
 
-        this.ci = new btCollisionAlgorithmConstructionInfo();
+        this.constructionInfo = new btCollisionAlgorithmConstructionInfo();
         this.info = new btDispatcherInfo();
-        this.ci.setDispatcher1(this.dispatcher);
+        this.constructionInfo.setDispatcher1(this.dispatcher);
 
         this.result = new btManifoldResult();
     }
@@ -111,8 +111,10 @@ public class CollisionCalculator implements ICollisionCalculator {
         }
 
         //If none of them are either a spaceCraft of a harmful type
-        if ((first.getCollidableType() == CollidableType.SPACECRAFT || first.getCollidableType() == CollidableType.HARMFUL) ||
-                (second.getCollidableType() == CollidableType.SPACECRAFT || second.getCollidableType() == CollidableType.HARMFUL)) {
+        if ((   first.getCollidableType() == CollidableType.SPACECRAFT ||
+                first.getCollidableType() == CollidableType.HARMFUL) ||
+                        (second.getCollidableType() == CollidableType.SPACECRAFT ||
+                        second.getCollidableType() == CollidableType.HARMFUL)) {
             return true;
         } else {
             return false;
@@ -127,7 +129,9 @@ public class CollisionCalculator implements ICollisionCalculator {
         this.result.setBody1Wrap(co1.wrapper);
 
         this.algorithmList.add(this.dispatcher.findAlgorithm(co0.wrapper, co1.wrapper));
-        this.algorithmList.get(this.algorithmList.size() - 1).processCollision(co0.wrapper, co1.wrapper, this.info, this.result);
+        this.algorithmList.get(this.algorithmList.size() - 1).processCollision(co0.wrapper,
+                               co1.wrapper,
+                               this.info, this.result);
 
         this.dispatcher.freeCollisionAlgorithm(this.algorithmList.get(this.algorithmList.size() - 1).getCPointer());
         this.dispatcher.getInternalManifoldPool().dispose();
@@ -257,7 +261,7 @@ public class CollisionCalculator implements ICollisionCalculator {
         this.result.dispose();
         this.collisionConfig.dispose();
         this.dispatcher.dispose();
-        this.ci.dispose();
+        this.constructionInfo.dispose();
     }
 
     /**

@@ -7,7 +7,11 @@ import java.util.Random;
  */
 public class PowerUpFactory {
 
-    private final static Random random = new Random();
+    private static final Random random = new Random();
+
+    private PowerUpFactory() {
+
+    }
 
     public static Cannon createCannon() {
         return new Cannon();
@@ -16,8 +20,6 @@ public class PowerUpFactory {
     public static Missile createMissile() {
         return new Missile();
     }
-
-    private PowerUpFactory(){}
 
     /**
      * @return a random powerUp.

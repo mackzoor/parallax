@@ -18,8 +18,8 @@ import com.tda367.parallax.model.core.powerups.arsenal.IPowerUp;
  */
 public class HudTextureGenerator {
 
-    private final static int WITDH = 512;
-    private final static int HEIGHT = 256;
+    private static final int WITDH = 512;
+    private static final int HEIGHT = 256;
 
     private Texture generatedTexture;
 
@@ -45,35 +45,35 @@ public class HudTextureGenerator {
     }
 
     Texture generateTexture() {
-        final Pixmap pm = renderText(Color.WHITE);
-//        pm = outLine(pm);
-        renderBackground(pm);
-        generatedTexture.draw(pm, 0, 0);
-        pm.dispose(); //Important!
+        final Pixmap pMap = renderText(Color.WHITE);
+//        pMap = outLine(pMap);
+        renderBackground(pMap);
+        generatedTexture.draw(pMap, 0, 0);
+        pMap.dispose(); //Important!
 
 
         return generatedTexture;
     }
 
-    private Pixmap renderBackground(Pixmap pm) {
+    private Pixmap renderBackground(Pixmap pMap) {
         final int triangleOffset = 64;
 
-//        pm.setColor(Color.WHITE);
-        pm.setColor(new Color(0, 0, 1f, 0.7f));
+//        pMap.setColor(Color.WHITE);
+        pMap.setColor(new Color(0, 0, 1f, 0.7f));
 
         //Right rectangle
-//        pm.fillRectangle(triangleOffset,0,WITDH-triangleOffset,HEIGHT);
+//        pMap.fillRectangle(triangleOffset,0,WITDH-triangleOffset,HEIGHT);
 
         //Bottom rectangle
-//        pm.fillRectangle(0,triangleOffset,triangleOffset,HEIGHT-triangleOffset);
+//        pMap.fillRectangle(0,triangleOffset,triangleOffset,HEIGHT-triangleOffset);
 
         //Top left triangle
-//        pm.fillTriangle(0,triangleOffset,triangleOffset,triangleOffset,triangleOffset,0);
+//        pMap.fillTriangle(0,triangleOffset,triangleOffset,triangleOffset,triangleOffset,0);
 
 
-        pm.fillTriangle(0, triangleOffset, 0, 0, triangleOffset, 0);
+        pMap.fillTriangle(0, triangleOffset, 0, 0, triangleOffset, 0);
 
-        return pm;
+        return pMap;
     }
 
     private Pixmap renderText(Color fgColor) {
@@ -97,8 +97,11 @@ public class HudTextureGenerator {
         font.getData().setScale(3);
         font.draw(spriteBatch, "Score: " + this.score + "\n Lives: " + this.lives, 48, 48);
 
-        spriteBatch.end();//finish write to buffer
-        final Pixmap pm = ScreenUtils.getFrameBufferPixmap(0, 0, WITDH, HEIGHT); //write frame buffer to Pixmap
+        //finish write to buffer
+        spriteBatch.end();
+
+        //write frame buffer to Pixmap
+        final Pixmap pMap = ScreenUtils.getFrameBufferPixmap(0, 0, WITDH, HEIGHT);
         frameBuffer.end();
 
         //Dispose of c++ objects.
@@ -109,27 +112,27 @@ public class HudTextureGenerator {
         spriteBatch.dispose();
         spriteBatch = null;
 
-        return pm;
+        return pMap;
     }
 
-    private Pixmap outLine(Pixmap pm) {
-        pm.setColor(Color.WHITE);
+    private Pixmap outLine(Pixmap pMap) {
+        pMap.setColor(Color.WHITE);
 
         final int lineWidth = 3;
 
         //Top line
-        pm.fillRectangle(0, 0, pm.getWidth(), lineWidth);
+        pMap.fillRectangle(0, 0, pMap.getWidth(), lineWidth);
 
         //Right line
-        pm.fillRectangle(pm.getWidth() - lineWidth, 0, pm.getWidth(), pm.getHeight());
+        pMap.fillRectangle(pMap.getWidth() - lineWidth, 0, pMap.getWidth(), pMap.getHeight());
 
         //Bottom line
-        pm.fillRectangle(0, pm.getHeight() - lineWidth, pm.getWidth(), pm.getHeight());
+        pMap.fillRectangle(0, pMap.getHeight() - lineWidth, pMap.getWidth(), pMap.getHeight());
 
         //Left line
-        pm.fillRectangle(0, 0, lineWidth, pm.getHeight());
+        pMap.fillRectangle(0, 0, lineWidth, pMap.getHeight());
 
-        return pm;
+        return pMap;
     }
 
     public void dispose() {

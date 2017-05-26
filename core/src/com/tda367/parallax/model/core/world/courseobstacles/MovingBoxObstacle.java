@@ -26,18 +26,18 @@ public class MovingBoxObstacle extends BoxObstacle {
         super(pos, rot);
 
         if (random) {
-            final Random r = new Random();
+            final Random rand = new Random();
             this.velocity = new Vector3f(
-                    r.nextFloat() * 2 - 1,
-                    r.nextFloat() * 2 - 1,
-                    r.nextFloat() * 2 - 1
+                    rand.nextFloat() * 2 - 1,
+                    rand.nextFloat() * 2 - 1,
+                    rand.nextFloat() * 2 - 1
             );
 
             this.angularRotation = new Quat4f(
-                    r.nextFloat(),
-                    r.nextFloat(),
-                    r.nextFloat(),
-                    r.nextFloat()
+                    rand.nextFloat(),
+                    rand.nextFloat(),
+                    rand.nextFloat(),
+                    rand.nextFloat()
             );
             this.angularRotation.normalize();
 

@@ -10,10 +10,11 @@ import javax.vecmath.Vector3f;
 
 public abstract class Button3D implements Collidable {
 
+    String collisionModel;
+
     private Vector3f pos;
     private Quat4f rot;
     private boolean isHit;
-    String collisionModel;
     private boolean collisionEnabled;
 
     Button3D(Vector3f pos, Quat4f rot) {

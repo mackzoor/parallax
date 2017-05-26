@@ -83,7 +83,9 @@ public class CardboardMenuScreen extends com.tda367.parallax.controller.screens.
     private Vector3f getLookDirection(HeadTransform paramHeadTransForm) {
         final float[] eulerAngles = new float[3];
         paramHeadTransForm.getEulerAngles(eulerAngles, 0);
-        final Vector3f returnVector = MathUtilities.eulerToVector(eulerAngles[0], eulerAngles[2], eulerAngles[1]);
+        final Vector3f returnVector = MathUtilities.eulerToVector(eulerAngles[0],
+                                                                  eulerAngles[2],
+                                                                  eulerAngles[1]);
         returnVector.normalize();
         return returnVector;
     }
