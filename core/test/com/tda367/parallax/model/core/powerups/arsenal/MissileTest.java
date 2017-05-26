@@ -53,10 +53,6 @@ public class MissileTest {
         CollidableType type = missile.getCollidableType();
         Vector3f pos = missile.getPos();
         Vector3f underPos = missile.getPos();
-        System.out.println(underPos);
-        System.out.println(agelion.getPos());
-
-
 
         missile.update(901);
         CollidableType type1 = missile.getCollidableType();
