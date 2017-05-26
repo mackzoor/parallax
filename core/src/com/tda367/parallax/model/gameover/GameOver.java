@@ -13,16 +13,11 @@ import java.util.List;
  */
 
 public class GameOver {
-    @Getter
-    private Player player;
-    @Getter
-    private boolean obsolete;
-    @Getter
-    int highScore;
-    @Getter
-    int playerScore;
-    @Getter
-    List<GameOverText> gameOverTexts;
+    @Getter private Player player;
+    @Getter private boolean obsolete;
+    @Getter int highScore;
+    @Getter int playerScore;
+    @Getter List<GameOverText> gameOverTexts;
     private float timeShowed;
 
     private static final float ACTIVE_TIME = 3f;

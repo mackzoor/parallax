@@ -60,19 +60,19 @@ public class IPowerUpView implements View {
             Renderer3D.getInstance().addObjectToFrame(renderable3dObject);
             Renderer3D.getInstance().addParticleEffectToFrame(rocketTrail);
         } else if (powerUp.isDead()){
+            if (deathTime == 0){
+                Renderer3D.getInstance().addParticleEffectToFrame(explosion);
                 explosion.setPosition(powerUp.getPos());
                 explosion.start();
                 rocketTrail.kill();
             }
             Renderer3D.getInstance().addParticleEffectToFrame(rocketTrail);
             deathTime++;
-            if (deathTime == 0){
         }
-        Renderer3D.getInstance().addParticleEffectToFrame(explosion);
     }
 
     @Override
     public boolean isObsolete() {
-        return powerUp.isDead() && deathTime > 300;
+        return powerUp.isDead() && deathTime > 120;
     }
 }

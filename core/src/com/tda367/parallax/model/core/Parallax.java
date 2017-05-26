@@ -1,5 +1,6 @@
 package com.tda367.parallax.model.core;
 
+import com.tda367.parallax.model.core.enemies.HunterAI;
 import com.tda367.parallax.model.core.enemies.MinionEnemy;
 import com.tda367.parallax.model.core.spacecraft.ISpaceCraft;
 import com.tda367.parallax.model.core.spacecraft.SpaceCraftFactory;
@@ -25,7 +26,7 @@ public class Parallax {
     @Getter
     private World world;
     @Getter
-    private com.tda367.parallax.model.core.Camera camera;
+    private Camera camera;
     @Getter
     private Player player;
     @Getter
@@ -37,7 +38,7 @@ public class Parallax {
     private String pauseMusic;
     private final static String musicDirectory = "sounds/music";
 
-    private List<com.tda367.parallax.model.core.enemies.HunterAI> ais;
+    private List<HunterAI> ais;
 
     public Parallax(Player player) {
         this.audioQueue = AudioQueue.getInstance();
@@ -49,11 +50,11 @@ public class Parallax {
         this.world.addSpaceCraft(player.getSpaceCraft());
         player.getSpaceCraft().getPos().set(0, -50, 0);
 
-        this.camera = new com.tda367.parallax.model.core.Camera();
+        this.camera = new Camera();
         this.camera.trackTo(player.getSpaceCraft());
         this.player = player;
 
-        this.ais = new ArrayList<com.tda367.parallax.model.core.enemies.HunterAI>();
+        this.ais = new ArrayList<HunterAI>();
 
         //createTestEnemy();
 
@@ -92,7 +93,7 @@ public class Parallax {
                     updateTime = 100;
                 }
 
-                for (com.tda367.parallax.model.core.enemies.HunterAI ai : this.ais) {
+                for (HunterAI ai : this.ais) {
                     ai.update(updateTime);
                 }
 

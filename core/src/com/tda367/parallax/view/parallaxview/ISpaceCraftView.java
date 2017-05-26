@@ -61,7 +61,9 @@ public class ISpaceCraftView implements View {
 
             Renderer3D.getInstance().addParticleEffectToFrame(trail);
             if (iSpaceCraft.getHealth() < 2) {
-                damaged.setPosition(iSpaceCraft.getPos());
+                Vector3f fireOffset = new Vector3f(iSpaceCraft.getPos());
+                fireOffset.add(new Vector3f(0,0,0.25f));
+                damaged.setPosition(fireOffset);
                 Renderer3D.getInstance().addParticleEffectToFrame(damaged);
             }
         }

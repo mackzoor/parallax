@@ -16,9 +16,6 @@ public class ParallaxView implements View {
     private HudView playerHudView;
     private CollisionEffect collisionEffect;
     @Getter @Setter private boolean hudViewActive;
-    @Getter
-    @Setter
-    private boolean hudViewActive;
 
     /**
      * Creates a ParallaxView from a {@link Parallax}.
