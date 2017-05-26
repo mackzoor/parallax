@@ -43,12 +43,4 @@ public class WorldTest {
     public void update() throws Exception {
     }
 
-    @Test
-    public void setCollisionCalculator() throws Exception {
-    }
-
-    @Test
-    public void powerUPUsed() throws Exception {
-    }
-
 }

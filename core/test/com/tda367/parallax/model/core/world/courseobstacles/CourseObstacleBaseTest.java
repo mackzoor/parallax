@@ -20,10 +20,10 @@ public class CourseObstacleBaseTest {
     Agelion agelion = SpaceCraftFactory.getAgelionInstance(10);
     IPowerUp powerUp = PowerUpFactory.createRandom();
     @Test
+
     public void handleCollision() throws Exception {
-        courseObstacle.handleCollision(powerUp);
-        powerUp.handleCollision(courseObstacle);
-        assertTrue(courseObstacle.isDestroyed());
+        courseObstacle.handleCollision(agelion);
+        assertFalse(courseObstacle.isDestroyed());
         assertTrue(!courseObstacle.collisionActivated());
 
         System.out.println(agelion.getHealth());
