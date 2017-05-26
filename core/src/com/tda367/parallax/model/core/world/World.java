@@ -135,35 +135,45 @@ public class World implements Updatable, CollisionObserver {
 
     @Override
     public void update(int milliSinceLastUpdate) {
-        //Update spacecraft
-        for (final ISpaceCraft spaceCraft : this.spaceCrafts) {
-            spaceCraft.update(milliSinceLastUpdate);
-        }
 
-        //Update obstacles in each module.
+        this.updateSpaceCraft(milliSinceLastUpdate);
+
+        this.updateObstacles(milliSinceLastUpdate);
+
+        this.updatePowerUps(milliSinceLastUpdate);
+
+        this.updateModuleRange();
+    }
+
+    private void updatePowerUps(int milliSinceLastUpdate) {
+        List<IPowerUp> deadPowerUps = new ArrayList<IPowerUp>();
+        for (IPowerUp powerUp : powerUps) {
+            if (powerUp.isDead()) {
+                deadPowerUps.add(powerUp);
+            } else {
+                powerUp.update(milliSinceLastUpdate);
+            }
+        }
+        powerUps.removeAll(deadPowerUps);
+    }
+
+    private void updateObstacles(int milliSinceLastUpdate) {
         for (final ICourseModule module : this.modules) {
             for (final CourseObstacleBase courseObstacleBase : module.getCouseObstacles()) {
                 courseObstacleBase.update(milliSinceLastUpdate);
             }
         }
+    }
 
-
-        final List<Integer> numbers = new ArrayList<Integer>();
-        //Update powerups and find dead ones.
-        for (int i = 0; i < this.powerUps.size(); i++) {
-            this.powerUps.get(i).update(milliSinceLastUpdate);
-            if (this.powerUps.get(i).isDead()) {
-                numbers.add(i);
+    private void updateSpaceCraft(int milliSinceLastUpdate){
+        List<ISpaceCraft> deadSpaceCraft = new ArrayList<ISpaceCraft>();
+        for (final ISpaceCraft spaceCraft : this.spaceCrafts) {
+            if (spaceCraft.getHealth() < 1) {
+                deadSpaceCraft.add(spaceCraft);
             }
+            spaceCraft.update(milliSinceLastUpdate);
         }
-
-        //remove dead powerups.
-        for (final Integer number : numbers) {
-            this.powerUps.remove(number.intValue());
-        }
-
-        //Update module range
-        this.updateModuleRange();
+        spaceCrafts.removeAll(deadSpaceCraft);
     }
 
     @Override
