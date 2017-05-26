@@ -22,7 +22,7 @@ import java.util.Random;
 public class Parallax {
 
     private static Random rand = new Random();
-    private static final String musicDirectory = "sounds/music/";
+    private static final String musicDirectory = "sounds/music";
 
 
     private AudioQueue audioQueue;
