@@ -85,6 +85,7 @@ public class Container implements IContainer {
         if (collidable.getCollidableType() == CollidableType.SPACECRAFT) {
             this.isCollected = true;
             this.removeFromCollisionManager();
+            this.collisionEnabled = false;
         }
     }
 

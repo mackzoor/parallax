@@ -24,7 +24,7 @@ public class Missile extends PowerUpBase {
     private static final int ACTIVE_TIME = 5000;
 
     //Time that missile is tracking the ships movement, making sure that it doesn't go trough it.
-    private static final int TIME_TRACKING_TRANS = 900;
+    private static final int TIME_TRACKING_TRANS = 700;
 
     //Multiplier to change the speed of missile
     private static final float VELOCITY_MULTIPLIER_X = 10f;
@@ -70,6 +70,7 @@ public class Missile extends PowerUpBase {
     public void activate(Transformable transformable) {
         super.activate(transformable);
         super.addToCollisionManager();
+        super.enableCollision();
         //Add the missile to the world and make it collidable
 
         this.transformable = transformable;
@@ -216,6 +217,7 @@ public class Missile extends PowerUpBase {
         removeFromCollisionManager();
         super.setDead(true);
         super.setActive(false);
+        super.setCollisionEnabled(false);
     }
 
     private void fall(int milliSinceLastUpdate) {
