@@ -47,7 +47,7 @@ public abstract class SpaceCraft implements ISpaceCraft {
     private SpaceCraftType type;
 
     //SpaceCraft movement limiter
-    private final static float COURSE_RADIUS = 3;
+    private final static float COURSE_RADIUS = 5;
 
     SpaceCraft(int health, float forwardVelocity, float maxPanVelocity, Vector3f pos, Quat4f rot, String pathToCollisionModel, SpaceCraftType type, boolean independentRotation) {
         this.collisionModel = pathToCollisionModel;
