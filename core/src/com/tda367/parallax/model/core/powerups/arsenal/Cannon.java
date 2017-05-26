@@ -52,7 +52,6 @@ public class Cannon extends PowerUpBase {
                         ,transformable.getRot().y
                         ,-1*transformable.getRot().z
                         ,transformable.getRot().w));
-        System.out.println(transformable.getRot());
         this.velocity.scale(30);
 
         playCannonSound();
