@@ -1,7 +1,11 @@
 package com.tda367.parallax.model.core.enemies;
 
 import com.tda367.parallax.model.core.spacecraft.ISpaceCraft;
+import com.tda367.parallax.utilities.MathUtilities;
 import lombok.Getter;
+
+import javax.vecmath.Quat4f;
+import javax.vecmath.Vector3f;
 
 /**
  * An enemy minion. Will try to destroy its target.
@@ -13,39 +17,48 @@ public class MinionEnemy extends HunterAI {
 
     public MinionEnemy(ISpaceCraft spaceCraft) {
         this.spaceCraft = spaceCraft;
+        this.spaceCraft.enableIndipendantRotation(true);
     }
 
     private void operate() {
-        //TODO implement minion operate method. (Remove commented lines)
-        /* spaceCraft.setAccelerateTarget(1);
+        rotateToTarget();
 
-        //Track to target
-        //System.out.println(spaceCraft.getRot().getX() + " " + spaceCraft.getRot().getY() + " " + spaceCraft.getRot().getZ() + " " + spaceCraft.getRot().getW());
+        if (isPointingAtTarget()) {
+            shoot();
+        }
+    }
 
-        //spaceCraft.getRot().setZ(1f);
-        //spaceCraft.getRot().setW(1f);
-        //spaceCraft.getRot().setX(1f);
-        //spaceCraft.getRot().setY(1f);
+    private boolean isPointingAtTarget() {
+        Vector3f currentHeading = new Vector3f(0,1,0);
+        MathUtilities.rotateVectorByQuat(currentHeading, spaceCraft.getRot());
 
-       // spaceCraft.getRot().
+        Vector3f targetDirection = getTargetDirection();
+        System.out.println(currentHeading.angle(targetDirection));
+        return currentHeading.angle(targetDirection) < 0.4;
+    }
 
-        //System.out.println(spaceCraft.getRot().getX() + " " + spaceCraft.getRot().getY() + " " + spaceCraft.getRot().getZ() + " " + spaceCraft.getRot().getW());
+    private Vector3f getTargetDirection(){
+        Vector3f currentPos = new Vector3f(this.spaceCraft.getPos());
+        Vector3f targetPos = new Vector3f(super.getTarget().getPos());
 
-        //spaceCraft.getRot().getY();
-        //spaceCraft.getRot().getZ();
-        //spaceCraft.getRot().getW();
+        Vector3f targetDirection = new Vector3f(targetPos);
+        targetDirection.sub(currentPos);
 
+        targetDirection.normalize();
 
-        //spaceCraft.getRot().set(new AxisAngle4f(spaceCraft.getRot().getX(),spaceCraft.getRot().getY(),spaceCraft.getRot().getZ(), 90 ));
+        return targetDirection;
+    }
 
-        //spaceCraft.getRot().set( spaceCraft.getRot().getX(), (spaceCraft.getRot().getY()),  spaceCraft.getRot().getZ(),  spaceCraft.getRot().getW());
+    private void rotateToTarget() {
+        Vector3f targetDirection = getTargetDirection();
 
-        */
+        Quat4f rotationNew = MathUtilities.vectorToQuat(targetDirection);
+        rotationNew.interpolate(this.spaceCraft.getRot(),0.95f);
+        this.spaceCraft.getRot().set(rotationNew);
+    }
 
-        //If pointing at target
-        //Shoot
-        //else
-        //Do nothing
+    private void shoot() {
+        spaceCraft.action();
     }
 
     @Override
