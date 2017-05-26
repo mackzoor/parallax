@@ -55,30 +55,21 @@ public abstract class SpaceCraft implements ISpaceCraft {
     @Getter
     private Quat4f rot;
 
-    private String collisionModel;
     private boolean collisionEnabled;
     private SpaceCraftType type;
 
-    SpaceCraft(int health,
-               float forwardVelocity,
-               float maxPanVelocity,
-               Vector3f pos,
-               Quat4f rot,
-               String pathToCollisionModel,
-               SpaceCraftType type,
-               boolean independentRotation) {
+    SpaceCraft(SpaceCraftMobility mobility, int health, SpaceCraftType type) {
 
-        this.collisionModel = pathToCollisionModel;
         this.health = health;
         this.type = type;
-        this.forwardVelocity = forwardVelocity;
-        this.maxPanVelocity = maxPanVelocity;
-        this.pos = pos;
-        this.rot = rot;
+        this.forwardVelocity = mobility.getForwardVelocity();
+        this.maxPanVelocity = mobility.getMaxPanVelocity();
+        this.pos = mobility.getPos();
+        this.rot = mobility.getRot();
         this.panAcceleration = new Vector2f();
         this.desiredPanVelocity = new Vector2f();
         this.pu = new ArrayList<IPowerUp>();
-        this.independentRotation = independentRotation;
+        this.independentRotation = mobility.isIndependentRotation();
 
         this.panAbsoluteTarget = new Vector2f();
         this.currentPanVelocity = new Vector2f();
