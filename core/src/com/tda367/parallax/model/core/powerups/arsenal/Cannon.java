@@ -44,7 +44,6 @@ public class Cannon extends PowerUpBase {
     public void activate(Transformable transformable) {
         super.activate(transformable);
         super.addToCollisionManager();
-        super.enableCollision();
 
         super.setPos(new Vector3f(transformable.getPos()));
         super.getPos().add(new Vector3f(0, 1, 0));
@@ -67,6 +66,10 @@ public class Cannon extends PowerUpBase {
     @Override
     public void update(int milliSinceLastUpdate) {
         if (super.isActive()) {
+
+            if (timeAlive > 150) {
+                super.enableCollision();
+            }
             this.timeAlive += milliSinceLastUpdate;
             updatePosition(milliSinceLastUpdate);
         }
