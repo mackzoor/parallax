@@ -39,15 +39,4 @@ public class Playstation3GamePadTest {
 
         assertTrue(convertedValue == -1f * value);
     }
-
-    @Test
-    public void equals() throws Exception {
-        GamePad gamePad1 = new Playstation3GamePad();
-        GamePad gamePad2 = new Playstation3GamePad();
-        GamePad gamePad3 = new Xbox360GamePad();
-        GamePad gamePad4 = new AndroidGamePad();
-        assertTrue(gamePad1.equals(gamePad2));
-        assertFalse(gamePad1.equals(gamePad3));
-        assertFalse(gamePad1.equals(gamePad4));
-    }
 }
