@@ -22,7 +22,7 @@ import java.util.List;
 public abstract class SpaceCraft implements ISpaceCraft {
 
     //SpaceCraft movement limiter
-    static private final float COURSE_RADIUS = 3;
+    static private final float COURSE_RADIUS = 5;
 
     @Getter
     private List<IPowerUp> pu = new ArrayList<IPowerUp>();
