@@ -3,9 +3,14 @@ package com.tda367.parallax.view.parallaxview;
 import com.tda367.parallax.model.core.spacecraft.Agelion;
 import com.tda367.parallax.model.core.spacecraft.ISpaceCraft;
 import com.tda367.parallax.model.core.spacecraft.SpaceCraftType;
+import com.tda367.parallax.view.rendering.ParticleEffectType;
+import com.tda367.parallax.view.rendering.RenderableParticleEffect;
 import com.tda367.parallax.view.rendering.Renderer3D;
 import com.tda367.parallax.view.rendering.Renderable3dObject;
 import com.tda367.parallax.utilities.ResourceLoader;
+
+import javax.vecmath.Quat4f;
+import javax.vecmath.Vector3f;
 
 /**
  * View class for the spacecraft {@link Agelion}
@@ -15,12 +20,14 @@ public class ISpaceCraftView implements View {
     private final String model3dInternalPath;
     private final ISpaceCraft iSpaceCraft;
     private Renderable3dObject spaceCraftModel;
+    private RenderableParticleEffect trail;
+    private RenderableParticleEffect damaged;
 
     /**
      * Creates a ISpaceCraftView from an {@link ISpaceCraft}.
      * @param iSpaceCraft to be used to create the ContainerView.
      */
-    public ISpaceCraftView(ISpaceCraft iSpaceCraft) {
+    ISpaceCraftView(ISpaceCraft iSpaceCraft) {
         this.iSpaceCraft = iSpaceCraft;
         model3dInternalPath = getSpaceCraftModel(iSpaceCraft);
 
@@ -32,6 +39,8 @@ public class ISpaceCraftView implements View {
                 true
         );
 
+        trail = new RenderableParticleEffect(ParticleEffectType.BOOST_TRAIL);
+        damaged = new RenderableParticleEffect(ParticleEffectType.FIRE);
     }
 
     @Override
@@ -39,7 +48,21 @@ public class ISpaceCraftView implements View {
         if (!isObsolete()){
             spaceCraftModel.setPos(iSpaceCraft.getPos());
             spaceCraftModel.setRot(iSpaceCraft.getRot());
+
+            Vector3f particleOffset = new Vector3f(iSpaceCraft.getPos());
+            particleOffset.add(new Vector3f(0,-1f,0.15f));
+
+            Quat4f rot = new Quat4f(0,0,1,0);
+
+            trail.setRotation(rot);
+            trail.setPosition(particleOffset);
             Renderer3D.getInstance().addObjectToFrame(spaceCraftModel);
+
+            Renderer3D.getInstance().addParticleEffectToFrame(trail);
+            if (iSpaceCraft.getHealth() < 2) {
+                damaged.setPosition(iSpaceCraft.getPos());
+                Renderer3D.getInstance().addParticleEffectToFrame(damaged);
+            }
         }
     }
     @Override
