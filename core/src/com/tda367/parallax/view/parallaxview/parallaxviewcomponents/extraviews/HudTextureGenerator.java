@@ -13,6 +13,8 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.tda367.parallax.model.core.Parallax;
 import com.tda367.parallax.model.core.powerups.arsenal.IPowerUp;
 
+import java.util.Random;
+
 /**
  * Generates a dynamic texture for the player hud in the game {@link Parallax}
  */
@@ -29,7 +31,9 @@ public class HudTextureGenerator {
 
     HudTextureGenerator(int lives) {
         this.lives = lives;
-        this.generatedTexture = new Texture(renderText(Color.BLACK));
+//        generatedTexture = new Texture(renderText(Color.BLACK));
+        Pixmap pMap = new Pixmap(WITDH,HEIGHT, Pixmap.Format.RGBA8888);
+        generatedTexture = new Texture(pMap);
     }
 
     void setScore(int score) {
@@ -45,12 +49,18 @@ public class HudTextureGenerator {
     }
 
     Texture generateTexture() {
-        final Pixmap pMap = renderText(Color.WHITE);
-//        pMap = outLine(pMap);
-        renderBackground(pMap);
-        this.generatedTexture.draw(pMap, 0, 0);
-        //Important!
-        pMap.dispose();
+        Pixmap pMap = renderText(Color.WHITE);
+
+        Pixmap clear = new Pixmap(WITDH,HEIGHT, Pixmap.Format.RGBA8888);
+        clear.setColor(new Color(0,0,0,1));
+        clear.fillRectangle(0,0,WITDH,HEIGHT);
+
+        generatedTexture.draw(clear,0,0);
+        generatedTexture.draw(pMap, 0, 0);
+
+
+        pMap.dispose(); //Important!
+        clear.dispose();
 
 
         return this.generatedTexture;
@@ -79,9 +89,7 @@ public class HudTextureGenerator {
 
     private Pixmap renderText(Color fgColor) {
         SpriteBatch spriteBatch = new SpriteBatch();
-
-        FrameBuffer frameBuffer = new FrameBuffer(Pixmap.Format.RGBA8888, WITDH, HEIGHT, false);
-        frameBuffer.begin();
+//
 
         Gdx.gl.glClearColor(1, 1, 1, 0.3f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -95,23 +103,22 @@ public class HudTextureGenerator {
         //Draw text
         BitmapFont font = new BitmapFont(true);
         font.setColor(fgColor);
-        font.getData().setScale(3);
-        font.draw(spriteBatch, "Score: " + this.score + "\n Lives: " + this.lives, 48, 48);
+        font.getData().setScale(1);
+        font.draw(spriteBatch, "Score: " + this.score + "\n Lives: " + this.lives, 0, 0);
 
         //finish write to buffer
         spriteBatch.end();
 
         //write frame buffer to Pixmap
         final Pixmap pMap = ScreenUtils.getFrameBufferPixmap(0, 0, WITDH, HEIGHT);
-        frameBuffer.end();
 
         //Dispose of c++ objects.
         font.dispose();
         font = null;
-        frameBuffer.dispose();
-        frameBuffer = null;
         spriteBatch.dispose();
         spriteBatch = null;
+
+
 
         return pMap;
     }
