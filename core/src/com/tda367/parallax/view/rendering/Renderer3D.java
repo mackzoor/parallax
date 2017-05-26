@@ -8,8 +8,12 @@ import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
+import com.badlogic.gdx.graphics.g3d.particles.ParticleSystem;
+import com.badlogic.gdx.graphics.g3d.particles.batches.BillboardParticleBatch;
 import com.badlogic.gdx.math.Matrix4;
 import com.google.vrtoolkit.cardboard.Eye;
+import com.tda367.parallax.utilities.ResourceLoader;
+import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,10 +23,16 @@ import java.util.List;
  */
 public final class Renderer3D {
 
+    @Getter private ParticleSystem particleSystem;
+
+
+    private BillboardParticleBatch spriteBatch;
     private ModelBatch modelBatch;
     private Camera camera;
     private Environment environment;
+
     private List<Renderable3dObject> modelsToRender;
+    private List<RenderableParticleEffect> particleEffectsToRender;
 
     //Singleton pattern
     private static Renderer3D renderer3D;
@@ -50,7 +60,15 @@ public final class Renderer3D {
     private Renderer3D(Camera camera) {
         this.camera = camera;
         modelsToRender = new ArrayList<Renderable3dObject>();
+        particleEffectsToRender = new ArrayList<RenderableParticleEffect>();
         modelBatch = new ModelBatch();
+
+        particleSystem = ParticleSystem.get();
+        spriteBatch = new BillboardParticleBatch();
+        spriteBatch.setTexture(ResourceLoader.getInstance().getTexture("particles/pre_particle.png"));
+        spriteBatch.setCamera(camera);
+        particleSystem.add(spriteBatch);
+
 
         camera.near = 0.1f;
         camera.far = 50f;
@@ -59,9 +77,7 @@ public final class Renderer3D {
         environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 1f, 1f, 1f, 1.f));
         environment.set(new ColorAttribute(ColorAttribute.Fog, 0f, 0f, 0f,1f));
         //environment.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -1f, -0.8f, -0.2f));
-
     }
-
     /**
      * Creates a new Renderer3D.
      * @param fov Field of view of the camera
@@ -87,42 +103,40 @@ public final class Renderer3D {
         //Add objects to render queue for current frame
         modelsToRender.add(renderObject);
     }
-
-    /**
-     * Sets the render camera position in the format; X+ = Right, Y+ = forward, Z+ = up
-     *
-     * @param x x-value.
-     * @param y y-value.
-     * @param z z-value.
-     */
-    public void setCameraPosition(float x, float y, float z) {
-        //Update camera position
-        camera.position.set(
-                x,
-                z,
-                y * -1
-        );
-        camera.update();
+    public void addParticleEffectToFrame(RenderableParticleEffect particleEffect){
+        particleEffectsToRender.add(particleEffect);
     }
 
-    /**
-     * Renders frame.
-     */
     public void renderFrame() {
         Gdx.gl.glEnable(GL20.GL_DEPTH_TEST);
         Gdx.gl.glClearColor(0,0,0,0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
-        //Start rendering
+
+
         modelBatch.begin(camera);
 
+        renderOpaque3dModels(modelBatch, modelsToRender);
+        renderTransparent3dModels(modelBatch, modelsToRender);
+        renderParticles(modelBatch, particleEffectsToRender);
+
+        modelBatch.end();
+
+
+        modelsToRender.clear();
+        particleEffectsToRender.clear();
+    }
+
+    private void renderOpaque3dModels(ModelBatch modelBatch, List<Renderable3dObject> modelsToRender){
         //Render high priority objects
         for (Renderable3dObject renderable3dObject : modelsToRender) {
             if (renderable3dObject.isHighPriority()){
                 modelBatch.render(renderable3dObject.getModelInstance(), environment);
             }
         }
-        modelBatch.flush();
 
+        modelBatch.flush();
+    }
+    private void renderTransparent3dModels(ModelBatch modelBatch, List<Renderable3dObject> modelsToRender){
         //Render low priority objects
         for (Renderable3dObject renderable3dObject : modelsToRender) {
             if (!renderable3dObject.isHighPriority()){
@@ -130,11 +144,22 @@ public final class Renderer3D {
             }
         }
 
-        //End rendering
-        modelBatch.end();
+        modelBatch.flush();
+    }
+    private void renderParticles(ModelBatch modelBatch, List<RenderableParticleEffect> particleEffectsToRender) {
 
-        //Clear models to render.
-        modelsToRender.clear();
+        for (RenderableParticleEffect renderableParticleEffect : particleEffectsToRender) {
+            particleSystem.add(renderableParticleEffect.getParticleEffect());
+        }
+        particleSystem.update();
+
+        particleSystem.begin();
+        particleSystem.draw();
+        particleSystem.end();
+
+        modelBatch.render(particleSystem);
+        modelBatch.flush();
+        particleSystem.removeAll();
     }
 
     /**
@@ -149,20 +174,18 @@ public final class Renderer3D {
 
     }
 
-    /**
-     * Sets render y-resolution.
-     *
-     * @param y new y-resolution.
-     */
+    public void setCameraPosition(float x, float y, float z) {
+        //Update camera position
+        camera.position.set(
+                x,
+                z,
+                y * -1
+        );
+        camera.update();
+    }
     public void setHeight(int y) {
         camera.viewportHeight = y;
     }
-
-    /**
-     * Sets render x-resolution.
-     *
-     * @param x new x-resolution.
-     */
     public void setWidth(int x) {
         camera.viewportWidth = x;
     }
