@@ -51,7 +51,7 @@ public class Missile extends PowerUpBase {
     private static final float VELOCITY_MULTIPLIER_Z = 10f;
     private static final float FALL_MULTIPLIER = 2.5f;
 
-    private static final String COLLISION_MODEL = "3dModels/box/hitbox.obj";
+    private static final String COLLISION_MODEL = "3dModels/missile/hitbox.obj";
 
     //How fast the missile will accelerate
     private static final double ACCELERATION = 0.8;
