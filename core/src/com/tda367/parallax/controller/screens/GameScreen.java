@@ -40,7 +40,7 @@ public class GameScreen extends ScreenAdapter {
     @Override
     public void render(float delta) {
         if (!this.parallaxGame.isGameOver()) {
-            this.parallaxGame.update((int) (Gdx.graphics.getDeltaTime() * 1000));
+            this.parallaxGame.update((int) (delta * 1000));
             this.collisionCalculator.run();
             this.parallaxView.render();
             DeviceManager.getDevice().update();

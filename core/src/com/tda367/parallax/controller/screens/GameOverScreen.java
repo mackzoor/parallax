@@ -25,7 +25,7 @@ public class GameOverScreen extends ScreenAdapter {
 
     @Override
     public void render(float delta) {
-        this.model.update(delta);
+        this.model.update((int) (delta * 1000));
         if (!this.model.isObsolete()) {
             this.view.render();
         } else {

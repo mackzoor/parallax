@@ -43,7 +43,7 @@ public class MainMenuScreen extends ScreenAdapter {
             dispose();
             Gdx.app.exit();
         }
-        this.model.update((int) (Gdx.graphics.getDeltaTime() * 1000));
+        this.model.update((int) (delta * 1000));
         this.view.render();
         this.collisionCalculator.run();
     }

@@ -15,7 +15,7 @@ import java.util.List;
  */
 
 public class GameOver {
-    private static final float ACTIVE_TIME = 3f;
+    private static final int ACTIVE_TIME = 3000;
     private static final float DISTANCE_TO_TEXT = 10f;
 
     @Getter
@@ -65,9 +65,9 @@ public class GameOver {
         this.highScore = scoreAdapter.getHighScores().get(0);
     }
 
-    public void update(float delta) {
+    public void update(int milliSinceLastUpdate) {
         if (this.timeShowed < ACTIVE_TIME) {
-            this.timeShowed += delta;
+            this.timeShowed += milliSinceLastUpdate;
         } else {
             this.obsolete = true;
             for (final GameOverText gameOverText : this.gameOverTexts) {

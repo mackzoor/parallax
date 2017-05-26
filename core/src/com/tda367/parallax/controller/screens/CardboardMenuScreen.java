@@ -5,6 +5,7 @@ import com.google.vrtoolkit.cardboard.Eye;
 import com.google.vrtoolkit.cardboard.HeadTransform;
 import com.tda367.parallax.controller.controllerclasses.CardboardMenuController;
 import com.tda367.parallax.controller.devicestates.DeviceManager;
+import com.tda367.parallax.controller.screens.cardboardadapter.CardboardScreenAdapter;
 import com.tda367.parallax.model.CollisionCalculator;
 import com.tda367.parallax.model.core.Player;
 import com.tda367.parallax.model.core.collision.CollisionManager;
@@ -19,7 +20,7 @@ import javax.vecmath.Vector3f;
 import static com.tda367.parallax.controller.screens.ScreenState.GAME;
 
 
-public class CardboardMenuScreen extends com.tda367.parallax.controller.screens.cardboardadapter.CardboardScreenAdapter {
+public class CardboardMenuScreen extends CardboardScreenAdapter {
     private CardboardMenuController controller;
     private Sound sound;
     private MainMenu mainMenu;

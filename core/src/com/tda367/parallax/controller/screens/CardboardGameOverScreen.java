@@ -28,7 +28,7 @@ public class CardboardGameOverScreen extends CardboardScreenAdapter {
 
     @Override
     public void onNewFrame(HeadTransform headTransform) {
-        this.model.update(Gdx.graphics.getDeltaTime());
+        this.model.update((int) (Gdx.graphics.getDeltaTime() * 1000));
         if (this.model.isObsolete()) {
             dispose();
             screenChanger.requestScreenChange(MAIN_MENU, this.player);
