@@ -11,7 +11,7 @@ import com.tda367.parallax.model.core.Player;
 
 public final class ScreenManager implements ScreenChanger {
 
-    private ScreenManager() {}
+    private ScreenManager() { }
 
     private static Game game;
     private static com.tda367.parallax.controller.screens.MainMenuScreen mainMenuScreen;

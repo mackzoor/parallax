@@ -48,18 +48,18 @@ public class IPowerUpView implements View {
 
     @Override
     public void render() {
-        if (powerUp.isActive()){
+        if (powerUp.isActive()) {
             renderable3dObject.setPos(powerUp.getPos());
             renderable3dObject.setRot(powerUp.getRot());
 
-            Vector3f particleOffset = new Vector3f(powerUp.getPos());
+            final Vector3f particleOffset = new Vector3f(powerUp.getPos());
             particleOffset.add(new Vector3f(0,-0.5f,0));
             rocketTrail.setPosition(particleOffset);
 
             Renderer3D.getInstance().addObjectToFrame(renderable3dObject);
             Renderer3D.getInstance().addParticleEffectToFrame(rocketTrail);
-        } else if (powerUp.isDead()){
-            if (deathTime == 0){
+        } else if (powerUp.isDead()) {
+            if (deathTime == 0) {
                 Renderer3D.getInstance().addParticleEffectToFrame(explosion);
                 explosion.setPosition(powerUp.getPos());
                 explosion.start();

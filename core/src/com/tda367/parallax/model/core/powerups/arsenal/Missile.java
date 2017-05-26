@@ -176,7 +176,7 @@ public class Missile extends PowerUpBase {
             fall(milliSinceLastUpdate);
 
 
-        }else if(timeStorage <= ACTIVE_TIME){
+        } else if (timeStorage <= ACTIVE_TIME) {
             super.enableCollision();
             accelerateMissile(milliSinceLastUpdate);
             moveOnVelocity(milliSinceLastUpdate);
@@ -207,7 +207,7 @@ public class Missile extends PowerUpBase {
             r is the growth rate when r>0 or decay rate when r<0, in percent.
             t is the time in discrete intervals and selected time units.
              */
-            velocity = startVelocity * ((float) Math.pow((1 + ACCELERATION), (((double) timeAccelerated) / 1000)));
+            velocity = startVelocity * ((float) Math.pow(1 + ACCELERATION, ((double) timeAccelerated) / 1000));
         } else {
             velocity = MAXIMUM_VELOCITY;
         }

@@ -11,7 +11,7 @@ import javax.vecmath.Vector3f;
 
 /**
  * A virtual camera with capabilities to track
- * {@link com.tda367.parallax.model.core.util.Transformable}
+ * {@link Transformable}
  */
 
 public class Camera implements Updatable, Transformable {
@@ -21,7 +21,7 @@ public class Camera implements Updatable, Transformable {
     @Getter
     private float fov;
 
-    private com.tda367.parallax.model.core.util.Transformable trackingTarget;
+    private Transformable trackingTarget;
 
     public Camera(Vector3f pos, Quat4f rot, float fov) {
         this.pos = pos;
@@ -40,7 +40,7 @@ public class Camera implements Updatable, Transformable {
 
     private void updatePosition() {
         this.pos.set(this.trackingTarget.getPos().getX() / 2,
-                     (this.trackingTarget.getPos().getY()) - 4,
+                     this.trackingTarget.getPos().getY() - 4,
                      this.trackingTarget.getPos().getZ() / 2 + 1);
     }
 

@@ -55,7 +55,7 @@ public class DefaultCourseModule implements ICourseModule {
         for (int x = 0; x < amount; x++) {
             final Vector3f obstaclePos = new Vector3f(
                     0,
-                    (this.pos.getY()) - this.length / 2 + x * distanceBetween,
+                    this.pos.getY() - this.length / 2 + x * distanceBetween,
                     0
             );
             final CourseObstacleBase obstacle = ObstacleFactory.getRandomWallInstance(obstaclePos);
@@ -124,7 +124,7 @@ public class DefaultCourseModule implements ICourseModule {
         this.powerUps.add(pu);
         final Container container = new Container(pu);
         final Random rand = new Random();
-        container.setPos(new Vector3f(0, getPos().getY() + rand.nextFloat() * this.getLength(), 0));
+        container.setPos(new Vector3f(0, getPos().getY() + rand.nextFloat() * length, 0));
         container.addToCollisionManager();
         this.containers.add(container);
     }

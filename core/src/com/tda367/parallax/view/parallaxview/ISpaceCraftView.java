@@ -46,14 +46,14 @@ public class ISpaceCraftView implements View {
 
     @Override
     public void render() {
-        if (!isObsolete()){
+        if (!isObsolete()) {
             spaceCraftModel.setPos(iSpaceCraft.getPos());
             spaceCraftModel.setRot(iSpaceCraft.getRot());
 
-            Vector3f particleOffset = new Vector3f(iSpaceCraft.getPos());
+            final Vector3f particleOffset = new Vector3f(iSpaceCraft.getPos());
             particleOffset.add(new Vector3f(0,-1f,0.15f));
 
-            Quat4f rot = new Quat4f(0,0,1,0);
+            final Quat4f rot = new Quat4f(0,0,1,0);
 
             trail.setRotation(rot);
             trail.setPosition(particleOffset);
@@ -61,7 +61,7 @@ public class ISpaceCraftView implements View {
 
             Renderer3D.getInstance().addParticleEffectToFrame(trail);
             if (iSpaceCraft.getHealth() < 2) {
-                Vector3f fireOffset = new Vector3f(iSpaceCraft.getPos());
+                final Vector3f fireOffset = new Vector3f(iSpaceCraft.getPos());
                 fireOffset.add(new Vector3f(0,0,0.25f));
                 damaged.setPosition(fireOffset);
                 Renderer3D.getInstance().addParticleEffectToFrame(damaged);

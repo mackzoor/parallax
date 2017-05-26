@@ -13,13 +13,13 @@ public class AudioQueue {
 
     private static AudioQueue instance;
 
-    private List<AudioObserver> listeners = new ArrayList<AudioObserver>();
+    private final List<AudioObserver> listeners = new ArrayList<AudioObserver>();
 
     //Sound and music stored to be played when a listener is added.
-    private List<SoundCombiantion> soundQueue = new ArrayList<SoundCombiantion>();
-    private List<SoundCombiantion> musicQueue = new ArrayList<SoundCombiantion>();
+    private final List<SoundCombiantion> soundQueue = new ArrayList<SoundCombiantion>();
+    private final List<SoundCombiantion> musicQueue = new ArrayList<SoundCombiantion>();
 
-    public static AudioQueue getInstance() {
+    public static synchronized AudioQueue getInstance() {
         if (instance == null) {
             instance = new AudioQueue();
         }

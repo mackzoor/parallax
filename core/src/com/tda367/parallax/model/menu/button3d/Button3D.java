@@ -3,6 +3,8 @@ package com.tda367.parallax.model.menu.button3d;
 import com.tda367.parallax.model.core.collision.Collidable;
 import com.tda367.parallax.model.core.collision.CollidableType;
 import com.tda367.parallax.model.core.collision.CollisionManager;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;

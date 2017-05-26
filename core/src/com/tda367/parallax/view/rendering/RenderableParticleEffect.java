@@ -33,13 +33,13 @@ public class RenderableParticleEffect {
         particleEffect.init();
     }
 
-    private void updateEffectTransform(){
+    private void updateEffectTransform() {
         particleEffect.setTransform(new Matrix4());
 
         particleEffect.translate( new Vector3(
                 position.getX(),
                 position.getZ(),
-                position.getY() *-1
+                position.getY() * -1
         ));
 
         particleEffect.rotate(new Quaternion(
@@ -50,27 +50,27 @@ public class RenderableParticleEffect {
         ));
     }
 
-    public void start(){
-        if (!dead && !enabled){
+    public void start() {
+        if (!dead && !enabled) {
             enabled = true;
             this.particleEffect.start();
         }
     }
-    public void kill(){
+    public void kill() {
         this.dead = true;
 
-        Emitter emitter = particleEffect.getControllers().first().emitter;
+        final Emitter emitter = particleEffect.getControllers().first().emitter;
         if (emitter instanceof RegularEmitter) {
-            RegularEmitter reg = (RegularEmitter) emitter;
+            final RegularEmitter reg = (RegularEmitter) emitter;
             reg.setEmissionMode(RegularEmitter.EmissionMode.EnabledUntilCycleEnd);
         }
     }
 
-    public void dispose(){
+    public void dispose() {
         this.particleEffect.dispose();
     }
 
-    public ParticleEffect getParticleEffect(){
+    public ParticleEffect getParticleEffect() {
         updateEffectTransform();
         return particleEffect;
     }

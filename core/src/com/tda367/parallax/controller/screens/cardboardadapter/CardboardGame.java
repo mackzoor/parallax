@@ -6,11 +6,12 @@ import com.badlogic.gdx.backends.android.CardBoardApplicationListener;
 import com.google.vrtoolkit.cardboard.Eye;
 import com.google.vrtoolkit.cardboard.HeadTransform;
 import com.google.vrtoolkit.cardboard.Viewport;
+import lombok.Getter;
 
 
 public abstract class CardboardGame extends Game implements CardBoardApplicationListener {
 
-    protected CardboardScreen cardboardScreen;
+    @Getter private CardboardScreen cardboardScreen;
 
     @Override
     public void onNewFrame(HeadTransform paramHeadTransform) {

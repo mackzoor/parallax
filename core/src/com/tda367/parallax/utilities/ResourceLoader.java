@@ -31,7 +31,6 @@ import java.util.Map;
 public final class ResourceLoader {
     private static ResourceLoader instance;
     private G3dModelLoader modelLoader;
-    ParticleEffectLoader particleEffectLoader;
 
     private AssetManager assetManager;
 
@@ -47,7 +46,6 @@ public final class ResourceLoader {
         final UBJsonReader jsonReader = new UBJsonReader();
         this.modelLoader = new G3dModelLoader(jsonReader);
         assetManager = new AssetManager(new InternalFileHandleResolver());
-        particleEffectLoader = new ParticleEffectLoader(new InternalFileHandleResolver());
 
         loadedModels = new HashMap<String, Model>();
         loadedSounds = new HashMap<String, Sound>();
@@ -300,7 +298,7 @@ public final class ResourceLoader {
         return shape;
     }
 
-    private ParticleEffect loadParticleEffect(String filePath){
+    private ParticleEffect loadParticleEffect(String filePath) {
         ParticleEffect effect;
 
         assetManager.setLoader(ParticleEffect.class,new ParticleEffectLoader(new InternalFileHandleResolver()));

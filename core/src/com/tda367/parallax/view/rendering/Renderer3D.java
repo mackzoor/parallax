@@ -106,7 +106,7 @@ public final class Renderer3D {
         //Add objects to render queue for current frame
         this.modelsToRender.add(renderObject);
     }
-    public void addParticleEffectToFrame(RenderableParticleEffect particleEffect){
+    public void addParticleEffectToFrame(RenderableParticleEffect particleEffect) {
         particleEffectsToRender.add(particleEffect);
     }
 
@@ -129,7 +129,7 @@ public final class Renderer3D {
         particleEffectsToRender.clear();
     }
 
-    private void renderOpaque3dModels(ModelBatch modelBatch, List<Renderable3dObject> modelsToRender){
+    private void renderOpaque3dModels(ModelBatch modelBatch, List<Renderable3dObject> modelsToRender) {
         //Render high priority objects
         for (final Renderable3dObject renderable3dObject : this.modelsToRender) {
             if (renderable3dObject.isHighPriority()) {
@@ -139,7 +139,7 @@ public final class Renderer3D {
 
         modelBatch.flush();
     }
-    private void renderTransparent3dModels(ModelBatch modelBatch, List<Renderable3dObject> modelsToRender){
+    private void renderTransparent3dModels(ModelBatch modelBatch, List<Renderable3dObject> modelsToRender) {
         //Render low priority objects
         for (final Renderable3dObject renderable3dObject : this.modelsToRender) {
             if (!renderable3dObject.isHighPriority()) {
@@ -151,7 +151,7 @@ public final class Renderer3D {
     }
     private void renderParticles(ModelBatch modelBatch, List<RenderableParticleEffect> particleEffectsToRender) {
 
-        for (RenderableParticleEffect renderableParticleEffect : particleEffectsToRender) {
+        for (final RenderableParticleEffect renderableParticleEffect : particleEffectsToRender) {
             particleSystem.add(renderableParticleEffect.getParticleEffect());
         }
         particleSystem.update();

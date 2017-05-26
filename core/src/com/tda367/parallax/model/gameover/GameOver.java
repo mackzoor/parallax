@@ -19,12 +19,12 @@ public class GameOver {
     private static final float DISTANCE_TO_TEXT = 10f;
 
     @Getter
-    List<GameOverText> gameOverTexts;
+    private List<GameOverText> gameOverTexts;
 
     @Getter
-    int highScore;
+    private int highScore;
     @Getter
-    int playerScore;
+    private int playerScore;
     @Getter
     private Player player;
     @Getter

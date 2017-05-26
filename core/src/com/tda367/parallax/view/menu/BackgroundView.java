@@ -12,8 +12,8 @@ import javax.vecmath.Vector3f;
 public class BackgroundView implements View {
 
 
-    private String internalPath = "3dModels/defaultCourse/course.g3db";
-    private Renderable3dObject renderable3dObject;
+    private final String internalPath = "3dModels/defaultCourse/course.g3db";
+    private final Renderable3dObject renderable3dObject;
 
     BackgroundView() {
         this.renderable3dObject = new Renderable3dObject(

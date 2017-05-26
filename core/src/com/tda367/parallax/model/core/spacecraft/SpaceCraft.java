@@ -143,7 +143,7 @@ public abstract class SpaceCraft implements ISpaceCraft {
 
     private boolean isShipOutsideCourse() {
         final Vector2f vector2f = this.xzPos(getPos());
-        return (vector2f.length() > COURSE_RADIUS);
+        return vector2f.length() > COURSE_RADIUS;
     }
 
     private Vector2f rotateNinetyDeg(Vector2f vector2f) {

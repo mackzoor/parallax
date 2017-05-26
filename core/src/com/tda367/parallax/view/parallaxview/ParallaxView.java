@@ -59,10 +59,10 @@ public class ParallaxView implements View {
         return false;
     }
 
-    public void setWidth(int width){
+    public void setWidth(int width) {
         Renderer3D.getInstance().setWidth(width);
     }
-    public void setHeight(int height){
+    public void setHeight(int height) {
         Renderer3D.getInstance().setHeight(height);
     }
 }

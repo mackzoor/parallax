@@ -18,7 +18,7 @@ import static com.tda367.parallax.controller.screens.ScreenState.MAIN_MENU;
 
 public final class CardboardScreenManager implements ScreenChanger {
 
-    private CardboardScreenManager() {}
+    private CardboardScreenManager() { }
 
     private static CardboardGame cardboardGame;
     private static CardboardMenuScreen cardboardMenuScreen;
