@@ -16,7 +16,7 @@ import java.util.List;
 
 public class GameOver {
     private static final int ACTIVE_TIME = 3000;
-    private static final float DISTANCE_TO_TEXT = 10f;
+    private static final float DISTANCE_TO_TEXT = 3f;
 
     @Getter
     private List<GameOverText> gameOverTexts;
