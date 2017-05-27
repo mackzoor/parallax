@@ -11,15 +11,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Class responsible for creating and holding four {@link GameOverText} surrounding the camera.
+ * Class responsible for creating and holding four {@link GameOverPane} surrounding the camera.
  */
 
 public class GameOver {
-    private static final int ACTIVE_TIME = 3000;
+    private static final int ACTIVE_TIME = 5000;
     private static final float DISTANCE_TO_TEXT = 3f;
 
     @Getter
-    private List<GameOverText> gameOverTexts;
+    private List<GameOverPane> gameOverPanes;
 
     @Getter
     private int highScore;
@@ -31,6 +31,8 @@ public class GameOver {
     private boolean obsolete;
     @Getter
     private final Camera camera;
+    @Getter
+    private final String gameOverText;
     private float timeShowed;
 
     public GameOver(Player player) {
@@ -39,22 +41,24 @@ public class GameOver {
         this.obsolete = false;
         this.camera = new Camera();
         handleScore();
-        generateGameOverTexts(this.playerScore, this.highScore);
+        this.gameOverText = this.generateText();
+        generateGameOverPanes();
+        generateText();
     }
 
-    private void generateGameOverTexts(int playerScore, int highScore) {
-        this.gameOverTexts = new ArrayList<GameOverText>();
-        this.gameOverTexts.add(new GameOverText(
-                new Vector3f(DISTANCE_TO_TEXT, 0, 0), playerScore, highScore)
+    private void generateGameOverPanes() {
+        this.gameOverPanes = new ArrayList<GameOverPane>();
+        this.gameOverPanes.add(new GameOverPane(
+                new Vector3f(DISTANCE_TO_TEXT, 0, 0))
         );
-        this.gameOverTexts.add(new GameOverText(
-                new Vector3f(-DISTANCE_TO_TEXT, 0, 0), playerScore, highScore)
+        this.gameOverPanes.add(new GameOverPane(
+                new Vector3f(-DISTANCE_TO_TEXT, 0, 0))
         );
-        this.gameOverTexts.add(new GameOverText(
-                new Vector3f(0, DISTANCE_TO_TEXT, 0), playerScore, highScore)
+        this.gameOverPanes.add(new GameOverPane(
+                new Vector3f(0, DISTANCE_TO_TEXT, 0))
         );
-        this.gameOverTexts.add(new GameOverText(
-                new Vector3f(0, -DISTANCE_TO_TEXT, 0), playerScore, highScore)
+        this.gameOverPanes.add(new GameOverPane(
+                new Vector3f(0, -DISTANCE_TO_TEXT, 0))
         );
     }
 
@@ -70,9 +74,25 @@ public class GameOver {
             this.timeShowed += milliSinceLastUpdate;
         } else {
             this.obsolete = true;
-            for (final GameOverText gameOverText : this.gameOverTexts) {
-                gameOverText.setObsolete(true);
+            for (final GameOverPane gameOverPane : this.gameOverPanes) {
+                gameOverPane.setObsolete(true);
             }
+        }
+    }
+
+    private boolean isNewHighScore() {
+        return this.highScore < this.playerScore;
+    }
+
+    private String generateText() {
+        if (!this.isNewHighScore()) {
+            return "YOU DEAD!" +
+                    "\nYour score: " + this.playerScore +
+                    "\nHigh score: " + this.highScore;
+        } else {
+            return "YOU DEAD!" +
+                    "\nYour score: " + this.playerScore +
+                    "\nWow! New High score!";
         }
     }
 }
