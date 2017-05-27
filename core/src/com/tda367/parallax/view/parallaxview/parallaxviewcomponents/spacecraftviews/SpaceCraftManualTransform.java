@@ -12,7 +12,7 @@ public class SpaceCraftManualTransform implements View {
     private final RenderableSpaceCraft renderableSpaceCraft;
 
     public SpaceCraftManualTransform(SpaceCraftType type) {
-        this.type = this.type;
+        this.type = type;
         this.renderableSpaceCraft = getRenderableSpaceCraft(this.type);
     }
 
