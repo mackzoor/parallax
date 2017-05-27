@@ -34,6 +34,7 @@ public final class Renderer3D {
     private ModelBatch modelBatch;
     private Camera camera;
     private Environment environment;
+    private boolean particlesEnabled;
 
     private List<Renderable3dObject> modelsToRender;
     private List<RenderableParticleEffect> particleEffectsToRender;
@@ -43,12 +44,13 @@ public final class Renderer3D {
      *
      * @param camera
      */
-    private Renderer3D(Camera camera) {
+    private Renderer3D(Camera camera, boolean enableParticleEffects) {
         this.camera = camera;
         modelsToRender = new ArrayList<Renderable3dObject>();
         particleEffectsToRender = new ArrayList<RenderableParticleEffect>();
         modelBatch = new ModelBatch();
 
+        particlesEnabled = enableParticleEffects;
         particleSystem = ParticleSystem.get();
         spriteBatch = new BillboardParticleBatch();
         spriteBatch.setTexture(ResourceLoader.getInstance().getTexture("particles/pre_particle.png"));
@@ -72,24 +74,25 @@ public final class Renderer3D {
      * @param width  Amount of pixels on the x axis to be rendered.
      * @param height Amount of pixels on the y axis to be rendered.
      */
-    private Renderer3D(float fov, int width, int height) {
+    private Renderer3D(float fov, int width, int height, boolean particlesEnabled) {
         this(
                 new PerspectiveCamera(
                         fov,
                         width,
                         height
-                )
+                ),
+                particlesEnabled
         );
     }
 
-    public static Renderer3D initialize(float fov, int width, int height, boolean isVr) {
+    public static Renderer3D initialize(float fov, int width, int height, boolean isVr, boolean particlesEnabled) {
         if (isVr) {
             // Setup of special camera for VR
             final Camera cardboardCamera = new CardboardCamera();
             cardboardCamera.lookAt(0, 0, -1);
-            rend3D = new Renderer3D(cardboardCamera);
+            rend3D = new Renderer3D(cardboardCamera, particlesEnabled);
         } else {
-            rend3D = new Renderer3D(fov, width, height);
+            rend3D = new Renderer3D(fov, width, height, particlesEnabled);
         }
 
         return rend3D;
@@ -123,7 +126,9 @@ public final class Renderer3D {
 
         renderOpaque3dModels(this.modelBatch, this.modelsToRender);
         renderTransparent3dModels(this.modelBatch, this.modelsToRender);
-        renderParticles(this.modelBatch, this.particleEffectsToRender);
+        if (particlesEnabled) {
+            renderParticles(this.modelBatch, this.particleEffectsToRender);
+        }
 
         this.modelBatch.end();
 

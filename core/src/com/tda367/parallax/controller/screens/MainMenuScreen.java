@@ -25,8 +25,10 @@ public class MainMenuScreen extends ScreenAdapter {
     private final CollisionCalculator collisionCalculator;
     private final AudioQueue audioQueue;
     private final ScreenChanger screenChanger;
+    private boolean particlesEnabled;
 
-    public MainMenuScreen(Player player, ScreenChanger screenChanger) {
+    public MainMenuScreen(Player player, ScreenChanger screenChanger, boolean particlesEnabled) {
+        this.particlesEnabled = particlesEnabled;
         this.player = player;
         this.screenChanger = screenChanger;
         this.sound = new Sound();
@@ -66,6 +68,6 @@ public class MainMenuScreen extends ScreenAdapter {
     public void newMainMenu() {
         this.model = new MainMenu();
         this.controller = new MainMenuController(this.model, DeviceManager.getDevice());
-        this.view = new MainMenuView(this.model, false);
+        this.view = new MainMenuView(this.model, false, particlesEnabled);
     }
 }

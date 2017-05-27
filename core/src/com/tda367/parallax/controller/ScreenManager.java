@@ -11,45 +11,58 @@ import com.tda367.parallax.model.core.Player;
 
 public final class ScreenManager implements ScreenChanger {
 
-    private static Game game;
-    private static com.tda367.parallax.controller.screens.MainMenuScreen mainMenuScreen;
-    private static com.tda367.parallax.controller.screens.GameScreen gameScreen;
-    private static com.tda367.parallax.controller.screens.GameOverScreen gameOverScreen;
+    private static ScreenManager instance;
 
-    private ScreenManager() {
+    private Game game;
+    private com.tda367.parallax.controller.screens.MainMenuScreen mainMenuScreen;
+    private com.tda367.parallax.controller.screens.GameScreen gameScreen;
+    private com.tda367.parallax.controller.screens.GameOverScreen gameOverScreen;
+    private boolean highPerformanceMode;
+
+    public static void initialize(boolean highPerformanceMode){
+        instance = new ScreenManager(highPerformanceMode);
     }
 
-    public static void setGame(Game game) {
-        if (ScreenManager.game == null) {
-            ScreenManager.game = game;
+    public static ScreenManager getInstance(){
+        return instance;
+    }
+
+
+    private ScreenManager(boolean highPerformanceMode) {
+        this.highPerformanceMode = highPerformanceMode;
+    }
+
+    public void setGame(Game game) {
+        if (this.game == null) {
+            this.game = game;
         }
     }
 
-    private static synchronized void setMainMenuScreen(Player player) {
+    private synchronized void setMainMenuScreen(Player player) {
         if (mainMenuScreen == null) {
-            mainMenuScreen = new com.tda367.parallax.controller.screens.MainMenuScreen(player, GameStateManagerSingleton.INSTANCE);
+            mainMenuScreen = new com.tda367.parallax.controller.screens.MainMenuScreen(player, instance, highPerformanceMode);
         }
         mainMenuScreen.newMainMenu();
         game.setScreen(mainMenuScreen);
     }
 
-    private static synchronized void setGameScreen(Player player) {
+    private synchronized void setGameScreen(Player player) {
         if (gameScreen == null) {
-            gameScreen = new com.tda367.parallax.controller.screens.GameScreen(player, GameStateManagerSingleton.INSTANCE);
+            gameScreen = new com.tda367.parallax.controller.screens.GameScreen(player, instance, highPerformanceMode);
         }
         gameScreen.newGame();
         game.setScreen(gameScreen);
     }
 
-    private static synchronized void setGameOverScreen(Player player) {
+    private synchronized void setGameOverScreen(Player player) {
         if (gameOverScreen == null) {
-            gameOverScreen = new com.tda367.parallax.controller.screens.GameOverScreen(player, GameStateManagerSingleton.INSTANCE);
+            gameOverScreen = new com.tda367.parallax.controller.screens.GameOverScreen(player, instance,highPerformanceMode);
         }
         gameOverScreen.newGameOver();
         game.setScreen(gameOverScreen);
     }
 
-    public static void setGameState(ScreenState nextState, Player player) {
+    public void setGameState(ScreenState nextState, Player player) {
         if (nextState == ScreenState.MAIN_MENU) {
             setMainMenuScreen(player);
         } else if (nextState == ScreenState.GAME) {
@@ -62,14 +75,5 @@ public final class ScreenManager implements ScreenChanger {
     @Override
     public void requestScreenChange(ScreenState nextState, Player player) {
         setGameState(nextState, player);
-    }
-
-    private static class GameStateManagerSingleton {
-
-        GameStateManagerSingleton() {
-
-        }
-
-        private static final ScreenChanger INSTANCE = new ScreenManager();
     }
 }

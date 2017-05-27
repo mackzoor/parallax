@@ -20,8 +20,10 @@ public class CardboardGameOverScreen extends CardboardScreenAdapter {
     private GameOverView view;
     private final Player player;
     private final ScreenChanger screenChanger;
+    private boolean particlesEnabled;
 
-    public CardboardGameOverScreen(Player player, ScreenChanger screenChanger) {
+    public CardboardGameOverScreen(Player player, ScreenChanger screenChanger, boolean particlesEnabled) {
+        this.particlesEnabled = particlesEnabled;
         this.player = player;
         this.screenChanger = screenChanger;
     }
@@ -48,6 +50,6 @@ public class CardboardGameOverScreen extends CardboardScreenAdapter {
 
     public void newGameOver() {
         this.model = new GameOver(this.player);
-        this.view = new GameOverView(this.model, true);
+        this.view = new GameOverView(this.model, true, particlesEnabled);
     }
 }

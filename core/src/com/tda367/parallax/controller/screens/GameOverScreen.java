@@ -17,8 +17,10 @@ public class GameOverScreen extends ScreenAdapter {
     private GameOverView view;
     private final Player player;
     private final ScreenChanger screenChanger;
+    private boolean particlesEnabled;
 
-    public GameOverScreen(Player player, ScreenChanger screenChanger) {
+    public GameOverScreen(Player player, ScreenChanger screenChanger, boolean particlesEnabled) {
+        this.particlesEnabled = particlesEnabled;
         this.player = player;
         this.screenChanger = screenChanger;
     }
@@ -46,7 +48,7 @@ public class GameOverScreen extends ScreenAdapter {
 
     public void newGameOver() {
         this.model = new GameOver(this.player);
-        this.view = new GameOverView(this.model, false);
+        this.view = new GameOverView(this.model, false, particlesEnabled);
     }
 }
 

@@ -52,7 +52,8 @@ public final class CardboardScreenManager implements ScreenChanger {
         if (cardboardGameOverScreen == null) {
             cardboardGameOverScreen = new CardboardGameOverScreen(
                     player,
-                    ScreenChangerSingleton.INSTANCE
+                    ScreenChangerSingleton.INSTANCE,
+                    false
             );
         }
         cardboardGameOverScreen.newGameOver();

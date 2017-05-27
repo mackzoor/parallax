@@ -26,14 +26,14 @@ public class MainMenuView {
     private final Map<IPowerUp, PowerUpViewAutomaticTransform> powerUpsHash;
 
 
-    public MainMenuView(MainMenu mainMenu, boolean isVr) {
+    public MainMenuView(MainMenu mainMenu, boolean isVr, boolean particlesEnabled) {
         this.mainMenu = mainMenu;
         this.world = new BackgroundView();
         this.exitButton = new ExitButton3DView(mainMenu.getExitButton());
         this.startButton = new StartButton3DView(mainMenu.getStartButton());
         this.powerUpsHash = new HashMap<IPowerUp, PowerUpViewAutomaticTransform>();
         Renderer3D.initialize(mainMenu.getCamera().getFov(), Gdx.graphics.getWidth(),
-                Gdx.graphics.getHeight(), isVr);
+                Gdx.graphics.getHeight(), isVr, particlesEnabled);
         updatePowerupList();
     }
 

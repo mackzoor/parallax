@@ -77,7 +77,7 @@ public class CardboardMenuScreen extends CardboardScreenAdapter {
 
     public void newMainMenu() {
         this.mainMenu = new MainMenu();
-        this.view = new MainMenuView(this.mainMenu, true);
+        this.view = new MainMenuView(this.mainMenu, true, false);
         this.controller = new CardboardMenuController(this.mainMenu, DeviceManager.getDevice());
     }
 

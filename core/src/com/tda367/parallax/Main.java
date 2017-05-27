@@ -1,5 +1,6 @@
 package com.tda367.parallax;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.tda367.parallax.controller.ScreenManager;
@@ -18,8 +19,15 @@ public class Main extends Game {
         Gdx.input.setCatchBackKey(true);
         final Player player = new Player();
         DeviceManager.setDevice(this);
-        ScreenManager.setGame(this);
-        ScreenManager.setGameState(ScreenState.MAIN_MENU, player);
+
+        if (Gdx.app.getType() == Application.ApplicationType.Android){
+            ScreenManager.initialize(false);
+        } else {
+            ScreenManager.initialize(true);
+        }
+        ScreenManager screenManager = ScreenManager.getInstance();
+        screenManager.setGame(this);
+        screenManager.setGameState(ScreenState.MAIN_MENU, player);
     }
 
     @Override

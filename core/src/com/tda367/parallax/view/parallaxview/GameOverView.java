@@ -20,10 +20,10 @@ public class GameOverView {
 
     private List<GameOverTextView> gameOverTextViews;
 
-    public GameOverView(GameOver model, boolean isVr) {
+    public GameOverView(GameOver model, boolean isVr, boolean particlesEnabled) {
         this.model = model;
         Renderer3D.initialize(model.getCamera().getFov(), Gdx.graphics.getWidth(),
-                Gdx.graphics.getHeight(), isVr);
+                Gdx.graphics.getHeight(), isVr, particlesEnabled);
         generateGameOverTextViews();
     }
 

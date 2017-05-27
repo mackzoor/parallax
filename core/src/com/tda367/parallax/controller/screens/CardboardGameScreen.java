@@ -63,7 +63,7 @@ public class CardboardGameScreen extends com.tda367.parallax.controller.screens.
     public void newGame() {
         this.player.addSpaceCraft(SpaceCraftFactory.getAgelionInstance(15));
         this.parallaxGame = new Parallax(this.player);
-        this.parallaxView = new ParallaxView(this.parallaxGame, true);
+        this.parallaxView = new ParallaxView(this.parallaxGame, true, false);
         this.controller = new GameController(this.parallaxGame, this.parallaxView, DeviceManager.getDevice());
     }
 

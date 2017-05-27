@@ -25,9 +25,10 @@ public class GameScreen extends ScreenAdapter {
     private final CollisionCalculator collisionCalculator;
     private ParallaxView parallaxView;
     private final ScreenChanger screenChanger;
+    private boolean particlesEnabled;
 
-    public GameScreen(Player player, ScreenChanger screenChanger) {
-
+    public GameScreen(Player player, ScreenChanger screenChanger, boolean particlesEnabled) {
+        this.particlesEnabled = particlesEnabled;
         this.audioQueue = AudioQueue.getInstance();
         // Initiate game with space craft "Agelion"
         this.player = player;
@@ -66,7 +67,7 @@ public class GameScreen extends ScreenAdapter {
     public void newGame() {
         this.player.addSpaceCraft(SpaceCraftFactory.getAgelionInstance(15));
         this.parallaxGame = new Parallax(this.player);
-        this.parallaxView = new ParallaxView(this.parallaxGame, false);
+        this.parallaxView = new ParallaxView(this.parallaxGame, false, particlesEnabled);
         this.controller = new GameController(this.parallaxGame,
                 this.parallaxView,
                 DeviceManager.getDevice());
