@@ -1,9 +1,12 @@
-package com.tda367.parallax.view.menu;
+package com.tda367.parallax.view.parallaxview;
 
 
 import com.badlogic.gdx.Gdx;
 import com.tda367.parallax.model.core.powerups.arsenal.IPowerUp;
 import com.tda367.parallax.model.menu.MainMenu;
+import com.tda367.parallax.view.parallaxview.parallaxviewcomponents.menu.BackgroundView;
+import com.tda367.parallax.view.parallaxview.parallaxviewcomponents.menu.ExitButton3DView;
+import com.tda367.parallax.view.parallaxview.parallaxviewcomponents.menu.StartButton3DView;
 import com.tda367.parallax.view.parallaxview.parallaxviewcomponents.View;
 import com.tda367.parallax.view.parallaxview.parallaxviewcomponents.powerupviews.PowerUpViewAutomaticTransform;
 import com.tda367.parallax.view.rendering.Renderer3D;

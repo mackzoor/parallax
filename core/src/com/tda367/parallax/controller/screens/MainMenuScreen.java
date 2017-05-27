@@ -11,7 +11,7 @@ import com.tda367.parallax.model.core.collision.CollisionManager;
 import com.tda367.parallax.model.coreabstraction.AudioQueue;
 import com.tda367.parallax.model.menu.MainMenu;
 import com.tda367.parallax.view.Sound;
-import com.tda367.parallax.view.menu.MainMenuView;
+import com.tda367.parallax.view.parallaxview.MainMenuView;
 
 import static com.tda367.parallax.controller.screens.ScreenState.GAME;
 

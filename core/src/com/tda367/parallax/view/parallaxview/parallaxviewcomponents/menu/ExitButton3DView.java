@@ -1,4 +1,4 @@
-package com.tda367.parallax.view.menu;
+package com.tda367.parallax.view.parallaxview.parallaxviewcomponents.menu;
 
 import com.tda367.parallax.model.menu.button3d.ExitButton3D;
 import com.tda367.parallax.utilities.ResourceLoader;
@@ -15,7 +15,7 @@ public class ExitButton3DView implements View {
     private final Renderable3dObject renderable3dObject;
 
 
-    ExitButton3DView(ExitButton3D exitButton) {
+    public ExitButton3DView(ExitButton3D exitButton) {
         this.exitButton = exitButton;
         this.renderable3dObject = new Renderable3dObject(
                 exitButton.getPos(),

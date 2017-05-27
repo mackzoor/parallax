@@ -12,7 +12,7 @@ import com.tda367.parallax.model.core.collision.CollisionManager;
 import com.tda367.parallax.model.menu.MainMenu;
 import com.tda367.parallax.utilities.MathUtilities;
 import com.tda367.parallax.view.Sound;
-import com.tda367.parallax.view.menu.MainMenuView;
+import com.tda367.parallax.view.parallaxview.MainMenuView;
 import com.tda367.parallax.view.rendering.Renderer3D;
 
 import javax.vecmath.Vector3f;

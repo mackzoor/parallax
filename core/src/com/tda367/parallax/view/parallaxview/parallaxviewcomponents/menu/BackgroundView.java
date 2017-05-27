@@ -1,4 +1,4 @@
-package com.tda367.parallax.view.menu;
+package com.tda367.parallax.view.parallaxview.parallaxviewcomponents.menu;
 
 import com.tda367.parallax.utilities.ResourceLoader;
 import com.tda367.parallax.view.parallaxview.parallaxviewcomponents.View;
@@ -15,7 +15,7 @@ public class BackgroundView implements View {
     private final String internalPath = "3dModels/defaultCourse/course.g3db";
     private final Renderable3dObject renderable3dObject;
 
-    BackgroundView() {
+    public BackgroundView() {
         this.renderable3dObject = new Renderable3dObject(
                 new Vector3f(),
                 new Quat4f(),

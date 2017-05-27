@@ -1,7 +1,8 @@
-package com.tda367.parallax.view.gameover;
+package com.tda367.parallax.view.parallaxview.parallaxviewcomponents.extraviews;
 
 import com.tda367.parallax.model.gameover.GameOverText;
 import com.tda367.parallax.utilities.ResourceLoader;
+import com.tda367.parallax.view.parallaxview.GameOverView;
 import com.tda367.parallax.view.parallaxview.parallaxviewcomponents.View;
 import com.tda367.parallax.view.rendering.Renderable3dObject;
 import com.tda367.parallax.view.rendering.Renderer3D;
@@ -18,7 +19,7 @@ public class GameOverTextView implements View {
     private final GameOverText gameOverText;
     private final Renderable3dObject renderable3dObject;
 
-    GameOverTextView(GameOverText gameOverText) {
+    public GameOverTextView(GameOverText gameOverText) {
         this.gameOverText = gameOverText;
         this.renderable3dObject = new Renderable3dObject(
                 gameOverText.getPosition(),

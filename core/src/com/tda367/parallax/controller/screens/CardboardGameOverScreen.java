@@ -6,7 +6,7 @@ import com.google.vrtoolkit.cardboard.HeadTransform;
 import com.tda367.parallax.controller.screens.cardboardadapter.CardboardScreenAdapter;
 import com.tda367.parallax.model.core.Player;
 import com.tda367.parallax.model.gameover.GameOver;
-import com.tda367.parallax.view.gameover.GameOverView;
+import com.tda367.parallax.view.parallaxview.GameOverView;
 import com.tda367.parallax.view.rendering.Renderer3D;
 
 import static com.tda367.parallax.controller.screens.ScreenState.MAIN_MENU;

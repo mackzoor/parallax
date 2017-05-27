@@ -30,9 +30,9 @@ public class TouchPadView {
 
     public TouchPadView() {
         final Skin gamePadSkin = new Skin();
-        gamePadSkin.add("background", new Texture("touchpad/background.png"));
-        gamePadSkin.add("knob", new Texture("touchpad/knob.png"));
-        gamePadSkin.add("actionButton", new Texture("touchpad/actionButton.png"));
+        gamePadSkin.add("background", new Texture("images.touchpad/background.png"));
+        gamePadSkin.add("knob", new Texture("images.touchpad/knob.png"));
+        gamePadSkin.add("actionButton", new Texture("images.touchpad/actionButton.png"));
 
         this.stage = new Stage();
 

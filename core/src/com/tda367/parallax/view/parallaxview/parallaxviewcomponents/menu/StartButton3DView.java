@@ -1,4 +1,4 @@
-package com.tda367.parallax.view.menu;
+package com.tda367.parallax.view.parallaxview.parallaxviewcomponents.menu;
 
 import com.tda367.parallax.model.menu.button3d.StartButton3D;
 import com.tda367.parallax.utilities.ResourceLoader;
@@ -13,7 +13,7 @@ public class StartButton3DView implements View {
     private final Renderable3dObject renderable3dObject;
 
 
-    StartButton3DView(StartButton3D startButton) {
+    public StartButton3DView(StartButton3D startButton) {
         this.startButton = startButton;
         this.renderable3dObject = new Renderable3dObject(
                 startButton.getPos(),

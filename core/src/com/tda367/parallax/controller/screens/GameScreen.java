@@ -1,6 +1,5 @@
 package com.tda367.parallax.controller.screens;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.controllers.Controllers;
 import com.tda367.parallax.controller.controllerclasses.game.GameController;

@@ -3,7 +3,7 @@ package com.tda367.parallax.controller.screens;
 import com.badlogic.gdx.ScreenAdapter;
 import com.tda367.parallax.model.core.Player;
 import com.tda367.parallax.model.gameover.GameOver;
-import com.tda367.parallax.view.gameover.GameOverView;
+import com.tda367.parallax.view.parallaxview.GameOverView;
 
 import static com.tda367.parallax.controller.screens.ScreenState.MAIN_MENU;
 

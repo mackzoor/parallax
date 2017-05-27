@@ -1,8 +1,9 @@
-package com.tda367.parallax.view.gameover;
+package com.tda367.parallax.view.parallaxview;
 
 import com.badlogic.gdx.Gdx;
 import com.tda367.parallax.model.gameover.GameOver;
 import com.tda367.parallax.model.gameover.GameOverText;
+import com.tda367.parallax.view.parallaxview.parallaxviewcomponents.extraviews.GameOverTextView;
 import com.tda367.parallax.view.rendering.Renderer3D;
 
 import java.util.ArrayList;
