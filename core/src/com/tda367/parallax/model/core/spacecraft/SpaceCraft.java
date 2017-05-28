@@ -270,6 +270,11 @@ public abstract class SpaceCraft implements ISpaceCraft {
         return this.type;
     }
 
+    @Override
+    public Vector2f getCurrentPanVelocity() {
+        return currentPanVelocity;
+    }
+
 
     //Collision
     @Override
