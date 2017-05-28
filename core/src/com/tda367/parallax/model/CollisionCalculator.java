@@ -99,9 +99,9 @@ public class CollisionCalculator implements ICollisionCalculator {
                 && second.getCollidableType() == CollidableType.OBSTACLE) {
             return false;
         } else if (!(first.getCollidableType() == CollidableType.SPACECRAFT
-                && first.getCollidableType() == CollidableType.HARMFUL
-                && second.getCollidableType() == CollidableType.SPACECRAFT
-                && second.getCollidableType() == CollidableType.HARMFUL)) {
+                || first.getCollidableType() == CollidableType.HARMFUL
+                || second.getCollidableType() == CollidableType.SPACECRAFT
+                || second.getCollidableType() == CollidableType.HARMFUL)) {
             return false;
         }
 
