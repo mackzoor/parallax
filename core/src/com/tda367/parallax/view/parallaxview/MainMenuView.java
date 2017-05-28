@@ -7,6 +7,7 @@ import com.tda367.parallax.model.menu.MainMenu;
 import com.tda367.parallax.view.parallaxview.parallaxviewcomponents.View;
 import com.tda367.parallax.view.parallaxview.parallaxviewcomponents.menu.BackgroundView;
 import com.tda367.parallax.view.parallaxview.parallaxviewcomponents.menu.ExitButton3DView;
+import com.tda367.parallax.view.parallaxview.parallaxviewcomponents.menu.GalacticaText;
 import com.tda367.parallax.view.parallaxview.parallaxviewcomponents.menu.StartButton3DView;
 import com.tda367.parallax.view.parallaxview.parallaxviewcomponents.powerupviews.PowerUpViewAutomaticTransform;
 import com.tda367.parallax.view.rendering.Renderer3D;
@@ -25,6 +26,7 @@ public class MainMenuView {
     private final BackgroundView world;
     private final ExitButton3DView exitButton;
     private final StartButton3DView startButton;
+    private final GalacticaText galacticaText;
     private final Map<IPowerUp, PowerUpViewAutomaticTransform> powerUpsHash;
 
 
@@ -33,6 +35,7 @@ public class MainMenuView {
         this.world = new BackgroundView();
         this.exitButton = new ExitButton3DView(mainMenu.getExitButton());
         this.startButton = new StartButton3DView(mainMenu.getStartButton());
+        this.galacticaText = new GalacticaText();
         this.powerUpsHash = new HashMap<IPowerUp, PowerUpViewAutomaticTransform>();
         Renderer3D.initialize(mainMenu.getCamera().getFov(), Gdx.graphics.getWidth(),
                 Gdx.graphics.getHeight(), isVr, particlesEnabled);
@@ -49,6 +52,7 @@ public class MainMenuView {
         this.world.render();
         this.exitButton.render();
         this.startButton.render();
+        this.galacticaText.render();
         for (final PowerUpViewAutomaticTransform powerUpViewAutomaticTransform : this.powerUpsHash.values()) {
             powerUpViewAutomaticTransform.render();
         }
