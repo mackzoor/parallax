@@ -1,0 +1,40 @@
+Removed rules to make custome rule-set able to be used:
+
+Header check
+Regexp header check
+Loose package coupling 
+All hammurapi coding rules
+
+Removed due to not being relevant:
+
+Append character with char
+Avoid instantiating objects in loop
+Method argument could be final
+Avoid static imports
+Long variable
+Javadoc variable
+Illegal token
+Final parameters
+Design for extension
+Package Javadoc
+Javadoc type
+Javadoc method
+Import control
+Dataflow Anamaly Analysis
+Write tag
+Import order
+Avoid final local variable
+Avoid literals in if condition
+Hidden field
+Bean members should serialize
+Empty method in abstract class should be abstract
+
+Removed after being thoroughly analyzed and fixed to desireable level.
+
+Line Length
+Import control
+Short class name
+Star imports
+
+
+
