@@ -19,8 +19,8 @@ public class StringToTextureGenerator {
 
     @Setter
     private String string;
-    private int width;
-    private int height;
+    private final int width;
+    private final int height;
     private final Texture generatedTexture;
 
     public StringToTextureGenerator(String string, int width, int height) {
@@ -75,9 +75,7 @@ public class StringToTextureGenerator {
 
         //Dispose of c++ objects.
         font.dispose();
-        font = null;
         spriteBatch.dispose();
-        spriteBatch = null;
 
         return pMap;
     }

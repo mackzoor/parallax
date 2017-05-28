@@ -25,7 +25,7 @@ public class MainMenuScreen extends ScreenAdapter {
     private final CollisionCalculator collisionCalculator;
     private final AudioQueue audioQueue;
     private final ScreenChanger screenChanger;
-    private boolean particlesEnabled;
+    private final boolean particlesEnabled;
 
     public MainMenuScreen(Player player, ScreenChanger screenChanger, boolean particlesEnabled) {
         super();

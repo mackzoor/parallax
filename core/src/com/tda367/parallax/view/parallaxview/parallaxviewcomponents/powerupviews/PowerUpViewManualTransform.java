@@ -43,13 +43,13 @@ public class PowerUpViewManualTransform implements View {
 
     private RenderablePowerUp getRenderablePowerUp(PowerUpType powerUp) {
         if (powerUp == PowerUpType.LAZER) {
-            return new LazerView();
+            return new CannonView();
         } else if (powerUp == PowerUpType.MISSILE) {
             return new MissileView();
         } else if (powerUp == PowerUpType.SHIELD) {
             return new ShieldView();
         } else {
-            return new LazerView();
+            return new CannonView();
         }
     }
 }

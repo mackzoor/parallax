@@ -14,9 +14,15 @@ public abstract class RenderablePowerUpBase implements RenderablePowerUp {
     private static final ParticleEffectType ROCKET_TRAIL = ParticleEffectType.ROCKET_TRAIL;
     private static final ParticleEffectType EXPLOSION = ParticleEffectType.EXPLOSION;
 
-    @Getter @Setter private Vector3f pos;
-    @Getter @Setter private Quat4f rot;
-    @Setter @Getter private boolean effectsEnabled;
+    @Getter
+    @Setter
+    private Vector3f pos;
+    @Getter
+    @Setter
+    private Quat4f rot;
+    @Setter
+    @Getter
+    private boolean effectsEnabled;
 
     RenderablePowerUpBase() {
         this.pos = new Vector3f();

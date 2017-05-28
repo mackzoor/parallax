@@ -17,7 +17,7 @@ public class GameOverScreen extends ScreenAdapter {
     private GameOverView view;
     private final Player player;
     private final ScreenChanger screenChanger;
-    private boolean particlesEnabled;
+    private final boolean particlesEnabled;
 
     public GameOverScreen(Player player, ScreenChanger screenChanger, boolean particlesEnabled) {
         super();

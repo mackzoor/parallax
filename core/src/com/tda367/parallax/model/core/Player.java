@@ -12,14 +12,11 @@ public class Player {
     @Setter
     private int score;
     @Getter
+    @Setter
     private ISpaceCraft spaceCraft;
 
     public Player(String usernName) {
         this.userName = usernName;
         this.score = 0;
-    }
-
-    public void addSpaceCraft(ISpaceCraft spaceCraft) {
-        this.spaceCraft = spaceCraft;
     }
 }

@@ -60,7 +60,7 @@ public class CardboardGameScreen extends CardboardScreenAdapter {
     }
 
     public void newGame() {
-        this.player.addSpaceCraft(SpaceCraftFactory.getAgelionInstance(15));
+        this.player.setSpaceCraft(SpaceCraftFactory.getAgelionInstance(15));
         this.parallaxGame = new Parallax(this.player);
         this.parallaxView = new ParallaxView(this.parallaxGame, true, false);
         this.controller = new GameController(this.parallaxGame, this.parallaxView, DeviceManager.getDevice());

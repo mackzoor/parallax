@@ -21,7 +21,6 @@ public final class SpaceCraftFactory {
 
 
     public static SpaceCraft getRandom(float forwardSpeed, Vector3f pos, Quat4f rot) {
-        //TODO When more spaceCrafts are available, return a random one.
         return new Agelion(forwardSpeed, pos, rot);
     }
 

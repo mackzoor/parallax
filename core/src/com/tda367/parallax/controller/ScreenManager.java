@@ -21,7 +21,7 @@ public final class ScreenManager implements ScreenChanger {
     private MenuScreen menuScreen;
     private GameScreen gameScreen;
     private GameOverScreen gameOverScreen;
-    private boolean highPerformanceMode;
+    private final boolean highPerformanceMode;
 
     private ScreenManager(boolean highPerformanceMode) {
         this.highPerformanceMode = highPerformanceMode;

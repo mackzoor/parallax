@@ -42,10 +42,6 @@ public class HudView {
         );
 
         this.htg = new HudTextureGenerator(5);
-
-        this.powerUpType = null;
-        this.lives = -1;
-        this.score = -1;
     }
 
     public void render() {

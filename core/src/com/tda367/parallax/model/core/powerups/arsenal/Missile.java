@@ -87,8 +87,6 @@ public class Missile extends PowerUpBase {
         }
     }
 
-    //TODO, remove the fact that missile moves faster towards things further away.
-
     @Override
     public void update(int milliSinceLastUpdate) {
         if (!super.isDead() && super.isActive()) {

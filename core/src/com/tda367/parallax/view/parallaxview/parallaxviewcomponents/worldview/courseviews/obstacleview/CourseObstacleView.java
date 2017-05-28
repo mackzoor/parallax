@@ -10,6 +10,9 @@ import com.tda367.parallax.view.rendering.Renderer3D;
  * View class for {@link CourseObstacleBase}.
  */
 public class CourseObstacleView {
+    private static final String PATH_TO_BOX = "3dModels/box/box.g3db";
+    private static final String PATH_TO_WALL = "3dModels/wall/wall.g3db";
+
     private final CourseObstacleBase obstacle;
     private final Renderable3dObject renderable3dObject;
 
@@ -38,11 +41,11 @@ public class CourseObstacleView {
 
     private String get3dModelPath(ObstacleType type) {
         if (type == ObstacleType.BOX) {
-            return "3dModels/box/box.g3db";
+            return PATH_TO_BOX;
         } else if (type == ObstacleType.WALL) {
-            return "3dModels/wall/wall.g3db";
+            return PATH_TO_WALL;
         } else {
-            return "3dModels/box/box.g3db";
+            return PATH_TO_BOX;
         }
 
     }

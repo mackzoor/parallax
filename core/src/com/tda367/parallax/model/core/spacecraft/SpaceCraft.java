@@ -26,7 +26,7 @@ public abstract class SpaceCraft implements ISpaceCraft {
     private static final float COURSE_RADIUS = 5;
 
     @Getter
-    private List<IPowerUp> pu = new ArrayList<IPowerUp>();
+    private List<IPowerUp> powerUps = new ArrayList<IPowerUp>();
     @Setter
     @Getter
     private int health;
@@ -42,8 +42,8 @@ public abstract class SpaceCraft implements ISpaceCraft {
     private float maxPanVelocity;
     private final Vector2f desiredPanVelocity;
     private Vector2f panAcceleration;
-    @Setter
     @Getter
+    @Setter
     private Vector2f currentPanVelocity;
     @Getter
     private final Vector2f panAbsoluteTarget;
@@ -69,7 +69,7 @@ public abstract class SpaceCraft implements ISpaceCraft {
         this.rot = mobility.getRot();
         this.panAcceleration = new Vector2f();
         this.desiredPanVelocity = new Vector2f();
-        this.pu = new ArrayList<IPowerUp>();
+        this.powerUps = new ArrayList<IPowerUp>();
         this.independentRotation = mobility.isIndependentRotation();
 
         this.panAbsoluteTarget = new Vector2f();
@@ -111,8 +111,8 @@ public abstract class SpaceCraft implements ISpaceCraft {
 
     @Override
     public PowerUpType getPowerUpType() {
-        if (this.pu.size() > 0) {
-            return this.pu.get(0).getPowerUpType();
+        if (this.powerUps.size() > 0) {
+            return this.powerUps.get(0).getPowerUpType();
         } else {
             return null;
         }
@@ -233,23 +233,23 @@ public abstract class SpaceCraft implements ISpaceCraft {
     //ISpaceCraft
     @Override
     public void action() {
-        if (!this.pu.isEmpty()) {
-            final IPowerUp activePowerUP = this.pu.get(this.pu.size() - 1);
+        if (!this.powerUps.isEmpty()) {
+            final IPowerUp activePowerUP = this.powerUps.get(this.powerUps.size() - 1);
 
             activePowerUP.activate(this);
-            this.pu.remove(this.pu.size() - 1);
+            this.powerUps.remove(this.powerUps.size() - 1);
         }
     }
 
     @Override
     public void add(IPowerUp singlePu) {
         //Adds a single powerUp in a list if empty or only if the other powerups in it are the same type of powerUps
-        if (this.pu.size() <= 0) {
-            this.pu.add(singlePu);
+        if (this.powerUps.size() <= 0) {
+            this.powerUps.add(singlePu);
         } else if (
-                this.pu.get(0).getClass().equals(singlePu.getClass())
-                        && this.pu.size() < 4) {
-            this.pu.add(singlePu);
+                this.powerUps.get(0).getClass().equals(singlePu.getClass())
+                        && this.powerUps.size() < 4) {
+            this.powerUps.add(singlePu);
         }
     }
 

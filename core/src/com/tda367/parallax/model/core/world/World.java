@@ -23,7 +23,6 @@ public class World implements Updatable, CollisionObserver {
     private final List<ICourseModule> modules;
     @Getter
     private final List<ISpaceCraft> spaceCrafts;
-    //TODO, remove the power-up after used
     @Getter
     private final List<IPowerUp> powerUps;
 

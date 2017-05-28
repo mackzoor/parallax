@@ -42,13 +42,13 @@ public class PowerUpViewAutomaticTransform implements View {
 
     private RenderablePowerUp getRenderablePowerUp(IPowerUp powerUp) {
         if (powerUp.getPowerUpType() == PowerUpType.LAZER) {
-            return new LazerView();
+            return new CannonView();
         } else if (powerUp.getPowerUpType() == PowerUpType.MISSILE) {
             return new MissileView();
         } else if (powerUp.getPowerUpType() == PowerUpType.SHIELD) {
             return new ShieldView();
         } else {
-            return new LazerView();
+            return new CannonView();
         }
     }
 }

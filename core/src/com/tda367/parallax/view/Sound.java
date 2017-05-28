@@ -86,7 +86,7 @@ public class Sound implements AudioObserver {
 
     @Override
     public void clearAllActiveMusic() {
-        while (!(this.activeMusic.size() == 0)) {
+        while (this.activeMusic.size() != 0) {
             this.activeMusic.get(0).getMusicPlaying().stop();
             this.activeMusic.remove(0);
         }

@@ -13,8 +13,8 @@ public class ShieldView extends RenderablePowerUpBase implements RenderablePower
     private static final String SHIELD_3D_MODEL = "3dModels/shield/shield.g3db";
     private static final ParticleEffectType EXPLOSION = ParticleEffectType.EXPLOSION;
 
-    private Renderable3dObject shieldModel;
-    private RenderableParticleEffect explosion;
+    private final Renderable3dObject shieldModel;
+    private final RenderableParticleEffect explosion;
 
 
     private int deathTime;

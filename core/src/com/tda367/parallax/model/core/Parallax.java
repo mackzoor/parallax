@@ -42,8 +42,6 @@ public class Parallax {
     private String backgroundMusic;
     private String pauseMusic;
 
-    private final List<AbstractHunterAI> ais;
-
     public Parallax(Player player) {
         this.audioQueue = AudioQueue.getInstance();
 
@@ -58,8 +56,6 @@ public class Parallax {
         this.camera = new Camera();
         this.camera.trackTo(player.getSpaceCraft());
         this.player = player;
-
-        this.ais = new ArrayList<AbstractHunterAI>();
 
         //createTestEnemy();
 
@@ -91,16 +87,7 @@ public class Parallax {
     public void update(int milliSinceLastUpdate) {
         if (this.player.getSpaceCraft().getHealth() > 0) {
             if (!this.paused) {
-                int updateTime = milliSinceLastUpdate;
-
-                if (milliSinceLastUpdate > 100) {
-                    updateTime = 100;
-                }
-
-                for (final AbstractHunterAI ai : this.ais) {
-                    ai.update(updateTime);
-                }
-
+                int updateTime = getUpdateTime(milliSinceLastUpdate);
                 this.world.update(updateTime);
                 this.camera.update(updateTime);
                 calculatePlayerScore(milliSinceLastUpdate);
@@ -138,5 +125,9 @@ public class Parallax {
             this.audioQueue.playMusic("soundsGreat.mp3", MUSIC_DIRECTORY, 0.5f);
             this.backgroundMusic = "sounds/music/soundsGreat.mp3";
         }
+    }
+
+    private int getUpdateTime(int milliSinceLastUpdate) {
+        return (milliSinceLastUpdate > 100) ? 100 : milliSinceLastUpdate;
     }
 }

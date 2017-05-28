@@ -6,7 +6,7 @@ import com.tda367.parallax.view.rendering.Renderable3dObject;
 import com.tda367.parallax.view.rendering.RenderableParticleEffect;
 import com.tda367.parallax.view.rendering.Renderer3D;
 
-public class LazerView extends RenderablePowerUpBase implements RenderablePowerUp {
+public class CannonView extends RenderablePowerUpBase implements RenderablePowerUp {
     private static final String LAZER_3D_MODEL = "3dModels/laser/laser.g3db";
     private static final ParticleEffectType EXPLOSION = ParticleEffectType.EXPLOSION;
 
@@ -14,10 +14,10 @@ public class LazerView extends RenderablePowerUpBase implements RenderablePowerU
     private final RenderableParticleEffect explosion;
 
     private int deathTime;
-    private boolean effectsEnabled;
+    private final boolean effectsEnabled;
 
 
-    LazerView() {
+    CannonView() {
         super();
         this.renderable3dObject = new Renderable3dObject(
                 super.getPos(),

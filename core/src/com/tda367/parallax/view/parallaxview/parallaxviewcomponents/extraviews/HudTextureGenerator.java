@@ -90,10 +90,7 @@ public class HudTextureGenerator {
 
         //Dispose of c++ objects.
         font.dispose();
-        font = null;
         spriteBatch.dispose();
-        spriteBatch = null;
-
 
         return pMap;
     }

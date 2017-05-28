@@ -25,7 +25,7 @@ public class DefaultCourseModule implements ICourseModule {
     private List<IPowerUp> powerUps;
     private boolean active;
     private List<Container> containers;
-
+    private final Random rand;
 
     DefaultCourseModule(Vector3f pos, int obstacleAmmount, int powerupsToSpawn) {
         this.pos = pos;
@@ -36,6 +36,7 @@ public class DefaultCourseModule implements ICourseModule {
         this.containers = new ArrayList<Container>();
         this.length = 64;
         this.couseObstacles = new ArrayList<CourseObstacleBase>();
+        this.rand = new Random();
 
         addObstacles(obstacleAmmount);
 
@@ -61,7 +62,7 @@ public class DefaultCourseModule implements ICourseModule {
         for (int x = 0; x < amount; x++) {
             final Vector3f obstaclePos = new Vector3f(
                     0,
-                    this.pos.getY() - this.length / 2 + this.length * new Random().nextFloat(),
+                    this.pos.getY() - this.length / 2 + this.length * rand.nextFloat(),
                     0
             );
             final CourseObstacleBase obstacle = ObstacleFactory.getMovingBoxInstance(obstaclePos, true);

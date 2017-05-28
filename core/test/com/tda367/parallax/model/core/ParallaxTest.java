@@ -18,7 +18,7 @@ public class ParallaxTest {
 
     public ParallaxTest(){
         player = new Player();
-        player.addSpaceCraft(SpaceCraftFactory.getAgelionInstance(15));
+        player.setSpaceCraft(SpaceCraftFactory.getAgelionInstance(15));
         parallax = new Parallax(player);
     }
 

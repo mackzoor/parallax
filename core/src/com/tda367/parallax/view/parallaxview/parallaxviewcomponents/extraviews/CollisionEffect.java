@@ -21,8 +21,8 @@ public class CollisionEffect implements CollisionObserver {
 
     private final List<RenderableParticleEffect> activeEffects;
     private final CollisionManager collisionManager;
-    @Setter
     @Getter
+    @Setter
     private boolean enabled;
 
     public CollisionEffect() {

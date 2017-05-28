@@ -25,7 +25,7 @@ public class GameScreen extends ScreenAdapter {
     private final CollisionCalculator collisionCalculator;
     private ParallaxView parallaxView;
     private final ScreenChanger screenChanger;
-    private boolean particlesEnabled;
+    private final boolean particlesEnabled;
 
     public GameScreen(Player player, ScreenChanger screenChanger, boolean particlesEnabled) {
         super();
@@ -65,7 +65,7 @@ public class GameScreen extends ScreenAdapter {
     }
 
     public void newGame() {
-        this.player.addSpaceCraft(SpaceCraftFactory.getAgelionInstance(15));
+        this.player.setSpaceCraft(SpaceCraftFactory.getAgelionInstance(15));
         this.parallaxGame = new Parallax(this.player);
         this.parallaxView = new ParallaxView(this.parallaxGame, false, this.particlesEnabled);
         this.controller = new GameController(this.parallaxGame,

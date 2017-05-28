@@ -20,7 +20,7 @@ public class CardboardGameOverScreen extends CardboardScreenAdapter {
     private GameOverView view;
     private final Player player;
     private final ScreenChanger screenChanger;
-    private boolean particlesEnabled;
+    private final boolean particlesEnabled;
 
     public CardboardGameOverScreen(Player player, ScreenChanger screenChanger, boolean particlesEnabled) {
         super();
