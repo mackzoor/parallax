@@ -87,12 +87,6 @@ public class Missile extends PowerUpBase {
         }
     }
 
-    //Usable
-    @Override
-    public void use() {
-    }
-
-
     //TODO, remove the fact that missile moves faster towards things further away.
 
     @Override

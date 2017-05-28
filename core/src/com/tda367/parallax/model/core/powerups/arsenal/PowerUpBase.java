@@ -53,9 +53,6 @@ public abstract class PowerUpBase implements IPowerUp {
     }
 
     @Override
-    public abstract void use();
-
-    @Override
     public abstract CollidableType getCollidableType();
 
     @Override

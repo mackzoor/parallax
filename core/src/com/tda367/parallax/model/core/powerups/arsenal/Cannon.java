@@ -58,11 +58,6 @@ public class Cannon extends PowerUpBase {
     }
 
     @Override
-    public void use() {
-        //I can't remember what this was for....
-    }
-
-    @Override
     public void update(int milliSinceLastUpdate) {
         if (super.isActive()) {
 

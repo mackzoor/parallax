@@ -47,11 +47,6 @@ public class Shield extends PowerUpBase {
     }
 
     @Override
-    public void use() {
-
-    }
-
-    @Override
     public CollidableType getCollidableType() {
         return COLLIDABLE_TYPE;
     }
