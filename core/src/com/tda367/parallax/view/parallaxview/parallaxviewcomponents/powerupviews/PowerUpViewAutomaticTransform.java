@@ -1,7 +1,6 @@
 package com.tda367.parallax.view.parallaxview.parallaxviewcomponents.powerupviews;
 
 import com.tda367.parallax.model.core.powerups.arsenal.IPowerUp;
-import com.tda367.parallax.model.core.powerups.arsenal.PowerUpType;
 import com.tda367.parallax.view.parallaxview.parallaxviewcomponents.View;
 
 /**
@@ -41,14 +40,18 @@ public class PowerUpViewAutomaticTransform implements View {
 
 
     private RenderablePowerUp getRenderablePowerUp(IPowerUp powerUp) {
-        if (powerUp.getPowerUpType() == PowerUpType.LAZER) {
-            return new CannonView();
-        } else if (powerUp.getPowerUpType() == PowerUpType.MISSILE) {
-            return new MissileView();
-        } else if (powerUp.getPowerUpType() == PowerUpType.SHIELD) {
-            return new ShieldView();
-        } else {
-            return new CannonView();
+        RenderablePowerUp returnRenderablePowerUp;
+        switch (powerUp.getPowerUpType()) {
+            case LASER:
+                returnRenderablePowerUp = new CannonView();
+                break;
+            case MISSILE:
+                returnRenderablePowerUp = new MissileView();
+                break;
+            default:
+                returnRenderablePowerUp = new ShieldView();
+                break;
         }
+        return returnRenderablePowerUp;
     }
 }

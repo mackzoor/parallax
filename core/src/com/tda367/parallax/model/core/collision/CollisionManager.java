@@ -15,13 +15,11 @@ public final class CollisionManager {
 
     @Getter
     private final List<Collidable> collidables;
-    private final List<ICollisionCalculator> calculators;
     @Getter
     private final List<CollisionObserver> observers;
 
     private CollisionManager() {
         this.collidables = new ArrayList<Collidable>();
-        this.calculators = new ArrayList<ICollisionCalculator>();
         this.observers = new ArrayList<CollisionObserver>();
     }
 

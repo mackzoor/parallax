@@ -9,13 +9,12 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.tda367.parallax.model.core.Parallax;
 import com.tda367.parallax.model.core.powerups.arsenal.PowerUpType;
 
 import java.util.Locale;
 
 /**
- * Generates a dynamic texture for the player hud in the game {@link Parallax}.
+ * Generates a dynamic texture for the player hud.
  */
 public class HudTextureGenerator {
 

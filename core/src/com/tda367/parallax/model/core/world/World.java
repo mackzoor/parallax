@@ -46,33 +46,35 @@ public class World implements Updatable, CollisionObserver {
     }
 
     private float getFirstSpaceCraftYPosition() {
+        float yPosition;
         if (this.spaceCrafts.size() > 0) {
-            float yPosition = this.spaceCrafts.get(0).getPos().getY();
+            yPosition = this.spaceCrafts.get(0).getPos().getY();
             for (int i = 1; i < this.spaceCrafts.size(); i++) {
                 final float tempYPosition = this.spaceCrafts.get(i).getPos().getY();
                 if (tempYPosition > yPosition) {
                     yPosition = tempYPosition;
                 }
             }
-            return yPosition;
         } else {
-            return 0;
+            yPosition = 0;
         }
+        return yPosition;
     }
 
     private float getLastSpaceCraftYPosition() {
+        float yPosition;
         if (this.spaceCrafts.size() > 0) {
-            float yPosition = this.spaceCrafts.get(0).getPos().getY();
+            yPosition = this.spaceCrafts.get(0).getPos().getY();
             for (int i = 1; i < this.spaceCrafts.size(); i++) {
                 final float tempYPosition = this.spaceCrafts.get(i).getPos().getY();
                 if (tempYPosition < yPosition) {
                     yPosition = tempYPosition;
                 }
             }
-            return yPosition;
         } else {
-            return 0;
+            yPosition = 0;
         }
+        return yPosition;
     }
 
     private void updateModuleRange() {

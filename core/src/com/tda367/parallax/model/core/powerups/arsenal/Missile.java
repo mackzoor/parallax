@@ -11,6 +11,9 @@ import lombok.Setter;
 
 import javax.vecmath.Vector3f;
 
+import static com.tda367.parallax.model.core.collision.CollidableType.HARMFUL;
+import static com.tda367.parallax.model.core.collision.CollidableType.NEUTRAL;
+
 public class Missile extends PowerUpBase {
 
 
@@ -70,11 +73,7 @@ public class Missile extends PowerUpBase {
 
     @Override
     public CollidableType getCollidableType() {
-        if (this.timeStorage > TIME_TRACKING_TRANS) {
-            return CollidableType.HARMFUL;
-        } else {
-            return CollidableType.NEUTRAL;
-        }
+        return  this.timeStorage > TIME_TRACKING_TRANS ? HARMFUL : NEUTRAL;
     }
 
     @Override

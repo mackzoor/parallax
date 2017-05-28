@@ -10,10 +10,6 @@ import com.tda367.parallax.model.core.Player;
 
 public class Main extends Game {
 
-    public Main() {
-        super();
-    }
-
     @Override
     public void create() {
         Gdx.input.setCatchBackKey(true);

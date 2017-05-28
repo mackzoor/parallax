@@ -1,17 +1,11 @@
 package com.tda367.parallax.model.core;
 
-import com.tda367.parallax.model.core.enemies.AbstractHunterAI;
-import com.tda367.parallax.model.core.enemies.MinionEnemy;
 import com.tda367.parallax.model.core.spacecraft.ISpaceCraft;
-import com.tda367.parallax.model.core.spacecraft.SpaceCraftFactory;
 import com.tda367.parallax.model.core.world.World;
 import com.tda367.parallax.model.coreabstraction.AudioQueue;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.vecmath.Quat4f;
-import javax.vecmath.Vector3f;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -128,6 +122,6 @@ public class Parallax {
     }
 
     private int getUpdateTime(int milliSinceLastUpdate) {
-        return (milliSinceLastUpdate > 100) ? 100 : milliSinceLastUpdate;
+        return milliSinceLastUpdate > 100 ? 100 : milliSinceLastUpdate;
     }
 }

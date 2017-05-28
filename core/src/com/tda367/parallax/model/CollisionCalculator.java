@@ -74,19 +74,20 @@ public class CollisionCalculator implements ICollisionCalculator {
 
     @Override
     public CollisionResult checkCollision(Collidable first, Collidable second) {
-
+        CollisionResult result;
         if (!collisionCheckNeeded(first, second)) {
-            return noCollisionResult(first, second);
+            result = noCollisionResult(first, second);
+        } else {
+            clearLists();
+
+            final btPersistentManifold contactResult = processCollision(first, second);
+
+            final CollisionResult collisionResult = createResult(contactResult, first, second);
+            contactResult.dispose();
+
+            result = collisionResult;
         }
-
-        clearLists();
-
-        final btPersistentManifold contactResult = processCollision(first, second);
-
-        final CollisionResult collisionResult = createResult(contactResult, first, second);
-        contactResult.dispose();
-
-        return collisionResult;
+        return result;
     }
 
     private boolean collisionCheckNeeded(Collidable first, Collidable second) {
@@ -104,10 +105,10 @@ public class CollisionCalculator implements ICollisionCalculator {
     }
 
     private boolean isCraftOrHarmfulCollision(Collidable first, Collidable second) {
-        return (first.getCollidableType() == CollidableType.SPACECRAFT ||
+        return first.getCollidableType() == CollidableType.SPACECRAFT ||
                 first.getCollidableType() == CollidableType.HARMFUL ||
                 second.getCollidableType() == CollidableType.SPACECRAFT ||
-                second.getCollidableType() == CollidableType.HARMFUL);
+                second.getCollidableType() == CollidableType.HARMFUL;
     }
 
     private btPersistentManifold processCollision(Collidable first, Collidable second) {

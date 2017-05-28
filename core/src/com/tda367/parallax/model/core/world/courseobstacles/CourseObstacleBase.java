@@ -4,14 +4,13 @@ import com.tda367.parallax.model.core.collision.Collidable;
 import com.tda367.parallax.model.core.collision.CollidableType;
 import com.tda367.parallax.model.core.collision.CollisionManager;
 import com.tda367.parallax.model.core.util.Updatable;
-import com.tda367.parallax.model.core.world.ICourseModule;
 import lombok.Getter;
 
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
 
 /**
- * Base class for all course obstacles in {@link ICourseModule}'s.
+ * Base class for all course obstacles.
  */
 public abstract class CourseObstacleBase implements Collidable, Updatable {
 

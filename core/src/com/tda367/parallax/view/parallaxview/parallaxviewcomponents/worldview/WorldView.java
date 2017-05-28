@@ -6,13 +6,10 @@ import com.tda367.parallax.model.core.spacecraft.ISpaceCraft;
 import com.tda367.parallax.model.core.world.ICourseModule;
 import com.tda367.parallax.model.core.world.World;
 import com.tda367.parallax.view.parallaxview.parallaxviewcomponents.View;
-import com.tda367.parallax.view.parallaxview.parallaxviewcomponents.menu.BackgroundView;
 import com.tda367.parallax.view.parallaxview.parallaxviewcomponents.powerupviews.PowerUpViewAutomaticTransform;
 import com.tda367.parallax.view.parallaxview.parallaxviewcomponents.spacecraftviews.SpaceCraftAutomaticTransform;
 import com.tda367.parallax.view.parallaxview.parallaxviewcomponents.worldview.courseviews.CourseModelView;
-import com.tda367.parallax.view.rendering.Renderable3dObject;
 
-import javax.vecmath.Vector3f;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

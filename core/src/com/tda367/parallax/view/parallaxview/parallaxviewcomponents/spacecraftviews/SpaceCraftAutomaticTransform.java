@@ -1,7 +1,6 @@
 package com.tda367.parallax.view.parallaxview.parallaxviewcomponents.spacecraftviews;
 
 import com.tda367.parallax.model.core.spacecraft.ISpaceCraft;
-import com.tda367.parallax.model.core.spacecraft.SpaceCraftType;
 import com.tda367.parallax.view.parallaxview.parallaxviewcomponents.View;
 
 public class SpaceCraftAutomaticTransform implements View {
@@ -35,10 +34,15 @@ public class SpaceCraftAutomaticTransform implements View {
 
 
     private RenderableSpaceCraft getRenderableSpaceCraft(ISpaceCraft spaceCraft) {
-        if (spaceCraft.getType() == SpaceCraftType.AGELION) {
-            return new AgelionView();
-        } else {
-            return new AgelionView();
+        RenderableSpaceCraft returnCraft;
+        switch (spaceCraft.getType()) {
+            case AGELION:
+                returnCraft = new AgelionView();
+                break;
+            default:
+                returnCraft = new AgelionView();
+                break;
         }
+        return returnCraft;
     }
 }

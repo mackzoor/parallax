@@ -25,20 +25,20 @@ public final class PowerUpFactory {
         return new Shield();
     }
 
-    /**
-     * @return a random powerUp.
-     */
-    public static IPowerUp createRandom() {
-        final int randomNumber = (int) (RAND.nextFloat() * 3);
-
-        if (randomNumber == 0) {
-            return createCannon();
-        } else if (randomNumber == 1) {
-            return createMissile();
-        } else if (randomNumber == 2) {
-            return createShield();
-        } else {
-            return createMissile();
+    public static IPowerUp createRandomPowerUp() {
+        final int randomInt = RAND.nextInt(3);
+        IPowerUp returnPowerUp;
+        switch (randomInt) {
+            case 0:
+                returnPowerUp = createCannon();
+                break;
+            case 1:
+                returnPowerUp = createMissile();
+                break;
+            default:
+                returnPowerUp = createShield();
+                break;
         }
+        return returnPowerUp;
     }
 }

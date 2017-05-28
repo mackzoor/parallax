@@ -1,7 +1,5 @@
 package com.tda367.parallax.model.core.world.courseobstacles;
 
-import com.tda367.parallax.model.core.collision.CollidableType;
-import com.tda367.parallax.model.core.powerups.arsenal.Cannon;
 import com.tda367.parallax.model.core.powerups.arsenal.IPowerUp;
 import com.tda367.parallax.model.core.powerups.arsenal.PowerUpFactory;
 import com.tda367.parallax.model.core.spacecraft.Agelion;
@@ -18,7 +16,7 @@ public class CourseObstacleBaseTest {
 
     CourseObstacleBase courseObstacle = new WallObstacle(new Vector3f(),new Quat4f());
     Agelion agelion = SpaceCraftFactory.getAgelionInstance(10);
-    IPowerUp powerUp = PowerUpFactory.createRandom();
+    IPowerUp powerUp = PowerUpFactory.createRandomPowerUp();
     @Test
 
     public void handleCollision() throws Exception {

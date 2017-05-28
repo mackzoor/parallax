@@ -9,7 +9,7 @@ import java.util.Random;
  */
 public final class ObstacleFactory {
 
-    private static Random random = new Random();
+    private static Random rand = new Random();
 
     private ObstacleFactory() {
     }
@@ -53,23 +53,23 @@ public final class ObstacleFactory {
     }
 
     public static WallObstacle getRandomWallInstance(Vector3f pos) {
-        final Random rand = new Random();
-
-        final int randomInt = (int) (rand.nextFloat() * 5);
-
-
-        if (randomInt == 0) {
-            return getBottomWallInstance(pos);
-        } else if (randomInt == 1) {
-            return getLeftWallInstance(pos);
-        } else if (randomInt == 2) {
-            return getRightWallInstance(pos);
-        } else if (randomInt == 3) {
-            return getTopWallInstance(pos);
-        } else {
-            return getMovingWallObstacle(pos);
-
+        final int randomInt = rand.nextInt(4);
+        WallObstacle returnWall;
+        switch (randomInt) {
+            case 0:
+                returnWall = getBottomWallInstance(pos);
+                break;
+            case 1:
+                returnWall = getLeftWallInstance(pos);
+                break;
+            case 2:
+                returnWall = getRightWallInstance(pos);
+                break;
+            default:
+                returnWall = getTopWallInstance(pos);
+                break;
         }
+        return returnWall;
     }
 }
 

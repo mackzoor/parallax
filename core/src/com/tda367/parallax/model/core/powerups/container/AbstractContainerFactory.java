@@ -28,7 +28,7 @@ abstract class AbstractContainerFactory {
      * @return the created Container with random powerUp.
      */
     public static IContainer createRandomContainer() {
-        final IPowerUp powerUp = PowerUpFactory.createRandom();
+        final IPowerUp powerUp = PowerUpFactory.createRandomPowerUp();
         return createContainer(powerUp);
     }
 

@@ -40,11 +40,16 @@ public class SpaceCraftManualTransform implements View {
 
 
     private RenderableSpaceCraft getRenderableSpaceCraft(SpaceCraftType type) {
-        if (type == SpaceCraftType.AGELION) {
-            return new AgelionView();
-        } else {
-            return new AgelionView();
+        RenderableSpaceCraft returnCraft;
+        switch (type) {
+            case AGELION:
+                returnCraft = new AgelionView();
+                break;
+            default:
+                returnCraft = new AgelionView();
+                break;
         }
+        return returnCraft;
     }
 
 }

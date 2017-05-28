@@ -17,15 +17,18 @@ public final class GamePadFactory {
     }
 
     public static GamePad getGamePad(String gamePadName) {
+        GamePad returnGamePad;
         final String lowerCaseName = gamePadName.toLowerCase(Locale.ENGLISH);
         if (Gdx.app.getType() == Application.ApplicationType.Android) {
-            return new com.tda367.parallax.model.gamepads.AndroidGamePad();
+            returnGamePad = new AndroidGamePad();
         } else if (lowerCaseName.contains("playstation") && lowerCaseName.contains("3")) {
-            return new com.tda367.parallax.model.gamepads.Playstation3GamePad();
+            returnGamePad = new Playstation3GamePad();
         } else if (lowerCaseName.contains("xbox") && lowerCaseName.contains("360")) {
-            return new com.tda367.parallax.model.gamepads.Xbox360GamePad();
+            returnGamePad = new Xbox360GamePad();
         } else {
-            return null;
+            //TODO should cast exception
+            returnGamePad = null;
         }
+        return returnGamePad;
     }
 }

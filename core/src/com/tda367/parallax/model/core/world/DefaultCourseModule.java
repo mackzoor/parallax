@@ -56,7 +56,6 @@ public class DefaultCourseModule implements ICourseModule {
     }
 
     private List<CourseObstacleBase> createBoxes(int amount) {
-        final float distanceBetween = this.length / (float) amount;
 
         final List<CourseObstacleBase> boxes = new ArrayList<CourseObstacleBase>();
         for (int x = 0; x < amount; x++) {
@@ -144,7 +143,7 @@ public class DefaultCourseModule implements ICourseModule {
     }
 
     private void spawnPowerUp() {
-        final IPowerUp pu = PowerUpFactory.createRandom();
+        final IPowerUp pu = PowerUpFactory.createRandomPowerUp();
         this.powerUps.add(pu);
         final Container container = new Container(pu);
         final Random rand = new Random();

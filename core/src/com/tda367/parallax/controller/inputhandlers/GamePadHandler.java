@@ -79,12 +79,8 @@ public final class GamePadHandler extends ControllerAdapter {
         if (this.listener != null) {
             if (axisCode == this.gamePad.getXAxisJoystickCode()) {
                 this.listener.xAxisJoystickMovement(this.gamePad.xAxisValueConverter(roundedValue));
-                return false;
-            }
-
-            if (axisCode == this.gamePad.getYAxisJoystickCode()) {
+            } else if (axisCode == this.gamePad.getYAxisJoystickCode()) {
                 this.listener.yAxisJoystickMovement(this.gamePad.yAxisValueConverter(roundedValue));
-                return false;
             }
         }
 

@@ -11,10 +11,6 @@ import com.tda367.parallax.model.core.Player;
 
 public class CardboardMain extends CardboardGame {
 
-    CardboardMain() {
-        super();
-    }
-
     @Override
     public void create() {
         final Player player = new Player("No Name");
