@@ -33,6 +33,10 @@ Class makes reference to unresolvable class or method
 Avoid inline conditionals
 Correctness method performs math using floating point precision
 Method concatenates strings using + in a loop.
+Unused private fields
+Immutable fields
+Uncommented empty method
+
 
 Removed after being thoroughly analyzed and fixed to desirable level.
 
@@ -44,6 +48,7 @@ Abstract naming
 Abstract class name
 Missing constructor
 A class which only has private constructors should be final
-
+Missing constructor
+Short variable
 
 

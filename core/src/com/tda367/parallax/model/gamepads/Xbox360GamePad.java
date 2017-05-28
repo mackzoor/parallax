@@ -22,7 +22,9 @@ public final class Xbox360GamePad implements GamePad {
     private static final int LEFT_JOYSTICK_X = 1;
     private static final int LEFT_JOYSTICK_Y = 0;
 
-    Xbox360GamePad() {}
+    Xbox360GamePad() {
+
+    }
 
     @Override
     public int getActionButtonCode() {

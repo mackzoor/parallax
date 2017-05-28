@@ -16,7 +16,9 @@ public final class Playstation3GamePad implements GamePad {
     private static final int LEFT_JOYSTICK_X = 0;
     private static final int LEFT_JOYSTICK_Y = 1;
 
-    Playstation3GamePad() {}
+    Playstation3GamePad() {
+
+    }
 
     @Override
     public int getActionButtonCode() {
