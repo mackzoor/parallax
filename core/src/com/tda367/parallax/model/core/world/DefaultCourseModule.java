@@ -148,9 +148,9 @@ public class DefaultCourseModule implements ICourseModule {
     }
 
     private void spawnPowerUp() {
-        final IPowerUp pu = PowerUpFactory.createRandomPowerUp();
-        this.powerUps.add(pu);
-        final Container container = new Container(pu);
+        final IPowerUp powerUp = PowerUpFactory.createRandomPowerUp();
+        this.powerUps.add(powerUp);
+        final Container container = new Container(powerUp);
         final Random rand = new Random();
         container.setPos(new Vector3f(0, getPos().getY() + rand.nextFloat() * this.length, 0));
         container.addToCollisionManager();

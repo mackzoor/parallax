@@ -103,8 +103,8 @@ public class MainMenuView {
             }
         }
 
-        for (final View v : obsolete) {
-            hash.remove(v);
+        for (final View view : obsolete) {
+            hash.remove(view);
         }
 
         final List<T> missing = new ArrayList<T>();

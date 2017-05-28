@@ -22,7 +22,7 @@ import java.util.List;
 public abstract class SpaceCraft implements ISpaceCraft {
     private static final int SEC_TO_MILLISEC = 1000;
     private static final int MAX_NUMBER_OF_POWER_UPS = 4;
-    private static final float FLOAT_ROUNDING_COMPENSATOR = 49f/50f;
+    private static final float FLOAT_ROUNDING_COMPENSATOR = 49f / 50f;
     private static final float COURSE_RADIUS = 5;
 
     @Getter
@@ -231,20 +231,20 @@ public abstract class SpaceCraft implements ISpaceCraft {
     }
 
     @Override
-    public void add(IPowerUp singlePu) {
+    public void add(IPowerUp powerUp) {
         if (this.powerUps.size() <= 0) {
-            this.powerUps.add(singlePu);
+            this.powerUps.add(powerUp);
         } else if (
-                this.powerUps.get(0).getClass().equals(singlePu.getClass())
+                this.powerUps.get(0).getClass().equals(powerUp.getClass())
                         && this.powerUps.size() < MAX_NUMBER_OF_POWER_UPS) {
-            this.powerUps.add(singlePu);
+            this.powerUps.add(powerUp);
         }
     }
 
     @Override
     public void add(List<IPowerUp> listOfPowerUps) {
-        for (final IPowerUp pu : listOfPowerUps) {
-            this.add(pu);
+        for (final IPowerUp powerUp : listOfPowerUps) {
+            this.add(powerUp);
         }
     }
 

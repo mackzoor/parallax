@@ -40,10 +40,6 @@ public class GameOverScreen extends ScreenAdapter {
     }
 
     @Override
-    public void resize(int width, int height) {
-    }
-
-    @Override
     public void dispose() {
         this.view.dispose();
     }

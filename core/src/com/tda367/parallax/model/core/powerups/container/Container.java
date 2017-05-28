@@ -33,8 +33,8 @@ public class Container implements IContainer {
     @Getter
     private boolean isCollected;
 
-    public Container(IPowerUp pu) {
-        this.powerUp = pu;
+    public Container(IPowerUp powerUp) {
+        this.powerUp = powerUp;
 
         this.pos = new Vector3f();
         this.rot = new Quat4f();

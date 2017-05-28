@@ -89,7 +89,4 @@ public class HudTextureGenerator {
 
         return pMap;
     }
-
-    public void dispose() {
-    }
 }

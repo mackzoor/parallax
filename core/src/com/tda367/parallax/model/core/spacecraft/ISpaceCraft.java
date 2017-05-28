@@ -23,7 +23,7 @@ public interface ISpaceCraft extends Collidable, Updatable {
 
     void action();
 
-    void add(IPowerUp pu);
+    void add(IPowerUp powerUp);
 
     void add(List<IPowerUp> listOfPowerUps);
 

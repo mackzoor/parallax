@@ -46,8 +46,4 @@ public class GameOverView {
         }
         Renderer3D.getInstance().renderFrame();
     }
-
-    public void dispose() {
-
-    }
 }

@@ -24,11 +24,6 @@ public class MainMenuController extends InputControlsAdapter {
     }
 
     @Override
-    public void actionButtonPressed() {
-
-    }
-
-    @Override
     public void yAxisJoystickMovement(float yValue) {
         if (yValue > 0) {
             upButtonDown();
