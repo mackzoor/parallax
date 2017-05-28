@@ -60,6 +60,6 @@ public class ContainerView {
     }
 
     public boolean isCollected() {
-        return !this.container.isCollected();
+        return this.container.isCollected();
     }
 }
