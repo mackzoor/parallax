@@ -19,6 +19,10 @@ import java.util.List;
  */
 
 public class World implements Updatable, CollisionObserver {
+
+    private static final int MODULE_LENGTH = 64;
+    private static final int RENDER_LIMIT = 256;
+
     @Getter
     private final List<ICourseModule> modules;
     @Getter
@@ -87,8 +91,8 @@ public class World implements Updatable, CollisionObserver {
                     + this.modules.get(this.modules.size() - 1).getLength();
             final float lastModule = this.modules.get(0).getPos().getY();
 
-            final int modulesToAdd = (int) ((firstCraft + 256 - firstModule) / 64);
-            final int modulesToRemove = (int) ((lastCraft - lastModule) / 128);
+            final int modulesToAdd = (int) (firstCraft + RENDER_LIMIT - firstModule)/MODULE_LENGTH;
+            final int modulesToRemove = (int) ((lastCraft - lastModule) / (RENDER_LIMIT / 2));
 
 
             addModules(modulesToAdd);

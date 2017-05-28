@@ -1,7 +1,11 @@
 package com.tda367.parallax.view.parallaxview.parallaxviewcomponents.extraviews;
 
 
-import com.tda367.parallax.model.core.collision.*;
+import com.tda367.parallax.model.core.collision.Collidable;
+import com.tda367.parallax.model.core.collision.CollidableType;
+import com.tda367.parallax.model.core.collision.CollisionManager;
+import com.tda367.parallax.model.core.collision.CollisionObserver;
+import com.tda367.parallax.model.core.collision.CollisionResult;
 import com.tda367.parallax.view.rendering.ParticleEffectType;
 import com.tda367.parallax.view.rendering.RenderableParticleEffect;
 import com.tda367.parallax.view.rendering.Renderer3D;
@@ -13,7 +17,10 @@ import javax.vecmath.Vector3f;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.tda367.parallax.model.core.collision.CollidableType.*;
+import static com.tda367.parallax.model.core.collision.CollidableType.CONTAINER;
+import static com.tda367.parallax.model.core.collision.CollidableType.HARMFUL;
+import static com.tda367.parallax.model.core.collision.CollidableType.OBSTACLE;
+
 
 /**
  * Listens to collisions and creates explosion effects at the location.

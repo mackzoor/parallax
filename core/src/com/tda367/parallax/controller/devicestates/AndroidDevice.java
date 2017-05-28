@@ -1,7 +1,12 @@
 package com.tda367.parallax.controller.devicestates;
 
-import com.tda367.parallax.controller.inputhandlers.*;
+import com.tda367.parallax.controller.inputhandlers.GamePadHandler;
+import com.tda367.parallax.controller.inputhandlers.InputControlsListener;
+import com.tda367.parallax.controller.inputhandlers.TouchHandler;
+import com.tda367.parallax.controller.inputhandlers.TouchPadHandler;
 import com.tda367.parallax.view.parallaxview.TouchPadView;
+
+import static com.tda367.parallax.controller.inputhandlers.ControllerMode.GAMEMODE;
 
 /**
  * Manages the input-handlers for Android devices.
@@ -20,7 +25,7 @@ class AndroidDevice implements Device {
 
     @Override
     public void addInputDevices(InputControlsListener listener) {
-        if (listener.getControllerMode() == ControllerMode.GAMEMODE) {
+        if (listener.getControllerMode() == GAMEMODE) {
             initiateGameController(listener);
         } else {
             initiateTouchController(listener);

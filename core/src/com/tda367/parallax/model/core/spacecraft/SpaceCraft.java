@@ -21,6 +21,7 @@ import java.util.List;
  */
 public abstract class SpaceCraft implements ISpaceCraft {
     private final static int SEC_TO_MILLISEC = 1000;
+    private final static float FLOAT_ROUNDING_COMPENSATOR = 49f / 50f;
     private static final float COURSE_RADIUS = 5;
 
     @Getter
@@ -91,13 +92,13 @@ public abstract class SpaceCraft implements ISpaceCraft {
     }
 
     @Override
-    public synchronized void setForwardSpeedTarget(float speed) {
+    public void setForwardSpeedTarget(float speed) {
         this.forwardTargetSpeed = speed;
         this.forwardRelativeVelocityMode = false;
     }
 
     @Override
-    public synchronized void setForwardAcceleration(float accelerate) {
+    public void setForwardAcceleration(float accelerate) {
         this.forwardAcceleration = accelerate;
         this.forwardRelativeVelocityMode = true;
     }
@@ -162,7 +163,7 @@ public abstract class SpaceCraft implements ISpaceCraft {
             final Vector2f tempVec = this.xzPos(getPos());
             tempVec.normalize();
             //Too compensate for rounding of float
-            tempVec.scale((49f / 50f) * COURSE_RADIUS);
+            tempVec.scale(FLOAT_ROUNDING_COMPENSATOR * COURSE_RADIUS);
             getPos().set(new Vector3f(tempVec.getX(), getPos().getY(), tempVec.getY()));
         }
     }

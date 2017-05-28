@@ -1,10 +1,17 @@
 package com.tda367.parallax.controller;
 
-import com.tda367.parallax.controller.screens.*;
+import com.tda367.parallax.controller.screens.CardboardGameOverScreen;
+import com.tda367.parallax.controller.screens.CardboardGameScreen;
+import com.tda367.parallax.controller.screens.CardboardMenuScreen;
+import com.tda367.parallax.controller.screens.ScreenChanger;
+import com.tda367.parallax.controller.screens.ScreenState;
 import com.tda367.parallax.controller.screens.cardboardadapter.CardboardGame;
 import com.tda367.parallax.model.core.Player;
 
-import static com.tda367.parallax.controller.screens.ScreenState.*;
+import static com.tda367.parallax.controller.screens.ScreenState.GAME;
+import static com.tda367.parallax.controller.screens.ScreenState.GAME_OVER;
+import static com.tda367.parallax.controller.screens.ScreenState.MAIN_MENU;
+
 
 /**
  * Tells its {@link CardboardGame} whether to show a {@link CardboardMenuScreen},
