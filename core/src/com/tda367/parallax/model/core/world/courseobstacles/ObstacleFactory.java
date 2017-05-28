@@ -37,7 +37,7 @@ public final class ObstacleFactory {
     }
 
     private static WallObstacle crazyWall(Vector3f pos) {
-        return new WallObstacle(pos, new Quat4f(0, random.nextFloat(), 0, random.nextFloat()));
+        return new WallObstacle(pos, new Quat4f(0, -random.nextFloat(), 0, random.nextFloat()));
     }
 
     private static WallObstacle getRightWallInstance(Vector3f pos) {
@@ -53,26 +53,27 @@ public final class ObstacleFactory {
     }
 
     private static MovingWallObstacle getMovingWallObstacle(Vector3f pos) {
-        return new MovingWallObstacle(pos, new Quat4f(0, 0,0 ,1));
+        return new MovingWallObstacle(pos, new Quat4f(0, 0, 0, 1));
     }
 
     public static WallObstacle getRandomWallInstance(Vector3f pos) {
-        /*int randomInt = (int) (rand.nextFloat() * 5);
+        final Random rand = new Random();
+
+        int randomInt = (int) (rand.nextFloat() * 5);
 
 
         if (randomInt == 0) {
-            return getTopWallInstance(pos);
-        } else if (randomInt == 1) {
-            return getRightWallInstance(pos);
-        } else if (randomInt == 2) {
             return getBottomWallInstance(pos);
-        } else if(randomInt == 3) {
+        } else if (randomInt == 1) {
             return getLeftWallInstance(pos);
-        }else{
-            return crazyWall(pos);
-            */
-        return getMovingWallObstacle(pos);
+        } else if (randomInt == 2) {
+            return getRightWallInstance(pos);
+        } else if (randomInt == 3) {
+            return getTopWallInstance(pos);
+        } else {
+            return getMovingWallObstacle(pos);
 
+        }
     }
 }
 
