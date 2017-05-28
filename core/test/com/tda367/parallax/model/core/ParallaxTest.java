@@ -2,7 +2,6 @@ package com.tda367.parallax.model.core;
 
 import com.tda367.parallax.model.core.spacecraft.SpaceCraftFactory;
 import com.tda367.parallax.model.core.world.World;
-import com.tda367.parallax.model.coreabstraction.AudioQueue;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -12,12 +11,11 @@ public class ParallaxTest {
     Player player;
     World world;
     Camera camera;
-    AudioQueue audioQueue;
     boolean gameOver;
     Parallax parallax;
 
     public ParallaxTest(){
-        player = new Player();
+        player = new Player("test");
         player.setSpaceCraft(SpaceCraftFactory.getAgelionInstance(15));
         parallax = new Parallax(player);
     }

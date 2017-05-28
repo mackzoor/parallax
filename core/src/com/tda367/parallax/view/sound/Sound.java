@@ -1,52 +1,49 @@
-package com.tda367.parallax.view;
+package com.tda367.parallax.view.sound;
 
 import com.badlogic.gdx.audio.Music;
-import com.tda367.parallax.model.coreabstraction.AudioObserver;
-import com.tda367.parallax.model.coreabstraction.AudioQueue;
 import com.tda367.parallax.utilities.ResourceLoader;
 import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/*
-*   Class that calls upon the resource loader to interact with the sound.
+/**
+ * Class that calls upon the resource loader to interact with the sound.
  */
-
-
-public class Sound implements AudioObserver {
+public class Sound {
 
     private final ResourceLoader resources;
 
     private final List<ActiveMusicCombination> activeMusic = new ArrayList<ActiveMusicCombination>();
 
-    public Sound() {
-        this.resources = ResourceLoader.getInstance();
-        AudioQueue.getInstance().addAudioListener(this);
+    private static Sound instance;
+
+    public static Sound getInstance() {
+        if (instance == null) {
+            instance = new Sound();
+        }
+        return instance;
     }
 
-
-    //AudioObserver methods
+    private Sound() {
+        this.resources = ResourceLoader.getInstance();
+    }
 
     //Methods for playing music or sound using its data location (directory\fileName).
-    @Override
     public void playSound(String soundLocation) {
         this.resources.getSound(soundLocation).play();
     }
 
-    @Override
     public void playMusic(String musicLocation) {
         final Music playing = this.resources.getMusic(musicLocation);
         playing.play();
         this.activeMusic.add(new ActiveMusicCombination(musicLocation, playing));
     }
 
-    @Override
     public void playSound(String soundLocation, float volume) {
         this.resources.getSound(soundLocation).play(volume);
     }
 
-    @Override
     public void playMusic(String musicLocation, float volume) {
         final Music playing = this.resources.getMusic(musicLocation);
         playing.setVolume(volume);
@@ -56,7 +53,6 @@ public class Sound implements AudioObserver {
     }
 
     //Methods interacting with active music. Either Stop, Pause, Un-pause or clear it.
-    @Override
     public void stopActiveMusic(String fileNameAndDirectory) {
         for (int i = 0; i < this.activeMusic.size(); i++) {
             if (this.activeMusic.get(i).getFileName().equals(fileNameAndDirectory)) {
@@ -66,7 +62,6 @@ public class Sound implements AudioObserver {
         }
     }
 
-    @Override
     public void pauseActiveMusic(String fileNameAndDirectory) {
         for (int i = 0; i < this.activeMusic.size(); i++) {
             if (this.activeMusic.get(i).getFileName().equals(fileNameAndDirectory)) {
@@ -75,7 +70,6 @@ public class Sound implements AudioObserver {
         }
     }
 
-    @Override
     public void unPauseActiveMusic(String fileNameAndDirectory) {
         for (int i = 0; i < this.activeMusic.size(); i++) {
             if (this.activeMusic.get(i).getFileName().equals(fileNameAndDirectory)) {
@@ -84,7 +78,6 @@ public class Sound implements AudioObserver {
         }
     }
 
-    @Override
     public void clearAllActiveMusic() {
         while (this.activeMusic.size() != 0) {
             this.activeMusic.get(0).getMusicPlaying().stop();

@@ -6,7 +6,6 @@ import com.tda367.parallax.model.core.collision.CollisionManager;
 import com.tda367.parallax.model.core.powerups.arsenal.IPowerUp;
 import com.tda367.parallax.model.core.powerups.arsenal.PowerUpType;
 import com.tda367.parallax.model.core.powerups.container.IContainer;
-import com.tda367.parallax.model.coreabstraction.AudioQueue;
 import com.tda367.parallax.utilities.MathUtilities;
 import lombok.Getter;
 import lombok.Setter;
@@ -307,7 +306,6 @@ public abstract class SpaceCraft implements ISpaceCraft {
     public void handleCollision(Collidable collidable) {
         if (collidable.getCollidableType() == CollidableType.OBSTACLE || collidable.getCollidableType() == CollidableType.HARMFUL) {
             //Take damage if collided with obstacle or harmful
-            AudioQueue.getInstance().playSound("flashBang.mp3", "sounds/effects", 0.2f);
             this.decHealth();
         } else if (collidable.getCollidableType() == com.tda367.parallax.model.core.collision.CollidableType.CONTAINER) {
             //take powerup of collided with container

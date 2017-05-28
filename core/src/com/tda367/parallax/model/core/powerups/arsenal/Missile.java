@@ -4,7 +4,6 @@ package com.tda367.parallax.model.core.powerups.arsenal;
 import com.tda367.parallax.model.core.collision.Collidable;
 import com.tda367.parallax.model.core.collision.CollidableType;
 import com.tda367.parallax.model.core.util.Transformable;
-import com.tda367.parallax.model.coreabstraction.AudioQueue;
 import com.tda367.parallax.utilities.MathUtilities;
 import lombok.Getter;
 import lombok.Setter;
@@ -55,7 +54,6 @@ public class Missile extends PowerUpBase {
 
         this.enemyTargetPosition.set(new Vector3f(super.getPos()));
         this.enemyTargetPosition.add(new Vector3f(0, 100, 20));
-        playMissileSound();
 
         this.posLastUpdate = new Vector3f(transformable.getPos());
         super.getPos().set(this.transformable.getPos());
@@ -183,9 +181,4 @@ public class Missile extends PowerUpBase {
                 (directionalVector.getZ() * (float) milliSinceLastUpdate / 1000) * VELOCITY_MULTIPLIER_Z));
         this.setRot(MathUtilities.vectorToQuat(directionalVector));
     }
-
-    private void playMissileSound() {
-        AudioQueue.getInstance().playSound("MissileDemo.mp3", "sounds/effects", 0.7f);
-    }
-
 }

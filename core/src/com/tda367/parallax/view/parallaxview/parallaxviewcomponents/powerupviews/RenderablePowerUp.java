@@ -4,6 +4,8 @@ import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
 
 interface RenderablePowerUp {
+    void playActivationSound();
+
     void render();
 
     void kill();

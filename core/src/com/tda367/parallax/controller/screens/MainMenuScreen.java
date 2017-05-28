@@ -8,9 +8,7 @@ import com.tda367.parallax.controller.devicestates.DeviceManager;
 import com.tda367.parallax.model.CollisionCalculator;
 import com.tda367.parallax.model.core.Player;
 import com.tda367.parallax.model.core.collision.CollisionManager;
-import com.tda367.parallax.model.coreabstraction.AudioQueue;
 import com.tda367.parallax.model.menu.MainMenu;
-import com.tda367.parallax.view.Sound;
 import com.tda367.parallax.view.parallaxview.MainMenuView;
 
 import static com.tda367.parallax.controller.screens.ScreenState.GAME;
@@ -21,9 +19,7 @@ public class MainMenuScreen extends ScreenAdapter {
     private MainMenu model;
     private MainMenuController controller;
     private MainMenuView view;
-    private final Sound sound;
     private final CollisionCalculator collisionCalculator;
-    private final AudioQueue audioQueue;
     private final ScreenChanger screenChanger;
     private final boolean particlesEnabled;
 
@@ -32,8 +28,6 @@ public class MainMenuScreen extends ScreenAdapter {
         this.particlesEnabled = particlesEnabled;
         this.player = player;
         this.screenChanger = screenChanger;
-        this.sound = new Sound();
-        this.audioQueue = AudioQueue.getInstance();
         this.collisionCalculator = new CollisionCalculator();
     }
 

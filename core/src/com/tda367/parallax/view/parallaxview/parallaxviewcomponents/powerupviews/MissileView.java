@@ -5,6 +5,7 @@ import com.tda367.parallax.view.rendering.ParticleEffectType;
 import com.tda367.parallax.view.rendering.Renderable3dObject;
 import com.tda367.parallax.view.rendering.RenderableParticleEffect;
 import com.tda367.parallax.view.rendering.Renderer3D;
+import com.tda367.parallax.view.sound.Sound;
 
 import javax.vecmath.Vector3f;
 
@@ -38,12 +39,21 @@ public class MissileView extends RenderablePowerUpBase implements RenderablePowe
         this.deathTime = 0;
     }
 
+    private void playMissileSound() {
+        Sound.getInstance().playSound("sounds/effects/MissileDemo.mp3", 0.7f);
+    }
+
     private void updateTranformation() {
         this.renderable3dObject.setPos(super.getPos());
         this.renderable3dObject.setRot(super.getRot());
 
         this.rocketTrail.setPosition(super.getPos());
         this.explosion.setPosition(super.getPos());
+    }
+
+    @Override
+    public void playActivationSound() {
+        playMissileSound();
     }
 
     @Override

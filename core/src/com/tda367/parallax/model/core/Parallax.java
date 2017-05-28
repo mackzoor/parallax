@@ -2,7 +2,6 @@ package com.tda367.parallax.model.core;
 
 import com.tda367.parallax.model.core.spacecraft.ISpaceCraft;
 import com.tda367.parallax.model.core.world.World;
-import com.tda367.parallax.model.coreabstraction.AudioQueue;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,8 +17,6 @@ public class Parallax {
     private static Random rand = new Random();
     private static final String MUSIC_DIRECTORY = "sounds/music";
 
-
-    private final AudioQueue audioQueue;
     @Getter
     private boolean gameOver;
     @Getter
@@ -33,12 +30,9 @@ public class Parallax {
     private int totalPlayingTime;
     @Getter
     private boolean paused;
-    private String backgroundMusic;
-    private String pauseMusic;
+
 
     public Parallax(Player player) {
-        this.audioQueue = AudioQueue.getInstance();
-
         this.gameOver = false;
         this.paused = false;
 
@@ -52,30 +46,10 @@ public class Parallax {
         this.player = player;
 
         //createTestEnemy();
-
-        startBackgroundMusic();
     }
 
     public void setPaused(Boolean paused) {
         this.paused = paused;
-
-        if (paused) {
-            AudioQueue.getInstance().pauseActiveMusic(this.backgroundMusic);
-
-            final int randomSong = rand.nextInt(100 - 1 + 1) + 1;
-
-            if (randomSong == -1) {
-                this.pauseMusic = "sounds/music/spanishFlea.mp3";
-                AudioQueue.getInstance().playMusic("spanishFlea.mp3", MUSIC_DIRECTORY, 0.7f);
-            } else {
-                this.pauseMusic = "sounds/music/spaceInTime.mp3";
-                AudioQueue.getInstance().playMusic("spaceInTime.mp3", MUSIC_DIRECTORY, 0.7f);
-            }
-        } else {
-            AudioQueue.getInstance().unPauseActiveMusic(this.backgroundMusic);
-
-            AudioQueue.getInstance().stopActiveMusic(this.pauseMusic);
-        }
     }
 
     public void update(int milliSinceLastUpdate) {
@@ -98,27 +72,6 @@ public class Parallax {
 
     public List<ISpaceCraft> getSpaceCraft() {
         return this.world.getSpaceCrafts();
-    }
-
-    private void startBackgroundMusic() {
-        final int randomSong = rand.nextInt(100 - 1 + 1) + 1;
-
-        if (randomSong == -1) {
-            this.audioQueue.playMusic("secretTrack.mp3", MUSIC_DIRECTORY);
-            this.backgroundMusic = "sounds/music/secretTrack.mp3";
-        } else if (randomSong == -2) {
-            this.audioQueue.playMusic("trippingBalls.mp3", MUSIC_DIRECTORY, 0.7f);
-            this.backgroundMusic = "sounds/music/trippingBalls.mp3";
-        } else {
-            /*
-            Dj Smack's Youtube: http://www.youtube.com/Djsmack100
-            Dj Smack's Soundcloud: http://soundcloud.com/dj-smack-1
-            Dj Smack's Facebook: http://www.facebook.com/pages/Dj-Smac...
-             */
-
-            this.audioQueue.playMusic("soundsGreat.mp3", MUSIC_DIRECTORY, 0.5f);
-            this.backgroundMusic = "sounds/music/soundsGreat.mp3";
-        }
     }
 
     private int getUpdateTime(int milliSinceLastUpdate) {

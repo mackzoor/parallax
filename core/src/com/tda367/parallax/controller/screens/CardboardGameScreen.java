@@ -11,7 +11,6 @@ import com.tda367.parallax.model.core.Parallax;
 import com.tda367.parallax.model.core.Player;
 import com.tda367.parallax.model.core.collision.CollisionManager;
 import com.tda367.parallax.model.core.spacecraft.SpaceCraftFactory;
-import com.tda367.parallax.view.Sound;
 import com.tda367.parallax.view.parallaxview.ParallaxView;
 import com.tda367.parallax.view.rendering.Renderer3D;
 
@@ -23,7 +22,6 @@ public class CardboardGameScreen extends CardboardScreenAdapter {
     private Parallax parallaxGame;
     private GameController controller;
     private final CollisionCalculator collisionCalculator;
-    private final Sound sound;
     private ParallaxView parallaxView;
     private final ScreenChanger screenChanger;
 
@@ -31,7 +29,6 @@ public class CardboardGameScreen extends CardboardScreenAdapter {
         super();
         this.player = player;
         this.screenChanger = screenChanger;
-        this.sound = new Sound();
         this.collisionCalculator = new CollisionCalculator();
     }
 
@@ -40,7 +37,6 @@ public class CardboardGameScreen extends CardboardScreenAdapter {
         CollisionManager.getInstance().getCollidables().clear();
         CollisionManager.getInstance().getObservers().clear();
         this.collisionCalculator.clear();
-        this.sound.clearAllActiveMusic();
     }
 
     @Override

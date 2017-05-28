@@ -3,7 +3,6 @@ package com.tda367.parallax.model.core.powerups.arsenal;
 import com.tda367.parallax.model.core.collision.Collidable;
 import com.tda367.parallax.model.core.collision.CollidableType;
 import com.tda367.parallax.model.core.util.Transformable;
-import com.tda367.parallax.model.coreabstraction.AudioQueue;
 import com.tda367.parallax.utilities.MathUtilities;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,7 +17,6 @@ import java.util.Random;
 
 public class Cannon extends PowerUpBase {
     private static final String COLLISION_MODEL = "3dModels/laser/hitbox.obj";
-    private static final String SOUND_DIRECTORY = "sounds/effects";
     private static final int LIFE_LENGTH = 4000;
 
     private final Random rand = new Random();
@@ -56,8 +54,6 @@ public class Cannon extends PowerUpBase {
                 transformable.getRot().w)
         );
         this.velocity.scale(30);
-
-        playCannonSound();
     }
 
     @Override
@@ -89,17 +85,6 @@ public class Cannon extends PowerUpBase {
                 this.velocity.getZ() * ((float) milliSinceLastUpdate / 1000)
         ));
         this.setRot(MathUtilities.vectorToQuat(this.velocity));
-    }
-
-    private void playCannonSound() {
-        final int randomSong = this.rand.nextInt(200 - 1 + 1) + 1;
-
-        //Plays a funny sound every 200 shots, [Disabled]
-        if (randomSong > 200) {
-            AudioQueue.getInstance().playSound("cannonLow.mp3", SOUND_DIRECTORY, 0.3f);
-        } else {
-            AudioQueue.getInstance().playSound("cannon.mp3", SOUND_DIRECTORY, 0.8f);
-        }
     }
 
     @Override

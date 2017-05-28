@@ -11,7 +11,6 @@ import com.tda367.parallax.model.core.Player;
 import com.tda367.parallax.model.core.collision.CollisionManager;
 import com.tda367.parallax.model.menu.MainMenu;
 import com.tda367.parallax.utilities.MathUtilities;
-import com.tda367.parallax.view.Sound;
 import com.tda367.parallax.view.parallaxview.MainMenuView;
 import com.tda367.parallax.view.rendering.Renderer3D;
 
@@ -22,7 +21,6 @@ import static com.tda367.parallax.controller.screens.ScreenState.GAME;
 
 public class CardboardMenuScreen extends CardboardScreenAdapter {
     private CardboardMenuController controller;
-    private final Sound sound;
     private MainMenu mainMenu;
     private final CollisionCalculator collisionCalculator;
     private MainMenuView view;
@@ -33,7 +31,6 @@ public class CardboardMenuScreen extends CardboardScreenAdapter {
         super();
         this.player = player;
         this.screenChanger = screenChanger;
-        this.sound = new Sound();
         this.collisionCalculator = new CollisionCalculator();
     }
 
@@ -64,7 +61,6 @@ public class CardboardMenuScreen extends CardboardScreenAdapter {
         CollisionManager.getInstance().getCollidables().clear();
         CollisionManager.getInstance().getObservers().clear();
         this.collisionCalculator.clear();
-        this.sound.clearAllActiveMusic();
     }
 
     private void startButtonHit() {

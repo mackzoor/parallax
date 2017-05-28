@@ -5,10 +5,14 @@ import com.tda367.parallax.view.rendering.ParticleEffectType;
 import com.tda367.parallax.view.rendering.Renderable3dObject;
 import com.tda367.parallax.view.rendering.RenderableParticleEffect;
 import com.tda367.parallax.view.rendering.Renderer3D;
+import com.tda367.parallax.view.sound.Sound;
+
+import java.util.Random;
 
 public class CannonView extends RenderablePowerUpBase implements RenderablePowerUp {
     private static final String LAZER_3D_MODEL = "3dModels/laser/laser.g3db";
     private static final ParticleEffectType EXPLOSION = ParticleEffectType.EXPLOSION;
+    private static final String SOUND_DIRECTORY = "sounds/effects/";
 
     private final Renderable3dObject renderable3dObject;
     private final RenderableParticleEffect explosion;
@@ -40,6 +44,11 @@ public class CannonView extends RenderablePowerUpBase implements RenderablePower
     }
 
     @Override
+    public void playActivationSound() {
+        playCannonSound();
+    }
+
+    @Override
     public void render() {
         this.updateTransformation();
 
@@ -59,6 +68,18 @@ public class CannonView extends RenderablePowerUpBase implements RenderablePower
             this.explosion.setPosition(super.getPos());
             this.explosion.start();
             this.deathTime = 1;
+        }
+    }
+
+    private void playCannonSound() {
+        Random rand = new Random();
+        final int randomSong = rand.nextInt(200 - 1 + 1) + 1;
+
+        //Plays a funny sound every 200 shots, [Disabled]
+        if (randomSong > 200) {
+            Sound.getInstance().playSound(SOUND_DIRECTORY + "cannonLow.mp3", 0.3f);
+        } else {
+            Sound.getInstance().playSound(SOUND_DIRECTORY + "cannon.mp3", 0.8f);
         }
     }
 

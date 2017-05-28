@@ -42,6 +42,11 @@ public class ShieldView extends RenderablePowerUpBase implements RenderablePower
     }
 
     @Override
+    public void playActivationSound() {
+        //No sound played.
+    }
+
+    @Override
     public void render() {
         this.updatePosition();
 

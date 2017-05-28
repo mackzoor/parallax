@@ -5,6 +5,7 @@ import com.tda367.parallax.model.core.collision.*;
 import com.tda367.parallax.view.rendering.ParticleEffectType;
 import com.tda367.parallax.view.rendering.RenderableParticleEffect;
 import com.tda367.parallax.view.rendering.Renderer3D;
+import com.tda367.parallax.view.sound.Sound;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -68,7 +69,9 @@ public class CollisionEffect implements CollisionObserver {
         final RenderableParticleEffect explosionParticle = new RenderableParticleEffect(ParticleEffectType.EXPLOSION);
         explosionParticle.setPosition(explosionPoint);
         this.activeEffects.add(explosionParticle);
+
         explosionParticle.start();
+        Sound.getInstance().playSound("sounds/effects/flashBang.mp3", 0.2f);
     }
 
     public void render() {

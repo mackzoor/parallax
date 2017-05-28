@@ -9,8 +9,7 @@ import com.tda367.parallax.model.core.Parallax;
 import com.tda367.parallax.model.core.Player;
 import com.tda367.parallax.model.core.collision.CollisionManager;
 import com.tda367.parallax.model.core.spacecraft.SpaceCraftFactory;
-import com.tda367.parallax.model.coreabstraction.AudioQueue;
-import com.tda367.parallax.view.Sound;
+import com.tda367.parallax.view.sound.Sound;
 import com.tda367.parallax.view.parallaxview.ParallaxView;
 
 import static com.tda367.parallax.controller.screens.ScreenState.GAME_OVER;
@@ -20,8 +19,6 @@ public class GameScreen extends ScreenAdapter {
     private final Player player;
     private Parallax parallaxGame;
     private GameController controller;
-    private final Sound sound;
-    private final AudioQueue audioQueue;
     private final CollisionCalculator collisionCalculator;
     private ParallaxView parallaxView;
     private final ScreenChanger screenChanger;
@@ -30,10 +27,8 @@ public class GameScreen extends ScreenAdapter {
     public GameScreen(Player player, ScreenChanger screenChanger, boolean particlesEnabled) {
         super();
         this.particlesEnabled = particlesEnabled;
-        this.audioQueue = AudioQueue.getInstance();
         this.player = player;
         this.screenChanger = screenChanger;
-        this.sound = new Sound();
         this.collisionCalculator = new CollisionCalculator();
     }
 
@@ -59,7 +54,7 @@ public class GameScreen extends ScreenAdapter {
     public void dispose() {
         CollisionManager.getInstance().getCollidables().clear();
         Controllers.clearListeners();
-        this.audioQueue.clearAllActiveMusic();
+        Sound.getInstance().clearAllActiveMusic();
         this.collisionCalculator.clear();
         CollisionManager.getInstance().getObservers().clear();
     }
