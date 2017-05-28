@@ -111,8 +111,8 @@ public abstract class SpaceCraft implements ISpaceCraft {
 
     @Override
     public PowerUpType getPowerUpType() {
-        if (pu.size() > 0) {
-            return pu.get(0).getPowerUpType();
+        if (this.pu.size() > 0) {
+            return this.pu.get(0).getPowerUpType();
         } else {
             return null;
         }

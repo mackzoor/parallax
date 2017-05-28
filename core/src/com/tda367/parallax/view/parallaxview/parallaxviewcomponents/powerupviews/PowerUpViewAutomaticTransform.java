@@ -45,7 +45,7 @@ public class PowerUpViewAutomaticTransform implements View {
             return new LazerView();
         } else if (powerUp.getPowerUpType() == PowerUpType.MISSILE) {
             return new MissileView();
-        } else if(powerUp.getPowerUpType() == PowerUpType.SHIELD){
+        } else if (powerUp.getPowerUpType() == PowerUpType.SHIELD) {
             return new ShieldView();
         } else {
             return new LazerView();

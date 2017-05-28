@@ -21,7 +21,7 @@ public final class PowerUpFactory {
         return new Missile();
     }
 
-    public static Shield createShield(){
+    public static Shield createShield() {
         return new Shield();
     }
 
@@ -35,7 +35,7 @@ public final class PowerUpFactory {
             return createCannon();
         } else if (randomNumber == 1) {
             return createMissile();
-        } else if (randomNumber == 2){
+        } else if (randomNumber == 2) {
             return createShield();
         } else {
             return createMissile();

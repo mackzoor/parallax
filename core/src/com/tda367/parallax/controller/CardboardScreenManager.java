@@ -18,7 +18,9 @@ public final class CardboardScreenManager implements ScreenChanger {
     private static CardboardGameScreen cardboardGameScreen;
     private static CardboardGameOverScreen cardboardGameOverScreen;
 
-    private CardboardScreenManager() {}
+    private CardboardScreenManager() {
+
+    }
 
     public static synchronized void setCardboardGame(CardboardGame game) {
         if (cardboardGame == null) {

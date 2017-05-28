@@ -72,9 +72,12 @@ public class HudTextureGenerator {
         font.setColor(fgColor);
         font.getData().setScale(1);
         font.draw(spriteBatch,
-                " Score: " + this.score +
-                    "\n Lives: " + this.lives +
-                    "\n PowerUp: " + ((powerUp == null) ? "None" : this.powerUp.toString().toLowerCase(Locale.ENGLISH)),
+                " Score: " + this.score
+                        + "\n Lives: "
+                        + this.lives
+                        + "\n PowerUp: "
+                        + ((this.powerUp == null)
+                        ? "None" : this.powerUp.toString().toLowerCase(Locale.ENGLISH)),
                 0,
                 0
         );

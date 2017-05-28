@@ -36,10 +36,6 @@ public final class ObstacleFactory {
         return new WallObstacle(pos, new Quat4f(0, 0.7071f, 0, 0.7071f));
     }
 
-    private static WallObstacle crazyWall(Vector3f pos) {
-        return new WallObstacle(pos, new Quat4f(0, -random.nextFloat(), 0, random.nextFloat()));
-    }
-
     private static WallObstacle getRightWallInstance(Vector3f pos) {
         return new WallObstacle(pos, new Quat4f(0, 1, 0, 0));
     }

@@ -9,7 +9,9 @@ public final class DeviceManager {
 
     private static Device device;
 
-    private DeviceManager() {}
+    private DeviceManager() {
+
+    }
 
     public static Device getDevice() {
         return device;

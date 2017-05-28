@@ -4,7 +4,7 @@ import com.tda367.parallax.controller.inputhandlers.*;
 import com.tda367.parallax.view.TouchPadView;
 
 /**
- * Manages the inputhandlers for Android devices
+ * Manages the input-handlers for Android devices.
  */
 
 class AndroidDevice implements Device {

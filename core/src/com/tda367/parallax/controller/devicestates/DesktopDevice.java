@@ -5,7 +5,7 @@ import com.tda367.parallax.controller.inputhandlers.GamePadHandler;
 import com.tda367.parallax.controller.inputhandlers.InputControlsListener;
 
 /**
- * Manages the inputhandlers for Desktop computers
+ * Manages the input-handlers for Desktop computers.
  */
 
 class DesktopDevice implements Device {

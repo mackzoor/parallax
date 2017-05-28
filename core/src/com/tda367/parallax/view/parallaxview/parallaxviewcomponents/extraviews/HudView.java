@@ -43,9 +43,9 @@ public class HudView {
 
         this.htg = new HudTextureGenerator(5);
 
-        powerUpType = null;
-        lives = -1;
-        score = -1;
+        this.powerUpType = null;
+        this.lives = -1;
+        this.score = -1;
     }
 
     public void render() {
@@ -53,35 +53,35 @@ public class HudView {
         renderHud();
     }
 
-    private void updateHudTexture(){
+    private void updateHudTexture() {
         if (playerStatsChange()) {
             this.htg.setLives(this.player.getSpaceCraft().getHealth());
             this.htg.setScore(this.player.getScore());
-            this.htg.setWeapon(powerUpType);
+            this.htg.setWeapon(this.powerUpType);
             this.setHudPaneTexture(this.htg.generateTexture());
         }
     }
-    private boolean playerStatsChange(){
+    private boolean playerStatsChange() {
         boolean changed = false;
-        if (powerUpType != player.getSpaceCraft().getPowerUpType()) {
+        if (this.powerUpType != this.player.getSpaceCraft().getPowerUpType()) {
             changed = true;
-            powerUpType = player.getSpaceCraft().getPowerUpType();
+            this.powerUpType = this.player.getSpaceCraft().getPowerUpType();
         }
 
-        if (lives != player.getSpaceCraft().getHealth()) {
+        if (this.lives != this.player.getSpaceCraft().getHealth()) {
             changed = true;
-            lives = player.getSpaceCraft().getHealth();
+            this.lives = this.player.getSpaceCraft().getHealth();
         }
 
-        if (score != player.getScore()) {
+        if (this.score != this.player.getScore()) {
             changed = true;
-            score = player.getScore();
+            this.score = this.player.getScore();
         }
 
         return changed;
     }
 
-    public void renderHud(){
+    public void renderHud() {
         final Vector3f nextPos = new Vector3f(this.player.getSpaceCraft().getPos());
         nextPos.add(new Vector3f(1.5f, 1, 0.8f));
         this.hudPane.setPos(nextPos);

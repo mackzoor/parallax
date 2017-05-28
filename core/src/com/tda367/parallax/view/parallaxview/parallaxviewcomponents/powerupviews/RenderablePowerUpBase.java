@@ -8,7 +8,7 @@ import lombok.Setter;
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
 
-public abstract class RenderablePowerUpBase implements RenderablePowerUp{
+public abstract class RenderablePowerUpBase implements RenderablePowerUp {
 
     private static final String MODEL_3D_INTERNAL_PATH = "3dModels/missile/missile.g3db";
     private static final ParticleEffectType ROCKET_TRAIL = ParticleEffectType.ROCKET_TRAIL;
@@ -26,7 +26,7 @@ public abstract class RenderablePowerUpBase implements RenderablePowerUp{
         this.pos = new Vector3f();
         this.rot = new Quat4f();
 
-        effectsEnabled = true;
+        this.effectsEnabled = true;
     }
 
     @Override

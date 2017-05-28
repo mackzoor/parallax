@@ -111,7 +111,7 @@ public class Renderable3dObject {
         return this.opacity;
     }
 
-    boolean isTransparent() {
+    boolean getTransparency() {
         return this.isTransparent;
     }
 

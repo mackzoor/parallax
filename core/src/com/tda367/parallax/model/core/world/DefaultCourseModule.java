@@ -54,27 +54,27 @@ public class DefaultCourseModule implements ICourseModule {
         this.couseObstacles.addAll(createBoxes(amount));
     }
 
-    private List<CourseObstacleBase> createBoxes(int amount){
+    private List<CourseObstacleBase> createBoxes(int amount) {
         final float distanceBetween = this.length / (float) amount;
 
-        List<CourseObstacleBase> boxes = new ArrayList<CourseObstacleBase>();
+        final List<CourseObstacleBase> boxes = new ArrayList<CourseObstacleBase>();
         for (int x = 0; x < amount; x++) {
             final Vector3f obstaclePos = new Vector3f(
                     0,
                     this.pos.getY() - this.length / 2 + this.length * new Random().nextFloat(),
                     0
             );
-            final CourseObstacleBase obstacle = ObstacleFactory.getMovingBoxInstance(obstaclePos,true);
+            final CourseObstacleBase obstacle = ObstacleFactory.getMovingBoxInstance(obstaclePos, true);
 
             obstacle.getPos().set(obstaclePos);
             boxes.add(obstacle);
         }
         return boxes;
     }
-    private List<CourseObstacleBase> createWalls(int amount){
+    private List<CourseObstacleBase> createWalls(int amount) {
         final float distanceBetween = this.length / (float) amount;
 
-        List<CourseObstacleBase> walls = new ArrayList<CourseObstacleBase>();
+        final List<CourseObstacleBase> walls = new ArrayList<CourseObstacleBase>();
         for (int x = 0; x < amount; x++) {
             final Vector3f obstaclePos = new Vector3f(
                     0,

@@ -50,18 +50,18 @@ public class WorldView {
 
 
         //Render Course modules
-        for (CourseModelView courseModelView : courseModuleHash.values()) {
+        for (final CourseModelView courseModelView : this.courseModuleHash.values()) {
             courseModelView.render();
         }
 
         //Render SpaceCraft
-        for (SpaceCraftAutomaticTransform spaceCraftAutomaticTransform : spaceCraftHash.values()) {
+        for (final SpaceCraftAutomaticTransform spaceCraftAutomaticTransform : this.spaceCraftHash.values()) {
             spaceCraftAutomaticTransform.render();
         }
 
 
         //Render Powerups
-        for (PowerUpViewAutomaticTransform powerUpViewAutomaticTransform : powerUpsHash.values()) {
+        for (final PowerUpViewAutomaticTransform powerUpViewAutomaticTransform : this.powerUpsHash.values()) {
             powerUpViewAutomaticTransform.render();
         }
     }

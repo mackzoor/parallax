@@ -109,8 +109,8 @@ public class Missile extends PowerUpBase {
     }
 
     private void moveTheMissile(int milliSinceLastUpdate, int timeStorage) {
-        if (timeStorage <= TIME_TRACKING_TRANS &&
-                this.posLastUpdate.getZ() > this.transformable.getPos().getZ()) {
+        if (timeStorage <= TIME_TRACKING_TRANS
+                && this.posLastUpdate.getZ() > this.transformable.getPos().getZ()) {
             super.getPos().add(new Vector3f(0, 0,
                     this.transformable.getPos().getZ() - this.posLastUpdate.getZ())
             );

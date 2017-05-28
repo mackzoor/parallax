@@ -23,26 +23,26 @@ public class Shield extends PowerUpBase {
 
     @Override
     public void activate(Transformable transformable) {
-        objectToShield = transformable;
+        this.objectToShield = transformable;
         super.activate(transformable);
 
         super.getPos().set(positionOffset(transformable.getPos()));
-        super.setRot(new Quat4f(0,0,0,1));
+        super.setRot(new Quat4f(0, 0, 0, 1));
 
         super.addToCollisionManager();
         super.enableCollision();
     }
 
-    private Vector3f positionOffset(Vector3f basePosition){
-        Vector3f offsettedPosition = new Vector3f(basePosition);
-        offsettedPosition.add(new Vector3f(0,2,0));
+    private Vector3f positionOffset(Vector3f basePosition) {
+        final Vector3f offsettedPosition = new Vector3f(basePosition);
+        offsettedPosition.add(new Vector3f(0, 2, 0));
         return offsettedPosition;
     }
 
     @Override
     public void update(int milliSinceLastUpdate) {
-        if (super.isActive()){
-            super.setPos(positionOffset(objectToShield.getPos()));
+        if (super.isActive()) {
+            super.setPos(this.positionOffset(this.objectToShield.getPos()));
         }
     }
 

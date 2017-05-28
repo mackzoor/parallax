@@ -18,6 +18,7 @@ import java.util.Random;
 
 public class Cannon extends PowerUpBase {
     private static final String COLLISION_MODEL = "3dModels/box/hitbox.obj";
+    private static final String SOUND_DIRECTORY = "sounds/effects";
     private static final int LIFE_LENGTH = 4000;
 
     private final Random rand = new Random();
@@ -93,9 +94,9 @@ public class Cannon extends PowerUpBase {
 
         //Plays a funny sound every 200 shots
         if (randomSong > 199) {
-            AudioQueue.getInstance().playSound("cannonLow.mp3", "sounds/effects", 0.3f);
+            AudioQueue.getInstance().playSound("cannonLow.mp3", SOUND_DIRECTORY, 0.3f);
         } else {
-            AudioQueue.getInstance().playSound("cannon.mp3", "sounds/effects", 0.8f);
+            AudioQueue.getInstance().playSound("cannon.mp3", SOUND_DIRECTORY, 0.8f);
         }
     }
 

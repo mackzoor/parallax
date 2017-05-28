@@ -4,7 +4,7 @@ import com.tda367.parallax.controller.inputhandlers.GamePadHandler;
 import com.tda367.parallax.controller.inputhandlers.InputControlsListener;
 
 /**
- * Manages the inputhandlers for Google Cardboard
+ * Manages the input-handlers for Google Cardboard.
  */
 
 class CardboardDevice implements Device {

@@ -8,7 +8,7 @@ import com.tda367.parallax.view.rendering.Renderable3dObject;
 import com.tda367.parallax.view.rendering.RenderableParticleEffect;
 import com.tda367.parallax.view.rendering.Renderer3D;
 
-public class ShieldView extends RenderablePowerUpBase implements RenderablePowerUp{
+public class ShieldView extends RenderablePowerUpBase implements RenderablePowerUp {
 
     private static final String SHIELD_3D_MODEL = "3dModels/shield/shield.g3db";
     private static final ParticleEffectType EXPLOSION = ParticleEffectType.EXPLOSION;
@@ -19,11 +19,11 @@ public class ShieldView extends RenderablePowerUpBase implements RenderablePower
 
     private int deathTime;
 
-    ShieldView(){
+    ShieldView() {
         super();
-        deathTime = 0;
+        this.deathTime = 0;
 
-        shieldModel = new Renderable3dObject(
+        this.shieldModel = new Renderable3dObject(
                 super.getPos(),
                 super.getRot(),
                 ResourceLoader.getInstance().getModel(SHIELD_3D_MODEL),
@@ -31,19 +31,19 @@ public class ShieldView extends RenderablePowerUpBase implements RenderablePower
                 true
         );
 
-        explosion = new RenderableParticleEffect(EXPLOSION);
+        this.explosion = new RenderableParticleEffect(EXPLOSION);
     }
 
-    private void updatePosition(){
-        shieldModel.setPos(super.getPos());
-        shieldModel.setRot(super.getRot());
+    private void updatePosition() {
+        this.shieldModel.setPos(super.getPos());
+        this.shieldModel.setRot(super.getRot());
 
-        explosion.setPosition(super.getPos());
+        this.explosion.setPosition(super.getPos());
     }
 
     @Override
     public void render() {
-        updatePosition();
+        this.updatePosition();
 
         if (this.deathTime == 0) {
             Renderer3D.getInstance().addObjectToFrame(this.shieldModel);
@@ -60,12 +60,12 @@ public class ShieldView extends RenderablePowerUpBase implements RenderablePower
         if (this.deathTime == 0) {
             this.explosion.setPosition(super.getPos());
             this.explosion.start();
-            deathTime = 1;
+            this.deathTime = 1;
         }
     }
 
     @Override
     public boolean isDead() {
-        return deathTime > 120;
+        return this.deathTime > 120;
     }
 }

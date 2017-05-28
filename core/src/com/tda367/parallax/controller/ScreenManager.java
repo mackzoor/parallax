@@ -23,18 +23,18 @@ public final class ScreenManager implements ScreenChanger {
     private GameOverScreen gameOverScreen;
     private boolean highPerformanceMode;
 
-    public static void initialize(boolean highPerformanceMode){
-        instance = new ScreenManager(highPerformanceMode);
-    }
-
-    public static ScreenManager getInstance(){
-        return instance;
-    }
-
-
     private ScreenManager(boolean highPerformanceMode) {
         this.highPerformanceMode = highPerformanceMode;
     }
+
+    public static void initialize(boolean highPerformanceMode) {
+        instance = new ScreenManager(highPerformanceMode);
+    }
+
+    public static ScreenManager getInstance() {
+        return instance;
+    }
+
 
     public void setGame(Game game) {
         if (this.game == null) {
@@ -44,7 +44,7 @@ public final class ScreenManager implements ScreenChanger {
 
     private synchronized void setMenuScreen(Player player) {
         if (this.menuScreen == null) {
-            this.menuScreen = new MenuScreen(player, instance, highPerformanceMode);
+            this.menuScreen = new MenuScreen(player, instance, this.highPerformanceMode);
         }
         this.menuScreen.newMainMenu();
         this.game.setScreen(this.menuScreen);
@@ -52,7 +52,7 @@ public final class ScreenManager implements ScreenChanger {
 
     private synchronized void setGameScreen(Player player) {
         if (this.gameScreen == null) {
-            this.gameScreen = new GameScreen(player, instance, highPerformanceMode);
+            this.gameScreen = new GameScreen(player, instance, this.highPerformanceMode);
         }
         this.gameScreen.newGame();
         this.game.setScreen(this.gameScreen);
@@ -60,7 +60,7 @@ public final class ScreenManager implements ScreenChanger {
 
     private synchronized void setGameOverScreen(Player player) {
         if (this.gameOverScreen == null) {
-            this.gameOverScreen = new GameOverScreen(player, instance,highPerformanceMode);
+            this.gameOverScreen = new GameOverScreen(player, instance, this.highPerformanceMode);
         }
         this.gameOverScreen.newGameOver();
         this.game.setScreen(this.gameOverScreen);

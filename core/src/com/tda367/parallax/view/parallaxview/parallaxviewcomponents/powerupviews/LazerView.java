@@ -58,7 +58,7 @@ public class LazerView extends RenderablePowerUpBase implements RenderablePowerU
         if (this.deathTime == 0) {
             this.explosion.setPosition(super.getPos());
             this.explosion.start();
-            deathTime = 1;
+            this.deathTime = 1;
         }
     }
 

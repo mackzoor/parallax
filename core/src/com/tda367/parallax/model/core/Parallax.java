@@ -139,17 +139,4 @@ public class Parallax {
             this.backgroundMusic = "sounds/music/soundsGreat.mp3";
         }
     }
-
-    //Debug only
-    private void createTestEnemy() {
-        final MinionEnemy minionEnemy = new MinionEnemy(SpaceCraftFactory.getAgelionInstance(
-                13,
-                new Vector3f(1.5f, -2, 1),
-                new Quat4f()
-        ));
-        minionEnemy.getSpaceCraft().setForwardAcceleration(-3f);
-        this.world.addSpaceCraft(minionEnemy.getSpaceCraft());
-        this.ais.add(minionEnemy);
-        minionEnemy.setTarget(this.player.getSpaceCraft());
-    }
 }
