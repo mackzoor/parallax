@@ -72,17 +72,15 @@ public class Missile extends PowerUpBase {
 
     @Override
     public CollidableType getCollidableType() {
-        return  this.timeStorage > TIME_TRACKING_TRANS ? HARMFUL : NEUTRAL;
+        return  this.timeStorage > FALL_TIME ? HARMFUL : NEUTRAL;
     }
 
     @Override
     public void handleCollision(Collidable collidable) {
-        if (collidable.getCollidableType() == CollidableType.SPACECRAFT
-                && this.timeStorage > TIME_TRACKING_TRANS) {
+        if (collidable.getCollidableType() == CollidableType.SPACECRAFT && this.timeStorage > FALL_TIME) {
             removeMissile();
         }
-        if (collidable.getCollidableType() == CollidableType.OBSTACLE
-                && this.timeStorage > ACTIVATION_DELAY) {
+        if (collidable.getCollidableType() == CollidableType.OBSTACLE) {
             removeMissile();
         }
     }

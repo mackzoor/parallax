@@ -36,23 +36,23 @@ public final class ObstacleFactory {
 
 
     private static WallObstacle getTopWallInstance(Vector3f pos) {
-        return new WallObstacle(pos, TOP_WALLROTATION);
+        return new WallObstacle(pos, new Quat4f(TOP_WALLROTATION));
     }
 
     private static WallObstacle getRightWallInstance(Vector3f pos) {
-        return new WallObstacle(pos, RIGHT_WALLROTATION);
+        return new WallObstacle(pos, new Quat4f(RIGHT_WALLROTATION));
     }
 
     private static WallObstacle getBottomWallInstance(Vector3f pos) {
-        return new WallObstacle(pos, BOTTOM_WALLROTATION);
+        return new WallObstacle(pos, new Quat4f(BOTTOM_WALLROTATION));
     }
 
     private static WallObstacle getLeftWallInstance(Vector3f pos) {
-        return new WallObstacle(pos, LEFT_WALLROTATION);
+        return new WallObstacle(pos, new Quat4f(LEFT_WALLROTATION));
     }
 
     private static MovingWallObstacle getMovingWallInstance(Vector3f pos) {
-        return new MovingWallObstacle(pos, LEFT_WALLROTATION);
+        return new MovingWallObstacle(pos, new Quat4f(LEFT_WALLROTATION));
     }
 
     public static WallObstacle getRandomWallInstance(Vector3f pos) {

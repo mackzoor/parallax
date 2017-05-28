@@ -10,6 +10,7 @@ public class MovingWallObstacle extends WallObstacle {
 
     MovingWallObstacle(Vector3f pos, Quat4f rot) {
         super(pos, rot);
+        ROTATION.normalize();
     }
 
 
