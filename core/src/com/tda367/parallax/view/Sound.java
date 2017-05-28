@@ -93,34 +93,6 @@ public class Sound implements AudioObserver {
     }
 
 
-    //Methods for interacting with the music using it's musicFile, generally only used within this class
-    //TODO, remove these methods if we never find a use for them.
-    public void stopActiveMusic(Music musicFile) {
-        for (int i = 0; i < this.activeMusic.size(); i++) {
-            if (this.activeMusic.get(i).getMusicPlaying().equals(musicFile)) {
-                this.activeMusic.get(this.activeMusic.indexOf(this.activeMusic.get(i))).getMusicPlaying().stop();
-                this.activeMusic.remove(this.activeMusic.get(i));
-            }
-        }
-    }
-
-    public void pauseActiveMusic(Music musicFile) {
-        for (int i = 0; i < this.activeMusic.size(); i++) {
-            if (this.activeMusic.get(i).getMusicPlaying().equals(musicFile)) {
-                this.activeMusic.get(this.activeMusic.indexOf(this.activeMusic.get(i))).getMusicPlaying().pause();
-            }
-        }
-    }
-
-    public void unPauseActiveMusic(Music musicFile) {
-        for (int i = 0; i < this.activeMusic.size(); i++) {
-            if (this.activeMusic.get(i).getMusicPlaying().equals(musicFile)) {
-                this.activeMusic.get(this.activeMusic.indexOf(this.activeMusic.get(i))).getMusicPlaying().play();
-            }
-        }
-    }
-
-
     //Inner class for combination class, directory of sound/music and file of playing sound/music.
     private final class ActiveMusicCombination {
         @Getter
