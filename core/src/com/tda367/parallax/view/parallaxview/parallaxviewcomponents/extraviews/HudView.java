@@ -17,6 +17,9 @@ import javax.vecmath.Vector3f;
 public class HudView {
 
     private static final String PATH_TO_3D_MODEL = "3dModels/hudpane/hudPane.g3db";
+    private static final float OPACITY = 0.75f;
+    private static final int LIVES = 5;
+    private static final Vector3f RELATIVE_POSITION = new Vector3f(1.5f, 1, 0.8f);
     private final Player player;
     private final Renderable3dObject hudPane;
 
@@ -32,11 +35,11 @@ public class HudView {
                 player.getSpaceCraft().getPos(),
                 player.getSpaceCraft().getRot(),
                 ResourceLoader.getInstance().getModel(PATH_TO_3D_MODEL),
-                0.75f,
+                OPACITY,
                 true
         );
 
-        this.htg = new HudTextureGenerator(5);
+        this.htg = new HudTextureGenerator(LIVES);
     }
 
     public void render() {
@@ -74,7 +77,7 @@ public class HudView {
 
     public void renderHud() {
         final Vector3f nextPos = new Vector3f(this.player.getSpaceCraft().getPos());
-        nextPos.add(new Vector3f(1.5f, 1, 0.8f));
+        nextPos.add(RELATIVE_POSITION);
         this.hudPane.setPos(nextPos);
 
         Renderer3D.getInstance().addObjectToFrame(this.hudPane);

@@ -11,6 +11,7 @@ public class Agelion extends SpaceCraft {
 
     private static final String COLLISION_MODEL = "3dModels/agelion/hitbox.obj";
     private static final float MAX_PAN_VELOCITY = 16f;
+    private static final float DEFAULT_FORWARD_VELOCITY = 20f;
     private static final int HEALTH = 5;
     private static final SpaceCraftType TYPE = SpaceCraftType.AGELION;
 
@@ -24,7 +25,7 @@ public class Agelion extends SpaceCraft {
     }
 
     Agelion() {
-        this(20);
+        this(DEFAULT_FORWARD_VELOCITY);
     }
 
     @Override

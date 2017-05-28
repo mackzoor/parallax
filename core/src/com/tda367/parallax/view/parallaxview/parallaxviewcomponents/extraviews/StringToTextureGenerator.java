@@ -50,7 +50,7 @@ public class StringToTextureGenerator {
     }
 
     private Pixmap renderText() {
-        SpriteBatch spriteBatch = new SpriteBatch();
+        final SpriteBatch spriteBatch = new SpriteBatch();
 
         Gdx.gl.glClearColor(0, 0, 0, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -61,7 +61,7 @@ public class StringToTextureGenerator {
         spriteBatch.begin();
 
         //Draw text
-        BitmapFont font = new BitmapFont(true);
+        final BitmapFont font = new BitmapFont(true);
 
         font.setColor(Color.WHITE);
         font.getData().setScale(1);

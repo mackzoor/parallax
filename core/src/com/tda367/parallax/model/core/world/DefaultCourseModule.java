@@ -17,6 +17,11 @@ import java.util.Random;
  */
 
 public class DefaultCourseModule implements ICourseModule {
+
+    private static final float DEFAULT_LENGTH = 64;
+    private static final int DEFAULT_OBSTACLE_AMOUNT = 4;
+    private static final int DEFAULT_POWER_UP_AMOUNT = 1;
+
     private Vector3f pos;
     private Quat4f rot;
     private float length;
@@ -34,7 +39,7 @@ public class DefaultCourseModule implements ICourseModule {
         this.active = true;
         this.powerUps = new ArrayList<IPowerUp>();
         this.containers = new ArrayList<Container>();
-        this.length = 64;
+        this.length = DEFAULT_LENGTH;
         this.couseObstacles = new ArrayList<CourseObstacleBase>();
         this.rand = new Random();
 
@@ -46,7 +51,7 @@ public class DefaultCourseModule implements ICourseModule {
     }
 
     public DefaultCourseModule(Vector3f pos) {
-        this(pos, 4, 1);
+        this(pos, DEFAULT_OBSTACLE_AMOUNT, DEFAULT_POWER_UP_AMOUNT);
     }
 
 

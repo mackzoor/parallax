@@ -55,7 +55,7 @@ public class Parallax {
     public void update(int milliSinceLastUpdate) {
         if (this.player.getSpaceCraft().getHealth() > 0) {
             if (!this.paused) {
-                int updateTime = getUpdateTime(milliSinceLastUpdate);
+                final int updateTime = getUpdateTime(milliSinceLastUpdate);
                 this.world.update(updateTime);
                 this.camera.update(updateTime);
                 calculatePlayerScore(milliSinceLastUpdate);

@@ -12,6 +12,10 @@ import javax.vecmath.Vector3f;
  */
 
 public class MinionEnemy extends AbstractHunterAI {
+
+    private final static float TARGET_ANGLE_THRESHOLD = 0.4f;
+    private final static float ROTATION_SPEED_MODIFIER = 0.95f;
+
     @Getter
     private final ISpaceCraft spaceCraft;
 
@@ -34,7 +38,7 @@ public class MinionEnemy extends AbstractHunterAI {
         MathUtilities.rotateVectorByQuat(currentHeading, this.spaceCraft.getRot());
 
         final Vector3f targetDirection = getTargetDirection();
-        return currentHeading.angle(targetDirection) < 0.4;
+        return currentHeading.angle(targetDirection) < TARGET_ANGLE_THRESHOLD;
     }
 
     private Vector3f getTargetDirection() {
@@ -53,7 +57,7 @@ public class MinionEnemy extends AbstractHunterAI {
         final Vector3f targetDirection = this.getTargetDirection();
 
         final Quat4f rotationNew = MathUtilities.vectorToQuat(targetDirection);
-        rotationNew.interpolate(this.spaceCraft.getRot(), 0.95f);
+        rotationNew.interpolate(this.spaceCraft.getRot(), ROTATION_SPEED_MODIFIER);
         this.spaceCraft.getRot().set(rotationNew);
     }
 

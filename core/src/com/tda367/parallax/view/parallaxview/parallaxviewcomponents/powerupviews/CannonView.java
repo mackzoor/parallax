@@ -13,9 +13,11 @@ import java.util.Random;
  * Represents a visible cannon that can be rendered.
  */
 public class CannonView extends RenderablePowerUpBase implements RenderablePowerUp {
-    private static final String LAZER_3D_MODEL = "3dModels/laser/laser.g3db";
+    private static final String CANNON_3D_MODEL = "3dModels/laser/laser.g3db";
     private static final ParticleEffectType EXPLOSION = ParticleEffectType.EXPLOSION;
+    private static final int PARTICLE_DEATH_DELAY = 120;
     private static final String SOUND_DIRECTORY = "sounds/effects/";
+    private static final int LOW_SOUND_ODDS = 200;
 
     private final Renderable3dObject renderable3dObject;
     private final RenderableParticleEffect explosion;
@@ -29,7 +31,7 @@ public class CannonView extends RenderablePowerUpBase implements RenderablePower
         this.renderable3dObject = new Renderable3dObject(
                 super.getPos(),
                 super.getRot(),
-                ResourceLoader.getInstance().getModel(LAZER_3D_MODEL),
+                ResourceLoader.getInstance().getModel(CANNON_3D_MODEL),
                 1,
                 false
         );
@@ -53,13 +55,15 @@ public class CannonView extends RenderablePowerUpBase implements RenderablePower
 
     private void playCannonSound() {
         Random rand = new Random();
-        final int randomSong = rand.nextInt(200 - 1 + 1) + 1;
+        final int randomSong = rand.nextInt(LOW_SOUND_ODDS) + 1;
 
         //Plays a funny sound every 200 shots, [Disabled]
-        if (randomSong > 200) {
-            Sound.getInstance().playSound(SOUND_DIRECTORY + "cannonLow.mp3", 0.3f);
+        if (randomSong > LOW_SOUND_ODDS) {
+            float volume = 0.3f;
+            Sound.getInstance().playSound(SOUND_DIRECTORY + "cannonLow.mp3", volume);
         } else {
-            Sound.getInstance().playSound(SOUND_DIRECTORY + "cannon.mp3", 0.8f);
+            float volume = 0.8f;
+            Sound.getInstance().playSound(SOUND_DIRECTORY + "cannon.mp3", volume);
         }
     }
 
@@ -88,6 +92,6 @@ public class CannonView extends RenderablePowerUpBase implements RenderablePower
 
     @Override
     public boolean isDead() {
-        return this.deathTime > 120;
+        return this.deathTime > PARTICLE_DEATH_DELAY;
     }
 }

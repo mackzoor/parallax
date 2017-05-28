@@ -28,6 +28,7 @@ public class MainMenu implements CollisionObserver {
     private static final Quat4f EXIT_BUTTON_ROT = new Quat4f();
     private static final Vector3f START_BUTTON_POS = new Vector3f(-2, 5, 1);
     private static final Quat4f START_BUTTON_ROT = new Quat4f();
+    private static final float CANNON_SHOT_SPEED = 30;
 
     @Getter
     private final ExitButton3D exitButton;
@@ -56,7 +57,7 @@ public class MainMenu implements CollisionObserver {
         this.powerUps.add(cannon);
         cannon.activate(this.camera);
         this.aimDirection.normalize();
-        this.aimDirection.scale(30);
+        this.aimDirection.scale(CANNON_SHOT_SPEED);
         cannon.setVelocity(this.aimDirection);
     }
 

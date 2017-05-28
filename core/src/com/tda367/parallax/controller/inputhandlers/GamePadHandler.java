@@ -14,6 +14,8 @@ import lombok.Setter;
 
 public final class GamePadHandler extends ControllerAdapter {
 
+    private static final float MOVEMENT_THRESHOLD = 0.02f;
+
     @Setter
     private InputControlsListener listener;
     private GamePad gamePad;
@@ -72,7 +74,7 @@ public final class GamePadHandler extends ControllerAdapter {
 
         Float roundedValue = value;
 
-        if (value * value < 0.02f) {
+        if (value * value < MOVEMENT_THRESHOLD) {
             roundedValue = 0f;
         }
 

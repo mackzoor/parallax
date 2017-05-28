@@ -12,6 +12,7 @@ import com.tda367.parallax.view.rendering.Renderer3D;
 public class ExitButton3DView implements View {
 
     private static final String INTERNAL_PATH = "3dModels/quittext/quit.g3db";
+    private static final float OPACITY = 1f;
 
     private final ExitButton3D exitButton;
     private final Renderable3dObject renderable3dObject;
@@ -23,7 +24,7 @@ public class ExitButton3DView implements View {
                 exitButton.getPos(),
                 exitButton.getRot(),
                 ResourceLoader.getInstance().getModel(INTERNAL_PATH),
-                1f
+                OPACITY
         );
     }
 

@@ -14,6 +14,12 @@ import javax.vecmath.Vector3f;
 
 public class Camera implements Updatable, Transformable {
 
+    private final static float DEFAULT_FOV = 90;
+    private final static Vector3f DEFAULT_POSITION = new Vector3f(0, 0, 1);
+    private final static Quat4f DEFAULT_ROTATION = new Quat4f();
+    private final static float DISTANCE_BEHIND_TRACKING_TARGET = 4;
+    private final static float DISTANCE_ABOVE_TRACKING_TARGET = 1;
+
     private Vector3f pos;
     private Quat4f rot;
     @Getter
@@ -28,7 +34,7 @@ public class Camera implements Updatable, Transformable {
     }
 
     public Camera() {
-        this(new Vector3f(0, 0, 1), new Quat4f(), 90);
+        this(new Vector3f(DEFAULT_POSITION), DEFAULT_ROTATION, DEFAULT_FOV);
     }
 
 
@@ -38,8 +44,8 @@ public class Camera implements Updatable, Transformable {
 
     private void updatePosition() {
         this.pos.set(this.trackingTarget.getPos().getX() / 2,
-                this.trackingTarget.getPos().getY() - 4,
-                this.trackingTarget.getPos().getZ() / 2 + 1);
+                this.trackingTarget.getPos().getY() - DISTANCE_BEHIND_TRACKING_TARGET,
+                this.trackingTarget.getPos().getZ() / 2 + DISTANCE_ABOVE_TRACKING_TARGET);
     }
 
 

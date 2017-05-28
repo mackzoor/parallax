@@ -16,6 +16,7 @@ import static com.tda367.parallax.controller.screens.ScreenState.MAIN_MENU;
  */
 
 public class CardboardGameOverScreen extends CardboardScreenAdapter {
+    private final static int SEC_TO_MILLISEC = 1000;
     private GameOver model;
     private GameOverView view;
     private final Player player;
@@ -31,7 +32,7 @@ public class CardboardGameOverScreen extends CardboardScreenAdapter {
 
     @Override
     public void onNewFrame(HeadTransform headTransform) {
-        this.model.update((int) (Gdx.graphics.getDeltaTime() * 1000));
+        this.model.update((int) (Gdx.graphics.getDeltaTime() * SEC_TO_MILLISEC));
         if (this.model.isObsolete()) {
             dispose();
             this.screenChanger.requestScreenChange(MAIN_MENU, this.player);

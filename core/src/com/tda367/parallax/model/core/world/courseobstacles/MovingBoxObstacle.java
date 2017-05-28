@@ -12,6 +12,9 @@ import java.util.Random;
  */
 public class MovingBoxObstacle extends BoxObstacle {
 
+    private static final float TRANS_SPEED_MODIFIER = 0.01f;
+    private static final float ROTATION_SPEED_MODIFIER = 0.95f;
+
     private Vector3f velocity;
     private Quat4f angularRotation;
 
@@ -41,9 +44,9 @@ public class MovingBoxObstacle extends BoxObstacle {
             );
             this.angularRotation.normalize();
 
-            this.velocity.scale(0.01f);
+            this.velocity.scale(TRANS_SPEED_MODIFIER);
 
-            this.angularRotation.interpolate(new Quat4f(0, 0, 0, 1), 0.95f);
+            this.angularRotation.interpolate(new Quat4f(0, 0, 0, 1), ROTATION_SPEED_MODIFIER);
 
         } else {
             this.velocity = new Vector3f();

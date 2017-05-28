@@ -14,8 +14,7 @@ import static com.tda367.parallax.model.core.collision.CollidableType.HARMFUL;
 import static com.tda367.parallax.model.core.collision.CollidableType.NEUTRAL;
 
 public class Missile extends PowerUpBase {
-
-
+    private final static int SEC_TO_MILLISEC = 1000;
     private static final int FALL_TIME = 500;
     private static final int ACTIVE_TIME = 5000;
     private static final int TIME_TRACKING_TRANS = 700;
@@ -25,6 +24,7 @@ public class Missile extends PowerUpBase {
     private static final float VELOCITY_MULTIPLIER_Y = 1f;
     private static final float VELOCITY_MULTIPLIER_Z = 10f;
     private static final float FALL_MULTIPLIER = 2.5f;
+    private static final Vector3f MISSILE_TARGET =  new Vector3f(0, 100, 0);
     private static final String COLLISION_MODEL = "3dModels/missile/hitbox.obj";
 
     @Setter
@@ -53,7 +53,7 @@ public class Missile extends PowerUpBase {
 
 
         this.enemyTargetPosition.set(new Vector3f(super.getPos()));
-        this.enemyTargetPosition.add(new Vector3f(0, 100, 20));
+        this.enemyTargetPosition.add(MISSILE_TARGET);
 
         this.posLastUpdate = new Vector3f(transformable.getPos());
         super.getPos().set(this.transformable.getPos());
@@ -100,7 +100,7 @@ public class Missile extends PowerUpBase {
     }
 
     private void generateVelocity(Vector3f firstPosition, Vector3f secondPosition, int milliSinceLastUpdate) {
-        setVelocity((secondPosition.getY() - firstPosition.getY()) / ((float) milliSinceLastUpdate) * 1000);
+        setVelocity((secondPosition.getY() - firstPosition.getY()) / ((float) milliSinceLastUpdate) * SEC_TO_MILLISEC);
     }
 
     private void moveTheMissile(int milliSinceLastUpdate, int timeStorage) {
@@ -144,7 +144,7 @@ public class Missile extends PowerUpBase {
         }
 
         if (this.velocity < MAXIMUM_VELOCITY) {
-            this.velocity = this.startVelocity * ((float) Math.pow(1 + ACCELERATION, ((double) this.timeAccelerated) / 1000));
+            this.velocity = this.startVelocity * ((float) Math.pow(1 + ACCELERATION, ((double) this.timeAccelerated) / SEC_TO_MILLISEC));
         } else {
             this.velocity = MAXIMUM_VELOCITY;
         }
@@ -158,11 +158,11 @@ public class Missile extends PowerUpBase {
     }
 
     private void fall(int milliSinceLastUpdate) {
-        super.getPos().add(new Vector3f(0, 0, -(((float) milliSinceLastUpdate) / 1000) * FALL_MULTIPLIER));
+        super.getPos().add(new Vector3f(0, 0, -(((float) milliSinceLastUpdate) / SEC_TO_MILLISEC) * FALL_MULTIPLIER));
     }
 
     private void moveOnVelocity(int milliSinceLastUpdate) {
-        final float posYAdded = this.velocity * ((float) milliSinceLastUpdate / 1000);
+        final float posYAdded = this.velocity * ((float) milliSinceLastUpdate / SEC_TO_MILLISEC);
         super.getPos().add(new Vector3f(0, posYAdded, 0));
     }
 
@@ -176,9 +176,9 @@ public class Missile extends PowerUpBase {
     }
 
     private void moveOnDirectionVector(Vector3f directionalVector, int milliSinceLastUpdate) {
-        getPos().add(new Vector3f((directionalVector.getX() * (float) milliSinceLastUpdate / 1000) * VELOCITY_MULTIPLIER_X,
-                (directionalVector.getY() * (float) milliSinceLastUpdate / 1000) * VELOCITY_MULTIPLIER_Y,
-                (directionalVector.getZ() * (float) milliSinceLastUpdate / 1000) * VELOCITY_MULTIPLIER_Z));
+        getPos().add(new Vector3f((directionalVector.getX() * (float) milliSinceLastUpdate / SEC_TO_MILLISEC) * VELOCITY_MULTIPLIER_X,
+                (directionalVector.getY() * (float) milliSinceLastUpdate / SEC_TO_MILLISEC) * VELOCITY_MULTIPLIER_Y,
+                (directionalVector.getZ() * (float) milliSinceLastUpdate / SEC_TO_MILLISEC) * VELOCITY_MULTIPLIER_Z));
         this.setRot(MathUtilities.vectorToQuat(directionalVector));
     }
 }

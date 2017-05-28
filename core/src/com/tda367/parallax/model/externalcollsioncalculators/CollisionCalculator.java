@@ -19,6 +19,8 @@ import java.util.Map;
  */
 public class CollisionCalculator implements ICollisionCalculator {
 
+    private final static int SIZE_LIMIT = 100;
+
     private final btCollisionAlgorithmConstructionInfo constructionInfo;
     private final btDispatcherInfo info;
     private final btManifoldResult result;
@@ -216,11 +218,11 @@ public class CollisionCalculator implements ICollisionCalculator {
     }
 
     private void clearLists() {
-        if (this.loadedCollidables.size() > 100) {
+        if (this.loadedCollidables.size() > SIZE_LIMIT) {
             clearLoadedCollidables();
         }
 
-        if (this.algorithmList.size() > 100) {
+        if (this.algorithmList.size() > SIZE_LIMIT) {
             clearAlgorithmList();
         }
     }

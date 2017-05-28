@@ -13,6 +13,7 @@ import static com.tda367.parallax.controller.screens.ScreenState.MAIN_MENU;
  */
 
 public class GameOverScreen extends ScreenAdapter {
+    private final static int SEC_TO_MILLISEC = 1000;
     private GameOver model;
     private GameOverView view;
     private final Player player;
@@ -28,7 +29,7 @@ public class GameOverScreen extends ScreenAdapter {
 
     @Override
     public void render(float delta) {
-        this.model.update((int) (delta * 1000));
+        this.model.update((int) (delta * SEC_TO_MILLISEC));
         if (this.model.isObsolete()) {
             dispose();
             this.screenChanger.requestScreenChange(MAIN_MENU, this.player);

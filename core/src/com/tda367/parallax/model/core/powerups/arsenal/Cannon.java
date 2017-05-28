@@ -9,7 +9,6 @@ import lombok.Setter;
 
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
-import java.util.Random;
 
 /**
  * The cannon PowerUp fires a cannon shot towards the direction it is pointed at.
@@ -17,9 +16,10 @@ import java.util.Random;
 
 public class Cannon extends PowerUpBase {
     private static final String COLLISION_MODEL = "3dModels/laser/hitbox.obj";
+    private final static int SEC_TO_MILLISEC = 1000;
     private static final int LIFE_LENGTH = 4000;
-
-    private final Random rand = new Random();
+    private static final float SPEED = 30;
+    private static final float ACTIVATION_TIME = 150;
 
     @Getter
     @Setter
@@ -53,14 +53,14 @@ public class Cannon extends PowerUpBase {
                 transformable.getRot().z * -1,
                 transformable.getRot().w)
         );
-        this.velocity.scale(30);
+        this.velocity.scale(SPEED);
     }
 
     @Override
     public void update(int milliSinceLastUpdate) {
         if (super.isActive()) {
 
-            if (this.timeAlive > 150) {
+            if (this.timeAlive > ACTIVATION_TIME) {
                 super.enableCollision();
             }
             this.timeAlive += milliSinceLastUpdate;
@@ -80,9 +80,9 @@ public class Cannon extends PowerUpBase {
 
     private void updatePosition(int milliSinceLastUpdate) {
         super.getPos().add(new Vector3f(
-                this.velocity.getX() * ((float) milliSinceLastUpdate / 1000),
-                this.velocity.getY() * ((float) milliSinceLastUpdate / 1000),
-                this.velocity.getZ() * ((float) milliSinceLastUpdate / 1000)
+                this.velocity.getX() * ((float) milliSinceLastUpdate / SEC_TO_MILLISEC),
+                this.velocity.getY() * ((float) milliSinceLastUpdate / SEC_TO_MILLISEC),
+                this.velocity.getZ() * ((float) milliSinceLastUpdate / SEC_TO_MILLISEC)
         ));
         this.setRot(MathUtilities.vectorToQuat(this.velocity));
     }
@@ -104,7 +104,7 @@ public class Cannon extends PowerUpBase {
 
     @Override
     public void handleCollision(Collidable collidable) {
-        if (this.timeAlive > 250 && CollidableType.OBSTACLE == collidable.getCollidableType()) {
+        if (this.timeAlive > ACTIVATION_TIME && CollidableType.OBSTACLE == collidable.getCollidableType()) {
             this.die();
         }
     }

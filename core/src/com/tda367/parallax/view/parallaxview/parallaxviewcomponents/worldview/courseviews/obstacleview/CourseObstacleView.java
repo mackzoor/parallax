@@ -12,6 +12,7 @@ import com.tda367.parallax.view.rendering.Renderer3D;
 public class CourseObstacleView {
     private static final String PATH_TO_BOX = "3dModels/box/box.g3db";
     private static final String PATH_TO_WALL = "3dModels/wall/wall.g3db";
+    private static final float OPACITY = 0.75f;
 
     private final CourseObstacleBase obstacle;
     private final Renderable3dObject renderable3dObject;
@@ -22,7 +23,7 @@ public class CourseObstacleView {
                 obstacle.getPos(),
                 obstacle.getRot(),
                 ResourceLoader.getInstance().getModel(get3dModelPath(obstacle.getObstacleType())),
-                0.75f,
+                OPACITY,
                 true
         );
     }

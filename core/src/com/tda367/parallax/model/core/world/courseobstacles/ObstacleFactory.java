@@ -9,6 +9,10 @@ import java.util.Random;
  */
 public final class ObstacleFactory {
 
+    private static final Quat4f TOP_WALLROTATION = new Quat4f(0, 0.7071f, 0, 0.7071f);
+    private static final Quat4f RIGHT_WALLROTATION = new Quat4f(0, 1, 0, 0);
+    private static final Quat4f BOTTOM_WALLROTATION = new Quat4f(0, -0.7071f, 0, 0.7071f);
+    private static final Quat4f LEFT_WALLROTATION = new Quat4f(0, 0, 0, 1);
     private static Random rand = new Random();
 
     private ObstacleFactory() {
@@ -33,23 +37,23 @@ public final class ObstacleFactory {
 
     //Walls
     private static WallObstacle getTopWallInstance(Vector3f pos) {
-        return new WallObstacle(pos, new Quat4f(0, 0.7071f, 0, 0.7071f));
+        return new WallObstacle(pos, TOP_WALLROTATION);
     }
 
     private static WallObstacle getRightWallInstance(Vector3f pos) {
-        return new WallObstacle(pos, new Quat4f(0, 1, 0, 0));
+        return new WallObstacle(pos, RIGHT_WALLROTATION);
     }
 
     private static WallObstacle getBottomWallInstance(Vector3f pos) {
-        return new WallObstacle(pos, new Quat4f(0, -0.7071f, 0, 0.7071f));
+        return new WallObstacle(pos, BOTTOM_WALLROTATION);
     }
 
     private static WallObstacle getLeftWallInstance(Vector3f pos) {
-        return new WallObstacle(pos, new Quat4f(0, 0, 0, 1));
+        return new WallObstacle(pos, LEFT_WALLROTATION);
     }
 
     private static MovingWallObstacle getMovingWallInstance(Vector3f pos) {
-        return new MovingWallObstacle(pos, new Quat4f(0, 0, 0, 1));
+        return new MovingWallObstacle(pos, LEFT_WALLROTATION);
     }
 
     public static WallObstacle getRandomWallInstance(Vector3f pos) {

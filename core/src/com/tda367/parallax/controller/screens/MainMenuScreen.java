@@ -14,7 +14,7 @@ import com.tda367.parallax.view.parallaxview.MainMenuView;
 import static com.tda367.parallax.controller.screens.ScreenState.GAME;
 
 public class MainMenuScreen extends ScreenAdapter {
-
+    private final static int SEC_TO_MILLISEC = 1000;
     private final Player player;
     private MainMenu model;
     private MainMenuController controller;
@@ -40,7 +40,7 @@ public class MainMenuScreen extends ScreenAdapter {
             dispose();
             Gdx.app.exit();
         }
-        this.model.update((int) (delta * 1000));
+        this.model.update((int) (delta * SEC_TO_MILLISEC));
         this.view.render();
         this.collisionCalculator.run();
     }

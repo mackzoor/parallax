@@ -18,6 +18,8 @@ public class AgelionView implements RenderableSpaceCraft {
     private static final String AGELION_3D_MODEL = "3dModels/agelion/agelion.g3db";
     private static final ParticleEffectType BOOST_TRAIL = ParticleEffectType.BOOST_TRAIL;
     private static final ParticleEffectType FIRE_EFFECT = ParticleEffectType.FIRE;
+    private static final Vector3f PARTICLE_OFFSET = new Vector3f(0, -1f, 0.15f);
+    private static final Vector3f FIRE_OFFSET = new Vector3f(0, 0, 0.25f);
 
     private Quat4f rot;
     private Vector3f pos;
@@ -35,14 +37,14 @@ public class AgelionView implements RenderableSpaceCraft {
         this.spaceCraftModel = new Renderable3dObject(
                 this.pos,
                 this.rot,
-                ResourceLoader.getInstance().getModel(this.AGELION_3D_MODEL),
+                ResourceLoader.getInstance().getModel(AGELION_3D_MODEL),
                 1f
         );
 
         this.criticalDamage = false;
 
-        this.trail = new RenderableParticleEffect(this.BOOST_TRAIL);
-        this.damaged = new RenderableParticleEffect(this.FIRE_EFFECT);
+        this.trail = new RenderableParticleEffect(BOOST_TRAIL);
+        this.damaged = new RenderableParticleEffect(FIRE_EFFECT);
     }
 
     private void updateTransformation() {
@@ -56,7 +58,7 @@ public class AgelionView implements RenderableSpaceCraft {
 
 
         final Vector3f particleOffset = new Vector3f(this.pos);
-        particleOffset.add(new Vector3f(0, -1f, 0.15f));
+        particleOffset.add(PARTICLE_OFFSET);
         this.trail.setPosition(particleOffset);
 
         Renderer3D.getInstance().addObjectToFrame(this.spaceCraftModel);
@@ -64,7 +66,7 @@ public class AgelionView implements RenderableSpaceCraft {
 
         if (this.criticalDamage) {
             final Vector3f fireOffset = new Vector3f(this.pos);
-            fireOffset.add(new Vector3f(0, 0, 0.25f));
+            fireOffset.add(FIRE_OFFSET);
             this.damaged.setPosition(fireOffset);
 
             Renderer3D.getInstance().addParticleEffectToFrame(this.damaged);

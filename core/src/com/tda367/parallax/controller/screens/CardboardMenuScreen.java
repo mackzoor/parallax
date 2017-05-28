@@ -20,6 +20,7 @@ import static com.tda367.parallax.controller.screens.ScreenState.GAME;
 
 
 public class CardboardMenuScreen extends CardboardScreenAdapter {
+    private final static int SEC_TO_MILLISEC = 1000;
     private CardboardMenuController controller;
     private MainMenu mainMenu;
     private final CollisionCalculator collisionCalculator;
@@ -41,7 +42,7 @@ public class CardboardMenuScreen extends CardboardScreenAdapter {
         } else if (this.mainMenu.getExitButton().isCollided()) {
             exitButtonHit();
         } else {
-            this.mainMenu.update((int) (Gdx.graphics.getDeltaTime() * 1000));
+            this.mainMenu.update((int) (Gdx.graphics.getDeltaTime() * SEC_TO_MILLISEC));
             this.collisionCalculator.run();
             this.mainMenu.setAimDirection(getLookDirection(paramHeadTransform));
         }

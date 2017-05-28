@@ -20,8 +20,7 @@ import java.util.List;
  * Abstract class for all spacecraft.
  */
 public abstract class SpaceCraft implements ISpaceCraft {
-
-    //SpaceCraft movement limiter
+    private final static int SEC_TO_MILLISEC = 1000;
     private static final float COURSE_RADIUS = 5;
 
     @Getter
@@ -181,7 +180,7 @@ public abstract class SpaceCraft implements ISpaceCraft {
 
     private void panRelativeMode(int timeMilli) {
         final Vector2f addedVelocity = new Vector2f(this.panAcceleration);
-        addedVelocity.scale((float) timeMilli / 1000);
+        addedVelocity.scale((float) timeMilli / SEC_TO_MILLISEC);
 
         this.currentPanVelocity.add(addedVelocity);
         this.currentPanVelocity.clamp(-this.maxPanVelocity, this.maxPanVelocity);
@@ -194,15 +193,15 @@ public abstract class SpaceCraft implements ISpaceCraft {
     }
 
     private float distanceCalc(float speed, float timeMilli) {
-        return speed * (timeMilli / 1000);
+        return speed * (timeMilli / SEC_TO_MILLISEC);
     }
 
     private void accelerateCraft(int timeMilli) {
         if (this.forwardRelativeVelocityMode) {
-            this.forwardVelocity = this.forwardVelocity + this.forwardAcceleration * ((float) timeMilli / 1000);
+            this.forwardVelocity = this.forwardVelocity + this.forwardAcceleration * ((float) timeMilli / SEC_TO_MILLISEC);
         } else {
             if (this.forwardVelocity < this.forwardTargetSpeed) {
-                final float speedIncrease = this.forwardVelocity + this.forwardAcceleration * ((float) timeMilli / 1000);
+                final float speedIncrease = this.forwardVelocity + this.forwardAcceleration * ((float) timeMilli / SEC_TO_MILLISEC);
 
                 if (this.forwardTargetSpeed < speedIncrease + this.forwardVelocity) {
                     this.forwardVelocity = this.forwardTargetSpeed;
@@ -215,7 +214,7 @@ public abstract class SpaceCraft implements ISpaceCraft {
     }
 
     private void advanceCraft(int timeMilli) {
-        final float posYAdded = this.forwardVelocity * ((float) timeMilli / 1000);
+        final float posYAdded = this.forwardVelocity * ((float) timeMilli / SEC_TO_MILLISEC);
         this.pos.add(new Vector3f(0, posYAdded, 0));
     }
 

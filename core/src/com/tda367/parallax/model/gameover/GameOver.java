@@ -84,7 +84,7 @@ public class GameOver {
     }
 
     private String generateText() {
-        StringBuilder gameOverText = new StringBuilder("YOU DEAD!"
+        final StringBuilder gameOverText = new StringBuilder("YOU DEAD!"
                 + "\nYour score: " + this.playerScore);
         if (this.isNewHighScore()) {
             gameOverText.append("\nWow! New High score!");

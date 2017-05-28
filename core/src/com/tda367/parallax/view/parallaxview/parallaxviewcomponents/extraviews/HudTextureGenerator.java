@@ -20,6 +20,7 @@ public class HudTextureGenerator {
 
     private static final int WITDH = 512;
     private static final int HEIGHT = 256;
+    private static final float OPACITY = 0.3f;
 
     private final Texture generatedTexture;
 
@@ -55,9 +56,9 @@ public class HudTextureGenerator {
     }
 
     private Pixmap renderText(Color fgColor) {
-        SpriteBatch spriteBatch = new SpriteBatch();
+        final SpriteBatch spriteBatch = new SpriteBatch();
 
-        Gdx.gl.glClearColor(1, 1, 1, 0.3f);
+        Gdx.gl.glClearColor(1, 1, 1, OPACITY);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         final Matrix4 normalProjection = new Matrix4().setToOrtho2D(0, 0, WITDH, HEIGHT);
@@ -67,7 +68,7 @@ public class HudTextureGenerator {
         spriteBatch.setColor(fgColor);
 
         //Draw text
-        BitmapFont font = new BitmapFont(true);
+        final BitmapFont font = new BitmapFont(true);
         font.setColor(fgColor);
         font.getData().setScale(1);
         font.draw(spriteBatch,

@@ -17,7 +17,8 @@ import com.tda367.parallax.view.rendering.Renderer3D;
 import static com.tda367.parallax.controller.screens.ScreenState.GAME_OVER;
 
 public class CardboardGameScreen extends CardboardScreenAdapter {
-
+    private final static int SEC_TO_MILLISEC = 1000;
+    private final static int START_SPEED = 15;
     private final Player player;
     private Parallax parallaxGame;
     private GameController controller;
@@ -44,7 +45,7 @@ public class CardboardGameScreen extends CardboardScreenAdapter {
         if (this.parallaxGame.isGameOver()) {
             gameOver();
         } else {
-            this.parallaxGame.update((int) (Gdx.graphics.getDeltaTime() * 1000));
+            this.parallaxGame.update((int) (Gdx.graphics.getDeltaTime() * SEC_TO_MILLISEC));
             this.collisionCalculator.run();
         }
     }
@@ -56,7 +57,7 @@ public class CardboardGameScreen extends CardboardScreenAdapter {
     }
 
     public void newGame() {
-        this.player.setSpaceCraft(SpaceCraftFactory.getAgelionInstance(15));
+        this.player.setSpaceCraft(SpaceCraftFactory.getAgelionInstance(START_SPEED));
         this.parallaxGame = new Parallax(this.player);
         this.parallaxView = new ParallaxView(this.parallaxGame, true, false);
         this.controller = new GameController(this.parallaxGame, this.parallaxView, DeviceManager.getDevice());
