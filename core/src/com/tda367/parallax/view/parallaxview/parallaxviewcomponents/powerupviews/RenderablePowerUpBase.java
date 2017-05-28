@@ -8,6 +8,9 @@ import lombok.Setter;
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
 
+/**
+ * Base class for renderable powerups.
+ */
 public abstract class RenderablePowerUpBase implements RenderablePowerUp {
 
     private static final String MODEL_3D_INTERNAL_PATH = "3dModels/missile/missile.g3db";

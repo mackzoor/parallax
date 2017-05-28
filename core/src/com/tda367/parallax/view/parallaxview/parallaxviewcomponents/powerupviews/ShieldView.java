@@ -8,6 +8,9 @@ import com.tda367.parallax.view.rendering.Renderable3dObject;
 import com.tda367.parallax.view.rendering.RenderableParticleEffect;
 import com.tda367.parallax.view.rendering.Renderer3D;
 
+/**
+ * Represents a visible shield that can be rendered.
+ */
 public class ShieldView extends RenderablePowerUpBase implements RenderablePowerUp {
 
     private static final String SHIELD_3D_MODEL = "3dModels/shield/shield.g3db";

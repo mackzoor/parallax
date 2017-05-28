@@ -1,4 +1,4 @@
-package com.tda367.parallax.view;
+package com.tda367.parallax.view.parallaxview;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;

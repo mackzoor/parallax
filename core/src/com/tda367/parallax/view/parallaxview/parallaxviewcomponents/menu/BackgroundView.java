@@ -8,7 +8,9 @@ import com.tda367.parallax.view.rendering.Renderer3D;
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
 
-
+/**
+ * A background scenery 3d model for the menu.
+ */
 public class BackgroundView implements View {
 
 

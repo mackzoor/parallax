@@ -23,11 +23,6 @@ public class CourseModelView implements View {
     private final List<ContainerView> containerViews;
     private final Renderable3dObject courseModule3dObject;
 
-    /**
-     * Creates a CourseModelView from an {@link ICourseModule}.
-     *
-     * @param courseModule to be used to create the CourseModelView.
-     */
     public CourseModelView(ICourseModule courseModule) {
         this.courseModule = courseModule;
         this.obstacleViews = new ArrayList<CourseObstacleView>();

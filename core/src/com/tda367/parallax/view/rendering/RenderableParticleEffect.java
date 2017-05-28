@@ -37,7 +37,7 @@ public class RenderableParticleEffect {
         this.particleEffect.init();
     }
 
-    private void updateEffectTransform() {
+    private void updateEffectTransformation() {
         this.particleEffect.setTransform(new Matrix4());
 
         this.particleEffect.translate(new Vector3(
@@ -54,6 +54,9 @@ public class RenderableParticleEffect {
         ));
     }
 
+    /**
+     * Starts emitting the particle effect.
+     */
     public void start() {
         if (!this.dead && !this.enabled) {
             this.enabled = true;
@@ -61,6 +64,9 @@ public class RenderableParticleEffect {
         }
     }
 
+    /**
+     * Stops emitting the particle effect.
+     */
     public void kill() {
         this.dead = true;
 
@@ -76,7 +82,7 @@ public class RenderableParticleEffect {
     }
 
     public ParticleEffect getParticleEffect() {
-        this.updateEffectTransform();
+        this.updateEffectTransformation();
         return this.particleEffect;
     }
 }

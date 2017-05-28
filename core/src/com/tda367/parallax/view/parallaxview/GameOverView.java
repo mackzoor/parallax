@@ -14,7 +14,6 @@ import java.util.List;
 /**
  * Class responsible for creating and rendering all {@link GameOverPaneView} from {@link GameOver}.
  */
-
 public class GameOverView {
 
     private final GameOver model;

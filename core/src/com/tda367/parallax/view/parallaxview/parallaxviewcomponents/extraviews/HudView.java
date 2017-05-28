@@ -26,11 +26,6 @@ public class HudView {
     private int lives;
     private int score;
 
-    /**
-     * Creates a HudView from a {@link Player}.
-     *
-     * @param player to be used to create the PlayerView.
-     */
     public HudView(Player player) {
         this.player = player;
         this.hudPane = new Renderable3dObject(

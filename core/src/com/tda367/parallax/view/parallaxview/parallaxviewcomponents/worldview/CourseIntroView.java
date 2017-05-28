@@ -8,6 +8,9 @@ import com.tda367.parallax.view.rendering.Renderer3D;
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
 
+/**
+ * A background scenery 3d model to ease into the main course 3d model.
+ */
 public class CourseIntroView implements View {
 
     private final String internalPath = "3dModels/courseintro/courseintro.g3db";

@@ -29,7 +29,7 @@ public class HudTextureGenerator {
 
     HudTextureGenerator(int lives) {
         this.lives = lives;
-//        generatedTexture = new Texture(renderText(Color.BLACK));
+
         final Pixmap pMap = new Pixmap(WITDH, HEIGHT, Pixmap.Format.RGBA8888);
         this.generatedTexture = new Texture(pMap);
     }
@@ -81,10 +81,7 @@ public class HudTextureGenerator {
                 0
         );
 
-        //finish write to buffer
         spriteBatch.end();
-
-        //write frame buffer to Pixmap
         final Pixmap pMap = ScreenUtils.getFrameBufferPixmap(0, 0, WITDH, HEIGHT);
 
         //Dispose of c++ objects.

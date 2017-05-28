@@ -16,7 +16,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
+/**
+ * Class is responsible for rendering the main menu of the game.
+ */
 public class MainMenuView {
 
     private final MainMenu mainMenu;

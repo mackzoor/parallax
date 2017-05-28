@@ -2,7 +2,9 @@ package com.tda367.parallax.view.parallaxview.parallaxviewcomponents.spacecraftv
 
 import com.tda367.parallax.model.core.spacecraft.ISpaceCraft;
 import com.tda367.parallax.view.parallaxview.parallaxviewcomponents.View;
-
+/**
+ * View class for {@link ISpaceCraft} that will automatically transform to match the spacecraft given.
+ */
 public class SpaceCraftAutomaticTransform implements View {
 
     private final ISpaceCraft spaceCraft;

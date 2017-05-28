@@ -43,7 +43,7 @@ public class ContainerView {
     }
 
     public void render() {
-        if (!this.container.isCollected()) {
+        if (!this.isCollected()) {
             updatePowerUpRotation();
             this.internalPowerUp.render();
             Renderer3D.getInstance().addObjectToFrame(this.container3dObject);

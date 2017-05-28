@@ -10,6 +10,9 @@ import com.tda367.parallax.view.rendering.Renderer3D;
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
 
+/**
+ * Represents a visible agelion spacecraft that can be rendered.
+ */
 public class AgelionView implements RenderableSpaceCraft {
 
     private static final String AGELION_3D_MODEL = "3dModels/agelion/agelion.g3db";
@@ -18,7 +21,6 @@ public class AgelionView implements RenderableSpaceCraft {
 
     private Quat4f rot;
     private Vector3f pos;
-
 
     private final Renderable3dObject spaceCraftModel;
     private final RenderableParticleEffect trail;

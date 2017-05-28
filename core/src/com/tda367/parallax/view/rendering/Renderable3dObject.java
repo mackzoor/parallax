@@ -45,11 +45,6 @@ public class Renderable3dObject {
         this(pos, rot, modelInstance, opacity, opacity < 1);
     }
 
-    /**
-     * Sets the position of the 3d model.
-     *
-     * @param pos the new position.
-     */
     public void setPos(Vector3f pos) {
         this.pos = pos;
         this.modelInstance.transform.setTranslation(
@@ -59,11 +54,6 @@ public class Renderable3dObject {
         );
     }
 
-    /**
-     * Sets the rotation of the 3d model.
-     *
-     * @param rot the new rotation.
-     */
     public void setRot(Quat4f rot) {
         this.rot = rot;
 
@@ -83,11 +73,6 @@ public class Renderable3dObject {
         this.setPos(this.pos);
     }
 
-    /**
-     * Sets the opacity of the 3d model.
-     *
-     * @param opacity the new opacity.
-     */
     public void setOpacity(float opacity) {
         this.opacity = opacity;
 

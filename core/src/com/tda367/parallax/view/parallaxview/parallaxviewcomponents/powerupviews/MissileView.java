@@ -9,6 +9,9 @@ import com.tda367.parallax.view.sound.Sound;
 
 import javax.vecmath.Vector3f;
 
+/**
+ * Represents a visible missile that can be rendered.
+ */
 public class MissileView extends RenderablePowerUpBase implements RenderablePowerUp {
     private static final String MODEL_3D_INTERNAL_PATH = "3dModels/missile/missile.g3db";
     private static final ParticleEffectType ROCKET_TRAIL = ParticleEffectType.ROCKET_TRAIL;
@@ -19,7 +22,6 @@ public class MissileView extends RenderablePowerUpBase implements RenderablePowe
     private final RenderableParticleEffect explosion;
 
     private int deathTime;
-    private boolean effectsEnabled;
 
 
     MissileView() {
@@ -39,26 +41,18 @@ public class MissileView extends RenderablePowerUpBase implements RenderablePowe
         this.deathTime = 0;
     }
 
-    private void playMissileSound() {
-        Sound.getInstance().playSound("sounds/effects/MissileDemo.mp3", 0.7f);
-    }
-
-    private void updateTranformation() {
-        this.renderable3dObject.setPos(super.getPos());
-        this.renderable3dObject.setRot(super.getRot());
-
-        this.rocketTrail.setPosition(super.getPos());
-        this.explosion.setPosition(super.getPos());
-    }
-
     @Override
     public void playActivationSound() {
         playMissileSound();
     }
 
+    private void playMissileSound() {
+        Sound.getInstance().playSound("sounds/effects/MissileDemo.mp3", 0.7f);
+    }
+
     @Override
     public void render() {
-        this.updateTranformation();
+        this.updateTransformation();
 
         if (this.deathTime == 0) {
             final Vector3f particleOffset = new Vector3f(super.getPos());
@@ -66,16 +60,24 @@ public class MissileView extends RenderablePowerUpBase implements RenderablePowe
             this.rocketTrail.setPosition(particleOffset);
 
             Renderer3D.getInstance().addObjectToFrame(this.renderable3dObject);
-            if (this.effectsEnabled) {
+            if (super.isEffectsEnabled()) {
                 Renderer3D.getInstance().addParticleEffectToFrame(this.rocketTrail);
             }
         } else {
-            if (this.effectsEnabled) {
+            if (super.isEffectsEnabled()) {
                 Renderer3D.getInstance().addParticleEffectToFrame(this.rocketTrail);
                 Renderer3D.getInstance().addParticleEffectToFrame(this.explosion);
             }
             this.deathTime++;
         }
+    }
+
+    private void updateTransformation() {
+        this.renderable3dObject.setPos(super.getPos());
+        this.renderable3dObject.setRot(super.getRot());
+
+        this.rocketTrail.setPosition(super.getPos());
+        this.explosion.setPosition(super.getPos());
     }
 
     @Override

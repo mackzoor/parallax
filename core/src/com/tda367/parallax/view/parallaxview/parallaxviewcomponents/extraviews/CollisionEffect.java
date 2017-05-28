@@ -44,7 +44,7 @@ public class CollisionEffect implements CollisionObserver {
         final CollidableType second = collisionResult.getSecond().getCollidableType();
 
         if (isDestructive(first) || isDestructive(second)) {
-            createExplosion(explosionPoint);
+            createExplosionParticleEffect(explosionPoint);
         }
     }
 
@@ -54,18 +54,18 @@ public class CollisionEffect implements CollisionObserver {
 
     private void handleExplosion(Collidable collidable) {
         if (collidable.getCollidableType() == CONTAINER) {
-            createAscend(collidable.getPos());
+            createAscendParticleEffect(collidable.getPos());
         }
     }
 
-    private void createAscend(Vector3f position) {
+    private void createAscendParticleEffect(Vector3f position) {
         final RenderableParticleEffect ascendEffect = new RenderableParticleEffect(ParticleEffectType.ASCEND);
         ascendEffect.setPosition(position);
         this.activeEffects.add(ascendEffect);
         ascendEffect.start();
     }
 
-    private void createExplosion(Vector3f explosionPoint) {
+    private void createExplosionParticleEffect(Vector3f explosionPoint) {
         final RenderableParticleEffect explosionParticle = new RenderableParticleEffect(ParticleEffectType.EXPLOSION);
         explosionParticle.setPosition(explosionPoint);
         this.activeEffects.add(explosionParticle);
@@ -80,5 +80,4 @@ public class CollisionEffect implements CollisionObserver {
             renderer.addParticleEffectToFrame(particleExplosion);
         }
     }
-
 }

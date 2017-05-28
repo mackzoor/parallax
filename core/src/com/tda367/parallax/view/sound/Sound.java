@@ -13,9 +13,7 @@ import java.util.List;
 public class Sound {
 
     private final ResourceLoader resources;
-
     private final List<ActiveMusicCombination> activeMusic = new ArrayList<ActiveMusicCombination>();
-
     private static Sound instance;
 
     public static Sound getInstance() {
@@ -29,7 +27,7 @@ public class Sound {
         this.resources = ResourceLoader.getInstance();
     }
 
-    //Methods for playing music or sound using its data location (directory\fileName).
+
     public void playSound(String soundLocation) {
         this.resources.getSound(soundLocation).play();
     }
@@ -52,7 +50,7 @@ public class Sound {
         this.activeMusic.add(new ActiveMusicCombination(musicLocation, playing));
     }
 
-    //Methods interacting with active music. Either Stop, Pause, Un-pause or clear it.
+
     public void stopActiveMusic(String fileNameAndDirectory) {
         for (int i = 0; i < this.activeMusic.size(); i++) {
             if (this.activeMusic.get(i).getFileName().equals(fileNameAndDirectory)) {

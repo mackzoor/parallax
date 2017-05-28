@@ -6,6 +6,9 @@ import com.tda367.parallax.view.parallaxview.parallaxviewcomponents.View;
 import com.tda367.parallax.view.rendering.Renderable3dObject;
 import com.tda367.parallax.view.rendering.Renderer3D;
 
+/**
+ * Renderable 3d model text.
+ */
 public class StartButton3DView implements View {
 
     private static final String INTERNAL_PATH = "3dModels/playtext/play.g3db";

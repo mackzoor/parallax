@@ -4,7 +4,7 @@ import com.tda367.parallax.model.core.powerups.arsenal.IPowerUp;
 import com.tda367.parallax.view.parallaxview.parallaxviewcomponents.View;
 
 /**
- * View class for {@link IPowerUp}.
+ * View class for {@link IPowerUp} that will automatically transform to match the IPowerUp given.
  */
 public class PowerUpViewAutomaticTransform implements View {
 

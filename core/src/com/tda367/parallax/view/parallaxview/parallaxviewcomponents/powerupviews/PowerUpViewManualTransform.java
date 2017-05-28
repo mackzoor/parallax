@@ -6,7 +6,10 @@ import com.tda367.parallax.view.parallaxview.parallaxviewcomponents.View;
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
 
-
+/**
+ * View class that will show a powerUp and is manually controlled
+ * and doesn't need a IPowerUp from the model to be rendered.
+ */
 public class PowerUpViewManualTransform implements View {
 
     private final RenderablePowerUp renderablePowerUp;

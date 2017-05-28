@@ -2,7 +2,7 @@ package com.tda367.parallax.controller.inputhandlers;
 
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
-import com.tda367.parallax.view.TouchPadView;
+import com.tda367.parallax.view.parallaxview.TouchPadView;
 import lombok.Setter;
 
 /**

@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Class for rendering 3d objects.
+ * Class for rendering 3d objects by using libgdx rendering system.
  */
 public final class Renderer3D {
 
@@ -39,11 +39,41 @@ public final class Renderer3D {
     private List<Renderable3dObject> modelsToRender;
     private List<RenderableParticleEffect> particleEffectsToRender;
 
+
+    public static Renderer3D initialize(float fov, int width, int height, boolean isVr, boolean particlesEnabled) {
+        if (isVr) {
+            // Setup of special camera for VR
+            final Camera cardboardCamera = new CardboardCamera();
+            cardboardCamera.lookAt(0, 0, -1);
+            rend3D = new Renderer3D(cardboardCamera, particlesEnabled);
+        } else {
+            rend3D = new Renderer3D(fov, width, height, particlesEnabled);
+        }
+
+        return rend3D;
+    }
+
+    public static Renderer3D getInstance() {
+        return rend3D;
+    }
+
     /**
-     * Creates a new Renderer3D from a {@link Camera}.
+     * Creates a new Renderer3D.
      *
-     * @param camera
+     * @param fov    Field of view of the camera
+     * @param width  Amount of pixels on the x axis to be rendered.
+     * @param height Amount of pixels on the y axis to be rendered.
      */
+    private Renderer3D(float fov, int width, int height, boolean particlesEnabled) {
+        this(
+                new PerspectiveCamera(
+                        fov,
+                        width,
+                        height),
+                particlesEnabled
+        );
+    }
+
     private Renderer3D(Camera camera, boolean enableParticleEffects) {
         this.camera = camera;
         this.modelsToRender = new ArrayList<Renderable3dObject>();
@@ -68,40 +98,6 @@ public final class Renderer3D {
     }
 
     /**
-     * Creates a new Renderer3D.
-     *
-     * @param fov    Field of view of the camera
-     * @param width  Amount of pixels on the x axis to be rendered.
-     * @param height Amount of pixels on the y axis to be rendered.
-     */
-    private Renderer3D(float fov, int width, int height, boolean particlesEnabled) {
-        this(
-                new PerspectiveCamera(
-                        fov,
-                        width,
-                        height),
-                particlesEnabled
-        );
-    }
-
-    public static Renderer3D initialize(float fov, int width, int height, boolean isVr, boolean particlesEnabled) {
-        if (isVr) {
-            // Setup of special camera for VR
-            final Camera cardboardCamera = new CardboardCamera();
-            cardboardCamera.lookAt(0, 0, -1);
-            rend3D = new Renderer3D(cardboardCamera, particlesEnabled);
-        } else {
-            rend3D = new Renderer3D(fov, width, height, particlesEnabled);
-        }
-
-        return rend3D;
-    }
-
-    public static Renderer3D getInstance() {
-        return rend3D;
-    }
-
-    /**
      * Adds {@link Renderable3dObject} to be rendered in next frame.
      *
      * @param renderObject object to be rendered.
@@ -111,6 +107,10 @@ public final class Renderer3D {
         this.modelsToRender.add(renderObject);
     }
 
+    /**
+     * Adds {@link RenderableParticleEffect} to be rendered in next frame.
+     * @param particleEffect object to be rendered.
+     */
     public void addParticleEffectToFrame(RenderableParticleEffect particleEffect) {
         this.particleEffectsToRender.add(particleEffect);
     }
@@ -176,9 +176,8 @@ public final class Renderer3D {
     }
 
     /**
-     * Draws eye for VR.
+     * Sets eye view matrix for VR.
      */
-
     public void onDrawEye(Eye eye) {
         ((CardboardCamera) this.camera).setEyeViewAdjustMatrix(new Matrix4(eye.getEyeView()));
 

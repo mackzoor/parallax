@@ -1,7 +1,7 @@
 package com.tda367.parallax.controller.devicestates;
 
 import com.tda367.parallax.controller.inputhandlers.*;
-import com.tda367.parallax.view.TouchPadView;
+import com.tda367.parallax.view.parallaxview.TouchPadView;
 
 /**
  * Manages the input-handlers for Android devices.
