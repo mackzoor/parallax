@@ -2,6 +2,7 @@ package com.tda367.parallax.model.core.spacecraft;
 
 import com.tda367.parallax.model.core.collision.Collidable;
 import com.tda367.parallax.model.core.powerups.arsenal.IPowerUp;
+import com.tda367.parallax.model.core.powerups.arsenal.PowerUpType;
 import com.tda367.parallax.model.core.util.Updatable;
 
 import javax.vecmath.Vector2f;
@@ -41,6 +42,8 @@ public interface ISpaceCraft extends Collidable, Updatable {
     void setCurrentPanVelocity(float x, float y);
 
     void enableIndipendantRotation(boolean value);
+
+    PowerUpType getPowerUpType();
 }
 
 

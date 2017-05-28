@@ -4,6 +4,7 @@ import com.tda367.parallax.model.core.collision.Collidable;
 import com.tda367.parallax.model.core.collision.CollidableType;
 import com.tda367.parallax.model.core.collision.CollisionManager;
 import com.tda367.parallax.model.core.powerups.arsenal.IPowerUp;
+import com.tda367.parallax.model.core.powerups.arsenal.PowerUpType;
 import com.tda367.parallax.model.core.powerups.container.IContainer;
 import com.tda367.parallax.model.coreabstraction.AudioQueue;
 import com.tda367.parallax.utilities.MathUtilities;
@@ -106,6 +107,15 @@ public abstract class SpaceCraft implements ISpaceCraft {
     @Override
     public void enableIndipendantRotation(boolean value) {
         this.independentRotation = value;
+    }
+
+    @Override
+    public PowerUpType getPowerUpType() {
+        if (pu.size() > 0) {
+            return pu.get(0).getPowerUpType();
+        } else {
+            return null;
+        }
     }
 
     //Update
