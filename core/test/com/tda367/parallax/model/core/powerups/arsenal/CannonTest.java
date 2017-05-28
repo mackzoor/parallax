@@ -31,8 +31,12 @@ public class CannonTest {
     @Test
     public void update() throws Exception {
         cannon.activate(agelion);
+        Vector3f pos = cannon2.getPos();
         cannon2.activate(agelion);
+        cannon2.setVelocity(new Vector3f(1,1,1));
         cannon2.update(4000);
+        Vector3f pos2 = cannon2.getPos();
+        assertFalse(pos.equals(pos2));
         assertTrue(!cannon2.isDead());
         cannon.update(4001);
         assertTrue(cannon.isDead());
