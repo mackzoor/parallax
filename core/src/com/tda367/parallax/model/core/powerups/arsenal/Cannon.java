@@ -17,7 +17,7 @@ import java.util.Random;
  */
 
 public class Cannon extends PowerUpBase {
-    private static final String COLLISION_MODEL = "3dModels/box/hitbox.obj";
+    private static final String COLLISION_MODEL = "3dModels/laser/hitbox.obj";
     private static final String SOUND_DIRECTORY = "sounds/effects";
     private static final int LIFE_LENGTH = 4000;
 
@@ -48,11 +48,13 @@ public class Cannon extends PowerUpBase {
         super.setPos(new Vector3f(transformable.getPos()));
         super.getPos().add(new Vector3f(0, 1, 0));
 
-        this.velocity = MathUtilities.rotateVectorByQuat(new Vector3f(0, 1, 0),
-                new Quat4f(-1 * transformable.getRot().x
-                        , transformable.getRot().y
-                        , -1 * transformable.getRot().z
-                        , transformable.getRot().w));
+        this.velocity = MathUtilities.rotateVectorByQuat(
+                new Vector3f(0, 1, 0),
+                new Quat4f(-1 * transformable.getRot().x,
+                transformable.getRot().y ,
+                transformable.getRot().z * -1,
+                transformable.getRot().w)
+        );
         this.velocity.scale(30);
 
         playCannonSound();
