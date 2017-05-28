@@ -1,4 +1,4 @@
-package com.tda367.parallax.view.parallaxview.parallaxviewcomponents.menu;
+package com.tda367.parallax.view.parallaxview.parallaxviewcomponents.worldview;
 
 import com.tda367.parallax.utilities.ResourceLoader;
 import com.tda367.parallax.view.parallaxview.parallaxviewcomponents.View;
@@ -8,14 +8,12 @@ import com.tda367.parallax.view.rendering.Renderer3D;
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
 
+public class CourseIntroView implements View {
 
-public class BackgroundView implements View {
-
-
-    private final String internalPath = "3dModels/floor/floor.g3db";
+    private final String internalPath = "3dModels/courseintro/courseintro.g3db";
     private final Renderable3dObject renderable3dObject;
 
-    public BackgroundView() {
+    public CourseIntroView() {
         this.renderable3dObject = new Renderable3dObject(
                 new Vector3f(),
                 new Quat4f(),
@@ -26,6 +24,11 @@ public class BackgroundView implements View {
     @Override
     public void render() {
         Renderer3D.getInstance().addObjectToFrame(this.renderable3dObject);
+    }
+
+
+    public void setPos(Vector3f pos){
+        renderable3dObject.setPos(pos);
     }
 
     @Override

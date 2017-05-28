@@ -52,7 +52,7 @@ public class Parallax {
 
         this.world = new World();
         this.world.addSpaceCraft(player.getSpaceCraft());
-        player.getSpaceCraft().getPos().set(0, -50, 0);
+        player.getSpaceCraft().getPos().set(0, -110, 0);
         player.getSpaceCraft().setForwardAcceleration(0.2f);
 
         this.camera = new Camera();

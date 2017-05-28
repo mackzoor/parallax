@@ -6,10 +6,13 @@ import com.tda367.parallax.model.core.spacecraft.ISpaceCraft;
 import com.tda367.parallax.model.core.world.ICourseModule;
 import com.tda367.parallax.model.core.world.World;
 import com.tda367.parallax.view.parallaxview.parallaxviewcomponents.View;
+import com.tda367.parallax.view.parallaxview.parallaxviewcomponents.menu.BackgroundView;
 import com.tda367.parallax.view.parallaxview.parallaxviewcomponents.powerupviews.PowerUpViewAutomaticTransform;
 import com.tda367.parallax.view.parallaxview.parallaxviewcomponents.spacecraftviews.SpaceCraftAutomaticTransform;
 import com.tda367.parallax.view.parallaxview.parallaxviewcomponents.worldview.courseviews.CourseModelView;
+import com.tda367.parallax.view.rendering.Renderable3dObject;
 
+import javax.vecmath.Vector3f;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -25,6 +28,7 @@ public class WorldView {
     private final Map<ICourseModule, CourseModelView> courseModuleHash;
     private final Map<ISpaceCraft, SpaceCraftAutomaticTransform> spaceCraftHash;
     private final Map<IPowerUp, PowerUpViewAutomaticTransform> powerUpsHash;
+    private final CourseIntroView startingGrid;
 
     /**
      * Creates a WorldView from a {@link World}.
@@ -33,6 +37,9 @@ public class WorldView {
      */
     public WorldView(World world) {
         this.world = world;
+
+        this.startingGrid = new CourseIntroView();
+
 
         this.courseModuleHash = new HashMap<ICourseModule, CourseModelView>();
         this.spaceCraftHash = new HashMap<ISpaceCraft, SpaceCraftAutomaticTransform>();
@@ -47,6 +54,8 @@ public class WorldView {
         updateSpaceCraftList();
         updateCourseModuleList();
         updatePowerupList();
+
+        startingGrid.render();
 
 
         //Render Course modules
@@ -63,6 +72,9 @@ public class WorldView {
         //Render Powerups
         for (final PowerUpViewAutomaticTransform powerUpViewAutomaticTransform : this.powerUpsHash.values()) {
             powerUpViewAutomaticTransform.render();
+        }
+        for (final IPowerUp iPowerUp : this.powerUpsHash.keySet()) {
+            this.powerUpsHash.get(iPowerUp).render();
         }
     }
 

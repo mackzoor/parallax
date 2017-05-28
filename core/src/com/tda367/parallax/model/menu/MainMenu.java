@@ -24,9 +24,9 @@ import java.util.List;
 
 public class MainMenu implements CollisionObserver {
 
-    private static final Vector3f EXIT_BUTTON_POS = new Vector3f(2, 10, 1);
+    private static final Vector3f EXIT_BUTTON_POS = new Vector3f(2, 5, 1);
     private static final Quat4f EXIT_BUTTON_ROT = new Quat4f();
-    private static final Vector3f START_BUTTON_POS = new Vector3f(-2, 10, 1);
+    private static final Vector3f START_BUTTON_POS = new Vector3f(-2, 5, 1);
     private static final Quat4f START_BUTTON_ROT = new Quat4f();
 
     @Getter
