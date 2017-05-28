@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 
 public class ContainerTest {
 
-    Container container = (Container)ContainerFactory.createContainer(PowerUpFactory.createCannon());
+    Container container = (Container) AbstractContainerFactory.createContainer(PowerUpFactory.createCannon());
     Agelion agelion = SpaceCraftFactory.getAgelionInstance(10);
 
     @Test

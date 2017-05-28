@@ -11,7 +11,7 @@ import javax.vecmath.Vector3f;
  * An enemy minion. Will try to destroy its target.
  */
 
-public class MinionEnemy extends HunterAI {
+public class MinionEnemy extends AbstractHunterAI {
     @Getter
     private final ISpaceCraft spaceCraft;
 

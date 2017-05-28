@@ -1,13 +1,9 @@
 package com.tda367.parallax.model.core;
 
-import com.tda367.parallax.model.core.enemies.HunterAI;
-import com.tda367.parallax.model.core.spacecraft.Agelion;
 import com.tda367.parallax.model.core.spacecraft.SpaceCraftFactory;
 import com.tda367.parallax.model.core.world.World;
 import com.tda367.parallax.model.coreabstraction.AudioQueue;
 import org.junit.Test;
-
-import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 

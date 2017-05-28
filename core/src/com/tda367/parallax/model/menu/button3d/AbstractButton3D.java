@@ -8,7 +8,7 @@ import lombok.Setter;
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
 
-public abstract class Button3D implements Collidable {
+public abstract class AbstractButton3D implements Collidable {
 
     @Setter
     private String collisionModel;
@@ -18,7 +18,7 @@ public abstract class Button3D implements Collidable {
     private boolean isHit;
     private boolean collisionEnabled;
 
-    Button3D(Vector3f pos, Quat4f rot) {
+    AbstractButton3D(Vector3f pos, Quat4f rot) {
         this.pos = pos;
         this.rot = rot;
         this.collisionEnabled = true;

@@ -9,7 +9,7 @@ import lombok.Setter;
  * Interface for ai that will try to destroy its target.
  */
 
-public abstract class HunterAI implements Updatable {
+public abstract class AbstractHunterAI implements Updatable {
     @Getter
     private Transformable target;
     @Getter

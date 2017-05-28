@@ -59,7 +59,7 @@ public final class ObstacleFactory {
     public static WallObstacle getRandomWallInstance(Vector3f pos) {
         final Random rand = new Random();
 
-        int randomInt = (int) (rand.nextFloat() * 5);
+        final int randomInt = (int) (rand.nextFloat() * 5);
 
 
         if (randomInt == 0) {
