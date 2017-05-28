@@ -61,13 +61,5 @@ public class MovingBoxObstacle extends BoxObstacle {
         super.getRot().mul(this.angularRotation);
         super.getPos().add(this.velocity);
     }
-
-    @Override
-    public void handleCollision(Collidable collidable) {
-        if (collidable.getCollidableType() == CollidableType.SPACECRAFT) {
-            super.handleCollision(collidable);
-        } else {
-            this.velocity.scale(-1);
-        }
-    }
+    
 }
