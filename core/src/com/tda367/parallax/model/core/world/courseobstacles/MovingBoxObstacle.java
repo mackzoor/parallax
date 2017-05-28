@@ -43,7 +43,8 @@ public class MovingBoxObstacle extends BoxObstacle {
 
             this.velocity.scale(0.01f);
 
-            //TODO Lower the ludicrous speed on rotations
+            this.angularRotation.interpolate(new Quat4f(0,0,0,1), 0.95f);
+
         } else {
             this.velocity = new Vector3f();
             this.angularRotation = new Quat4f();
