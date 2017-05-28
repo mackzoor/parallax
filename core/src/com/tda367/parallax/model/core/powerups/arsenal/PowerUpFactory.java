@@ -21,16 +21,22 @@ public final class PowerUpFactory {
         return new Missile();
     }
 
+    public static Shield createShield(){
+        return new Shield();
+    }
+
     /**
      * @return a random powerUp.
      */
     public static IPowerUp createRandom() {
-        final int randomNumber = (int) (RAND.nextFloat() * 2);
+        final int randomNumber = (int) (RAND.nextFloat() * 3);
 
         if (randomNumber == 0) {
             return createCannon();
         } else if (randomNumber == 1) {
             return createMissile();
+        } else if (randomNumber == 2){
+            return createShield();
         } else {
             return createMissile();
         }

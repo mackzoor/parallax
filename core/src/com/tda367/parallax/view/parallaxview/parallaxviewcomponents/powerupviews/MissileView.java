@@ -6,16 +6,12 @@ import com.tda367.parallax.view.rendering.Renderable3dObject;
 import com.tda367.parallax.view.rendering.RenderableParticleEffect;
 import com.tda367.parallax.view.rendering.Renderer3D;
 
-import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
 
-public class MissileView implements RenderablePowerUp {
+public class MissileView extends RenderablePowerUpBase implements RenderablePowerUp {
     private static final String MODEL_3D_INTERNAL_PATH = "3dModels/missile/missile.g3db";
     private static final ParticleEffectType ROCKET_TRAIL = ParticleEffectType.ROCKET_TRAIL;
     private static final ParticleEffectType EXPLOSION = ParticleEffectType.EXPLOSION;
-
-    private Vector3f pos;
-    private Quat4f rot;
 
     private final Renderable3dObject renderable3dObject;
     private final RenderableParticleEffect rocketTrail;
@@ -26,12 +22,11 @@ public class MissileView implements RenderablePowerUp {
 
 
     MissileView() {
-        this.pos = new Vector3f();
-        this.rot = new Quat4f();
+        super();
 
         this.renderable3dObject = new Renderable3dObject(
-                this.pos,
-                this.rot,
+                super.getPos(),
+                super.getRot(),
                 ResourceLoader.getInstance().getModel(MODEL_3D_INTERNAL_PATH),
                 1,
                 false
@@ -40,16 +35,15 @@ public class MissileView implements RenderablePowerUp {
         this.rocketTrail = new RenderableParticleEffect(ROCKET_TRAIL);
         this.rocketTrail.start();
         this.explosion = new RenderableParticleEffect(EXPLOSION);
-        this.effectsEnabled = true;
         this.deathTime = 0;
     }
 
     private void updateTranformation() {
-        this.renderable3dObject.setPos(this.pos);
-        this.renderable3dObject.setRot(this.rot);
+        this.renderable3dObject.setPos(super.getPos());
+        this.renderable3dObject.setRot(super.getRot());
 
-        this.rocketTrail.setPosition(this.pos);
-        this.explosion.setPosition(this.pos);
+        this.rocketTrail.setPosition(super.getPos());
+        this.explosion.setPosition(super.getPos());
     }
 
     @Override
@@ -57,7 +51,7 @@ public class MissileView implements RenderablePowerUp {
         this.updateTranformation();
 
         if (this.deathTime == 0) {
-            final Vector3f particleOffset = new Vector3f(this.pos);
+            final Vector3f particleOffset = new Vector3f(super.getPos());
             particleOffset.add(new Vector3f(0, -0.5f, 0));
             this.rocketTrail.setPosition(particleOffset);
 
@@ -77,7 +71,7 @@ public class MissileView implements RenderablePowerUp {
     @Override
     public void kill() {
         if (this.deathTime == 0) {
-            this.explosion.setPosition(this.pos);
+            this.explosion.setPosition(super.getPos());
             this.explosion.start();
             this.rocketTrail.kill();
         }
@@ -86,21 +80,6 @@ public class MissileView implements RenderablePowerUp {
     @Override
     public boolean isDead() {
         return this.deathTime > 60;
-    }
-
-    @Override
-    public void enableEffects(boolean value) {
-        this.effectsEnabled = value;
-    }
-
-    @Override
-    public void setPosition(Vector3f pos) {
-        this.pos = pos;
-    }
-
-    @Override
-    public void setRotation(Quat4f rot) {
-        this.rot = rot;
     }
 
 }

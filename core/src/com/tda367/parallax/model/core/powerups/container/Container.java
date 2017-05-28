@@ -82,11 +82,9 @@ public class Container implements IContainer {
 
     @Override
     public void handleCollision(Collidable collidable) {
-        if (collidable.getCollidableType() == CollidableType.SPACECRAFT) {
             this.isCollected = true;
             this.removeFromCollisionManager();
             this.collisionEnabled = false;
-        }
     }
 
     @Override

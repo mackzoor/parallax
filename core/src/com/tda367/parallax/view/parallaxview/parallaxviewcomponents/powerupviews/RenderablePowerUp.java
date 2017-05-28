@@ -12,7 +12,7 @@ interface RenderablePowerUp {
 
     void enableEffects(boolean value);
 
-    void setPosition(Vector3f pos);
+    void setPos(Vector3f post);
 
-    void setRotation(Quat4f rot);
+    void setRot(Quat4f rot);
 }

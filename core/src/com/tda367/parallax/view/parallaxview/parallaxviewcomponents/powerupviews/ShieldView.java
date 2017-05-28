@@ -1,52 +1,54 @@
 package com.tda367.parallax.view.parallaxview.parallaxviewcomponents.powerupviews;
 
+
+
 import com.tda367.parallax.utilities.ResourceLoader;
 import com.tda367.parallax.view.rendering.ParticleEffectType;
 import com.tda367.parallax.view.rendering.Renderable3dObject;
 import com.tda367.parallax.view.rendering.RenderableParticleEffect;
 import com.tda367.parallax.view.rendering.Renderer3D;
 
-public class LazerView extends RenderablePowerUpBase implements RenderablePowerUp {
-    private static final String LAZER_3D_MODEL = "3dModels/laser/laser.g3db";
+public class ShieldView extends RenderablePowerUpBase implements RenderablePowerUp{
+
+    private static final String SHIELD_3D_MODEL = "3dModels/shield/shield.g3db";
     private static final ParticleEffectType EXPLOSION = ParticleEffectType.EXPLOSION;
 
-    private final Renderable3dObject renderable3dObject;
-    private final RenderableParticleEffect explosion;
+    private Renderable3dObject shieldModel;
+    private RenderableParticleEffect explosion;
+
 
     private int deathTime;
-    private boolean effectsEnabled;
 
-
-    LazerView() {
+    ShieldView(){
         super();
-        this.renderable3dObject = new Renderable3dObject(
+        deathTime = 0;
+
+        shieldModel = new Renderable3dObject(
                 super.getPos(),
                 super.getRot(),
-                ResourceLoader.getInstance().getModel(LAZER_3D_MODEL),
-                1,
-                false
+                ResourceLoader.getInstance().getModel(SHIELD_3D_MODEL),
+                0.3f,
+                true
         );
 
-        this.explosion = new RenderableParticleEffect(EXPLOSION);
-        this.deathTime = 0;
-        this.effectsEnabled = true;
+        explosion = new RenderableParticleEffect(EXPLOSION);
     }
 
-    private void updateTransformation() {
-        this.renderable3dObject.setPos(super.getPos());
-        this.renderable3dObject.setRot(super.getRot());
+    private void updatePosition(){
+        shieldModel.setPos(super.getPos());
+        shieldModel.setRot(super.getRot());
 
-        this.explosion.setPosition(super.getPos());
+        explosion.setPosition(super.getPos());
     }
 
     @Override
     public void render() {
-        this.updateTransformation();
+        updatePosition();
 
         if (this.deathTime == 0) {
-            Renderer3D.getInstance().addObjectToFrame(this.renderable3dObject);
+            Renderer3D.getInstance().addObjectToFrame(this.shieldModel);
         } else {
-            if (this.effectsEnabled) {
+            if (super.isEffectsEnabled()) {
                 Renderer3D.getInstance().addParticleEffectToFrame(this.explosion);
             }
             this.deathTime++;
@@ -64,6 +66,6 @@ public class LazerView extends RenderablePowerUpBase implements RenderablePowerU
 
     @Override
     public boolean isDead() {
-        return this.deathTime > 120;
+        return deathTime > 120;
     }
 }

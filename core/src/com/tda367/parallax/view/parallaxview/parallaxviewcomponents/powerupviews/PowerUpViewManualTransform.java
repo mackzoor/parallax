@@ -21,11 +21,11 @@ public class PowerUpViewManualTransform implements View {
     }
 
     public void setPosition(Vector3f pos) {
-        this.renderablePowerUp.setPosition(pos);
+        this.renderablePowerUp.setPos(pos);
     }
 
     public void setRotation(Quat4f rot) {
-        this.renderablePowerUp.setRotation(rot);
+        this.renderablePowerUp.setRot(rot);
     }
 
     public void kill() {
@@ -46,7 +46,9 @@ public class PowerUpViewManualTransform implements View {
             return new LazerView();
         } else if (powerUp == PowerUpType.MISSILE) {
             return new MissileView();
-        } else {
+        } else if(powerUp == PowerUpType.SHIELD) {
+            return new ShieldView();
+        }else {
             return new LazerView();
         }
     }
