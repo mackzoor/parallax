@@ -40,13 +40,18 @@ public class CourseObstacleView {
     }
 
     private String get3dModelPath(ObstacleType type) {
-        if (type == ObstacleType.BOX) {
-            return PATH_TO_BOX;
-        } else if (type == ObstacleType.WALL) {
-            return PATH_TO_WALL;
-        } else {
-            return PATH_TO_BOX;
+        String pathToModel;
+        switch (type) {
+            case BOX:
+                pathToModel = PATH_TO_BOX;
+                break;
+            case WALL:
+                pathToModel = PATH_TO_WALL;
+                break;
+            default:
+                pathToModel = PATH_TO_BOX;
+                break;
         }
-
+        return pathToModel;
     }
 }

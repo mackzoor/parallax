@@ -90,24 +90,24 @@ public class CollisionCalculator implements ICollisionCalculator {
     }
 
     private boolean collisionCheckNeeded(Collidable first, Collidable second) {
-        if (!first.collisionActivated() || !second.collisionActivated()) {
-            return false;
-        } else if (first.getCollidableType() == CollidableType.CONTAINER
-                && first.getCollidableType() == second.getCollidableType()) {
-            return false;
-        } else if (first.getCollidableType() == CollidableType.OBSTACLE
-                && second.getCollidableType() == CollidableType.OBSTACLE) {
-            return false;
-        } else if (!(first.getCollidableType() == CollidableType.SPACECRAFT
-                || first.getCollidableType() == CollidableType.HARMFUL
-                || second.getCollidableType() == CollidableType.SPACECRAFT
-                || second.getCollidableType() == CollidableType.HARMFUL
-                || second.getCollidableType() == CollidableType.HARMFUL
-                || first.getCollidableType() == CollidableType.HARMFUL)) {
-            return false;
-        }
+        return !(!first.collisionActivated() ||
+                !second.collisionActivated()) &&
+                isNoteworthyCollision(first, second);
+    }
 
-        return true;
+    private boolean isNoteworthyCollision(Collidable first, Collidable second) {
+        return !(first.getCollidableType() == CollidableType.CONTAINER &&
+                first.getCollidableType() == second.getCollidableType() ||
+                first.getCollidableType() == CollidableType.OBSTACLE &&
+                second.getCollidableType() == CollidableType.OBSTACLE) &&
+                isCraftOrHarmfulCollision(first, second);
+    }
+
+    private boolean isCraftOrHarmfulCollision(Collidable first, Collidable second) {
+        return (first.getCollidableType() == CollidableType.SPACECRAFT ||
+                first.getCollidableType() == CollidableType.HARMFUL ||
+                second.getCollidableType() == CollidableType.SPACECRAFT ||
+                second.getCollidableType() == CollidableType.HARMFUL);
     }
 
     private btPersistentManifold processCollision(Collidable first, Collidable second) {
