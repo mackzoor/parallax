@@ -18,6 +18,8 @@ public class CannonView extends RenderablePowerUpBase implements RenderablePower
     private static final ParticleEffectType EXPLOSION = ParticleEffectType.EXPLOSION;
     private static final int PARTICLE_DEATH_DELAY = 120;
     private static final String SOUND_DIRECTORY = "sounds/effects/";
+    private static final float CANNON_LOW_VOLUME = 0.3f;
+    private static final float CANNON_VOLUME = 0.8f;
     private static final int LOW_SOUND_ODDS = 200;
 
     private final Renderable3dObject renderable3dObject;
@@ -60,11 +62,9 @@ public class CannonView extends RenderablePowerUpBase implements RenderablePower
 
         //Plays a funny sound every 200 shots
         if (randomSong > LOW_SOUND_ODDS) {
-            final float volume = 0.3f;
-            Sound.getInstance().playSound(SOUND_DIRECTORY + "cannonLow.mp3", volume);
+            Sound.getInstance().playSound(SOUND_DIRECTORY + "cannonLow.mp3", CANNON_LOW_VOLUME);
         } else {
-            final float volume = 0.8f;
-            Sound.getInstance().playSound(SOUND_DIRECTORY + "cannon.mp3", volume);
+            Sound.getInstance().playSound(SOUND_DIRECTORY + "cannon.mp3", CANNON_VOLUME);
         }
     }
 

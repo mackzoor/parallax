@@ -6,7 +6,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.List;
-import java.util.Random;
+
+import javax.vecmath.Vector3f;
 
 /**
  * The startup class for the game "Parallax".
@@ -14,8 +15,10 @@ import java.util.Random;
 
 public class Parallax {
 
-    private static Random rand = new Random();
-    private static final String MUSIC_DIRECTORY = "sounds/music";
+    private static final Vector3f STARTING_POSITION = new Vector3f(0, -110, 0);
+    private static final float DEFAULT_PLAYER_ACCELERATION = 0.2f;
+    private static final int TIME_TO_SCORE_DIVISOR = 100;
+    private static final int LOWEST_FREQUENCY = 100;
 
     @Getter
     private boolean gameOver;
@@ -38,8 +41,8 @@ public class Parallax {
 
         this.world = new World();
         this.world.addSpaceCraft(player.getSpaceCraft());
-        player.getSpaceCraft().getPos().set(0, -110, 0);
-        player.getSpaceCraft().setForwardAcceleration(0.2f);
+        player.getSpaceCraft().getPos().set(STARTING_POSITION);
+        player.getSpaceCraft().setForwardAcceleration(DEFAULT_PLAYER_ACCELERATION);
 
         this.camera = new Camera();
         this.camera.trackTo(player.getSpaceCraft());
@@ -65,7 +68,7 @@ public class Parallax {
 
     private void calculatePlayerScore(int milliSinceLastUpdate) {
         this.totalPlayingTime = this.totalPlayingTime + milliSinceLastUpdate;
-        this.player.setScore(this.totalPlayingTime / 100);
+        this.player.setScore(this.totalPlayingTime / TIME_TO_SCORE_DIVISOR);
     }
 
     public List<ISpaceCraft> getSpaceCraft() {
@@ -73,6 +76,6 @@ public class Parallax {
     }
 
     private int getUpdateTime(int milliSinceLastUpdate) {
-        return milliSinceLastUpdate > 100 ? 100 : milliSinceLastUpdate;
+        return milliSinceLastUpdate > LOWEST_FREQUENCY ? LOWEST_FREQUENCY : milliSinceLastUpdate;
     }
 }

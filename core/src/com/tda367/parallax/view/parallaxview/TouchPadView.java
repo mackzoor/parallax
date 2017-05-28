@@ -20,6 +20,7 @@ public class TouchPadView {
     private static final float BUTTON_POSITON_DIVISOR = 10f;
     private static final float TOUCH_PAD_DIAMETER_DIVISOR = 4.8f;
     private static final float TOUCH_PAD_POSITON_DIVISOR = 24f;
+    private static final float DEATH_ZONE_RADIUS = 10f;
 
     @Getter
     private Touchpad touchpad;
@@ -88,7 +89,7 @@ public class TouchPadView {
         touchKnob.setMinWidth(touchPadDiameter / 2f);
         touchKnob.setMinHeight(touchPadDiameter / 2f);
 
-        this.touchpad = new Touchpad(10, touchpadStyle);
+        this.touchpad = new Touchpad(DEATH_ZONE_RADIUS, touchpadStyle);
         this.touchpad.setBounds(touchPadXYPos, touchPadXYPos, touchPadDiameter, touchPadDiameter);
 
         this.stage.addActor(this.touchpad);

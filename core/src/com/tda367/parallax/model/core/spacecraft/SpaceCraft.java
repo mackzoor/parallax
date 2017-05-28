@@ -21,7 +21,8 @@ import java.util.List;
  */
 public abstract class SpaceCraft implements ISpaceCraft {
     private static final int SEC_TO_MILLISEC = 1000;
-    private static final float FLOAT_ROUNDING_COMPENSATOR = 49f / 50f;
+    private static final int MAX_NUMBER_OF_POWER_UPS = 4;
+    private static final float FLOAT_ROUNDING_COMPENSATOR = 49f/50f;
     private static final float COURSE_RADIUS = 5;
 
     @Getter
@@ -235,7 +236,7 @@ public abstract class SpaceCraft implements ISpaceCraft {
             this.powerUps.add(singlePu);
         } else if (
                 this.powerUps.get(0).getClass().equals(singlePu.getClass())
-                        && this.powerUps.size() < 4) {
+                        && this.powerUps.size() < MAX_NUMBER_OF_POWER_UPS) {
             this.powerUps.add(singlePu);
         }
     }

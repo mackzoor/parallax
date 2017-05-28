@@ -17,6 +17,7 @@ public class Missile extends PowerUpBase {
     private static final int SEC_TO_MILLISEC = 1000;
     private static final int FALL_TIME = 500;
     private static final int ACTIVE_TIME = 5000;
+    private static final int ACTIVATION_DELAY = 250;
     private static final int TIME_TRACKING_TRANS = 700;
     private static final float ACCELERATION = 0.8f;
     private static final float MAXIMUM_VELOCITY = 80;
@@ -76,10 +77,12 @@ public class Missile extends PowerUpBase {
 
     @Override
     public void handleCollision(Collidable collidable) {
-        if (collidable.getCollidableType() == CollidableType.SPACECRAFT && this.timeStorage > TIME_TRACKING_TRANS) {
+        if (collidable.getCollidableType() == CollidableType.SPACECRAFT
+                && this.timeStorage > TIME_TRACKING_TRANS) {
             removeMissile();
         }
-        if (collidable.getCollidableType() == CollidableType.OBSTACLE && this.timeStorage > 250) {
+        if (collidable.getCollidableType() == CollidableType.OBSTACLE
+                && this.timeStorage > ACTIVATION_DELAY) {
             removeMissile();
         }
     }
@@ -99,8 +102,10 @@ public class Missile extends PowerUpBase {
         }
     }
 
-    private void generateVelocity(Vector3f firstPosition, Vector3f secondPosition, int milliSinceLastUpdate) {
-        setVelocity((secondPosition.getY() - firstPosition.getY()) / ((float) milliSinceLastUpdate) * SEC_TO_MILLISEC);
+    private void generateVelocity(Vector3f first, Vector3f second, int milliSinceLastUpdate) {
+        setVelocity(
+                (second.getY() - first.getY()) / ((float) milliSinceLastUpdate) * SEC_TO_MILLISEC
+        );
     }
 
     private void moveTheMissile(int milliSinceLastUpdate, int timeStorage) {
@@ -158,7 +163,9 @@ public class Missile extends PowerUpBase {
     }
 
     private void fall(int milliSinceLastUpdate) {
-        super.getPos().add(new Vector3f(0, 0, -(((float) milliSinceLastUpdate) / SEC_TO_MILLISEC) * FALL_MULTIPLIER));
+        super.getPos().add(new Vector3f(0, 0,
+                -(((float) milliSinceLastUpdate) / SEC_TO_MILLISEC) * FALL_MULTIPLIER)
+        );
     }
 
     private void moveOnVelocity(int milliSinceLastUpdate) {

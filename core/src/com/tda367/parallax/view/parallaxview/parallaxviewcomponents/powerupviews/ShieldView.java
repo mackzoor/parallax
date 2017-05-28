@@ -15,6 +15,8 @@ public class ShieldView extends RenderablePowerUpBase implements RenderablePower
 
     private static final String SHIELD_3D_MODEL = "3dModels/shield/shield.g3db";
     private static final ParticleEffectType EXPLOSION = ParticleEffectType.EXPLOSION;
+    private static final float OPACITY = 0.3f;
+    private static final int DEATH_DELAY = 120;
 
     private final Renderable3dObject shieldModel;
     private final RenderableParticleEffect explosion;
@@ -30,7 +32,7 @@ public class ShieldView extends RenderablePowerUpBase implements RenderablePower
                 super.getPos(),
                 super.getRot(),
                 ResourceLoader.getInstance().getModel(SHIELD_3D_MODEL),
-                0.3f,
+                OPACITY,
                 true
         );
 
@@ -74,6 +76,6 @@ public class ShieldView extends RenderablePowerUpBase implements RenderablePower
 
     @Override
     public boolean isDead() {
-        return this.deathTime > 120;
+        return this.deathTime > DEATH_DELAY;
     }
 }

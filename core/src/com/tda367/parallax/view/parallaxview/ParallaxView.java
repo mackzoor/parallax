@@ -19,6 +19,12 @@ public class ParallaxView {
 
     private static final Random RAND = new Random();
     private static final String MUSIC_DIRECTORY = "sounds/music/";
+    private static final int SPANISH_FLEA_ODDS = 100;
+    private static final int SECRET_TRACK_ODDS = 100;
+    private static final float SPANISH_VOLUME = 0.7f;
+    private static final float SPACE_VOLUME = 0.7f;
+    private static final float BALLS_VOLUME = 0.7f;
+    private static final float SOUNDS_GREAT_VOLUME = 0.5f;
 
     private final Parallax parallax;
     private final WorldView worldView;
@@ -83,41 +89,39 @@ public class ParallaxView {
         if (this.parallax.isPaused()) {
             Sound.getInstance().pauseActiveMusic(this.backgroundMusic);
 
-            final int randomSong = RAND.nextInt(100 - 1 + 1) + 1;
+            final int randomSong = RAND.nextInt(SPANISH_FLEA_ODDS) + 1;
 
-            if (randomSong == -1) {
+            if (randomSong == 1) {
                 this.pauseMusic = "sounds/music/spanishFlea.mp3";
-                Sound.getInstance().playMusic(MUSIC_DIRECTORY + "spanishFlea.mp3", 0.7f);
+                Sound.getInstance().playMusic(MUSIC_DIRECTORY + "spanishFlea.mp3", SPANISH_VOLUME);
             } else {
                 this.pauseMusic = "sounds/music/spaceInTime.mp3";
-                Sound.getInstance().playMusic(MUSIC_DIRECTORY + "spaceInTime.mp3", 0.7f);
+                Sound.getInstance().playMusic(MUSIC_DIRECTORY + "spaceInTime.mp3", SPACE_VOLUME);
             }
         } else {
             Sound.getInstance().unPauseActiveMusic(this.backgroundMusic);
-
             Sound.getInstance().stopActiveMusic(this.pauseMusic);
         }
     }
 
     private void startBackgroundMusic() {
 
-        final int randomSong = RAND.nextInt(100 - 1 + 1) + 1;
+        final int randomSong = RAND.nextInt(SECRET_TRACK_ODDS) + 1;
 
-        if (randomSong == -1) {
+        if (randomSong == 1) {
             this.backgroundMusic = "sounds/music/secretTrack.mp3";
             Sound.getInstance().playMusic(this.backgroundMusic);
-        } else if (randomSong == -2) {
+        } else if (randomSong == 2) {
             this.backgroundMusic = "sounds/music/trippingBalls.mp3";
-            Sound.getInstance().playMusic(this.backgroundMusic, 0.7f);
+            Sound.getInstance().playMusic(this.backgroundMusic, BALLS_VOLUME);
         } else {
             /*
             Dj Smack's Youtube: http://www.youtube.com/Djsmack100
             Dj Smack's Soundcloud: http://soundcloud.com/dj-smack-1
             Dj Smack's Facebook: http://www.facebook.com/pages/Dj-Smac...
              */
-
             this.backgroundMusic = "sounds/music/soundsGreat.mp3";
-            Sound.getInstance().playMusic(this.backgroundMusic, 0.5f);
+            Sound.getInstance().playMusic(this.backgroundMusic, SOUNDS_GREAT_VOLUME);
         }
     }
 

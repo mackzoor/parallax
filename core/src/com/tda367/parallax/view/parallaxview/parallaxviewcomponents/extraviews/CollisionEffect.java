@@ -27,6 +27,8 @@ import static com.tda367.parallax.model.core.collision.CollidableType.OBSTACLE;
  */
 public class CollisionEffect implements CollisionObserver {
 
+    private final static float FLASH_BANG_VOLUME = 0.2f;
+
     private final List<RenderableParticleEffect> activeEffects;
     private final CollisionManager collisionManager;
     @Getter
@@ -78,7 +80,7 @@ public class CollisionEffect implements CollisionObserver {
         this.activeEffects.add(explosionParticle);
 
         explosionParticle.start();
-        Sound.getInstance().playSound("sounds/effects/flashBang.mp3", 0.2f);
+        Sound.getInstance().playSound("sounds/effects/flashBang.mp3", FLASH_BANG_VOLUME);
     }
 
     public void render() {

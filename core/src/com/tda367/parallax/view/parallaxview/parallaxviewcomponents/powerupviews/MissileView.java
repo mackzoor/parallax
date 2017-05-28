@@ -16,6 +16,9 @@ public class MissileView extends RenderablePowerUpBase implements RenderablePowe
     private static final String MODEL_3D_INTERNAL_PATH = "3dModels/missile/missile.g3db";
     private static final ParticleEffectType ROCKET_TRAIL = ParticleEffectType.ROCKET_TRAIL;
     private static final ParticleEffectType EXPLOSION = ParticleEffectType.EXPLOSION;
+    private static final Vector3f PARTICLE_OFFSET = new Vector3f(0, -0.5f, 0);
+    private static final float MISSILE_VOLUME = 0.7f;
+    private static final int DEATH_DELAY = 60;
 
     private final Renderable3dObject renderable3dObject;
     private final RenderableParticleEffect rocketTrail;
@@ -47,7 +50,7 @@ public class MissileView extends RenderablePowerUpBase implements RenderablePowe
     }
 
     private void playMissileSound() {
-        Sound.getInstance().playSound("sounds/effects/MissileDemo.mp3", 0.7f);
+        Sound.getInstance().playSound("sounds/effects/MissileDemo.mp3", MISSILE_VOLUME);
     }
 
     @Override
@@ -56,7 +59,7 @@ public class MissileView extends RenderablePowerUpBase implements RenderablePowe
 
         if (this.deathTime == 0) {
             final Vector3f particleOffset = new Vector3f(super.getPos());
-            particleOffset.add(new Vector3f(0, -0.5f, 0));
+            particleOffset.add(PARTICLE_OFFSET);
             this.rocketTrail.setPosition(particleOffset);
 
             Renderer3D.getInstance().addObjectToFrame(this.renderable3dObject);
@@ -91,7 +94,7 @@ public class MissileView extends RenderablePowerUpBase implements RenderablePowe
 
     @Override
     public boolean isDead() {
-        return this.deathTime > 60;
+        return this.deathTime > DEATH_DELAY;
     }
 
 }
