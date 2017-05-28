@@ -15,14 +15,10 @@ public abstract class CardboardGame extends Game implements CardBoardApplication
     private CardboardScreen cardboardScreen;
 
     @Override
-    public void onNewFrame(HeadTransform paramHeadTransform) {
-
-    }
+    public abstract void onNewFrame(HeadTransform paramHeadTransform);
 
     @Override
-    public void onDrawEye(Eye paramEye) {
-
-    }
+    public abstract void onDrawEye(Eye paramEye);
 
     @Override
     public void onFinishFrame(Viewport paramViewport) {
@@ -40,9 +36,7 @@ public abstract class CardboardGame extends Game implements CardBoardApplication
     }
 
     @Override
-    public void create() {
-
-    }
+    public abstract void create();
 
     @Override
     public void resize(int width, int height) {

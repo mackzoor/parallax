@@ -43,7 +43,6 @@ public class GameOver {
         handleScore();
         this.gameOverText = this.generateText();
         generateGameOverPanes();
-        generateText();
     }
 
     private void generateGameOverPanes() {
@@ -85,14 +84,14 @@ public class GameOver {
     }
 
     private String generateText() {
-        if (!this.isNewHighScore()) {
-            return "YOU DEAD!" +
-                    "\nYour score: " + this.playerScore +
-                    "\nHigh score: " + this.highScore;
+        if (this.isNewHighScore()) {
+            return "YOU DEAD!"
+                    + "\nYour score: " + this.playerScore
+                    + "\nWow! New High score!";
         } else {
-            return "YOU DEAD!" +
-                    "\nYour score: " + this.playerScore +
-                    "\nWow! New High score!";
+            return "YOU DEAD!"
+                    + "\nYour score: " + this.playerScore
+                    + "\nHigh score: " + this.highScore;
         }
     }
 }

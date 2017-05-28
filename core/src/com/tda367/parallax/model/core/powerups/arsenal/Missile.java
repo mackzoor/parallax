@@ -124,26 +124,24 @@ public class Missile extends PowerUpBase {
     //Updatable, things that control the missile each update
     @Override
     public void update(int milliSinceLastUpdate) {
-        if (!super.isDead()) {
-            if (super.isActive()) {
-                this.timeStorage = this.timeStorage + milliSinceLastUpdate;
+        if (!super.isDead() && super.isActive()) {
+            this.timeStorage = this.timeStorage + milliSinceLastUpdate;
 
-                //Checks to see that the missile has gotten a velocity before moving
-                //Before testing velocity, check that velocity generation is allowed,
-                //by using previous and current position.
-                if (this.transformableEarlierPosition == null) {
-                    this.transformableEarlierPosition = new Vector3f(this.transformable.getPos());
-                    //Make sure that the missile has the same position as the ship after one cycle.
-                    super.getPos().set(this.transformable.getPos());
-                } else if (this.velocity == 0) {
-                    //Generate velocity for the missile, based on the velocity of the transformable object
-                    generateVelocity(this.transformableEarlierPosition,
-                            this.transformable,
-                            milliSinceLastUpdate);
-                } else {
-                    moveTheMissile(milliSinceLastUpdate,
-                            this.timeStorage);
-                }
+            //Checks to see that the missile has gotten a velocity before moving
+            //Before testing velocity, check that velocity generation is allowed,
+            //by using previous and current position.
+            if (this.transformableEarlierPosition == null) {
+                this.transformableEarlierPosition = new Vector3f(this.transformable.getPos());
+                //Make sure that the missile has the same position as the ship after one cycle.
+                super.getPos().set(this.transformable.getPos());
+            } else if (this.velocity == 0) {
+                //Generate velocity for the missile, based on the velocity of the transformable object
+                generateVelocity(this.transformableEarlierPosition,
+                        this.transformable,
+                        milliSinceLastUpdate);
+            } else {
+                moveTheMissile(milliSinceLastUpdate,
+                        this.timeStorage);
             }
         }
     }

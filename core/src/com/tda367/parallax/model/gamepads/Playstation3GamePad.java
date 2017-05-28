@@ -1,7 +1,7 @@
 package com.tda367.parallax.model.gamepads;
 
 /**
- * Class that bestow the button codes for a Playstation 3 controller
+ * Class that bestow the button codes for a Playstation 3 controller.
  */
 
 public final class Playstation3GamePad implements GamePad {

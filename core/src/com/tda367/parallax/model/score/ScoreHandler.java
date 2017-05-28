@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Class that acts like a layer between LibGDX preferences and classes using stored score
+ * Class that acts like a layer between LibGDX preferences and classes using stored score.
  */
 
 public class ScoreHandler {
@@ -64,7 +64,7 @@ public class ScoreHandler {
     //Sort the updateHighScoreHolder list. Making it be in order of highest score, to the 10th highest score.
     private void sortHighScoreHolders() {
 
-        final ArrayList sortedHighScores = new ArrayList<HighScoreHolder>();
+        final List sortedHighScores = new ArrayList<HighScoreHolder>();
         HighScoreHolder currentHighestScore = new HighScoreHolder("No highest scorers", -1);
 
         for (int i = 0; i < this.highScoreHolders.size(); i++) {
@@ -84,8 +84,13 @@ public class ScoreHandler {
 
     //Store a score if it is amongst the top 10 scores. Adds score, then removes lowest.
     public void storeHighScore(String name, int score) {
-        if (!(this.preferences.get().size() < LENGTH_OF_LIST)) {
+        if (this.preferences.get().size() < LENGTH_OF_LIST) {
 
+            final String storeName = suitableName(name);
+
+            this.preferences.putInteger(storeName, score);
+
+        } else {
             final String storeName = suitableName(name);
 
             this.preferences.putInteger(storeName, score);
@@ -93,11 +98,6 @@ public class ScoreHandler {
             this.preferences.flush();
 
             removeLowestHighScore();
-
-        } else {
-            final String storeName = suitableName(name);
-
-            this.preferences.putInteger(storeName, score);
         }
         this.preferences.flush();
         this.updateHighScoreHolders();
@@ -149,7 +149,7 @@ public class ScoreHandler {
 
     //Get highest scores in list, in two different ways
     public List<Integer> getHighScores() {
-        final ArrayList<Integer> highScore = new ArrayList<Integer>();
+        final List<Integer> highScore = new ArrayList<Integer>();
         for (final HighScoreHolder holder : this.highScoreHolders) {
             highScore.add(holder.getScore());
         }
@@ -157,7 +157,7 @@ public class ScoreHandler {
     }
 
     public List<String> getHighScoresHolders() {
-        final ArrayList<String> highScoreName = new ArrayList<String>();
+        final List<String> highScoreName = new ArrayList<String>();
         for (final HighScoreHolder holder : this.highScoreHolders) {
             highScoreName.add(holder.getName());
         }

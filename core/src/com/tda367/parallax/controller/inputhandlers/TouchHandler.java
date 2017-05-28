@@ -17,6 +17,7 @@ public final class TouchHandler extends InputAdapter {
     private InputControlsListener listener;
 
     public TouchHandler() {
+        super();
         Gdx.input.setInputProcessor(this);
     }
 

@@ -9,7 +9,6 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.utils.ScreenUtils;
-
 import lombok.Setter;
 
 /**
@@ -28,24 +27,24 @@ public class StringToTextureGenerator {
         this.string = string;
         this.width = width;
         this.height = height;
-        Pixmap pMap = new Pixmap(width,height, Pixmap.Format.RGBA8888);
-        generatedTexture = new Texture(pMap);
+        final Pixmap pMap = new Pixmap(width, height, Pixmap.Format.RGBA8888);
+        this.generatedTexture = new Texture(pMap);
     }
 
     public Texture generateTexture() {
-        Pixmap pMap = renderText();
+        final Pixmap pMap = renderText();
 
-        Pixmap clear = new Pixmap(width,height, Pixmap.Format.RGBA8888);
-        clear.setColor(new Color(0,0,0,1));
-        clear.fillRectangle(0,0,width,height);
+        final Pixmap clear = new Pixmap(this.width, this.height, Pixmap.Format.RGBA8888);
+        clear.setColor(new Color(0, 0, 0, 1));
+        clear.fillRectangle(0, 0, this.width, this.height);
 
-        generatedTexture.draw(clear,0,0);
-        generatedTexture.draw(pMap, 0, 0);
+        this.generatedTexture.draw(clear, 0, 0);
+        this.generatedTexture.draw(pMap, 0, 0);
 
+        //Important!
+        pMap.dispose();
 
-        pMap.dispose(); //Important!
         clear.dispose();
-
 
         return this.generatedTexture;
     }
@@ -56,7 +55,7 @@ public class StringToTextureGenerator {
         Gdx.gl.glClearColor(0, 0, 0, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        final Matrix4 normalProjection = new Matrix4().setToOrtho2D(0, 0, width, height);
+        final Matrix4 normalProjection = new Matrix4().setToOrtho2D(0, 0, this.width, this.height);
         spriteBatch.setProjectionMatrix(normalProjection);
 
         spriteBatch.begin();
@@ -66,13 +65,13 @@ public class StringToTextureGenerator {
 
         font.setColor(Color.WHITE);
         font.getData().setScale(1);
-        font.draw(spriteBatch, string, 0, 0);
+        font.draw(spriteBatch, this.string, 0, 0);
 
         //finish write to buffer
         spriteBatch.end();
 
         //write frame buffer to Pixmap
-        final Pixmap pMap = ScreenUtils.getFrameBufferPixmap(0, 0, width, height);
+        final Pixmap pMap = ScreenUtils.getFrameBufferPixmap(0, 0, this.width, this.height);
 
         //Dispose of c++ objects.
         font.dispose();

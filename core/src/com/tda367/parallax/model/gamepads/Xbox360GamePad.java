@@ -1,7 +1,7 @@
 package com.tda367.parallax.model.gamepads;
 
 /**
- * Class that bestow the button codes for a Xbox 360 controller
+ * Class that bestow the button codes for a Xbox360 controller.
  */
 
 public final class Xbox360GamePad implements GamePad {

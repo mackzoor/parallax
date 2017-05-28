@@ -3,7 +3,7 @@ package com.tda367.parallax.model.core.powerups.usables;
 import lombok.Setter;
 
 /**
- * ExtraLife PowerUp increments the life of the Agelion ship
+ * ExtraLife PowerUp increments the life of the Agelion ship.
  */
 
 public class ExtraLife implements com.tda367.parallax.model.core.powerups.usables.Usable {

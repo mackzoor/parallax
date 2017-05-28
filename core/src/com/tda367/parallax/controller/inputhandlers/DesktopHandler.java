@@ -15,6 +15,7 @@ public final class DesktopHandler extends InputAdapter {
     private InputControlsListener listener;
 
     public DesktopHandler() {
+        super();
         Gdx.input.setInputProcessor(this);
     }
 

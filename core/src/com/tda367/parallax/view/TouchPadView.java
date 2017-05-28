@@ -11,15 +11,15 @@ import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import lombok.Getter;
 
 /**
- * Class responsible for drawing the on screen game pad that's visible on Android
+ * Class responsible for drawing the on screen game pad that's visible on Android.
  */
 
 public class TouchPadView {
 
-    private static float BUTTON_DIAMETER_DIVISOR = 9.6f;
-    private static float BUTTON_POSITON_DIVISOR = 10f;
-    private static float TOUCH_PAD_DIAMETER_DIVISOR = 4.8f;
-    private static float TOUCH_PAD_POSITON_DIVISOR = 24f;
+    private static final float BUTTON_DIAMETER_DIVISOR = 9.6f;
+    private static final float BUTTON_POSITON_DIVISOR = 10f;
+    private static final float TOUCH_PAD_DIAMETER_DIVISOR = 4.8f;
+    private static final float TOUCH_PAD_POSITON_DIVISOR = 24f;
 
     @Getter
     private Touchpad touchpad;

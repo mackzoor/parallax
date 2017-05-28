@@ -15,6 +15,7 @@ public class CardboardMenuController extends InputControlsAdapter {
     private final MainMenu mainMenu;
 
     public CardboardMenuController(MainMenu mainMenu, Device device) {
+        super();
         this.mainMenu = mainMenu;
         device.addInputDevices(this);
     }

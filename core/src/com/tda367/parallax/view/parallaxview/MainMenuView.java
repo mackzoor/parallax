@@ -4,10 +4,10 @@ package com.tda367.parallax.view.parallaxview;
 import com.badlogic.gdx.Gdx;
 import com.tda367.parallax.model.core.powerups.arsenal.IPowerUp;
 import com.tda367.parallax.model.menu.MainMenu;
+import com.tda367.parallax.view.parallaxview.parallaxviewcomponents.View;
 import com.tda367.parallax.view.parallaxview.parallaxviewcomponents.menu.BackgroundView;
 import com.tda367.parallax.view.parallaxview.parallaxviewcomponents.menu.ExitButton3DView;
 import com.tda367.parallax.view.parallaxview.parallaxviewcomponents.menu.StartButton3DView;
-import com.tda367.parallax.view.parallaxview.parallaxviewcomponents.View;
 import com.tda367.parallax.view.parallaxview.parallaxviewcomponents.powerupviews.PowerUpViewAutomaticTransform;
 import com.tda367.parallax.view.rendering.Renderer3D;
 
@@ -72,16 +72,16 @@ public class MainMenuView {
     }
 
     /**
-     * Updates the PowerUpList from the world object
+     * Updates the PowerUpList from the world object.
      */
     private void updatePowerupList() {
 
         final List<IPowerUp> missingPowerUps = syncHash(this.powerUpsHash,
-                                                        this.mainMenu.getPowerUps());
+                this.mainMenu.getPowerUps());
 
         for (final IPowerUp missingPowerUp : missingPowerUps) {
             this.powerUpsHash.put(missingPowerUp,
-                                  new PowerUpViewAutomaticTransform(missingPowerUp));
+                    new PowerUpViewAutomaticTransform(missingPowerUp));
         }
     }
 
@@ -95,7 +95,7 @@ public class MainMenuView {
      */
     private <T> List<T> syncHash(Map<T, ? extends View> hash, List<T> list) {
         //Find obsolete
-        final ArrayList<T> obsolete = new ArrayList<T>();
+        final List<T> obsolete = new ArrayList<T>();
         for (final T t : hash.keySet()) {
             if (hash.get(t).isObsolete()) {
                 obsolete.add(t);
@@ -108,7 +108,7 @@ public class MainMenuView {
         }
 
         //Finds missing
-        final ArrayList<T> missing = new ArrayList<T>();
+        final List<T> missing = new ArrayList<T>();
         for (final T t : list) {
             if (!hash.containsKey(t)) {
                 missing.add(t);

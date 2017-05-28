@@ -16,6 +16,7 @@ public class MinionEnemy extends HunterAI {
     private final ISpaceCraft spaceCraft;
 
     public MinionEnemy(ISpaceCraft spaceCraft) {
+        super();
         this.spaceCraft = spaceCraft;
         this.spaceCraft.enableIndipendantRotation(true);
     }
@@ -29,11 +30,10 @@ public class MinionEnemy extends HunterAI {
     }
 
     private boolean isPointingAtTarget() {
-        final Vector3f currentHeading = new Vector3f(0,1 ,0);
+        final Vector3f currentHeading = new Vector3f(0, 1, 0);
         MathUtilities.rotateVectorByQuat(currentHeading, this.spaceCraft.getRot());
 
         final Vector3f targetDirection = getTargetDirection();
-        System.out.println(currentHeading.angle(targetDirection));
         return currentHeading.angle(targetDirection) < 0.4;
     }
 

@@ -40,7 +40,7 @@ public final class Renderer3D {
     private List<RenderableParticleEffect> particleEffectsToRender;
 
     /**
-     * Creates a new Renderer3D from a {@link Camera}
+     * Creates a new Renderer3D from a {@link Camera}.
      *
      * @param camera
      */
@@ -55,7 +55,7 @@ public final class Renderer3D {
         this.spriteBatch = new BillboardParticleBatch();
         this.spriteBatch.setTexture(ResourceLoader.getInstance().getTexture("particles/pre_particle.png"));
         this.spriteBatch.setCamera(camera);
-        this.particleSystem.add(spriteBatch);
+        this.particleSystem.add(this.spriteBatch);
 
 
         camera.near = 0.1f;
@@ -125,7 +125,7 @@ public final class Renderer3D {
 
         renderOpaque3dModels(this.modelBatch, this.modelsToRender);
         renderTransparent3dModels(this.modelBatch, this.modelsToRender);
-        if (particlesEnabled) {
+        if (this.particlesEnabled) {
             renderParticles(this.modelBatch, this.particleEffectsToRender);
         }
 
@@ -176,8 +176,9 @@ public final class Renderer3D {
     }
 
     /**
-     * Draws eye for VR
+     * Draws eye for VR.
      */
+
     public void onDrawEye(Eye eye) {
         ((CardboardCamera) this.camera).setEyeViewAdjustMatrix(new Matrix4(eye.getEyeView()));
 

@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Class responsible for creating and rendering all {@link GameOverPaneView} from {@link GameOver}
+ * Class responsible for creating and rendering all {@link GameOverPaneView} from {@link GameOver}.
  */
 
 public class GameOverView {

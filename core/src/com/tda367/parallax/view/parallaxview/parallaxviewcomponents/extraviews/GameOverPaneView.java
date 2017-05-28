@@ -8,7 +8,6 @@ import com.tda367.parallax.utilities.ResourceLoader;
 import com.tda367.parallax.view.parallaxview.parallaxviewcomponents.View;
 import com.tda367.parallax.view.rendering.Renderable3dObject;
 import com.tda367.parallax.view.rendering.Renderer3D;
-
 import lombok.Getter;
 
 /**
@@ -18,8 +17,10 @@ import lombok.Getter;
 
 public class GameOverPaneView implements View {
 
-    @Getter private static final int WIDTH = 512;
-    @Getter private static final int HEIGHT = 256;
+    @Getter
+    private static final int WIDTH = 512;
+    @Getter
+    private static final int HEIGHT = 256;
     private static final String INTERNAL_PATH = "3dModels/hudpane/hudPane.g3db";
 
     private final GameOverPane gameOverPane;
@@ -49,6 +50,7 @@ public class GameOverPaneView implements View {
     }
 
     @Override
-    public void render() {Renderer3D.getInstance().addObjectToFrame(this.textPane);
+    public void render() {
+        Renderer3D.getInstance().addObjectToFrame(this.textPane);
     }
 }

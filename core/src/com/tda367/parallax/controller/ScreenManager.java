@@ -6,7 +6,7 @@ import com.tda367.parallax.controller.screens.ScreenState;
 import com.tda367.parallax.model.core.Player;
 
 /**
- * Manages Screens for the desktop and Android application
+ * Manages Screens for the desktop and Android application.
  */
 
 public final class ScreenManager implements ScreenChanger {
@@ -19,17 +19,16 @@ public final class ScreenManager implements ScreenChanger {
     private com.tda367.parallax.controller.screens.GameOverScreen gameOverScreen;
     private boolean highPerformanceMode;
 
-    public static void initialize(boolean highPerformanceMode){
+    private ScreenManager(boolean highPerformanceMode) {
+        this.highPerformanceMode = highPerformanceMode;
+    }
+
+    public static void initialize(boolean highPerformanceMode) {
         instance = new ScreenManager(highPerformanceMode);
     }
 
-    public static ScreenManager getInstance(){
+    public static ScreenManager getInstance() {
         return instance;
-    }
-
-
-    private ScreenManager(boolean highPerformanceMode) {
-        this.highPerformanceMode = highPerformanceMode;
     }
 
     public void setGame(Game game) {
@@ -39,41 +38,41 @@ public final class ScreenManager implements ScreenChanger {
     }
 
     private synchronized void setMainMenuScreen(Player player) {
-        if (mainMenuScreen == null) {
-            mainMenuScreen = new com.tda367.parallax.controller.screens.MainMenuScreen(player, instance, highPerformanceMode);
+        if (this.mainMenuScreen == null) {
+            this.mainMenuScreen = new com.tda367.parallax.controller.screens.MainMenuScreen(player, instance, this.highPerformanceMode);
         }
-        mainMenuScreen.newMainMenu();
-        game.setScreen(mainMenuScreen);
+        this.mainMenuScreen.newMainMenu();
+        this.game.setScreen(this.mainMenuScreen);
     }
 
     private synchronized void setGameScreen(Player player) {
-        if (gameScreen == null) {
-            gameScreen = new com.tda367.parallax.controller.screens.GameScreen(player, instance, highPerformanceMode);
+        if (this.gameScreen == null) {
+            this.gameScreen = new com.tda367.parallax.controller.screens.GameScreen(player, instance, this.highPerformanceMode);
         }
-        gameScreen.newGame();
-        game.setScreen(gameScreen);
+        this.gameScreen.newGame();
+        this.game.setScreen(this.gameScreen);
     }
 
     private synchronized void setGameOverScreen(Player player) {
-        if (gameOverScreen == null) {
-            gameOverScreen = new com.tda367.parallax.controller.screens.GameOverScreen(player, instance,highPerformanceMode);
+        if (this.gameOverScreen == null) {
+            this.gameOverScreen = new com.tda367.parallax.controller.screens.GameOverScreen(player, instance, this.highPerformanceMode);
         }
-        gameOverScreen.newGameOver();
-        game.setScreen(gameOverScreen);
+        this.gameOverScreen.newGameOver();
+        this.game.setScreen(this.gameOverScreen);
     }
 
     public void setGameState(ScreenState nextState, Player player) {
         if (nextState == ScreenState.MAIN_MENU) {
-            setMainMenuScreen(player);
+            this.setMainMenuScreen(player);
         } else if (nextState == ScreenState.GAME) {
-            setGameScreen(player);
+            this.setGameScreen(player);
         } else if (nextState == ScreenState.GAME_OVER) {
-            setGameOverScreen(player);
+            this.setGameOverScreen(player);
         }
     }
 
     @Override
     public void requestScreenChange(ScreenState nextState, Player player) {
-        setGameState(nextState, player);
+        this.setGameState(nextState, player);
     }
 }

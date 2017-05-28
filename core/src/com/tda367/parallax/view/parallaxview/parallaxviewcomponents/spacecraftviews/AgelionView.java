@@ -13,8 +13,8 @@ import javax.vecmath.Vector3f;
 public class AgelionView implements RenderableSpaceCraft {
 
     private static final String AGELION_3D_MODEL = "3dModels/agelion/agelion.g3db";
-    private final ParticleEffectType BOOST_TRAIL = ParticleEffectType.BOOST_TRAIL;
-    private final ParticleEffectType FIRE_EFFECT = ParticleEffectType.FIRE;
+    private static final ParticleEffectType BOOST_TRAIL = ParticleEffectType.BOOST_TRAIL;
+    private static final ParticleEffectType FIRE_EFFECT = ParticleEffectType.FIRE;
 
     private Quat4f rot;
     private Vector3f pos;

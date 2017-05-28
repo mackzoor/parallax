@@ -1,7 +1,7 @@
 package com.tda367.parallax.model.gamepads;
 
 /**
- * Class that bestow the button codes for an Android controller
+ * Class that bestow the button codes for an Android controller.
  */
 
 public final class AndroidGamePad implements GamePad {

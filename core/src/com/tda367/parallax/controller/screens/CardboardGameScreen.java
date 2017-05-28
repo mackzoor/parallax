@@ -28,6 +28,7 @@ public class CardboardGameScreen extends com.tda367.parallax.controller.screens.
 
     public CardboardGameScreen(Player player, ScreenChanger screenChanger) {
         //Gdx.graphics.setTitle("Galactica space wars of justice, ultimate edition");
+        super();
         this.player = player;
         this.screenChanger = screenChanger;
         this.sound = new Sound();
@@ -44,11 +45,11 @@ public class CardboardGameScreen extends com.tda367.parallax.controller.screens.
 
     @Override
     public void onNewFrame(HeadTransform paramHeadTransform) {
-        if (!this.parallaxGame.isGameOver()) {
+        if (this.parallaxGame.isGameOver()) {
+            gameOver();
+        } else {
             this.parallaxGame.update((int) (Gdx.graphics.getDeltaTime() * 1000));
             this.collisionCalculator.run();
-        } else {
-            gameOver();
         }
     }
 

@@ -1,6 +1,7 @@
 package com.tda367.parallax.model.core.enemies;
 
 import com.tda367.parallax.model.core.util.Transformable;
+import com.tda367.parallax.model.core.util.Updatable;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,7 +9,7 @@ import lombok.Setter;
  * Interface for ai that will try to destroy its target.
  */
 
-public abstract class HunterAI implements com.tda367.parallax.model.core.util.Updatable {
+public abstract class HunterAI implements Updatable {
     @Getter
     private Transformable target;
     @Getter

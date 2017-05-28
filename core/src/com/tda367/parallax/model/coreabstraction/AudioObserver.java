@@ -1,7 +1,7 @@
 package com.tda367.parallax.model.coreabstraction;
 
 /**
- * An interface for classes handling music playing
+ * An interface for classes handling music playing.
  */
 
 public interface AudioObserver {

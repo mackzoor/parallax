@@ -3,13 +3,15 @@ package com.tda367.parallax.model.menu.button3d;
 import com.tda367.parallax.model.core.collision.Collidable;
 import com.tda367.parallax.model.core.collision.CollidableType;
 import com.tda367.parallax.model.core.collision.CollisionManager;
+import lombok.Setter;
 
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
 
 public abstract class Button3D implements Collidable {
 
-    String collisionModel;
+    @Setter
+    private String collisionModel;
 
     private final Vector3f pos;
     private final Quat4f rot;

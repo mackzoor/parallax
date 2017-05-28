@@ -147,7 +147,7 @@ public class World implements Updatable, CollisionObserver {
 
     private void updatePowerUps(int milliSinceLastUpdate) {
         final List<IPowerUp> deadPowerUps = new ArrayList<IPowerUp>();
-        for (IPowerUp powerUp : this.powerUps) {
+        for (final IPowerUp powerUp : this.powerUps) {
             if (powerUp.isDead()) {
                 deadPowerUps.add(powerUp);
             } else {

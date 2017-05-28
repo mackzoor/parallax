@@ -28,6 +28,7 @@ public class MainMenuScreen extends ScreenAdapter {
     private boolean particlesEnabled;
 
     public MainMenuScreen(Player player, ScreenChanger screenChanger, boolean particlesEnabled) {
+        super();
         this.particlesEnabled = particlesEnabled;
         this.player = player;
         this.screenChanger = screenChanger;
@@ -68,6 +69,6 @@ public class MainMenuScreen extends ScreenAdapter {
     public void newMainMenu() {
         this.model = new MainMenu();
         this.controller = new MainMenuController(this.model, DeviceManager.getDevice());
-        this.view = new MainMenuView(this.model, false, particlesEnabled);
+        this.view = new MainMenuView(this.model, false, this.particlesEnabled);
     }
 }

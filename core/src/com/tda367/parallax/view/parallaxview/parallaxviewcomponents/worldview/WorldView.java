@@ -74,7 +74,7 @@ public class WorldView {
     }
 
     /**
-     * Updates the CourseModuleList from the world object
+     * Updates the CourseModuleList from the world object.
      */
     private void updateCourseModuleList() {
 
@@ -86,7 +86,7 @@ public class WorldView {
     }
 
     /**
-     * Updates the SpaceCraftList from the world object
+     * Updates the SpaceCraftList from the world object.
      */
     private void updateSpaceCraftList() {
         final List<ISpaceCraft> missingSpaceCraft = syncHash(this.spaceCraftHash, this.world.getSpaceCrafts());
@@ -99,7 +99,7 @@ public class WorldView {
 
     private <T> List<T> syncHash(Map<T, ? extends View> hash, List<T> list) {
         //Find obsolete
-        final ArrayList<T> obsolete = new ArrayList<T>();
+        final List<T> obsolete = new ArrayList<T>();
         for (final T t : hash.keySet()) {
             if (hash.get(t).isObsolete()) {
                 obsolete.add(t);
@@ -112,7 +112,7 @@ public class WorldView {
         }
 
         //Finds missing
-        final ArrayList<T> missing = new ArrayList<T>();
+        final List<T> missing = new ArrayList<T>();
         for (final T t : list) {
             if (!hash.containsKey(t)) {
                 missing.add(t);

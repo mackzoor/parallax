@@ -8,7 +8,7 @@ import static java.lang.Math.cos;
 import static java.lang.Math.sin;
 
 /**
- * Utility class for math functions
+ * Utility class for math functions.
  */
 public final class MathUtilities {
 

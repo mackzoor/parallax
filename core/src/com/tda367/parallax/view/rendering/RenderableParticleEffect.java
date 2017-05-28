@@ -31,7 +31,7 @@ public class RenderableParticleEffect {
 
     public RenderableParticleEffect(ParticleEffectType type) {
         this.position = new Vector3f();
-        this.rotation = new Quat4f(0, 0,  0, 1);
+        this.rotation = new Quat4f(0, 0, 0, 1);
 
         this.particleEffect = ResourceLoader.getInstance().getParticleEffect(type.getFilePath());
         this.particleEffect.init();

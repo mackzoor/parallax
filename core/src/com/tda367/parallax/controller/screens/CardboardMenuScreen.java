@@ -30,6 +30,7 @@ public class CardboardMenuScreen extends CardboardScreenAdapter {
     private final ScreenChanger screenChanger;
 
     public CardboardMenuScreen(Player player, ScreenChanger screenChanger) {
+        super();
         this.player = player;
         this.screenChanger = screenChanger;
         this.sound = new Sound();

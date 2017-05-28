@@ -1,7 +1,7 @@
 package com.tda367.parallax.controller.screens;
 
 /**
- * For ScreenChanger
+ * For ScreenChanger.
  */
 
 public enum ScreenState {

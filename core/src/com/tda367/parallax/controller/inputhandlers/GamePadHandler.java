@@ -19,6 +19,7 @@ public final class GamePadHandler extends ControllerAdapter {
     private GamePad gamePad;
 
     public GamePadHandler() {
+        super();
         Controllers.addListener(this);
         for (final Controller controller : Controllers.getControllers()) {
             controller.addListener(this);

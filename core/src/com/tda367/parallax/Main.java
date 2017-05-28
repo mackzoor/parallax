@@ -11,7 +11,7 @@ import com.tda367.parallax.model.core.Player;
 public class Main extends Game {
 
     public Main() {
-
+        super();
     }
 
     @Override
@@ -20,12 +20,12 @@ public class Main extends Game {
         final Player player = new Player();
         DeviceManager.setDevice(this);
 
-        if (Gdx.app.getType() == Application.ApplicationType.Android){
+        if (Gdx.app.getType() == Application.ApplicationType.Android) {
             ScreenManager.initialize(false);
         } else {
             ScreenManager.initialize(true);
         }
-        ScreenManager screenManager = ScreenManager.getInstance();
+        final ScreenManager screenManager = ScreenManager.getInstance();
         screenManager.setGame(this);
         screenManager.setGameState(ScreenState.MAIN_MENU, player);
     }

@@ -10,7 +10,7 @@ import javax.vecmath.Vector3f;
 //TODO implement different tracking modes.
 
 /**
- * A virtual camera with capabilities to track
+ * A virtual camera with capabilities to track.
  * {@link Transformable}
  */
 
@@ -34,7 +34,7 @@ public class Camera implements Updatable, Transformable {
     }
 
 
-    void trackTo(com.tda367.parallax.model.core.util.Transformable transformable) {
+    void trackTo(Transformable transformable) {
         this.trackingTarget = transformable;
     }
 

@@ -17,6 +17,7 @@ public class MainMenuController extends InputControlsAdapter {
     private final MainMenu mainMenu;
 
     public MainMenuController(MainMenu mainMenu, Device device) {
+        super();
         this.mainMenu = mainMenu;
         device.addInputDevices(this);
     }
@@ -37,8 +38,8 @@ public class MainMenuController extends InputControlsAdapter {
 
     @Override
     public void onScreenClick(int xValue, int yValue) {
-        int aimXValue = xValue - Gdx.graphics.getWidth() / 2;
-        int aimYValue = yValue - Gdx.graphics.getHeight() / 2;
+        final int aimXValue = xValue - Gdx.graphics.getWidth() / 2;
+        final int aimYValue = yValue - Gdx.graphics.getHeight() / 2;
 
         this.mainMenu.setAimDirection(new Vector3f(aimXValue, 500, aimYValue));
         this.mainMenu.action();

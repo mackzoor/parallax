@@ -7,16 +7,13 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.tda367.parallax.model.core.Parallax;
 import com.tda367.parallax.model.core.powerups.arsenal.IPowerUp;
 
-import java.util.Random;
-
 /**
- * Generates a dynamic texture for the player hud in the game {@link Parallax}
+ * Generates a dynamic texture for the player hud in the game {@link Parallax}.
  */
 public class HudTextureGenerator {
 
@@ -52,14 +49,15 @@ public class HudTextureGenerator {
         final Pixmap pMap = renderText(Color.WHITE);
 
         final Pixmap clear = new Pixmap(WITDH, HEIGHT, Pixmap.Format.RGBA8888);
-        clear.setColor(new Color(0, 0,0 ,1));
+        clear.setColor(new Color(0, 0, 0, 1));
         clear.fillRectangle(0, 0, WITDH, HEIGHT);
 
-        this.generatedTexture.draw(clear,0 ,0);
+        this.generatedTexture.draw(clear, 0, 0);
         this.generatedTexture.draw(pMap, 0, 0);
 
+        //Important!
+        pMap.dispose();
 
-        pMap.dispose(); //Important!
         clear.dispose();
 
 
@@ -117,7 +115,6 @@ public class HudTextureGenerator {
         font = null;
         spriteBatch.dispose();
         spriteBatch = null;
-
 
 
         return pMap;

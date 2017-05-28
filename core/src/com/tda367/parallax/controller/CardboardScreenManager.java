@@ -7,7 +7,7 @@ import com.tda367.parallax.model.core.Player;
 import static com.tda367.parallax.controller.screens.ScreenState.*;
 
 /**
- * Manages Screens for the Cardboard application
+ * Manages Screens for the Cardboard application.
  */
 
 public final class CardboardScreenManager implements ScreenChanger {

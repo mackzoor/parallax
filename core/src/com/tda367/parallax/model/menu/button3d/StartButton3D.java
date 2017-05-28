@@ -9,7 +9,7 @@ public class StartButton3D extends com.tda367.parallax.model.menu.button3d.Butto
 
     public StartButton3D(Vector3f pos, Quat4f rot) {
         super(pos, rot);
-        collisionModel = "3dModels/playtext/playhitbox.obj";
+        setCollisionModel("3dModels/playtext/playhitbox.obj");
         addToCollisionManager();
     }
 

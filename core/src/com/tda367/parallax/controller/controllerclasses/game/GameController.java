@@ -18,6 +18,7 @@ public class GameController extends InputControlsAdapter {
     private final ParallaxView parallaxView;
 
     public GameController(Parallax parallax, ParallaxView parallaxView, Device device) {
+        super();
         device.addInputDevices(this);
         this.parallax = parallax;
         this.parallaxView = parallaxView;

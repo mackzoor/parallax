@@ -20,6 +20,7 @@ public class GameOverScreen extends ScreenAdapter {
     private boolean particlesEnabled;
 
     public GameOverScreen(Player player, ScreenChanger screenChanger, boolean particlesEnabled) {
+        super();
         this.particlesEnabled = particlesEnabled;
         this.player = player;
         this.screenChanger = screenChanger;
@@ -28,11 +29,11 @@ public class GameOverScreen extends ScreenAdapter {
     @Override
     public void render(float delta) {
         this.model.update((int) (delta * 1000));
-        if (!this.model.isObsolete()) {
-            this.view.render();
-        } else {
+        if (this.model.isObsolete()) {
             dispose();
             this.screenChanger.requestScreenChange(MAIN_MENU, this.player);
+        } else {
+            this.view.render();
         }
 
     }
@@ -48,7 +49,7 @@ public class GameOverScreen extends ScreenAdapter {
 
     public void newGameOver() {
         this.model = new GameOver(this.player);
-        this.view = new GameOverView(this.model, false, particlesEnabled);
+        this.view = new GameOverView(this.model, false, this.particlesEnabled);
     }
 }
 
