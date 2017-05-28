@@ -18,8 +18,8 @@ public class AgelionView implements RenderableSpaceCraft {
     private static final String AGELION_3D_MODEL = "3dModels/agelion/agelion.g3db";
     private static final ParticleEffectType BOOST_TRAIL = ParticleEffectType.BOOST_TRAIL;
     private static final ParticleEffectType FIRE_EFFECT = ParticleEffectType.FIRE;
-    private static final Vector3f PARTICLE_OFFSET = new Vector3f(0, -1f, 0.15f);
-    private static final Vector3f FIRE_OFFSET = new Vector3f(0, 0, 0.25f);
+    private static final Vector3f PARTICLE_OFFSET = new Vector3f(0, -1f, 0);
+    private static final Vector3f FIRE_OFFSET = new Vector3f(0, 0, 0.1f);
 
     private Quat4f rot;
     private Vector3f pos;

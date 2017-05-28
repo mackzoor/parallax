@@ -21,7 +21,7 @@ public class GameOverPaneView implements View {
     private static final int WIDTH = 512;
     @Getter
     private static final int HEIGHT = 256;
-    private static final String INTERNAL_PATH = "3dModels/hudpane/hudPane.g3db";
+    private static final String INTERNAL_PATH = "3dModels/hudpane/hudpane.g3db";
 
     private final GameOverPane gameOverPane;
     private final Renderable3dObject textPane;

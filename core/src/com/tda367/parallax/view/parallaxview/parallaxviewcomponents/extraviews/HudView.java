@@ -16,7 +16,7 @@ import javax.vecmath.Vector3f;
  */
 public class HudView {
 
-    private static final String PATH_TO_3D_MODEL = "3dModels/hudpane/hudPane.g3db";
+    private static final String PATH_TO_3D_MODEL = "3dModels/hudpane/hudpane.g3db";
     private static final float OPACITY = 0.75f;
     private static final int LIVES = 5;
     private static final Vector3f RELATIVE_POSITION = new Vector3f(1.5f, 1, 0.8f);
