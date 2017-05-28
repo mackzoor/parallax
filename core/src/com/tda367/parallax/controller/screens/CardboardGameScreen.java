@@ -6,7 +6,7 @@ import com.google.vrtoolkit.cardboard.HeadTransform;
 import com.tda367.parallax.controller.controllerclasses.game.GameController;
 import com.tda367.parallax.controller.devicestates.DeviceManager;
 import com.tda367.parallax.controller.screens.cardboardadapter.CardboardScreenAdapter;
-import com.tda367.parallax.model.CollisionCalculator;
+import com.tda367.parallax.model.externalcollsioncalculators.CollisionCalculator;
 import com.tda367.parallax.model.core.Parallax;
 import com.tda367.parallax.model.core.Player;
 import com.tda367.parallax.model.core.collision.CollisionManager;

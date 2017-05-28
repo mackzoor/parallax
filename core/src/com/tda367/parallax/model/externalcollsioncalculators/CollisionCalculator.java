@@ -1,4 +1,4 @@
-package com.tda367.parallax.model;
+package com.tda367.parallax.model.externalcollsioncalculators;
 
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Quaternion;

@@ -4,7 +4,7 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.controllers.Controllers;
 import com.tda367.parallax.controller.controllerclasses.game.GameController;
 import com.tda367.parallax.controller.devicestates.DeviceManager;
-import com.tda367.parallax.model.CollisionCalculator;
+import com.tda367.parallax.model.externalcollsioncalculators.CollisionCalculator;
 import com.tda367.parallax.model.core.Parallax;
 import com.tda367.parallax.model.core.Player;
 import com.tda367.parallax.model.core.collision.CollisionManager;
