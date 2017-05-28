@@ -7,7 +7,7 @@ import lombok.Setter;
 public class Player {
 
     @Getter
-    private static final String USER_NAME = "LingonBoy";
+    private static final String USER_NAME = "NO USER";
     @Getter
     @Setter
     private int score;
