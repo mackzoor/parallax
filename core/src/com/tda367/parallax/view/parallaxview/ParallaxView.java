@@ -10,8 +10,6 @@ import com.tda367.parallax.view.sound.Sound;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Random;
-
 /**
  * View class for {@link Parallax}.
  */

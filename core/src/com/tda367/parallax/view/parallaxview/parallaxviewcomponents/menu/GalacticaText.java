@@ -14,7 +14,7 @@ import javax.vecmath.Vector3f;
 public class GalacticaText implements View {
 
     private static final String INTERNAL_PATH = "3dModels/galacticatext/galactica.g3db";
-    private static final Vector3f TEXT_POSITION_OFFSET = new Vector3f(0,4,3);
+    private static final Vector3f TEXT_POSITION_OFFSET = new Vector3f(0, 4, 3);
     private static final float OPACITY = 1f;
 
     private final Renderable3dObject galacticaText;
