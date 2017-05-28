@@ -20,7 +20,7 @@ import static com.tda367.parallax.controller.screens.ScreenState.GAME;
 
 
 public class CardboardMenuScreen extends CardboardScreenAdapter {
-    private final static int SEC_TO_MILLISEC = 1000;
+    private static final int SEC_TO_MILLISEC = 1000;
     private CardboardMenuController controller;
     private MainMenu mainMenu;
     private final CollisionCalculator collisionCalculator;

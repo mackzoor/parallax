@@ -17,6 +17,7 @@ import java.util.Random;
  */
 public class ParallaxView {
 
+    private static final Random RAND = new Random();
     private static final String MUSIC_DIRECTORY = "sounds/music/";
 
     private final Parallax parallax;
@@ -72,18 +73,17 @@ public class ParallaxView {
     }
 
     private void checkPaused() {
-        if (parallax.isPaused() != this.paused) {
-            this.paused = parallax.isPaused();
+        if (this.parallax.isPaused() != this.paused) {
+            this.paused = this.parallax.isPaused();
             changeMainMusic();
         }
     }
 
-    private void changeMainMusic(){
-        if (parallax.isPaused()) {
+    private void changeMainMusic() {
+        if (this.parallax.isPaused()) {
             Sound.getInstance().pauseActiveMusic(this.backgroundMusic);
 
-            Random rand = new Random();
-            final int randomSong = rand.nextInt(100 - 1 + 1) + 1;
+            final int randomSong = RAND.nextInt(100 - 1 + 1) + 1;
 
             if (randomSong == -1) {
                 this.pauseMusic = "sounds/music/spanishFlea.mp3";
@@ -100,16 +100,15 @@ public class ParallaxView {
     }
 
     private void startBackgroundMusic() {
-        Random rand = new Random();
 
-        final int randomSong = rand.nextInt(100 - 1 + 1) + 1;
+        final int randomSong = RAND.nextInt(100 - 1 + 1) + 1;
 
         if (randomSong == -1) {
             this.backgroundMusic = "sounds/music/secretTrack.mp3";
-            Sound.getInstance().playMusic(backgroundMusic);
+            Sound.getInstance().playMusic(this.backgroundMusic);
         } else if (randomSong == -2) {
             this.backgroundMusic = "sounds/music/trippingBalls.mp3";
-            Sound.getInstance().playMusic(backgroundMusic, 0.7f);
+            Sound.getInstance().playMusic(this.backgroundMusic, 0.7f);
         } else {
             /*
             Dj Smack's Youtube: http://www.youtube.com/Djsmack100
@@ -118,7 +117,7 @@ public class ParallaxView {
              */
 
             this.backgroundMusic = "sounds/music/soundsGreat.mp3";
-            Sound.getInstance().playMusic(backgroundMusic, 0.5f);
+            Sound.getInstance().playMusic(this.backgroundMusic, 0.5f);
         }
     }
 

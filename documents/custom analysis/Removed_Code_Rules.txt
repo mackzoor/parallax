@@ -28,13 +28,22 @@ Avoid literals in if condition
 Hidden field
 Bean members should serialize
 Empty method in abstract class should be abstract
+Avoid inline conditionals
+Class makes reference to unresolvable class or method
+Avoid inline conditionals
+Correctness method performs math using floating point precision
+Method concatenates strings using + in a loop.
 
-Removed after being thoroughly analyzed and fixed to desireable level.
+Removed after being thoroughly analyzed and fixed to desirable level.
 
 Line Length
 Import control
 Short class name
 Star imports
+Abstract naming
+Abstract class name
+Missing constructor
+A class which only has private constructors should be final
 
 
 

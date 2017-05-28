@@ -17,8 +17,8 @@ import com.tda367.parallax.view.rendering.Renderer3D;
 import static com.tda367.parallax.controller.screens.ScreenState.GAME_OVER;
 
 public class CardboardGameScreen extends CardboardScreenAdapter {
-    private final static int SEC_TO_MILLISEC = 1000;
-    private final static int START_SPEED = 15;
+    private static final int SEC_TO_MILLISEC = 1000;
+    private static final int START_SPEED = 15;
     private final Player player;
     private Parallax parallaxGame;
     private GameController controller;

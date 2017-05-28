@@ -39,8 +39,8 @@ public class PowerUpViewManualTransform implements View {
         this.renderablePowerUp.enableEffects(value);
     }
 
-    public void playActivationSound(){
-        renderablePowerUp.playActivationSound();
+    public void playActivationSound() {
+        this.renderablePowerUp.playActivationSound();
     }
 
     @Override

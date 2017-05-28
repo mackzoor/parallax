@@ -82,9 +82,9 @@ public class Container implements IContainer {
 
     @Override
     public void handleCollision(Collidable collidable) {
-            this.isCollected = true;
-            this.removeFromCollisionManager();
-            this.collisionEnabled = false;
+        this.isCollected = true;
+        this.removeFromCollisionManager();
+        this.collisionEnabled = false;
     }
 
     @Override

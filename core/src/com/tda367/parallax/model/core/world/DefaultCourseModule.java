@@ -66,7 +66,7 @@ public class DefaultCourseModule implements ICourseModule {
         for (int x = 0; x < amount; x++) {
             final Vector3f obstaclePos = new Vector3f(
                     0,
-                    this.pos.getY() - this.length / 2 + this.length * rand.nextFloat(),
+                    this.pos.getY() - this.length / 2 + this.length * this.rand.nextFloat(),
                     0
             );
             final CourseObstacleBase obstacle = ObstacleFactory.getMovingBoxInstance(obstaclePos, true);

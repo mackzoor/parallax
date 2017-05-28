@@ -17,7 +17,7 @@ public class Renderable3dObject {
     private Quat4f rot;
     private ModelInstance modelInstance;
     private float opacity;
-    private boolean isTransparent;
+    private boolean isTransparentObject;
 
     /**
      * Creates a Renderable 3d Object.
@@ -26,19 +26,19 @@ public class Renderable3dObject {
      * @param rot           rotation of the 3d object.
      * @param modelInstance The 3d model to be used to render the 3d model.
      * @param opacity       Opacity of the rendered 3d model.
-     * @param isTransparent  if true will render before 3d models that are set to false.
+     * @param isTransparentObject  if true will render before 3d models that are set to false.
      */
     public Renderable3dObject(Vector3f pos,
                               Quat4f rot,
                               ModelInstance modelInstance,
                               float opacity,
-                              boolean isTransparent) {
+                              boolean isTransparentObject) {
 
         this.modelInstance = modelInstance;
         setPos(pos);
         setRot(rot);
         setOpacity(opacity);
-        this.isTransparent = isTransparent;
+        this.isTransparentObject = isTransparentObject;
     }
 
     public Renderable3dObject(Vector3f pos, Quat4f rot, ModelInstance modelInstance, float opacity) {
@@ -91,8 +91,8 @@ public class Renderable3dObject {
         return this.opacity;
     }
 
-    boolean getTransparency() {
-        return this.isTransparent;
+    boolean isTransparency() {
+        return this.isTransparentObject;
     }
 
     /**

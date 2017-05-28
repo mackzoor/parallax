@@ -58,7 +58,7 @@ public class StringToTextureGenerator {
 
         spriteBatch.begin();
 
-        BitmapFont font = new BitmapFont(true);
+        final BitmapFont font = new BitmapFont(true);
 
         font.setColor(Color.WHITE);
         font.getData().setScale(1);

@@ -15,8 +15,8 @@ import com.tda367.parallax.view.parallaxview.ParallaxView;
 import static com.tda367.parallax.controller.screens.ScreenState.GAME_OVER;
 
 public class GameScreen extends ScreenAdapter {
-    private final static int SEC_TO_MILLISEC = 1000;
-    private final static int START_SPEED = 15;
+    private static final int SEC_TO_MILLISEC = 1000;
+    private static final int START_SPEED = 15;
     private final Player player;
     private Parallax parallaxGame;
     private GameController controller;

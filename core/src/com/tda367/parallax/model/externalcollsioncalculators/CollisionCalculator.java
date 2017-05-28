@@ -19,7 +19,7 @@ import java.util.Map;
  */
 public class CollisionCalculator implements ICollisionCalculator {
 
-    private final static int SIZE_LIMIT = 100;
+    private static final int SIZE_LIMIT = 100;
 
     private final btCollisionAlgorithmConstructionInfo constructionInfo;
     private final btDispatcherInfo info;
@@ -76,9 +76,7 @@ public class CollisionCalculator implements ICollisionCalculator {
     @Override
     public CollisionResult checkCollision(Collidable first, Collidable second) {
         CollisionResult result;
-        if (!collisionCheckNeeded(first, second)) {
-            result = noCollisionResult(first, second);
-        } else {
+        if (collisionCheckNeeded(first, second)) {
             clearLists();
 
             final btPersistentManifold contactResult = processCollision(first, second);
@@ -87,29 +85,31 @@ public class CollisionCalculator implements ICollisionCalculator {
             contactResult.dispose();
 
             result = collisionResult;
+        } else {
+            result = noCollisionResult(first, second);
         }
         return result;
     }
 
     private boolean collisionCheckNeeded(Collidable first, Collidable second) {
-        return !(!first.collisionActivated() ||
-                !second.collisionActivated()) &&
-                isNoteworthyCollision(first, second);
+        return !(!first.collisionActivated()
+                || !second.collisionActivated())
+                && isNoteworthyCollision(first, second);
     }
 
     private boolean isNoteworthyCollision(Collidable first, Collidable second) {
-        return !(first.getCollidableType() == CollidableType.CONTAINER &&
-                first.getCollidableType() == second.getCollidableType() ||
-                first.getCollidableType() == CollidableType.OBSTACLE &&
-                second.getCollidableType() == CollidableType.OBSTACLE) &&
-                isCraftOrHarmfulCollision(first, second);
+        return !(first.getCollidableType() == CollidableType.CONTAINER
+                && first.getCollidableType() == second.getCollidableType()
+                || first.getCollidableType() == CollidableType.OBSTACLE
+                && second.getCollidableType() == CollidableType.OBSTACLE)
+                && isCraftOrHarmfulCollision(first, second);
     }
 
     private boolean isCraftOrHarmfulCollision(Collidable first, Collidable second) {
-        return first.getCollidableType() == CollidableType.SPACECRAFT ||
-                first.getCollidableType() == CollidableType.HARMFUL ||
-                second.getCollidableType() == CollidableType.SPACECRAFT ||
-                second.getCollidableType() == CollidableType.HARMFUL;
+        return first.getCollidableType() == CollidableType.SPACECRAFT
+                || first.getCollidableType() == CollidableType.HARMFUL
+                || second.getCollidableType() == CollidableType.SPACECRAFT
+                || second.getCollidableType() == CollidableType.HARMFUL;
     }
 
     private btPersistentManifold processCollision(Collidable first, Collidable second) {

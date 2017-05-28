@@ -52,7 +52,7 @@ public class WorldView {
         updateCourseModuleList();
         updatePowerupList();
 
-        startingGrid.render();
+        this.startingGrid.render();
 
         for (final CourseModelView courseModelView : this.courseModuleHash.values()) {
             courseModelView.render();
@@ -66,7 +66,7 @@ public class WorldView {
             powerUpViewAutomaticTransform.render();
         }
 
-        for (PowerUpViewAutomaticTransform powerUpViewAutomaticTransform : powerUpsHash.values()) {
+        for (PowerUpViewAutomaticTransform powerUpViewAutomaticTransform : this.powerUpsHash.values()) {
             powerUpViewAutomaticTransform.render();
         }
     }

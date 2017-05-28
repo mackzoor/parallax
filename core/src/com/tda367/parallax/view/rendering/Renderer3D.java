@@ -38,23 +38,6 @@ public final class Renderer3D {
     private List<Renderable3dObject> modelsToRender;
     private List<RenderableParticleEffect> particleEffectsToRender;
 
-
-    public static Renderer3D initialize(float fov, int width, int height, boolean isVr, boolean particlesEnabled) {
-        if (isVr) {
-            final Camera cardboardCamera = new CardboardCamera();
-            cardboardCamera.lookAt(0, 0, -1);
-            rend3D = new Renderer3D(cardboardCamera, particlesEnabled);
-        } else {
-            rend3D = new Renderer3D(fov, width, height, particlesEnabled);
-        }
-
-        return rend3D;
-    }
-
-    public static Renderer3D getInstance() {
-        return rend3D;
-    }
-
     /**
      * Creates a new Renderer3D.
      *
@@ -93,6 +76,23 @@ public final class Renderer3D {
         this.environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 1f, 1f, 1f, 1.f));
         this.environment.set(new ColorAttribute(ColorAttribute.Fog, 0f, 0f, 0f, 1f));
     }
+
+    public static Renderer3D initialize(float fov, int width, int height, boolean isVr, boolean particlesEnabled) {
+        if (isVr) {
+            final Camera cardboardCamera = new CardboardCamera();
+            cardboardCamera.lookAt(0, 0, -1);
+            rend3D = new Renderer3D(cardboardCamera, particlesEnabled);
+        } else {
+            rend3D = new Renderer3D(fov, width, height, particlesEnabled);
+        }
+
+        return rend3D;
+    }
+
+    public static Renderer3D getInstance() {
+        return rend3D;
+    }
+
 
     /**
      * Adds {@link Renderable3dObject} to be rendered in next frame.
@@ -134,7 +134,7 @@ public final class Renderer3D {
 
     private void renderTransparent3dModels(ModelBatch modelBatch, List<Renderable3dObject> modelsToRender) {
         for (final Renderable3dObject renderable3dObject : this.modelsToRender) {
-            if (renderable3dObject.getTransparency()) {
+            if (renderable3dObject.isTransparency()) {
                 this.modelBatch.render(renderable3dObject.getModelInstance(), this.environment);
             }
         }
@@ -144,7 +144,7 @@ public final class Renderer3D {
 
     private void renderOpaque3dModels(ModelBatch modelBatch, List<Renderable3dObject> modelsToRender) {
         for (final Renderable3dObject renderable3dObject : this.modelsToRender) {
-            if (!renderable3dObject.getTransparency()) {
+            if (!renderable3dObject.isTransparency()) {
                 this.modelBatch.render(renderable3dObject.getModelInstance(), this.environment);
             }
         }

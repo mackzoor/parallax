@@ -14,7 +14,7 @@ import static com.tda367.parallax.model.core.collision.CollidableType.HARMFUL;
 import static com.tda367.parallax.model.core.collision.CollidableType.NEUTRAL;
 
 public class Missile extends PowerUpBase {
-    private final static int SEC_TO_MILLISEC = 1000;
+    private static final int SEC_TO_MILLISEC = 1000;
     private static final int FALL_TIME = 500;
     private static final int ACTIVE_TIME = 5000;
     private static final int TIME_TRACKING_TRANS = 700;

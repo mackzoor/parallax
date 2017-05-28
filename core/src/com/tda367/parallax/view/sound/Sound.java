@@ -10,11 +10,15 @@ import java.util.List;
 /**
  * Class that calls upon the resource loader to interact with the sound.
  */
-public class Sound {
+public final class Sound {
 
+    private static Sound instance;
     private final ResourceLoader resources;
     private final List<ActiveMusicCombination> activeMusic = new ArrayList<ActiveMusicCombination>();
-    private static Sound instance;
+
+    private Sound() {
+        this.resources = ResourceLoader.getInstance();
+    }
 
     public static Sound getInstance() {
         if (instance == null) {
@@ -22,11 +26,6 @@ public class Sound {
         }
         return instance;
     }
-
-    private Sound() {
-        this.resources = ResourceLoader.getInstance();
-    }
-
 
     public void playSound(String soundLocation) {
         this.resources.getSound(soundLocation).play();

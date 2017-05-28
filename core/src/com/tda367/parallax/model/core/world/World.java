@@ -91,7 +91,7 @@ public class World implements Updatable, CollisionObserver {
                     + this.modules.get(this.modules.size() - 1).getLength();
             final float lastModule = this.modules.get(0).getPos().getY();
 
-            final int modulesToAdd = (int) (firstCraft + RENDER_LIMIT - firstModule)/MODULE_LENGTH;
+            final int modulesToAdd = (int) (firstCraft + RENDER_LIMIT - firstModule) / MODULE_LENGTH;
             final int modulesToRemove = (int) ((lastCraft - lastModule) / (RENDER_LIMIT / 2));
 
 

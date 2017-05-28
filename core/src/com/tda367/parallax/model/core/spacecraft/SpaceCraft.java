@@ -20,8 +20,8 @@ import java.util.List;
  * Abstract class for all spacecraft.
  */
 public abstract class SpaceCraft implements ISpaceCraft {
-    private final static int SEC_TO_MILLISEC = 1000;
-    private final static float FLOAT_ROUNDING_COMPENSATOR = 49f / 50f;
+    private static final int SEC_TO_MILLISEC = 1000;
+    private static final float FLOAT_ROUNDING_COMPENSATOR = 49f / 50f;
     private static final float COURSE_RADIUS = 5;
 
     @Getter
@@ -264,7 +264,7 @@ public abstract class SpaceCraft implements ISpaceCraft {
 
     @Override
     public Vector2f getCurrentPanVelocity() {
-        return currentPanVelocity;
+        return this.currentPanVelocity;
     }
 
 

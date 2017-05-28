@@ -13,14 +13,14 @@ import javax.vecmath.Vector3f;
  */
 public class CourseIntroView implements View {
 
-    private final String internalPath = "3dModels/courseintro/courseintro.g3db";
+    private static final String INTERNAL_PATH = "3dModels/courseintro/courseintro.g3db";
     private final Renderable3dObject renderable3dObject;
 
     public CourseIntroView() {
         this.renderable3dObject = new Renderable3dObject(
                 new Vector3f(),
                 new Quat4f(),
-                ResourceLoader.getInstance().getModel(this.internalPath),
+                ResourceLoader.getInstance().getModel(this.INTERNAL_PATH),
                 1f);
     }
 
@@ -30,8 +30,8 @@ public class CourseIntroView implements View {
     }
 
 
-    public void setPos(Vector3f pos){
-        renderable3dObject.setPos(pos);
+    public void setPos(Vector3f pos) {
+        this.renderable3dObject.setPos(pos);
     }
 
     @Override

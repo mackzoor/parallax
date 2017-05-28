@@ -14,11 +14,11 @@ import javax.vecmath.Vector3f;
 
 public class Camera implements Updatable, Transformable {
 
-    private final static float DEFAULT_FOV = 90;
-    private final static Vector3f DEFAULT_POSITION = new Vector3f(0, 0, 1);
-    private final static Quat4f DEFAULT_ROTATION = new Quat4f();
-    private final static float DISTANCE_BEHIND_TRACKING_TARGET = 4;
-    private final static float DISTANCE_ABOVE_TRACKING_TARGET = 1;
+    private static final float DEFAULT_FOV = 90;
+    private static final Vector3f DEFAULT_POSITION = new Vector3f(0, 0, 1);
+    private static final Quat4f DEFAULT_ROTATION = new Quat4f();
+    private static final float DISTANCE_BEHIND_TRACKING_TARGET = 4;
+    private static final float DISTANCE_ABOVE_TRACKING_TARGET = 1;
 
     private Vector3f pos;
     private Quat4f rot;

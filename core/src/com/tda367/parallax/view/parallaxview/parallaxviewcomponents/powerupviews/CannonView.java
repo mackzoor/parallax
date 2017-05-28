@@ -13,6 +13,7 @@ import java.util.Random;
  * Represents a visible cannon that can be rendered.
  */
 public class CannonView extends RenderablePowerUpBase implements RenderablePowerUp {
+    private static final Random RAND = new Random();
     private static final String CANNON_3D_MODEL = "3dModels/laser/laser.g3db";
     private static final ParticleEffectType EXPLOSION = ParticleEffectType.EXPLOSION;
     private static final int PARTICLE_DEATH_DELAY = 120;
@@ -54,15 +55,15 @@ public class CannonView extends RenderablePowerUpBase implements RenderablePower
     }
 
     private void playCannonSound() {
-        Random rand = new Random();
-        final int randomSong = rand.nextInt(LOW_SOUND_ODDS) + 1;
+
+        final int randomSong = RAND.nextInt(LOW_SOUND_ODDS) + 1;
 
         //Plays a funny sound every 200 shots
         if (randomSong > LOW_SOUND_ODDS) {
-            float volume = 0.3f;
+            final float volume = 0.3f;
             Sound.getInstance().playSound(SOUND_DIRECTORY + "cannonLow.mp3", volume);
         } else {
-            float volume = 0.8f;
+            final float volume = 0.8f;
             Sound.getInstance().playSound(SOUND_DIRECTORY + "cannon.mp3", volume);
         }
     }

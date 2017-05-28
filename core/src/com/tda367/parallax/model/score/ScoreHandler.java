@@ -58,7 +58,7 @@ public class ScoreHandler {
     }
 
     /**
-     * Sorts highscore holders list from highest score to lowest
+     * Sorts highscore holders list from highest score to lowest.
      */
     private void sortHighScoreHolders() {
 

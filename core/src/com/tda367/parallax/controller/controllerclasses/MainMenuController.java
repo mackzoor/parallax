@@ -14,8 +14,8 @@ import javax.vecmath.Vector3f;
 
 public class MainMenuController extends InputControlsAdapter {
 
-    private final MainMenu mainMenu;
     private static final double AIM_MODIFIER = 3.8;
+    private final MainMenu mainMenu;
 
     public MainMenuController(MainMenu mainMenu, Device device) {
         super();
@@ -39,10 +39,10 @@ public class MainMenuController extends InputControlsAdapter {
 
     @Override
     public void onScreenClick(int xValue, int yValue) {
-        final float aimXValue = xValue - Gdx.graphics.getWidth()/2;
-        final float aimYValue = yValue - Gdx.graphics.getHeight()/2;
+        final float aimXValue = xValue - Gdx.graphics.getWidth() / 2;
+        final float aimYValue = yValue - Gdx.graphics.getHeight() / 2;
 
-        this.mainMenu.setAimDirection(new Vector3f(aimXValue, (float)(Gdx.graphics.getWidth()/AIM_MODIFIER),aimYValue));
+        this.mainMenu.setAimDirection(new Vector3f(aimXValue, (float) (Gdx.graphics.getWidth() / AIM_MODIFIER), aimYValue));
         this.mainMenu.action();
     }
 

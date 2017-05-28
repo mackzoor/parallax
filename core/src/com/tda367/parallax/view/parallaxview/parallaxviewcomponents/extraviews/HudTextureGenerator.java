@@ -67,7 +67,7 @@ public class HudTextureGenerator {
         spriteBatch.begin();
         spriteBatch.setColor(fgColor);
 
-        BitmapFont font = new BitmapFont(true);
+        final BitmapFont font = new BitmapFont(true);
         font.setColor(fgColor);
         font.getData().setScale(1);
         font.draw(spriteBatch,

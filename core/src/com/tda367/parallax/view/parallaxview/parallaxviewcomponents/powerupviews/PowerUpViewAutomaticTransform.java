@@ -14,7 +14,7 @@ public class PowerUpViewAutomaticTransform implements View {
     private boolean soundPlayed;
 
     public PowerUpViewAutomaticTransform(IPowerUp powerUp) {
-        soundPlayed = false;
+        this.soundPlayed = false;
         this.powerUp = powerUp;
         this.renderablePowerUp = getRenderablePowerUp(powerUp);
     }
@@ -27,9 +27,9 @@ public class PowerUpViewAutomaticTransform implements View {
 
         if (this.powerUp.isActive()) {
 
-            if (!soundPlayed) {
-                renderablePowerUp.playActivationSound();
-                soundPlayed = true;
+            if (!this.soundPlayed) {
+                this.renderablePowerUp.playActivationSound();
+                this.soundPlayed = true;
             }
 
             this.renderablePowerUp.render();

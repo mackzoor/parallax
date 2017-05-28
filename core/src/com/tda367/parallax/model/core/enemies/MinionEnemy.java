@@ -13,8 +13,8 @@ import javax.vecmath.Vector3f;
 
 public class MinionEnemy extends AbstractHunterAI {
 
-    private final static float TARGET_ANGLE_THRESHOLD = 0.4f;
-    private final static float ROTATION_SPEED_MODIFIER = 0.95f;
+    private static final float TARGET_ANGLE_THRESHOLD = 0.4f;
+    private static final float ROTATION_SPEED_MODIFIER = 0.95f;
 
     @Getter
     private final ISpaceCraft spaceCraft;
