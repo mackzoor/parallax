@@ -105,7 +105,7 @@ public abstract class SpaceCraft implements ISpaceCraft {
 
     @Override
     public void enableIndipendantRotation(boolean value) {
-        independentRotation = value;
+        this.independentRotation = value;
     }
 
     //Update
@@ -238,8 +238,7 @@ public abstract class SpaceCraft implements ISpaceCraft {
             this.pu.add(singlePu);
         } else if (
                 this.pu.get(0).getClass().equals(singlePu.getClass())
-                        && this.pu.size() < 4
-                ) {
+                        && this.pu.size() < 4) {
             this.pu.add(singlePu);
         }
     }

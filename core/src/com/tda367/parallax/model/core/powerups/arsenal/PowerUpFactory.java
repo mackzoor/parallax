@@ -5,7 +5,7 @@ import java.util.Random;
 /**
  * Factory for creating powerUps.
  */
-public class PowerUpFactory {
+final public class PowerUpFactory {
 
     private static final Random RAND = new Random();
 

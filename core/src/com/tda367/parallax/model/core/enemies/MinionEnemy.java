@@ -29,19 +29,19 @@ public class MinionEnemy extends HunterAI {
     }
 
     private boolean isPointingAtTarget() {
-        Vector3f currentHeading = new Vector3f(0,1,0);
-        MathUtilities.rotateVectorByQuat(currentHeading, spaceCraft.getRot());
+        final Vector3f currentHeading = new Vector3f(0,1 ,0);
+        MathUtilities.rotateVectorByQuat(currentHeading, this.spaceCraft.getRot());
 
-        Vector3f targetDirection = getTargetDirection();
+        final Vector3f targetDirection = getTargetDirection();
         System.out.println(currentHeading.angle(targetDirection));
         return currentHeading.angle(targetDirection) < 0.4;
     }
 
-    private Vector3f getTargetDirection(){
-        Vector3f currentPos = new Vector3f(this.spaceCraft.getPos());
-        Vector3f targetPos = new Vector3f(super.getTarget().getPos());
+    private Vector3f getTargetDirection() {
+        final Vector3f currentPos = new Vector3f(this.spaceCraft.getPos());
+        final Vector3f targetPos = new Vector3f(super.getTarget().getPos());
 
-        Vector3f targetDirection = new Vector3f(targetPos);
+        final Vector3f targetDirection = new Vector3f(targetPos);
         targetDirection.sub(currentPos);
 
         targetDirection.normalize();
@@ -50,15 +50,15 @@ public class MinionEnemy extends HunterAI {
     }
 
     private void rotateToTarget() {
-        Vector3f targetDirection = getTargetDirection();
+        final Vector3f targetDirection = this.getTargetDirection();
 
-        Quat4f rotationNew = MathUtilities.vectorToQuat(targetDirection);
-        rotationNew.interpolate(this.spaceCraft.getRot(),0.95f);
+        final Quat4f rotationNew = MathUtilities.vectorToQuat(targetDirection);
+        rotationNew.interpolate(this.spaceCraft.getRot(), 0.95f);
         this.spaceCraft.getRot().set(rotationNew);
     }
 
     private void shoot() {
-        spaceCraft.action();
+        this.spaceCraft.action();
     }
 
     @Override

@@ -156,8 +156,7 @@ public class CollisionCalculator implements ICollisionCalculator {
                         collidable.getRot().getX(),
                         collidable.getRot().getZ(),
                         collidable.getRot().getY() * -1,
-                        collidable.getRot().getW()
-                )
+                        collidable.getRot().getW())
         ));
     }
 

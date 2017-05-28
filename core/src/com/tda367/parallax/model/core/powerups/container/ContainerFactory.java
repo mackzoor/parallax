@@ -6,7 +6,7 @@ import com.tda367.parallax.model.core.powerups.arsenal.PowerUpFactory;
 /**
  * Factory for creating powerUp containers.
  */
-class ContainerFactory {
+final class ContainerFactory {
 
     private ContainerFactory() {
     }

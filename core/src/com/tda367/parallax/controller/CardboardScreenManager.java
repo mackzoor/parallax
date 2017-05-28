@@ -77,10 +77,10 @@ public final class CardboardScreenManager implements ScreenChanger {
 
     private static class ScreenChangerSingleton {
 
+        private static final ScreenChanger INSTANCE = new CardboardScreenManager();
+
         ScreenChangerSingleton() {
 
         }
-
-        private static final ScreenChanger INSTANCE = new CardboardScreenManager();
     }
 }

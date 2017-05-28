@@ -146,15 +146,15 @@ public class World implements Updatable, CollisionObserver {
     }
 
     private void updatePowerUps(int milliSinceLastUpdate) {
-        List<IPowerUp> deadPowerUps = new ArrayList<IPowerUp>();
-        for (IPowerUp powerUp : powerUps) {
+        final List<IPowerUp> deadPowerUps = new ArrayList<IPowerUp>();
+        for (IPowerUp powerUp : this.powerUps) {
             if (powerUp.isDead()) {
                 deadPowerUps.add(powerUp);
             } else {
                 powerUp.update(milliSinceLastUpdate);
             }
         }
-        powerUps.removeAll(deadPowerUps);
+        this.powerUps.removeAll(deadPowerUps);
     }
 
     private void updateObstacles(int milliSinceLastUpdate) {
@@ -165,15 +165,15 @@ public class World implements Updatable, CollisionObserver {
         }
     }
 
-    private void updateSpaceCraft(int milliSinceLastUpdate){
-        List<ISpaceCraft> deadSpaceCraft = new ArrayList<ISpaceCraft>();
+    private void updateSpaceCraft(int milliSinceLastUpdate) {
+        final List<ISpaceCraft> deadSpaceCraft = new ArrayList<ISpaceCraft>();
         for (final ISpaceCraft spaceCraft : this.spaceCrafts) {
             if (spaceCraft.getHealth() < 1) {
                 deadSpaceCraft.add(spaceCraft);
             }
             spaceCraft.update(milliSinceLastUpdate);
         }
-        spaceCrafts.removeAll(deadSpaceCraft);
+        this.spaceCrafts.removeAll(deadSpaceCraft);
     }
 
     @Override

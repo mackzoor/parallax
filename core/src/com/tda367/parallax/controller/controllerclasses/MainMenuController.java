@@ -37,10 +37,10 @@ public class MainMenuController extends InputControlsAdapter {
 
     @Override
     public void onScreenClick(int xValue, int yValue) {
-        xValue = xValue - Gdx.graphics.getWidth() / 2;
-        yValue = yValue - Gdx.graphics.getHeight() / 2;
+        int aimXValue = xValue - Gdx.graphics.getWidth() / 2;
+        int aimYValue = yValue - Gdx.graphics.getHeight() / 2;
 
-        this.mainMenu.setAimDirection(new Vector3f(xValue, 500, yValue));
+        this.mainMenu.setAimDirection(new Vector3f(aimXValue, 500, aimYValue));
         this.mainMenu.action();
     }
 

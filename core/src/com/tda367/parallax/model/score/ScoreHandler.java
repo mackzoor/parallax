@@ -27,7 +27,7 @@ public class ScoreHandler {
 
     public ScoreHandler() {
         this.highScoreHolders = new ArrayList<HighScoreHolder>();
-        this.preferences = Gdx.app.getPreferences("My Preferences");
+        this.preferences = Gdx.app.getPreferences("My Preferences.txt");
         updateHighScoreHolders();
     }
 

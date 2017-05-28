@@ -76,8 +76,7 @@ public class Renderable3dObject {
                         rot.getX(),
                         rot.getZ(),
                         rot.getY() * -1,
-                        rot.getW()
-                )
+                        rot.getW())
         );
 
         //Reset position.

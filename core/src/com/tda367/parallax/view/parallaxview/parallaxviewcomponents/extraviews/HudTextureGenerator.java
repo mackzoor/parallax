@@ -32,8 +32,8 @@ public class HudTextureGenerator {
     HudTextureGenerator(int lives) {
         this.lives = lives;
 //        generatedTexture = new Texture(renderText(Color.BLACK));
-        Pixmap pMap = new Pixmap(WITDH,HEIGHT, Pixmap.Format.RGBA8888);
-        generatedTexture = new Texture(pMap);
+        final Pixmap pMap = new Pixmap(WITDH, HEIGHT, Pixmap.Format.RGBA8888);
+        this.generatedTexture = new Texture(pMap);
     }
 
     void setScore(int score) {
@@ -49,14 +49,14 @@ public class HudTextureGenerator {
     }
 
     Texture generateTexture() {
-        Pixmap pMap = renderText(Color.WHITE);
+        final Pixmap pMap = renderText(Color.WHITE);
 
-        Pixmap clear = new Pixmap(WITDH,HEIGHT, Pixmap.Format.RGBA8888);
-        clear.setColor(new Color(0,0,0,1));
-        clear.fillRectangle(0,0,WITDH,HEIGHT);
+        final Pixmap clear = new Pixmap(WITDH, HEIGHT, Pixmap.Format.RGBA8888);
+        clear.setColor(new Color(0, 0,0 ,1));
+        clear.fillRectangle(0, 0, WITDH, HEIGHT);
 
-        generatedTexture.draw(clear,0,0);
-        generatedTexture.draw(pMap, 0, 0);
+        this.generatedTexture.draw(clear,0 ,0);
+        this.generatedTexture.draw(pMap, 0, 0);
 
 
         pMap.dispose(); //Important!

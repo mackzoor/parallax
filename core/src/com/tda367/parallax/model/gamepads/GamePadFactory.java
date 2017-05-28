@@ -3,6 +3,8 @@ package com.tda367.parallax.model.gamepads;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 
+import java.util.Locale;
+
 /**
  * A factory class for the {@link GamePad} interface. Takes in a string and returns the
  * corresponding GamePad. Will always return an {@link com.tda367.parallax.model.gamepads.AndroidGamePad} when connected to an
@@ -15,7 +17,7 @@ public final class GamePadFactory {
     }
 
     public static GamePad getGamePad(String gamePadName) {
-        final String lowerCaseName = gamePadName.toLowerCase();
+        final String lowerCaseName = gamePadName.toLowerCase(Locale.ENGLISH);
         if (Gdx.app.getType() == Application.ApplicationType.Android) {
             return new com.tda367.parallax.model.gamepads.AndroidGamePad();
         } else if (lowerCaseName.contains("playstation") && lowerCaseName.contains("3")) {

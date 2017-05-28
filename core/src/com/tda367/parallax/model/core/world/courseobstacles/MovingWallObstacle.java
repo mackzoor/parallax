@@ -6,7 +6,7 @@ import javax.vecmath.Vector3f;
 
 public class MovingWallObstacle extends WallObstacle {
 
-    private static Quat4f ROTATION = new Quat4f(0,0.009f,0,1);
+    private static Quat4f ROTATION = new Quat4f(0, 0.009f,0 ,1);
 
 
     MovingWallObstacle(Vector3f pos, Quat4f rot) {
@@ -16,7 +16,7 @@ public class MovingWallObstacle extends WallObstacle {
 
 
     @Override
-    public void update(int milliSinceLastUpdate){
+    public void update(int milliSinceLastUpdate) {
         super.update(milliSinceLastUpdate);
         super.getRot().mul(ROTATION);
     }

@@ -58,7 +58,7 @@ public class MissileView implements RenderablePowerUp {
 
         if (this.deathTime == 0) {
             final Vector3f particleOffset = new Vector3f(this.pos);
-            particleOffset.add(new Vector3f(0, -0.5f, 0 ));
+            particleOffset.add(new Vector3f(0, -0.5f, 0));
             this.rocketTrail.setPosition(particleOffset);
 
             Renderer3D.getInstance().addObjectToFrame(this.renderable3dObject);

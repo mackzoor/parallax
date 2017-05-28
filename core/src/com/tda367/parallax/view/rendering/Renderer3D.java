@@ -46,16 +46,16 @@ public final class Renderer3D {
      */
     private Renderer3D(Camera camera, boolean enableParticleEffects) {
         this.camera = camera;
-        modelsToRender = new ArrayList<Renderable3dObject>();
-        particleEffectsToRender = new ArrayList<RenderableParticleEffect>();
-        modelBatch = new ModelBatch();
+        this.modelsToRender = new ArrayList<Renderable3dObject>();
+        this.particleEffectsToRender = new ArrayList<RenderableParticleEffect>();
+        this.modelBatch = new ModelBatch();
 
-        particlesEnabled = enableParticleEffects;
-        particleSystem = ParticleSystem.get();
-        spriteBatch = new BillboardParticleBatch();
-        spriteBatch.setTexture(ResourceLoader.getInstance().getTexture("particles/pre_particle.png"));
-        spriteBatch.setCamera(camera);
-        particleSystem.add(spriteBatch);
+        this.particlesEnabled = enableParticleEffects;
+        this.particleSystem = ParticleSystem.get();
+        this.spriteBatch = new BillboardParticleBatch();
+        this.spriteBatch.setTexture(ResourceLoader.getInstance().getTexture("particles/pre_particle.png"));
+        this.spriteBatch.setCamera(camera);
+        this.particleSystem.add(spriteBatch);
 
 
         camera.near = 0.1f;
@@ -79,8 +79,7 @@ public final class Renderer3D {
                 new PerspectiveCamera(
                         fov,
                         width,
-                        height
-                ),
+                        height),
                 particlesEnabled
         );
     }

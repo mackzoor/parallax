@@ -9,10 +9,10 @@ import java.util.Random;
  */
 public final class ObstacleFactory {
 
+    private static Random random = new Random();
+
     private ObstacleFactory() {
     }
-
-    private static Random random = new Random();
 
     //Boxes
     public static BoxObstacle getBoxObstacleInstance(Vector3f pos, Quat4f rot) {
@@ -53,12 +53,10 @@ public final class ObstacleFactory {
     }
 
     private static MovingWallObstacle getMovingWallObstacle(Vector3f pos) {
-        return new MovingWallObstacle(pos, new Quat4f(0,0,0,1));
+        return new MovingWallObstacle(pos, new Quat4f(0, 0,0 ,1));
     }
 
     public static WallObstacle getRandomWallInstance(Vector3f pos) {
-        final Random rand = new Random();
-
         /*int randomInt = (int) (rand.nextFloat() * 5);
 
 
