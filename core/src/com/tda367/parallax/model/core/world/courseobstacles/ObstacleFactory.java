@@ -48,12 +48,12 @@ public final class ObstacleFactory {
         return new WallObstacle(pos, new Quat4f(0, 0, 0, 1));
     }
 
-    private static MovingWallObstacle getMovingWallObstacle(Vector3f pos) {
+    private static MovingWallObstacle getMovingWallInstance(Vector3f pos) {
         return new MovingWallObstacle(pos, new Quat4f(0, 0, 0, 1));
     }
 
     public static WallObstacle getRandomWallInstance(Vector3f pos) {
-        final int randomInt = rand.nextInt(4);
+        final int randomInt = rand.nextInt(5);
         WallObstacle returnWall;
         switch (randomInt) {
             case 0:
@@ -64,6 +64,9 @@ public final class ObstacleFactory {
                 break;
             case 2:
                 returnWall = getRightWallInstance(pos);
+                break;
+            case 3:
+                returnWall = getMovingWallInstance(pos);
                 break;
             default:
                 returnWall = getTopWallInstance(pos);

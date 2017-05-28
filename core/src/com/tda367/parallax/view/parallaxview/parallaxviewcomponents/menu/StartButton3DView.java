@@ -19,7 +19,7 @@ public class StartButton3DView implements View {
                 startButton.getPos(),
                 startButton.getRot(),
                 ResourceLoader.getInstance().getModel(INTERNAL_PATH),
-                0.5f
+                1f
         );
     }
 

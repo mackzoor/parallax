@@ -21,7 +21,7 @@ public class ExitButton3DView implements View {
                 exitButton.getPos(),
                 exitButton.getRot(),
                 ResourceLoader.getInstance().getModel(INTERNAL_PATH),
-                0.5f
+                1f
         );
     }
 
