@@ -26,7 +26,6 @@ public final class GamePadFactory {
             return new com.tda367.parallax.model.gamepads.Xbox360GamePad();
         } else {
             return null;
-            //TODO Implement support for unrecognised devices. Special setup?
         }
     }
 }

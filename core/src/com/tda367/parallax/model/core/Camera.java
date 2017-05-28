@@ -7,8 +7,6 @@ import lombok.Getter;
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
 
-//TODO implement different tracking modes.
-
 /**
  * A virtual camera with capabilities to track.
  * {@link Transformable}

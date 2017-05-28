@@ -38,7 +38,6 @@ public class GameController extends InputControlsAdapter {
     @Override
     public void pauseButtonPressed() {
         this.parallax.setPaused(!this.parallax.isPaused());
-        //TODO Add a "pause screen" to parallaxView
     }
 
     @Override

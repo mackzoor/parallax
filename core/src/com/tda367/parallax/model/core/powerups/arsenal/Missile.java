@@ -76,7 +76,6 @@ public class Missile extends PowerUpBase {
         this.transformable = transformable;
 
 
-        //TODO, Temporary initialization for the enemy, will be controlled elsewhere later.
         this.enemyTargetPosition.set(new Vector3f(super.getPos()));
         this.enemyTargetPosition.add(new Vector3f(0, 100, 20));
         playMissileSound();
@@ -103,7 +102,6 @@ public class Missile extends PowerUpBase {
 
     @Override
     public void handleCollision(Collidable collidable) {
-        //Todo Create explosion
         if (collidable.getCollidableType() == CollidableType.SPACECRAFT && this.timeStorage > TIME_TRACKING_TRANS) {
             removeMissile();
         }
@@ -183,7 +181,6 @@ public class Missile extends PowerUpBase {
             super.enableCollision();
             accelerateMissile(milliSinceLastUpdate);
             moveOnVelocity(milliSinceLastUpdate);
-            rotateMissile(getEnemyTargetPosition());
 
             if (timeStorage > TIME_TRACKING_TRANS) {
                 final Vector3f directionalVector = generateDirectionVector(getEnemyTargetPosition());
@@ -232,10 +229,6 @@ public class Missile extends PowerUpBase {
 
         final float posYAdded = this.velocity * ((float) milliSinceLastUpdate / 1000);
         super.getPos().add(new Vector3f(0, posYAdded, 0));
-    }
-
-    private void rotateMissile(Vector3f target) {
-        //TODO rotate missile
     }
 
     //Method to generate a direction vector (normalized) for the ship's movement.
