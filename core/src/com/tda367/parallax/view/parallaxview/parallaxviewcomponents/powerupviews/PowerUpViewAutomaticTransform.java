@@ -51,7 +51,7 @@ public class PowerUpViewAutomaticTransform implements View {
     private RenderablePowerUp getRenderablePowerUp(IPowerUp powerUp) {
         RenderablePowerUp returnRenderablePowerUp;
         switch (powerUp.getPowerUpType()) {
-            case LASER:
+            case CANNON:
                 returnRenderablePowerUp = new CannonView();
                 break;
             case MISSILE:

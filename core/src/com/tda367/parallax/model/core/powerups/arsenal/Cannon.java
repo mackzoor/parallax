@@ -94,7 +94,7 @@ public class Cannon extends PowerUpBase {
 
     @Override
     public PowerUpType getPowerUpType() {
-        return PowerUpType.LASER;
+        return PowerUpType.CANNON;
     }
 
     @Override

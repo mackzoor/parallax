@@ -51,7 +51,7 @@ public class PowerUpViewManualTransform implements View {
     private RenderablePowerUp getRenderablePowerUp(PowerUpType powerUp) {
         RenderablePowerUp returnRenderablePowerUp;
         switch (powerUp) {
-            case LASER:
+            case CANNON:
                 returnRenderablePowerUp = new CannonView();
                 break;
             case MISSILE:
