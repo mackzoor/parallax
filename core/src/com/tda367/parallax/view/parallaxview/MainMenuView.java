@@ -95,16 +95,16 @@ public class MainMenuView {
      */
     private <T> List<T> syncHash(Map<T, ? extends View> hash, List<T> list) {
         //Find obsolete
-        final List<T> obsolete = new ArrayList<T>();
-        for (final T t : hash.keySet()) {
-            if (hash.get(t).isObsolete()) {
-                obsolete.add(t);
+        final List<View> obsolete = new ArrayList<View>();
+        for (final View view : hash.values()) {
+            if (view.isObsolete()) {
+                obsolete.add(view);
             }
         }
 
         //Remove obsolete
-        for (final T t : obsolete) {
-            hash.remove(t);
+        for (final View v : obsolete) {
+            hash.remove(v);
         }
 
         //Finds missing
