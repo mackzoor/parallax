@@ -19,7 +19,7 @@ public class CourseObstacleView {
                 obstacle.getPos(),
                 obstacle.getRot(),
                 ResourceLoader.getInstance().getModel(get3dModelPath(obstacle.getObstacleType())),
-                1f,
+                0.75f,
                 true
         );
     }

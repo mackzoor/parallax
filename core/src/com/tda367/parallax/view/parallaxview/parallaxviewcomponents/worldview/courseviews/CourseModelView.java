@@ -37,7 +37,7 @@ public class CourseModelView implements View {
                 courseModule.getRot(),
                 ResourceLoader.getInstance().getModel(MODEL_3D_INTERNAL_PATH),
                 1f,
-                true
+                false
         );
 
         for (final CourseObstacleBase obstacle : courseModule.getCouseObstacles()) {
