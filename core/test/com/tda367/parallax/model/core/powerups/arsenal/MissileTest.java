@@ -48,17 +48,16 @@ public class MissileTest {
 
     @Test
     public void update() throws Exception {
-        missile.setVelocity(10);
         missile.activate(agelion);
         CollidableType type = missile.getCollidableType();
-        Vector3f pos = missile.getPos();
-        Vector3f underPos = missile.getPos();
-
-        missile.update(901);
+        float y = missile.getPos().y;
+        missile.update(1000);
+        agelion.update(1000);
+        missile.update(1000);
+        missile.update(1000);
         CollidableType type1 = missile.getCollidableType();
-        Vector3f pos1 = missile.getPos();
-        assertTrue(type != type1);
-        assertTrue(pos.x != pos1.x && pos.y != pos1.y);
+        assertFalse(type == type1);
+        assertFalse(y == missile.getPos().y);
 
 
     }

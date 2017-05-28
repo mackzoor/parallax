@@ -23,16 +23,12 @@ public class CourseObstacleBaseTest {
 
     public void handleCollision() throws Exception {
         courseObstacle.handleCollision(agelion);
-        assertFalse(courseObstacle.isDestroyed());
+        assertTrue(courseObstacle.isDestroyed());
         assertTrue(!courseObstacle.collisionActivated());
 
-        System.out.println(agelion.getHealth());
-        int health = agelion.getHealth();
-        courseObstacle.handleCollision(agelion);
-        agelion.handleCollision(courseObstacle);
-        System.out.println(agelion.getHealth());
-        assertTrue(!courseObstacle.collisionActivated());
-        assertTrue(agelion.getHealth() < health);
+        courseObstacle.handleCollision(powerUp);
+        assertFalse(courseObstacle.collisionActivated());
+        assertTrue(courseObstacle.isDestroyed());
     }
 
 }

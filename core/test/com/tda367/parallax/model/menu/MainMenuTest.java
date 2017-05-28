@@ -22,7 +22,7 @@ public class MainMenuTest {
     @Test
     public void update() throws Exception {
         mainMenu.getStartButton().handleCollision(PowerUpFactory.createCannon());
-        mainMenu.getStartButton().isCollided();
+        assertTrue(mainMenu.getStartButton().isCollided());
     }
 
     @Test

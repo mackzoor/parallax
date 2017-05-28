@@ -8,6 +8,7 @@ import com.tda367.parallax.model.core.powerups.container.Container;
 import com.tda367.parallax.model.core.world.courseobstacles.ObstacleFactory;
 import org.junit.Test;
 
+import javax.vecmath.Vector2f;
 import javax.vecmath.Vector3f;
 import java.util.List;
 
@@ -15,7 +16,6 @@ import static org.junit.Assert.*;
 
 
 public class SpaceCraftTest {
-
 
     SpaceCraft spaceCraft = SpaceCraftFactory.getAgelionInstance(10);
 
@@ -29,6 +29,8 @@ public class SpaceCraftTest {
         spaceCraft.setForwardAcceleration(10);
         spaceCraft.update(1000);
         assertTrue(spaceCraft.getForwardVelocity() == 20);
+
+        spaceCraft.getPos().set(500,0,0);
     }
 
     @Test
@@ -67,6 +69,16 @@ public class SpaceCraftTest {
         int puSize2 = spaceCraft.getPu().size();
         assertTrue(puSize2 > puSize);
         assertTrue(spaceCraft.getPu().get(1) instanceof Cannon);
+    }
+
+    @Test
+    public void setDesiredPanVelocity() throws Exception {
+        spaceCraft.getPos().set(500,0,0);
+        Vector2f vector2f = new Vector2f(1,1);
+        spaceCraft.setDesiredPanVelocity(vector2f);
+        System.out.println(vector2f);
+        assertTrue(vector2f.x <= 0);
+
     }
 
 }
