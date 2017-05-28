@@ -88,8 +88,6 @@ public final class CardboardScreenManager implements ScreenChanger {
 
         private static final ScreenChanger INSTANCE = new CardboardScreenManager();
 
-        ScreenChangerSingleton() {
-
-        }
+        ScreenChangerSingleton() {}
     }
 }

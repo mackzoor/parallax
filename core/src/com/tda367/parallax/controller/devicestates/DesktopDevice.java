@@ -26,6 +26,6 @@ class DesktopDevice implements Device {
 
     @Override
     public void update() {
-
+        //Not applicable
     }
 }

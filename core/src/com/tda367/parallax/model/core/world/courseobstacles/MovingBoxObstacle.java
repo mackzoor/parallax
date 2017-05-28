@@ -1,8 +1,5 @@
 package com.tda367.parallax.model.core.world.courseobstacles;
 
-import com.tda367.parallax.model.core.collision.Collidable;
-import com.tda367.parallax.model.core.collision.CollidableType;
-
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
 import java.util.Random;

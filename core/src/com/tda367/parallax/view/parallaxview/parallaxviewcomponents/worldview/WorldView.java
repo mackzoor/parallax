@@ -66,7 +66,7 @@ public class WorldView {
             powerUpViewAutomaticTransform.render();
         }
 
-        for (PowerUpViewAutomaticTransform powerUpViewAutomaticTransform : this.powerUpsHash.values()) {
+        for (final PowerUpViewAutomaticTransform powerUpViewAutomaticTransform : this.powerUpsHash.values()) {
             powerUpViewAutomaticTransform.render();
         }
     }

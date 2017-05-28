@@ -137,12 +137,13 @@ public class ScoreHandler {
     }
 
     private boolean checkAvailability(String name) {
+        boolean returnvalue = true;
         for (final String preferenceName : this.storageLocation.get().keySet()) {
             if (preferenceName.equals(name)) {
-                return false;
+                returnvalue = false;
             }
         }
-        return true;
+        return returnvalue;
     }
 
 

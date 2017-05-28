@@ -8,10 +8,6 @@ import com.tda367.parallax.model.core.powerups.arsenal.PowerUpFactory;
  */
 abstract class AbstractContainerFactory {
 
-    private AbstractContainerFactory() {
-    }
-
-
     /**
      * Creates a {@link Container} with the specified {@link IPowerUp}.
      *

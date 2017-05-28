@@ -27,7 +27,7 @@ import static com.tda367.parallax.model.core.collision.CollidableType.OBSTACLE;
  */
 public class CollisionEffect implements CollisionObserver {
 
-    private final static float FLASH_BANG_VOLUME = 0.2f;
+    private static final float FLASH_BANG_VOLUME = 0.2f;
 
     private final List<RenderableParticleEffect> activeEffects;
     private final CollisionManager collisionManager;

@@ -4,8 +4,20 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Quaternion;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.bullet.Bullet;
-import com.badlogic.gdx.physics.bullet.collision.*;
-import com.tda367.parallax.model.core.collision.*;
+import com.badlogic.gdx.physics.bullet.collision.CollisionObjectWrapper;
+import com.badlogic.gdx.physics.bullet.collision.btCollisionAlgorithm;
+import com.badlogic.gdx.physics.bullet.collision.btCollisionAlgorithmConstructionInfo;
+import com.badlogic.gdx.physics.bullet.collision.btCollisionDispatcher;
+import com.badlogic.gdx.physics.bullet.collision.btCollisionObject;
+import com.badlogic.gdx.physics.bullet.collision.btCollisionShape;
+import com.badlogic.gdx.physics.bullet.collision.btDefaultCollisionConfiguration;
+import com.badlogic.gdx.physics.bullet.collision.btDispatcherInfo;
+import com.badlogic.gdx.physics.bullet.collision.btManifoldResult;
+import com.badlogic.gdx.physics.bullet.collision.btPersistentManifold;
+import com.tda367.parallax.model.core.collision.Collidable;
+import com.tda367.parallax.model.core.collision.CollisionManager;
+import com.tda367.parallax.model.core.collision.CollisionResult;
+import com.tda367.parallax.model.core.collision.ICollisionCalculator;
 import com.tda367.parallax.utilities.ResourceLoader;
 
 import javax.vecmath.Vector3f;
@@ -13,6 +25,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static com.tda367.parallax.model.core.collision.CollidableType.CONTAINER;
+import static com.tda367.parallax.model.core.collision.CollidableType.HARMFUL;
+import static com.tda367.parallax.model.core.collision.CollidableType.OBSTACLE;
+import static com.tda367.parallax.model.core.collision.CollidableType.SPACECRAFT;
 
 /**
  * Calculates collisions between {@link Collidable} with the use of bullet physics.
@@ -98,18 +115,18 @@ public class CollisionCalculator implements ICollisionCalculator {
     }
 
     private boolean isNoteworthyCollision(Collidable first, Collidable second) {
-        return !(first.getCollidableType() == CollidableType.CONTAINER
+        return !(first.getCollidableType() == CONTAINER
                 && first.getCollidableType() == second.getCollidableType()
-                || first.getCollidableType() == CollidableType.OBSTACLE
-                && second.getCollidableType() == CollidableType.OBSTACLE)
+                || first.getCollidableType() == OBSTACLE
+                && second.getCollidableType() == OBSTACLE)
                 && isCraftOrHarmfulCollision(first, second);
     }
 
     private boolean isCraftOrHarmfulCollision(Collidable first, Collidable second) {
-        return first.getCollidableType() == CollidableType.SPACECRAFT
-                || first.getCollidableType() == CollidableType.HARMFUL
-                || second.getCollidableType() == CollidableType.SPACECRAFT
-                || second.getCollidableType() == CollidableType.HARMFUL;
+        return first.getCollidableType() == SPACECRAFT
+                || first.getCollidableType() == HARMFUL
+                || second.getCollidableType() == SPACECRAFT
+                || second.getCollidableType() == HARMFUL;
     }
 
     private btPersistentManifold processCollision(Collidable first, Collidable second) {

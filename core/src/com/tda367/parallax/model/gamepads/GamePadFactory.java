@@ -26,7 +26,7 @@ public final class GamePadFactory {
         } else if (lowerCaseName.contains("xbox") && lowerCaseName.contains("360")) {
             returnGamePad = new Xbox360GamePad();
         } else {
-            //TODO should cast exception
+            //Should cast exception when connected to an unknown game pad
             returnGamePad = null;
         }
         return returnGamePad;

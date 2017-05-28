@@ -132,24 +132,24 @@ public final class Renderer3D {
         this.particleEffectsToRender.clear();
     }
 
-    private void renderTransparent3dModels(ModelBatch modelBatch, List<Renderable3dObject> modelsToRender) {
-        for (final Renderable3dObject renderable3dObject : this.modelsToRender) {
+    private void renderTransparent3dModels(ModelBatch batch, List<Renderable3dObject> renderableModels) {
+        for (final Renderable3dObject renderable3dObject : renderableModels) {
             if (renderable3dObject.isTransparency()) {
-                this.modelBatch.render(renderable3dObject.getModelInstance(), this.environment);
+                batch.render(renderable3dObject.getModelInstance(), this.environment);
             }
         }
 
-        modelBatch.flush();
+        batch.flush();
     }
 
-    private void renderOpaque3dModels(ModelBatch modelBatch, List<Renderable3dObject> modelsToRender) {
-        for (final Renderable3dObject renderable3dObject : this.modelsToRender) {
+    private void renderOpaque3dModels(ModelBatch batch, List<Renderable3dObject> renderableModels) {
+        for (final Renderable3dObject renderable3dObject : renderableModels) {
             if (!renderable3dObject.isTransparency()) {
-                this.modelBatch.render(renderable3dObject.getModelInstance(), this.environment);
+                batch.render(renderable3dObject.getModelInstance(), this.environment);
             }
         }
 
-        modelBatch.flush();
+        batch.flush();
     }
 
     private void renderParticles(ModelBatch modelBatch, List<RenderableParticleEffect> particleEffectsToRender) {

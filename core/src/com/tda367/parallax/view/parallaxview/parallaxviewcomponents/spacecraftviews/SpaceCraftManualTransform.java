@@ -1,6 +1,5 @@
 package com.tda367.parallax.view.parallaxview.parallaxviewcomponents.spacecraftviews;
 
-import com.tda367.parallax.model.core.spacecraft.ISpaceCraft;
 import com.tda367.parallax.model.core.spacecraft.SpaceCraftType;
 import com.tda367.parallax.view.parallaxview.parallaxviewcomponents.View;
 
@@ -8,8 +7,7 @@ import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
 
 /**
- * View class that will show a spacecraft and is manually controlled
- * and doesn't need a {@link ISpaceCraft} from the model to be rendered.
+ * View class that will show a spacecraft that is manually controlled.
  */
 public class SpaceCraftManualTransform implements View {
 
