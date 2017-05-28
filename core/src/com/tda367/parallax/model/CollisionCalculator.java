@@ -90,35 +90,22 @@ public class CollisionCalculator implements ICollisionCalculator {
     }
 
     private boolean collisionCheckNeeded(Collidable first, Collidable second) {
-        //Return false if:
-
-        //Collision is disabled on one of the collidables
         if (!first.collisionActivated() || !second.collisionActivated()) {
             return false;
-        }
-
-        //If both are containers
-        if (first.getCollidableType() == CollidableType.CONTAINER
+        } else if (first.getCollidableType() == CollidableType.CONTAINER
                 && first.getCollidableType() == second.getCollidableType()) {
             return false;
-        }
-
-
-        //If both are obstacles
-        if (first.getCollidableType() == CollidableType.OBSTACLE
+        } else if (first.getCollidableType() == CollidableType.OBSTACLE
                 && second.getCollidableType() == CollidableType.OBSTACLE) {
             return false;
-        }
-
-        //If none of them are either a spaceCraft of a harmful type
-        if (first.getCollidableType() == CollidableType.SPACECRAFT
-                || first.getCollidableType() == CollidableType.HARMFUL
-                || second.getCollidableType() == CollidableType.SPACECRAFT
-                || second.getCollidableType() == CollidableType.HARMFUL) {
-            return true;
-        } else {
+        } else if (!(first.getCollidableType() == CollidableType.SPACECRAFT
+                && first.getCollidableType() == CollidableType.HARMFUL
+                && second.getCollidableType() == CollidableType.SPACECRAFT
+                && second.getCollidableType() == CollidableType.HARMFUL)) {
             return false;
         }
+
+        return true;
     }
 
     private btPersistentManifold processCollision(Collidable first, Collidable second) {
