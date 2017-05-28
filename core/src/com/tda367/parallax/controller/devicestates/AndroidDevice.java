@@ -3,6 +3,10 @@ package com.tda367.parallax.controller.devicestates;
 import com.tda367.parallax.controller.inputhandlers.*;
 import com.tda367.parallax.view.TouchPadView;
 
+/**
+ * Manages the inputhandlers for Android devices
+ */
+
 class AndroidDevice implements Device {
 
     private TouchPadHandler touchPadHandler;

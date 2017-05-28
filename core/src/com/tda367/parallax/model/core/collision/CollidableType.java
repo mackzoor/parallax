@@ -1,8 +1,9 @@
 package com.tda367.parallax.model.core.collision;
 
 /**
- * Enum for different types of collidables.
+ * Enum for different types of collidables. Used for responding to a collision
  */
+
 public enum CollidableType {
     SPACECRAFT,
     OBSTACLE,

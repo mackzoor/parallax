@@ -31,7 +31,6 @@ public class GameScreen extends ScreenAdapter {
         super();
         this.particlesEnabled = particlesEnabled;
         this.audioQueue = AudioQueue.getInstance();
-        // Initiate game with space craft "Agelion"
         this.player = player;
         this.screenChanger = screenChanger;
         this.sound = new Sound();

@@ -8,7 +8,7 @@ import com.tda367.parallax.model.menu.MainMenu;
 
 import javax.vecmath.Vector3f;
 
-/*
+/**
  * Controller class used for user input in the menu for Desktop and Android.
  */
 

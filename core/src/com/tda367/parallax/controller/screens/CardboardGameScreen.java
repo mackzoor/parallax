@@ -5,6 +5,7 @@ import com.google.vrtoolkit.cardboard.Eye;
 import com.google.vrtoolkit.cardboard.HeadTransform;
 import com.tda367.parallax.controller.controllerclasses.game.GameController;
 import com.tda367.parallax.controller.devicestates.DeviceManager;
+import com.tda367.parallax.controller.screens.cardboardadapter.CardboardScreenAdapter;
 import com.tda367.parallax.model.CollisionCalculator;
 import com.tda367.parallax.model.core.Parallax;
 import com.tda367.parallax.model.core.Player;
@@ -16,7 +17,7 @@ import com.tda367.parallax.view.rendering.Renderer3D;
 
 import static com.tda367.parallax.controller.screens.ScreenState.GAME_OVER;
 
-public class CardboardGameScreen extends com.tda367.parallax.controller.screens.cardboardadapter.CardboardScreenAdapter {
+public class CardboardGameScreen extends CardboardScreenAdapter {
 
     private final Player player;
     private Parallax parallaxGame;
@@ -27,8 +28,6 @@ public class CardboardGameScreen extends com.tda367.parallax.controller.screens.
     private final ScreenChanger screenChanger;
 
     public CardboardGameScreen(Player player, ScreenChanger screenChanger) {
-        //Gdx.graphics.setTitle("Galactica space wars of justice, ultimate edition");
-        super();
         this.player = player;
         this.screenChanger = screenChanger;
         this.sound = new Sound();
@@ -45,19 +44,17 @@ public class CardboardGameScreen extends com.tda367.parallax.controller.screens.
 
     @Override
     public void onNewFrame(HeadTransform paramHeadTransform) {
-        if (this.parallaxGame.isGameOver()) {
-            gameOver();
-        } else {
+        if (!this.parallaxGame.isGameOver()) {
             this.parallaxGame.update((int) (Gdx.graphics.getDeltaTime() * 1000));
             this.collisionCalculator.run();
+        } else {
+            gameOver();
         }
     }
 
     @Override
     public void onDrawEye(Eye eye) {
-        // Apply the eye transformation to the camera.
         Renderer3D.getInstance().onDrawEye(eye);
-        //Renders scene for current eye
         this.parallaxView.render();
     }
 

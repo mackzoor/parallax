@@ -8,6 +8,9 @@ import com.google.vrtoolkit.cardboard.HeadTransform;
 import com.google.vrtoolkit.cardboard.Viewport;
 import lombok.Getter;
 
+/**
+ * Merges the functionality from the Cardboard extension with the LibGDX {@link Game} class.
+ */
 
 public abstract class CardboardGame extends Game implements CardBoardApplicationListener {
 

@@ -9,27 +9,12 @@ public final class DeviceManager {
 
     private static Device device;
 
-    private DeviceManager() {
-
-    }
-
-    public static Device getGameModeState(ApplicationListener application) {
-        if (Gdx.app.getType() == Application.ApplicationType.Desktop) {
-            return new DesktopDevice();
-        } else if (application instanceof CardBoardApplicationListener) {
-            return new CardboardDevice();
-        } else if (Gdx.app.getType() == Application.ApplicationType.Android) {
-            return new AndroidDevice();
-        } else {
-            return null;
-        }
-    }
+    private DeviceManager() {}
 
     public static Device getDevice() {
         return device;
     }
 
-    //Should perhaps throw an exception if device is unknown
     public static void setDevice(ApplicationListener application) {
         if (Gdx.app.getType() == Application.ApplicationType.Desktop) {
             device = new DesktopDevice();

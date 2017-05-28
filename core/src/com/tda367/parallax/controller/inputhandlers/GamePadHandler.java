@@ -7,12 +7,12 @@ import com.tda367.parallax.model.gamepads.GamePad;
 import com.tda367.parallax.model.gamepads.GamePadFactory;
 import lombok.Setter;
 
-public final class GamePadHandler extends ControllerAdapter {
+/**
+ * Class that checks inputs from a game pad, compares it with a buttonCode and notifies its
+ * observer, an {@link InputControlsListener}, about it.
+ */
 
-    /**
-     * Class that checks inputs from a game pad, compares it with a buttonCode and notifies its
-     * observer, an {@link InputControlsListener}, about it.
-     */
+public final class GamePadHandler extends ControllerAdapter {
 
     @Setter
     private InputControlsListener listener;

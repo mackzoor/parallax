@@ -6,7 +6,8 @@ import com.tda367.parallax.view.TouchPadView;
 import lombok.Setter;
 
 /**
- *
+ * Class that handles the on screen touch pad on Android devices. Tells its observer, an
+ * {@link InputControlsListener}, if the button is pressed or the joystick is moved.
  */
 
 public final class TouchPadHandler implements EventListener {

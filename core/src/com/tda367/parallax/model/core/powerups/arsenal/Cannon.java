@@ -39,7 +39,6 @@ public class Cannon extends PowerUpBase {
         this.enemyTargetPosition = new Vector3f();
     }
 
-    //Launches the cannon round.
     @Override
     public void activate(Transformable transformable) {
         super.activate(transformable);

@@ -7,7 +7,8 @@ import com.tda367.parallax.model.core.Player;
 import static com.tda367.parallax.controller.screens.ScreenState.*;
 
 /**
- * Manages Screens for the Cardboard application.
+ * Tells its {@link CardboardGame} whether to show a {@link CardboardMenuScreen},
+ * {@link CardboardGameScreen}, or a {@link CardboardGameOverScreen}.
  */
 
 public final class CardboardScreenManager implements ScreenChanger {
@@ -17,8 +18,7 @@ public final class CardboardScreenManager implements ScreenChanger {
     private static CardboardGameScreen cardboardGameScreen;
     private static CardboardGameOverScreen cardboardGameOverScreen;
 
-    private CardboardScreenManager() {
-    }
+    private CardboardScreenManager() {}
 
     public static synchronized void setCardboardGame(CardboardGame game) {
         if (cardboardGame == null) {
