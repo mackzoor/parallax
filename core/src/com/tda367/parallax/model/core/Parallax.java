@@ -74,7 +74,7 @@ public class Parallax {
 
             final int randomSong = rand.nextInt(100 - 1 + 1) + 1;
 
-            if (randomSong == 1) {
+            if (randomSong == -1) {
                 this.pauseMusic = "sounds/music/spanishFlea.mp3";
                 AudioQueue.getInstance().playMusic("spanishFlea.mp3", MUSIC_DIRECTORY, 0.7f);
             } else {
@@ -122,10 +122,10 @@ public class Parallax {
     private void startBackgroundMusic() {
         final int randomSong = rand.nextInt(100 - 1 + 1) + 1;
 
-        if (randomSong == 1) {
+        if (randomSong == -1) {
             this.audioQueue.playMusic("secretTrack.mp3", MUSIC_DIRECTORY);
             this.backgroundMusic = "sounds/music/secretTrack.mp3";
-        } else if (randomSong == 2) {
+        } else if (randomSong == -2) {
             this.audioQueue.playMusic("trippingBalls.mp3", MUSIC_DIRECTORY, 0.7f);
             this.backgroundMusic = "sounds/music/trippingBalls.mp3";
         } else {

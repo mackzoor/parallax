@@ -92,8 +92,8 @@ public class Cannon extends PowerUpBase {
     private void playCannonSound() {
         final int randomSong = this.rand.nextInt(200 - 1 + 1) + 1;
 
-        //Plays a funny sound every 200 shots
-        if (randomSong > 199) {
+        //Plays a funny sound every 200 shots, [Disabled]
+        if (randomSong > 200) {
             AudioQueue.getInstance().playSound("cannonLow.mp3", SOUND_DIRECTORY, 0.3f);
         } else {
             AudioQueue.getInstance().playSound("cannon.mp3", SOUND_DIRECTORY, 0.8f);
