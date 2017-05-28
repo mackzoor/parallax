@@ -33,7 +33,7 @@ public class HudView {
                 player.getSpaceCraft().getRot(),
                 ResourceLoader.getInstance().getModel(PATH_TO_3D_MODEL),
                 0.75f,
-                false
+                true
         );
 
         this.htg = new HudTextureGenerator(5);

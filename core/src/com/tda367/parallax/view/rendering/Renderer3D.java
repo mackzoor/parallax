@@ -136,10 +136,10 @@ public final class Renderer3D {
         this.particleEffectsToRender.clear();
     }
 
-    private void renderOpaque3dModels(ModelBatch modelBatch, List<Renderable3dObject> modelsToRender) {
+    private void renderTransparent3dModels(ModelBatch modelBatch, List<Renderable3dObject> modelsToRender) {
         //Render high priority objects
         for (final Renderable3dObject renderable3dObject : this.modelsToRender) {
-            if (renderable3dObject.isHighPriority()) {
+            if (renderable3dObject.isTransparent()) {
                 this.modelBatch.render(renderable3dObject.getModelInstance(), this.environment);
             }
         }
@@ -147,10 +147,10 @@ public final class Renderer3D {
         modelBatch.flush();
     }
 
-    private void renderTransparent3dModels(ModelBatch modelBatch, List<Renderable3dObject> modelsToRender) {
+    private void renderOpaque3dModels(ModelBatch modelBatch, List<Renderable3dObject> modelsToRender) {
         //Render low priority objects
         for (final Renderable3dObject renderable3dObject : this.modelsToRender) {
-            if (!renderable3dObject.isHighPriority()) {
+            if (!renderable3dObject.isTransparent()) {
                 this.modelBatch.render(renderable3dObject.getModelInstance(), this.environment);
             }
         }

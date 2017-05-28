@@ -34,8 +34,7 @@ public class AgelionView implements RenderableSpaceCraft {
                 this.pos,
                 this.rot,
                 ResourceLoader.getInstance().getModel(this.AGELION_3D_MODEL),
-                1f,
-                true
+                1f
         );
 
         this.criticalDamage = false;

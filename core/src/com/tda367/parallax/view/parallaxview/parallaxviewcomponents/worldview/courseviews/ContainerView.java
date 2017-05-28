@@ -33,7 +33,8 @@ public class ContainerView {
                 container.getPos(),
                 container.getRot(),
                 ResourceLoader.getInstance().getModel(MODEL_3D_INTERNAL_PATH),
-                1f
+                1f,
+                true
         );
 
         this.internalPowerUp = new PowerUpViewManualTransform(container.getPowerUp().getPowerUpType());

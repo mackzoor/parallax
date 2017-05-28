@@ -9,7 +9,7 @@ import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
 
 /**
- * Class that holds an object that is able to be rendered.
+ * A 3d object that is able to be rendered.
  */
 public class Renderable3dObject {
 
@@ -17,7 +17,7 @@ public class Renderable3dObject {
     private Quat4f rot;
     private ModelInstance modelInstance;
     private float opacity;
-    private boolean highPriority;
+    private boolean isTransparent;
 
     /**
      * Creates a Renderable 3d Object.
@@ -26,23 +26,23 @@ public class Renderable3dObject {
      * @param rot           rotation of the 3d object.
      * @param modelInstance The 3d model to be used to render the 3d model.
      * @param opacity       Opacity of the rendered 3d model.
-     * @param highPriority  if true will render before 3d models that are set to false.
+     * @param isTransparent  if true will render before 3d models that are set to false.
      */
     public Renderable3dObject(Vector3f pos,
                               Quat4f rot,
                               ModelInstance modelInstance,
                               float opacity,
-                              boolean highPriority) {
+                              boolean isTransparent) {
 
         this.modelInstance = modelInstance;
         setPos(pos);
         setRot(rot);
         setOpacity(opacity);
-        this.highPriority = highPriority;
+        this.isTransparent = isTransparent;
     }
 
     public Renderable3dObject(Vector3f pos, Quat4f rot, ModelInstance modelInstance, float opacity) {
-        this(pos, rot, modelInstance, opacity, false);
+        this(pos, rot, modelInstance, opacity, opacity < 1);
     }
 
     /**
@@ -99,40 +99,20 @@ public class Renderable3dObject {
 
     }
 
-    /**
-     * Returns the position.
-     *
-     * @return the position of the 3d model.
-     */
     public Vector3f getPos() {
         return this.pos;
     }
 
-    /**
-     * Returns the rotation.
-     *
-     * @return the rotation of the 3d model.
-     */
     public Quat4f getRot() {
         return this.rot;
     }
 
-    /**
-     * Returns the opacity.
-     *
-     * @return the opacity of the 3d model.
-     */
     public float getOpacity() {
         return this.opacity;
     }
 
-    /**
-     * Returns the priority of the 3d model.
-     *
-     * @return true if high priority, false if low.
-     */
-    boolean isHighPriority() {
-        return this.highPriority;
+    boolean isTransparent() {
+        return this.isTransparent;
     }
 
     /**

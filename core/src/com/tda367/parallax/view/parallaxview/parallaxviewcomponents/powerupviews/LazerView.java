@@ -33,7 +33,7 @@ public class LazerView implements RenderablePowerUp {
                 this.rot,
                 ResourceLoader.getInstance().getModel(LAZER_3D_MODEL),
                 1,
-                true
+                false
         );
 
         this.explosion = new RenderableParticleEffect(EXPLOSION);

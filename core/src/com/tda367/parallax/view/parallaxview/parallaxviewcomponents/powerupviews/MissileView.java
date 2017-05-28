@@ -34,7 +34,7 @@ public class MissileView implements RenderablePowerUp {
                 this.rot,
                 ResourceLoader.getInstance().getModel(MODEL_3D_INTERNAL_PATH),
                 1,
-                true
+                false
         );
 
         this.rocketTrail = new RenderableParticleEffect(ROCKET_TRAIL);
