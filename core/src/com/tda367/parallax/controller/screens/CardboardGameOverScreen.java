@@ -47,7 +47,7 @@ public class CardboardGameOverScreen extends CardboardScreenAdapter {
 
     @Override
     public void dispose() {
-        this.view.dispose();
+        //Not applicable
     }
 
     public void newGameOver() {

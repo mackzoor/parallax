@@ -41,7 +41,7 @@ public class GameOverScreen extends ScreenAdapter {
 
     @Override
     public void dispose() {
-        this.view.dispose();
+        //Not applicable
     }
 
     public void newGameOver() {
