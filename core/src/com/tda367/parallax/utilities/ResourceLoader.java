@@ -53,7 +53,6 @@ public final class ResourceLoader {
         this.loadedParticleEffects = new HashMap<String, ParticleEffect>();
     }
 
-    //Singleton pattern
     public static synchronized ResourceLoader getInstance() {
         if (instance == null) {
             instance = new ResourceLoader();

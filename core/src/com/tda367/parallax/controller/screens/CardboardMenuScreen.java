@@ -50,11 +50,8 @@ public class CardboardMenuScreen extends CardboardScreenAdapter {
 
     @Override
     public void onDrawEye(Eye paramEye) {
-        // Apply the eye transformation to the camera
         Renderer3D.getInstance().onDrawEye(paramEye);
         this.view.render();
-        //Renders scene for current eye
-
     }
 
     @Override

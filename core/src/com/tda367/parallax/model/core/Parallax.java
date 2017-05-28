@@ -44,8 +44,6 @@ public class Parallax {
         this.camera = new Camera();
         this.camera.trackTo(player.getSpaceCraft());
         this.player = player;
-
-        //createTestEnemy();
     }
 
     public void setPaused(Boolean paused) {

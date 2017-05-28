@@ -124,7 +124,6 @@ public class World implements Updatable, CollisionObserver {
             this.modules.add(tempModule);
             tempModule.add3dObjectsToCollisionManager();
 
-            //Add powerups from course module to world so they'll be updated.
             this.powerUps.addAll(tempModule.getPowerups());
         }
     }

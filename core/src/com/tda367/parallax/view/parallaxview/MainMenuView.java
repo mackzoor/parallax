@@ -96,7 +96,6 @@ public class MainMenuView {
      * @return Missing keys in hash from the list provided.
      */
     private <T> List<T> syncHash(Map<T, ? extends View> hash, List<T> list) {
-        //Find obsolete
         final List<View> obsolete = new ArrayList<View>();
         for (final View view : hash.values()) {
             if (view.isObsolete()) {
@@ -104,12 +103,10 @@ public class MainMenuView {
             }
         }
 
-        //Remove obsolete
         for (final View v : obsolete) {
             hash.remove(v);
         }
 
-        //Finds missing
         final List<T> missing = new ArrayList<T>();
         for (final T t : list) {
             if (!hash.containsKey(t)) {
@@ -117,7 +114,6 @@ public class MainMenuView {
             }
         }
 
-        //Return missing
         return missing;
     }
 }

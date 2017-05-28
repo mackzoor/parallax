@@ -94,7 +94,7 @@ public class DefaultCourseModule implements ICourseModule {
         return walls;
     }
 
-    //ICourseModule
+
     @Override
     public float getLength() {
         return this.length;
@@ -157,7 +157,6 @@ public class DefaultCourseModule implements ICourseModule {
         this.containers.add(container);
     }
 
-    //Transformable
     @Override
     public Vector3f getPos() {
         return this.pos;

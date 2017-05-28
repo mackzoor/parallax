@@ -2,7 +2,7 @@ package com.tda367.parallax.model.score;
 
 import lombok.Getter;
 
-/*
+/**
  * Storing a combination of name and score, class for simplified usage of data storage in real time.
 */
 

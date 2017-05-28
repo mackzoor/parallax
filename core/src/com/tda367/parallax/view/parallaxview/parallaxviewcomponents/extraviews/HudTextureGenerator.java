@@ -67,8 +67,7 @@ public class HudTextureGenerator {
         spriteBatch.begin();
         spriteBatch.setColor(fgColor);
 
-        //Draw text
-        final BitmapFont font = new BitmapFont(true);
+        BitmapFont font = new BitmapFont(true);
         font.setColor(fgColor);
         font.getData().setScale(1);
         font.draw(spriteBatch,
@@ -85,7 +84,6 @@ public class HudTextureGenerator {
         spriteBatch.end();
         final Pixmap pMap = ScreenUtils.getFrameBufferPixmap(0, 0, WITDH, HEIGHT);
 
-        //Dispose of c++ objects.
         font.dispose();
         spriteBatch.dispose();
 

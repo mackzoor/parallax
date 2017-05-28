@@ -18,7 +18,6 @@ public final class ObstacleFactory {
     private ObstacleFactory() {
     }
 
-    //Boxes
     public static BoxObstacle getBoxObstacleInstance(Vector3f pos, Quat4f rot) {
         return new BoxObstacle(pos, rot);
     }
@@ -35,7 +34,7 @@ public final class ObstacleFactory {
         );
     }
 
-    //Walls
+
     private static WallObstacle getTopWallInstance(Vector3f pos) {
         return new WallObstacle(pos, TOP_WALLROTATION);
     }

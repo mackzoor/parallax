@@ -28,7 +28,6 @@ public abstract class CourseObstacleBase implements Collidable, Updatable {
         this.destroyed = false;
     }
 
-    //Transformable
     @Override
     public Vector3f getPos() {
         return this.pos;
@@ -40,7 +39,6 @@ public abstract class CourseObstacleBase implements Collidable, Updatable {
     }
 
 
-    //Collidable
     @Override
     public void enableCollision() {
         this.collisionEnabled = true;

@@ -8,17 +8,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Class that acts like a layer between LibGDX preferences and classes using stored score.
+ * Class that acts like a layer between LibGDX storageLocation and classes using stored score.
  */
 
 public class ScoreHandler {
 
     private static final int LENGTH_OF_LIST = 10;
 
-    //Storage file connected to LibGDX storage.
-    private final Preferences preferences;
+    private final Preferences storageLocation;
 
-    //The top 10 highest scoring players, list not necessarily in order.
     @Getter
     private List<HighScoreHolder> highScoreHolders;
 
@@ -27,21 +25,20 @@ public class ScoreHandler {
 
     public ScoreHandler() {
         this.highScoreHolders = new ArrayList<HighScoreHolder>();
-        this.preferences = Gdx.app.getPreferences("My Preferences.txt");
+        this.storageLocation = Gdx.app.getPreferences("My Preferences.txt");
         updateHighScoreHolders();
     }
 
-    //Creates a new list highest scores based on the preferences. Easier to handle.
     private void updateHighScoreHolders() {
         final List<HighScoreHolder> tempList = new ArrayList<HighScoreHolder>();
 
-        for (final String preferenceName : this.preferences.get().keySet()) {
+        for (final String preferenceName : this.storageLocation.get().keySet()) {
             this.temporaryString = preferenceName;
             Boolean check = false;
             while (!check) {
                 check = removeNameDivider();
             }
-            tempList.add(new HighScoreHolder(this.temporaryString, this.preferences.getInteger(preferenceName)));
+            tempList.add(new HighScoreHolder(this.temporaryString, this.storageLocation.getInteger(preferenceName)));
         }
         this.highScoreHolders = tempList;
         sortHighScoreHolders();
@@ -60,8 +57,9 @@ public class ScoreHandler {
         }
     }
 
-
-    //Sort the updateHighScoreHolder list. Making it be in order of highest score, to the 10th highest score.
+    /**
+     * Sorts highscore holders list from highest score to lowest
+     */
     private void sortHighScoreHolders() {
 
         final List sortedHighScores = new ArrayList<HighScoreHolder>();
@@ -82,29 +80,30 @@ public class ScoreHandler {
     }
 
 
-    //Store a score if it is amongst the top 10 scores. Adds score, then removes lowest.
     public void storeHighScore(String name, int score) {
-        if (this.preferences.get().size() < LENGTH_OF_LIST) {
+        if (this.storageLocation.get().size() < LENGTH_OF_LIST) {
 
             final String storeName = suitableName(name);
 
-            this.preferences.putInteger(storeName, score);
+            this.storageLocation.putInteger(storeName, score);
 
         } else {
             final String storeName = suitableName(name);
 
-            this.preferences.putInteger(storeName, score);
+            this.storageLocation.putInteger(storeName, score);
 
-            this.preferences.flush();
+            this.storageLocation.flush();
 
             removeLowestHighScore();
         }
-        this.preferences.flush();
+        this.storageLocation.flush();
         this.updateHighScoreHolders();
     }
 
+    /**
+     * Adds an # if the name already exists amongst the top 10 score holders.
+     */
     private String suitableName(String name) {
-        //Method that adds an # if the name already exists amongst the top 10 score holders.
         String returnName = name;
         boolean nameAvailable = false;
         while (!nameAvailable) {
@@ -121,24 +120,24 @@ public class ScoreHandler {
     private void removeLowestHighScore() {
         String removeName = null;
         int lowestScore = -1;
-        for (final String preferenceName : this.preferences.get().keySet()) {
+        for (final String preferenceName : this.storageLocation.get().keySet()) {
             if (lowestScore == -1) {
-                lowestScore = this.preferences.getInteger(preferenceName);
+                lowestScore = this.storageLocation.getInteger(preferenceName);
                 removeName = preferenceName;
             } else {
-                if (this.preferences.getInteger(preferenceName) < lowestScore || removeName == null) {
+                if (this.storageLocation.getInteger(preferenceName) < lowestScore || removeName == null) {
                     removeName = preferenceName;
-                    lowestScore = this.preferences.getInteger(preferenceName);
+                    lowestScore = this.storageLocation.getInteger(preferenceName);
                 }
             }
         }
         if (removeName != null) {
-            this.preferences.remove(removeName);
+            this.storageLocation.remove(removeName);
         }
     }
 
     private boolean checkAvailability(String name) {
-        for (final String preferenceName : this.preferences.get().keySet()) {
+        for (final String preferenceName : this.storageLocation.get().keySet()) {
             if (preferenceName.equals(name)) {
                 return false;
             }
@@ -147,7 +146,6 @@ public class ScoreHandler {
     }
 
 
-    //Get highest scores in list, in two different ways
     public List<Integer> getHighScores() {
         final List<Integer> highScore = new ArrayList<Integer>();
         for (final HighScoreHolder holder : this.highScoreHolders) {
@@ -166,7 +164,7 @@ public class ScoreHandler {
 
 
     public void removeAllStoredHighScores() {
-        this.preferences.clear();
-        this.preferences.flush();
+        this.storageLocation.clear();
+        this.storageLocation.flush();
     }
 }

@@ -9,14 +9,12 @@ public final class Xbox360GamePad implements GamePad {
     private static final int A_BUTTON = 0;
     private static final int B_BUTTON = 1;
     private static final int START_BUTTON = 7;
-    //Unknown
-    private static final int DPAD_UP = 999;
-    //Unknown
-    private static final int DPAD_RIGHT = 999;
-    //Unknown
-    private static final int DPAD_DOWN = 999;
-    //Unknown
-    private static final int DPAD_LEFT = 999;
+
+    private static final int DPAD_UP = 999; //Unknown
+    private static final int DPAD_RIGHT = 999; //Unknown
+    private static final int DPAD_DOWN = 999; //Unknown
+    private static final int DPAD_LEFT = 999; //Unknown
+
     private static final int LEFT_JOYSTICK_X = 1;
     private static final int LEFT_JOYSTICK_Y = 0;
 

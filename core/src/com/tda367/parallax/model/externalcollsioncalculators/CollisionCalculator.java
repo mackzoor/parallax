@@ -60,7 +60,6 @@ public class CollisionCalculator implements ICollisionCalculator {
 
     @Override
     public List<CollisionResult> getAllCollisions(List<? extends Collidable> collidables) {
-        //Find collisions.
         final List<CollisionResult> collisions = new ArrayList<CollisionResult>();
         for (int i = 0; i < collidables.size(); i++) {
             for (int j = i + 1; j < collidables.size(); j++) {
@@ -134,7 +133,6 @@ public class CollisionCalculator implements ICollisionCalculator {
     private void updateCollisionObject(CollisionObjectWrapper collisionObject, Collidable collidable) {
         final btCollisionObject collObject = collisionObject.wrapper.getCollisionObject();
 
-        //Translate
         collObject.setWorldTransform(new Matrix4());
         collObject.setWorldTransform(collObject.getWorldTransform().setTranslation(
                 collidable.getPos().getX(),
@@ -142,7 +140,6 @@ public class CollisionCalculator implements ICollisionCalculator {
                 collidable.getPos().getY() * -1
         ));
 
-        //Rotate
         collObject.setWorldTransform(collObject.getWorldTransform().rotate(
                 new Quaternion(
                         collidable.getRot().getX(),

@@ -12,7 +12,7 @@ import javax.vecmath.Quat4f;
  * View class for {@link Container}.
  */
 public class ContainerView {
-
+    private static Quat4f constantRotation;
     private static final String MODEL_3D_INTERNAL_PATH = "3dModels/containerround/containerround.g3db";
 
     private final Container container;
@@ -40,6 +40,9 @@ public class ContainerView {
         this.internalPowerUp = new PowerUpViewManualTransform(container.getPowerUp().getPowerUpType());
         this.internalPowerUp.setPosition(this.container.getPos());
         this.internalPowerUp.effectsEnabled(false);
+
+        constantRotation = new Quat4f(0, 0, 0.035f, 0.999f);
+        constantRotation.normalize();
     }
 
     public void render() {
@@ -51,10 +54,8 @@ public class ContainerView {
     }
 
     private void updatePowerUpRotation() {
-        //Set rotation of 2 degrees per update.
-        final Quat4f rotation = new Quat4f(0, 0, 0.035f, 0.999f);
-        rotation.normalize();
-        this.powerUpRotation.mul(rotation);
+
+        this.powerUpRotation.mul(constantRotation);
         this.powerUpRotation.normalize();
         this.internalPowerUp.setRotation(this.powerUpRotation);
     }

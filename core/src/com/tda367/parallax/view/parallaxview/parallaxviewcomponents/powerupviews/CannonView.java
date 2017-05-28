@@ -57,7 +57,7 @@ public class CannonView extends RenderablePowerUpBase implements RenderablePower
         Random rand = new Random();
         final int randomSong = rand.nextInt(LOW_SOUND_ODDS) + 1;
 
-        //Plays a funny sound every 200 shots, [Disabled]
+        //Plays a funny sound every 200 shots
         if (randomSong > LOW_SOUND_ODDS) {
             float volume = 0.3f;
             Sound.getInstance().playSound(SOUND_DIRECTORY + "cannonLow.mp3", volume);

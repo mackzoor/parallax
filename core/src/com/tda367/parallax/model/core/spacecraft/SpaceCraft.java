@@ -80,8 +80,6 @@ public abstract class SpaceCraft implements ISpaceCraft {
     }
 
 
-    //Controls
-
     @Override
     public void setDesiredPanVelocity(float x, float y) {
         this.setDesiredPanVelocity(new Vector2f(x, y));
@@ -113,7 +111,6 @@ public abstract class SpaceCraft implements ISpaceCraft {
         return this.powerUps.size() > 0 ? this.powerUps.get(0).getPowerUpType() : null;
     }
 
-    //Update
     @Override
     public void update(int milliSinceLastUpdate) {
         accelerateCraft(milliSinceLastUpdate);
@@ -136,7 +133,6 @@ public abstract class SpaceCraft implements ISpaceCraft {
         }
     }
 
-    //SpaceCraft movement limiter
     private Vector2f xzPos(Vector3f vector3f) {
         return new Vector2f(vector3f.getX(), vector3f.getZ());
     }
@@ -162,13 +158,11 @@ public abstract class SpaceCraft implements ISpaceCraft {
         if (this.isShipOutsideCourse()) {
             final Vector2f tempVec = this.xzPos(getPos());
             tempVec.normalize();
-            //Too compensate for rounding of float
             tempVec.scale(FLOAT_ROUNDING_COMPENSATOR * COURSE_RADIUS);
             getPos().set(new Vector3f(tempVec.getX(), getPos().getY(), tempVec.getY()));
         }
     }
 
-    //Movement related methods
     private void updatePanAcceleration() {
         final Vector2f truePanVector = new Vector2f(this.desiredPanVelocity);
         truePanVector.scale(this.maxPanVelocity);
@@ -225,7 +219,6 @@ public abstract class SpaceCraft implements ISpaceCraft {
         this.currentPanVelocity.y = y;
     }
 
-    //ISpaceCraft
     @Override
     public void action() {
         if (!this.powerUps.isEmpty()) {
@@ -238,7 +231,6 @@ public abstract class SpaceCraft implements ISpaceCraft {
 
     @Override
     public void add(IPowerUp singlePu) {
-        //Adds a single powerUp in a list if empty or only if the other powerups in it are the same type of powerUps
         if (this.powerUps.size() <= 0) {
             this.powerUps.add(singlePu);
         } else if (
@@ -276,7 +268,6 @@ public abstract class SpaceCraft implements ISpaceCraft {
     }
 
 
-    //Collision
     @Override
     public boolean collisionActivated() {
         return this.collisionEnabled;
@@ -310,10 +301,8 @@ public abstract class SpaceCraft implements ISpaceCraft {
     @Override
     public void handleCollision(Collidable collidable) {
         if (collidable.getCollidableType() == CollidableType.OBSTACLE || collidable.getCollidableType() == CollidableType.HARMFUL) {
-            //Take damage if collided with obstacle or harmful
             this.decHealth();
         } else if (collidable.getCollidableType() == com.tda367.parallax.model.core.collision.CollidableType.CONTAINER) {
-            //take powerup of collided with container
             final IContainer container = (IContainer) collidable;
             this.add(container.getPowerUp());
         }

@@ -54,24 +54,20 @@ public class WorldView {
 
         startingGrid.render();
 
-
-        //Render Course modules
         for (final CourseModelView courseModelView : this.courseModuleHash.values()) {
             courseModelView.render();
         }
 
-        //Render SpaceCraft
         for (final SpaceCraftAutomaticTransform spaceCraftAutomaticTransform : this.spaceCraftHash.values()) {
             spaceCraftAutomaticTransform.render();
         }
 
-
-        //Render Powerups
         for (final PowerUpViewAutomaticTransform powerUpViewAutomaticTransform : this.powerUpsHash.values()) {
             powerUpViewAutomaticTransform.render();
         }
-        for (final IPowerUp iPowerUp : this.powerUpsHash.keySet()) {
-            this.powerUpsHash.get(iPowerUp).render();
+
+        for (PowerUpViewAutomaticTransform powerUpViewAutomaticTransform : powerUpsHash.values()) {
+            powerUpViewAutomaticTransform.render();
         }
     }
 
@@ -104,7 +100,6 @@ public class WorldView {
 
 
     private <T> List<T> syncHash(Map<T, ? extends View> hash, List<T> list) {
-        //Find obsolete
         final List<T> obsolete = new ArrayList<T>();
         for (final T t : hash.keySet()) {
             if (hash.get(t).isObsolete()) {
@@ -112,12 +107,10 @@ public class WorldView {
             }
         }
 
-        //Remove obsolete
         for (final T t : obsolete) {
             hash.remove(t);
         }
 
-        //Finds missing
         final List<T> missing = new ArrayList<T>();
         for (final T t : list) {
             if (!hash.containsKey(t)) {
@@ -125,7 +118,6 @@ public class WorldView {
             }
         }
 
-        //Return missing
         return missing;
     }
 }

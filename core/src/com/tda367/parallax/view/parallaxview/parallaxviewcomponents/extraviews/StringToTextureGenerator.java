@@ -41,9 +41,7 @@ public class StringToTextureGenerator {
         this.generatedTexture.draw(clear, 0, 0);
         this.generatedTexture.draw(pMap, 0, 0);
 
-        //Important!
         pMap.dispose();
-
         clear.dispose();
 
         return this.generatedTexture;
@@ -60,20 +58,16 @@ public class StringToTextureGenerator {
 
         spriteBatch.begin();
 
-        //Draw text
-        final BitmapFont font = new BitmapFont(true);
+        BitmapFont font = new BitmapFont(true);
 
         font.setColor(Color.WHITE);
         font.getData().setScale(1);
         font.draw(spriteBatch, this.string, 0, 0);
 
-        //finish write to buffer
         spriteBatch.end();
 
-        //write frame buffer to Pixmap
         final Pixmap pMap = ScreenUtils.getFrameBufferPixmap(0, 0, this.width, this.height);
 
-        //Dispose of c++ objects.
         font.dispose();
         spriteBatch.dispose();
 

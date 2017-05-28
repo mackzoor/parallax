@@ -47,7 +47,7 @@ public class Container implements IContainer {
 
     @Override
     public void update(int milliSinceLastUpdate) {
-        //No position change for now
+        //No need to update anything.
     }
 
     @Override

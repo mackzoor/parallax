@@ -38,7 +38,6 @@ public class ParallaxView {
      * @param parallax to be used to create the ParallaxView.
      */
     public ParallaxView(Parallax parallax, boolean isVr, boolean particlesEnabled) {
-        //Initialize renderer.
         Renderer3D.initialize(
                 parallax.getCamera().getFov(),
                 Gdx.graphics.getWidth(),

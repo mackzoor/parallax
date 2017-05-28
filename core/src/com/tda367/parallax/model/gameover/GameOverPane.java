@@ -25,7 +25,6 @@ public class GameOverPane {
         this.position = position;
         this.obsolete = false;
         final Vector3f tmpVec = new Vector3f(position);
-        //tmpVec.negate();
         this.direction = MathUtilities.vectorToQuat(tmpVec);
     }
 }

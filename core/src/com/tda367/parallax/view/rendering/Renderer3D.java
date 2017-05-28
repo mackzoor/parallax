@@ -23,7 +23,6 @@ import java.util.List;
  */
 public final class Renderer3D {
 
-    //Singleton pattern
     private static Renderer3D rend3D;
 
     @Getter
@@ -42,7 +41,6 @@ public final class Renderer3D {
 
     public static Renderer3D initialize(float fov, int width, int height, boolean isVr, boolean particlesEnabled) {
         if (isVr) {
-            // Setup of special camera for VR
             final Camera cardboardCamera = new CardboardCamera();
             cardboardCamera.lookAt(0, 0, -1);
             rend3D = new Renderer3D(cardboardCamera, particlesEnabled);
@@ -94,7 +92,6 @@ public final class Renderer3D {
         this.environment = new Environment();
         this.environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 1f, 1f, 1f, 1.f));
         this.environment.set(new ColorAttribute(ColorAttribute.Fog, 0f, 0f, 0f, 1f));
-        //environment.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -1f, -0.8f, -0.2f));
     }
 
     /**
@@ -103,7 +100,6 @@ public final class Renderer3D {
      * @param renderObject object to be rendered.
      */
     public void addObjectToFrame(Renderable3dObject renderObject) {
-        //Add objects to render queue for current frame
         this.modelsToRender.add(renderObject);
     }
 
@@ -137,7 +133,6 @@ public final class Renderer3D {
     }
 
     private void renderTransparent3dModels(ModelBatch modelBatch, List<Renderable3dObject> modelsToRender) {
-        //Render high priority objects
         for (final Renderable3dObject renderable3dObject : this.modelsToRender) {
             if (renderable3dObject.getTransparency()) {
                 this.modelBatch.render(renderable3dObject.getModelInstance(), this.environment);
@@ -148,7 +143,6 @@ public final class Renderer3D {
     }
 
     private void renderOpaque3dModels(ModelBatch modelBatch, List<Renderable3dObject> modelsToRender) {
-        //Render low priority objects
         for (final Renderable3dObject renderable3dObject : this.modelsToRender) {
             if (!renderable3dObject.getTransparency()) {
                 this.modelBatch.render(renderable3dObject.getModelInstance(), this.environment);
@@ -188,7 +182,6 @@ public final class Renderer3D {
     }
 
     public void setCameraPosition(float x, float y, float z) {
-        //Update camera position
         this.camera.position.set(
                 x,
                 z,

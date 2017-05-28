@@ -15,7 +15,6 @@ public class Agelion extends SpaceCraft {
     private static final int HEALTH = 5;
     private static final SpaceCraftType TYPE = SpaceCraftType.AGELION;
 
-    //Constructors
     Agelion(float forwardVelocity, Vector3f pos, Quat4f rot) {
         super(new SpaceCraftMobility(pos, rot, forwardVelocity, MAX_PAN_VELOCITY, false), HEALTH, TYPE);
     }

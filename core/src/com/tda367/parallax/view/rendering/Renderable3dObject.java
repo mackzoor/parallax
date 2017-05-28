@@ -57,10 +57,7 @@ public class Renderable3dObject {
     public void setRot(Quat4f rot) {
         this.rot = rot;
 
-        //Reset transform matrix
         this.modelInstance.transform.idt();
-
-        //Rotate to rotation
         this.modelInstance.transform.rotate(
                 new Quaternion(
                         rot.getX(),
@@ -69,14 +66,12 @@ public class Renderable3dObject {
                         rot.getW())
         );
 
-        //Reset position.
         this.setPos(this.pos);
     }
 
     public void setOpacity(float opacity) {
         this.opacity = opacity;
 
-        //Change opacity level
         final BlendingAttribute blendingAttribute = new BlendingAttribute();
         blendingAttribute.opacity = this.opacity;
         final Material material = this.modelInstance.materials.get(0);
