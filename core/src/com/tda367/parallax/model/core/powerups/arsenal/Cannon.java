@@ -18,7 +18,7 @@ public class Cannon extends PowerUpBase {
     private static final String COLLISION_MODEL = "3dModels/laser/hitbox.obj";
     private static final int SEC_TO_MILLISEC = 1000;
     private static final int LIFE_LENGTH = 4000;
-    private static final float SPEED = 30;
+    private static final float SPEED = 60;
     private static final float ACTIVATION_TIME = 150;
 
     @Getter
