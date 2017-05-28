@@ -17,7 +17,7 @@ public class Main extends Game {
     @Override
     public void create() {
         Gdx.input.setCatchBackKey(true);
-        final Player player = new Player();
+        final Player player = new Player("No name");
         DeviceManager.setDevice(this);
 
         if (Gdx.app.getType() == Application.ApplicationType.Android) {

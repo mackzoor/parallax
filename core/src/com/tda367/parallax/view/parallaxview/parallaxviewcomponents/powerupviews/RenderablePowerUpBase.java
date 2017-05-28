@@ -16,11 +16,7 @@ public abstract class RenderablePowerUpBase implements RenderablePowerUp {
 
     @Getter @Setter private Vector3f pos;
     @Getter @Setter private Quat4f rot;
-
-
-    private int deathTime;
     @Setter @Getter private boolean effectsEnabled;
-
 
     RenderablePowerUpBase() {
         this.pos = new Vector3f();

@@ -23,8 +23,8 @@ public class Cannon extends PowerUpBase {
 
     private final Random rand = new Random();
 
-    @Setter
     @Getter
+    @Setter
     private Vector3f velocity;
 
     @Getter

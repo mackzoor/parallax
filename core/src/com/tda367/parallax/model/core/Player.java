@@ -7,14 +7,15 @@ import lombok.Setter;
 public class Player {
 
     @Getter
-    private static final String USER_NAME = "NO USER";
+    private final String userName;
     @Getter
     @Setter
     private int score;
     @Getter
     private ISpaceCraft spaceCraft;
 
-    public Player() {
+    public Player(String usernName) {
+        this.userName = usernName;
         this.score = 0;
     }
 
