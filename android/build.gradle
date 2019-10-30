@@ -1,6 +1,5 @@
 android {
-    buildToolsVersion '25.0.2'
-    compileSdkVersion 23
+    compileSdkVersion 29
     sourceSets {
         main {
             manifest.srcFile 'AndroidManifest.xml'
@@ -11,8 +10,6 @@ android {
             assets.srcDirs = ['assets']
             jniLibs.srcDirs = ['libs']
         }
-
-        instrumentTest.setRoot('tests')
     }
     packagingOptions {
         exclude 'META-INF/robovm/ios/robovm.xml'
@@ -21,11 +18,6 @@ android {
     }
     defaultConfig {
         applicationId "com.tda367.parallax"
-        minSdkVersion 9
-        targetSdkVersion 23
-        ndk {
-            abiFilters 'armeabi-v7a', 'x86', 'armeabi'
-        }
     }
 }
 
@@ -95,14 +87,14 @@ eclipse {
     }
 
     classpath {
-        plusConfigurations += [ project.configurations.compile ]        
+        plusConfigurations += [ project.configurations.compile ]
         containers 'com.android.ide.eclipse.adt.ANDROID_FRAMEWORK', 'com.android.ide.eclipse.adt.LIBRARIES'       
     }
 
     project {
         name = appName + "-android"
         natures 'com.android.ide.eclipse.adt.AndroidNature'
-        buildCommands.clear();
+        buildCommands.clear()
         buildCommand "com.android.ide.eclipse.adt.ResourceManagerBuilder"
         buildCommand "com.android.ide.eclipse.adt.PreCompilerBuilder"
         buildCommand "org.eclipse.jdt.core.javabuilder"
