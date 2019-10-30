@@ -57,12 +57,12 @@ public class ParallaxView {
 
     public void render() {
         checkPaused();
-        Renderer3D.getInstance().setCameraPosition(
-                this.parallax.getCamera().getPos().getX(),
-                this.parallax.getCamera().getPos().getY(),
-                this.parallax.getCamera().getPos().getZ()
-        );
-        this.worldView.render();
+//        Renderer3D.getInstance().setCameraPosition(
+//                this.parallax.getCamera().getPos().getX(),
+//                this.parallax.getCamera().getPos().getY(),
+//                this.parallax.getCamera().getPos().getZ()
+//        );
+//        this.worldView.render();
         if (this.hudViewActive) {
             this.playerHudView.render();
         }

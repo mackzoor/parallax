@@ -15,7 +15,7 @@ import javax.vecmath.Vector3f;
 
 public class Parallax {
 
-    private static final Vector3f STARTING_POSITION = new Vector3f(0, -110, 0);
+    private static final Vector3f STARTING_POSITION = new Vector3f(0, 0, 0);
     private static final float DEFAULT_PLAYER_ACCELERATION = 0.2f;
     private static final int TIME_TO_SCORE_DIVISOR = 100;
     private static final int LOWEST_FREQUENCY = 100;
