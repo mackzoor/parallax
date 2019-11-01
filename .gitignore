@@ -57,9 +57,11 @@ nb-configuration.xml
 
 .gradle
 gradle-app.setting
-build/
 
 ## OS Specific
 .DS_Store
 android/libs/armeabi/
 android/libs/x86/
+
+## Python env
+venv
