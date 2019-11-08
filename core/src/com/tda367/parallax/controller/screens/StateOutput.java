@@ -5,10 +5,12 @@ import com.tda367.parallax.model.core.world.ICourseModule;
 import com.tda367.parallax.model.core.world.World;
 import com.tda367.parallax.model.core.world.courseobstacles.CourseObstacleBase;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.net.*;
 import java.io.*;
+import java.util.LinkedHashMap;
 
 import javax.vecmath.Quat4f;
 
@@ -27,29 +29,31 @@ public class StateOutput {
     }
 
     public void update(Parallax parallax) {
-        JSONObject jo = new JSONObject();
-        // putting data to JSONObject
-        jo.put("firstName", "John");
-        jo.put("lastName", "Smith");
-        jo.put("age", 25);
-        try{
-            this.out.write(jo.toString());
-        } catch (IOException e) {
-            System.out.println(e);
-        }
-        /*this.pr.println("UPDATE");
-        this.pr.flush();
-        this.pr.println("PLAYER" + parallax.getPlayer().getSpaceCraft().getPos().toString());
-        this.pr.flush();
+        JSONObject outputObject = new JSONObject();
+
+        LinkedHashMap player = new LinkedHashMap(1);
+        player.put("pos", parallax.getPlayer().getSpaceCraft().getPos().toString());
+
+        outputObject.put("player", player);
+
+        JSONArray obstacles = new JSONArray();
+        int i = 0;
         for (ICourseModule module : parallax.getWorld().getModules()) {
+            i++;
+            System.out.println(i);
             for (CourseObstacleBase obstacle : module.getCouseObstacles()) {
-                float rel_pos = obstacle.getPos().y - parallax.getPlayer().getSpaceCraft().getPos().y;
-                Quat4f rot = obstacle.getRot();
-                // System.out.println(rel_pos + rot.toString());
-                this.pr.println(obstacle.getObstacleType() + obstacle.getPos().toString() + obstacle.getRot().toString());
-                this.pr.flush();
+                LinkedHashMap obstacle_json = new LinkedHashMap(3);
+                obstacle_json.put("type", obstacle.getObstacleType());
+                obstacle_json.put("pos", obstacle.getPos().toString());
+                obstacle_json.put("rot", obstacle.getRot().toString());
+                obstacles.put(obstacle_json);
             }
-        }*/
+        }
+
+        outputObject.put("obstacles", obstacles);
+
+        this.pr.write(outputObject.toString());
+        this.pr.flush();
     }
 
 
