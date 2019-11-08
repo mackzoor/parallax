@@ -57,7 +57,7 @@ public class DefaultCourseModule implements ICourseModule {
 
     private void addObstacles(int amount) {
         this.couseObstacles.addAll(createWalls(amount));
-        this.couseObstacles.addAll(createBoxes(amount));
+        // this.couseObstacles.addAll(createBoxes(amount));
     }
 
     private List<CourseObstacleBase> createBoxes(int amount) {
