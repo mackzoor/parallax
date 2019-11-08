@@ -13,4 +13,6 @@ eclipse.project {
 dependencies {
     compile 'junit:junit:4.12'
     compile 'com.badlogicgames.gdx:gdx-backend-lwjgl:1.9.6'
+    // https://mvnrepository.com/artifact/org.json/json
+    compile group: 'org.json', name: 'json', version: '20190722'
 }
