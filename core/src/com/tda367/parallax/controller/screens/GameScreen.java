@@ -12,6 +12,8 @@ import com.tda367.parallax.model.core.spacecraft.SpaceCraftFactory;
 import com.tda367.parallax.view.sound.Sound;
 import com.tda367.parallax.view.parallaxview.ParallaxView;
 
+import java.io.IOException;
+
 import static com.tda367.parallax.controller.screens.ScreenState.GAME_OVER;
 
 public class GameScreen extends ScreenAdapter {
@@ -24,6 +26,7 @@ public class GameScreen extends ScreenAdapter {
     private ParallaxView parallaxView;
     private final ScreenChanger screenChanger;
     private final boolean particlesEnabled;
+    private StateOutput stateOutput;
 
     public GameScreen(Player player, ScreenChanger screenChanger, boolean particlesEnabled) {
         super();
@@ -31,6 +34,11 @@ public class GameScreen extends ScreenAdapter {
         this.player = player;
         this.screenChanger = screenChanger;
         this.collisionCalculator = new CollisionCalculator();
+        try {
+            this.stateOutput = new StateOutput();
+        } catch (IOException e) {
+            System.out.println("Connection failed");
+        }
     }
 
     @Override
@@ -41,6 +49,7 @@ public class GameScreen extends ScreenAdapter {
             this.parallaxGame.update((int) (delta * SEC_TO_MILLISEC));
             this.collisionCalculator.run();
             this.parallaxView.render();
+            this.stateOutput.update(this.parallaxGame);
             DeviceManager.getDevice().update();
         }
     }

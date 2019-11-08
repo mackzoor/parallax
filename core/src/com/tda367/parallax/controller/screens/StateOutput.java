@@ -24,6 +24,8 @@ public class StateOutput {
     }
 
     public void update(Parallax parallax) {
+        this.pr.println("UPDATE");
+        this.pr.flush();
         this.pr.println("PLAYER" + parallax.getPlayer().getSpaceCraft().getPos().toString());
         this.pr.flush();
         for (ICourseModule module : parallax.getWorld().getModules()) {

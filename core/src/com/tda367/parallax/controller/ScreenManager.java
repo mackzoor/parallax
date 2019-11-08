@@ -25,15 +25,9 @@ public final class ScreenManager implements ScreenChanger {
     private GameScreen gameScreen;
     private GameOverScreen gameOverScreen;
     private final boolean highPerformanceMode;
-    private StateOutput stateOutput;
 
     private ScreenManager(boolean highPerformanceMode) {
         this.highPerformanceMode = highPerformanceMode;
-        try {
-            this.stateOutput = new StateOutput();
-        } catch (IOException e) {
-            System.out.println("Connection failed");
-        }
     }
 
     public static void initialize(boolean highPerformanceMode) {
